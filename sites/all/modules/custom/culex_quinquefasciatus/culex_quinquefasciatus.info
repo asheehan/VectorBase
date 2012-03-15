@@ -1,0 +1,5 @@
+name = Culex quinquefasciatus
+description = Organism
+package = VectorBase Development -- Organism
+core = 7.x
+files[] = culex_quinquefasciatus.module

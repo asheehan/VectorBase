@@ -1,0 +1,6 @@
+name = Tool Menuitem
+description = VectorBase site-wide navigation menu -- Tool
+package = VectorBase Development -- Navigation Menu
+core = 7.x
+files[] = tool.module
+files[] = tool.inc

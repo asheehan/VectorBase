@@ -1,0 +1,5 @@
+name = Test
+description = Test of menu system, this is only a test
+package = VectorBase Testing Suite
+core = 7.x
+files[] = test.module

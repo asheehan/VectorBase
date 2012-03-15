@@ -1,0 +1,158 @@
+<?php
+
+/**
+ * @file
+ * xgrid module
+ *
+ * This module is for connecting to an Xgrid SOAP web service. Such web service
+ *  would be running on OS X and has access to the xgrid command line program.
+ *  The service provides a way for non OS X machines to interact with an Xgrid.
+ *
+*/
+
+function xgrid_getURL(){
+  return "http://".variable_get('xgrid_server', 'jobs.vectorbase.org').":".variable_get('xgrid_port', '80') . '/' . variable_get('xgrid_server_suffix', 'xgrid.wsdl');
+}
+
+function xgrid_submit($batchXml) {
+
+  $path = drupal_get_path('module', 'xgrid');
+  file_put_contents($path.'/tempFile',$batchXml);
+
+  $client = new SoapClient(xgrid_getURL(), array('compression' => SOAP_COMPRESSION_ACCEPT | SOAP_COMPRESSION_GZIP));
+  $jobId = $client->submitBatch($batchXml);
+  return $jobId;
+}
+
+function xgrid_status($id) {
+  if (!$id) { throw new Exception("No job ID provided."); }
+  $soapClient = new SoapClient(xgrid_getURL(), array('compression' => SOAP_COMPRESSION_ACCEPT | SOAP_COMPRESSION_GZIP));
+  $statusOutput = $soapClient->getStatus($id);
+  preg_match("#jobStatus = (.*?);#",$statusOutput,$match);
+  if (!$match[1]) { throw new Exception("Sorry, we have no information for Job ID ".$id); }
+  return $match[1];
+}
+
+function xgrid_get_results($id){
+  $client = new SoapClient(xgrid_getURL(), array('compression' => SOAP_COMPRESSION_ACCEPT | SOAP_COMPRESSION_GZIP));
+  if (!$id) { throw new Exception("No job ID provided."); }
+  $status = new JobStatus($id);
+  $this->status = $status->simpleStatus();
+  if (!$this->status) { throw new Exception("No data for job ID ".$id."."); }
+
+  if ($this->status=="Finished") {
+    $results = $client->getResults($id);
+  }
+
+  return $results;
+}
+
+
+
+/**
+ * Implementation of hook_help()
+*/
+function xgrid_help($path, $arg){
+  switch ($path) {
+    case "admin/help#xgrid":
+      return '<p>'.  t("this is some text from the help hook") .'</p>';
+      break;
+  }
+
+}
+
+
+/**
+ * Implements hook_menu().
+ */
+function xgrid_menu(){
+  $items = array();
+
+  $items['admin/config/system/xgrid'] = array(
+    'title' => 'Xgrid',
+    'description' => 'Configuration for Xgrid module',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('xgrid_form'),
+    'access arguments' => array('access administration pages'),
+    'type' => MENU_NORMAL_ITEM,
+  );
+  
+  return $items;
+}
+
+
+/**
+ * Form function, called by drupal_get_form() 
+ * in xgrid_menu().
+ */
+function xgrid_form($form, &$form_state){
+  $form['from'] = array(
+  '#type' => 'item',
+  '#title' => t('Xgrid Web Service Settings'),
+  '#markup' => 'The (separate) web service runs on an OS X machine which has access to the xgrid program on the command line. 
+The service runs over SOAP and implements the basic functionality of the xgrid program.<br/>These settings connect to http://server:port/wsdlPath<br/>Currently: ' . xgrid_getURL(),
+);
+
+  $form['xgrid_server'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Xgrid service machine'),
+    '#default_value' => variable_get('xgrid_server', 'jobs.vectorbase.org'),
+    '#maxlength' => 35,
+    '#description' => t('The machine where the Xgrid web service is running.'),
+    '#required' => TRUE,
+  );
+
+  $form['xgrid_server_port'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Port'),
+    '#default_value' => variable_get('xgrid_server_port', '80'),
+    '#maxlength' => 4,
+    '#description' => t('The service port.'),
+    '#required' => TRUE,
+  );
+
+  $form['xgrid_controller_url_suffix'] = array(
+    '#type' => 'textfield',
+    '#title' => t('WSDL Path'),
+    '#default_value' => variable_get('xgrid_server_suffix', 'xgrid.wsdl'),
+    '#maxlength' => 35,
+    '#description' => t('Path to WSDL file on Xgrid server. No leading slash.'),
+    '#required' => TRUE,
+  );
+
+  return system_settings_form($form);
+}
+
+
+/**
+ * Implements validation from the Form API.
+ * 
+ * @param $form
+ *   A structured array containing the elements and properties of the form.
+ * @param $form_state
+ *   An array that stores information about the form's current state 
+ *   during processing.
+ */
+//implement this when we get ambitious
+function xgrid_form_validate($form, &$form_state){
+//  $max_num = $form_state['values']['current_posts_max'];
+//  if (!is_numeric($max_num)){
+//    form_set_error('current_posts_max', t('You must enter an integer for the maximum number of posts to display.'));
+//  } 
+//  else if ($max_num <= 0){
+//    form_set_error('current_posts_max', t('Maximum number of posts to display must be positive.'));       
+//  }
+}
+
+
+
+
+function xgrid_genRandomString($length) {
+    $characters = "0123456789abcdefghijklmnopqrstuvwxyz";
+    $string = "";
+    for ($p = 0; $p < $length; $p++) {
+        $string .= $characters[mt_rand(0, strlen($characters)-1)];
+    }
+    return $string;
+}
+

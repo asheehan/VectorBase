@@ -1,0 +1,6 @@
+name = Data Menuitem
+description = VectorBase site-wide navigation menu -- Data
+package = VectorBase Development -- Navigation Menu
+core = 7.x
+files[] = data.module
+files[] = data.inc

@@ -1,0 +1,194 @@
+
+/****************************/
+/* LOCAL CSS                */
+/****************************/
+
+/* Put your custom CSS and CSS overrides in this file and  */
+/* rename it local.css.  By restricting your CSS changes   */
+/* to local.css, your changes will not be overwritten when */
+/* upgrading to a new version of this theme.  You can also */
+/* use a local-rtl.css file for the equivalent in RTL.     */
+
+/* Steps to activate local.css:                       */
+/* 1. Add your custom CSS to this file                */
+/* 2. Rename this file to local.css                   */
+/* 3. Clear cached data at admin/settings/performance */
+
+a,
+a:link,
+a:visited {
+	color: #003300;
+}
+
+/* ---- site wide updates ---- */
+
+html {
+	background: #ffffff;
+}
+
+/* ---- Header Info ---- */
+
+#header-group-wrapper {
+	background: #004400;
+}
+
+#header-group-wrapper a {
+	color: white;
+}
+#header-group-wrapper a:link {
+	color: white;
+}
+#header-group-wrapper a:visited {
+	color: white;
+}
+
+
+/* menu stuffs */
+
+
+.block-superfish ul.sf-style-default li a:link,
+.block-superfish ul.sf-style-default li a:visited {
+  background-color: #e1e1e1;
+  color: #154B70;
+}
+
+.block-superfish ul.sf-style-default li a:hover,
+.block-superfish ul.sf-style-default li a:focus,
+.block-superfish ul.sf-style-default li:hover a:link,
+.block-superfish ul.sf-style-default li:hover a:visited,
+.block-superfish ul.sf-style-default li.active-trail a:link,
+.block-superfish ul.sf-style-default li.active-trail a:visited {
+  background: #b5ee48; /* old browsers */
+  background: -moz-linear-gradient(top, #b5ee48 0%, #95cf1a 27%, #95cf1a 100%); /* firefox */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#b5ee48), color-stop(27%,#95cf1a), color-stop(100%,#95cf1a)); /* webkit */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b5ee48', endColorstr='#95cf1a',GradientType=0 ); /* ie */
+  background: -o-linear-gradient(top, #b5ee48 0%,#95cf1a 27%,#95cf1a 100%); /* opera */  color: #fff;
+}
+
+/* Second level */
+.block-superfish ul.sf-style-default li ul,
+.block-superfish ul.sf-style-default li:hover ul {
+  background: #92ca2c;
+}
+
+.block-superfish ul.sf-style-default li ul li,
+.block-superfish ul.sf-style-default li:hover ul li {
+  background: #98D022;
+  border-bottom: 1px solid #83A638;
+}
+
+
+
+.block-superfish ul.sf-style-default li ul li,
+.block-superfish ul.sf-style-default li:hover ul li {
+  background: #98D022;
+  border-bottom: 1px solid #83A638;
+}
+
+ck-superfish ul.sf-style-default li ul li a:link,
+.block-superfish ul.sf-style-default li ul li a:visited,
+.block-superfish ul.sf-style-default li:hover ul li a:link,
+.block-superfish ul.sf-style-default li:hover ul li a:visited,
+.block-superfish ul.sf-style-default li.active-trail ul li a:link,
+.block-superfish ul.sf-style-default li.active-trail ul li a:visited {
+  background: #98D022;
+  color: #154B6F;
+  padding-left: 10px;
+}
+
+.block-superfish ul.sf-style-default li ul li a:hover,
+.block-superfish ul.sf-style-default li ul li a:focus,
+.block-superfish ul.sf-style-default li:hover ul li a:hover,
+.block-superfish ul.sf-style-default li:hover ul li a:focus,
+.block-superfish ul.sf-style-default li.active-trail ul li a:hover,
+.block-superfish ul.sf-style-default li.active-trail ul li a:focus {
+  color: #fff;
+}
+
+.block-superfish ul.sf-style-default li ul li a.active {
+  text-decoration: underline;
+}
+
+/* Third level */
+.block-superfish ul.sf-style-default li ul li ul,
+.block-superfish ul.sf-style-default li:hover ul li ul,
+.block-superfish ul.sf-style-default li.hover ul li ul {
+  font-size: 100% !important;  /* 11px/12px */
+  margin-top: 0 !important;
+}
+
+/* Primary menu - Nolink */
+#primary-menu ul.menu li span.nolink  {
+  color: #154B70;
+  display: block;
+  padding: 5px 10px 1px 10px;
+  text-decoration: none;
+}
+
+#primary-menu ul.menu li span.nolink:hover,
+#primary-menu ul.menu li span.nolink.hover,
+#primary-menu ul.menu li:hover span.nolink,
+#primary-menu ul.menu li.hover span.nolink,
+#primary-menu ul.menu li.active-trail span.nolink {
+  color: #fff;
+}
+
+#primary-menu ul.sf-menu li.sfHover ul.menu li span.nolink,
+#primary-menu ul.menu li:hover ul.menu li span.nolink,
+#primary-menu ul.menu li.hover ul.menu li span.nolink {
+  background: #98D022;
+  color: #154B6F;
+  padding-left: 10px;
+}
+
+#primary-menu ul.menu li:hover ul.menu li span.nolink:hover,
+#primary-menu ul.menu li.hover ul.menu li span.nolink.hover {
+  color: #fff;
+}
+
+.block-superfish ul.sf-style-default li ul li a:link,
+.block-superfish ul.sf-style-default li ul li a:visited,
+.block-superfish ul.sf-style-default li:hover ul li a:link,
+.block-superfish ul.sf-style-default li:hover ul li a:visited,
+.block-superfish ul.sf-style-default li.active-trail ul li a:link,
+.block-superfish ul.sf-style-default li.active-trail ul li a:visited {
+  background: #98D022;
+  color: #154B6F;
+}
+
+.block-superfish ul.sf-style-default li ul li a:hover,
+.block-superfish ul.sf-style-default li ul li a:focus,
+.block-superfish ul.sf-style-default li:hover ul li a:hover,
+.block-superfish ul.sf-style-default li:hover ul li a:focus,
+.block-superfish ul.sf-style-default li.active-trail ul li a:hover,
+.block-superfish ul.sf-style-default li.active-trail ul li a:focus {
+  color: #fff;
+}
+
+/* Primary menu - Nolink */
+#primary-menu ul.menu li span.nolink  {
+  color: #154B70;
+}
+
+#primary-menu ul.menu li span.nolink:hover,
+#primary-menu ul.menu li span.nolink.hover,
+#primary-menu ul.menu li:hover span.nolink,
+#primary-menu ul.menu li.hover span.nolink,
+#primary-menu ul.menu li.active-trail span.nolink {
+  color: #fff;
+}
+
+#primary-menu ul.sf-menu li.sfHover ul.menu li span.nolink,
+#primary-menu ul.menu li:hover ul.menu li span.nolink,
+#primary-menu ul.menu li.hover ul.menu li span.nolink {
+  background: #98D022;
+  color: #154B6F;
+}
+
+#primary-menu ul.menu li:hover ul.menu li span.nolink:hover,
+#primary-menu ul.menu li.hover ul.menu li span.nolink.hover {
+  color: #fff;
+}
+
+
+

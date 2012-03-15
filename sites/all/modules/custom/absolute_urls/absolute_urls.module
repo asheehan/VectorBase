@@ -1,0 +1,6 @@
+<?php
+
+function absolute_urls_url_outbound_alter(&$path, &$options, $original_path) {
+  $options['absolute'] = TRUE;
+}
+

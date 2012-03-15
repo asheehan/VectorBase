@@ -1,0 +1,36 @@
+<?  header("Content-type: text/css"); ?>
+.textElement { font-family: Arial; font-size: 8pt; color: #800000; }
+.textAttr { font-family: Arial; font-size: 8pt; color: #FF0000; }
+.textContents { font-family: Arial; font-size: 8pt; color: #000000; }
+.textOperator { font-family: Arial; font-size: 8pt; color: #0000FF; }
+.schemaHeader { font-family: Arial; font-size: 11pt; color: #000000; }
+.schemaHeader2 { font-family: Arial; font-size: 11pt; font-weight: bold; color: #000000; }
+.elementHeader { font-family: Arial; font-size: 10pt; color: #000000; }
+.elementHeader2 { font-family: Arial; font-size: 10pt; font-weight: bold; color: #000000; }
+.schemaName { font-family: Arial; font-size: 8pt; font-weight: bold; color: #000000; }
+.schemaSubTitle { font-family: Arial; font-size: 8pt; color: #808080; }
+.schemaSubData { font-family: Arial; font-size: 8pt; color: #000000; }
+.schemaSubData { font-family: Arial; font-size: 8pt; color: #808080; }
+pre { margin-bottom: 0 }
+
+.metadatatable {
+    border:1px solid #000000;
+    padding: 2px 2px 2px 2px;
+    width:100%
+}
+
+.metadata {
+    font-family: Arial;
+    font-size: 8pt;
+    color: 000000;
+    border:1px solid #000000;
+    padding: 2px 2px 2px 2px;
+}
+
+.smalltext {
+    color: #000000;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 8pt; 
+    font-weight: normal;
+    text-decoration: none;
+}

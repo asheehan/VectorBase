@@ -1,0 +1,85 @@
+{
+11 : {
+       "short" : "GO:",
+       "long" : "GO:Biological Process"
+     },
+12 : {
+       "short" : "GO:",
+       "long" : "GO:Molecular Function"
+     },
+13 : {
+       "short" : "GO:",
+       "long" : "GO:Cellular Component"
+     },
+21 : {
+      "short" : "TADS:",
+      "long" : "TADS:Tick Anatomy"
+     },
+22 : {
+      "short" : "TGMA:",
+      "long" : "TGMA:CARO Mosquito Anatomy"
+     },
+23 : {
+      "short" : "MIRO:",
+      "long" : "MIRO:Mosquito Insecticide Resistance Ontology"
+     },
+25 : {
+      "short" : "IDOMAL:",
+      "long" : "IDOMAL:Infectious Disease Ontology"
+     }
+}
+
+
+
+<?
+
+#
+# Author: David Campbell
+# Project: VectorBase
+# Institution: Center for Research Computing, University of Notre Dame
+# Date: June 2010
+# Purpose: This file is an attempt to keep all of the php references to CV ID
+# constants from the ontology database in one file.  We found that the 
+# easiest way to do this, since we are using inline php in javascript, is to 
+# create a method for each instance that these constants are being used and
+# print out the javascript from here with the constants written in.  This is not
+# a necessarily pretty solution, but it, again, keeps all the constants in a
+# singular, easy to manage location.
+#
+
+# Apparently the section of code that should be calling this method will not
+# accept inline insertion.  The suspected issue is that javascript functions
+# simply will not accept php functions. If someone figures out how to get this
+# method to be properly called from CVSearch.php, please go ahead an update it.
+# Right now, the code in this print statement is just hard-coded into the class.
+function printForCvSearch() {
+    print "if(CV_ID == 22){
+      id.innerHTML = \" TGMA:\";
+    } else if(CV_ID == 21){
+      id.innerHTML = \" TADS:\";
+    } else if(CV_ID == 23){
+      id.innerHTML = \" MIRO:\";
+    } else if (CV_ID == 11 || 
+            CV_ID == 12 ||
+            CV_ID == 13) {
+      id.innerHTML = \" GO:\";
+    } else if(CV_ID == 25) {
+      id.innerHTML = \"IDOMAL:\";
+    }";
+}
+
+
+# Called by sidebar.php
+function printForSidebar() {
+    print "<option value=\"0\">Select Ontology</option>
+        <option value=\"11\">GO:Biological Process</option>
+        <option value=\"12\">GO:Molecular Function</option>
+        <option value=\"13\">GO:Cellular Component</option>
+        <option value=\"21\">TADS:Tick Anatomy</option>
+        <option value=\"22\">TGMA:CARO Mosquito Anatomy</option>
+        <option value=\"23\">MIRO:Mosquito Insecticide Resistance Ontology</option>
+	<option value=\"25\">IDOMAL:Infectious Disease Ontology</option>";
+}
+
+
+?>

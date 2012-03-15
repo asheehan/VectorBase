@@ -1,0 +1,79 @@
+<?php
+
+/**
+ * @file
+ * Use this module to learn about Drupal's menu system,
+ * specifically how local tasks work.
+ */
+
+
+/**
+ * Implementation of hook_menu().
+ */
+function tools_menu() {
+  $items['tools'] = array(
+    'title' => 'Tools',
+    'access arguments' => array('BLAST, Clustal, CAP, cvbrowser'),
+    'page callback' => 'tools_overview',
+    'access callback' => 'user_access',
+    'type' => MENU_NORMAL_ITEM,
+    'weight' => -8,
+  );
+  $items['tools/BLAST'] = array(
+    'title' => 'BLAST',
+    'access arguments' => array('BLAST'),
+    'access callback' => 'user_access',
+    'type' => MENU_DEFAULT_LOCAL_TASK,
+    'weight' => 0,
+  );
+  $items['tools/Clustal'] = array(
+    'title' => 'Clustal',
+    'access arguments' => array('Clustal'),
+    'access callback' => 'user_access',
+    'page callback' => 'clustal_show',
+    'type' => MENU_LOCAL_TASK,
+    'weight' => 1,
+  );
+  $items['tools/CAP'] = array(
+    'title' => 'CAP',
+    'access arguments' => array('CAP'),
+    'access callback' => 'user_access',
+    'page callback' => 'cap_show',
+    'type' => MENU_LOCAL_TASK,
+    'weight' => 2,
+  );
+
+   $items['tools/cvbrowser'] = array(
+    'title' => 'Ontology Browser',
+    'access arguments' => array('cvbrowser'),
+    'page callback' => 'cvbrowser_load',
+    'access callback' => 'user_access',
+    'type' => MENU_LOCAL_TASK,
+    'weight' => 3,
+  ); 
+
+  return $items;
+}
+
+  function tools_overview() {
+    //include('tool_includes/BLAST/input.php');
+    $output = t('blast code here ...');
+    // blast code here...
+    return $output;
+  }
+
+  function clustal_show() {
+    return t('Clustal Code Here...');
+  }
+
+  function cap_show() {
+     $summaryTable = file_get_contents('ftp://ftp.vectorbase.org/public_data/gffexport/latest/summary.html');
+     return $summaryTable;
+  }
+
+  function cvbrowser_load() {
+	
+	require_once('tool_includes/cvbrowser/CVSearch.php');
+
+  }
+

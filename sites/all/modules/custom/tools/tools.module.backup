@@ -1,0 +1,90 @@
+<?php
+
+/**
+ * @file
+ * Use this module to learn about Drupal's menu system,
+ * specifically how local tasks work.
+ */
+
+/**
+ * Implementation of hook_permission().
+ */
+function tools_permission() {
+  return array(
+
+    'access simple page' => array(
+      'title' => t('Access simple page'),
+      'description' => t('Allow users to access simple page'),
+    ),
+    'access arguments page' => array(
+      'title' => t('Access page with arguments'), 
+      'description' => t('Allow users to access page with arguments'),
+    ),
+  ); 
+
+  //return array('BLAST', 'Clustal', 'CAP');
+}
+
+/**
+ * Implementation of hook_menu().
+ */
+function tools_menu() {
+  $items['tools'] = array(
+    'title' => 'Tools',
+    'access arguments' => array('BLAST, Clustal, CAP', 'cvbrowser'),
+    'page callback' => 'tools_overview',
+    'type' => MENU_NORMAL_ITEM,
+    'weight' => -8,
+  );
+  $items['tools/BLAST'] = array(
+    'title' => 'BLAST',
+    'access arguments' => array('BLAST'),
+    'type' => MENU_DEFAULT_LOCAL_TASK,
+    'weight' => 0,
+  );
+  $items['tools/Clustal'] = array(
+    'title' => 'Clustal',
+    'access arguments' => array('Clustal'),
+    'page callback' => 'clustal_show',
+    'type' => MENU_LOCAL_TASK,
+    'weight' => 1,
+  );
+  $items['tools/CAP'] = array(
+    'title' => 'CAP',
+    'access arguments' => array('CAP'),
+    'page callback' => 'cap_show',
+    'type' => MENU_LOCAL_TASK,
+    'weight' => 2,
+  );
+
+   $items['tools/cvbrowser'] = array(
+    'title' => 'Ontology Browser',
+    'page callback' => 'cvbrowser_load',
+    'access callback' => TRUE,
+    'type' => MENU_LOCAL_TASK,
+  ); 
+
+  return $items;
+}
+
+  function tools_overview() {
+    //include('tool_includes/BLAST/input.php');
+    $output = t('blast code here ...');
+    // blast code here...
+    return $output;
+  }
+
+  function clustal_show() {
+    return t('Clustal Code Here...');
+  }
+
+  function cap_show() {
+    return t('cap code here...');
+  }
+
+  function cvbrowser_load() {
+
+    require_once("tool_includes/cvbrowser/CVSearch.php");
+
+  }
+

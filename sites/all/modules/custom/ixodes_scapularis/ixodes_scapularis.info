@@ -1,0 +1,5 @@
+name = Ixodes scapularis
+description = Organism
+package = VectorBase Development -- Organism
+core = 7.x
+files[] = ixodes_scapularis.module

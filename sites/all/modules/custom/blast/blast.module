@@ -1,0 +1,157 @@
+<?php
+
+/**
+ * @file
+ * blast module
+ *
+ *
+*/
+
+
+// 1: make form to get job parameters from user
+//	 use same form. how do we get bast dbs? enable dbs with the configure screen?
+// 2: using these parameters, create xgrid xml batch file
+// 3: submit job, update status via AJAX
+// 4: display results
+
+
+function blast_content(){
+
+
+
+
+
+
+
+
+
+
+
+}
+
+
+function blast_submit($batchXml) {
+  $client = new SoapClient(blast_getURL(), array('compression' => SOAP_COMPRESSION_ACCEPT | SOAP_COMPRESSION_GZIP));
+  $jobId = $client->submitBatch($batchXml);
+  return $jobId;
+}
+
+function blast_status($id) {
+  if (!$id) { throw new Exception("No job ID provided."); }
+  $soapClient = new SoapClient(blast_getURL(), array('compression' => SOAP_COMPRESSION_ACCEPT | SOAP_COMPRESSION_GZIP));
+  $statusOutput = $soapClient->getStatus($id);
+  preg_match("#jobStatus = (.*?);#",$statusOutput,$match);
+  if (!$match[1]) { throw new Exception("Sorry, we have no information for Job ID ".$id); }
+  return $match[1];
+}
+
+function blast_get_results($id){
+  $client = new SoapClient(blast_getURL(), array('compression' => SOAP_COMPRESSION_ACCEPT | SOAP_COMPRESSION_GZIP));
+  if (!$id) { throw new Exception("No job ID provided."); }
+  $status = new JobStatus($id);
+  $this->status = $status->simpleStatus();
+  if (!$this->status) { throw new Exception("No data for job ID ".$id."."); }
+
+  if ($this->status=="Finished") {
+    $results = $client->getResults($id);
+  }
+
+  return $results;
+}
+
+
+
+/**
+ * Implementation of hook_help()
+*/
+function blast_help($path, $arg){
+  switch ($path) {
+    case "admin/help#blast":
+      return '<p>'.  t("this is some text from the help hook") .'</p>';
+      break;
+  }
+
+}
+
+
+/**
+ * Implements hook_menu().
+ */
+function blast_menu(){
+  $items = array();
+
+  $items['admin/config/vectorbase/blast'] = array(
+    'title' => 'blast',
+    'description' => 'Configuration for blast module',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('blast_form'),
+    'access arguments' => array('access administration pages'),
+    'type' => MENU_NORMAL_ITEM,
+  );
+  
+  return $items;
+}
+
+
+/**
+ * Form function, called by drupal_get_form() 
+ * in blast_menu().
+ */
+function blast_form($form, &$form_state){
+  $form['from'] = array(
+  '#type' => 'item',
+  '#title' => t('BLAST Settings'),
+  '#markup' => 'The (separate) web service runs on an OS X machine which has access to the blast program on the command line. 
+The service runs over SOAP and implements the basic functionality of the blast program.<br/>These settings connect to http://server:port/wsdlPath<br/>Currently: ' . blast_getURL(),
+);
+
+  $form['blast_server'] = array(
+    '#type' => 'textfield',
+    '#title' => t('blast service machine'),
+    '#default_value' => variable_get('blast_server', 'jobs.vectorbase.org'),
+    '#maxlength' => 35,
+    '#description' => t('The machine where the blast web service is running.'),
+    '#required' => TRUE,
+  );
+
+  $form['blast_server_port'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Port'),
+    '#default_value' => variable_get('blast_server_port', '80'),
+    '#maxlength' => 4,
+    '#description' => t('The service port.'),
+    '#required' => TRUE,
+  );
+
+  $form['blast_controller_url_suffix'] = array(
+    '#type' => 'textfield',
+    '#title' => t('WSDL Path'),
+    '#default_value' => variable_get('blast_server_suffix', 'blast.wsdl'),
+    '#maxlength' => 35,
+    '#description' => t('Path to WSDL file on blast server. No leading slash.'),
+    '#required' => TRUE,
+  );
+
+  return system_settings_form($form);
+}
+
+
+/**
+ * Implements validation from the Form API.
+ * 
+ * @param $form
+ *   A structured array containing the elements and properties of the form.
+ * @param $form_state
+ *   An array that stores information about the form's current state 
+ *   during processing.
+ */
+//implement this when we get ambitious
+function blast_form_validate($form, &$form_state){
+//  $max_num = $form_state['values']['current_posts_max'];
+//  if (!is_numeric($max_num)){
+//    form_set_error('current_posts_max', t('You must enter an integer for the maximum number of posts to display.'));
+//  } 
+//  else if ($max_num <= 0){
+//    form_set_error('current_posts_max', t('Maximum number of posts to display must be positive.'));       
+//  }
+}

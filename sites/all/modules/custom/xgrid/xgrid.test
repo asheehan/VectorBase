@@ -1,0 +1,52 @@
+<?php
+
+
+/**
+ * @file
+ * Tests for the Xgrid module
+ */
+
+class XgridTestCase extends DrupalWebTestCase{
+  public static function getInfo(){
+    return array(
+      'name' => 'Xgrid module functionality',
+      'description' => 'Test submission function of module',
+      'group' => 'Xgrid',
+    ); 
+
+  public function setUp(){
+    parent::setUp('xgrid');
+  }
+
+  public function testSubmission(){
+   $testXML='
+     <?xml version="1.0" encoding="UTF-8"?>
+     <!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+     <plist version="1.0">
+     <array>
+         <dict>
+             <key>name</key>
+             <string>Drupal Test</string>
+             <key>taskSpecifications</key>
+             <dict>
+                 <key>0</key>
+                 <dict>
+                     <key>command</key>
+                     <string>/bin/echo</string>
+                     <key>arguments</key>
+                     <array>
+                         <string>drupal</string>
+                         <string>test</string>
+                     </array>
+                 </dict>
+             </dict>
+         </dict>
+     </array>
+     </plist>
+';
+
+    $data = module_invoke('xgrid', 'submit', $testXML);
+    $this->assertTrue(!is_nan($data), t('Submission returns a number.'));
+  }
+
+}

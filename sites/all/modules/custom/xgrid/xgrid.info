@@ -1,0 +1,4 @@
+name = Xgrid
+description = allow drupal to interface with Apple's Xgrid
+package = VectorBase
+core = 7.x

@@ -1,0 +1,31 @@
+<?php
+
+/**
+ * @file
+ * navigation menu module
+ *
+ *
+*/
+
+
+/**
+ * Implementation of hook_menu()
+*/
+
+function culex_quinquefasciatus_menu() {
+  $items['organism/culex_quinquefasciatus'] = array(
+    'title' => 'Culex quinquefasciatus',
+    //'title callback' => 'navigation_title',
+    'page callback' => 'culex_quinquefasciatus',
+    'access callback' => TRUE,
+    'type' => MENU_NORMAL_ITEM,
+    'weight' => 2,
+  );
+  return $items;
+}
+
+function culex_quinquefasciatus( $section = '' ){
+  return t('Culex quinquefasciatus... section: @section', array('@section' => $section));
+}
+
+

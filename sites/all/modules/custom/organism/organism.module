@@ -1,0 +1,28 @@
+<?php
+
+/**
+ * @file
+ * navigation menu module
+ *
+ *
+*/
+
+
+/**
+ * Implementation of hook_menu()
+*/
+
+function organism_menu() {
+  $items['organism'] = array(
+    'title' => 'Organisms',
+    //'title callback' => 'navigation_title',
+    'page callback' => 'organism',
+    'file' => 'organism.inc',
+    'access callback' => TRUE,
+    'type' => MENU_NORMAL_ITEM,
+    'weight' => -9,
+  );
+  return $items;
+}
+
+

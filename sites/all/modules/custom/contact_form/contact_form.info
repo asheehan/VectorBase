@@ -1,0 +1,7 @@
+name = Contact Form
+description = VectorBase Contact Form
+package = VectorBase
+core = 7.x
+
+$scripts[]='toggle.js';
+

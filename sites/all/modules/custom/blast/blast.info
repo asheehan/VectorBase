@@ -1,0 +1,6 @@
+name = BLAST
+description = Allow Drupal to collect BLAST job parameters from the user, submit them to Xgrid, and display the status and results of the job.
+package = VectorBase
+core = 7.x
+dependencies[] = xgrid
+

@@ -1,0 +1,6 @@
+name = Home Menuitem
+description = VectorBase site-wide navigation menu -- Home
+package = VectorBase Development -- Navigation Menu
+core = 7.x
+files[] = home.module
+files[] = home.inc

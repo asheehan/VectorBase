@@ -1,0 +1,243 @@
+<?php
+
+/**
+ * @file
+ * VectorBase's contact_form module
+ *
+*/
+
+
+function contact_form_block_view($op='list', $delta=0, $edit=array()){
+  // pull in css and javascripts files
+  $path = drupal_get_path('module', 'contact_form');
+  drupal_add_js($path.'/toggle.js','file');
+  drupal_add_css($path.'/form.css','file');
+
+  // draw block
+  $subject='<span id="contact_title" onclick="toggleCollapse(\'contact_form_container\');">Contact Vectorbase</span>';
+  $blocks['subject'] = t($subject);
+  $blocks['content'] = drupal_get_form('ajax_contact_form_genform');
+  return $blocks;
+}
+
+
+function ajax_contact_form_genform($form, &$form_state) {
+  $form['contact_form'] = array(
+    '#type' => 'contact_form',
+    '#prefix' => '<div id="contact_form_container" class="invisible">',
+    '#suffix' => '</div>'
+  );
+
+  $form['contact_form']['comments'] = array(
+    '#type' => 'textarea',
+//    '#description' => t("Thoughts, questions, or suggestions"),
+    '#resizable' => FALSE,
+    '#rows' => 5,
+    '#cols' => 23,
+    '#attributes' => array('placeholder' => 'Let us know your thoughts, suggestions, or any questions you may have.'),
+  );
+
+  $form['contact_form']['email'] = array(
+    '#type' => 'textfield',
+    '#description' => t("Your Email address"),
+    '#size' =>20,
+  );
+
+  $form['contact_form']['submit'] = array(
+    '#type' => 'submit',
+    '#value' => t('Submit'),
+    '#suffix' => '<br/>',
+    '#ajax' => array(
+      'callback' => 'ajax_contact_form_handler',
+      'wrapper' => 'ajaxized',
+      'effect' => 'fade',
+      'progress' => array(
+        'type' => 'throbber',
+        'message' => t('')),
+    ),
+//    '#attributes' => array(
+//      'id'=>'submitButton'),
+  );
+/*
+ $form['contact_form']['clear'] = array(
+    '#name' => 'clear',
+    '#type' => 'button',
+    '#value' => t('Reset'),
+    '#attributes' => array(
+      'onclick' => 'this.form.reset(); return false;',
+      'id'=>'clearButton')
+  );
+*/
+  $form['contact_form']['results'] = array(
+    '#title' => '',
+    // The prefix/suffix provide the div that we're replacing, named by
+    // #ajax['wrapper'] above.
+    '#prefix' => '<div id="results">',
+    '#suffix' => '</div>',
+    '#type' => 'item',
+  );
+
+  return $form;
+}
+
+/**
+ * Callback element needs only select the portion of the form to be updated.
+ * Since #ajax['callback'] return can be HTML or a renderable array (or an
+ * array of commands), we can just return a piece of the form.
+ */
+function ajax_contact_form_handler($form, $form_state) {
+
+  //validate user input
+    $commands[]=ajax_command_data('#edit-email','value','this is the new html' );
+
+
+  if($form_state['values']['comments']==''){
+    $message="Tell us something!";
+    $commands[]=ajax_command_css('#edit-comments', array('border' => 'solid red 2px'));
+    $commands[]=ajax_command_css('#edit-results', array('color' => 'red', 'margin-left' => '6px'));
+
+ } elseif($form_state['values']['email']==''){
+    $message="Please enter your address";
+    $commands[]=ajax_command_css('#edit-comments', array('border' => 'solid 1px #aacfe4'));
+    $commands[]=ajax_command_css('#edit-email', array('border' => 'solid red 2px'));
+    $commands[]=ajax_command_css('#edit-results', array('color' => 'red', 'margin-left' => '6px'));
+
+  }elseif(!preg_match("#.+?@.+?\..+?#",$form_state['values']['email'])){
+    $message="Your address appears invalid";
+    $commands[]=ajax_command_css('#edit-email', array('border' => 'solid red 2px'));
+    $commands[]=ajax_command_css('#edit-results', array('color' => 'red', 'margin-left' => '6px'));
+
+  // input looks good
+  } else {
+    $message='Thank you for your submission!';
+
+    //  clear any error css that may have come up
+    $commands[]=ajax_command_css('#edit-results', array('color' => 'green', 'margin-left' => '2px'));
+    $commands[]=ajax_command_css('#edit-email', array('border' => 'solid 1px #aacfe4'));
+    $commands[]=ajax_command_css('#edit-comments', array('border' => 'solid 1px #aacfe4'));
+
+    //  insert sql
+
+    // reset form values
+    $commands[]=ajax_command_replace('#edit-comments', '<textarea id="edit-comments" name="comments" cols="23" rows="5" class="form-textarea"></textarea>');
+    $commands[]=ajax_command_replace('#edit-email', '<input type="text" id="edit-email" name="email" value="" size="20" maxlength="128" class="form-text" />');
+  }
+
+
+  $commands[]=ajax_command_html('#edit-results',$message );
+
+  return array('#type' => 'ajax', '#commands' => $commands);
+}
+
+
+
+
+
+
+
+
+
+/**
+ * Implements hook_block_info().
+ */
+function contact_form_block_info() {
+  $blocks['recent']['info'] = t('VectorBase Contact Form');
+  return $blocks;
+}
+
+
+
+/**
+ * Implementation of hook_help()
+*/
+function contact_form_help($path, $arg){
+  switch ($path) {
+    case "admin/help#contact_form":
+      return '<p>'.  t("this is some text from the help hook") .'</p>';
+      break;
+  }
+
+}
+
+
+/**
+ * Implements hook_menu().
+ */
+function contact_form_menu(){
+  $items = array();
+
+  $items['admin/config/system/contact_form'] = array(
+    'title' => 'Contact Form',
+    'description' => 'Manage contact form messages',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('contact_form_configform'),
+    'access arguments' => array('access administration pages'),
+    'type' => MENU_NORMAL_ITEM,
+  );
+  
+  return $items;
+}
+
+
+/**
+ * Form function, called by drupal_get_form() 
+ * in contact_form_menu().
+ */
+function contact_form_configform($form, &$form_state){
+  $form['from'] = array(
+  '#type' => 'item',
+  '#title' => t('contact_form Web Service Settings'),
+  '#markup' => 'The (separate) web service runs on an OS X machine which has access to the contact_form program on the command line. 
+The service runs over SOAP and implements the basic functionality of the contact_form program.<br/>These settings connect to http://server:port/wsdlPath<br/>Currently: ' . contact_form_getURL(),
+);
+
+  $form['contact_form_server'] = array(
+    '#type' => 'textfield',
+    '#title' => t('contact_form service machine'),
+    '#default_value' => variable_get('contact_form_server', 'jobs.vectorbase.org'),
+    '#maxlength' => 35,
+    '#description' => t('The machine where the contact_form web service is running.'),
+    '#required' => TRUE,
+  );
+
+  $form['contact_form_server_port'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Port'),
+    '#default_value' => variable_get('contact_form_server_port', '80'),
+    '#maxlength' => 4,
+    '#description' => t('The service port.'),
+    '#required' => TRUE,
+  );
+
+  $form['contact_form_controller_url_suffix'] = array(
+    '#type' => 'textfield',
+    '#title' => t('WSDL Path'),
+    '#default_value' => variable_get('contact_form_server_suffix', 'contact_form.wsdl'),
+    '#maxlength' => 35,
+    '#description' => t('Path to WSDL file on contact_form server. No leading slash.'),
+    '#required' => TRUE,
+  );
+
+  return system_settings_form($form);
+}
+
+
+/**
+ * Implements validation from the Form API.
+ * 
+ * @param $form
+ *   A structured array containing the elements and properties of the form.
+ * @param $form_state
+ *   An array that stores information about the form's current state 
+ *   during processing.
+ */
+//implement this when we get ambitious
+function contact_form_form_validate($form, &$form_state){
+//  $max_num = $form_state['values']['current_posts_max'];
+//  if (!is_numeric($max_num)){
+//    form_set_error('current_posts_max', t('You must enter an integer for the maximum number of posts to display.'));
+//  } 
+//  else if ($max_num <= 0){
+//    form_set_error('current_posts_max', t('Maximum number of posts to display must be positive.'));       
+//  }
+}

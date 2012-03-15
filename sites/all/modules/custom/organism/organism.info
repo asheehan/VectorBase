@@ -1,0 +1,6 @@
+name = Organism Menuitem
+description = VectorBase site-wide navigation menu -- Organism
+package = VectorBase Development -- Navigation Menu
+core = 7.x
+files[] = organism.module
+files[] = organism.inc

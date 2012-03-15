@@ -1,0 +1,4 @@
+name = Absolute URLs
+description = Rewrites outbound links to be absolute
+core = 7.x
+
