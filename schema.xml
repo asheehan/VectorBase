@@ -515,38 +515,38 @@
   <!-- CAP GENE: entity_type = bundle = "cap_gene", bundle_name = "CAP gene" -->
   <!-- CAP TRANSCRIPT: entity_type = bundle = "cap_transcript", bundle_name = "CAP transcript" -->
 
-  <field name="seq_region_name" type="string" indexed="true" stored="true"/>
+  <field name="seq_region_name" type="text" indexed="true" stored="true"/>
   <copyField source="seq_region_name" dest="text"/>
   
-  <field name="seq_region_start" type="string" indexed="true" stored="true"/>
+  <field name="seq_region_start" type="text" indexed="true" stored="true"/>
   
-  <field name="seq_region_end" type="string" indexed="true" stored="true"/>
+  <field name="seq_region_end" type="text" indexed="true" stored="true"/>
 
-  <field name="biotype" type="string" indexed="true" stored="true"/>
+  <field name="biotype" type="text" indexed="true" stored="true"/>
   
-  <field name="symbol" type="string" indexed="true" stored="true"/>
+  <field name="symbol" type="text" indexed="true" stored="true"/>
   <copyField source="symbol" dest="text"/>
 
-  <field name="transcript" type="string" indexed="true" stored="true" multiValued="true"/>
+  <field name="transcript" type="text" indexed="true" stored="true" multiValued="true"/>
   <copyField source="transcript" dest="text"/>
 
-  <field name="exon" type="string" indexed="true" stored="true" multiValued="true"/>
+  <field name="exon" type="text" indexed="true" stored="true" multiValued="true"/>
   <copyField source="exon" dest="text"/>
 
-  <field name="peptide" type="string" indexed="true" stored="true" multiValued="true"/>
+  <field name="peptide" type="text" indexed="true" stored="true" multiValued="true"/>
   <copyField source="peptide" dest="text"/>
 
-  <field name="domain" type="string" indexed="true" stored="true" multiValued="true"/>
+  <field name="domain" type="text" indexed="true" stored="true" multiValued="true"/>
   <copyField source="domain" dest="text"/>
 
-  <field name="xref" type="string" indexed="true" stored="true" multiValued="true"/>
+  <field name="xref" type="text" indexed="true" stored="true" multiValued="true"/>
   <copyField source="xref" dest="text"/>
   
   <!-- transcript only -->
 
-  <field name="seq_region_strand" type="string" indexed="true" stored="true"/>
+  <field name="seq_region_strand" type="text" indexed="true" stored="true"/>
   
-  <field name="submitter" type="string" indexed="true" stored="true"/> 
+  <field name="submitter" type="text" indexed="true" stored="true"/> 
   <copyField source="submitter" dest="text"/>
 
   <!-- =========================== -->
@@ -555,13 +555,13 @@
 
   <!-- TERM: entity_type = bundle = "ontology_term", bundle_name = "Ontology term" -->
 
-  <field name="alt_id" type="string" indexed="true" stored="true"/>
+  <field name="alt_id" type="text" indexed="true" stored="true"/>
   <copyField source="alt_id" dest="text"/>
   
-  <field name="synonym" type="string" indexed="true" stored="true" multiValued="true"/>
+  <field name="synonym" type="text" indexed="true" stored="true" multiValued="true"/>
   <copyField source="synonym" dest="text"/>
 
-  <field name="is_a" type="string" indexed="true" stored="true" multiValued="true"/>
+  <field name="is_a" type="text" indexed="true" stored="true" multiValued="true"/>
   <copyField source="is_a" dest="text"/>
 
   <!-- =================================== -->
