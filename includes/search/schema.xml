@@ -518,11 +518,11 @@
   <field name="seq_region_name" type="text" indexed="true" stored="true"/>
   <copyField source="seq_region_name" dest="text"/>
   
-  <field name="seq_region_start" type="text" indexed="true" stored="true"/>
+  <field name="seq_region_start" type="integer" indexed="true" stored="true"/>
   
-  <field name="seq_region_end" type="text" indexed="true" stored="true"/>
+  <field name="seq_region_end" type="integer" indexed="true" stored="true"/>
 
-  <field name="biotype" type="text" indexed="true" stored="true"/>
+  <field name="biotype" type="string" indexed="true" stored="true"/>
   
   <field name="symbol" type="text" indexed="true" stored="true"/>
   <copyField source="symbol" dest="text"/>
@@ -544,7 +544,7 @@
   
   <!-- transcript only -->
 
-  <field name="seq_region_strand" type="text" indexed="true" stored="true"/>
+  <field name="seq_region_strand" type="string" indexed="true" stored="true"/>
   
   <field name="submitter" type="text" indexed="true" stored="true"/> 
   <copyField source="submitter" dest="text"/>
