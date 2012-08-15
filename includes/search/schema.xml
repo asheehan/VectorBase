@@ -568,28 +568,66 @@
   <!-- POPULATION BIOLOGY: site = "popbio" -->
   <!-- =================================== -->
 
-  <!-- SAMPLE: entity_type = bundle = "pop_sample", bundle_name = "sample" -->
+  <!-- site = entity_type = "popbio" -->
 
-  <!-- cvterm.name -->
+  <!-- SAMPLE: bundle = "pop_sample", bundle_name = "sample" -->
 
-  <field name="phenotypes" type="string" indexed="true" stored="true" multiValued="true" />
+  <field name="phenotypes" type="text" indexed="true" stored="true" multiValued="true" />
   <copyField source="phenotypes" dest="text"/>
 
-  <field name="genotypes" type="string" indexed="true" stored="true" multiValued="true" />
+  <field name="genotypes" type="text" indexed="true" stored="true" multiValued="true" />
   <copyField source="genotypes" dest="text"/>
 
-  <field name="geolocations" type="string" indexed="true" stored="true" multiValued="true" />
+  <field name="geolocations" type="text" indexed="true" stored="true" multiValued="true" />
   <copyField source="geolocations" dest="text"/>
 
-  <field name="annotation" type="string" indexed="true" stored="true" multiValued="true" />
-  <copyField source="annotation" dest="text"/>
-
-
-  <!-- ASSAY: entity_type = bundle = "pop_experiment", bundle_name = "assay" -->
-
   <!-- PROJECT: and maybe other popbio entities -->
+  <!-- bundle = "pop_project"  bundle_name = "project" -->
+  <!-- no special fields required -->
+  
+  <!-- ====================================== -->
+  <!-- FUNCGEN a.k.a. expression data/browser -->
+  <!-- ====================================== -->
 
+  <!-- site = entity_type = "funcgen" -->
 
+  <!-- EXPERIMENT: bundle = 'experiment' bundle_name = "Expression experiment"  -->
+ 
+  <!-- if there's a CamelCase-aware field type that could be useful here: -->
+  <field name="experimental_factors" type="string" indexed="true" stored="true" multiValued="true" />
+  <copyField source="experimental_factors" dest="text"/>
+
+  <!-- SAMPLE: bundle = "sample" bundle_name = "Sample" -->
+  <field name="annotations" type="text" indexed="true" stored="true" multiValued="true" />
+  <copyField source="annotations" dest="text"/>  <!-- used for GDAVs too -->
+
+  <!-- MICROARRAY: bundle = 'microarray' bundle_name = "Microarray" -->
+  <!-- no new fields -->
+
+  <!-- REPORTER: bundle = 'reporter' bundle_name = "Probe/Reporter" -->
+  <field name="gene_ids" type="string" indexed="true" stored="true" multiValued="true" />
+  <copyField source="gene_ids" dest="text"/>
+
+  <!-- REPORTER-EXPRESSION bundle = 'reporter_expression' bundle_name = 'Expression statistic' -->
+  <field name="p_value" type="double" indexed="true" stored="true" />
+  <field name="statistical_test" type="string" indexed="true" stored="true" />
+  <copyField source="statistical_test" dest="text"/>
+  <field name="high_conditions" type="text" indexed="true" stored="true" multiValued="true"/>
+  <field name="low_conditions" type="text" indexed="true" stored="true" multiValued="true"/>
+  <copyField source="*_conditions" dest="text"/> 
+
+  <!-- =========================================== -->
+  <!-- GDAVs for misc transcriptomes and proteomes -->
+  <!-- =========================================== -->
+  
+  <!-- site = "Transcriptome" or "Proteome" etc -->
+  <!-- bundle = GDAV_DB_NAME  bundle_name = GDAV_TITLE (e.g. "Eight Anopheline mRNAseq transcriptomes") -->
+
+  <!-- no new fields needed - uses "annotations" from funcgen -->
+  
+  
+  
+  
  </fields>
 
  <!-- Field to use to determine and enforce document uniqueness.
