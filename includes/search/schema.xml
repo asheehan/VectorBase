@@ -10,7 +10,7 @@
  http://wiki.apache.org/solr/SchemaXml
 -->
 
-<schema name="drupal-3.0-rc2" version="1.2">
+<schema name="preview-1.0" version="1.2">
     <!-- attribute "name" is the name of this schema and is only used for display purposes.
          Applications should change this to reflect the nature of the search collection.
          version="1.2" is Solr's version number for the schema syntax and semantics.  It should
@@ -332,6 +332,10 @@
 <!-- The document id is usually derived from a site-spcific key (hash) and the entity type and ID like:
      $document->id = $hash . '/node/' . $node->nid; -->
 
+   <!-- added for solr 4.0 -->
+   <field name="_version_" type="long" indexed="true" stored="true"/>
+   
+
    <field name="id" type="string" indexed="true" stored="true" required="true" />
    <!-- entity_id is the numeric object ID, e.g. Node ID, File ID -->
    <field name="entity_id"  type="long" indexed="true" stored="true" />
@@ -506,6 +510,16 @@
   <field name="species" type="text" indexed="true" stored="true" multiValued="true"/>
   <copyField source="species" dest="text"/>
 
+  <!-- Added by Greg Davis to test string values for the species field-->
+  <field name="species_category" type="string" indexed="true" stored="true" multiValued="true"/>
+  <copyField source="species" dest="species_category"/>
+
+<!--
+  <field name="body" indexed="true" stored="true"/>
+  <copyField source="*" dest="body"/>
+  -->
+
+
 
   <!-- ======================= -->
   <!-- GENOME: site = "genome" -->
@@ -518,13 +532,13 @@
   <field name="seq_region_name" type="text" indexed="true" stored="true"/>
   <copyField source="seq_region_name" dest="text"/>
   
-  <field name="seq_region_start" type="integer" indexed="true" stored="true"/>
+  <field name="seq_region_start" type="text" indexed="true" stored="true"/>
   
-  <field name="seq_region_end" type="integer" indexed="true" stored="true"/>
+  <field name="seq_region_end" type="text" indexed="true" stored="true"/>
 
-  <field name="biotype" type="string" indexed="true" stored="true"/>
+  <field name="biotype" type="text" indexed="true" stored="true"/>
   
-  <field name="symbol" type="text" indexed="true" stored="true"/>
+  <field name="symbol" type="string" indexed="true" stored="true"/>
   <copyField source="symbol" dest="text"/>
 
   <field name="transcript" type="text" indexed="true" stored="true" multiValued="true"/>
@@ -539,12 +553,12 @@
   <field name="domain" type="text" indexed="true" stored="true" multiValued="true"/>
   <copyField source="domain" dest="text"/>
 
-  <field name="xref" type="text" indexed="true" stored="true" multiValued="true"/>
+  <field name="xref" type="string" indexed="true" stored="true" multiValued="true"/>
   <copyField source="xref" dest="text"/>
   
   <!-- transcript only -->
 
-  <field name="seq_region_strand" type="string" indexed="true" stored="true"/>
+  <field name="seq_region_strand" type="text" indexed="true" stored="true"/>
   
   <field name="submitter" type="text" indexed="true" stored="true"/> 
   <copyField source="submitter" dest="text"/>
@@ -568,9 +582,9 @@
   <!-- POPULATION BIOLOGY: site = "popbio" -->
   <!-- =================================== -->
 
-  <!-- site = entity_type = "popbio" -->
+  <!-- SAMPLE: entity_type = bundle = "pop_sample", bundle_name = "sample" -->
 
-  <!-- SAMPLE: bundle = "pop_sample", bundle_name = "sample" -->
+  <!-- cvterm.name -->
 
   <field name="phenotypes" type="text" indexed="true" stored="true" multiValued="true" />
   <copyField source="phenotypes" dest="text"/>
@@ -581,53 +595,18 @@
   <field name="geolocations" type="text" indexed="true" stored="true" multiValued="true" />
   <copyField source="geolocations" dest="text"/>
 
-  <!-- PROJECT: and maybe other popbio entities -->
-  <!-- bundle = "pop_project"  bundle_name = "project" -->
-  <!-- no special fields required -->
-  
-  <!-- ====================================== -->
-  <!-- FUNCGEN a.k.a. expression data/browser -->
-  <!-- ====================================== -->
-
-  <!-- site = entity_type = "funcgen" -->
-
-  <!-- EXPERIMENT: bundle = 'experiment' bundle_name = "Expression experiment"  -->
- 
-  <!-- if there's a CamelCase-aware field type that could be useful here: -->
-  <field name="experimental_factors" type="string" indexed="true" stored="true" multiValued="true" />
-  <copyField source="experimental_factors" dest="text"/>
-
-  <!-- SAMPLE: bundle = "sample" bundle_name = "Sample" -->
   <field name="annotations" type="text" indexed="true" stored="true" multiValued="true" />
-  <copyField source="annotations" dest="text"/>  <!-- used for GDAVs too -->
+  <copyField source="annotations" dest="text"/>
 
-  <!-- MICROARRAY: bundle = 'microarray' bundle_name = "Microarray" -->
-  <!-- no new fields -->
+  <field name="annotation" type="string" indexed="true" stored="true" multiValued="true" />
+  <copyField source="annotation" dest="text"/>
 
-  <!-- REPORTER: bundle = 'reporter' bundle_name = "Probe/Reporter" -->
-  <field name="gene_ids" type="string" indexed="true" stored="true" multiValued="true" />
-  <copyField source="gene_ids" dest="text"/>
 
-  <!-- REPORTER-EXPRESSION bundle = 'reporter_expression' bundle_name = 'Expression statistic' -->
-  <field name="p_value" type="double" indexed="true" stored="true" />
-  <field name="statistical_test" type="string" indexed="true" stored="true" />
-  <copyField source="statistical_test" dest="text"/>
-  <field name="high_conditions" type="text" indexed="true" stored="true" multiValued="true"/>
-  <field name="low_conditions" type="text" indexed="true" stored="true" multiValued="true"/>
-  <copyField source="*_conditions" dest="text"/> 
+  <!-- ASSAY: entity_type = bundle = "pop_experiment", bundle_name = "assay" -->
 
-  <!-- =========================================== -->
-  <!-- GDAVs for misc transcriptomes and proteomes -->
-  <!-- =========================================== -->
-  
-  <!-- site = "Transcriptome" or "Proteome" etc -->
-  <!-- bundle = GDAV_DB_NAME  bundle_name = GDAV_TITLE (e.g. "Eight Anopheline mRNAseq transcriptomes") -->
+  <!-- PROJECT: and maybe other popbio entities -->
 
-  <!-- no new fields needed - uses "annotations" from funcgen -->
-  
-  
-  
-  
+
  </fields>
 
  <!-- Field to use to determine and enforce document uniqueness.
@@ -636,7 +615,7 @@
  <uniqueKey>id</uniqueKey>
 
  <!-- field for the QueryParser to use when an explicit fieldname is absent -->
- <defaultSearchField>content</defaultSearchField>
+ <defaultSearchField>text</defaultSearchField>
 
  <!-- SolrQueryParser configuration: defaultOperator="AND|OR" -->
  <solrQueryParser defaultOperator="AND"/>
