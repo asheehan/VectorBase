@@ -2363,7 +2363,6 @@
     <field name="bundle_name">VBcv term</field>
     <field name="url">/content/ontology-browser?cv=VBcv&amp;t=VBcv:0000189</field>
     <field name="label">publication class</field>
-    <field name="synonym"><new synonym></field>
     <field name="synonym">category of document</field>
     <field name="is_a">descriptor</field>
   </doc>
@@ -6131,7 +6130,7 @@
     <field name="bundle_name">VBcv term</field>
     <field name="url">/content/ontology-browser?cv=VBcv&amp;t=VBcv:0000493</field>
     <field name="label">MRh12</field>
-    <field name="synonym">MR<up>h12</up></field>
+    <field name="synonym">MR^h12</field>
     <field name="is_a">MR</field>
   </doc>
   <doc>
@@ -6144,7 +6143,7 @@
     <field name="bundle_name">VBcv term</field>
     <field name="url">/content/ontology-browser?cv=VBcv&amp;t=VBcv:0000494</field>
     <field name="label">MRT007</field>
-    <field name="synonym">MR<up>T007</up></field>
+    <field name="synonym">MR^T007</field>
     <field name="is_a">MR</field>
   </doc>
   <doc>
@@ -6305,7 +6304,7 @@
     <field name="bundle_name">VBcv term</field>
     <field name="url">/content/ontology-browser?cv=VBcv&amp;t=VBcv:0000507</field>
     <field name="label">60Co gamma ray</field>
-    <field name="synonym"><up>60</up>Co &ggr; ray</field>
+    <field name="synonym">60^Co gamma ray</field>
     <field name="is_a">ray</field>
   </doc>
   <doc>
@@ -6318,7 +6317,7 @@
     <field name="bundle_name">VBcv term</field>
     <field name="url">/content/ontology-browser?cv=VBcv&amp;t=VBcv:0000508</field>
     <field name="label">137Cs gamma ray</field>
-    <field name="synonym"><up>137</up>Cs &ggr; ray</field>
+    <field name="synonym">137^Cs gamma ray</field>
     <field name="is_a">ray</field>
   </doc>
   <doc>
@@ -6331,7 +6330,7 @@
     <field name="bundle_name">VBcv term</field>
     <field name="url">/content/ontology-browser?cv=VBcv&amp;t=VBcv:0000509</field>
     <field name="label">226Ra alpha ray</field>
-    <field name="synonym"><up>226</up>Ra &agr; ray</field>
+    <field name="synonym">226^Ra alpha ray</field>
     <field name="synonym">radium</field>
     <field name="is_a">ray</field>
   </doc>
@@ -6903,7 +6902,7 @@
     <field name="bundle">VBcv_term</field>
     <field name="bundle_name">VBcv term</field>
     <field name="url">/content/ontology-browser?cv=VBcv&amp;t=VBcv:0000555</field>
-    <field name="label">H<down>3</down>BO<down>3</down></field>
+    <field name="label">H_3BO_3</field>
     <field name="is_a">compound</field>
   </doc>
   <doc>
@@ -7115,7 +7114,7 @@
     <field name="bundle_name">VBcv term</field>
     <field name="url">/content/ontology-browser?cv=VBcv&amp;t=VBcv:0000572</field>
     <field name="label">7-bromomethyl 12 methyl benz alpha anthracine</field>
-    <field name="synonym">7-bromomethyl 12 methyl benz<up>&agr;</up> anthracine</field>
+    <field name="synonym">7-bromomethyl 12 methyl benz^alpha anthracine</field>
     <field name="is_a">chemical</field>
   </doc>
   <doc>
@@ -8721,17 +8720,6 @@
     <field name="label">mortality rate</field>
     <field name="synonym">mortality percentage</field>
     <field name="is_a">qualifier</field>
-  </doc>
-  <doc>
-    <field name="id">VBcv/term/VBcv:0000704</field>
-    <field name="site">Ontology</field>
-    <field name="accession">VBcv:0000704</field>
-    <field name="entity_type">VBcv_term</field>
-    <field name="entity_id">704</field>
-    <field name="bundle">VBcv_term</field>
-    <field name="bundle_name">VBcv term</field>
-    <field name="url">/content/ontology-browser?cv=VBcv&amp;t=VBcv:0000704</field>
-    <field name="label"><new term></field>
   </doc>
   <doc>
     <field name="id">VBcv/term/VBcv:0000705</field>
