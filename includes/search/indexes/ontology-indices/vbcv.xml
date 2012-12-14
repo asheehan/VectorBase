@@ -6066,7 +6066,7 @@
     <field name="bundle_name">VBcv term</field>
     <field name="url">/content/ontology-browser?cv=VBcv&amp;t=VBcv:0000488</field>
     <field name="label">Delta2-3</field>
-    <field name="synonym">&Dgr;2-3</field>
+    <field name="synonym">&amp;Dgr;2-3</field>
     <field name="is_a">activity</field>
   </doc>
   <doc>
@@ -6092,7 +6092,7 @@
     <field name="bundle_name">VBcv term</field>
     <field name="url">/content/ontology-browser?cv=VBcv&amp;t=VBcv:0000490</field>
     <field name="label">p pi25.1</field>
-    <field name="synonym">p&pgr;25.1</field>
+    <field name="synonym">p&amp;pgr;25.1</field>
     <field name="is_a">activity</field>
   </doc>
   <doc>
@@ -6105,7 +6105,7 @@
     <field name="bundle_name">VBcv term</field>
     <field name="url">/content/ontology-browser?cv=VBcv&amp;t=VBcv:0000491</field>
     <field name="label">p pi25.7wc</field>
-    <field name="synonym">p&pgr;25.7wc</field>
+    <field name="synonym">p&amp;pgr;25.7wc</field>
     <field name="is_a">activity</field>
   </doc>
   <doc>
@@ -6278,7 +6278,7 @@
     <field name="bundle_name">VBcv term</field>
     <field name="url">/content/ontology-browser?cv=VBcv&amp;t=VBcv:0000505</field>
     <field name="label">alpha ray</field>
-    <field name="synonym">&agr; ray</field>
+    <field name="synonym">&amp;agr; ray</field>
     <field name="is_a">radiation</field>
   </doc>
   <doc>
@@ -6291,7 +6291,7 @@
     <field name="bundle_name">VBcv term</field>
     <field name="url">/content/ontology-browser?cv=VBcv&amp;t=VBcv:0000506</field>
     <field name="label">gamma ray</field>
-    <field name="synonym">&ggr; ray</field>
+    <field name="synonym">&amp;ggr; ray</field>
     <field name="is_a">radiation</field>
   </doc>
   <doc>
@@ -7139,7 +7139,7 @@
     <field name="bundle_name">VBcv term</field>
     <field name="url">/content/ontology-browser?cv=VBcv&amp;t=VBcv:0000574</field>
     <field name="label">benzo(alpha)pyrene</field>
-    <field name="synonym">benzo(&agr;)pyrene</field>
+    <field name="synonym">benzo(&amp;agr;)pyrene</field>
     <field name="is_a">chemical</field>
   </doc>
   <doc>
