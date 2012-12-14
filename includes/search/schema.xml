@@ -248,7 +248,7 @@
 
   <!-- cvterm.name -->
 
-  <field name="phenotypes" type="text_ws" indexed="true" stored="true" multiValued="true" />
+  <field name="phenotypes" type="text_en_splitting" indexed="true" stored="true" multiValued="true" />
   <copyField source="phenotypes" dest="text"/>
 
   <field name="genotypes" type="text_ws" indexed="true" stored="true" multiValued="true" />
