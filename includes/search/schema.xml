@@ -110,17 +110,22 @@
    <field name="entity_type" type="string" indexed="true" stored="true" required="true" />
    <!-- bundle is a node type, or as appropriate for other entity types -->
    <field name="bundle" type="string" indexed="true" stored="true"/>
+   <copyField source="bundle" dest="text"/>
    <field name="bundle_name" type="string" indexed="true" stored="true"/>
+   <copyField source="bundle_name" dest="text"/>
 
    <field name="site" type="string" indexed="true" stored="true"/>
+   <copyField source="site" dest="text"/>
    <field name="hash" type="string" indexed="true" stored="true"/>
    <field name="url" type="string" indexed="true" stored="true"/>
    <!-- label is the default field for a human-readable string for this entity (e.g. the title of a node) -->
    <field name="label" type="text_ws" indexed="true" stored="true" termVectors="true" omitNorms="true"/>
+   <copyField source="label" dest="text"/>
    <!-- The string version of the title is used for sorting -->
    <copyField source="label" dest="sort_label"/>
    <!-- content is the default field for full text search - dump crap here -->
    <field name="content" type="text_ws" indexed="true" stored="true" termVectors="true"/>
+   <copyField source="content" dest="text"/>
    <field name="teaser" type="text_ws" indexed="false" stored="true"/>
 
    <field name="path" type="string" indexed="true" stored="true"/>
@@ -133,6 +138,7 @@
    <field name="tid"  type="long" indexed="true" stored="true" multiValued="true"/>
 
    <field name="taxonomy_names" type="text_ws" indexed="true" stored="false" termVectors="true" multiValued="true" omitNorms="true"/>
+   <copyField source="taxonomy_names" dest="text"/>
    <!-- Copy terms to a single field that contains all taxonomy term names -->
    <copyField source="tm_vid_*" dest="taxonomy_names"/>
 
