@@ -1,0 +1,9 @@
+/* no trailing slashes (especially for REST url) */
+
+configTxt = {
+	'REST':'https://drupal.vectorbase.org/popbio/REST/',
+  'ROOT':'https://drupal.vectorbase.org/popbio/',
+'ROOT_STATIC':'https://drupal.vectorbase.org/popbio_static/'
+};
+
+var config = eval(configTxt);

@@ -1,0 +1,2 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=0 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=2921&page=res&job_id=208891
+AAEL005356-RA	BLAST	Blast Hit	86	586	2132	.	.	FBpp0303281 type=protein;loc=2R:complement(15552167..15552171,15553030..15553735,15553800..15554072,15554133..15554714,15554773..15554969,15555033..15555753); ID=FBpp0303281; name=hrg-PD;parent=FBgn0015949,FBtr0330248;dbxref=FlyBase:FBpp0303281,FlyBase_Annotation_IDs:CG9854-PD;MD5=7120502b726aa7204654b34f3aeec009; length=827; release=r5.48;species=Dmel;

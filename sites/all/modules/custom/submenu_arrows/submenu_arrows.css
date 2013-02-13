@@ -1,0 +1,21 @@
+div.menuarrow {
+  display: table;
+  width: 100%;
+}
+
+div.menuarrowleft {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+div.menuarrowright {
+  display: table-cell;
+  vertical-align: middle;
+  text-align: right;
+  padding-left: 10px;
+}
+
+img.menuarrow {
+  float: right;
+}
+

@@ -1,0 +1,11 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=0 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=3081&page=res&job_id=208983
+supercont3.7	BLAST	Blast Hit	331327	331662	582	+	.	Cat L cDNA
+supercont3.7	BLAST	Blast Hit	331325	331663	566	-	.	Cat L cDNA
+supercont3.7	BLAST	Blast Hit	331326	331661	563	+	.	Cat L cDNA
+supercont3.7	BLAST	Blast Hit	331326	331661	549	-	.	Cat L cDNA
+supercont3.7	BLAST	Blast Hit	331325	331663	545	+	.	Cat L cDNA
+supercont3.7	BLAST	Blast Hit	331324	331662	540	-	.	Cat L cDNA
+supercont3.7	BLAST	Blast Hit	334548	334823	397	+	.	Cat L cDNA
+supercont3.684	BLAST	Blast Hit	216578	216844	342	+	.	Cat L cDNA
+supercont3.684	BLAST	Blast Hit	213849	214115	323	-	.	Cat L cDNA
+supercont3.15	BLAST	Blast Hit	204192	204479	321	+	.	Cat L cDNA

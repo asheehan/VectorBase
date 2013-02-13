@@ -1,0 +1,11 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=0 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=2943&page=res&job_id=208913
+scf_1925491391	BLAST	Blast Hit	14653	38326	45558	+	.	2R dna:chromosome chromosome:AgamP3:2R:57980001:58150000:1
+scf_1925491391	BLAST	Blast Hit	1	9403	18332	+	.	2R dna:chromosome chromosome:AgamP3:2R:57980001:58150000:1
+scf_1925491391	BLAST	Blast Hit	9400	15306	11484	+	.	2R dna:chromosome chromosome:AgamP3:2R:57980001:58150000:1
+scf_1925491360	BLAST	Blast Hit	7073	17565	19344	-	.	2R dna:chromosome chromosome:AgamP3:2R:57980001:58150000:1
+scf_1925491360	BLAST	Blast Hit	17793	23169	10588	-	.	2R dna:chromosome chromosome:AgamP3:2R:57980001:58150000:1
+scf_1925491222	BLAST	Blast Hit	8619	14465	11326	+	.	2R dna:chromosome chromosome:AgamP3:2R:57980001:58150000:1
+scf_1925490423	BLAST	Blast Hit	3412	7725	8296	+	.	2R dna:chromosome chromosome:AgamP3:2R:57980001:58150000:1
+scf_1925490423	BLAST	Blast Hit	8918	12144	6072	+	.	2R dna:chromosome chromosome:AgamP3:2R:57980001:58150000:1
+scf_1925488501	BLAST	Blast Hit	1	2954	5662	-	.	2R dna:chromosome chromosome:AgamP3:2R:57980001:58150000:1
+scf_1925488501	BLAST	Blast Hit	3072	5529	4708	-	.	2R dna:chromosome chromosome:AgamP3:2R:57980001:58150000:1

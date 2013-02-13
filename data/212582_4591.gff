@@ -1,0 +1,23 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=0 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=4591&page=res&job_id=212582
+AGAP003870-RA	BLAST	Blast Hit	901	949	92	-	.	Example1
+AGAP003870-RA	BLAST	Blast Hit	902	949	90	-	.	Example1
+AGAP001582-RA	BLAST	Blast Hit	3015	3064	84	+	.	Example1
+AGAP001582-RA	BLAST	Blast Hit	3015	3062	80	+	.	Example1
+AGAP005927-RA	BLAST	Blast Hit	542	591	84	-	.	Example1
+AGAP005927-RA	BLAST	Blast Hit	544	592	82	-	.	Example1
+AGAP012359-RA	BLAST	Blast Hit	1015	1064	70	-	.	Example1
+AGAP012359-RA	BLAST	Blast Hit	1018	1065	70	-	.	Example1
+AGAP005745-RA	BLAST	Blast Hit	1834	1878	70	+	.	Example1
+AGAP005745-RA	BLAST	Blast Hit	1834	1878	70	+	.	Example1
+AGAP000983-RA	BLAST	Blast Hit	3452	3480	52	-	.	Example1
+AGAP000983-RA	BLAST	Blast Hit	3454	3480	48	-	.	Example1
+AGAP004689-RC	BLAST	Blast Hit	2431	2458	46	+	.	Example1
+AGAP004689-RC	BLAST	Blast Hit	2431	2458	46	+	.	Example1
+AGAP004689-RB	BLAST	Blast Hit	2449	2476	46	+	.	Example1
+AGAP004689-RB	BLAST	Blast Hit	2449	2476	46	+	.	Example1
+AGAP004689-RA	BLAST	Blast Hit	2572	2599	46	+	.	Example1
+AGAP004689-RA	BLAST	Blast Hit	2572	2599	46	+	.	Example1
+AGAP005166-RA	BLAST	Blast Hit	1357	1381	40	+	.	Example1
+AGAP005166-RA	BLAST	Blast Hit	1357	1381	40	+	.	Example1
+AGAP009919-RA	BLAST	Blast Hit	758	772	30	-	.	Example1
+AGAP009919-RA	BLAST	Blast Hit	758	772	30	-	.	Example1

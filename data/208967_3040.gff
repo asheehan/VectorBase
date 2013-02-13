@@ -1,0 +1,11 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=0 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=3040&page=res&job_id=208967
+contig:AaegL1:contig_2702:1:230520:1	BLAST	Blast Hit	7740	7817	130	-	.	Actina cDNA
+contig:AaegL1:contig_9607:1:203761:1	BLAST	Blast Hit	198573	198650	130	-	.	Actina cDNA
+contig:AaegL1:contig_9607:1:203761:1	BLAST	Blast Hit	190398	190475	128	-	.	Actina cDNA
+contig:AaegL1:contig_3054:1:178651:1	BLAST	Blast Hit	92508	92585	130	+	.	Actina cDNA
+contig:AaegL1:contig_3054:1:178651:1	BLAST	Blast Hit	18931	19008	130	-	.	Actina cDNA
+contig:AaegL1:contig_20261:1:83407:1	BLAST	Blast Hit	34348	34425	130	+	.	Actina cDNA
+contig:AaegL1:contig_7242:1:28910:1	BLAST	Blast Hit	22022	22099	130	-	.	Actina cDNA
+contig:AaegL1:contig_7242:1:28910:1	BLAST	Blast Hit	21925	22041	116	+	.	Actina cDNA
+contig:AaegL1:contig_16577:1:179042:1	BLAST	Blast Hit	60457	60534	130	-	.	Actina cDNA
+contig:AaegL1:contig_7243:1:20455:1	BLAST	Blast Hit	18013	18090	121	-	.	Actina cDNA

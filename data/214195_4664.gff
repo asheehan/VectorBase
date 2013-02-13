@@ -1,0 +1,2 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=0 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=4664&page=res&job_id=214195
+Locus_29417_Length_671	BLAST	Blast Hit	310	670	104	-	.	AGAP010815-RA cdna:KNOWN_protein_coding

@@ -1,0 +1,4 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=0 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=2549&page=res&job_id=208689
+113730	BLAST	Blast Hit	135	249	64	-	.	
+112897	BLAST	Blast Hit	8866	8906	40	-	.	
+RPTMP15367-RA	BLAST	Blast Hit	1027	1051	40	+	.	

@@ -1,0 +1,11 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=0 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=2416&page=res&job_id=208685
+scaffold02792	BLAST	Blast Hit	181187	184046	5120	+	.	
+scaffold05074	BLAST	Blast Hit	338107	338273	190	-	.	
+scaffold04245	BLAST	Blast Hit	9791	9961	168	+	.	
+scaffold02207	BLAST	Blast Hit	905	1096	164	-	.	
+scaffold05378	BLAST	Blast Hit	4641	4821	164	-	.	
+scaffold00590	BLAST	Blast Hit	131505	131671	162	+	.	
+scaffold05454	BLAST	Blast Hit	2892	3052	162	+	.	
+scaffold05292	BLAST	Blast Hit	528944	529119	160	-	.	
+scaffold04343	BLAST	Blast Hit	475244	475412	158	+	.	
+scaffold02189	BLAST	Blast Hit	38607	38789	158	+	.	

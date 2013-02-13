@@ -1,0 +1,11 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=1 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=715&page=res&job_id=204104
+CPIJ013408-RA	BLAST	Blast Hit	1	370	1647	.	.	AaGPRop9_1
+CPIJ005000-RA	BLAST	Blast Hit	1	371	1590	.	.	AaGPRop9_1
+CPIJ009246-RA	BLAST	Blast Hit	7	362	975	.	.	AaGPRop9_1
+CPIJ020021-RA	BLAST	Blast Hit	25	367	514	.	.	AaGPRop9_1
+CPIJ011576-RA	BLAST	Blast Hit	26	371	506	.	.	AaGPRop9_1
+CPIJ011574-RA	BLAST	Blast Hit	26	371	506	.	.	AaGPRop9_1
+CPIJ011571-RA	BLAST	Blast Hit	27	357	500	.	.	AaGPRop9_1
+CPIJ004067-RA	BLAST	Blast Hit	23	367	496	.	.	AaGPRop9_1
+CPIJ012052-RA	BLAST	Blast Hit	27	343	492	.	.	AaGPRop9_1
+CPIJ011573-RA	BLAST	Blast Hit	29	370	486	.	.	AaGPRop9_1

@@ -1,0 +1,11 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=1 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=310&page=res&job_id=200935
+AGAP008023-RA	BLAST	Blast Hit	184	1788	1843	+	.	sp|O02491|HMEN_ANOGA Segmentation polarity homeobox protein engrailed OS=Anopheles gambiae GN=en PE=2 SV=3
+AGAP008025-RA	BLAST	Blast Hit	1489	1905	534	+	.	sp|O02491|HMEN_ANOGA Segmentation polarity homeobox protein engrailed OS=Anopheles gambiae GN=en PE=2 SV=3
+AGAP005346-RA	BLAST	Blast Hit	436	618	182	+	.	sp|O02491|HMEN_ANOGA Segmentation polarity homeobox protein engrailed OS=Anopheles gambiae GN=en PE=2 SV=3
+AGAP013373-RA	BLAST	Blast Hit	40	297	177	+	.	sp|O02491|HMEN_ANOGA Segmentation polarity homeobox protein engrailed OS=Anopheles gambiae GN=en PE=2 SV=3
+AGAP004647-RA	BLAST	Blast Hit	106	276	173	+	.	sp|O02491|HMEN_ANOGA Segmentation polarity homeobox protein engrailed OS=Anopheles gambiae GN=en PE=2 SV=3
+AGAP000484-RA	BLAST	Blast Hit	1630	1890	173	+	.	sp|O02491|HMEN_ANOGA Segmentation polarity homeobox protein engrailed OS=Anopheles gambiae GN=en PE=2 SV=3
+AGAP004659-RA	BLAST	Blast Hit	1072	1272	163	+	.	sp|O02491|HMEN_ANOGA Segmentation polarity homeobox protein engrailed OS=Anopheles gambiae GN=en PE=2 SV=3
+AGAP004649-RA	BLAST	Blast Hit	1282	1455	163	+	.	sp|O02491|HMEN_ANOGA Segmentation polarity homeobox protein engrailed OS=Anopheles gambiae GN=en PE=2 SV=3
+AGAP004646-RA	BLAST	Blast Hit	1039	1221	163	+	.	sp|O02491|HMEN_ANOGA Segmentation polarity homeobox protein engrailed OS=Anopheles gambiae GN=en PE=2 SV=3
+AGAP007058-RA	BLAST	Blast Hit	334	504	161	+	.	sp|O02491|HMEN_ANOGA Segmentation polarity homeobox protein engrailed OS=Anopheles gambiae GN=en PE=2 SV=3

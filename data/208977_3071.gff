@@ -1,0 +1,11 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=0 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=3071&page=res&job_id=208977
+AAWU01029296.1	BLAST	Blast Hit	20289	20456	274	-	.	Cat B1 Gen
+AAWU01029296.1	BLAST	Blast Hit	20289	20456	244	+	.	Cat B1 Gen
+AAWU01029296.1	BLAST	Blast Hit	20287	20454	224	+	.	Cat B1 Gen
+AAWU01029296.1	BLAST	Blast Hit	20287	20457	224	-	.	Cat B1 Gen
+AAWU01029296.1	BLAST	Blast Hit	23267	23383	183	+	.	Cat B1 Gen
+AAWU01029296.1	BLAST	Blast Hit	20288	20455	170	+	.	Cat B1 Gen
+AAWU01029296.1	BLAST	Blast Hit	23269	23370	156	-	.	Cat B1 Gen
+AAWU01029296.1	BLAST	Blast Hit	20288	20455	152	-	.	Cat B1 Gen
+AAWU01001582.1	BLAST	Blast Hit	23192	23308	137	+	.	Cat B1 Gen
+AAWU01001582.1	BLAST	Blast Hit	17465	17563	135	-	.	Cat B1 Gen

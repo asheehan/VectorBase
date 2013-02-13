@@ -1,0 +1,11 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=1 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=292&page=res&job_id=200501
+contig:AaegL1:contig_16536:1:277095:1	BLAST	Blast Hit	40056	40103	78	+	.	gnl|ti|1877706724 name:PRAG-aaa02a01.b1 mate_pair:1877708507
+contig:AaegL1:contig_4079:1:278070:1	BLAST	Blast Hit	228876	228916	66	+	.	gnl|ti|1877706724 name:PRAG-aaa02a01.b1 mate_pair:1877708507
+contig:AaegL1:contig_2469:1:90522:1	BLAST	Blast Hit	84370	84416	64	+	.	gnl|ti|1877706724 name:PRAG-aaa02a01.b1 mate_pair:1877708507
+contig:AaegL1:contig_4551:1:210512:1	BLAST	Blast Hit	81305	81359	60	+	.	gnl|ti|1877706724 name:PRAG-aaa02a01.b1 mate_pair:1877708507
+contig:AaegL1:contig_23266:1:68636:1	BLAST	Blast Hit	1927	1979	56	+	.	gnl|ti|1877706724 name:PRAG-aaa02a01.b1 mate_pair:1877708507
+contig:AaegL1:contig_16360:1:321174:1	BLAST	Blast Hit	1832	1884	56	+	.	gnl|ti|1877706724 name:PRAG-aaa02a01.b1 mate_pair:1877708507
+contig:AaegL1:contig_5444:1:195020:1	BLAST	Blast Hit	103663	103705	56	-	.	gnl|ti|1877706724 name:PRAG-aaa02a01.b1 mate_pair:1877708507
+contig:AaegL1:contig_26025:1:8818:1	BLAST	Blast Hit	1183	1223	52	-	.	gnl|ti|1877706724 name:PRAG-aaa02a01.b1 mate_pair:1877708507
+contig:AaegL1:contig_16621:1:136638:1	BLAST	Blast Hit	40205	40233	52	+	.	gnl|ti|1877706724 name:PRAG-aaa02a01.b1 mate_pair:1877708507
+contig:AaegL1:contig_9479:1:204991:1	BLAST	Blast Hit	84318	84361	52	-	.	gnl|ti|1877706724 name:PRAG-aaa02a01.b1 mate_pair:1877708507

@@ -1,0 +1,90 @@
+<?php
+/**
+ * @file
+ * Display a block that lists all species, grouped by class and genus.
+ *
+ */
+ 
+
+/**
+ * implementation of hook_block_info
+ * @return array $blocks
+ */
+function organism_header_block_info() {
+  $blocks['organism_header_block'] = array(
+    'info' => t('Organism Header Block'),
+    'cache' => DRUPAL_NO_CACHE,
+  );
+  return $blocks;
+}
+
+/**
+ * implementation of hook_block_view
+ *
+ * @param string $delta
+ * @return array
+ *  $block['subject']
+ *  $block['content']
+ */
+function organism_header_block_view($delta) {
+    $vocab = taxonomy_vocabulary_machine_name_load('organisms_taxonomy');
+    $tree = taxonomy_get_tree($vocab->vid);
+    //drupal_set_message(print_r($tree));
+    $organismArray = array();
+    foreach($tree as $leaf) {
+        $thisTerm = taxonomy_term_load($leaf->tid);
+        //drupal_set_message(print_r($thisTerm));
+        $thisTaxon = taxonomy_term_load(get_taxon($thisTerm))->name;
+        //$thisTerm = $thisTerm->tid;
+        //drupal_set_message($thisTaxon);
+        if ($thisTaxon == 'Species') {
+            $thisGenus = $thisOrder = $thisClass = null;
+            //drupal_set_message(print_r(taxonomy_get_parents_all($thisTerm)));
+            $ancestry = taxonomy_get_parents_all($thisTerm->tid);
+            //drupal_set_message(print_r($ancestry));
+            foreach ($ancestry as $ancestor) {
+                $ancestorTaxon = taxonomy_term_load(get_taxon($ancestor));
+                //drupal_set_message(print_r($ancestorTaxon));
+                if ($ancestorTaxon->name == 'Genus') {
+                    $thisGenus = $ancestor->name;
+                }
+                elseif ($ancestorTaxon->name == 'Order') {
+                    $thisOrder = $ancestor->name;
+                }
+                elseif ($ancestorTaxon->name == 'Class') {
+                    $thisClass = $ancestor->name;
+                }
+            }
+            if ($thisGenus && $thisOrder && $thisClass) {
+                $organismArray[$thisClass][$thisOrder][$thisGenus] = $thisTerm->name;
+            }
+            //array_push($organismArray, $thisTerm);
+        }
+    }
+    $content = '<table border=0 cellpadding=0 style="border-collapse: separate; line-height: 100%">';
+    //drupal_set_message(print_r($organismArray));
+    ksort($organismArray);
+    $orgClasses = array_keys($organismArray);
+    //drupal_set_message(print_r($orgClasses));
+    foreach($orgClasses as $orgClass) {
+        $content .= "<tr><td colspan=2><h3>$orgClass:</h3></td></tr>";
+        ksort($organismArray[$orgClass]);
+        $orgOrders = array_keys($organismArray[$orgClass]);
+        foreach($orgOrders as $orgOrder) {
+            $content .= "<tr><td><b>$orgOrder</b></td><td>";
+            ksort($organismArray[$orgClass][$orgOrder]);
+            $orgGenera = array_keys($organismArray[$orgClass][$orgOrder]);
+            foreach($orgGenera as $orgGenus) {
+                $orgGenusLower = strtolower($orgGenus);
+                $content .= "<a href='/taxonomy/$orgGenusLower'><i>$orgGenus</i></a> | ";
+            }
+            $content = substr($content, 0, -3);
+            $content .= "</td></tr>";
+        }
+        $content .= "<tr><td colspan=2>&nbsp;</td></tr>";
+    }
+    $content = substr($content, 0, -34);
+    $content .= "</table>";
+    $block['content'] = $content;
+    return $block;
+}

@@ -5,8 +5,8 @@
  * @file
  * This classextends by LdapAuthenticationConf for configuration and other admin functions
  */
+module_load_include('php', 'ldap_authentication', 'LdapAuthenticationConf.class');
 
-require_once('LdapAuthenticationConf.class.php');
 class LdapAuthenticationConfAdmin extends LdapAuthenticationConf {
 
   protected function setTranslatableProperties() {
@@ -228,7 +228,6 @@ class LdapAuthenticationConfAdmin extends LdapAuthenticationConf {
 
   static public function getSaveableProperty($property) {
     $ldap_authentication_conf = variable_get('ldap_authentication_conf', array());
-  //  debug($ldap_authentication_conf);
     return isset($ldap_authentication_conf[$property]) ? $ldap_authentication_conf[$property] : FALSE;
 
   }

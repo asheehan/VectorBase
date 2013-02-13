@@ -1,0 +1,4 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=0 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=4508&page=res&job_id=212574
+ABJB010858132	BLAST	Blast Hit	8006	8029	38	-	.	Example Sequence2
+ABJB010005612	BLAST	Blast Hit	1226	1252	38	-	.	Example Sequence2
+ABJB010674266	BLAST	Blast Hit	531	549	38	+	.	Example Sequence2

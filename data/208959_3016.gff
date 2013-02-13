@@ -1,0 +1,2 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=0 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=3016&page=res&job_id=208959
+contig:AaegL1:contig_17778:1:89640:1	BLAST	Blast Hit	65868	65888	42	-	.	SGS1-F

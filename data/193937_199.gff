@@ -1,0 +1,11 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=1 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=199&page=res&job_id=193937
+ADAR009278-PA	BLAST	Blast Hit	69	151	347	.	.	Anopheles_Pep
+ADAR009277-PA	BLAST	Blast Hit	12	95	335	.	.	Anopheles_Pep
+ADAR001092-PA	BLAST	Blast Hit	19	89	308	.	.	Anopheles_Pep
+ADAR001094-PA	BLAST	Blast Hit	20	90	308	.	.	Anopheles_Pep
+ADAR001094-PA	BLAST	Blast Hit	178	248	306	.	.	Anopheles_Pep
+ADAR009279-PA	BLAST	Blast Hit	20	90	305	.	.	Anopheles_Pep
+ADAR001090-PA	BLAST	Blast Hit	58	127	295	.	.	Anopheles_Pep
+ADAR001093-PA	BLAST	Blast Hit	99	169	267	.	.	Anopheles_Pep
+ADAR009276-PA	BLAST	Blast Hit	220	287	260	.	.	Anopheles_Pep
+ADAR008802-PA	BLAST	Blast Hit	64	127	249	.	.	Anopheles_Pep

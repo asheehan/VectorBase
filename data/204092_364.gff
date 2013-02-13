@@ -1,0 +1,11 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=1 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=364&page=res&job_id=204092
+ADAR004688-PA	BLAST	Blast Hit	1	290	1263	.	.	AaGPRop9_1
+ADAR007986-PA	BLAST	Blast Hit	6	350	520	.	.	AaGPRop9_1
+ADAR003603-PA	BLAST	Blast Hit	115	368	368	.	.	AaGPRop9_1
+ADAR002688-PA	BLAST	Blast Hit	29	236	282	.	.	AaGPRop9_1
+ADAR010756-PA	BLAST	Blast Hit	35	256	139	.	.	AaGPRop9_1
+ADAR000083-PA	BLAST	Blast Hit	60	190	132	.	.	AaGPRop9_1
+ADAR008048-PA	BLAST	Blast Hit	138	418	126	.	.	AaGPRop9_1
+ADAR002717-PA	BLAST	Blast Hit	23	341	123	.	.	AaGPRop9_1
+ADAR000540-PA	BLAST	Blast Hit	41	141	118	.	.	AaGPRop9_1
+ADAR010451-PA	BLAST	Blast Hit	38	393	114	.	.	AaGPRop9_1

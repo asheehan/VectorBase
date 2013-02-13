@@ -1,0 +1,3 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=0 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=3493&page=res&job_id=209116
+RPTMP03545-PA	BLAST	Blast Hit	1030	1455	226	.	.	AAEL010179-PA |NADPH oxidase|protein_coding|supercont1.458:730738-738617:-1|gene:AAEL010179
+RPTMP07634-PA	BLAST	Blast Hit	916	1111	177	.	.	AAEL010179-PA |NADPH oxidase|protein_coding|supercont1.458:730738-738617:-1|gene:AAEL010179

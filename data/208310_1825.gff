@@ -1,0 +1,11 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=0 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=1825&page=res&job_id=208310
+AGAP010513-PA	BLAST	Blast Hit	1	662	3021	.	.	GPRmac1
+AGAP004034-PA	BLAST	Blast Hit	29	261	320	.	.	GPRmac1
+AGAP000606-PA	BLAST	Blast Hit	78	280	317	.	.	GPRmac1
+AGAP004675-PB	BLAST	Blast Hit	110	333	302	.	.	GPRmac1
+AGAP004675-PA	BLAST	Blast Hit	110	333	301	.	.	GPRmac1
+AGAP002886-PB	BLAST	Blast Hit	128	331	300	.	.	GPRmac1
+AGAP007136-PA	BLAST	Blast Hit	26	253	293	.	.	GPRmac1
+AGAP002519-PA	BLAST	Blast Hit	127	303	287	.	.	GPRmac1
+AGAP000667-PA	BLAST	Blast Hit	70	251	277	.	.	GPRmac1
+AGAP002888-PA	BLAST	Blast Hit	95	315	274	.	.	GPRmac1

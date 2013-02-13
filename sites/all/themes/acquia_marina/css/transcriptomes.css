@@ -1,0 +1,44 @@
+{font-size:1em}
+
+/*#header {
+	width:100%;
+}
+
+#content {
+	width:100%	
+}*/
+
+#leftColumn {
+	float:left;
+	width:50%;
+	/*background-color:blue;*/
+}
+
+/*#rightColumn {
+	background-color:yellow;
+}*/
+
+.cell {
+	overflow:hidden;
+	padding-top:1em;
+	padding-bottom:1em;
+	padding-left:1em;
+	padding-right:1em;
+}
+
+/*.cell p {
+	padding-left:1em;
+}*/
+/*
+.cell span {
+	display:block;
+}*/
+
+.cell img {
+	float:left;
+	padding-right:1em;
+}
+
+/*.contentColumn span {
+	width:50%;
+}*/

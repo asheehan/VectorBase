@@ -1,0 +1,4 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=0 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=3495&page=res&job_id=209118
+ASTM015521-PA	BLAST	Blast Hit	1002	1497	323	.	.	AGAP003772-PA |hypothetical protein|protein_coding|2R:43147181-43149470:1|gene:AGAP003772
+ASTM002658-PA	BLAST	Blast Hit	790	988	178	.	.	AGAP003772-PA |hypothetical protein|protein_coding|2R:43147181-43149470:1|gene:AGAP003772
+ASTM002658-PA	BLAST	Blast Hit	328	436	138	.	.	AGAP003772-PA |hypothetical protein|protein_coding|2R:43147181-43149470:1|gene:AGAP003772

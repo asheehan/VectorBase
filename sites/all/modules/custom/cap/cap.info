@@ -1,0 +1,7 @@
+name = cap
+description = Community Annotation Pipeline Module for VectorBase.  This module is currently being used as a test bed.
+package = VectorBase
+core = 7.x
+files[] = cap.module
+files[] = cap.inc
+

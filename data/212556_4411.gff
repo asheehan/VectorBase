@@ -1,0 +1,7 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=0 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=4411&page=res&job_id=212556
+CPIJ000558-RA	BLAST	Blast Hit	696	715	34	+	.	Example Sequence2
+CPIJ026554-RA	BLAST	Blast Hit	47	62	32	-	.	Example Sequence2
+CPIJ026532-RA	BLAST	Blast Hit	47	62	32	-	.	Example Sequence2
+CPIJ022756-RA	BLAST	Blast Hit	47	62	32	-	.	Example Sequence2
+CPIJ009509-RA	BLAST	Blast Hit	504	519	32	+	.	Example Sequence2
+CPIJ009357-RA	BLAST	Blast Hit	2116	2141	32	-	.	Example Sequence2

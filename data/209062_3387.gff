@@ -1,0 +1,4 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=0 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=3387&page=res&job_id=209062
+ASTM002658-PA	BLAST	Blast Hit	17	996	3905	.	.	AAEL002039-PA |NADPH oxidase|protein_coding|supercont1.47:884633-901504:-1|gene:AAEL002039
+ASTM015521-PA	BLAST	Blast Hit	897	1294	359	.	.	AAEL002039-PA |NADPH oxidase|protein_coding|supercont1.47:884633-901504:-1|gene:AAEL002039
+ASTM015521-PA	BLAST	Blast Hit	1295	1479	257	.	.	AAEL002039-PA |NADPH oxidase|protein_coding|supercont1.47:884633-901504:-1|gene:AAEL002039

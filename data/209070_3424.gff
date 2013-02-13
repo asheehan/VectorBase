@@ -1,0 +1,5 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=0 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=3424&page=res&job_id=209070
+TMP010244-PA	BLAST	Blast Hit	500	1456	2820	.	.	AAEL002039-PA |NADPH oxidase|protein_coding|supercont1.47:884633-901504:-1|gene:AAEL002039
+TMP014084-PA	BLAST	Blast Hit	1011	1293	292	.	.	AAEL002039-PA |NADPH oxidase|protein_coding|supercont1.47:884633-901504:-1|gene:AAEL002039
+TMP014090-PA	BLAST	Blast Hit	151	335	260	.	.	AAEL002039-PA |NADPH oxidase|protein_coding|supercont1.47:884633-901504:-1|gene:AAEL002039
+TMP014090-PA	BLAST	Blast Hit	1	150	203	.	.	AAEL002039-PA |NADPH oxidase|protein_coding|supercont1.47:884633-901504:-1|gene:AAEL002039

@@ -1,0 +1,382 @@
+<?php
+/**
+ * This file contains all hooks into the drupal framework which allow the
+ * data file (downloads) functionality to work.
+ * 
+ * @package DataFiles
+ * @filesource
+ */
+
+
+require_once("include/ui.php");
+
+
+/**
+ * Implementation of hook_menu
+ * 
+ * This hook adds and defines a link in the administration menu to an admin
+ * overlay/page containing admin actions for this module.
+ * 
+ * @return string[] Render array telling drupal how to make this link.
+ */
+function downloadable_file_menu() {
+
+	$items['admin/config/downloadable_file'] = array(
+			'title' => 'Downloads Admin',
+			'description' => 'Run administrative tools related to the downloads (downloadable_file) module.',
+			'page callback' => 'drupal_get_form',
+			'page arguments' => array('downloadable_file_admin_form'),
+			'access arguments' => array('access administration pages'),
+			'type' => MENU_NORMAL_ITEM,
+			);
+
+	return $items;
+
+}
+
+
+/**
+ * Implementation of hook_block_info
+ * 
+ * This hook allows this module to create and define a custom block.
+ * 
+ * @return string[] Render array telling drupal what blocks to create.
+ */
+function downloadable_file_block_info() {
+	$info = array();
+	$info['downloadsForOrganism'] = array(
+			'info' => t('Downloads for Organism'),
+			'cache' => DRUPAL_CACHE_PER_ROLE,
+	);
+	return $info;
+}
+
+
+/**
+ * Implementation of hook_block_view 
+ * 
+ * Defines the custom blocks for this module.
+ * 
+ * @param string $delta Name of the block to be rendered.
+ * @return string[] Render array defining the custom blocks.
+ */
+function downloadable_file_block_view($delta = '') {
+
+	switch($delta) {
+		case 'downloadsForOrganism':
+			$block['subject'] = t('Related data files');
+			$content = downloadable_file_block_contents($delta);
+			if(empty($content)) {
+				$block = NULL;
+				break;
+			}
+			$block['content'] = $content;
+			break;
+	}
+	return $block;
+}
+
+
+/**
+ * Implementation of hook_form_alter
+ * 
+ * Allows the "Organism" dropdown filter to only show choices for existing records.
+ * 
+ * @param object $form Object definition of the form to be rendered.
+ * @param object $form_state Object definition of the form's current state.
+ * @param integer $form_id Uniquely defines this form in the drupal database (primary key).
+ */
+function downloadable_file_form_alter(&$form, &$form_state, $form_id) {
+	if($form['#id'] == 'views-exposed-form-downloads-page') {
+		$q = db_select('taxonomy_term_data', 't');
+		$q->distinct();
+		$q->innerJoin('field_data_field_organism_taxonomy', 'o', 't.tid = o.field_organism_taxonomy_tid');
+		$q->innerJoin('node', 'n', 'o.entity_id = n.nid');
+		$q->addField('t', 'name', 'nme');
+		$q->addField('t', 'tid', 'taxid');
+		$q->condition('t.vid', '5', '=');
+		$q->condition('n.type', 'downloadable_file', '=');
+		$q->orderBy('nme');
+		$results = $q->execute();
+		$names = array('All' => '- Any -');
+		foreach($results as $curRes) {
+			$names[$curRes->taxid] = $curRes->nme;
+		}		
+		$form['field_organism_taxonomy_tid']['#options'] = $names;
+
+		$extendPager = false;
+		foreach($form_state['view']->exposed_input as $key => $inputVal) {
+			if($inputVal != 'All' && $key != 'field_status_value') {
+				$extendPager = true;
+				break;
+			}	
+		}
+		if($extendPager) {
+			$form_state['view']->items_per_page = 50;
+		}
+	}
+}
+
+
+/**
+ * Implementation of hook_views_pre_render
+ * 
+ * Builds a custom breadcrumb based on the applied filters to the view.
+ * Breadcrumb priority order is as follows: Status, Organism, Type, Format.
+ * Each breadcrumb link applies itself plus any filter listed to its left.
+ * 
+ * @param object $view Object definition of the view.
+ */
+function downloadable_file_views_pre_render(&$view) {
+   if($view->name == 'downloads') {
+      // dsm($view, 'view');
+      $breadcrumb = array();
+      $breadcrumb[] = l('Home', '<front>');
+      $breadcrumb[] = l($view->human_name, current_path());
+      // Status, Organism, Data Type, File Format
+      //dsm($view, 'view');
+      $status = $view->exposed_data['field_status_value'];
+      $org = $view->exposed_data['field_organism_taxonomy_tid'];
+      $type = $view->exposed_data['field_download_file_type_tid'];
+      $format = $view->exposed_data['field_download_file_format_tid'];
+      //$runningUrl = '';
+      $query = array();
+      if($status != 'All' && !empty($status)) {
+         $query['field_status_value'] = $status;
+         //$runningUrl = 'field_status_value%3D' . $status;
+         $breadcrumb[] = l($status, current_path(), array('query' => $query));
+      }
+      if($org != 'All' && !empty($org)) {
+         //if(!empty($runningUrl)) {
+         //      $runningUrl .= '&';
+         //}
+         $disp = taxonomy_term_load($org)->name;
+         $query['field_organism_taxonomy_tid'] = $org;
+         $breadcrumb[] = l($disp, current_path(), array('query' => $query));
+      }
+      if($type != 'All' && !empty($type)) {
+         //if(!empty($runningUrl)) {
+         //      $runningUrl .= '&';
+         //}
+         $disp = taxonomy_term_load($type)->name;
+         //$runningUrl .= 'field_download_file_type_tid%3D' . $type;
+         $query['field_download_file_type_tid'] = $type;
+         $breadcrumb[] = l($disp, current_path(), array('query' => $query));
+      }
+      if($format != 'All' && !empty($format)) {
+         //if(!empty($runningUrl)) {
+         //      $runningUrl .= '&';
+         //}
+         $disp = taxonomy_term_load($format)->name;
+         //$runningUrl .= 'field_download_file_format_tid%3D' . $format;
+         $query['field_download_file_format_tid'] = $format;
+         $breadcrumb[] = l($disp, current_path(), array('query' => $query));
+      }
+      drupal_set_breadcrumb($breadcrumb);
+   }
+}
+
+
+/**
+ * Convenience method to grab the last key in an array.
+ * 
+ * @param mixed[] $array Array to get the last key from.
+ * @return string Key of the last member of the given array.
+ */
+function lastKey($array) {
+   $val = end($array);
+   reset($array);
+   return key($val);
+}
+
+/*
+ * Implementation of hook_node_view_alter
+ * 
+ * Inserts a callback function into the post render stack. This inserted 
+ * function (download_file_post_render in utilities.php) alters the actual file 
+ * links to display their sizes in a human readable format.
+ * 
+ * @param object $build Object holding information about the page to be rendered.
+function downloadable_file_node_view_alter(&$build) {
+   if($build['#bundle'] == 'downloadable_file') {
+	$build['#post_render'][] = 'download_file_post_render';
+   }
+}*/
+
+
+/**
+ * Implementation of hook_field_attach_view_alter
+ *
+ * Inserts a callback function into the post render stack. This inserted 
+ * function (download_file_post_render in utilities.php) alters the actual file 
+ * links to display their sizes in a human readable format.
+ *
+ * @param mixed[] $output The structured content array tree for all of the entity's fields.
+ * @param mixed[] $context An associative array containing info about the, you 
+ * guessed it, the context of this view, like entity type and view mode. 
+ */
+function downloadable_file_field_attach_view_alter(&$output, $context) {
+	if($context['entity']->type == 'downloadable_file') {
+		$output['#post_render'][] = 'download_file_post_render';
+	}
+}
+
+/*function downloadable_file_preprocess_field(&$vars) {
+	if($vars['element']['#field_name'] == 'field_file') {
+		dsm($vars);
+		if(isset($vars['element']['#items'][0]['url'])) {
+			$vars['element']['#items'][0]['url'] = '/sites/all/modules/custom/downloadable_file/includes/incrementFileDownloadCount.php';
+		}
+	}
+}*/
+
+/**
+ * Implementation of hook_node_validate
+ * 
+ * Adds an extra level of validation to submitting new or editing existing
+ * Data files (downlaodable files). This method checks the filename itself
+ * and nothing more. Also added a hack to highlight the file field in red
+ * when it doesn't validate.  The existing form_set_error method doesn't
+ * seem to work with complex forms.
+ *
+ * @param object $node The downloadable_file node object
+ * @param array[] $form Array structure holding all info on the 'Add to content'
+ * web form.
+ * @param array[] $form_state Array structure holding the state information of
+ * from array, like which button was pressed and what fields were filled in, etc
+ * @return boolean true if the node validates or false if something is wrong. 
+ * Errors are printed to the red error box at the top of the form.
+ */
+function downloadable_file_node_validate($node, $form, &$form_state) {
+
+	if($node->type == 'downloadable_file') {
+		//dsm($form_state, 'form_state');
+		$file = file_load($node->field_file['und'][0]['fid']);	
+		$errors = validateFilename($file->filename);	
+		if(!empty($errors)) {
+			foreach($errors as $error) {
+				form_set_error('field_file', "Filename error: $error");
+				drupal_add_css('.file {border-style:solid;border-width:2px;border-radius:5px;border-color:red;}', 'inline');
+			}
+			return false;
+		}	
+		return true;
+	}
+}
+
+
+/**
+ * Validates the filename defined here: https://www.vectorbase.org/content/data-file-format-guide
+ * 
+ * @param string $filename Name of the file
+ * @return srting[] A list of errors, if they occur. An empty array indicates a valid name.
+ */
+function validateFilename($filename) {
+
+	$errorArray = array();
+	$fileNameParts = explode('.', $filename);
+	if(count($fileNameParts) !== 2 && count($fileNameParts) !== 3) {
+		$errorArray[] = "Filename ($filename) does not have the expected two or three parts separated by periods";
+		return $errorArray;
+	}
+
+	$vocab = taxonomy_vocabulary_machine_name_load('download_file_formats');
+	$tree = taxonomy_get_tree($vocab->vid, 0, null, true);
+	$fieldValid = false;	
+	foreach($tree as $tax) {
+		if($tax->field_extension['und'][0]['value'] === $fileNameParts[1]) {
+			$fieldValid = true;
+			break;
+		}
+	}
+	if(!$fieldValid) {
+		$errorArray[] = "Format extension ($fileNameParts[1]) not recognized";
+	}
+
+	if(count($fileNameParts) > 2) {
+		$fieldValid = false;
+		$extensions = array('bam', 'bai', 'fa', 'txt', 'gff', 'gff3', 'gtf', 'gz', 'obo', 'qual', 'agp', 'zip', 'tgz');
+		foreach($extensions as $ext) {
+			if($ext === $fileNameParts[2]) {
+				$fieldValid = true;
+				break;
+			}
+
+		}
+		if(!$fieldValid) {
+			$errorArray[] = "File extension ($fileNameParts[2]) not recognized";
+		}
+
+	}
+
+	// Validate the first part of the filename
+	$bodyPartIndex = 0;
+	$bodyParts = explode('_',$fileNameParts[0]);
+	$first = substrnpos($bodyParts[$bodyPartIndex], '-', 2);
+	$vocab = taxonomy_vocabulary_machine_name_load('organisms_taxonomy');
+	$tree = taxonomy_get_tree($vocab->vid);
+	$fieldValid = false;
+	foreach($tree as $tax) {
+		$taxStr = str_replace(' ', '-', $tax->name);
+		$taxStr = str_replace('.', '', $taxStr);
+		// Checking if the org name is within the first part of the filename
+		if(strtolower($first) === strtolower($taxStr)) {
+			$fieldValid = true;
+			break;
+		}
+	}
+
+	// If true, we have a non-onology file and the category/type is
+	// in index 1.  If not, we have an onotlogy and it is in spot 0.
+	if($fieldValid) {
+		$bodyPartIndex++;
+	}
+
+	// Check the category
+	$vocab = taxonomy_vocabulary_machine_name_load('download_file_types');
+	$tree = taxonomy_get_tree($vocab->vid, 0, null, true);
+	$fieldValid = false;
+	foreach($tree as $tax) {
+		if($tax->field_shortname['und'][0]['value'] === $bodyParts[$bodyPartIndex]) {
+			$fieldValid = true;
+			break;
+		}
+	}
+	if(!$fieldValid) {
+		$errorArray[] = 'File category/type (' . $bodyParts[$bodyPartIndex] . ') is not recognized';
+	}
+
+	$bodyPartIndex++;
+
+	// Check the version
+	$v = explode('-', $bodyParts[$bodyPartIndex]);
+
+	$haveVersionDate = false;
+
+	if(count($v) === 1 || !is_numeric($v[0])) {
+		if(!is_numeric(str_replace('v', '', $v[count($v) - 1]))) {
+			$errorArray[] = "File version ({$bodyParts[$bodyPartIndex]}) does not contain a valid number";
+		}
+		$haveVersionDate = true;
+		$bodyPartIndex++;
+	} 
+
+	// Check to see if we still have another field to check, if so, this will be a date field to check.
+	if($bodyPartIndex < count($bodyParts)) {
+		$dateParts = explode('-', $bodyParts[$bodyPartIndex]);
+		// checkdate(month, day, year) - so dumb that ordering, right?
+		if(count($dateParts) > 3 || count($dateParts) < 2 ||
+				(count($dateParts) === 3 && !checkdate($dateParts[1],$dateParts[2], $dateParts[0])) ||
+				(count($dateParts) === 2 && !checkdate($dateParts[1], '01', $dateParts[0]))) {
+			$errorArray[] = 'File date (' . $bodyParts[$bodyPartIndex] . ') is not a valid date';
+		}
+		$haveVersionDate = true;
+	}
+
+	if(!$haveVersionDate) {
+		$errorArray[] = 'Missing proper version and/or date field(s)';
+	}
+
+	return $errorArray; 
+}
+

@@ -1,0 +1,19 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=1 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=161&page=res&job_id=179196
+ABJB010556720	BLAST	Blast Hit	827	844	36	+	.	Example Sequence
+ABJB010203543	BLAST	Blast Hit	238	255	36	-	.	Example Sequence
+ABJB010006582	BLAST	Blast Hit	575	592	36	+	.	Example Sequence
+ABJB010049326	BLAST	Blast Hit	404	421	36	-	.	Example Sequence
+ABJB010218456	BLAST	Blast Hit	353	370	36	-	.	Example Sequence
+ABJB010218456	BLAST	Blast Hit	593	610	36	-	.	Example Sequence
+ABJB011112923	BLAST	Blast Hit	233	250	36	-	.	Example Sequence
+ABJB011112923	BLAST	Blast Hit	470	487	36	-	.	Example Sequence
+ABJB011112923	BLAST	Blast Hit	950	967	36	-	.	Example Sequence
+ABJB010953015	BLAST	Blast Hit	742	759	36	+	.	Example Sequence
+ABJB010404214	BLAST	Blast Hit	89	106	36	-	.	Example Sequence
+ABJB010404214	BLAST	Blast Hit	330	347	36	-	.	Example Sequence
+ABJB010404214	BLAST	Blast Hit	570	587	36	-	.	Example Sequence
+ABJB010915128	BLAST	Blast Hit	35	52	36	-	.	Example Sequence
+ABJB010752517	BLAST	Blast Hit	704	721	36	+	.	Example Sequence
+ABJB010752517	BLAST	Blast Hit	944	961	36	+	.	Example Sequence
+ABJB010752517	BLAST	Blast Hit	1184	1201	36	+	.	Example Sequence
+ABJB010965129	BLAST	Blast Hit	442	459	36	-	.	Example Sequence

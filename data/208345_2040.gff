@@ -1,0 +1,11 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=0 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=2040&page=res&job_id=208345
+contig contig_19556	BLAST	Blast Hit	586	635	100	-	.	Example1
+contig contig_8146	BLAST	Blast Hit	619	668	100	+	.	Example1
+EE997851 EST70075 Larval Stage 1 Aedes aegypti cDNA clone AEDR-LS1-216-C01-U.AB1 5', mRNA sequence.	BLAST	Blast Hit	923	972	100	-	.	Example1
+	BLAST	Blast Hit	2414721	2414770	100	-	.	Example1
+	BLAST	Blast Hit	3904737	3904786	100	-	.	Example1
+AgamP3:1:61545105:1 chromosome 2R	BLAST	Blast Hit	4607873	4607922	100	+	.	Example1
+AgamP3:1:61545105:1 chromosome 2R	BLAST	Blast Hit	5647144	5647193	100	-	.	Example1
+AgamP3:1:61545105:1 chromosome 2R	BLAST	Blast Hit	6628408	6628457	100	+	.	Example1
+AgamP3:1:61545105:1 chromosome 2R	BLAST	Blast Hit	371585	371634	100	-	.	Example1
+AgamP3:1:61545105:1 chromosome 2R	BLAST	Blast Hit	445853	445902	100	+	.	Example1

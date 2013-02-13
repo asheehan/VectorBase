@@ -1,0 +1,5 @@
+name = HMMer
+description = HMMer GUI for submitting jobs to VB's grid and displaying results
+package = VectorBase
+core = 7.x
+dependencies[] = xgrid

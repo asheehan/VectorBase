@@ -1,4 +1,3 @@
-// $Id: README.txt,v 1.4.2.4 2010/10/30 01:53:15 mfb Exp $
 
 SECURE LOGIN MODULE README
 --------------------------

@@ -1,0 +1,3 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=1 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=57&page=res&job_id=175235
+supercont1.2857	BLAST	Blast Hit	1456	1490	70	-	.	Example Sequence
+supercont1.406	BLAST	Blast Hit	253398	253432	70	+	.	Example Sequence

@@ -1,0 +1,10 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=1 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=199&page=res&job_id=181113
+gnl	BLAST	Blast Hit	386	439	88	-	.	k122.ab1
+gnl	BLAST	Blast Hit	386	439	88	-	.	k122.ab1
+gnl	BLAST	Blast Hit	280	333	88	-	.	k122.ab1
+gnl	BLAST	Blast Hit	399	452	88	+	.	k122.ab1
+gnl	BLAST	Blast Hit	452	505	88	-	.	k122.ab1
+gnl	BLAST	Blast Hit	713	767	82	+	.	k122.ab1
+gnl	BLAST	Blast Hit	281	313	46	+	.	k122.ab1
+gnl	BLAST	Blast Hit	582	614	46	-	.	k122.ab1
+gnl	BLAST	Blast Hit	697	729	46	-	.	k122.ab1

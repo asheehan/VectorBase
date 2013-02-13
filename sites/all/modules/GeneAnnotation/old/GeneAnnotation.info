@@ -1,0 +1,8 @@
+name = Community Annotation Portal
+description = module for front-end for CAP access.
+core = 7.x
+files[] = GeneAnnotation.module
+files[] = GeneAnnotation.install
+version = "7.x-3.x-dev"
+
+

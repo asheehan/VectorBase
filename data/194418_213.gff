@@ -1,0 +1,11 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=1 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=213&page=res&job_id=194418
+EW874380.1	BLAST	Blast Hit	33	344	608	-	.	gene gene undefined product 565:876 forward
+EW936105.1	BLAST	Blast Hit	33	344	608	-	.	gene gene undefined product 565:876 forward
+EW939466.1	BLAST	Blast Hit	33	344	608	-	.	gene gene undefined product 565:876 forward
+EW949391.1	BLAST	Blast Hit	328	639	604	-	.	gene gene undefined product 565:876 forward
+EW838300.1	BLAST	Blast Hit	34	344	594	-	.	gene gene undefined product 565:876 forward
+EW785222.1	BLAST	Blast Hit	644	809	304	-	.	gene gene undefined product 565:876 forward
+EW838299.1	BLAST	Blast Hit	733	830	160	+	.	gene gene undefined product 565:876 forward
+EW874379.1	BLAST	Blast Hit	723	786	128	+	.	gene gene undefined product 565:876 forward
+EW898718.1	BLAST	Blast Hit	726	811	124	+	.	gene gene undefined product 565:876 forward
+EW936104.1	BLAST	Blast Hit	724	786	120	+	.	gene gene undefined product 565:876 forward

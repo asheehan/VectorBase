@@ -1,0 +1,5 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=0 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=3428&page=res&job_id=209070
+ISCW002630-RA	BLAST	Blast Hit	524	727	725	.	.	AAEL002039-PA |NADPH oxidase|protein_coding|supercont1.47:884633-901504:-1|gene:AAEL002039
+ISCW002630-RA	BLAST	Blast Hit	119	444	625	.	.	AAEL002039-PA |NADPH oxidase|protein_coding|supercont1.47:884633-901504:-1|gene:AAEL002039
+ISCW007865-RA	BLAST	Blast Hit	935	1342	346	.	.	AAEL002039-PA |NADPH oxidase|protein_coding|supercont1.47:884633-901504:-1|gene:AAEL002039
+ISCW007865-RA	BLAST	Blast Hit	1331	1514	249	.	.	AAEL002039-PA |NADPH oxidase|protein_coding|supercont1.47:884633-901504:-1|gene:AAEL002039

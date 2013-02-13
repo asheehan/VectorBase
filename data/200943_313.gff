@@ -1,0 +1,11 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=1 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=313&page=res&job_id=200943
+ABKP02016424.1	BLAST	Blast Hit	1	1149	2218	+	.	gi|184185433|gb|EQ097732.1| Anopheles gambiae S scf_1106392395132 genomic scaffold, whole genome shotgun sequence
+ABKP02020049.1	BLAST	Blast Hit	3534	4117	1132	+	.	gi|184185433|gb|EQ097732.1| Anopheles gambiae S scf_1106392395132 genomic scaffold, whole genome shotgun sequence
+ABKP02009700.1	BLAST	Blast Hit	9056	9639	1128	+	.	gi|184185433|gb|EQ097732.1| Anopheles gambiae S scf_1106392395132 genomic scaffold, whole genome shotgun sequence
+ABKP02001138.1	BLAST	Blast Hit	495	1014	930	-	.	gi|184185433|gb|EQ097732.1| Anopheles gambiae S scf_1106392395132 genomic scaffold, whole genome shotgun sequence
+ABKP02017094.1	BLAST	Blast Hit	924	1580	864	+	.	gi|184185433|gb|EQ097732.1| Anopheles gambiae S scf_1106392395132 genomic scaffold, whole genome shotgun sequence
+ABKP02024862.1	BLAST	Blast Hit	1	444	834	-	.	gi|184185433|gb|EQ097732.1| Anopheles gambiae S scf_1106392395132 genomic scaffold, whole genome shotgun sequence
+ABKP02001983.1	BLAST	Blast Hit	1	443	816	-	.	gi|184185433|gb|EQ097732.1| Anopheles gambiae S scf_1106392395132 genomic scaffold, whole genome shotgun sequence
+ABKP02015703.1	BLAST	Blast Hit	24	591	788	-	.	gi|184185433|gb|EQ097732.1| Anopheles gambiae S scf_1106392395132 genomic scaffold, whole genome shotgun sequence
+ABKP02014428.1	BLAST	Blast Hit	346	1012	778	+	.	gi|184185433|gb|EQ097732.1| Anopheles gambiae S scf_1106392395132 genomic scaffold, whole genome shotgun sequence
+ABKP02023195.1	BLAST	Blast Hit	130	509	740	-	.	gi|184185433|gb|EQ097732.1| Anopheles gambiae S scf_1106392395132 genomic scaffold, whole genome shotgun sequence

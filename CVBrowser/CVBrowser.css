@@ -1,0 +1,116 @@
+.canvasPanel
+{
+  margin					:	0px 0px 0px;
+  background-color			:	#99dd99;
+}
+
+
+.mainPanel
+{
+	background-color		:	#eeeeee
+}
+
+
+.panelCVTree
+{
+	background-color		:	#effeef;
+	width					:	430px;
+	height					:	700px;
+}
+
+
+.panelData
+{
+	background-color		:	#fbffd7;
+	width					:	430px;
+	height					:	700px;
+	max-height				:	700px;
+}
+
+
+.panelTermDetails
+{
+	background-color		:	#fbffd7;
+}
+
+
+.panelSearch
+{
+	background-color		:	#99dd99;
+	position				:	absolute;
+	left					:	0px;
+	top						:	0px;
+	width					:	240px;
+	height					:	700px;
+	vertical-align			:	top;
+}
+
+
+.lbxCVs
+{
+	position				:	absolute;
+	left					:	10px;
+	top						:	10px;
+	width					:	220px;
+  	vertical-align			:	top;
+}
+
+
+.tbxSearch 
+{
+	position				:	absolute;
+	width					:	220px;
+  	vertical-align			:	top;
+  	align					:	center;
+	z-index					:	2;
+}
+
+
+.fxtSearchResults 
+{
+	background-color		:	#eeeeee;
+	position				:	absolute;
+	left					:	3px;
+	top						:	143px;
+	width					:	233px;
+	z-index					:	0;
+}
+
+
+.htmlPanelBody
+{
+	align					:	center;
+}
+
+
+.barBottom
+{
+	background-color		:	#005500;
+}
+
+
+.myLabel
+{
+	font-size				: 	12px;
+}
+
+table
+{
+	width					:	10%;
+	border-collapse			:	separate;
+}
+
+
+.scrpnlInfo 
+{
+	background-color		:	#fbffd7;
+	width					:	430px;
+	height					:	700px;
+}
+
+
+.pnlInfo
+{
+	background-color		:	#fbffd7;
+	width					:	412px;
+}

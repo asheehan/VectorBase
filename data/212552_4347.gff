@@ -1,0 +1,11 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=0 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=4347&page=res&job_id=212552
+DV420999.1	BLAST	Blast Hit	13	43	36	-	.	Example Sequence
+DV384118.1	BLAST	Blast Hit	13	43	36	-	.	Example Sequence
+DV415587.1	BLAST	Blast Hit	13	43	36	-	.	Example Sequence
+DV395272.1	BLAST	Blast Hit	13	43	36	-	.	Example Sequence
+AY433242.1	BLAST	Blast Hit	44	63	34	-	.	Example Sequence
+DV233027.1	BLAST	Blast Hit	312	331	34	+	.	Example Sequence
+DW213253.1	BLAST	Blast Hit	18	37	34	-	.	Example Sequence
+DV269521.1	BLAST	Blast Hit	318	337	34	+	.	Example Sequence
+DV321237.1	BLAST	Blast Hit	354	373	34	+	.	Example Sequence
+DV269806.1	BLAST	Blast Hit	354	373	34	+	.	Example Sequence

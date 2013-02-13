@@ -1,0 +1,11 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=1 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=303&page=res&job_id=200527
+contig:AaegL1:contig_10442:1:218347:1	BLAST	Blast Hit	30624	30785	142	+	.	comp876_c0_seq1 len=823 ~FPKM=138.3 path=[5:0-822]
+contig:AaegL1:contig_24244:1:43043:1	BLAST	Blast Hit	24916	25122	114	+	.	comp876_c0_seq1 len=823 ~FPKM=138.3 path=[5:0-822]
+contig:AaegL1:contig_1634:1:250491:1	BLAST	Blast Hit	50779	50985	110	-	.	comp876_c0_seq1 len=823 ~FPKM=138.3 path=[5:0-822]
+contig:AaegL1:contig_5669:1:165160:1	BLAST	Blast Hit	14547	14759	96	+	.	comp876_c0_seq1 len=823 ~FPKM=138.3 path=[5:0-822]
+contig:AaegL1:contig_1636:1:126725:1	BLAST	Blast Hit	120041	120190	91	+	.	comp876_c0_seq1 len=823 ~FPKM=138.3 path=[5:0-822]
+contig:AaegL1:contig_28745:1:17918:1	BLAST	Blast Hit	9945	10058	83	-	.	comp876_c0_seq1 len=823 ~FPKM=138.3 path=[5:0-822]
+contig:AaegL1:contig_18505:1:237004:1	BLAST	Blast Hit	208683	208826	82	-	.	comp876_c0_seq1 len=823 ~FPKM=138.3 path=[5:0-822]
+contig:AaegL1:contig_6650:1:33906:1	BLAST	Blast Hit	12863	12976	82	-	.	comp876_c0_seq1 len=823 ~FPKM=138.3 path=[5:0-822]
+contig:AaegL1:contig_22778:1:57534:1	BLAST	Blast Hit	2675	2758	80	-	.	comp876_c0_seq1 len=823 ~FPKM=138.3 path=[5:0-822]
+contig:AaegL1:contig_20230:1:6777:1	BLAST	Blast Hit	6128	6211	80	+	.	comp876_c0_seq1 len=823 ~FPKM=138.3 path=[5:0-822]

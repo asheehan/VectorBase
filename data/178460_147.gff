@@ -1,0 +1,13 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=1 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=147&page=res&job_id=178460
+EY205568.1	BLAST	Blast Hit	209	230	30	+	.	Example Sequence
+EY217176.1	BLAST	Blast Hit	568	589	30	+	.	Example Sequence
+FG111893.1	BLAST	Blast Hit	547	568	30	+	.	Example Sequence
+FG108504.1	BLAST	Blast Hit	240	257	30	-	.	Example Sequence
+FG116225.1	BLAST	Blast Hit	167	184	30	-	.	Example Sequence
+EY211135.1	BLAST	Blast Hit	482	504	30	+	.	Example Sequence
+EY214542.1	BLAST	Blast Hit	350	372	30	+	.	Example Sequence
+EY215708.1	BLAST	Blast Hit	393	414	30	+	.	Example Sequence
+EY214768.1	BLAST	Blast Hit	554	571	30	+	.	Example Sequence
+EY218848.1	BLAST	Blast Hit	304	325	30	+	.	Example Sequence
+FG112020.1	BLAST	Blast Hit	15	36	30	+	.	Example Sequence
+FG111596.1	BLAST	Blast Hit	489	510	30	+	.	Example Sequence

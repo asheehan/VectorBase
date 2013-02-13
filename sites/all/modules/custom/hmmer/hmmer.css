@@ -1,0 +1,79 @@
+/* layout */
+#edit-basic{
+	float:left;
+	width: 150px;
+}
+#edit-cutoffs{
+	float:left;
+	width: 150px;
+	padding-top:0;
+}
+#edit-significance{
+	padding:0 0 10px 12px;
+	margin-top: 6px;
+}
+#edit-report{
+	padding:0 0 10px 12px;
+	margin-top: 6px;
+}
+
+#edit-datasets{
+	float:left;
+}
+#edit-submit{
+	width:80px;
+}
+#clearButton{
+	margin-top:4px;
+	width:80px;
+}
+#warning{
+	border: 1px solid;
+	margin: 10px 0px;
+	padding: 6px 8px;
+	color: #D8000C;
+	background-color: #FFBABA;
+	font-size:10pt;
+	font-weight:bold;
+	display:none;
+}
+
+
+
+/* style input types */
+label[for="edit-sigsequence"]{
+float:left;
+width:80px;
+}
+input[name="sigSequence"]{
+float:left;
+margin-bottom:6px;
+}
+
+label[for="edit-sighit"]{
+clear:left;
+float:left;
+width:80px;
+}
+input[name="sigHit"]{
+float:left;
+}
+
+label[for="edit-reportsequence"]{
+float:left;
+width:80px;
+}
+input[name="reportSequence"]{
+float:left;
+margin-bottom:6px;
+}
+
+label[for="edit-reporthit"]{
+clear:left;
+float:left;
+width:80px;
+}
+input[name="reportHit"]{
+float:left;
+clear:right;
+}

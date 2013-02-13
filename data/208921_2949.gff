@@ -1,0 +1,7 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=0 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=2949&page=res&job_id=208921
+AY582943.1	BLAST	Blast Hit	1	1407	2732	+	.	AAEL005776:AAEL005776-RA cdna:KNOWN_protein_coding
+DW200336.1	BLAST	Blast Hit	215	421	408	+	.	AAEL005776:AAEL005776-RA cdna:KNOWN_protein_coding
+DW201949.1	BLAST	Blast Hit	164	208	42	+	.	AAEL005776:AAEL005776-RA cdna:KNOWN_protein_coding
+CB690893.1	BLAST	Blast Hit	91	135	42	+	.	AAEL005776:AAEL005776-RA cdna:KNOWN_protein_coding
+DV302151.1	BLAST	Blast Hit	567	611	42	-	.	AAEL005776:AAEL005776-RA cdna:KNOWN_protein_coding
+DV302058.1	BLAST	Blast Hit	555	599	42	-	.	AAEL005776:AAEL005776-RA cdna:KNOWN_protein_coding

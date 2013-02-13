@@ -1,5 +1,0 @@
-name = Legal Agreement
-description = Displays the VectorBase legal agreement for user registration.
-package = VectorBase
-core = 7.x
-files[] = legaltree.module

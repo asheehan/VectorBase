@@ -1,0 +1,4 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=0 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=4512&page=res&job_id=212574
+DS730855	BLAST	Blast Hit	18162	18185	38	-	.	Example Sequence2
+DS976293	BLAST	Blast Hit	531	549	38	+	.	Example Sequence2
+DS613720	BLAST	Blast Hit	1226	1252	38	-	.	Example Sequence2

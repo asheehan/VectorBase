@@ -1,0 +1,9 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=1 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=298&page=res&job_id=200527
+SRS008481_12978	BLAST	Blast Hit	193	450	160	+	.	comp876_c0_seq1 len=823 ~FPKM=138.3 path=[5:0-822]
+SRS008481_12978	BLAST	Blast Hit	37	120	65	+	.	comp876_c0_seq1 len=823 ~FPKM=138.3 path=[5:0-822]
+SRS008481_13383	BLAST	Blast Hit	2	91	59	+	.	comp876_c0_seq1 len=823 ~FPKM=138.3 path=[5:0-822]
+SRS008481_47941	BLAST	Blast Hit	113	151	52	+	.	comp876_c0_seq1 len=823 ~FPKM=138.3 path=[5:0-822]
+SRS008481_78756	BLAST	Blast Hit	3	38	52	+	.	comp876_c0_seq1 len=823 ~FPKM=138.3 path=[5:0-822]
+SRS008481_60288	BLAST	Blast Hit	3	53	52	-	.	comp876_c0_seq1 len=823 ~FPKM=138.3 path=[5:0-822]
+SRS008481_21790	BLAST	Blast Hit	48	89	50	+	.	comp876_c0_seq1 len=823 ~FPKM=138.3 path=[5:0-822]
+SRS008481_98953	BLAST	Blast Hit	3	35	50	+	.	comp876_c0_seq1 len=823 ~FPKM=138.3 path=[5:0-822]

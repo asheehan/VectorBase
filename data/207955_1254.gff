@@ -1,0 +1,11 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=0 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=1254&page=res&job_id=207955
+PHUM605270-RA	BLAST	Blast Hit	2344	2535	228	+	.	Anopheles_Pep
+PHUM058460-RA	BLAST	Blast Hit	127	345	218	+	.	Anopheles_Pep
+PHUM058890-RA	BLAST	Blast Hit	271	471	212	+	.	Anopheles_Pep
+PHUM605200-RA	BLAST	Blast Hit	73	270	209	+	.	Anopheles_Pep
+PHUM058910-RA	BLAST	Blast Hit	151	333	185	+	.	Anopheles_Pep
+PHUM058480-RA	BLAST	Blast Hit	196	360	179	+	.	Anopheles_Pep
+PHUM492240-RA	BLAST	Blast Hit	352	552	175	+	.	Anopheles_Pep
+PHUM492230-RA	BLAST	Blast Hit	457	660	172	+	.	Anopheles_Pep
+PHUM058920-RA	BLAST	Blast Hit	37	207	159	+	.	Anopheles_Pep
+PHUM492260-RA	BLAST	Blast Hit	244	441	156	+	.	Anopheles_Pep

@@ -1,0 +1,17 @@
+<?php
+
+function acquia_marina_preprocess_page(&$vars) {
+	drupal_add_css('/includes/index_style.css',array('type'=>'file','group'=>'CSS_THEME'));
+}
+
+function acquia_marina_link($variables) {
+  $menuObject = FALSE;
+  $menuObject = menu_get_object();
+  //drupal_set_message(print_r($menuObject));
+if ($menuObject && property_exists($menuObject,'type') && ($menuObject->type == 'navigation_page')) {
+  $variables['options']['html'] = FALSE;
+} else {
+  $variables['options']['html'] = TRUE;
+}
+  return '<a href="' . check_plain(url($variables['path'], $variables['options'])) . '"' . drupal_attributes($variables['options']['attributes']) . '>' . ($variables['options']['html'] ? $variables['text'] : strip_tags($variables['text'])) . '</a>';
+}

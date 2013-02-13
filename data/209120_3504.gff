@@ -1,0 +1,4 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=0 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=3504&page=res&job_id=209120
+ASTM015521-PA	BLAST	Blast Hit	986	1482	278	.	.	CPIJ010332-PA |nadph oxidase|protein_coding|supercont3.295:331244-341077:1|gene:CPIJ010332
+ASTM002658-PA	BLAST	Blast Hit	790	987	155	.	.	CPIJ010332-PA |nadph oxidase|protein_coding|supercont3.295:331244-341077:1|gene:CPIJ010332
+ASTM002658-PA	BLAST	Blast Hit	328	441	121	.	.	CPIJ010332-PA |nadph oxidase|protein_coding|supercont3.295:331244-341077:1|gene:CPIJ010332

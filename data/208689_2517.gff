@@ -1,0 +1,11 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=0 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=2517&page=res&job_id=208689
+contig:GmorY1:ctg10023100:1:2686:1	BLAST	Blast Hit	2047	2122	146	-	.	
+contig:GmorY1:ctg10006106:1:4284:1	BLAST	Blast Hit	1	65	124	+	.	
+contig:GmorY1:ctg10020011:1:1012:1	BLAST	Blast Hit	608	643	72	-	.	
+contig:GmorY1:ctg10000164:1:30520:1	BLAST	Blast Hit	25572	25604	50	-	.	
+contig:GmorY1:ctg10012689:1:44344:1	BLAST	Blast Hit	27146	27189	48	-	.	
+contig:GmorY1:ctg10010269:1:21754:1	BLAST	Blast Hit	4186	4219	48	-	.	
+contig:GmorY1:ctg10008937:1:39395:1	BLAST	Blast Hit	25191	25219	48	-	.	
+contig:GmorY1:ctg10007850:1:298500:1	BLAST	Blast Hit	294784	294829	48	+	.	
+contig:GmorY1:ctg10007623:1:28498:1	BLAST	Blast Hit	22491	22527	48	-	.	
+contig:GmorY1:ctg10005582:1:102066:1	BLAST	Blast Hit	18104	18137	48	-	.	

@@ -1,0 +1,11 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=1 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=4&page=res&job_id=190313
+AGAP006841-RA	BLAST	Blast Hit	34	423	453	+	.	Anopheles_Pep
+AGAP006842-RA	BLAST	Blast Hit	34	423	453	+	.	Anopheles_Pep
+AGAP006844-RA	BLAST	Blast Hit	34	423	452	+	.	Anopheles_Pep
+AGAP006840-RA	BLAST	Blast Hit	34	423	452	+	.	Anopheles_Pep
+AGAP006846-RA	BLAST	Blast Hit	34	423	443	+	.	Anopheles_Pep
+AGAP006845-RA	BLAST	Blast Hit	34	411	442	+	.	Anopheles_Pep
+AGAP006847-RA	BLAST	Blast Hit	34	285	380	+	.	Anopheles_Pep
+AGAP006843-RA	BLAST	Blast Hit	34	285	380	+	.	Anopheles_Pep
+AGAP006848-RA	BLAST	Blast Hit	34	315	329	+	.	Anopheles_Pep
+AGAP006861-RA	BLAST	Blast Hit	58	270	311	+	.	Anopheles_Pep

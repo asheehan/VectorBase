@@ -1,0 +1,113 @@
+<?php
+
+function cap_block_view($op='list', $delta=0, $edit=array()){
+  
+  $path = drupal_get_path('module', 'cap');
+  
+  // The following is to include any javascript we might need.
+  //drupal_add_js($path.'/validateSubmission.js');
+
+  $subject = "This is the subject?";
+  $blocks['subject'] = t($subject);
+  $blocks['content'] = drupal_get_form('ajax_cap_genform');
+  return $blocks;
+}
+
+function ajax_cap_genform($form, &$form_state) {
+
+  $form['cap'] = array(
+    '#type' => 'cap',
+  );
+
+  $form['cap']['dataSource'] = array(
+    '#type' => 'radios',
+    '#title' => t('Data Source'),
+    '#options' => array(
+      'half' => t('50/50'), 
+      'three' => t('25/25/50'),
+      'db' => t('From Database')), 
+    '#default_value' => 'half',
+    '#ajax' => array(
+      'callback' => 'ajax_datasource_handler',
+      'wrapper' => 'ajaxized',
+      'effect' => 'fade',
+      'progress' => array(
+        'type' => 'throbber',
+        'message' => t('Updating chart...')),
+    ),
+  );
+
+   $form['cap']['results'] = array(
+    '#title' => '',
+    // The prefix/suffix provide the div that we're replacing, named by
+    // #ajax['wrapper'] above.
+    '#prefix' => '<div id="results">',
+    '#suffix' => '</div>',
+    '#type' => 'item', 
+    '#ajax' => array(
+      'callback' => 'ajax_runningJob_handler',
+      'event' => 'click',
+      'wrapper' => 'ajaxized',
+      'effect' => 'fade', 
+      'progress' => array(
+        'type' => 'throbber',
+        'message' => t('Updating chart...')),
+      )
+  );
+  
+  return $form; 
+}
+
+/**
+ * Callback element needs only select the portion of the form to be updated.
+ * Since #ajax['callback'] return can be HTML or a renderable array (or an
+ * array of commands), we can just return a piece of the form.
+ */
+function ajax_datasource_handler($form, $form_state) {
+  
+  require_once("cap.inc");
+  $userCounts = get_cap_submission_stats($form_state['values']['dataSource']);
+  $output = "<script text/javascript> var sourceData = [";
+  $hadOutput = 0; 
+  foreach ($userCounts as $user => $count) {
+    $hadOutput = 1;     
+    $output .= "{\"label\":\"$user\", \"value\":$count},";
+  }
+ if($hadOutput == 1) {
+  $output = substr($output, 0, strlen($output) - 1);
+ }
+  $output .= "];";
+
+  $path = drupal_get_path('module', 'cap');  
+  $output .= file_get_contents($path . '/d3/d3.v2.js');
+  $output .= file_get_contents($path . '/pie.js');
+  $output .= "</script>";
+  
+  drupal_add_css('.chart rect {stroke:white; fill:steelblue;}', 'inline');
+  //drupal_add_css('.chart div {font:10px snas-serif, background-color:steelblue, text-align:right, padding:3px, margin:1px, color:white}', 'inline');
+  $commands[] = ajax_command_html('#edit-results', $output);
+  return array('#type' => 'ajax', '#commands' => $commands);
+}
+
+
+/**
+ * Implements hook_block_info().
+ */
+function cap_block_info() {
+  $blocks['recent']['info'] = t('CAP GUI for submitting gene annotations.');
+  return $blocks;
+}
+
+
+/**
+ * Implementation of hook_help()
+*/
+function cap_help($path, $arg){
+  switch ($path) {
+    case "admin/help#cap":
+      return '<p>'.  t("this is some text from the help hook for cap") .'</p>';
+      break;
+  }
+
+}
+

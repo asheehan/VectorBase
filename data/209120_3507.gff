@@ -1,0 +1,5 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=0 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=3507&page=res&job_id=209120
+AGAP003772-PA	BLAST	Blast Hit	1	561	1927	.	.	CPIJ010332-PA |nadph oxidase|protein_coding|supercont3.295:331244-341077:1|gene:CPIJ010332
+AGAP009978-PA	BLAST	Blast Hit	964	1460	274	.	.	CPIJ010332-PA |nadph oxidase|protein_coding|supercont3.295:331244-341077:1|gene:CPIJ010332
+AGAP008072-PA	BLAST	Blast Hit	847	1044	151	.	.	CPIJ010332-PA |nadph oxidase|protein_coding|supercont3.295:331244-341077:1|gene:CPIJ010332
+AGAP008072-PA	BLAST	Blast Hit	451	564	124	.	.	CPIJ010332-PA |nadph oxidase|protein_coding|supercont3.295:331244-341077:1|gene:CPIJ010332

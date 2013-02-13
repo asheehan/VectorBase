@@ -1,0 +1,5 @@
+name = User Welcome
+description = Displays a block welcoming the logged in user along with some stats.
+package = VectorBase
+core = 7.x
+files[] = welcome_user.module

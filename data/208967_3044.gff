@@ -1,0 +1,11 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=0 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=3044&page=res&job_id=208967
+AAWU01021518.1	BLAST	Blast Hit	16665	16742	130	+	.	Actina cDNA
+AAWU01021518.1	BLAST	Blast Hit	3577	3654	130	+	.	Actina cDNA
+AAWU01021518.1	BLAST	Blast Hit	21078	21155	124	+	.	Actina cDNA
+AAWU01016906.1	BLAST	Blast Hit	5807	5884	130	-	.	Actina cDNA
+AAWU01031554.1	BLAST	Blast Hit	7190	7267	130	-	.	Actina cDNA
+AAWU01031554.1	BLAST	Blast Hit	7191	7265	124	-	.	Actina cDNA
+AAWU01031554.1	BLAST	Blast Hit	7193	7267	121	+	.	Actina cDNA
+AAWU01021511.1	BLAST	Blast Hit	5572	5649	130	-	.	Actina cDNA
+AAWU01008512.1	BLAST	Blast Hit	4819	4896	130	-	.	Actina cDNA
+AAWU01020624.1	BLAST	Blast Hit	14120	14197	130	-	.	Actina cDNA

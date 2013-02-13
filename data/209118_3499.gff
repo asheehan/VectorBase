@@ -1,0 +1,3 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=0 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=3499&page=res&job_id=209118
+CPIJ010332-RA	BLAST	Blast Hit	1	561	1940	.	.	AGAP003772-PA |hypothetical protein|protein_coding|2R:43147181-43149470:1|gene:AGAP003772
+CPIJ003117-RA	BLAST	Blast Hit	987	1482	338	.	.	AGAP003772-PA |hypothetical protein|protein_coding|2R:43147181-43149470:1|gene:AGAP003772

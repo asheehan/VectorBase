@@ -1,0 +1,32 @@
+<?php
+
+/* xgrid.install
+ installs the db table needed for the module
+ just a simple table to keep track of all the job params
+ */
+
+function xgrid_install() {
+  drupal_install_schema('xgrid_schema');
+}
+
+function xgrid_uninstall(){
+  drupal_uninstall_schema('xgrid_schema');
+}
+
+function xgrid_schema(){
+  $schema['xgrid_job_params'] = array(
+    'description' => t('all params for xgrid jobs'),
+    'fields' => array(
+      'job_id' => array(
+        'unsigned' => true,
+        'type' => 'int',
+        'not null' => true), 
+      'argument' => array(
+        'type' => 'text',
+        'not null' => true),
+      'value' => array(
+        'type' => 'text')
+      ) // close fields array
+    ); // close schema array
+    return $schema;
+}

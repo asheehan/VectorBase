@@ -1,0 +1,11 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=0 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=3582&page=res&job_id=209154
+AY700377.1	BLAST	Blast Hit	568	1845	1130	+	.	gi|347965265|ref|XM_308496.5| Anopheles gambiae str. PEST AGAP007333-PA (AgaP_AGAP007333) mRNA, complete cds
+DV320432.1	BLAST	Blast Hit	2	778	618	+	.	gi|347965265|ref|XM_308496.5| Anopheles gambiae str. PEST AGAP007333-PA (AgaP_AGAP007333) mRNA, complete cds
+DV325896.1	BLAST	Blast Hit	2	696	614	+	.	gi|347965265|ref|XM_308496.5| Anopheles gambiae str. PEST AGAP007333-PA (AgaP_AGAP007333) mRNA, complete cds
+DV359551.1	BLAST	Blast Hit	1	689	502	+	.	gi|347965265|ref|XM_308496.5| Anopheles gambiae str. PEST AGAP007333-PA (AgaP_AGAP007333) mRNA, complete cds
+DW201472.1	BLAST	Blast Hit	12	592	480	+	.	gi|347965265|ref|XM_308496.5| Anopheles gambiae str. PEST AGAP007333-PA (AgaP_AGAP007333) mRNA, complete cds
+DV305658.1	BLAST	Blast Hit	1	471	452	+	.	gi|347965265|ref|XM_308496.5| Anopheles gambiae str. PEST AGAP007333-PA (AgaP_AGAP007333) mRNA, complete cds
+DV303525.1	BLAST	Blast Hit	1	585	394	+	.	gi|347965265|ref|XM_308496.5| Anopheles gambiae str. PEST AGAP007333-PA (AgaP_AGAP007333) mRNA, complete cds
+DV328914.1	BLAST	Blast Hit	374	948	370	-	.	gi|347965265|ref|XM_308496.5| Anopheles gambiae str. PEST AGAP007333-PA (AgaP_AGAP007333) mRNA, complete cds
+DV326364.1	BLAST	Blast Hit	374	928	350	-	.	gi|347965265|ref|XM_308496.5| Anopheles gambiae str. PEST AGAP007333-PA (AgaP_AGAP007333) mRNA, complete cds
+DV323667.1	BLAST	Blast Hit	374	894	312	-	.	gi|347965265|ref|XM_308496.5| Anopheles gambiae str. PEST AGAP007333-PA (AgaP_AGAP007333) mRNA, complete cds

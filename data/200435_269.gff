@@ -1,0 +1,6 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=1 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=269&page=res&job_id=200435
+ABKQ01028663.1	BLAST	Blast Hit	3365	3801	838	+	.	AGAP010089-RA cdna:NOVEL_protein_coding
+ABKQ01028663.1	BLAST	Blast Hit	3874	4555	1344	+	.	AGAP010089-RA cdna:NOVEL_protein_coding
+ABKQ01028663.1	BLAST	Blast Hit	4632	4812	356	+	.	AGAP010089-RA cdna:NOVEL_protein_coding
+ABKQ01028261.1	BLAST	Blast Hit	30744	31162	158	-	.	AGAP010089-RA cdna:NOVEL_protein_coding
+ABKQ01019978.1	BLAST	Blast Hit	1089	1345	152	-	.	AGAP010089-RA cdna:NOVEL_protein_coding

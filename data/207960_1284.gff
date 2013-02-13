@@ -1,0 +1,11 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=0 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=1284&page=res&job_id=207960
+X	BLAST	Blast Hit	7949492	7949539	96	+	.	Example Sequence
+X	BLAST	Blast Hit	6425207	6425254	86	+	.	Example Sequence
+X	BLAST	Blast Hit	7139586	7139633	86	+	.	Example Sequence
+X	BLAST	Blast Hit	7501782	7501829	86	+	.	Example Sequence
+X	BLAST	Blast Hit	7533509	7533556	86	-	.	Example Sequence
+X	BLAST	Blast Hit	14147905	14147952	86	-	.	Example Sequence
+X	BLAST	Blast Hit	15024431	15024478	86	-	.	Example Sequence
+X	BLAST	Blast Hit	15055889	15055936	86	-	.	Example Sequence
+X	BLAST	Blast Hit	15072684	15072731	86	-	.	Example Sequence
+X	BLAST	Blast Hit	15089757	15089804	86	-	.	Example Sequence

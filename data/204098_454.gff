@@ -1,0 +1,11 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=1 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=454&page=res&job_id=204098
+RPTMP00696-PA	BLAST	Blast Hit	13	370	954	.	.	AaGPRop9_1
+RPTMP10405-PA	BLAST	Blast Hit	30	371	505	.	.	AaGPRop9_1
+RPTMP15991-PA	BLAST	Blast Hit	32	335	495	.	.	AaGPRop9_1
+RPTMP14589-PA	BLAST	Blast Hit	8	297	159	.	.	AaGPRop9_1
+RPTMP11185-PA	BLAST	Blast Hit	2	292	157	.	.	AaGPRop9_1
+RPTMP13760-PA	BLAST	Blast Hit	10	311	156	.	.	AaGPRop9_1
+RPTMP07263-PA	BLAST	Blast Hit	2	242	118	.	.	AaGPRop9_1
+RPTMP07924-PA	BLAST	Blast Hit	10	74	118	.	.	AaGPRop9_1
+RPTMP13868-PA	BLAST	Blast Hit	39	226	118	.	.	AaGPRop9_1
+RPTMP07403-PA	BLAST	Blast Hit	32	190	115	.	.	AaGPRop9_1

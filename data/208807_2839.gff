@@ -1,0 +1,11 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=0 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=2839&page=res&job_id=208807
+supercont3.343	BLAST	Blast Hit	338255	340402	3103	+	.	tr|B0WX06|B0WX06_CULQU Heat shock protein 83 OS=Culex quinquefasciatus GN=CpipJ_CPIJ011246 PE=3 SV=1
+supercont3.343	BLAST	Blast Hit	325151	327298	3098	-	.	tr|B0WX06|B0WX06_CULQU Heat shock protein 83 OS=Culex quinquefasciatus GN=CpipJ_CPIJ011246 PE=3 SV=1
+supercont3.343	BLAST	Blast Hit	352251	352421	291	+	.	tr|B0WX06|B0WX06_CULQU Heat shock protein 83 OS=Culex quinquefasciatus GN=CpipJ_CPIJ011246 PE=3 SV=1
+supercont3.343	BLAST	Blast Hit	352415	352465	76	+	.	tr|B0WX06|B0WX06_CULQU Heat shock protein 83 OS=Culex quinquefasciatus GN=CpipJ_CPIJ011246 PE=3 SV=1
+supercont3.628	BLAST	Blast Hit	2367	4511	3067	+	.	tr|B0WX06|B0WX06_CULQU Heat shock protein 83 OS=Culex quinquefasciatus GN=CpipJ_CPIJ011246 PE=3 SV=1
+supercont3.33	BLAST	Blast Hit	1156631	1157878	857	-	.	tr|B0WX06|B0WX06_CULQU Heat shock protein 83 OS=Culex quinquefasciatus GN=CpipJ_CPIJ011246 PE=3 SV=1
+supercont3.33	BLAST	Blast Hit	1158035	1158673	636	-	.	tr|B0WX06|B0WX06_CULQU Heat shock protein 83 OS=Culex quinquefasciatus GN=CpipJ_CPIJ011246 PE=3 SV=1
+supercont3.307	BLAST	Blast Hit	86681	87766	494	+	.	tr|B0WX06|B0WX06_CULQU Heat shock protein 83 OS=Culex quinquefasciatus GN=CpipJ_CPIJ011246 PE=3 SV=1
+supercont3.307	BLAST	Blast Hit	79647	79979	239	+	.	tr|B0WX06|B0WX06_CULQU Heat shock protein 83 OS=Culex quinquefasciatus GN=CpipJ_CPIJ011246 PE=3 SV=1
+supercont3.307	BLAST	Blast Hit	86399	86674	210	+	.	tr|B0WX06|B0WX06_CULQU Heat shock protein 83 OS=Culex quinquefasciatus GN=CpipJ_CPIJ011246 PE=3 SV=1

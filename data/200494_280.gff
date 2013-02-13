@@ -1,0 +1,3 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=1 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=280&page=res&job_id=200494
+Afun013315	BLAST	Blast Hit	661	688	44	+	.	gnl|ti|1877706724 name:PRAG-aaa02a01.b1 mate_pair:1877708507
+Afun003111	BLAST	Blast Hit	184	220	40	-	.	gnl|ti|1877706724 name:PRAG-aaa02a01.b1 mate_pair:1877708507

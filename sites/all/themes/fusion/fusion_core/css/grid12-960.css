@@ -39,3 +39,12 @@ body,
 div.full-width {
   min-width: 960px;
 }
+
+#grid-mask-overlay .block .gutter {
+  background-color: rgba(0,204,0,.15);
+  outline: none;
+}
+
+body.grid-mask-enabled #grid-960 {
+  display: block;
+}

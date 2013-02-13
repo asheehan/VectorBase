@@ -1,0 +1,11 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=0 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=1258&page=res&job_id=207955
+EY123482.1	BLAST	Blast Hit	52	282	205	+	.	Anopheles_Pep
+EH114385.1	BLAST	Blast Hit	309	506	189	+	.	Anopheles_Pep
+EY123852.1	BLAST	Blast Hit	199	378	179	-	.	Anopheles_Pep
+EY123589.1	BLAST	Blast Hit	10	189	176	+	.	Anopheles_Pep
+EY123807.1	BLAST	Blast Hit	77	259	164	-	.	Anopheles_Pep
+EH113781.1	BLAST	Blast Hit	367	564	164	+	.	Anopheles_Pep
+HS400342.1	BLAST	Blast Hit	107	307	160	+	.	Anopheles_Pep
+EY125071.1	BLAST	Blast Hit	222	407	152	-	.	Anopheles_Pep
+EY124543.1	BLAST	Blast Hit	7	192	151	+	.	Anopheles_Pep
+FD778774.1	BLAST	Blast Hit	344	550	118	+	.	Anopheles_Pep

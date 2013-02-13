@@ -1,6 +1,5 @@
 name = BLAST
-description = Allow Drupal to collect BLAST job parameters from the user, submit them to Xgrid, and display the status and results of the job.
+description = BLAST GUI for submitting jobs to VB's Xgrid and displaying results
 package = VectorBase
 core = 7.x
 dependencies[] = xgrid
-

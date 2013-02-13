@@ -1,0 +1,41 @@
+<?php
+/**
+ * @file
+ * Display a block that show a login block when loggedout, vice versa.
+ *
+ */
+ 
+
+/**
+ * implementation of hook_block_info
+ * @return array $blocks
+ */
+function login_block_block_info() {
+  $blocks['login_block'] = array(
+    'info' => t('Login Block'),
+    'cache' => DRUPAL_NO_CACHE,
+  );
+  return $blocks;
+}
+
+/**
+ * implementation of hook_block_view
+ *
+ * @param string $delta
+ * @return array
+ *  $block['subject']
+ *  $block['content']
+ */
+function login_block_block_view($delta) {
+    global $user;
+    $userId = $user->uid;
+    $content = '<div id="login-block">';
+    if ($userId > 0) {
+        $content .= '<form action="/user/logout"><input type="submit" value="Logout" class="form-submit"></form>';
+    } else {
+        $content .= '<form action="/user"><input type="submit" value="Login" class="form-submit"></form>';
+    }
+    $content .= '</div>';
+    $block['content'] = $content;
+    return $block;
+}

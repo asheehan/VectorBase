@@ -1,0 +1,5 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=0 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=2948&page=res&job_id=208919
+FJ008059.1	BLAST	Blast Hit	1	1128	2246	+	.	AAEL006003:AAEL006003-RA cdna:KNOWN_protein_coding
+FJ008063.1	BLAST	Blast Hit	35	1134	428	+	.	AAEL006003:AAEL006003-RA cdna:KNOWN_protein_coding
+FJ008061.1	BLAST	Blast Hit	727	1129	136	+	.	AAEL006003:AAEL006003-RA cdna:KNOWN_protein_coding
+FJ008061.1	BLAST	Blast Hit	364	572	56	+	.	AAEL006003:AAEL006003-RA cdna:KNOWN_protein_coding

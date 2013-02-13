@@ -1,0 +1,7 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=0 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=2421&page=res&job_id=208685
+TMP003060-RA	BLAST	Blast Hit	45	66	44	+	.	
+TMP003059-RA	BLAST	Blast Hit	2460	2481	44	-	.	
+TMP005995-RA	BLAST	Blast Hit	1	25	44	+	.	
+TMP002271-RA	BLAST	Blast Hit	765	792	42	+	.	
+TMP011326-RA	BLAST	Blast Hit	4184	4204	42	+	.	
+TMP010383-RA	BLAST	Blast Hit	385	419	40	-	.	

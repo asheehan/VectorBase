@@ -1,0 +1,10 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=0 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=3456&page=res&job_id=209090
+CPIJ001576-RA	BLAST	Blast Hit	1551	1724	69	-	.	gi|23093348|gb|AAF49458.2| argos [Drosophila melanogaster]
+CPIJ801832-RA	BLAST	Blast Hit	1496	1594	68	-	.	gi|23093348|gb|AAF49458.2| argos [Drosophila melanogaster]
+CPIJ005915-RA	BLAST	Blast Hit	517	654	65	-	.	gi|23093348|gb|AAF49458.2| argos [Drosophila melanogaster]
+CPIJ015803-RA	BLAST	Blast Hit	844	1038	65	+	.	gi|23093348|gb|AAF49458.2| argos [Drosophila melanogaster]
+CPIJ018320-RA	BLAST	Blast Hit	179	325	64	+	.	gi|23093348|gb|AAF49458.2| argos [Drosophila melanogaster]
+CPIJ011270-RA	BLAST	Blast Hit	81	188	63	-	.	gi|23093348|gb|AAF49458.2| argos [Drosophila melanogaster]
+CPIJ010059-RA	BLAST	Blast Hit	343	477	62	+	.	gi|23093348|gb|AAF49458.2| argos [Drosophila melanogaster]
+CPIJ003085-RA	BLAST	Blast Hit	13	114	61	+	.	gi|23093348|gb|AAF49458.2| argos [Drosophila melanogaster]
+CPIJ004989-RA	BLAST	Blast Hit	248	340	61	+	.	gi|23093348|gb|AAF49458.2| argos [Drosophila melanogaster]

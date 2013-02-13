@@ -1,0 +1,12 @@
+<?php
+/**
+ * Increase the module title field to 255 characters.
+ */
+
+function long_title_form_alter(&$form, &$form_state, $form_id){
+   if ($form_id == 'menu_edit_item') {
+      // Override the title field in this form 
+      $form['link_title']['#maxlength'] = 255;
+   }
+}
+?>

@@ -1,14 +1,18 @@
 
-name = Acquia Marina
-description = <a href="http://www.acquia.com">Acquia</a> Marina is a bright and colorful grid-based theme with point-and-click theming. Requires the <a href="http://drupal.org/project/fusion">Fusion Core</a> base theme and the <a href="http://drupal.org/project/skinr">Skinr</a> module. Created by <a href="http://www.topnotchthemes.com">TopNotchThemes</a> and <a href="http://fusiondrupalthemes.com">Fusion Drupal Themes</a>.
+name = VectorBase
+description = Based on Acquia Marina. Requires the <a href="http://drupal.org/project/fusion">Fusion Core</a> base theme and the <a href="http://drupal.org/project/skinr">Skinr</a> module. Created by <a href="http://www.topnotchthemes.com">TopNotchThemes</a> and <a href="http://fusiondrupalthemes.com">Fusion Drupal Themes</a>.
 base theme = fusion_core
 core = 7.x
 engine = phptemplate
 
+stylesheets[all][] = css/search.css
 stylesheets[all][] = css/fusion-acquia-marina-style.css
+;stylesheets[all][] = css/superfish.css
+stylesheets[all][] = css/slideshow.css
 
 scripts[] = js/jquery.corner.js
 scripts[] = js/acquia-marina-script.js
+scripts[] = js/tablesorter/jquery.tablesorter.js
 
 skinr[api] = 2
 skinr[directory] = skins
@@ -30,6 +34,7 @@ regions[node_bottom] = Node bottom
 regions[help] = Help
 regions[page_top] = Page top
 regions[page_bottom] = Page bottom
+regions[featured_slideshow] = Featured Slideshow
 
 features[] = logo
 features[] = name

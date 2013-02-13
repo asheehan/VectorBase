@@ -1,0 +1,4 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=0 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=3825&page=res&job_id=209270
+supercont1.354	BLAST	Blast Hit	980737	980838	134	+	.	
+supercont1.777	BLAST	Blast Hit	239133	239199	108	-	.	
+supercont1.293	BLAST	Blast Hit	1349026	1349125	68	-	.	

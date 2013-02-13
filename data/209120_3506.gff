@@ -1,0 +1,5 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=0 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=3506&page=res&job_id=209120
+AAEL010179-RA	BLAST	Blast Hit	1	490	2010	.	.	CPIJ010332-PA |nadph oxidase|protein_coding|supercont3.295:331244-341077:1|gene:CPIJ010332
+AAEL007563-RA	BLAST	Blast Hit	946	1452	274	.	.	CPIJ010332-PA |nadph oxidase|protein_coding|supercont3.295:331244-341077:1|gene:CPIJ010332
+AAEL002039-RA	BLAST	Blast Hit	671	868	148	.	.	CPIJ010332-PA |nadph oxidase|protein_coding|supercont3.295:331244-341077:1|gene:CPIJ010332
+AAEL002039-RA	BLAST	Blast Hit	267	381	119	.	.	CPIJ010332-PA |nadph oxidase|protein_coding|supercont3.295:331244-341077:1|gene:CPIJ010332

@@ -1,0 +1,11 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=0 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=2719&page=res&job_id=208741
+TMP013036-RA	BLAST	Blast Hit	412	2052	2664	+	.	dme:Dmel_CG42708 CG42708 gene product from transcript CG42708-RA(EC:3.5.1.2); K01425 glutaminase [EC:3.5.1.2] (A)
+TMP009268-RA	BLAST	Blast Hit	2053	2331	136	+	.	dme:Dmel_CG42708 CG42708 gene product from transcript CG42708-RA(EC:3.5.1.2); K01425 glutaminase [EC:3.5.1.2] (A)
+TMP013767-RA	BLAST	Blast Hit	766	993	126	+	.	dme:Dmel_CG42708 CG42708 gene product from transcript CG42708-RA(EC:3.5.1.2); K01425 glutaminase [EC:3.5.1.2] (A)
+TMP012494-RA	BLAST	Blast Hit	543	794	111	+	.	dme:Dmel_CG42708 CG42708 gene product from transcript CG42708-RA(EC:3.5.1.2); K01425 glutaminase [EC:3.5.1.2] (A)
+TMP003620-RA	BLAST	Blast Hit	4066	4287	108	+	.	dme:Dmel_CG42708 CG42708 gene product from transcript CG42708-RA(EC:3.5.1.2); K01425 glutaminase [EC:3.5.1.2] (A)
+TMP005430-RA	BLAST	Blast Hit	1056	1226	106	+	.	dme:Dmel_CG42708 CG42708 gene product from transcript CG42708-RA(EC:3.5.1.2); K01425 glutaminase [EC:3.5.1.2] (A)
+TMP004019-RA	BLAST	Blast Hit	1022	1270	104	+	.	dme:Dmel_CG42708 CG42708 gene product from transcript CG42708-RA(EC:3.5.1.2); K01425 glutaminase [EC:3.5.1.2] (A)
+TMP013035-RA	BLAST	Blast Hit	469	657	103	+	.	dme:Dmel_CG42708 CG42708 gene product from transcript CG42708-RA(EC:3.5.1.2); K01425 glutaminase [EC:3.5.1.2] (A)
+TMP004020-RA	BLAST	Blast Hit	3797	4045	103	-	.	dme:Dmel_CG42708 CG42708 gene product from transcript CG42708-RA(EC:3.5.1.2); K01425 glutaminase [EC:3.5.1.2] (A)
+TMP004078-RA	BLAST	Blast Hit	1245	1436	103	+	.	dme:Dmel_CG42708 CG42708 gene product from transcript CG42708-RA(EC:3.5.1.2); K01425 glutaminase [EC:3.5.1.2] (A)

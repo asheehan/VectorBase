@@ -18,6 +18,22 @@ a:focus,
 a:active {
 }
 
+.button a,
+.button a:link,
+.button a:visited,
+a.button,
+a.button:link,
+a.button:visited {
+	
+}
+
+.button a:hover,
+.button a:active,
+a.button:hover,
+a.button:active {
+	
+}
+
 
 /* Specific Typography
 -------------------------------------------------------------- */
@@ -26,6 +42,7 @@ a:active {
   font-weight: normal;
   line-height: 150%;
   margin: 0;
+  margin-top: 10px;
 }
 
 .footer-message {
@@ -48,6 +65,8 @@ body {
 /* Add float here to put logo and site name side by side, also add margins as
   needed */
 #logo {
+  float: left;
+  margin-right: 20px;
 }
 
 /* Link and hover styles for site name */
@@ -65,7 +84,7 @@ body {
 /* Regions
 
   Classes (.region-name) should always be used instead of IDs (#region-name) so
-  that Skinr styles can override them with a class later
+  that skin styles can override them with a class later
 -------------------------------------------------------------- */
 
 /* All Regions
@@ -110,6 +129,9 @@ body {
 .main-menu {
 }
 
+/* These styles work well with the Superfish module. 
+ * http://www.drupal.org/project/superfish */
+ 
 /* styles for Superfish main menu */
 .main-menu-inner ul.sf-menu {
 }
@@ -633,20 +655,3 @@ div.poll div.bar div.foreground {
   background-color: #ccc;
 }
 
-
-/* Skinr
-/-------------------------------------------------------------- */
-
-/* This is a sample Skinr style to get you started. See fusion_starter.info */
-.fusion-example-stylename .inner {
-  /* When setting the background color, also set foreground colors for text and
-    links, even if it's similar to the default body style. Remember, this block
-    style may be used in regions with other foreground colors, thus making text
-    invisible if left unspecified */
-  background-color: #ccc;
-  color: #000;
-  /* All padding and borders should go on the .inner div, so as not to break
-    the widths of the grid */
-  border: 3px solid #000;
-  padding: 10px;
-}

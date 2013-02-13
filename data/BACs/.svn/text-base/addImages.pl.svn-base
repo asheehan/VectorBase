@@ -1,0 +1,297 @@
+#!/usr/bin/perl
+use strict;
+use DBI;
+use lib '/Network/Servers/heart.local/Volumes/App1/Perl/5.8.6/';
+
+# ####################
+# Connect to database
+# ####################
+my $db_host = 'jesse';
+my $db_user = 'db_public';
+my $db_pass = 'limecat';
+my $db_name = 'chado_test';
+#my $db_name = 'chado_12_20_2006';
+#my $db_name = 'chado_current';
+
+my $feature_id = "";
+my $type_id = "";
+
+my $db = "dbi:Pg:dbname=${db_name};host=${db_host}";
+my $dbh = DBI->connect($db, $db_user, $db_pass, {RaiseError=>1, AutoCommit => 0} )
+  || die " ERROR $DBI::errstr\n";
+
+my $where = "";
+my $next = "";
+if (-d "/Volumes/Web2/vectorbase/data/Images/BACs/divisions") {
+  $where = "/Volumes/Web2/vectorbase/data/Images/BACs/divisions";
+} else {
+  print "Invalid dir.";
+  exit;
+}
+
+##########################
+# create image relations #
+##########################
+my @types = ("hybrids", "photomaps", "divisions");
+
+my $cvtermQuery = "insert into cvterm (cv_id, name, definition, dbxref_id) values (?, ?, ?, ?)";
+my $cvsth = $dbh->prepare($cvtermQuery) or die "Can't prepare SQL: " . $dbh->errstr() . "\n";
+
+my $dbxInsert = "insert into dbxref (db_id, accession) values (1, ?)";
+my $dbxsth = $dbh->prepare($dbxInsert) or die "Can't prepare SQL: " . $dbh->errstr() . "\n";
+
+my $dbxQuery = "select dbxref_id from dbxref where accession = ?";
+my $dbxget = $dbh->prepare($dbxQuery) or die "Can't prepare SQL: " . $dbh->errstr() . "\n";
+
+foreach my $name (@types){
+  $dbxsth->execute("local:null for bac " . $name) or die "Can't Execute: " . $dbxsth->errstr() . "\n";
+  $dbxget->execute("local:null for bac " . $name) or die "Can't Execute: " . $dbxget->errstr() . "\n";
+  my $dbxID = "";
+  while(my @dA = $dbxget->fetchrow_array){
+    $cvsth->execute(2, "BAC " . $name, "An image of a BAC " . $name . ".", $dA[0]) or die "Can't Execute: " . $cvsth->errstr() . "\n";
+    }
+}
+my $fiQuery = "create TABLE feature_image (feature_image_id serial primary key, image_id integer, feature_id integer references feature, type_id integer references cvterm, filename varchar )";
+my $fisth = $dbh->prepare($fiQuery) or die "Can't prepare SQL: " . $dbh->errstr() . "\n";
+$fisth->execute();
+ 
+
+###########################
+# Retrieve cvterm_id
+# for Divisions
+###########################
+my $divQuery = "select cv.cvterm_id from cvterm cv where cv.name = 'BAC divisions'";
+my $dhh = $dbh -> prepare($divQuery) or die "Can't prepare div SQL: ", $dbh->errstr(), "\n";
+$dhh->execute() or die "Can't Execute: ", $dhh->errstr(), "\n";
+my $divID = "";
+while(my @hA = $dhh -> fetchrow_array) {
+  $divID = $hA[0];
+}
+$dhh->finish;
+die "No div ID" unless($divID ne "");
+
+#################################
+# Select all feature for a given 
+# chromosome band
+#################################
+#my $query = "select f.feature_id  from feature f
+#inner join cvterm cv on f.type_id = cv.cvterm_id
+#inner join featureloc fl on f.feature_id = fl.feature_id
+#inner join featureloc bandfl on (
+  #(fl.fmin >= bandfl.fmin and fl.fmin <= bandfl.fmax) or  --BAC min is inside band
+  #(fl.fmax >= bandfl.fmin and fl.fmax <= bandfl.fmax) or  --BAC max is inside band
+  #(fl.fmax >= bandfl.fmax and fl.fmin <= bandfl.fmin) )   --BAC is around band
+  #inner join feature bandf on bandfl.feature_id = bandf.feature_id
+  #inner join cvterm bandcv on bandcv.cvterm_id = bandf.type_id
+  #where bandf.name = ?
+  #and bandcv.name = 'chromosome_band'
+  #and cv.name='BAC_clone'
+  #";
+my $dquery = "select f.feature_id from feature f
+  inner join cvterm cv on f.type_id = cv.cvterm_id
+  where cv.name = 'chromosome_band'
+  and f.name = ?
+  ";
+
+my $dsth = $dbh -> prepare($dquery) or die "Can't prepare SQL: ", $dbh -> errstr(), "\n";
+ 
+my $dmax = "select max(image_id) from feature_image";
+my $dmth = $dbh -> prepare($dmax) or die "Can't prepare max: " , $dbh->errstr(), "\n";
+$dmth->execute() or die "Can't Execute max: ", $dmth->errstr(), "\n";
+my @mA = $dmth->fetchrow_array;
+my $imageNum = 1;
+$imageNum = $mA[0] + 1;
+#print $imageNum . " <-   imageMax\n";
+$dmth->finish;
+          
+####################
+# inserting ->
+# 
+# 1 feature_image_id
+# 2 image_id
+# 3 feature_id
+# 4 type_id
+# 5 filename
+####################
+my $dinsertQuery = "insert into feature_image values (default, ?, ?, ?, ?)";
+my $dih = $dbh->prepare($dinsertQuery) or die "Can't prepare SQL: " . $dbh ->errstr() . "\n";
+
+while (defined($next = <$where/*.JPG>)) {
+
+  my ($imageName) = ($next =~ /\/.*\/.*\/.*\/.*\/.*\/.*\/(.*)\.JPG/);
+
+  my @results = ($imageName =~ /([^-]+)-?/g);
+
+  foreach my $bandName (@results){
+    $dsth->execute($bandName) or die "Can't Execute: ", $dsth->errstr(), "\n";
+
+    while(my @ary = $dsth->fetchrow_array) {
+      
+      my $existsQuery = "select image_id from feature_image where filename='divisions/" . $imageName . ".JPG'";
+      my $eth = $dbh -> prepare($existsQuery) or die "Can't prepare exists SQL: ", $dbh -> errstr(), "\n";
+      $eth -> execute() or die "Can't execute: " . $eth -> errstr() . "\n";
+
+      my @exA = $eth->fetchrow_array;
+
+      if(@exA[0] ne ""){ # The photo exists
+        #print "Adding " . $bandName . " with " . @ary[0] . "\n";
+        $dih->execute(@exA[0], @ary[0], $divID, "divisions/" . $imageName . ".JPG") or die "Can't Execute: " . $dih->errstr() . "\n";
+      } else { # The photo does not exist
+        #print "Adding " . $bandName . " with " . @ary[0] . "\n";
+        $dih->execute($imageNum, @ary[0], $divID, "divisions/" . $imageName . ".JPG") or die "Can't Execute: " . $dih->errstr() . "\n";
+        $imageNum++;
+      }
+
+      $eth->finish;
+
+    }
+
+  }
+  ##last;
+
+}
+
+$dsth->finish;
+$dih->finish;
+
+##################
+# Adding hybrids
+##################
+
+if (-d "/Volumes/Web2/vectorbase/data/Images/BACs/hybrids") {
+  $where = "/Volumes/Web2/vectorbase/data/Images/BACs/hybrids";
+} else {
+  print "Invalid dir.";
+  exit;
+}
+
+my $hybridQuery = "select cv.cvterm_id from cvterm cv where cv.name = 'BAC hybrids'";
+my $hhh = $dbh -> prepare($hybridQuery) or die "Can't prepare hybrid SQL: ", $dbh->errstr(), "\n";
+$hhh->execute() or die "Can't Execute: ", $hhh->errstr(), "\n";
+my $hybridID = "";
+while(my @hA = $hhh -> fetchrow_array) {
+  $hybridID = $hA[0];
+}
+$hhh->finish;
+die "No hybrid ID" unless($hybridID ne "");
+
+my $hquery = "select f.feature_id from feature f " .
+  "inner join cvterm cv on cv.cvterm_id = f.type_id " . 
+  "where cv.name = 'BAC_clone' " . 
+  " and f.name=?";
+my $hsth = $dbh -> prepare($hquery) or die "Can't prepare SQL: ", $dbh -> errstr(), "\n";
+
+my $hmax = "select max(image_id) from feature_image";
+my $hmth = $dbh -> prepare($hmax) or die "Can't prepare max: " , $dbh->errstr(), "\n";
+$hmth->execute() or die "Can't Execute max: ", $hmth->errstr(), "\n";
+my @mA = $hmth->fetchrow_array;
+my $imageNum = $mA[0] + 1;
+$hmth->finish;
+          
+####################
+# inserting ->
+# feature_image_id
+# image_id
+# feature_id
+# type_id
+# filename
+####################
+my $hinsertQuery = "insert into feature_image values (default, ?, ?, ?, ?)";
+my $hih = $dbh->prepare($hinsertQuery) or die "Can't prepare SQL: " . $dbh ->errstr() . "\n";
+
+while (defined($next = <$where/*.JPG>)) {
+
+  $next =~ /\/.*\/.*\/.*\/.*\/.*\/.*\/(.*)\.JPG/;
+
+  $hsth->execute($1) or die "Can't Execute: ", $hsth->errstr(), "\n";
+
+  while(my @ary = $hsth->fetchrow_array) {
+    $hih->execute($imageNum, @ary[0], $hybridID, "hybrids/" . $1 . ".JPG") or die "Can't Execute: " . $hih->errstr() . "\n";
+    $imageNum++;
+  }
+}
+
+$hsth->finish;
+$hih->finish;
+
+#############
+# Photomaps #
+#############
+
+$where = "";
+$next = "";
+if (-d "/Volumes/Web2/vectorbase/data/Images/BACs/photomaps") {
+  $where = "/Volumes/Web2/vectorbase/data/Images/BACs/photomaps";
+} else {
+  print "Invalid dir.\n";
+  exit;
+}
+my $photoQuery = "select cv.cvterm_id from cvterm cv where cv.name = 'BAC photomaps'";
+my $phh = $dbh -> prepare($photoQuery) or die "Can't prepare photo SQL: ", $dbh->errstr(), "\n";
+$phh->execute() or die "Can't Execute: ", $phh->errstr(), "\n";
+my $photoID = "";
+while(my @hA = $phh -> fetchrow_array) {
+  $photoID = $hA[0];
+}
+$phh->finish;
+die "No Photomap ID" unless($photoID ne "");
+
+my $pquery = "select f.feature_id from feature f " .
+  "inner join cvterm cv on cvterm_id = f.type_id " . 
+  "where cv.name = 'BAC_clone' " . 
+  " and f.name=?";
+my $psth = $dbh -> prepare($pquery) or die "Can't prepare SQL: ", $dbh -> errstr(), "\n";
+
+my $pmax = "select max(image_id) from feature_image";
+my $pmth = $dbh -> prepare($pmax) or die "Can't prepare max: " , $dbh->errstr(), "\n";
+$pmth->execute() or die "Can't Execute max: ", $pmth->errstr(), "\n";
+my @mA = $pmth->fetchrow_array;
+my $imageNum = $mA[0] + 1;
+$pmth->finish;
+  
+####################
+# inserting ->
+# feature_image_id
+# image_id
+# feature_id
+# type_id
+# filename
+####################
+my $insertQuery = "insert into feature_image values (default, ?, ?, ?, ?)";
+my $pih = $dbh->prepare($insertQuery) or die "Can't prepare SQL: " . $dbh ->errstr() . "\n";
+
+while (defined($next = <$where/*.jpg>)) {
+
+  $next =~ /\/.*\/.*\/.*\/.*\/.*\/.*\/photo_(.*)\.jpg/;
+
+  $psth->execute($1) or die "Can't Execute: ", $psth->errstr(), "\n";
+
+  while(my @ary = $psth->fetchrow_array) {
+    $pih->execute($imageNum, @ary[0], $photoID, "photomaps/photo_" . $1 . ".jpg") or die "Can't Execute: " . $pih->errstr() . "\n";
+    $imageNum++
+  }
+}
+$psth->finish;
+$pih->finish;
+
+$dbh -> commit;
+$dbh->disconnect or warn "Disconnection failed: $!\n";
+
+##########################################
+# unused -> but a good relation to know! #
+##########################################
+
+  # Chrom.organism_id and chrom.name will give us the chromosome it's on.  location, though...
+  #my $query = "select f.feature_id, chrom.organism_id, chrom.name from feature f " . 
+  #"inner join cvterm cv on cv.cvterm_id = f.type_id " .
+  #"inner join featureloc fl on f.feature_id = fl.feature_id " .
+  #"inner join feature chrom on chrom.feature_id = fl.srcfeature_id " .
+  #"where cv.cvterm_id = 827" .
+  #"limit 10";
+
+#my $sth = $dbh->prepare($query) or die "Can't prepare SQL: ", $dbh->errstr(), "\n";
+#$sth->execute() or die "Can't Execture: ", $sth->errstr(), "\n";
+#while( my @ary = $sth->fetchrow_array) {
+  #print OUTFILE $ary[0], "\t", $ary[1], "\t", $ary[2], "\n";
+#}
+

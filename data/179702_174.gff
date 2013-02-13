@@ -1,0 +1,13 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=1 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=174&page=res&job_id=179702
+X	BLAST	Blast Hit	23668231	23668263	50	-	.	k284.ab1
+UNKN	BLAST	Blast Hit	27149659	27149691	50	+	.	k284.ab1
+UNKN	BLAST	Blast Hit	35565408	35565440	50	+	.	k284.ab1
+UNKN	BLAST	Blast Hit	35962820	35962852	50	-	.	k284.ab1
+UNKN	BLAST	Blast Hit	36330435	36330467	50	-	.	k284.ab1
+UNKN	BLAST	Blast Hit	37411569	37411601	50	+	.	k284.ab1
+UNKN	BLAST	Blast Hit	38036038	38036070	50	-	.	k284.ab1
+UNKN	BLAST	Blast Hit	38410527	38410559	50	+	.	k284.ab1
+UNKN	BLAST	Blast Hit	39716029	39716061	50	+	.	k284.ab1
+UNKN	BLAST	Blast Hit	40404103	40404135	50	+	.	k284.ab1
+UNKN	BLAST	Blast Hit	23363958	23363989	48	+	.	k284.ab1
+3R	BLAST	Blast Hit	12008879	12008898	40	-	.	k284.ab1

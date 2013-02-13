@@ -1,0 +1,11 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=1 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=731&page=res&job_id=204140
+ABKQ01028766.1	BLAST	Blast Hit	6240	7378	2258	-	.	AGAP009925-RA cdna:KNOWN_protein_coding
+ABKQ01028766.1	BLAST	Blast Hit	4772	5661	1724	-	.	AGAP009925-RA cdna:KNOWN_protein_coding
+ABKQ01028766.1	BLAST	Blast Hit	11630	12077	854	-	.	AGAP009925-RA cdna:KNOWN_protein_coding
+ABKQ01028766.1	BLAST	Blast Hit	7515	7622	216	-	.	AGAP009925-RA cdna:KNOWN_protein_coding
+ABKQ01028766.1	BLAST	Blast Hit	45044	45107	128	-	.	AGAP009925-RA cdna:KNOWN_protein_coding
+ABKQ01028850.1	BLAST	Blast Hit	19022	19075	78	+	.	AGAP009925-RA cdna:KNOWN_protein_coding
+ABKQ01012250.1	BLAST	Blast Hit	1736	1870	78	-	.	AGAP009925-RA cdna:KNOWN_protein_coding
+ABKQ01012749.1	BLAST	Blast Hit	20126	20171	76	-	.	AGAP009925-RA cdna:KNOWN_protein_coding
+ABKQ01051030.1	BLAST	Blast Hit	1282	1325	72	-	.	AGAP009925-RA cdna:KNOWN_protein_coding
+ABKQ01053785.1	BLAST	Blast Hit	244987	245034	70	+	.	AGAP009925-RA cdna:KNOWN_protein_coding

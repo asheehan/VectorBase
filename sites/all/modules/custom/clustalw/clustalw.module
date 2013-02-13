@@ -8,36 +8,74 @@
 
 
 function clustalw_block_view($op='list', $delta=0, $edit=array()){
-  // pull in css and javascripts files
-  $path = drupal_get_path('module', 'clustalw');
-  drupal_add_js($path.'/validateFASTA.js');
-  //drupal_add_js($path.'/toggle.js','file');
-  //drupal_add_css($path.'/form.css','file');
-
   // draw block
-  //$subject='<span id="contact_title" onclick="toggleCollapse(\'clustalw_container\');">Contact Vectorbase</span>';
-  $subject = "wtf is this";
-  $blocks['subject'] = t($subject);
+  $blocks['subject'] = t('clustalBlockView...i guess');
   $blocks['content'] = drupal_get_form('ajax_clustalw_genform');
   return $blocks;
 }
 
+// add js library
+function clustalw_init(){
+	drupal_add_js(drupal_get_path('module', 'clustalw'). '/clustalw.js');
+}
+
+function clustalw_getFastaForHsp($hsp_id){
+	// look up hit name for the hsp id
+	$bhId=db_query("select bh_id from blast_hsps where bs_id=$hsp_id")->fetchField();
+	$name=db_query("select name from blast_hits where bh_id=$bhId")->fetchField();
+
+	// get sequence with that hit name
+	// don't bother with description since clustal doesn't use them anyway
+	$conn = pg_connect("host=localhost port=5432 dbname=blast_sequences user=db_public password=limecat");
+	$sql="SELECT sequence FROM raw_sequences where primary_id='$name';";
+	$result = pg_query($conn, $sql);
+	while ($row = pg_fetch_assoc($result)) {
+		$out=">$name\n".$row['sequence']."\n";
+	}
+	return $out;
+}
+
+function clustalw_getFasta($inputs){
+	$fasta='';
+	foreach($inputs as $key => $value){
+		if(strstr($key,'hsp')){
+			$fasta.=clustalw_getFastaForHsp($value);
+		}
+	}
+	return $fasta;
+}
 
 function ajax_clustalw_genform($form, &$form_state) {
+
+	//drupal_add_js(array('xgrid' => array('xgridPath' => drupal_get_path('module','xgrid'))), 'setting');
+	drupal_add_js(array('clustalw' => array('clustalwPath' => drupal_get_path('module','clustalw'))), 'setting');
+
+
   $form['clustalw'] = array(
     '#type' => 'clustalw'
 //    '#prefix' => '<div id="clustalw_container" class="invisible">',
 //    '#suffix' => '</div>'
   );
 
+	$form['clustalw']['#attached'] = array(
+	'css' => array(
+		'type' => 'file',
+		'data' => drupal_get_path('module', 'clustalw').'/clustalw.css'
+		)
+	);
+	$form['clustalw']['#attached']['js'] =	array(
+		'data' => drupal_get_path('module', 'clustalw').'/clustalw.js',
+		'data' => drupal_get_path('module', 'clustalw').'/tablesorter/jquery.tablesorter.js',
+	);
+
+
   $form['clustalw']['sequence'] = array(
     '#type' => 'textarea',
-//    '#description' => t("Thoughts, questions, or suggestions"),
     '#resizable' => FALSE,
-    '#rows' => 10,
+    '#rows' => 8,
     '#cols' => 50,
-    '#attributes' => array('placeholder' => 'Paste your sequences here',
-    	'onmouseout'=>'isFastaNucleotide(this)')
+    //'#attributes' => array('placeholder' => 'Paste your sequences here'),
+   	'#default_value' => t(clustalw_getFasta($_POST)),
   );
 
 
@@ -45,10 +83,16 @@ function ajax_clustalw_genform($form, &$form_state) {
         '#type' => 'fieldset',
         '#title' => t('Parameters'),
         '#collapsible' => TRUE,
-        '#collapsed' => TRUE,
+        '#collapsed' => FALSE,
 	);
 
-  $form['clustalw']['parameters']['type'] = array(
+
+	$form['clustalw']['parameters']['basic'] = array(
+        '#type' => 'fieldset',
+        '#title' => t('Basic'),
+	);
+
+  $form['clustalw']['parameters']['basic']['type'] = array(
     '#type' => 'radios',
     '#title' => t('Sequence Type'),
     '#options' => array(
@@ -57,18 +101,13 @@ function ajax_clustalw_genform($form, &$form_state) {
     '#default_value' => 'DNA'
   );
 
-	$form['clustalw']['parameters']['alignment'] = array(
+	$form['clustalw']['parameters']['basic']['alignment'] = array(
 		'#type' => 'radios',
 		'#title' => t('Pairwise Alignment'),
 		'#options' => array(
 			'full' => t('Full'), // -ALIGN
 			'fast' => t('Fast')), // null
 		'#default_value' => 'full'
-	);
-
-	$form['clustalw']['parameters']['pairwise'] = array(
-        '#type' => 'fieldset',
-        '#title' => t('Pairwise Alignment'),
 	);
 
 
@@ -80,44 +119,47 @@ function ajax_clustalw_genform($form, &$form_state) {
 -PAIRGAP=n   :gap penalty
 -SCORE       :PERCENT or ABSOLUTE
 */
-	$form['clustalw']['parameters']['pairwise']['fast'] = array(
+	$form['clustalw']['parameters']['fast'] = array(
         '#type' => 'fieldset',
-        '#title' => t('Fast'),
+        '#title' => t('Fast Options'),
         '#states' => array(
         	 'visible' => array(
         	 	  ':input[name="alignment"]' => array('value' => 'fast'),
         	 	),
         	),
+        '#collapsible' => TRUE,
+        '#collapsed' => TRUE,
+
 	);
-	$form['clustalw']['parameters']['pairwise']['fast']['wordSize'] = array(
+	$form['clustalw']['parameters']['fast']['wordSize'] = array(
 		'#type' => 'textfield',
 		'#title' => t('K-tuple (word) Size'),
 		'#default_value' => '',
 		'#size' => 2, 
 		'#maxlength' => 3
 	);
-	$form['clustalw']['parameters']['pairwise']['fast']['window'] = array(
+	$form['clustalw']['parameters']['fast']['window'] = array(
 		'#type' => 'textfield',
 		'#title' => t('Window Size'),
 		'#default_value' => '',
 		'#size' => 2, 
 		'#maxlength' => 3
 	);
-	$form['clustalw']['parameters']['pairwise']['fast']['gapPenalty'] = array(
+	$form['clustalw']['parameters']['fast']['gapPenalty'] = array(
 		'#type' => 'textfield',
 		'#title' => t('Gap Penalty'),
 		'#default_value' => '',
 		'#size' => 2, 
 		'#maxlength' => 3
 	);
-	$form['clustalw']['parameters']['pairwise']['fast']['diagonals'] = array(
+	$form['clustalw']['parameters']['fast']['diagonals'] = array(
 		'#type' => 'textfield',
 		'#title' => t('Number of Top Diagonals'),
 		'#default_value' => '',
 		'#size' => 2, 
 		'#maxlength' => 3
 	);
-	$form['clustalw']['parameters']['pairwise']['fast']['scoringMethod'] = array(
+	$form['clustalw']['parameters']['fast']['scoringMethod'] = array(
 		'#type' => 'radios',
 		'#title' => t('Scoring Method'),
 		'#options' => array(
@@ -136,16 +178,18 @@ function ajax_clustalw_genform($form, &$form_state) {
 -PWGAPOPEN=f  :gap opening penalty        
 -PWGAPEXT=f   :gap opening penalty
 */
-	$form['clustalw']['parameters']['pairwise']['full'] = array(
+	$form['clustalw']['parameters']['full'] = array(
         '#type' => 'fieldset',
-        '#title' => t('Full'),
+        '#title' => t('Full Options'),
         '#states' => array(
         	 'visible' => array(
         	 	  ':input[name="alignment"]' => array('value' => 'full'),
         	 	),
         	),
+        '#collapsible' => TRUE,
+        '#collapsed' => TRUE,
 	);
-	$form['clustalw']['parameters']['pairwise']['full']['pwProteinMatrix'] = array(
+	$form['clustalw']['parameters']['full']['pwProteinMatrix'] = array(
 		'#type' => 'select',
 		'#title' => t('Protein weight matrix'),
 		'#options' => array(
@@ -161,7 +205,7 @@ function ajax_clustalw_genform($form, &$form_state) {
         	 	),
         	),
 	);
-	$form['clustalw']['parameters']['pairwise']['full']['pwDnaMatrix'] = array(
+	$form['clustalw']['parameters']['full']['pwDnaMatrix'] = array(
 		'#type' => 'select',
 		'#title' => t('DNA weight matrix'),
 		'#options' => array(
@@ -175,14 +219,14 @@ function ajax_clustalw_genform($form, &$form_state) {
         	 	),
         	),
 	);
-	$form['clustalw']['parameters']['pairwise']['full']['gapOpen'] = array(
+	$form['clustalw']['parameters']['full']['gapOpen'] = array(
 		'#type' => 'textfield',
 		'#title' => t('Gap Open Penalty'),
 		'#default_value' => '',
 		'#size' => 2, 
 		'#maxlength' => 3
 	);
-	$form['clustalw']['parameters']['pairwise']['full']['gapExtend'] = array(
+	$form['clustalw']['parameters']['full']['gapExtend'] = array(
 		'#type' => 'textfield',
 		'#title' => t('Gap Extension Penalty'),
 		'#default_value' => '',
@@ -215,6 +259,8 @@ function ajax_clustalw_genform($form, &$form_state) {
 	$form['clustalw']['parameters']['multiple'] = array(
         '#type' => 'fieldset',
         '#title' => t('Multiple Alignment'),
+        '#collapsible' => TRUE,
+        '#collapsed' => TRUE,
 	);
 	$form['clustalw']['parameters']['multiple']['proteinMatrix'] = array(
 		'#type' => 'select',
@@ -321,6 +367,8 @@ function ajax_clustalw_genform($form, &$form_state) {
 	$form['clustalw']['parameters']['output'] = array(
         '#type' => 'fieldset',
         '#title' => t('Output'),
+        '#collapsible' => TRUE,
+        '#collapsed' => TRUE,
 	);
    $form['clustalw']['parameters']['output']['format'] = array(
 		'#type' => 'select',
@@ -346,32 +394,48 @@ function ajax_clustalw_genform($form, &$form_state) {
 
 
 
+	$form['clustalw']['controlField'] = array(
+        '#type' => 'fieldset',
+        '#title' => t('Job Control'),
+	);
+
+
+ $form['clustalw']['controlField']['clear'] = array(
+ //   '#name' => 'clear',
+    '#type' => 'button',
+    '#value' => t('Reset'),
+    '#attributes' => array(
+      'onclick' => 'this.form.reset(); document.getElementById(\'edit-result\').innerHTML=\'\';return false;',
+      'id'=>'clearButton')
+  );
+
+	$form['clustalw']['controlField']['lookup'] = array(
+		'#type' => 'textfield',
+		'#title' => t('Load results'),
+		'#attributes' => array('placeholder' => 'Job ID'),
+		'#size' => 9, 
+		'#maxlength' => 12,
+	);
 
 
 
-  $form['clustalw']['submit'] = array(
+  $form['clustalw']['controlField']['submit'] = array(
     '#type' => 'submit',
     '#value' => t('Submit'),
     '#ajax' => array(
       'callback' => 'ajax_clustalw_handler',
-      'wrapper' => 'ajaxized',
+      'wrapper' => 'test',
       'effect' => 'fade',
       'progress' => array(
         'type' => 'throbber',
-        'message' => t('Submitting ClustalW Job...')),
+        'message' => t('Processing...')),
     ),
 //    '#attributes' => array(
 //      'id'=>'submitButton'),
   );
 
- $form['clustalw']['clear'] = array(
-    '#name' => 'clear',
-    '#type' => 'button',
-    '#value' => t('Reset'),
-    '#attributes' => array(
-      'onclick' => 'this.form.reset(); return false;',
-      'id'=>'clearButton')
-  );
+
+
 
   $form['clustalw']['results'] = array(
     '#title' => '',
@@ -380,10 +444,11 @@ function ajax_clustalw_genform($form, &$form_state) {
     '#prefix' => '<div id="results">',
     '#suffix' => '</div>',
     '#type' => 'item',
+
     '#ajax' => array(
       'callback' => 'ajax_runningJob_handler',
       'event' => 'click',
-      'wrapper' => 'ajaxized',
+      'wrapper' => 'test',
       'effect' => 'fade',
       'progress' => array(
         'type' => 'throbber',
@@ -391,19 +456,11 @@ function ajax_clustalw_genform($form, &$form_state) {
       )
   );
 
-
+  $form['clustalw']['result'] = array(
+    '#type' => 'item',
+  );
 
   return $form;
-}
-
-function ajax_runningJob_handler($form, $form_state){
-	// results contains the job id, lets get the status
-	if(preg_match("Job id: (\d+)",$form['clustalw']['results'],$match)){
-		$id=$match[1];
-		$status=xgrid_status($id);
-	}
-		$commands[]=ajax_command_html('#edit-results',print_r($form['clustalw']['results']));
-
 }
 
 /**
@@ -412,93 +469,204 @@ function ajax_runningJob_handler($form, $form_state){
  * array of commands), we can just return a piece of the form.
  */
 function ajax_clustalw_handler($form, $form_state) {
+	// 1)validate user input
+	// 1.1) check for job id to look up
+	if($form_state['values']['lookup']!=''){
+		if(preg_match("#^(\d+)$#",$form_state['values']['lookup'],$match))
+			$id=$match[1];
+		else
+			$message="Invalid job ID";
 
-  //validate user input
-    //$commands[]=ajax_command_data('#edit-email','value','this is the new html' );
+	}else if(substr_count($form_state['values']['sequence'],">")<2){
+		$results="Clustal requires at least 2 sequences to align";
 
+	// 1.2) check for valid data on submitted form
+	}else{
+		if($form_state['values']['sequence']==''){
+			$message="You forgot to enter sequences to align.";
+			$commands[]=ajax_command_css('#edit-sequence', array('border' => 'solid red 2px'));
+			//$commands[]=ajax_command_css('#edit-sequence', array('color' => 'red', 'margin-left' => '6px'));
 
-  if($form_state['values']['sequence']==''){
-    $message="You forgot to enter sequences to align.";
-    $commands[]=ajax_command_css('#edit-sequence', array('border' => 'solid red 2px'));
-//    $commands[]=ajax_command_css('#edit-sequence', array('color' => 'red', 'margin-left' => '6px'));
-/*
- } 
- elseif($form_state['values']['email']==''){
-    $message="Please enter your address";
-    $commands[]=ajax_command_css('#edit-comments', array('border' => 'solid 1px #aacfe4'));
-    $commands[]=ajax_command_css('#edit-email', array('border' => 'solid red 2px'));
-    $commands[]=ajax_command_css('#edit-results', array('color' => 'red', 'margin-left' => '6px'));
+		// input looks good
+		}else{
 
-  }elseif(!preg_match("#.+?@.+?\..+?#",$form_state['values']['email'])){
-    $message="Your address appears invalid";
-    $commands[]=ajax_command_css('#edit-email', array('border' => 'solid red 2px'));
-    $commands[]=ajax_command_css('#edit-results', array('color' => 'red', 'margin-left' => '6px'));
-*/
-  // input looks good
-  } else {
-    $message='Thank you for your submission!';
-
-    //  clear any error css that may have come up
-    //$commands[]=ajax_command_css('#edit-results', array('color' => 'green', 'margin-left' => '2px'));
-    $commands[]=ajax_command_css('#edit-sequence', array('border' => 'solid 1px #aacfe4'));
-    $commands[]=ajax_command_css('#edit-comments', array('border' => 'solid 1px #aacfe4'));
+		    //  clear any error css that may have come up
+		    //$commands[]=ajax_command_css('#edit-results', array('color' => 'green', 'margin-left' => '2px'));
+		    $commands[]=ajax_command_css('#edit-sequence', array('border' => 'solid 1px #aacfe4'));
+		    $commands[]=ajax_command_css('#edit-comments', array('border' => 'solid 1px #aacfe4'));
 
 
 
-   //build argument/value pairs from the form
-   $args['sequence']=$form_state['values']['sequence'];
-   $args['arguments'][]='-TYPE='.$form_state['values']['type'];
-	$args['arguments'][]='-OUTPUT='.$form_state['values']['format'];
-	$args['arguments'][]='-OUTORDER='.$form_state['values']['outOrder'];
+			//build argument/value pairs from the form
+			$args['sequence']=$form_state['values']['sequence'];
+			$args['arguments'][]='-TYPE='.$form_state['values']['type'];
+			$args['arguments'][]='-OUTPUT='.$form_state['values']['format'];
+			$args['arguments'][]='-OUTORDER='.$form_state['values']['outOrder'];
 
 
 
-   //remove options that weren't changed
-	foreach($form_state['values'] as $value){
-		if($value=='' || $value=='default')
-			unset($form_state['values'][$value]);
-	}
+			//remove options that weren't changed
+			foreach($form_state['values'] as $value){
+				if($value=='' || $value=='default')
+					unset($form_state['values'][$value]);
+			}
 
 
-   if($form_state['values']['alignment']=='fast'){
-		if($form_state['values']['wordSize']) $args['arguments'][]='-KTUPLE='.$form_state['values']['wordSize'];
-		if($form_state['values']['diagonals']) $args['arguments'][]='-TOPDIAGS='.$form_state['values']['diagonals'];
-		if($form_state['values']['windows']) $args['arguments'][]='-WINDOW='.$form_state['values']['window'];
-		if($form_state['values']['gapPenalty']) $args['arguments'][]='-PAIRGAP'.$form_state['values']['gapPenalty'];
-		if($form_state['values']['scoringMethod']) $args['arguments'][]='-SCORE'.$form_state['values']['scoringMethod'];
-   }else{
-   	   if($form_state['values']['type']=='DNA')
-				if($form_state['values']['pwDnaMatrix']!='default') $args['arguments'][]='-PWDNAMATRIX='.$form_state['values']['pwDnaMatrix'];
+			if($form_state['values']['alignment']=='fast'){
+				if($form_state['values']['wordSize']) $args['arguments'][]='-KTUPLE='.$form_state['values']['wordSize'];
+				if($form_state['values']['diagonals']) $args['arguments'][]='-TOPDIAGS='.$form_state['values']['diagonals'];
+				if($form_state['values']['windows']) $args['arguments'][]='-WINDOW='.$form_state['values']['window'];
+				if($form_state['values']['gapPenalty']) $args['arguments'][]='-PAIRGAP'.$form_state['values']['gapPenalty'];
+				if($form_state['values']['scoringMethod']) $args['arguments'][]='-SCORE'.$form_state['values']['scoringMethod'];
+			}else{
+				if($form_state['values']['type']=='DNA')
+						if($form_state['values']['pwDnaMatrix']!='default') $args['arguments'][]='-PWDNAMATRIX='.$form_state['values']['pwDnaMatrix'];
+					else
+						if($form_state['values']['pwProteinMatrix']!='default') $args['arguments'][]='-PWMATRIX='.$form_state['values']['pwProteinMatrix'];
+				if($form_state['values']['gapOpen']) $args['arguments'][]='-PWGAPOPEN='.$form_state['values']['gapOpen'];
+				if($form_state['values']['gapExtend']) $args['arguments'][]='-PWGAPEXT='.$form_state['values']['gapExtend'];
+			}
+
+			if($form_state['values']['type']=='DNA')
+				if($form_state['values']['dnaMatrix']!='default') $args['arguments'][]='-DNAMATRIX='.$form_state['values']['dnaMatrix'];
 			else
-				if($form_state['values']['pwProteinMatrix']!='default') $args['arguments'][]='-PWMATRIX='.$form_state['values']['pwProteinMatrix'];
-		if($form_state['values']['gapOpen']) $args['arguments'][]='-PWGAPOPEN='.$form_state['values']['gapOpen'];
-		if($form_state['values']['gapExtend']) $args['arguments'][]='-PWGAPEXT='.$form_state['values']['gapExtend'];
+				if($form_state['values']['proteinMatrix']!='default') $args['arguments'][]='-MATRIX='.$form_state['values']['proteinMatrix'];
+
+			if($form_state['values']['openGap']) $args['arguments'][]='-GAPOPEN='.$form_state['values']['openGap'];
+			if($form_state['values']['extendGap']) $args['arguments'][]='-GAPEXT='.$form_state['values']['extendGap'];
+			if($form_state['values']['gapDistance']) $args['arguments'][]='-GAPDIST='.$form_state['values']['gapDistance'];
+			if($form_state['values']['endGap']==0) $args['arguments'][]='-ENDGAPS';
+			if($form_state['values']['iteration']) $args['arguments'][]='-ITERATION='.$form_state['values']['iteration'];
+			if($form_state['values']['iterations']) $args['arguments'][]='-NUMITER='.$form_state['values']['iterations'];
+			$args['arguments'][]='-CLUSTERING='.$form_state['values']['clustering'];
+
+		//	$args['arguments'][]=''.$form_state['values'][''];
+
+		// submit job
+		$id=clustalw_submit_xgrid($args);
+		}
 	}
 
-	if($form_state['values']['type']=='DNA')
-		if($form_state['values']['dnaMatrix']!='default') $args['arguments'][]='-DNAMATRIX='.$form_state['values']['dnaMatrix'];
-	else
-		if($form_state['values']['proteinMatrix']!='default') $args['arguments'][]='-MATRIX='.$form_state['values']['proteinMatrix'];
+   // should have either a look up id or submitted job id at this point
+   if($id){
 
-	if($form_state['values']['openGap']) $args['arguments'][]='-GAPOPEN='.$form_state['values']['openGap'];
-	if($form_state['values']['extendGap']) $args['arguments'][]='-GAPEXT='.$form_state['values']['extendGap'];
-	if($form_state['values']['gapDistance']) $args['arguments'][]='-GAPDIST='.$form_state['values']['gapDistance'];
-	if($form_state['values']['endGap']==0) $args['arguments'][]='-ENDGAPS';
-	if($form_state['values']['iteration']) $args['arguments'][]='-ITERATION='.$form_state['values']['iteration'];
-	if($form_state['values']['iterations']) $args['arguments'][]='-NUMITER='.$form_state['values']['iterations'];
-	$args['arguments'][]='-CLUSTERING='.$form_state['values']['clustering'];
+		// job has been submitted. continually get status updates until we're done
+		while( !($status=="Finished" || $status=="Failed") ){
+			$status=xgrid_status($id);
+			sleep(2);
+		}
+
+		// job is done
+
+		// CHECK TO SEE IF THERE IS ERROR TEXT IN STDOUT
+		$jobResults=xgrid_results($id);
+		if( strpos($jobResults,"ERROR: ") ){
+			preg_match("#(.*?)====END OF STDOUT====#sm",$jobResults,$errors);
+			$errors=preg_replace("/\n+/", "\n", $errors[1]);
+			$errors=str_replace("\n","<br/>",$errors);
+			$results="
+				<div style=\"float:left;padding:6px;margin:6px; border:1px solid red;\">
+				Yikes! There were some problems running your job. Here is the output from the clustalw program:<br/>
+				$errors<br/><br/>
+				If the message pertains to no sequences in file, double check the formatting of your sequences.
+				</div>";
+		}else{
+
+			// generate some stats
+			$time=xgrid_jobRunTime($id);
+			if($time==0)
+				$time="< 1 second";
+			elseif($time==1)
+				$time="1 second";
+			else
+				$time=$time." seconds";
+
+			$submitDate=preg_match("#dateSubmitted = (.*?);#",xgrid_attributes($id),$match);
+			$date=date_create_from_format('Y-m-d H:i:s O',$match[1]);
+
+
+			$stdout=clustalw_getStdOut($id);
+			$score=preg_match("#Alignment Score (\d+)#",$stdout,$match);
+			$score=$match[1];
+
+			// generate silly seq vs. seq scores table
+			preg_match_all("#Sequence \d+:(.*?) (\d+) \w\w#",$stdout,$matches);
+			for($i=0; $i<count($matches[1]); $i++){
+				$inputSeqs[$i]['name']=$matches[1][$i];
+				$inputSeqs[$i]['length']=$matches[2][$i];
+			}
+
+			preg_match_all("#Sequences \((\d+):(\d+)\) Aligned. Score:\s+(\d+)#",$stdout,$matches);
+			$scoresTable="		<table id=\"topLevelTable\" class=\"tablesorter\" data-initial=\"sortme\">
+				<thead>
+					<tr>
+						<th>Sequence</th>
+						<th>Sequence</th>
+						<th>Score</th>
+					</tr>
+				</thead>
+
+				<tbody>\n";
+			for($i=0; $i<count($matches[1]); $i++){
+				$scoresTable.="<tr>
+				<td>".$inputSeqs[$matches[1][$i]-1]["name"]."</td><td>".$inputSeqs[$matches[2][$i]-1]["name"]."</td><td>".$matches[3][$i]."</td>
+				</tr>\n";
+			}
+			$scoresTable.="</tbody></table>\n";
+
+			// display results
+			$results='
+			<fieldset><legend>Results</legend>
+			<div style="float:left; clear:none;">
+			<div style="font-size:12pt;font-weight:bold;margin-bottom:10px;">Job <b id="jobId">'.$id.'</b></div>
+
+			<b>Submitted</b>&nbsp;&nbsp;'.date_format($date,'l, F jS, Y H:i:s O').'<br />
+			<b>Compute Time</b>&nbsp;&nbsp;'.$time.'<br />
+			</div>
+
+			<div style="float:right; clear:none;">
+				<fieldset style="margin-top:0px;"><legend>Download</legend>
+				<a id="download">Alignment</a> <br />
+				<a id="downloadScores">Scores</a> <br />
+				<a id="downloadTree">Guide Tree</a>
+				</fieldset>
+			</div>
+
+			<div style="float:left">
+
+			<a id="sendToHMMer">Send alignment to HMMer</a> <br /><br />
+
+			<fieldset style="margin-top:0px;">
+			<legend>Alignment Score '.$score.'</legend>
+			'.$scoresTable.'
+			</fieldset>
+			<br/>
+
+
+			<applet code="jalview.bin.JalviewLite" width="870" height="400"
+					       	archive="/'.drupal_get_path('module', 'clustalw').'/jalviewApplet.jar">
+								<param name="file" value="/'.drupal_get_path('module', 'clustalw').'/clustalwPrintResults.php?id='.$id.'&type=align">
+								<!-- <param name="treeFile" value="'.drupal_get_path('module', 'clustalw').'/clustalwPrintResults.php?id='.$id.'&type=tree"> -->
+		                        <param name="embedded" value="true">
+		                        <param name="defaultColour" value="Clustal">
+		                        <param name="showSequenceLogo" value="true">
+		                        <param name="showGroupConsensus" value="true">
+		                      </applet>
+
+		                      ';
+	//							<param name="file" value="/data/'.$id.'">
+
+			//$results.='<div style="font-family: monospace;border: 1px solid black; padding: 6px;">'.str_replace(" ","&nbsp;",str_replace("\n","<br/>",xgrid_results($id))).'</div>';
+		    $results.='</div></fieldset>';
+		} // end checking for errors in results
+	}
 
 
 
-//	$args['arguments'][]=''.$form_state['values'][''];
-
-   // submit job
-   $id=clustalw_submit_xgrid($args);
-
-  }
-
-  $message=$message.$form_state['values']['output'].' Job id: '.$id;//.print_r($args);
-  $commands[]=ajax_command_html('#edit-results',$message );
+  // update the results div with some new info
+  $commands[]=ajax_command_html('#edit-result',$results);
+//  $commands[]=ajax_command_css('#jobId', $argument);
+ // $commands[]=ajax_command_invoke('#edit-results','click');
 
   return array('#type' => 'ajax', '#commands' => $commands);
 }
@@ -513,6 +681,9 @@ function clustalw_submit_xgrid($args){
 
 	//create program argument string
 	foreach($args['arguments'] as $argument){
+		$arg=strstr($argument,'=',true);
+		$value=substr(strstr($argument,'='),1);
+		$argsToSave[$arg]=$value;
 		$arguments.="<string>$argument</string>\n";
 	}
 
@@ -536,7 +707,7 @@ function clustalw_submit_xgrid($args){
 			<key>0</key>
 			<dict>
 				<key>command</key>
-				<string>/var/xgrid_results/newClustalW.sh</string>
+				<string>/vectorbase/scripts/ClustalW.sh</string>
 				<key>arguments</key>
 				<array>
 					<string>$filename</string>
@@ -549,11 +720,39 @@ function clustalw_submit_xgrid($args){
 	</plist>";
 
 	$jobId = xgrid_submit($batch);
+
+
+	//save some job params in the db
+	global $user;
+	$argsToSave['user_name']=$user->name;
+	$argsToSave['submitter_ip']=$_SERVER['REMOTE_ADDR'];
+	$argsToSave['program']='ClustalW';
+	$argsToSave['date']=date("m/d/y");
+	$argsToSave['time']=date("H:i:s");
+	$argsToSave['sequence']=$args['sequence'];
+	xgrid_saveParams($jobId,$argsToSave);
+
 	return $jobId;
 }
 
 
 
+function clustalw_getStdOut($id){
+	$result=xgrid_results($id);
+	preg_match("#(.*?)\n====END OF STDOUT====#s",$result,$match);
+	return trim($match[1]);
+}
+function clustalw_getGuideTree($id){
+	$result=xgrid_results($id);
+	preg_match("#====START OF DND====\n(.*?)====END OF DND====#s",$result,$match);
+	return $match[1];
+}
+
+function clustalw_getAlignOut($id){
+	$result=xgrid_results($id);
+	preg_match("#====START OF ALIGNMENT====\n(.*)#s",$result,$match);
+	return trim($match[1]);
+}
 
 
 /**
@@ -565,98 +764,3 @@ function clustalw_block_info() {
 }
 
 
-
-/**
- * Implementation of hook_help()
-*/
-function clustalw_help($path, $arg){
-  switch ($path) {
-    case "admin/help#clustalw":
-      return '<p>'.  t("this is some text from the help hook") .'</p>';
-      break;
-  }
-
-}
-
-
-/**
- * Implements hook_menu().
- */
-function clustalw_menu(){
-  $items = array();
-
-  $items['admin/config/system/clustalw'] = array(
-    'title' => 'Contact Form',
-    'description' => 'Manage contact form messages',
-    'page callback' => 'drupal_get_form',
-    'page arguments' => array('clustalw_configform'),
-    'access arguments' => array('access administration pages'),
-    'type' => MENU_NORMAL_ITEM,
-  );
-  
-  return $items;
-}
-
-
-/**
- * Form function, called by drupal_get_form() 
- * in clustalw_menu().
- */
-function clustalw_configform($form, &$form_state){
-  $form['from'] = array(
-  '#type' => 'item',
-  '#title' => t('clustalw Web Service Settings'),
-  '#markup' => 'The (separate) web service runs on an OS X machine which has access to the clustalw program on the command line. 
-The service runs over SOAP and implements the basic functionality of the clustalw program.<br/>These settings connect to http://server:port/wsdlPath<br/>Currently: ' . clustalw_getURL(),
-);
-
-  $form['clustalw_server'] = array(
-    '#type' => 'textfield',
-    '#title' => t('clustalw service machine'),
-    '#default_value' => variable_get('clustalw_server', 'jobs.vectorbase.org'),
-    '#maxlength' => 35,
-    '#description' => t('The machine where the clustalw web service is running.'),
-    '#required' => TRUE,
-  );
-
-  $form['clustalw_server_port'] = array(
-    '#type' => 'textfield',
-    '#title' => t('Port'),
-    '#default_value' => variable_get('clustalw_server_port', '80'),
-    '#maxlength' => 4,
-    '#description' => t('The service port.'),
-    '#required' => TRUE,
-  );
-
-  $form['clustalw_controller_url_suffix'] = array(
-    '#type' => 'textfield',
-    '#title' => t('WSDL Path'),
-    '#default_value' => variable_get('clustalw_server_suffix', 'clustalw.wsdl'),
-    '#maxlength' => 35,
-    '#description' => t('Path to WSDL file on clustalw server. No leading slash.'),
-    '#required' => TRUE,
-  );
-
-  return system_settings_form($form);
-}
-
-
-/**
- * Implements validation from the Form API.
- * 
- * @param $form
- *   A structured array containing the elements and properties of the form.
- * @param $form_state
- *   An array that stores information about the form's current state 
- *   during processing.
- */
-//implement this when we get ambitious
-function clustalw_form_validate($form, &$form_state){
-//  $max_num = $form_state['values']['current_posts_max'];
-//  if (!is_numeric($max_num)){
-//    form_set_error('current_posts_max', t('You must enter an integer for the maximum number of posts to display.'));
-//  } 
-//  else if ($max_num <= 0){
-//    form_set_error('current_posts_max', t('Maximum number of posts to display must be positive.'));       
-//  }
-}

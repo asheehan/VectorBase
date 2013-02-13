@@ -1,0 +1,103 @@
+? GA.tgz
+? dev.txt
+? g.php
+? home
+? phpcurl.php
+? species.sql
+? css/home/dsth
+Index: GeneAnnotation.module
+===================================================================
+RCS file: /cvsroot/ensembl/VectorBase/CAP/drupal7/sites/all/modules/GeneAnnotation/GeneAnnotation.module,v
+retrieving revision 1.19
+diff -r1.19 GeneAnnotation.module
+456c456
+<         ) { form_set_error('', t('You must fill something in?!?')); } 
+---
+>         ) { form_set_error('', t('Please fill something in.')); } 
+460c460
+<     if ($form_state['values']['genestat'] && !$form_state['values']['status_just']) { form_set_error('', t('You must give a justification for a gene status change.')); } 
+---
+>     if ($form_state['values']['genestat'] && !$form_state['values']['status_just']) { form_set_error('', t('Please give a justification for a gene status change.')); } 
+462c462
+<     if ($form_state['values']['gene_sym'] && !$form_state['values']['gene_sym_just']) { form_set_error('', t('You must give a justification for the gene symbol.')); } 
+---
+>     if ($form_state['values']['gene_sym'] && !$form_state['values']['gene_sym_just']) { form_set_error('', t('Please give a justification for the gene symbol.')); } 
+464c464
+<     if ($form_state['values']['description'] && !$form_state['values']['desc_just']) { form_set_error('', t('You must give a justification for the gene description.')); } 
+---
+>     if ($form_state['values']['description'] && !$form_state['values']['desc_just']) { form_set_error('', t('Please give a justification for the gene description.')); } 
+682,683c682,684
+<                   .'This means you either have a typo in the Gene ID or you are submitting meta data for a wholly '
+<                   .'new gene model that you have submitted via the "Submit Models" form</div>',
+---
+>                   .'This means that:<br><ul>- you have a typo in the Gene ID (IDs should be in the form YYTMPxxxxxx), or</ul>'
+>                   .'<ul>- you are submitting meta data for a new gene model that you have submitted via the "Submit Models" form. '
+>                   .'In this case, make sure you use the SAME ID in both cases. See FAQs for more details.<ul></div>',
+701c702
+<             '#title' => t('[1] Gene Status'),
+---
+>             '#title' => t('[A] Gene Status'),
+738c739
+<             '#title' => t('[1] Gene Status Change Justification *'), // try markup to make it red?!?
+---
+>             '#title' => t('Gene Status Change Justification *'), // try markup to make it red?!?
+744c745
+<             '#description' => 'You must fill this out if you are changing the status of a gene.',
+---
+>             '#description' => 'Please fill this out if you are changing the status of a gene.',
+756c757
+<             '#title' => t('[2] Gene Symbol'),
+---
+>             '#title' => t('[B] Gene Symbol'),
+768c769
+<             '#children' => '<div class="info_msgbox">You must give a justification for your choosen gene symbol in textbox</div>',
+---
+>             '#children' => '<div class="info_msgbox">Please give a justification for your choosen gene symbol in textbox</div>',
+774c775
+<             '#title' => t('[2] Gene Symbol Justification *'),
+---
+>             '#title' => t('Gene Symbol Justification *'),
+786c787
+<             '#title' => t('[3] Gene Description'),
+---
+>             '#title' => t('[C] Gene Description'),
+796c797
+<             #'#markup' => '<div class="info_msgbox">You must give a justification for gene description in textbox [2b]</div>',
+---
+>             #'#markup' => '<div class="info_msgbox">Please give a justification for gene description in textbox [2b]</div>',
+798c799
+<             '#children' => '<div class="info_msgbox">You must give a justification for gene description in textbox</div>',
+---
+>             '#children' => '<div class="info_msgbox">Please give a justification for gene description in textbox</div>',
+804,805c805,806
+<             '#title' => t('[3] Gene Description Justification *'),
+<             // '#title' => t('[3b] Gene Description Justification <div style="font-family: Arial Black; font-size: 24px; color: black">*</div>'),
+---
+>             '#title' => t('Gene Description Justification *'),
+>             // '#title' => t('Gene Description Justification <div style="font-family: Arial Black; font-size: 24px; color: black">*</div>'),
+811c812
+<             '#description' => 'You must fill this out if you are giving a gene description in [3a].',
+---
+>             '#description' => 'You must fill this out if you are giving a gene description.',
+818c819
+<             '#title' => t('[4] PMID'),
+---
+>             '#title' => t('[D] PMID'),
+860c861
+<             '#title' => t('[5] General Comments'),
+---
+>             '#title' => t('[E] General Comments'),
+905,906c906,907
+<             //'#markup' => '<div class="msgbox"><h3>Gene Already Edited.</h3><p>To edit the entry for this gene please contact your group representative.</p></div>
+<             // '# markup' => '<div class="warning_msgbox">This Gene has already been edited. To edit the entry for this gene please contact your group representative.</div>
+---
+>             //'#markup' => '<div class="msgbox"><h3>Gene Already Edited.</h3><p>To edit the entry for this gene please contact your group representative or contact VectorBase (info-at-vectorabse.org).</p></div>
+>             // '# markup' => '<div class="warning_msgbox">This Gene has already been edited. To edit the entry for this gene please contact your group representative or contact VectorBase (info-at-vectorabse.org).</div>
+910c911
+<             '#markup' => '<div class="warning_msgbox">This Gene has already been edited. To edit the entry for this gene please contact your group representative.</div>
+---
+>             '#markup' => '<div class="warning_msgbox">This Gene has already been edited. To edit the entry for this gene please contact your group representative or contact VectorBase (info-at-vectorabse.org).</div>
+1197c1198
+<         $commands[] = ajax_command_replace("#box", '<div id="box"><div class="msgbox3"><h5>Pubmed Entry</h5><p>Error: You must enter a numeric PMID.</p></div></div>');  
+---
+>         $commands[] = ajax_command_replace("#box", '<div id="box"><div class="msgbox3"><h5>Pubmed Entry</h5><p>Error: Please enter a numeric PMID.</p></div></div>');  

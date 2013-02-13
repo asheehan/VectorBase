@@ -1,0 +1,4 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=0 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=3510&page=res&job_id=209120
+PHUM454140-PA	BLAST	Blast Hit	934	1441	305	.	.	CPIJ010332-PA |nadph oxidase|protein_coding|supercont3.295:331244-341077:1|gene:CPIJ010332
+PHUM389250-PA	BLAST	Blast Hit	399	539	135	.	.	CPIJ010332-PA |nadph oxidase|protein_coding|supercont3.295:331244-341077:1|gene:CPIJ010332
+PHUM389250-PA	BLAST	Blast Hit	764	968	151	.	.	CPIJ010332-PA |nadph oxidase|protein_coding|supercont3.295:331244-341077:1|gene:CPIJ010332

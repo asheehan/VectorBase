@@ -1,0 +1,11 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=0 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=3060&page=res&job_id=208971
+CPIJ015761-RA	BLAST	Blast Hit	1009	1095	105	-	.	Cat B1 cDNA
+CPIJ015761-RA	BLAST	Blast Hit	1008	1094	104	-	.	Cat B1 cDNA
+CPIJ015761-RA	BLAST	Blast Hit	1011	1094	103	+	.	Cat B1 cDNA
+CPIJ015761-RA	BLAST	Blast Hit	1013	1096	99	+	.	Cat B1 cDNA
+CPIJ015761-RA	BLAST	Blast Hit	1010	1096	99	-	.	Cat B1 cDNA
+CPIJ015761-RA	BLAST	Blast Hit	1012	1095	98	+	.	Cat B1 cDNA
+CPIJ015761-RA	BLAST	Blast Hit	981	1010	58	+	.	Cat B1 cDNA
+CPIJ005171-RA	BLAST	Blast Hit	971	1045	61	-	.	Cat B1 cDNA
+CPIJ000388-RA	BLAST	Blast Hit	1342	1425	59	+	.	Cat B1 cDNA
+CPIJ005213-RA	BLAST	Blast Hit	1152	1247	56	+	.	Cat B1 cDNA

@@ -1,0 +1,5 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=1 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=193&page=res&job_id=193112
+Afun007636	BLAST	Blast Hit	2	767	968	+	.	AGAP001573-RA cdna:KNOWN_protein_coding
+Afun008974	BLAST	Blast Hit	347	874	252	+	.	AGAP001573-RA cdna:KNOWN_protein_coding
+Afun008147	BLAST	Blast Hit	205	482	104	+	.	AGAP001573-RA cdna:KNOWN_protein_coding
+Afun010298	BLAST	Blast Hit	554	690	48	+	.	AGAP001573-RA cdna:KNOWN_protein_coding

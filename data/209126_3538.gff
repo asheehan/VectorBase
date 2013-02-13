@@ -1,0 +1,4 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=0 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=3538&page=res&job_id=209126
+RPTMP07634-PA	BLAST	Blast Hit	919	1120	691	.	.	gi|296278229|ref|NP_078781.3| NADPH oxidase 5 isoform 1 [Homo sapiens]
+RPTMP07634-PA	BLAST	Blast Hit	117	599	1034	.	.	gi|296278229|ref|NP_078781.3| NADPH oxidase 5 isoform 1 [Homo sapiens]
+RPTMP03545-PA	BLAST	Blast Hit	750	1437	555	.	.	gi|296278229|ref|NP_078781.3| NADPH oxidase 5 isoform 1 [Homo sapiens]

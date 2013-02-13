@@ -1,0 +1,81 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the GeneAnnotation module.
+ */
+
+/**
+function GeneAnnotation_uninstall() {
+  // Delete variables.
+  variable_del('GeneAnnotation_default_country');
+  variable_del('GeneAnnotation_display_GeneAnnotation');
+  variable_del('GeneAnnotation_usegmap');
+  variable_del('GeneAnnotation_locpick_macro');
+
+  // Delete geocoder settings.
+  $result = db_query("SELECT name FROM {variable} WHERE name LIKE 'GeneAnnotation_geocode_%'")->fetchCol();
+  foreach ($result as $var) {
+    variable_del($var);
+  }
+}
+ */
+
+///// cannot stand this - just completely denormalised...
+/**
+ * Implementation of hook_schema().
+ */
+function GeneAnnotation_schema() {
+
+    $schema['cap_file_node'] = array(
+    'fields' => array(
+        'sbm_id'            => array('type' => 'serial',     'unsigned' => TRUE,     'not null' => TRUE      ),
+        'submitter_name'    => array('type' => 'varchar',    'length' => 128,        'not null' => TRUE,     ),
+        'user'              => array('type' => 'varchar',    'length' => 32,         'not null' => TRUE,     ), 
+        'user_email'        => array('type' => 'varchar',    'length' => 32,         'not null' => TRUE,     ), 
+        'uid'               => array('type' => 'int',        'unsigned' => TRUE,     'not null' => TRUE,     'default' => 0),
+        'ip'                => array('type' => 'varchar',    'length' => 32,         'not null' => TRUE,     ), 
+        'species'           => array('type' => 'varchar',    'length' => 32,         'not null' => TRUE,     ),
+        'file_name'         => array('type' => 'varchar',    'length' => 128,        'not null' => TRUE,     ),
+        'file_type'         => array('type' => 'varchar',    'length' => 32,         'not null' => TRUE,     ), // download,gff,fasta...
+        'file_md5'          => array('type' => 'varchar',    'length' => 32,         'not null' => TRUE,     ),
+        'file_size'         => array('type' => 'int',        'unsigned' => TRUE,     'not null' => TRUE      ),
+        'file_desc'         => array('type' => 'varchar',    'length' => 1256,       'not null' => TRUE,     'default' => ''),
+    ),
+    'primary key' => array('sbm_id'),
+    // 'unique keys' => array( 'file_md5'     => array('file_md5') ),
+    'indexes' => array( 'sbm_id' => array('sbm_id'), ),
+    );
+
+    $schema['cap_gene_node'] = array(
+    'fields' => array(
+        'sbm_id'            => array('type' => 'serial',     'unsigned' => TRUE,     'not null' => TRUE      ),
+//        'nid'               => array('type' => 'int',        'unsigned' => TRUE,     'not null' => TRUE,     'default' => 0),
+        'submitter_name'    => array('type' => 'varchar',    'length' => 128,        'not null' => TRUE,     ),
+        'user'              => array('type' => 'varchar',    'length' => 32,         'not null' => TRUE,     ), 
+        'user_email'        => array('type' => 'varchar',    'length' => 32,         'not null' => TRUE,     ), 
+        'uid'               => array('type' => 'int',        'unsigned' => TRUE,     'not null' => TRUE,     'default' => 0),
+        'ip'                => array('type' => 'varchar',    'length' => 32,         'not null' => TRUE,     ), 
+        'species'           => array('type' => 'varchar',    'length' => 32,         'not null' => TRUE,     ),
+        'edited'            => array('type' => 'int',        'unsigned' => TRUE,     'not null' => TRUE,     'default' => 0),
+        'gene_id'           => array('type' => 'varchar',    'length' => 32,         'not null' => TRUE,     ),
+        'status'            => array('type' => 'varchar',    'length' => 10,         'not null' => FALSE,     ),
+        // pseudogene gives automatic appraisal - prolly not sqlite - use enums?!?
+        'status_just'       => array('type' => 'varchar',    'length' => 1256,       'not null' => FALSE,     'default' => ''),
+        'gene_sym'          => array('type' => 'varchar',    'length' => 32,         'not null' => FALSE,     ),
+        'sym_just'          => array('type' => 'varchar',    'length' => 1256,       'not null' => FALSE,     'default' => ''),
+        'description'         => array('type' => 'varchar',    'length' => 1256,       'not null' => FALSE,     'default' => ''),
+        'desc_just'         => array('type' => 'varchar',    'length' => 1256,       'not null' => FALSE,     'default' => ''),
+        // prolly need to allow for multiple pmids?!?
+        // 'pmid'              => array('type' => 'int',        'unsigned' => TRUE,     'not null' => FALSE,     'default' => 0),
+        'pmid'         => array('type' => 'varchar',    'length' => 1256,       'not null' => FALSE,     'default' => ''), // comma-separated list?!?
+        'comments'          => array('type' => 'varchar',    'length' => 1256,       'not null' => FALSE,     'default' => ''),
+    ),
+    'primary key' => array('sbm_id'),
+    'unique keys' => array( 'gene_id'     => array('gene_id') ),
+    'indexes' => array( 'gene_id' => array('gene_id'), ),
+    );
+
+    return $schema;
+
+}

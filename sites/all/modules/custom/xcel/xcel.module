@@ -1,0 +1,45 @@
+<?php
+/**
+ * @file
+ * Displays a block with xcel (such as anoxcel) data.
+ * author: Andrew Sheehan
+ *
+ */
+ 
+
+/**
+ * implementation of hook_block_info
+ * @return array $blocks
+ */
+function xcel_block_info() {
+  $blocks['xcel_block'] = array(
+    'info' => t('XCel Block'),
+    'cache' => DRUPAL_NO_CACHE,
+  );
+  return $blocks;
+}
+
+/**
+ * implementation of hook_block_view
+ *
+ * @param string $delta
+ * @return array
+ *  $block['subject']
+ *  $block['content']
+ */
+function xcel_block_view($delta) {
+  $block = array();
+  //$blast = Database::getConnection('blast', 'default')->db_query('SELECT * FROM job_params WHERE value = "Anonymous"');
+  //db_set_active('blast');
+  //$blast = db_query('SELECT * FROM job_params WHERE value = \'Anonymous\'');
+  //$jobs = db_query("SELECT * FROM xgrid_job_params WHERE argument='user_id' and value=:uid ORDER BY job_id DESC LIMIT 5", array(':uid'=>$userUid));
+  //$jobs = db_query("SELECT id, title FROM xcel");
+  //db_set_active('default');
+  $jobs = db_query("SELECT jobs.job_id as job_id, programs.value as program FROM xgrid_job_params as jobs right outer join xgrid_job_params as programs on jobs.job_id=programs.job_id and programs.argument='program' WHERE jobs.argument='user_id' and jobs.value=:uid ORDER BY jobs.job_id DESC LIMIT 5", array(':uid'=>$userUid));
+  //drupal_set_message(print_r($blast));
+  //$content = "<h2 class='title'>Welcome VectorBase User!</h2>Your recent jobs:<br><ul><li>Blast: Job ID<li>ClustalW: Job ID</ul>No Jobs? Not a VectorBase User?<br><div class='more-link'><a href='/user'>Login</a> or <a href='/user/register'>Create a new account</a></div>";
+  $content = "<h2 class='title'>AnoXcel</h2>Your recent jobs:<br><ul><li>Blast: Job ID<li>ClustalW: Job ID</ul>No Jobs? <div class='more-link'><a href='/user'>Login</a>.</div>";
+  $block['content'] = $content;
+  return $block;
+}
+

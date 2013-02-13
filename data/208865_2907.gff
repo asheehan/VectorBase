@@ -1,0 +1,4 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=0 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=2907&page=res&job_id=208865
+ADMH01001383.1	BLAST	Blast Hit	2223	4255	4066	+	.	intergenic_1-1b
+ADMH01001209.1	BLAST	Blast Hit	13	91	62	-	.	intergenic_1-1b
+ADMH01001204.1	BLAST	Blast Hit	3560	3589	44	-	.	intergenic_1-1b

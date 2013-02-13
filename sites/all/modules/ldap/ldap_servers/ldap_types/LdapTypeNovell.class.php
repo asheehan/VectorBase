@@ -6,7 +6,8 @@
  *
  */
 
-require_once(drupal_get_path('module', 'ldap_servers') . '/ldap_types/LdapTypeAbstract.class.php');
+
+ldap_server_module_load_include('php', 'ldap_servers', 'ldap_types/LdapTypeAbstract.class');
 
 class LdapTypeNovell extends LdapTypeAbstract {
 
@@ -19,12 +20,15 @@ class LdapTypeNovell extends LdapTypeAbstract {
   public $encrypted = 0;
   public $user_attr = 'uid';
   public $mail_attr = 'mail';
-  public $supportsNestGroups = FALSE;
 
-  public function getNestedGroupMemberships($user_ldap_entry, $nested = FALSE) {
-    if (!$this->supportsNestedGroups) {
-      return FALSE;
-    }
-  }
+  public $groupObjectClassDefault = 'groupOfNames';
+
+  public $groupDerivationModelDefault = LDAP_SERVERS_DERIVE_GROUP_FROM_ENTRY;
+
+  public $groupDeriveFromEntryAttrDefault = 'members';
+  public $groupDeriveFromEntryUserIdDefault = 'dn';
+
+
+
 
 }

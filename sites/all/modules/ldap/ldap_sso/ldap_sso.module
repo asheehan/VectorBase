@@ -32,8 +32,9 @@ function ldap_sso_menu() {
 function ldap_sso_user_logout($account) {
   $auth_conf = ldap_authentication_get_valid_conf();
   if ($auth_conf->seamlessLogin == 1) {
-    setcookie("seamless_login", 'do not auto login', time() + (int)$auth_conf->cookieExpire, base_path(), "");
-    $_SESSION['seamless_login'] = $_COOKIE['seamless_login'];
+    $cookie_string = 'do not auto login';
+    setcookie("seamless_login", $cookie_string, time() + (int)$auth_conf->cookieExpire, base_path(), "");
+    $_SESSION['seamless_login'] = $cookie_string;
   }
 }
 
@@ -55,14 +56,16 @@ function ldap_sso_boot() {
         else {
           $login_attempted = FALSE;
         }
-        require_once('includes/common.inc');
-        require_once('includes/path.inc');
+        require_once(DRUPAL_ROOT . '/includes/common.inc');
+        require_once(DRUPAL_ROOT . '/includes/path.inc');
         $ldap_authentication_conf = variable_get('ldap_authentication_conf', array());
-        if ($ldap_authentication_conf['seamlessLogin'] == 1 && ($login_attempted != 'true')) {
+        if (isset($ldap_authentication_conf['seamlessLogin']) && $ldap_authentication_conf['seamlessLogin'] == 1 && ($login_attempted != 'true')) {
           setcookie("seamless_login_attempted", 'true', time() + (int)$ldap_authentication_conf['cookieExpire'], base_path(), "");
           $_SESSION['seamless_login_attempted'] = $login_attempted;
-          $ldap_sso_q = (!isset($_GET['q']) || $_GET['q'] == '') ? 'user' : $_GET['q'];
-          drupal_goto('user/login/sso', array('query' => array('destination' => rawurlencode($ldap_sso_q))));
+          // removed with http://drupal.org/node/1485118 patch
+          //$ldap_sso_q = (!isset($_GET['q']) || $_GET['q'] == '') ? 'user' : $_GET['q'];
+          //drupal_goto('user/login/sso', array('query' => array('destination' => rawurlencode($ldap_sso_q))));
+          drupal_goto('user/login/sso', array('query' => drupal_get_destination()));
         }
         else {
           return;
@@ -88,34 +91,53 @@ function ldap_sso_user_login_sso() {
   $auth_conf = ldap_authentication_get_valid_conf();
   $implementation = $auth_conf->ldapImplementation;
   $enabled = $auth_conf->ssoEnabled;
+
+
   if ($enabled == TRUE) {
     switch ($implementation) {
+
       case 'mod_auth_sspi' :
-        if (isset($_SERVER['REMOTE_USER']))
+        $remote_user = FALSE;
+        if (isset($_SERVER['REMOTE_USER'])) {
           $remote_user = $_SERVER['REMOTE_USER'];
-        elseif (isset($_SERVER['REDIRECT_REMOTE_USER']))
+        }
+        elseif (isset($_SERVER['REDIRECT_REMOTE_USER'])) {
           $remote_user = $_SERVER['REDIRECT_REMOTE_USER'];
-        else
-          $remote_user = FALSE;
+        }
         break;
 
       case 'mod_auth_kerb' :
-        if(preg_match('/^([A-Za-z0-9_\-\.]+)@([A-Za-z0-9_\-.]+)$/',
-          ($_SERVER['REMOTE_USER'] ? $_SERVER['REMOTE_USER'] : $_SERVER['REDIRECT_REMOTE_USER']),
-          $matches)){
+        $remote_user = FALSE;
+        if (isset($_SERVER['REMOTE_USER'])) {
+          $remote_user = $_SERVER['REMOTE_USER'];
+        }
+        elseif (isset($_SERVER['REDIRECT_REMOTE_USER'])) {
+          $remote_user = $_SERVER['REDIRECT_REMOTE_USER'];
+        }
+
+        if ($remote_user && preg_match('/^([A-Za-z0-9_\-\.]+)@([A-Za-z0-9_\-.]+)$/',
+          $remote_user,
+          $matches)) {
           $remote_user = $matches[1];
           $realm = $matches[2]; // This can be used later if realms is ever supported properly
         }
-        else
-          $remote_user = FALSE;
         break;
       }
 
     if ($remote_user) {
       if ($auth_conf->ssoRemoteUserStripDomainName) {
-        $exploded = explode('@', $remote_user);
+        // might be in form <remote_user>@<domain> or <domain>\<remote_user>
+        $domain = NULL;
+        $exploded = preg_split('/[\@\\\\]/', $remote_user);
         if (count($exploded) == 2) {
-          $remote_user = $exploded[0];
+          if (strpos($remote_user, '@') !== FALSE) {
+            $remote_user = $exploded[0];
+            $domain = $exploded[1];
+          }
+          else {
+            $domain = $exploded[0];
+            $remote_user = $exploded[1];
+          }
         }
       }
       watchdog('ldap_authentication', '%username : $_SERVER[\'REMOTE_USER\'] found',

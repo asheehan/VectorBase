@@ -1,0 +1,5 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=0 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=3492&page=res&job_id=209116
+PHUM454140-PA	BLAST	Blast Hit	1161	1441	216	.	.	AAEL010179-PA |NADPH oxidase|protein_coding|supercont1.458:730738-738617:-1|gene:AAEL010179
+PHUM454140-PA	BLAST	Blast Hit	1017	1129	95	.	.	AAEL010179-PA |NADPH oxidase|protein_coding|supercont1.458:730738-738617:-1|gene:AAEL010179
+PHUM389250-PA	BLAST	Blast Hit	769	964	170	.	.	AAEL010179-PA |NADPH oxidase|protein_coding|supercont1.458:730738-738617:-1|gene:AAEL010179
+PHUM389250-PA	BLAST	Blast Hit	421	539	115	.	.	AAEL010179-PA |NADPH oxidase|protein_coding|supercont1.458:730738-738617:-1|gene:AAEL010179

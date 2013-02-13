@@ -1,0 +1,11 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=1 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=163&page=res&job_id=192186
+AAEL006347-RA	BLAST	Blast Hit	1	562	2990	.	.	sp|P50635|APY_AEDAE Apyrase OS=Aedes aegypti GN=APY PE=1 SV=2
+AAEL000575-RA	BLAST	Blast Hit	33	550	1038	.	.	sp|P50635|APY_AEDAE Apyrase OS=Aedes aegypti GN=APY PE=1 SV=2
+AAEL009970-RA	BLAST	Blast Hit	25	535	968	.	.	sp|P50635|APY_AEDAE Apyrase OS=Aedes aegypti GN=APY PE=1 SV=2
+AAEL011341-RA	BLAST	Blast Hit	22	542	968	.	.	sp|P50635|APY_AEDAE Apyrase OS=Aedes aegypti GN=APY PE=1 SV=2
+AAEL011346-RA	BLAST	Blast Hit	24	535	957	.	.	sp|P50635|APY_AEDAE Apyrase OS=Aedes aegypti GN=APY PE=1 SV=2
+AAEL006333-RA	BLAST	Blast Hit	42	537	895	.	.	sp|P50635|APY_AEDAE Apyrase OS=Aedes aegypti GN=APY PE=1 SV=2
+AAEL010986-RA	BLAST	Blast Hit	5	448	666	.	.	sp|P50635|APY_AEDAE Apyrase OS=Aedes aegypti GN=APY PE=1 SV=2
+AAEL011348-RA	BLAST	Blast Hit	19	174	359	.	.	sp|P50635|APY_AEDAE Apyrase OS=Aedes aegypti GN=APY PE=1 SV=2
+AAEL009968-RA	BLAST	Blast Hit	1	222	260	.	.	sp|P50635|APY_AEDAE Apyrase OS=Aedes aegypti GN=APY PE=1 SV=2
+AAEL012154-RA	BLAST	Blast Hit	9	461	196	.	.	sp|P50635|APY_AEDAE Apyrase OS=Aedes aegypti GN=APY PE=1 SV=2

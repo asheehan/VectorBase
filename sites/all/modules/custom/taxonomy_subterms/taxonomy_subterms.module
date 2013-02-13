@@ -1,0 +1,363 @@
+<?php
+
+/**
+ * @file
+ * Module Taxonomy subterms.
+ */
+
+/**
+ * Special depth values for field taxonomy_subterms.
+ * Do not retrieve children term nodes.
+ * @var int
+ */
+define('TAXONOMY_SUBTERMS_DISABLE', 0);
+/**
+ * Special depth values for field taxonomy_subterms.
+ * Retrieve children term nodes without max depth.
+ * @var int
+ */
+define('TAXONOMY_SUBTERMS_INFINITY', -1);
+/**
+ * Special depth values for field taxonomy_subterms.
+ * Inherits depth from vocabulary.
+ * @var int
+ */
+define('TAXONOMY_SUBTERMS_INHERIT', -2);
+
+/**
+ * Implementation of hook_menu_alter().
+ */
+function taxonomy_subterms_menu_alter(&$items) {
+  
+  if (!empty($items['taxonomy/term/%taxonomy_term'])) {
+    $item = $items['taxonomy/term/%taxonomy_term'];
+    // Store the original configuration, so we can pass it on to our own callback.
+    $callback = $item['page callback'];
+    $arguments = $item['page arguments'];
+    $file = $item['file'];
+    $filepath = isset($item['file path']) ? $item['file path'] : drupal_get_path('module', $item['module']);
+
+
+    // Alter the original callback.
+    $item['page callback'] = 'taxonomy_subterms_term_page';
+    $item['page arguments'] = array_merge(array(2, $callback, $file, $filepath), $arguments);
+    $item['file'] = 'taxonomy_subterms.pages.inc';
+    $item['file path'] = drupal_get_path('module', 'taxonomy_subterms');
+
+    //save this back 
+    $items['taxonomy/term/%taxonomy_term'] = $item;
+  
+  } else {
+//    watchdog('GDB', 'taxonomy/term/%taxonomy_term not defined');
+  }
+}
+
+/**
+ * Submission handler for taxonomy_form_vocabulary().
+ * 
+ * @ingroup forms
+ * @see taxonomy_form_vocabulary()
+ */
+function taxonomy_subterms_vocab_submit($form, &$form_state) {
+  $record=array(
+    'vid' => $form_state['values']['vid'],
+    'taxonomy_subterms' => $form_state['values']['taxonomy_subterms']['depth'],
+    'taxonomy_subterms_map' => $form_state['values']['taxonomy_subterms']['map'],
+  );
+  drupal_write_record('taxonomy_vocabulary', $record, 'vid');
+}
+
+/**
+ * Implementation of hook_form_alter().
+ */
+function taxonomy_subterms_form_alter(&$form, $form_state, $form_id) {
+  if ($form_id == 'taxonomy_form_vocabulary') {
+    $vocab=$form['#vocabulary'];
+
+    //safe-guard creating new - setting default values  
+    if (empty($vocab->taxonomy_subterms))       $vocab->taxonomy_subterms = TAXONOMY_SUBTERMS_DISABLE;
+    if (empty($vocab->taxonomy_subterms_map))   $vocab->taxonomy_subterms_map = TAXONOMY_SUBTERMS_DISABLE;
+
+    $form['taxonomy_subterms'] = array(
+      '#type' => 'fieldset',
+      '#collapsible' => TRUE,
+      '#title' => t('Taxonomy subterms'),
+      '#description' => t('Display nodes for subterms'),
+      '#weight' => 20,
+      '#tree' => TRUE,
+    );
+
+    $form['taxonomy_subterms']['depth'] = array(
+      '#type' => 'select',
+      '#title' => t('Taxonomy subterms'),
+      '#options' => array(
+          TAXONOMY_SUBTERMS_INFINITY => t('Infinity'),
+          TAXONOMY_SUBTERMS_DISABLE => t('Disabled')
+        )+array_combine(range(1, 10), range(1, 10)),
+      '#default_value' => $vocab->taxonomy_subterms,
+      '#description' => t('Recursion depth for subterms.'),
+    );
+    
+    $form['taxonomy_subterms']['map'] = array(
+      '#type' => 'select',
+      '#title' => t('Taxonomy subterms map'),
+      '#options' => array(
+          TAXONOMY_SUBTERMS_DISABLE => t('Disabled'),
+          1 => t('Enabled'),
+        ),
+      '#default_value' => $vocab->taxonomy_subterms_map,
+      '#description' => t('Subterms map.'),
+    );
+    
+    // move the buttons to the bottom of the form
+    $form['submit']['#weight'] = 49;
+    $form['delete']['#weight'] = 50;
+
+    // add an extra submit handler to save these settings
+    $form['#submit'][] = 'taxonomy_subterms_vocab_submit';
+  }
+  elseif ($form_id == 'taxonomy_form_term') {
+    $term=$form['#term'];
+
+    //safe-guard creating new - setting default values  
+    if (is_array($term)) {
+        $taxonomy_subterms = $term['taxonomy_subterms'];
+        $taxonomy_subterms_map = $term['taxonomy_subterms_map'];
+    } else {
+        $taxonomy_subterms = $term->taxonomy_subterms;
+        $taxonomy_subterms_map = $term->taxonomy_subterms_map;
+    }        
+    if (empty($taxonomy_subterms))          $taxonomy_subterms = TAXONOMY_SUBTERMS_INHERIT;
+    if (empty($taxonomy_subterms_map))   $taxonomy_subterms_map = TAXONOMY_SUBTERMS_INHERIT;
+
+    $form['taxonomy_subterms'] = array(
+      '#type' => 'fieldset',
+      '#collapsible' => TRUE,
+      '#title' => t('Taxonomy subterms'),
+      '#description' => t('Display nodes for subterms'),
+      '#weight' => 20,
+      '#tree' => TRUE,
+    );
+
+    $form['taxonomy_subterms']['depth'] = array(
+      '#type' => 'select',
+      '#title' => t('Taxonomy subterms'),
+      '#options' => array(
+          TAXONOMY_SUBTERMS_INHERIT => t('Inherit from vocabulary'),
+          TAXONOMY_SUBTERMS_INFINITY => t('Infinity'),
+          TAXONOMY_SUBTERMS_DISABLE => t('Disabled')
+        )+array_combine(range(1, 10), range(1, 10)),
+      '#default_value' => $taxonomy_subterms,
+      '#description' => t('Recursion depth for subterms.'),
+    );
+
+    $form['taxonomy_subterms']['map'] = array(
+      '#type' => 'select',
+      '#title' => t('Taxonomy subterms map'),
+      '#options' => array(
+          TAXONOMY_SUBTERMS_INHERIT => t('Inherit from vocabulary'),
+          TAXONOMY_SUBTERMS_DISABLE => t('Disabled'),
+          1 => t('Enabled'),
+          ),
+      '#default_value' => $taxonomy_subterms_map,
+      '#description' => t('Recursion depth for subterms.'),
+    );
+    
+    // move the buttons to the bottom of the form
+    $form['submit']['#weight'] = 49;
+    $form['delete']['#weight'] = 50;
+
+    // add an extra submit handler to save these settings
+    $form['#submit'][] = 'taxonomy_subterms_term_submit';
+  }
+}
+
+/**
+ * Submission handler for taxonomy_form_vocabulary taxonomy_form_vocabulary().
+ * 
+ * @ingroup forms
+ * @see taxonomy_form_term()
+ */
+function taxonomy_subterms_term_submit($form, &$form_state) {
+  $record=array(
+    'tid' => $form_state['values']['tid'],
+    'taxonomy_subterms' => $form_state['values']['taxonomy_subterms']['depth'],
+    'taxonomy_subterms_map' => $form_state['values']['taxonomy_subterms']['map'],
+  );
+  drupal_write_record('taxonomy_term_data', $record, 'tid');
+}
+
+
+/**
+ * Implementation of hook_menu().
+ */
+function taxonomy_subterms_menu() {
+  $items['admin/config/taxonomy_subterms'] = array(
+    'title' => 'Taxonomy Subterms',
+    'description' => 'Customize how Taxonomy subterms displays terms.',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('taxonomy_subterms_admin_settings'),
+    'access arguments' => array('administer taxonomy_subterms'),
+    'type' => MENU_NORMAL_ITEM,
+    'file' => 'taxonomy_subterms.admin.inc',
+    );
+
+  return $items;
+}
+
+
+/**
+ * Implementation of hook_permission().
+ */
+function taxonomy_subterms_permission() {
+  return array(
+    'administer taxonomy_subterms' => array(
+      'title' => t('Administer Taxonomy Sub Terms'), 
+      'description' => t('Perform administration tasks for my module.')
+    ),
+  );
+}
+
+
+/**
+ * Implementation of hook_theme().
+ */
+function taxonomy_subterms_theme() {
+  return array(
+    'taxonomy_subterms_termsmap' => array(
+      'arguments' => array('terms' => NULL),
+    ),
+  );
+}
+
+
+/**
+ * Implementation of hook_enable().
+ */
+function taxonomy_subterms_enable() {
+  // we need to come after taxonomy modules...
+  $weight = intval((db_query("SELECT MAX(weight) FROM {system} WHERE type='module' AND name IN ('taxonomy', 'i18ntaxonomy')")->fetchField()) + 1);
+  db_query("UPDATE {system} SET weight=".($weight+0)." WHERE type='module' AND name = 'taxonomy_subterms'");
+  
+  // not required in Drupal-7;  build-in
+  // db_query("UPDATE {system} SET weight=".($weight+1)." WHERE type='module' AND name = 'taxonomy_breadcrumb'");
+}
+
+/**
+ * implementation of hook_block_info
+ * @return array $blocks
+ */
+function taxonomy_subterms_block_info() {
+  $blocks['organism taxonomy block'] = array(
+    'info' => t('Organism Taxonomy Block'),
+    'cache' => DRUPAL_NO_CACHE,
+  );
+  return $blocks;
+}
+
+/**
+ * implementation of hook_block_view
+ *
+ * @param string $delta
+ * @return array
+ *  $block['subject']
+ *  $block['content']
+ */
+function taxonomy_subterms_block_view($delta) {
+    //drupal_set_message(t('taxonomy_subterms_block_view called'));
+    $tid = get_taxonomy(menu_get_object());
+    $vocabName = 'organisms_taxonomy';
+    $block = array();
+    require_once ( dirname(__FILE__) . '/taxonomy_subterms.pages.inc');
+    $vocab = taxonomy_vocabulary_machine_name_load($vocabName);
+    $vid = $vocab->vid;  // Set the vid to the vocabulary id of the vocabulary you wish to list the terms from
+    $output = '';
+    $thisTerm = taxonomy_term_load($tid);
+    if ($thisTerm) {
+        $ancestry = taxonomy_get_parents_all($thisTerm->tid);
+        $ancestry = array_filter($ancestry, 'filter_ancestry');
+        $ancestry = array_reverse($ancestry);
+        //$thisTaxon = taxonomy_term_load(get_taxon($thisTerm))->name;
+        //drupal_set_message(print_r($ancestry));
+        for ($ancestryDepth=0; $ancestryDepth<sizeof($ancestry); $ancestryDepth++) {
+            $ancestry[$ancestryDepth]->depth = $ancestryDepth;
+        }
+        //drupal_set_message(print_r($ancestry));
+        //$thisTerm->depth = -1;
+        //drupal_set_message(print_r($thisTerm));
+        //$output = l($thisTerm->name, "taxonomy/term/". ($thisTerm->tid) );
+        $tid = $thisTerm->tid;
+        $items = array();
+        $map = taxonomy_get_tree($vid,$tid);
+        $map = array_filter($map, 'filter_children');
+        //drupal_set_message(print_r($map));
+        foreach($map as $mapItem) {
+            $mapItem->depth = $mapItem->depth+$ancestryDepth;
+        }
+        $map = array_merge($ancestry,$map);
+        foreach($map as $organism) {
+            $taxonomy = taxonomy_term_load(get_taxon(taxonomy_term_load($organism->tid)));
+            if ($taxonomy && property_exists($taxonomy,'name')) {
+                $organism->taxonname = $taxonomy->name;
+            }
+        }
+        $termsmap_output = theme('taxonomy_subterms_termsmap', $map);
+        $output = drupal_render($termsmap_output);
+    }
+    //drupal_set_message(print_r($map));
+  if ($output != '') {
+    //$block['subject'] = t('Organism Taxonomy');
+    $block['subject'] = NULL;
+    $block['content'] = $output;
+    return $block;
+  }
+}
+
+function get_taxonomy($menuObject) {
+  $taxonomy = '';
+  if (property_exists($menuObject,'field_organism_taxonomy')) {
+    if (array_key_exists('und',$menuObject->field_organism_taxonomy)) {
+      $taxonomyArray = $menuObject->field_organism_taxonomy['und'];
+      if (sizeof($taxonomyArray) > 0) {
+        $taxonomyArray = $taxonomyArray[0];
+        if (array_key_exists('tid',$taxonomyArray)) {
+          $taxonomy = $taxonomyArray['tid'];
+        }
+      }
+    }
+  }
+  return $taxonomy;
+}
+function get_taxon($taxonObject) {
+  $taxon = '';
+  if (property_exists($taxonObject,'field_taxon')) {
+    if (array_key_exists('und',$taxonObject->field_taxon)) {
+      $taxonArray = $taxonObject->field_taxon['und'];
+      if (sizeof($taxonArray) > 0) {
+        $taxonArray = $taxonArray[0];
+        if (array_key_exists('tid',$taxonArray)) {
+          $taxon = $taxonArray['tid'];
+        }
+      }
+    }
+  }
+  return $taxon;
+}
+function filter_ancestry($organism) {
+    $taxon = taxonomy_term_load(get_taxon($organism));
+    $filteredTaxons = array('Phylum','Class','Order');
+    if (in_array($taxon->name, $filteredTaxons)) {
+        return FALSE;
+    } else {
+        return TRUE;
+    }
+}
+function filter_children($organism) {
+    $taxon = taxonomy_term_load(get_taxon(taxonomy_term_load($organism->tid)));
+    $filteredTaxons = array('Strain');
+    if ($taxon && in_array($taxon->name, $filteredTaxons)) {
+        return FALSE;
+    } else {
+        return TRUE;
+    }
+}

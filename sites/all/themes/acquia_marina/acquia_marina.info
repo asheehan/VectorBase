@@ -5,10 +5,17 @@ base theme = fusion_core
 core = 7.x
 engine = phptemplate
 
+stylesheets[all][] = css/search.css
 stylesheets[all][] = css/fusion-acquia-marina-style.css
+;stylesheets[all][] = css/superfish.css
+stylesheets[all][] = css/slideshow.css
 
 scripts[] = js/jquery.corner.js
 scripts[] = js/acquia-marina-script.js
+; fancy tables with sortable headers
+scripts[] = js/tablesorter/jquery.tablesorter.js
+; allows jquery to animate box shadows
+scripts[] = js/jquery.animate-shadow-min.js
 
 skinr[api] = 2
 skinr[directory] = skins
@@ -30,6 +37,7 @@ regions[node_bottom] = Node bottom
 regions[help] = Help
 regions[page_top] = Page top
 regions[page_bottom] = Page bottom
+regions[featured_slideshow] = Featured Slideshow
 
 features[] = logo
 features[] = name

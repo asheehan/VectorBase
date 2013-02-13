@@ -1,0 +1,4 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=1 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=215&page=res&job_id=194418
+ISCW010700-RA	BLAST	Blast Hit	890	913	38	-	.	gene gene undefined product 565:876 forward
+ISCW022464-RA	BLAST	Blast Hit	473	490	36	+	.	gene gene undefined product 565:876 forward
+ISCW002405-RA	BLAST	Blast Hit	189	219	36	-	.	gene gene undefined product 565:876 forward

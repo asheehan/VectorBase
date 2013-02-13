@@ -1,0 +1,369 @@
+
+/********** Main UI section ***********/
+#edit-jobid{
+	display:none;
+}
+#blastUIcontainer{
+	float:left;
+	line-height: 100%;
+}
+/* blast programs are inside this guy */
+#edit-programfield{
+width:614px;
+float:left;
+padding:8px;
+padding-left:10px;
+margin:0;
+}
+/* individual program radios */
+.form-item-program{
+	margin-right:2em;
+	margin-left:4em;
+	float:left;
+}
+#blastProgramDescription{
+	width:100%;
+	float:left;
+	text-align: center;
+	font-size:9pt;
+	padding:5px;
+}
+
+#edit-optionsfield{
+float:left;
+width:220px;
+padding:0;
+padding-left:10px;
+margin:0;
+margin-left: 16px;
+}
+
+#edit-controlfield{
+width:212px;
+float:left;
+padding:8px;
+padding-left:10px;
+margin:0;
+margin-left:16px;
+}
+
+.form-item-lookup{
+	float:left;
+	margin-top:0;
+}
+.form-submit{
+	float:right;
+}
+#edit-sequence{
+	font-family:monospace;
+	display:inline-block; /* weird firefox bug */
+}
+
+
+#datasetOptionsDiv{
+	padding-top:84px;
+}
+
+#edit-datasets{
+	width:620px;
+	float:left;
+padding:2px;
+padding-left:10px;
+margin:0;
+}
+
+/* div of organism checkboxes */
+
+.dbContainer{
+	padding: 0px;
+	margin: 0px;
+	border:none;
+}
+
+#stupidWrapperForFirefox{
+/* this surrounds #edit-organisms, the list of datasets . FF can't apply these permissions to fieldsets so we're putting them on a div*/
+	overflow:auto;
+	text-overflow: clip;
+	height:340px;
+	width:200px;
+	float:left;
+	margin:0px;
+	line-height: 100%;
+}
+
+#edit-organisms{
+	border:none;
+	padding:0;
+	margin:0;
+}
+
+.nucleotideField{
+	margin:0 12px;
+	padding:0;
+	padding-left: 12px;
+
+}
+.peptideField{
+	margin:8px 12px 0 12px;
+	padding:0;
+	padding-left:12px;
+}
+
+.organismCheckboxDiv{
+	border-radius: 7px;
+	margin:0;
+}
+
+b {
+	font-weight:bold;
+	font-size:8pt;
+}
+
+
+
+fieldset.organismsField::-webkit-scrollbar {
+    width: 12px;
+}
+ 
+fieldset.organismsField::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+}
+ 
+fieldset.organismsField::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    background: rgba(180,180,180,0.8); 
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+}
+
+
+
+
+#edit-result{
+float:left;
+clear:both;
+width:100%;
+margin:0;
+line-height: 150%;
+}
+
+input[type=submit]{
+	width:70px;
+}
+#clearButton{
+ margin-top:-6px;
+}
+#clearResultsButton{
+	width:108px;
+
+}
+#edit-submit--3{
+
+/* PURE GREEN
+	background: #86e27a;
+background: -moz-linear-gradient(top,  #86e27a 0%, #71bf67 100%);
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#86e27a), color-stop(100%,#71bf67)); 
+background: -webkit-linear-gradient(top,  #86e27a 0%,#71bf67 100%); 
+background: -o-linear-gradient(top,  #86e27a 0%,#71bf67 100%); 
+background: -ms-linear-gradient(top,  #86e27a 0%,#71bf67 100%); 
+background: linear-gradient(to bottom,  #86e27a 0%,#71bf67 100%); 
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#86e27a', endColorstr='#71bf67',GradientType=0 ); 
+border-color:#56914E;
+color:#355930;
+*/
+
+background: #d2e099; /* Old browsers */
+background: -moz-linear-gradient(top,  #d2e099 0%, #b1ca49 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#b1ca49), color-stop(100%,#b1ca49)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top,  #d2e099 0%,#b1ca49 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top,  #d2e099 0%,#b1ca49 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top,  #d2e099 0%,#b1ca49 100%); /* IE10+ */
+background: linear-gradient(to bottom,  #d2e099 0%,#b1ca49 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b1ca49', endColorstr='#b1ca49',GradientType=0 ); /* IE6-9 */
+
+border-color:#859937;
+color:#014f85;
+
+	margin-top:2px;
+
+}
+
+.dbContainer{
+	display:none;
+}
+
+.message{
+padding:6px;
+}
+
+/********** top results***********/
+#noResults{
+	float:left;
+	clear:both;
+	font-size:12pt;
+	color: red;
+}
+#jobId{
+	font-size:12pt;
+	font-weight:bold;
+}
+
+#hspDialog{
+	display:none;
+}
+
+#dlResults{
+	cursor:pointer;
+	cursor:hand;
+}
+#topLevelResults{
+	clear:both;
+}
+.dbResult{
+	border-radius: 7px;
+	margin:0;
+	padding: 1px;
+}
+#inputParams{
+	display:none;
+}
+/********** HSP Results ***********/
+
+#downloadSequences{
+	width: 140px;
+	margin-right:10px;
+}
+#sendToClustal{
+	width: 140px;
+	margin-right:10px;
+}
+#quickAlign{
+	width: 140px;
+}
+
+#hspControl{
+	float:right;
+	line-height: 150%;
+}
+#uniqueQuery{
+	float:left;
+	padding:6px;
+	padding-top:18px;
+	font-size:110%;
+}
+#uniqueQueryName{
+	width:350px;
+	white-space: nowrap;
+	overflow:hidden;
+	text-overflow: ellipsis;
+}
+
+.hspHitName{
+	text-align:left;
+	white-space: nowrap;
+	overflow:hidden;
+	height: 1.6em;
+	text-overflow: ellipsis;
+}
+
+.hspQueryName{
+	text-align:left;
+	white-space: nowrap;
+	overflow:hidden;
+	height: 1.6em;
+	text-overflow: ellipsis;
+/*
+	-o-text-overflow: ellipsis;
+	-icab-text-overflow: ellipsis;
+	-khtml-text-overflow: ellipsis;
+	-moz-text-overflow: ellipsis;
+	-webkit-text-overflow: ellipsis; 
+*/
+}
+
+#hspText{
+	display:none;
+}
+
+.hidden{
+	visibility: hidden;
+	width: 1px;
+	overflow:hidden;
+}
+.rightAln{
+text-align: right;
+width:10px;
+overflow: hidden;
+}
+.leftAln{
+text-align: left;
+width:10px;
+overflow: hidden;
+}
+.queryText{
+text-align:center;
+padding:0;
+overflow: hidden;
+}
+.dbText{
+text-align:center;
+padding:0;
+overflow: hidden;
+}
+
+.hitGraph{
+position:relative;
+overflow:hidden;
+color:white;
+text-align:center;
+font-family:monospace;
+font-size:130%;
+line-height: 100%;
+}
+
+
+/********** HSP details ***********/
+.hsp{
+	width:12px;
+}
+#hspContent{
+	font-family:monospace;
+	font-size:10pt;
+}
+
+
+
+#blastHsps{
+clear:both;
+}
+
+#hspTable {
+	margin: 0px;
+	padding: 0px;
+	width: auto;
+}
+
+#hspTable td {
+	line-height: 14px;
+	margin: 0px;
+	padding: 0px;
+	padding-right: 8px;
+	font-family:monospace;
+	font-size:10pt;
+	background-color: white;
+	width: auto;
+}
+
+#clustalResults{
+	font-family:monospace;
+	font-size:10pt;
+	background-color: white;
+}
+
+.hspBrowserLink{
+	float:right;
+	color:#0000FF;
+	text-decoration:underline;
+}

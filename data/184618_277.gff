@@ -1,0 +1,16 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=1 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=277&page=res&job_id=184618
+gi	BLAST	Blast Hit	806	826	36	+	.	Example Sequence
+gi	BLAST	Blast Hit	402	418	34	+	.	Example Sequence
+gi	BLAST	Blast Hit	565	584	34	-	.	Example Sequence
+gi	BLAST	Blast Hit	477	496	34	+	.	Example Sequence
+gi	BLAST	Blast Hit	514	533	34	-	.	Example Sequence
+gi	BLAST	Blast Hit	815	834	34	-	.	Example Sequence
+gi	BLAST	Blast Hit	296	315	34	-	.	Example Sequence
+gi	BLAST	Blast Hit	51	70	34	-	.	Example Sequence
+gi	BLAST	Blast Hit	409	428	34	-	.	Example Sequence
+gi	BLAST	Blast Hit	552	571	34	+	.	Example Sequence
+gi	BLAST	Blast Hit	809	828	34	+	.	Example Sequence
+gi	BLAST	Blast Hit	923	942	34	-	.	Example Sequence
+gi	BLAST	Blast Hit	96	115	34	-	.	Example Sequence
+gi	BLAST	Blast Hit	466	485	34	+	.	Example Sequence
+gi	BLAST	Blast Hit	434	453	34	-	.	Example Sequence

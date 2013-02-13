@@ -1,0 +1,4 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=1 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=156&page=res&job_id=178536
+contig:AaegL1:contig_34305:1:8172:1	BLAST	Blast Hit	1456	1490	70	-	.	Example Sequence
+contig:AaegL1:contig_16784:1:162205:1	BLAST	Blast Hit	57976	58010	70	+	.	Example Sequence
+contig:AaegL1:contig_11385:1:127956:1	BLAST	Blast Hit	31080	31107	36	-	.	Example Sequence

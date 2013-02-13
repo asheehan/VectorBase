@@ -1,0 +1,24 @@
+track name="BLAST Hits" description="BLAST Hits" colour="green" useScore=1 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=39&page=res&job_id=173239
+supercont1.1053	BLAST	Blast Hit	143555	143584	50	+	.	test
+supercont1.919	BLAST	Blast Hit	5203	5231	48	+	.	test
+supercont1.1574	BLAST	Blast Hit	28204	28272	46	+	.	test
+supercont1.502	BLAST	Blast Hit	169160	169181	44	-	.	test
+supercont1.546	BLAST	Blast Hit	815175	815201	44	+	.	test
+supercont1.64	BLAST	Blast Hit	1074998	1075019	44	-	.	test
+supercont1.26	BLAST	Blast Hit	3536834	3536854	42	+	.	test
+supercont1.46	BLAST	Blast Hit	3081500	3081525	42	+	.	test
+supercont1.3552	BLAST	Blast Hit	4146	4165	40	+	.	test
+supercont1.1040	BLAST	Blast Hit	225213	225237	40	-	.	test
+supercont1.1060	BLAST	Blast Hit	45022	45044	40	+	.	test
+supercont1.1377	BLAST	Blast Hit	60342	60364	40	-	.	test
+supercont1.1429	BLAST	Blast Hit	16952	16979	40	-	.	test
+supercont1.19	BLAST	Blast Hit	1855603	1855630	40	+	.	test
+supercont1.201	BLAST	Blast Hit	1805193	1805212	40	+	.	test
+supercont1.270	BLAST	Blast Hit	1136168	1136195	40	+	.	test
+supercont1.272	BLAST	Blast Hit	705280	705307	40	-	.	test
+supercont1.276	BLAST	Blast Hit	870346	870376	40	-	.	test
+supercont1.301	BLAST	Blast Hit	803703	803736	40	-	.	test
+supercont1.36	BLAST	Blast Hit	3536334	3536373	40	+	.	test
+supercont1.387	BLAST	Blast Hit	140255	140283	40	+	.	test
+supercont1.804	BLAST	Blast Hit	512156	512180	40	-	.	test
+supercont1.831	BLAST	Blast Hit	94835	94859	40	-	.	test

@@ -1,0 +1,8 @@
+track name="BLAST Hits" description="BLAST Hits" colour="green" useScore=1 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=50&page=res&job_id=173732
+AAEL003237-RA|no	BLAST	Blast Hit	6	24	38	+	.	test
+AAEL007114-RB|no	BLAST	Blast Hit	196	211	26	+	.	test
+AAEL007114-RA|no	BLAST	Blast Hit	608	623	26	+	.	test
+AAEL006784-RA|cytochrome	BLAST	Blast Hit	870	882	26	-	.	test
+AAEL000838-RA|no	BLAST	Blast Hit	243	255	26	-	.	test
+AAEL007898-RA|no	BLAST	Blast Hit	19887	19899	26	-	.	test
+AAEL007705-RA|no	BLAST	Blast Hit	7136	7148	26	-	.	test

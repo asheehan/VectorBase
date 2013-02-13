@@ -1,0 +1,11 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=0 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=3047&page=res&job_id=208969
+contig:AaegL1:contig_9607:1:203761:1	BLAST	Blast Hit	198477	198650	282	-	.	Actina Gen
+contig:AaegL1:contig_9607:1:203761:1	BLAST	Blast Hit	190302	190475	256	-	.	Actina Gen
+contig:AaegL1:contig_3054:1:178651:1	BLAST	Blast Hit	92508	92681	282	+	.	Actina Gen
+contig:AaegL1:contig_3054:1:178651:1	BLAST	Blast Hit	18835	19008	264	-	.	Actina Gen
+contig:AaegL1:contig_3054:1:178651:1	BLAST	Blast Hit	92510	92683	214	+	.	Actina Gen
+contig:AaegL1:contig_2702:1:230520:1	BLAST	Blast Hit	7644	7817	282	-	.	Actina Gen
+contig:AaegL1:contig_7242:1:28910:1	BLAST	Blast Hit	21926	22099	279	-	.	Actina Gen
+contig:AaegL1:contig_20261:1:83407:1	BLAST	Blast Hit	34348	34521	275	+	.	Actina Gen
+contig:AaegL1:contig_16577:1:179042:1	BLAST	Blast Hit	60361	60534	267	-	.	Actina Gen
+contig:AaegL1:contig_7243:1:20455:1	BLAST	Blast Hit	17917	18090	266	-	.	Actina Gen

@@ -1,0 +1,70 @@
+<?php
+/**
+ * @file
+ * Displays a block welcoming the logged in user along with some stats.
+ * created from Dan Linn's template dan@metaltoad.com
+ *
+ */
+ 
+
+/**
+ * implementation of hook_block_info
+ * @return array $blocks
+ */
+function user_welcome_block_info() {
+  $blocks['welcome_block'] = array(
+    'info' => t('User Welcome Block'),
+    'cache' => DRUPAL_NO_CACHE,
+  );
+  return $blocks;
+}
+
+/**
+ * implementation of hook_block_view
+ *
+ * @param string $delta
+ * @return array
+ *  $block['subject']
+ *  $block['content']
+ */
+function user_welcome_block_view($delta) {
+  global $user;
+  $userId = $user->uid;
+  $block = array();
+  if ($userId > 0) {
+    $currentUser = user_load($userId);
+    $userUid = $currentUser->uid;
+    //drupal_set_message(print_r($currentUser));
+    $fullName = $currentUser->field_full_name['und'][0]['safe_value'];
+    $firstName = explode(" ", $fullName);
+    if ($firstName) {
+      $firstName = $firstName[0];
+    }
+    //$lastAccess = date("F j, Y \a\\t g:ia",$currentUser->login);
+    $lastAccess = date("F j, Y",$currentUser->login);
+    //$blast = Database::getConnection('blast', 'default')->db_query('SELECT * FROM job_params WHERE value = "Anonymous"');
+    $content = "<h2 class='title'>Welcome $firstName!</h2>Last Login: $lastAccess<br><br>Your recent jobs:<br>";
+    $content .= '<ul>';
+    //db_set_active('blast');
+    //$blast = db_query('SELECT * FROM job_params WHERE value = \'Anonymous\'');
+    //$jobs = db_query("SELECT * FROM xgrid_job_params WHERE argument='user_id' and value=:uid ORDER BY job_id DESC LIMIT 5", array(':uid'=>$userUid));
+    $jobs = db_query("SELECT jobs.job_id as job_id, programs.value as program FROM xgrid_job_params as jobs right outer join xgrid_job_params as programs on jobs.job_id=programs.job_id and programs.argument='program' WHERE jobs.argument='user_id' and jobs.value=:uid ORDER BY jobs.job_id DESC LIMIT 5", array(':uid'=>$userUid));
+    //db_set_active('default');
+    //drupal_set_message(print_r($blast));
+    foreach ($jobs as $job) {
+        $submitId = $job->job_id;
+        $jobId = $submitId+1;
+        $program = $job->program;
+        //$program = db_query("SELECT * FROM xgrid_job_params WHERE argument='program' and job_id=:jid", array(':jid'=>$$submitId))->value;
+        //drupal_set_message(print_r($program));
+        //$program='Blast';
+        $content .= "<li>$program: <a target=_BLANK href='/sites/all/modules/custom/xgrid/results.php?id=$jobId'>$job->job_id</a>";
+    }
+    $content .= '</ul>';
+  } else {
+    //$content = "<h2 class='title'>Welcome VectorBase User!</h2>Your recent jobs:<br><ul><li>Blast: Job ID<li>ClustalW: Job ID</ul>No Jobs? Not a VectorBase User?<br><div class='more-link'><a href='/user'>Login</a> or <a href='/user/register'>Create a new account</a></div>";
+    $content = "<h2 class='title'>Welcome VectorBase User!</h2>Your recent jobs:<br><ul><li>Blast: Job ID<li>ClustalW: Job ID</ul>No Jobs? <div class='more-link'><a href='/user'>Login</a>.</div>";
+  }
+  $block['content'] = $content;
+  return $block;
+}

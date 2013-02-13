@@ -1,0 +1,6 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=0 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=3519&page=res&job_id=209122
+PHUM454140-PA	BLAST	Blast Hit	1133	1432	315	.	.	gi|8393843|ref|NP_058627.1| NADPH oxidase 4 isoform a [Homo sapiens]
+PHUM454140-PA	BLAST	Blast Hit	936	1124	221	.	.	gi|8393843|ref|NP_058627.1| NADPH oxidase 4 isoform a [Homo sapiens]
+PHUM389250-PA	BLAST	Blast Hit	757	973	202	.	.	gi|8393843|ref|NP_058627.1| NADPH oxidase 4 isoform a [Homo sapiens]
+PHUM389250-PA	BLAST	Blast Hit	241	394	161	.	.	gi|8393843|ref|NP_058627.1| NADPH oxidase 4 isoform a [Homo sapiens]
+PHUM389250-PA	BLAST	Blast Hit	396	499	133	.	.	gi|8393843|ref|NP_058627.1| NADPH oxidase 4 isoform a [Homo sapiens]

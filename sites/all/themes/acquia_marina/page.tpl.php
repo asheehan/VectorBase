@@ -5,7 +5,6 @@
  * @todo list available variables
  */
 ?>
-
   <div id="page" class="page">
     <div id="page-inner" class="page-inner">
       <?php print render($page['header_top']); ?>
@@ -65,7 +64,7 @@
                   <div id="main-content-inner" class="main-content-inner inner">
                     <!-- content group: width = grid_width - sidebar_first_width - sidebar_second_width -->
                     <div id="content-group" class="content-group region nested <?php print $content_group_width; ?>">
-                      <div id="content-group-inner" class="content-group-inner inner">
+                      <div id="content-group-inner" style="background-color:white;" class="content-group-inner inner">
                         <?php print theme('grid_block', array('content' => $breadcrumb, 'id' => 'breadcrumbs')); ?>
                         <?php print theme('grid_block', array('content' => $messages, 'id' => 'content-messages')); ?>
 
@@ -87,8 +86,15 @@
                             <?php endif; ?>
                             <?php if ($page['content']): ?>
                               <?php print render($page['content']); ?>
+				<?php if ($page['featured_slideshow']): ?>
+    				<div id="featured-slideshow">
+      				<?php print render($page['featured_slideshow']); ?>
+    				</div> <!-- End Featured Slider-->
+  				<?php endif; ?>
+                              <?php print $feed_icons; ?>
                             <?php endif; ?>
-
+			   
+			
                           </div><!-- /content-region-inner -->
                         </div><!-- /content-region -->
 

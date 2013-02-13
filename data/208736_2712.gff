@@ -1,0 +1,11 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=0 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=2712&page=res&job_id=208736
+ASTM006915-RA	BLAST	Blast Hit	6919	6958	50	-	.	
+ASTM006915-RA	BLAST	Blast Hit	6351	6379	44	+	.	
+ASTM014549-RA	BLAST	Blast Hit	1593	1621	48	+	.	
+ASTM014544-RA	BLAST	Blast Hit	785	813	48	-	.	
+ASTM008209-RA	BLAST	Blast Hit	257	283	48	+	.	
+ASTM021210-RA	BLAST	Blast Hit	129	151	46	+	.	
+ASTM010514-RA	BLAST	Blast Hit	108	130	46	+	.	
+ASTM001097-RA	BLAST	Blast Hit	381	408	46	-	.	
+ASTM021564-RA	BLAST	Blast Hit	240	261	44	+	.	
+ASTM021244-RA	BLAST	Blast Hit	1575	1603	44	+	.	

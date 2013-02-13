@@ -1,0 +1,11 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=1 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=291&page=res&job_id=200497
+EX473159.1	BLAST	Blast Hit	1	497	934	+	.	gnl|ti|1877706724 name:PRAG-aaa02a01.b1 mate_pair:1877708507
+FG114239.1	BLAST	Blast Hit	42	118	132	-	.	gnl|ti|1877706724 name:PRAG-aaa02a01.b1 mate_pair:1877708507
+EY215433.1	BLAST	Blast Hit	23	99	132	-	.	gnl|ti|1877706724 name:PRAG-aaa02a01.b1 mate_pair:1877708507
+FG111700.1	BLAST	Blast Hit	11	87	132	-	.	gnl|ti|1877706724 name:PRAG-aaa02a01.b1 mate_pair:1877708507
+FG108692.1	BLAST	Blast Hit	13	91	128	-	.	gnl|ti|1877706724 name:PRAG-aaa02a01.b1 mate_pair:1877708507
+EX474626.1	BLAST	Blast Hit	48	126	104	-	.	gnl|ti|1877706724 name:PRAG-aaa02a01.b1 mate_pair:1877708507
+EY215597.1	BLAST	Blast Hit	57	126	88	-	.	gnl|ti|1877706724 name:PRAG-aaa02a01.b1 mate_pair:1877708507
+FK815285.1	BLAST	Blast Hit	1	50	80	+	.	gnl|ti|1877706724 name:PRAG-aaa02a01.b1 mate_pair:1877708507
+FG110061.1	BLAST	Blast Hit	315	370	74	-	.	gnl|ti|1877706724 name:PRAG-aaa02a01.b1 mate_pair:1877708507
+FK810997.1	BLAST	Blast Hit	1	71	72	+	.	gnl|ti|1877706724 name:PRAG-aaa02a01.b1 mate_pair:1877708507

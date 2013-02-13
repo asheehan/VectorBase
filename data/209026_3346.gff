@@ -1,0 +1,11 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=0 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=3346&page=res&job_id=209026
+supercont1.63	BLAST	Blast Hit	2366883	2367017	270	+	.	DART_279H05-291
+supercont1.192	BLAST	Blast Hit	1803957	1804077	80	-	.	DART_279H05-291
+supercont1.255	BLAST	Blast Hit	1197133	1197192	80	-	.	DART_279H05-291
+supercont1.311	BLAST	Blast Hit	936144	936241	78	-	.	DART_279H05-291
+supercont1.343	BLAST	Blast Hit	981042	981099	76	+	.	DART_279H05-291
+supercont1.343	BLAST	Blast Hit	535963	536071	74	-	.	DART_279H05-291
+supercont1.42	BLAST	Blast Hit	410990	411047	76	+	.	DART_279H05-291
+supercont1.46	BLAST	Blast Hit	2945218	2945278	76	+	.	DART_279H05-291
+supercont1.78	BLAST	Blast Hit	1628022	1628102	76	-	.	DART_279H05-291
+supercont1.115	BLAST	Blast Hit	719235	719307	74	+	.	DART_279H05-291

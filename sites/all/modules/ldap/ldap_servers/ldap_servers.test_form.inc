@@ -1,7 +1,7 @@
 <?php
 // $Id: ldap_servers.test_form.inc,v 1.5.2.1 2011/02/08 06:01:00 johnbarclay Exp $
 
-require_once('ldap_servers.functions.inc');
+module_load_include('inc', 'ldap_servers', 'ldap_servers.functions');
 
 /**
  * @file
@@ -78,14 +78,33 @@ function ldap_servers_test_form($form, &$form_state, $op = NULL, $sid = NULL) {
     '#weight' => 100,
   );
 
+
   if (isset($_SESSION['ldap_server_test_data']) && count($_SESSION['ldap_server_test_data']) > 0) {
     $form['#suffix'] = theme('ldap_server_ldap_entry_table',
       array(
-        'entry' => $_SESSION['ldap_server_test_data']['LDAP Entry'],
+        'entry' => $_SESSION['ldap_server_test_data']['LDAP Entry']['attr'],
         'username' => $_SESSION['ldap_server_test_data']['username'],
       ));
+
+    if (function_exists('dpm')) {
+      $user_name =  $_SESSION['ldap_server_test_data']['username'];
+      dpm("ldap full result array for: " . $user_name);
+      dpm($_SESSION['ldap_server_test_data']['LDAP Entry']['attr']);
+
+      $user = user_load_by_name($user_name);
+      dpm("drupal user object for: $user_name");
+      dpm($user);
+
+      $user_entity = entity_load('user', array($user->uid));
+      if (count($user_entity) > 0) {
+        dpm("drupal user entity for: $user_name");
+        dpm($user_entity);
+      }
+    }
+
     unset($_SESSION['ldap_server_test_data']);
   }
+
   return $form;
 }
 
@@ -106,6 +125,7 @@ function ldap_servers_test_form_validate($form, &$form_state) {
  * Submit hook for the LDAP server form.
  */
 function ldap_servers_test_form_submit($form, &$form_state) {
+
   $errors = FALSE;
   $values = $form_state['values'];
   $sid = $values['sid'];
@@ -139,6 +159,7 @@ function ldap_servers_test_form_submit($form, &$form_state) {
   $results = array_merge($results, $more_results);
   if ($ldap_server->bind_method ==  LDAP_SERVERS_BIND_METHOD_ANON_USER) {
     list($has_errors, $more_results, $ldap_user) = ldap_servers_test_user_mapping($values['testing_drupal_username'], $ldap_server);
+
     $results = array_merge($results, $more_results);
     if (!$has_errors) {
       $mapping[] = "dn = " . $ldap_user['dn'];
@@ -161,19 +182,20 @@ function ldap_servers_test_form_submit($form, &$form_state) {
   }
 
   if (!$has_errors && @$values['testing_drupal_username']) {
-    require_once('ldap_servers.functions.inc');
+    ldap_server_module_load_include('inc', 'ldap_servers', 'ldap_servers.functions');
     list($has_errors, $more_results, $ldap_user) = ldap_servers_test_user_mapping($values['testing_drupal_username'], $ldap_server);
     $results = array_merge($results, $more_results);
     $tokens = ($ldap_user && isset($ldap_user['attr'])) ? ldap_server_tokenize_entry($ldap_user['attr'], 'all') : array();
     $_SESSION['ldap_server_test_data'] = array(
       'username' => $values['testing_drupal_username'],
       'Tokens Available' => $tokens,
-      'LDAP Entry' => $ldap_user['attr'],
+      'LDAP Entry' => $ldap_user,
     );
   }
-  $message =  theme_item_list(array('items' => $results, 'title' => t('Result Messages'), 'type' => 'ul', 'attributes' => array()));
+  $message = ''; // theme_item_list(array('items' => $results, 'title' => t('Result Messages'), 'type' => 'ul', 'attributes' => array()));
 
   drupal_set_message(t($message), ($has_errors) ? 'error' : 'status');
+
   $form_state['redirect'] = LDAP_SERVERS_MENU_BASE_PATH . "/servers/test/$sid";
 
 }

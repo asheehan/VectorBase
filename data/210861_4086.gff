@@ -1,0 +1,7 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=0 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=4086&page=res&job_id=210861
+2L	BLAST	Blast Hit	39287928	39287979	104	+	.	Anopheles
+2L	BLAST	Blast Hit	14806263	14806280	36	+	.	Anopheles
+2R	BLAST	Blast Hit	23926188	23926209	38	-	.	Anopheles
+2R	BLAST	Blast Hit	46156324	46156342	38	+	.	Anopheles
+3R	BLAST	Blast Hit	24715600	24715622	36	+	.	Anopheles
+3L	BLAST	Blast Hit	16148218	16148238	36	+	.	Anopheles

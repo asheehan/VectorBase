@@ -1,0 +1,5 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=1 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=346&page=res&job_id=187830
+2R	BLAST	Blast Hit	11452128	11455308	6362	-	.	gi|347966686|ref|XM_321212.4| Anopheles gambiae str. PEST AGAP001856-PA (AgaP_AGAP001856) mRNA, complete cds
+2R	BLAST	Blast Hit	11449401	11450082	1364	-	.	gi|347966686|ref|XM_321212.4| Anopheles gambiae str. PEST AGAP001856-PA (AgaP_AGAP001856) mRNA, complete cds
+2R	BLAST	Blast Hit	11455958	11456505	1090	-	.	gi|347966686|ref|XM_321212.4| Anopheles gambiae str. PEST AGAP001856-PA (AgaP_AGAP001856) mRNA, complete cds
+2R	BLAST	Blast Hit	11450838	11451267	860	-	.	gi|347966686|ref|XM_321212.4| Anopheles gambiae str. PEST AGAP001856-PA (AgaP_AGAP001856) mRNA, complete cds

@@ -1,0 +1,14 @@
+; $Id$
+name = External iFrame
+description = Open external links in an iframe with custom header
+package = User interface
+core = 7.x
+
+
+
+; Information added by drupal.org packaging script on 2012-04-23
+version = "7.x-1.0-beta6"
+core = "7.x"
+project = "external-iframe"
+datestamp = "1335192683"
+

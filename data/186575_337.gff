@@ -1,0 +1,7 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=1 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=337&page=res&job_id=186575
+AGAP013149-PA	BLAST	Blast Hit	1	370	1978	.	.	AgGPRop1
+AGAP012985-PA	BLAST	Blast Hit	1	370	1968	.	.	AgGPRop1
+AGAP012982-PA	BLAST	Blast Hit	1	370	1968	.	.	AgGPRop1
+AGAP001161-PA	BLAST	Blast Hit	1	369	1690	.	.	AgGPRop1
+AGAP001162-PA	BLAST	Blast Hit	14	375	1362	.	.	AgGPRop1
+AGAP002462-PA	BLAST	Blast Hit	13	363	1361	.	.	AgGPRop1

@@ -1,0 +1,11 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=0 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=4496&page=res&job_id=212574
+scf_1106392405291	BLAST	Blast Hit	468	515	68	-	.	Example Sequence2
+scf_1106392402677	BLAST	Blast Hit	673	720	68	-	.	Example Sequence2
+scf_1106392397139	BLAST	Blast Hit	2320475	2320522	68	-	.	Example Sequence2
+scf_1106392397139	BLAST	Blast Hit	2141524	2141571	64	+	.	Example Sequence2
+scf_1106392397139	BLAST	Blast Hit	5486405	5486452	64	-	.	Example Sequence2
+scf_1106392397137	BLAST	Blast Hit	8471129	8471176	68	+	.	Example Sequence2
+scf_1106392397131	BLAST	Blast Hit	2802084	2802131	68	+	.	Example Sequence2
+scf_1106392397124	BLAST	Blast Hit	7338975	7339022	68	-	.	Example Sequence2
+scf_1106392397100	BLAST	Blast Hit	222097	222144	68	+	.	Example Sequence2
+scf_1106392395805	BLAST	Blast Hit	9054	9101	68	+	.	Example Sequence2

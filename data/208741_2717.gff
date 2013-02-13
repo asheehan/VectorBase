@@ -1,0 +1,6 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=0 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=2717&page=res&job_id=208741
+contig:GmorY1:ctg10005902:1:123737:1	BLAST	Blast Hit	79194	79943	1219	+	.	dme:Dmel_CG42708 CG42708 gene product from transcript CG42708-RA(EC:3.5.1.2); K01425 glutaminase [EC:3.5.1.2] (A)
+contig:GmorY1:ctg10005902:1:123737:1	BLAST	Blast Hit	77744	78298	732	+	.	dme:Dmel_CG42708 CG42708 gene product from transcript CG42708-RA(EC:3.5.1.2); K01425 glutaminase [EC:3.5.1.2] (A)
+contig:GmorY1:ctg10005902:1:123737:1	BLAST	Blast Hit	78842	79120	472	+	.	dme:Dmel_CG42708 CG42708 gene product from transcript CG42708-RA(EC:3.5.1.2); K01425 glutaminase [EC:3.5.1.2] (A)
+contig:GmorY1:ctg10005902:1:123737:1	BLAST	Blast Hit	78660	78782	191	+	.	dme:Dmel_CG42708 CG42708 gene product from transcript CG42708-RA(EC:3.5.1.2); K01425 glutaminase [EC:3.5.1.2] (A)
+contig:GmorY1:ctg10014043:1:73674:1	BLAST	Blast Hit	10480	10758	131	+	.	dme:Dmel_CG42708 CG42708 gene product from transcript CG42708-RA(EC:3.5.1.2); K01425 glutaminase [EC:3.5.1.2] (A)

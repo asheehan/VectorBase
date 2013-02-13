@@ -1,0 +1,5 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=0 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=3018&page=res&job_id=208959
+DV247863.1	BLAST	Blast Hit	223	238	32	+	.	SGS3-F
+DV363842.1	BLAST	Blast Hit	279	294	32	+	.	SGS3-F
+DV363825.1	BLAST	Blast Hit	535	550	32	-	.	SGS3-F
+DV303626.1	BLAST	Blast Hit	279	294	32	+	.	SGS3-F

@@ -1,0 +1,11 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=1 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=266&page=res&job_id=200181
+ABKP02021178.1	BLAST	Blast Hit	1836	4355	5040	+	.	scf_1925491162 dna:supercontig supercontig:AgamM1:scf_1925491162:1836:11903:1
+ABKP02014046.1	BLAST	Blast Hit	47025	47631	490	-	.	scf_1925491162 dna:supercontig supercontig:AgamM1:scf_1925491162:1836:11903:1
+ABKP02025170.1	BLAST	Blast Hit	56707	57135	486	+	.	scf_1925491162 dna:supercontig supercontig:AgamM1:scf_1925491162:1836:11903:1
+ABKP02022156.1	BLAST	Blast Hit	21193	21702	468	+	.	scf_1925491162 dna:supercontig supercontig:AgamM1:scf_1925491162:1836:11903:1
+ABKP02020020.1	BLAST	Blast Hit	1012	1462	458	+	.	scf_1925491162 dna:supercontig supercontig:AgamM1:scf_1925491162:1836:11903:1
+ABKP02014086.1	BLAST	Blast Hit	38	521	442	+	.	scf_1925491162 dna:supercontig supercontig:AgamM1:scf_1925491162:1836:11903:1
+ABKP02025487.1	BLAST	Blast Hit	2174	2610	428	+	.	scf_1925491162 dna:supercontig supercontig:AgamM1:scf_1925491162:1836:11903:1
+ABKP02014085.1	BLAST	Blast Hit	10475	10863	410	+	.	scf_1925491162 dna:supercontig supercontig:AgamM1:scf_1925491162:1836:11903:1
+ABKP02022918.1	BLAST	Blast Hit	4632	4971	392	-	.	scf_1925491162 dna:supercontig supercontig:AgamM1:scf_1925491162:1836:11903:1
+ABKP02024597.1	BLAST	Blast Hit	9	548	382	+	.	scf_1925491162 dna:supercontig supercontig:AgamM1:scf_1925491162:1836:11903:1

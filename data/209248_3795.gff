@@ -1,0 +1,2 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=0 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=3795&page=res&job_id=209248
+AGAP002329-PA	BLAST	Blast Hit	357	507	79	.	.	tr|Q9VWX2|Q9VWX2_DROME RT06576p1 OS=Drosophila melanogaster GN=upd2 PE=2 SV=2

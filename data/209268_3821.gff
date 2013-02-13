@@ -1,0 +1,8 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=0 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=3821&page=res&job_id=209268
+PHUM213810-PA	BLAST	Blast Hit	1	475	1460	.	.	gi|421991706|gb|AFX73447.1| olfactory co-receptor [Lygus hesperus]
+PHUM600410-PA	BLAST	Blast Hit	250	409	137	.	.	gi|421991706|gb|AFX73447.1| olfactory co-receptor [Lygus hesperus]
+PHUM318770-PA	BLAST	Blast Hit	214	395	114	.	.	gi|421991706|gb|AFX73447.1| olfactory co-receptor [Lygus hesperus]
+PHUM080360-PA	BLAST	Blast Hit	340	417	110	.	.	gi|421991706|gb|AFX73447.1| olfactory co-receptor [Lygus hesperus]
+PHUM430460-PA	BLAST	Blast Hit	270	431	99	.	.	gi|421991706|gb|AFX73447.1| olfactory co-receptor [Lygus hesperus]
+PHUM318760-PA	BLAST	Blast Hit	253	394	75	.	.	gi|421991706|gb|AFX73447.1| olfactory co-receptor [Lygus hesperus]
+PHUM422450-PA	BLAST	Blast Hit	94	137	75	.	.	gi|421991706|gb|AFX73447.1| olfactory co-receptor [Lygus hesperus]

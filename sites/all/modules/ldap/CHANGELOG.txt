@@ -1,3 +1,61 @@
+Fixed fake ldap server in simpltests to never filter on dn=*.  See http://drupal.org/node/1066608
+Issue #1647950 by BobA.  Patch by BobA.  Ldap Profile issue.
+Issue #1650718 by alanrussian.  Patch by alanrussian.
+Issue #1661644 by thesaunterer.  Patch by by thesaunterer. Bad error message code throws warning.
+Issue #1623584 by alanrussian.  Patch by alanrussian.
+Issue #1634930 by boran.  Added hook alter to allow intervention in ldap authentication->allowUser method.
+Changes in ldap_authorization.inc to make logic clearer and set array keys in authorization lowercase.
+Fix for ldap servers caching issue when ctools enabled.  noticed the bug when building simpletests.  There is no issue for this.
+Issue #1371452.  Simpletest coverage for ldap servers add, update, delete and class property population.
+Fixed bug where ldap server could not be deleted even if disabled in ldap authentication.
+Issues #1588854, #1601270.  The gist of this patch was to fix exportables, fix setting of numeric id property on ldap authorization class load and rework simpltests to be able to test if the admin interface works with and without ctools
+Issue #1617696 by thomas.borrmann.  Fix for case sensitivity of mail attribute.
+Issue 1599632#comment-6076358 by jzornig. Finished applying patch.
+Issue #1599632 by jzornig. Patch by jzornig. Support $account->name being different to the users login id thru use of Persistent and Unique User Attribute.
+Issue #1612378 by Gisle Aas.  Fix for empty user logon help text.
+Add drupal user object and entity to ldap server test form, when devel enabled.
+Finished getting simpletests working and dealing with case sensitivity and escaping issues.
+Issue #1589148 by miscul.  Fix for login impossible with bind_method = 4.
+Issue #1066608#comment-6009682 by jdickmann.  fix for deriveFromEntryAttrMatchingUserAttr field implementation.
+Issue #1588068 by jzornig.  Patch to correct role saving in ldap authorization drupal role.
+Issue #1559388 by jzornig.  Patch to query group bundle instead of content bundle.
+added ldap_pear_unescape_filter_value() function
+A number of small fixes, including:
+-- changing of LdapAuthorizationConsumerConfAdmin->save() method to only save explicitly listed properties
+-- LdapAuthorizationConsumerConfAdmin->save() method to force 0 or 1 for status.
+-- call in ldap_authorization.inc to ldap_authorization_get_consumers() to flush cache.
+-- function ldap_authorizations_user_authorizations() changed to support multiple consumer types
+-- removal of test cases for case sensitivity and escaping.  These need to be tested on acutal ldap installs.
+Issue #1559088 by NimbyDagda.  LDAP SSO "noisily" checks the remote users headers for mod_auth_kerb.
+Issue #1548102 by MJCO.  Mixed case Drupal role names failed.
+Issue #1477540. Added more debug code to ldap authorization og and addl error checking.
+Issue #1535538 by snickl.  fix testing username property
+Issue #1532084 by lucuhb.  Remove ldap_profile's dependeny on ldap_authentication
+Issue #1468990 by superhenne.  Duplicate entry in db after updating configuration
+Issue #1512562 by jasondranedesigns and patch by figureone.  Issue still may not be resolved because binary files need to be addressed.
+Issue #1272190 by jrm402.  Fix ability to apply mapping to authorization without filtering.
+Issue #1446758 for pagination and size limit of ldap queries.
+fix for case sensitivity in ldap authorization mappings
+added deriveFromEntryEntriesAttr for strategy IIC in ldap authorization to deal with admin specified attributes so groups can contain cn, dns, etc
+renamed property deriveFromEntryAttr to deriveFromEntryMembershipAttr
+Fixed bug in basic authorization unit test (had wrong server configuration values)
+General commit of ldap authorization code which is still broken, but need feedback on authorization IIC and nested groups.
+removed description from authorization consumer class
+improvements to ldap authorization interface
+fix in ldap authorization test form and ldap_authorization_get_consumers (which was broken)
+added deriveFromEntryAttrMatchingUserAttr and deriveFromEntryUseFirstAttr properties to ldap authorization consumer conf
+General commit of ldap authorization code with support for nested groups and improved, but broken, IIC derive from entry setup.
+Issue #1491244 by smsearcy.  Adjustment to work with IIS for strip domain name.
+Issue #1498616 by johnbarclay.  LDAP Authorization OG was hiding filter checkbox on ldap authorization drupal roles form.
+LDAP Query: added more theming and info to ldap query test query interface
+Issue #1485118 by paulpaul.  SSO redirect issue corrected with drupal get destination call.
+Issue #1484418. Missing ldap_servers.bind_method field for some unstable upgrades in update hook.
+Issue #1016728. Moved deriveFromAttrGroups and deriveFromEntryGroups functions out of ldap authorization and into ldap servers to help implement nested groups.
+Issue #1016728. Added interface and db for nested groups config.
+Issue #1412076 by srinivas.kakde.  Allow specification of "Strategy 3: groups as entries" attribute
+johnbarclay added display of unfiltered authorizations to authorization debug/test interface
+Issue #1480236 by paulpaul.  foreach getting non array in ldap authorization include file.
+Issue #1481778 by dams_26.  includes without drupal root fixed.
 Issue #1412030 by srinivas.kakde.  corrected problem where authentication binding by user was preserverd in authorization, etc.
 Issue #1441694 by haydeniv. fixed some needed include in ldap sso.
 Issue #1450932 by hotspoons. untested kerberos for ldap sso.

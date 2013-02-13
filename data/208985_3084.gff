@@ -1,0 +1,11 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=0 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=3084&page=res&job_id=208985
+supercont3.7	BLAST	Blast Hit	331324	331653	573	+	.	Cat L Gen
+supercont3.7	BLAST	Blast Hit	331326	331658	563	+	.	Cat L Gen
+supercont3.7	BLAST	Blast Hit	331325	331651	556	-	.	Cat L Gen
+supercont3.7	BLAST	Blast Hit	331325	331651	534	+	.	Cat L Gen
+supercont3.7	BLAST	Blast Hit	331324	331653	533	-	.	Cat L Gen
+supercont3.7	BLAST	Blast Hit	331326	331652	533	-	.	Cat L Gen
+supercont3.7	BLAST	Blast Hit	334545	334823	402	+	.	Cat L Gen
+supercont3.684	BLAST	Blast Hit	216575	216844	343	+	.	Cat L Gen
+supercont3.684	BLAST	Blast Hit	213849	214118	324	-	.	Cat L Gen
+supercont3.15	BLAST	Blast Hit	204192	204479	321	+	.	Cat L Gen

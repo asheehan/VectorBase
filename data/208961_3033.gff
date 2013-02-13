@@ -1,0 +1,11 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=0 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=3033&page=res&job_id=208961
+DW995052.1	BLAST	Blast Hit	547	566	40	-	.	SGS2-RV
+DW189355.1	BLAST	Blast Hit	509	528	40	-	.	SGS2-RV
+DW990938.1	BLAST	Blast Hit	521	540	40	-	.	SGS2-RV
+DW187142.1	BLAST	Blast Hit	59	78	40	+	.	SGS2-RV
+DW994666.1	BLAST	Blast Hit	485	504	40	-	.	SGS2-RV
+DW989724.1	BLAST	Blast Hit	609	628	40	-	.	SGS2-RV
+DW188227.1	BLAST	Blast Hit	609	628	40	-	.	SGS2-RV
+DV266614.1	BLAST	Blast Hit	52	71	40	+	.	SGS2-RV
+DV304933.1	BLAST	Blast Hit	52	71	40	+	.	SGS2-RV
+DV266615.1	BLAST	Blast Hit	7	26	40	+	.	SGS2-RV

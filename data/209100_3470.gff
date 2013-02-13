@@ -1,0 +1,11 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=0 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=3470&page=res&job_id=209100
+AGAP009978-PA	BLAST	Blast Hit	24	1475	7457	.	.	AAEL007563-PA |DualOxidase: Peroxidase and NADPH-Oxidase domains.|protein_coding|supercont1.263:965300-1158278:-1|gene:AAEL007563
+AGAP008072-PA	BLAST	Blast Hit	93	556	485	.	.	AAEL007563-PA |DualOxidase: Peroxidase and NADPH-Oxidase domains.|protein_coding|supercont1.263:965300-1158278:-1|gene:AAEL007563
+AGAP008350-PA	BLAST	Blast Hit	837	1233	475	.	.	AAEL007563-PA |DualOxidase: Peroxidase and NADPH-Oxidase domains.|protein_coding|supercont1.263:965300-1158278:-1|gene:AAEL007563
+AGAP010734-PA	BLAST	Blast Hit	243	682	439	.	.	AAEL007563-PA |DualOxidase: Peroxidase and NADPH-Oxidase domains.|protein_coding|supercont1.263:965300-1158278:-1|gene:AAEL007563
+AGAP007237-PB	BLAST	Blast Hit	394	774	439	.	.	AAEL007563-PA |DualOxidase: Peroxidase and NADPH-Oxidase domains.|protein_coding|supercont1.263:965300-1158278:-1|gene:AAEL007563
+AGAP007237-PA	BLAST	Blast Hit	883	1263	437	.	.	AAEL007563-PA |DualOxidase: Peroxidase and NADPH-Oxidase domains.|protein_coding|supercont1.263:965300-1158278:-1|gene:AAEL007563
+AGAP013327-PA	BLAST	Blast Hit	190	599	435	.	.	AAEL007563-PA |DualOxidase: Peroxidase and NADPH-Oxidase domains.|protein_coding|supercont1.263:965300-1158278:-1|gene:AAEL007563
+AGAP003714-PA	BLAST	Blast Hit	261	626	420	.	.	AAEL007563-PA |DualOxidase: Peroxidase and NADPH-Oxidase domains.|protein_coding|supercont1.263:965300-1158278:-1|gene:AAEL007563
+AGAP004038-PA	BLAST	Blast Hit	322	760	405	.	.	AAEL007563-PA |DualOxidase: Peroxidase and NADPH-Oxidase domains.|protein_coding|supercont1.263:965300-1158278:-1|gene:AAEL007563
+AGAP004036-PA	BLAST	Blast Hit	338	757	403	.	.	AAEL007563-PA |DualOxidase: Peroxidase and NADPH-Oxidase domains.|protein_coding|supercont1.263:965300-1158278:-1|gene:AAEL007563

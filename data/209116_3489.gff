@@ -1,0 +1,5 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=0 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=3489&page=res&job_id=209116
+AGAP003772-PA	BLAST	Blast Hit	70	561	1646	.	.	AAEL010179-PA |NADPH oxidase|protein_coding|supercont1.458:730738-738617:-1|gene:AAEL010179
+AGAP009978-PA	BLAST	Blast Hit	1052	1475	235	.	.	AAEL010179-PA |NADPH oxidase|protein_coding|supercont1.458:730738-738617:-1|gene:AAEL010179
+AGAP008072-PA	BLAST	Blast Hit	507	562	101	.	.	AAEL010179-PA |NADPH oxidase|protein_coding|supercont1.458:730738-738617:-1|gene:AAEL010179
+AGAP008072-PA	BLAST	Blast Hit	849	1044	179	.	.	AAEL010179-PA |NADPH oxidase|protein_coding|supercont1.458:730738-738617:-1|gene:AAEL010179

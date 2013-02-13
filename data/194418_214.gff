@@ -1,0 +1,2 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=1 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=214&page=res&job_id=194418
+DS681879	BLAST	Blast Hit	565	876	624	+	.	gene gene undefined product 565:876 forward

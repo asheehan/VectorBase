@@ -1,0 +1,4 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=0 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=3812&page=res&job_id=209264
+ISCW004760-RA	BLAST	Blast Hit	284	374	50	-	.	
+ISCW002529-RA	BLAST	Blast Hit	1864	1891	46	-	.	
+ISCW021853-RA	BLAST	Blast Hit	794	831	44	-	.	

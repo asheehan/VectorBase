@@ -1,0 +1,11 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=0 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=1256&page=res&job_id=207955
+scaffold:PpapN1:Scaffold1805:1:31077:1	BLAST	Blast Hit	2339	2524	214	+	.	Anopheles_Pep
+scaffold:PpapN1:Scaffold53910:1:4297:1	BLAST	Blast Hit	2521	2703	208	-	.	Anopheles_Pep
+scaffold:PpapN1:Scaffold124:1:204696:1	BLAST	Blast Hit	70910	71107	196	-	.	Anopheles_Pep
+scaffold:PpapN1:Scaffold45089:1:12323:1	BLAST	Blast Hit	11632	11820	196	-	.	Anopheles_Pep
+scaffold:PpapN1:Scaffold631:1:64557:1	BLAST	Blast Hit	56680	56856	196	+	.	Anopheles_Pep
+scaffold:PpapN1:Scaffold631:1:64557:1	BLAST	Blast Hit	29323	29508	195	-	.	Anopheles_Pep
+scaffold:PpapN1:Scaffold2526:1:21990:1	BLAST	Blast Hit	4378	4560	195	-	.	Anopheles_Pep
+scaffold:PpapN1:Scaffold48214:1:7179:1	BLAST	Blast Hit	1079	1261	192	-	.	Anopheles_Pep
+scaffold:PpapN1:Scaffold54456:1:4091:1	BLAST	Blast Hit	2686	2898	191	+	.	Anopheles_Pep
+scaffold:PpapN1:Scaffold1622:1:35615:1	BLAST	Blast Hit	26051	26239	191	-	.	Anopheles_Pep

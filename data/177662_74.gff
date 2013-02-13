@@ -1,0 +1,11 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=1 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=74&page=res&job_id=177662
+supercont1.2857	BLAST	Blast Hit	1456	1490	70	-	.	Example Sequence
+supercont1.406	BLAST	Blast Hit	253398	253432	70	+	.	Example Sequence
+supercont1.119	BLAST	Blast Hit	830667	830686	34	-	.	Example Sequence
+supercont1.1357	BLAST	Blast Hit	124447	124466	34	-	.	Example Sequence
+supercont1.172	BLAST	Blast Hit	775938	775959	34	+	.	Example Sequence
+supercont1.2	BLAST	Blast Hit	1707393	1707409	34	+	.	Example Sequence
+supercont1.41	BLAST	Blast Hit	2203302	2203318	34	-	.	Example Sequence
+supercont1.490	BLAST	Blast Hit	479980	479996	34	-	.	Example Sequence
+supercont1.629	BLAST	Blast Hit	464964	464980	34	-	.	Example Sequence
+supercont1.966	BLAST	Blast Hit	288926	288945	34	-	.	Example Sequence

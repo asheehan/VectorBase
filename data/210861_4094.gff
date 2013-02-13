@@ -1,0 +1,4 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=0 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=4094&page=res&job_id=210861
+CPIJ800243-RA	BLAST	Blast Hit	1543	1559	34	+	.	Anopheles
+CPIJ004085-RA	BLAST	Blast Hit	900	915	32	+	.	Anopheles
+CPIJ010666-RA	BLAST	Blast Hit	3768	3788	32	-	.	Anopheles

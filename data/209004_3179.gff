@@ -1,0 +1,5 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=0 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=3179&page=res&job_id=209004
+AGAP003772-PA	BLAST	Blast Hit	70	561	1646	.	.	AAEL010179A_aegyptiNox4
+AGAP009978-PA	BLAST	Blast Hit	1052	1475	235	.	.	AAEL010179A_aegyptiNox4
+AGAP008072-PA	BLAST	Blast Hit	849	1044	179	.	.	AAEL010179A_aegyptiNox4
+AGAP008072-PA	BLAST	Blast Hit	507	562	101	.	.	AAEL010179A_aegyptiNox4

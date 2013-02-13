@@ -1,0 +1,5 @@
+name = Organism Header
+description = Display a block that lists all species, grouped by class and genus.
+package = VectorBase
+core = 7.x
+files[] = organism_header.module

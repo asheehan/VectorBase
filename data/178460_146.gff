@@ -1,0 +1,8 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=1 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=146&page=res&job_id=178460
+PHUM079970-RA	BLAST	Blast Hit	1092	1117	32	-	.	Example Sequence
+PHUM492290-RA	BLAST	Blast Hit	1618	1632	30	+	.	Example Sequence
+PHUM479080-RA	BLAST	Blast Hit	15	41	30	-	.	Example Sequence
+PHUM389830-RA	BLAST	Blast Hit	2226	2245	30	-	.	Example Sequence
+PHUM377660-RA	BLAST	Blast Hit	621	643	30	+	.	Example Sequence
+PHUM168440-RA	BLAST	Blast Hit	361	375	30	+	.	Example Sequence
+PHUM003490-RA	BLAST	Blast Hit	495	509	30	-	.	Example Sequence

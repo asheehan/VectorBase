@@ -1,0 +1,173 @@
+<?php
+/**
+ * Edit IPTC information in images
+ */
+
+/**
+ * Implementation of hook_init().
+ */
+function iptc_editor_init() {
+  drupal_add_css(drupal_get_path('module', 'iptc_editor') .'/iptc_editor.css', 'module');
+}
+/**
+ * Implementation of hook_help().
+ */
+function iptc_editor_help($path, $arg) {
+  switch ($path) {
+    case 'admin/help#iptc_editor':
+      $output = 'The IPTC Editor module allows permitted users to change the IPTC information for an image.';
+      return $output;
+  }
+}
+/**
+ * Implementation of hook_perm().
+ */
+function iptc_editor_permission() {
+  return array(
+    'edit iptc' => array(
+      'title' => t('Edit IPTC Data'),
+      'description' => t('User is able to edit IPTC data for images'),
+    ),
+  );
+}
+/**
+ * Implementation of hook_block_info()
+ */
+function iptc_editor_block_info() {
+
+  $blocks['iptc_editor'] = array(
+    'info' => t('IPTC Editor'),
+  );
+
+  return $blocks;
+}
+/**
+ * Implementation of hook_menu()
+ */
+function iptc_editor_menu() {
+  $items = array();
+
+  // create an entry to edit IPTC data
+  $items['iptc_editor/edit'] = array(
+    'title' => 'Edit IPTC Data',
+    'type' => MENU_CALLBACK,
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('iptc_editor_edit_iptc'),
+    'access arguments' => array('edit iptc'),
+  );
+
+  return $items;
+}
+/**
+ * Add an IPTC editor form.
+ * The form for editing IPTC data.
+ *
+ * @return 
+ *  Form HTML.
+ */
+function iptc_editor_edit_iptc() {
+  // Create a fieldset for the note:
+  
+  if (isset($_GET['imagepath'])) {
+    $imagepath = $_GET['imagepath'];
+  } else {
+    $imagepath = '';
+  }
+  
+  /*$form['path'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Image Path'),
+    '#size' => 60,
+    '#maxlength' => 24,
+    '#description' => t('path to the image'),
+  );*/
+  $form['title'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Image Title'),
+    '#size' => 60,
+    '#maxlength' => 24,
+    '#description' => t('The Title of the image (shown in the gallery).'),
+  );
+  $form['caption'] = array(
+    '#type' => 'textarea',
+    '#title' => t('Caption'),
+    '#cols' => 50,
+    '#rows' => 5,
+    '#description' => t('The Caption for the Image (shown in the slideshow as well as the gallery tooltip).'),
+  );
+  $form['credit'] = array(
+    '#type' => 'textarea',
+    '#title' => t('Credit'),
+    '#cols' => 50,
+    '#rows' => 5,
+    '#description' => t('Information regarding the original creator of the work.'),
+  );
+  $form['source'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Image Source'),
+    '#size' => 60,
+    '#maxlength' => 24,
+    '#description' => t('The source where the image was obtained (shortcuts: PHIL:1234).'),
+  );
+  $form['path'] = array(
+    '#type' => 'hidden',
+    '#default_value' => $imagepath,
+  );
+  $form['referer'] = array(
+    '#type' => 'hidden',
+    '#default_value' => $_SERVER['HTTP_REFERER'],
+  );
+  $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => t('Write IPTC Data'),
+  );
+  return $form;
+}
+/**
+ * Form submission handler, which functions like a hook.
+ */
+
+function iptc_editor_edit_iptc_submit($form, $form_state) {
+  
+  $referer = $form_state['values']['referer'];
+  $pathurl = escapeshellarg($form_state['values']['path']);
+  $path = escapeshellarg(drupal_realpath($form_state['values']['path']));
+  $title = escapeshellarg($form_state['values']['title']);
+  $caption  = escapeshellarg($form_state['values']['caption']);
+  $credit  = escapeshellarg($form_state['values']['credit']);
+  $source  = escapeshellarg($form_state['values']['source']);
+  
+  if (($path != '') && preg_match("/[jJpP][pPnN][gG]'$/", $path)) {
+      $execution = 0;
+      //$iptc_command = "echo '" . $caption . "' >> '" . $path . "'";
+
+      if ($title != '') {
+          $iptc_command = 'exiv2 -M"set Iptc.Application2.Byline ' . $title . '" ' . $path;
+          $execution += exec($iptc_command);
+      }
+      if ($caption != '') {
+          $iptc_command = 'exiv2 -M"set Iptc.Application2.Caption ' . $caption . '" ' . $path;
+          $execution += exec($iptc_command);
+      }
+      if ($credit != '') {
+          $iptc_command = 'exiv2 -M"set Iptc.Application2.Credit ' . $credit . '" ' . $path;
+          $execution += exec($iptc_command);
+      }
+      if ($caption != '') {
+          $iptc_command = 'exiv2 -M"set Iptc.Application2.Source ' . $source . '" ' . $path;
+          $execution += exec($iptc_command);
+      }
+
+  } else {
+    $execution = 99;
+  }
+  
+  
+  if ($execution > 1) {
+    drupal_set_message(t('There was a problem updating %path with title: %title and caption %caption.', array('%title' => $title, '%caption' => $caption, '%path' => $pathurl)), 'error');
+    drupal_goto(drupal_goto($referer));
+  } else {
+    drupal_set_message(t('The image %path has been updated with title: %title and caption %caption. <script>var xhr = new XMLHttpRequest();function clear_cache() { xhr.open("GET","/fast_gallery/clearcache", true);xhr.send();alert(xhr.readyState);if (xhr.status==200) { alert("Cache Cleared"); } }</script> To see your changes now you can <a id="clearlink" onClick="clear_cache();return false;">clear the cache</a> and <a onClick="window.location.reload();return false;">reload</a>.', array('%title' => $title, '%caption' => $caption, '%path' => $pathurl)));
+    drupal_goto($referer);
+  } 
+}

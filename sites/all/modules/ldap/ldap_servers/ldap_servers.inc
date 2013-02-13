@@ -7,8 +7,14 @@
  */
 
 function _ldap_servers_get_user_ldap_data($drupal_user, $sid) {
-  $drupal_username =  (is_object($drupal_user)) ? $drupal_user->name : $drupal_user;
-  // print $sid; die;
+
+  if (is_object($drupal_user) && isset($drupal_user->uid) && $authname = db_query("SELECT authname FROM {authmap} WHERE uid = :uid AND module = 'ldap_authentication'", array(':uid' => $drupal_user->uid))->fetchColumn()) {
+    $drupal_username = $authname;
+  }
+  else {
+    $drupal_username =  (is_object($drupal_user)) ? $drupal_user->name : $drupal_user;
+  }
+
   $servers = ldap_servers_get_servers($sid, 'enabled');
   foreach ($servers as $sid => $ldap_server)  {
     if ($ldap_user = $ldap_server->user_lookup($drupal_username)) {
@@ -24,14 +30,15 @@ function _ldap_servers_get_user_ldap_data($drupal_user, $sid) {
  * see ldap_servers_get_servers()
  */
 function _ldap_servers_get_servers($sid, $type, $flatten, $reset) {
-  require_once('LdapServerAdmin.class.php');
+ // dpm('_ldap_servers_get_servers params'); dpm(array($sid, $type, $flatten, $reset));
+  ldap_server_module_load_include('php', 'ldap_servers', 'LdapServerAdmin.class');
   static $servers;
-
+  $type = ($type) ? $type : 'all';
   if ($reset) {
     $servers = array();
   }
   if (!isset($servers['all'])) {
-    $servers['all'] = LdapServerAdmin::getLdapServerObjects('all');
+    $servers['all'] = LdapServerAdmin::getLdapServerObjects('all', NULL, 'LdapServer', $reset);
   }
 
   if (!isset($servers['enabled'])) {
@@ -58,11 +65,13 @@ function _ldap_servers_get_servers($sid, $type, $flatten, $reset) {
 /**
  * see ldap_servers_get_servers()
  */
-function _ldap_servers_get_simpletest_servers($sid, $type, $flatten, $reset = TRUE) {
-  require_once('tests/LdapServerTest.class.php');
+function _ldap_servers_get_simpletest_servers($sid, $type = NULL, $flatten, $reset = TRUE) {
+  if (!$type) {
+    $type = 'all';
+  }
 
-  $servers['all'] = LdapServerTest::getLdapServerObjects('all');
-
+  ldap_server_module_load_include('php', 'ldap_servers', 'tests/LdapServerTest.class');
+  $servers['all'] = LdapServerTest::getLdapServerObjects('all', NULL, 'LdapServer', $reset );
   foreach ($servers['all'] as $_sid => $ldap_server) {
     if ($ldap_server->status == 1) {
       $servers['enabled'][$_sid] = $ldap_server;

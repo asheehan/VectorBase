@@ -1,0 +1,11 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=1 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=309&page=res&job_id=200935
+AGAP005768-RA	BLAST	Blast Hit	52	2061	2773	+	.	sp|Q17020|HEXA_ANOGA Hexamerin-1.1 OS=Anopheles gambiae GN=HexA PE=2 SV=2
+AGAP001659-RA	BLAST	Blast Hit	73	2121	1474	+	.	sp|Q17020|HEXA_ANOGA Hexamerin-1.1 OS=Anopheles gambiae GN=HexA PE=2 SV=2
+AGAP001345-RA	BLAST	Blast Hit	52	2124	1407	+	.	sp|Q17020|HEXA_ANOGA Hexamerin-1.1 OS=Anopheles gambiae GN=HexA PE=2 SV=2
+AGAP001657-RA	BLAST	Blast Hit	52	2127	1351	+	.	sp|Q17020|HEXA_ANOGA Hexamerin-1.1 OS=Anopheles gambiae GN=HexA PE=2 SV=2
+AGAP005766-RA	BLAST	Blast Hit	331	972	1148	+	.	sp|Q17020|HEXA_ANOGA Hexamerin-1.1 OS=Anopheles gambiae GN=HexA PE=2 SV=2
+AGAP005767-RA	BLAST	Blast Hit	370	951	1029	+	.	sp|Q17020|HEXA_ANOGA Hexamerin-1.1 OS=Anopheles gambiae GN=HexA PE=2 SV=2
+AGAP004975-RA	BLAST	Blast Hit	321	2030	598	+	.	sp|Q17020|HEXA_ANOGA Hexamerin-1.1 OS=Anopheles gambiae GN=HexA PE=2 SV=2
+AGAP010657-RA	BLAST	Blast Hit	63	605	584	+	.	sp|Q17020|HEXA_ANOGA Hexamerin-1.1 OS=Anopheles gambiae GN=HexA PE=2 SV=2
+AGAP002825-RA	BLAST	Blast Hit	349	2157	554	+	.	sp|Q17020|HEXA_ANOGA Hexamerin-1.1 OS=Anopheles gambiae GN=HexA PE=2 SV=2
+AGAP004977-RA	BLAST	Blast Hit	173	2047	546	+	.	sp|Q17020|HEXA_ANOGA Hexamerin-1.1 OS=Anopheles gambiae GN=HexA PE=2 SV=2

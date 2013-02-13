@@ -1,0 +1,194 @@
+
+/****************************/
+/* LOCAL CSS                */
+/****************************/
+
+/* Put your custom CSS and CSS overrides in this file and  */
+/* rename it local.css.  By restricting your CSS changes   */
+/* to local.css, your changes will not be overwritten when */
+/* upgrading to a new version of this theme.  You can also */
+/* use a local-rtl.css file for the equivalent in RTL.     */
+
+/* Steps to activate local.css:                       */
+/* 1. Add your custom CSS to this file                */
+/* 2. Rename this file to local.css                   */
+/* 3. Clear cached data at admin/settings/performance */
+/*
+a,
+a:link,
+a:visited {
+	color: #003300;
+}
+*/
+
+/* ---- site wide updates ---- */
+
+
+/* ---- Header Info ---- */
+
+/*
+#header-group-wrapper {
+	background: #004400;
+}
+
+#header-group-wrapper a {
+	color: white;
+}
+#header-group-wrapper a:link {
+	color: white;
+}
+#header-group-wrapper a:visited {
+	color: white;
+}
+*/
+
+
+/* menu stuffs */
+
+/* species italics "stuffs" :-) */
+
+body.node-type-organism h1 { font-style: italic; }
+div.node-organism h2 { font-style: italic; }
+div.field-name-field-organism div.field-item, div.field-name-field-organisms div.field-item  { font-style: italic; }
+
+/* and the menu items - WILL BREAK IF ORDER CHANGES */
+li.sf-item-3.sf-depth-1 ul li { font-style: italic; }
+/* species names below thumbnails on front page */
+div.view-display-id-block_1 div.field-content.organism-name { font-style: italic; font-size: 90%; }
+
+/* krumo messages disabled for Bob TEMPORARILY */
+/* div.krumo-root { display: none } */
+
+/* Tags displayed inline, not vertically */
+div.field-name-field-tags div.field-items div {
+  float: none;
+  display: inline-block;
+  padding-right: 1ex;
+}
+
+/* align the organism image to the right */
+div.float-right img {
+  float: right;
+  margin-left: 10px;
+}
+
+/* cancel the weird horizontal rule below simple custom blocks (e.g. spacer 20px) */
+div.full-node .inner .content {
+    border-bottom: none;
+}
+
+/* make some space between two columns in display suite layout */
+div.ds-2col-stacked div.group-left, div.ds-2col div.group-left {
+  width: 47%;
+}
+div.ds-2col-stacked div.group-right, div.ds-2col div.group-right {
+  width: 47%;
+  margin-left: 6%;
+} 
+div.ds-3col div.group-middle, div.ds-3col-stacked div.group-middle {
+  width: 44%;
+  margin-left: 3%;
+  margin-right: 3%;
+}
+
+/* better spacing for view blocks in display suite */
+div.field {
+  margin-bottom: 30px;
+}
+
+/* Bob 2012-07-05 for taxonomy term edit page */
+select#edit-parent {
+  height: 200px;
+}
+
+/* bottom-align organism names in front page thumbnail grid */
+div.view-organisms table.views-view-grid div.views-field-title {
+  /* don't know how to do this! */
+}
+
+/* content type name in left sidebar */
+div.rotate-90 {
+  font-size: 40px;
+  width: 300px;
+  color: #ccc;
+  margin-top: 100px;
+  margin-left: -150px;
+  /* IE6-8 Values: 0, 1, 2, 3 for 0, 90, 180 or 270 degress respectively */ 
+  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3); 
+  -ms-transform: rotate(-90deg);  /* Microsoft - Internet Explorer 9 */ 
+  -moz-transform: rotate(-90deg);  /* Mozilla - Firefox 3.5+ */ 
+  -o-transform: rotate(-90deg);  /* Opera 10.5+ */ 
+  -webkit-transform: rotate(-90deg); /* Chrome, Safari */ 
+  transform: rotate(-90deg);   /* W3C - not really reqd yet */
+}
+.region-sidebar-first {
+  width: 50px;
+}
+/* next class selector should ideally be more specific to pages with the 90degree content type left sidebar */
+body.one-sidebar.sidebar-first  .grid16-12 {
+    width: 910px;
+}
+
+/* very obviously temporary genome browser link button */
+div.genome-browser-link-container {
+  border: 2px solid lightgreen;
+  background: pink;
+  padding-left: 5px;
+  width: 60px;
+}
+
+/* who added this, and what for? */
+.views-table {
+margin-bottom:35px;
+}
+
+/* views-table for organisms doesn't need this bottom margin */
+.view-strains-and-more-for-organism .views-table, .view-assemblies-for-strain .views-table {
+  margin-bottom: 0px;
+}
+
+caption {
+margin-bottom:15px;
+margin-left:5px;
+font-size:20px;
+}
+
+#block-search-form {
+position:relative;
+left:720px;
+bottom:90px;
+}
+
+#header-group-wrapper {
+ height:0px;
+}
+
+#header-group-inner {
+ height:90px;
+}
+
+#header-group-wrapper {
+ height:0px;
+}
+
+#main-wrapper {
+ position:relative;
+ bottom:20px;
+}
+
+#preface-top-outer {
+ display:none;
+}
+
+#main-menu-inner {
+ position:relative;
+ bottom:20px;
+}
+
+#postscript-bottom-wrapper {
+ background: #F4F7E7; /* Old browsers */
+ background: -moz-linear-gradient(top, #e3ecc0 0%, #F4F7E7 100%); 
+ border:0px;
+}
+
+

@@ -1,0 +1,10 @@
+name = Github Widget 
+description = This is a 3rd party javascript tool used to display your GitHub projects on a webpage, ordered by number of watchers.  The project's repository is located here: https://github.com/jawj/github-widget
+package = VectorBase
+core = 7.x
+files[] = repostat.png
+scripts[] = github_widget.coffee  
+scripts[] = github_widget.css  
+scripts[] = github_widget.js  
+scripts[] = github_widget.min.js  
+

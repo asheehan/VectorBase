@@ -1,0 +1,6 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=0 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=4669&page=res&job_id=214195
+SRS008445_39140	BLAST	Blast Hit	98	545	240	+	.	AGAP010815-RA cdna:KNOWN_protein_coding
+SRS008445_79999	BLAST	Blast Hit	5	101	114	-	.	AGAP010815-RA cdna:KNOWN_protein_coding
+SRS008445_70449	BLAST	Blast Hit	20	118	112	-	.	AGAP010815-RA cdna:KNOWN_protein_coding
+SRS008445_56024	BLAST	Blast Hit	1	75	74	+	.	AGAP010815-RA cdna:KNOWN_protein_coding
+SRS008445_41756	BLAST	Blast Hit	41	133	60	-	.	AGAP010815-RA cdna:KNOWN_protein_coding

@@ -1,0 +1,5 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=0 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=3778&page=res&job_id=209240
+AAEL002039-RA	BLAST	Blast Hit	444	463	40	+	.	
+AAEL006018-RB	BLAST	Blast Hit	220	237	30	+	.	
+AAEL006018-RA	BLAST	Blast Hit	220	237	30	+	.	
+AAEL005131-RA	BLAST	Blast Hit	2140	2153	28	+	.	

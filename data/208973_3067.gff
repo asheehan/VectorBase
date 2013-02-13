@@ -1,0 +1,11 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=0 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=3067&page=res&job_id=208973
+CPIJ015761-RA	BLAST	Blast Hit	927	1094	274	+	.	Cat B1 Gen
+CPIJ015761-RA	BLAST	Blast Hit	927	1094	244	-	.	Cat B1 Gen
+CPIJ015761-RA	BLAST	Blast Hit	929	1096	224	-	.	Cat B1 Gen
+CPIJ015761-RA	BLAST	Blast Hit	926	1096	224	+	.	Cat B1 Gen
+CPIJ015761-RA	BLAST	Blast Hit	928	1095	170	-	.	Cat B1 Gen
+CPIJ015761-RA	BLAST	Blast Hit	928	1095	152	+	.	Cat B1 Gen
+CPIJ015762-RA	BLAST	Blast Hit	967	1083	183	+	.	Cat B1 Gen
+CPIJ015762-RA	BLAST	Blast Hit	969	1070	156	-	.	Cat B1 Gen
+CPIJ001239-RA	BLAST	Blast Hit	872	970	135	+	.	Cat B1 Gen
+CPIJ001240-RA	BLAST	Blast Hit	766	864	134	+	.	Cat B1 Gen

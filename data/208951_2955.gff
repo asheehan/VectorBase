@@ -1,0 +1,10 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=0 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=2955&page=res&job_id=208951
+contig:AaegL1:contig_7232:1:70540:1	BLAST	Blast Hit	17535	17652	236	+	.	1174
+contig:AaegL1:contig_22779:1:210371:1	BLAST	Blast Hit	11941	11966	42	+	.	1174
+contig:AaegL1:contig_20915:1:77556:1	BLAST	Blast Hit	6759	6784	42	-	.	1174
+contig:AaegL1:contig_18174:1:61417:1	BLAST	Blast Hit	19642	19667	42	+	.	1174
+contig:AaegL1:contig_7278:1:141752:1	BLAST	Blast Hit	109844	109869	42	+	.	1174
+contig:AaegL1:contig_7142:1:17289:1	BLAST	Blast Hit	7257	7282	42	+	.	1174
+contig:AaegL1:contig_2250:1:14061:1	BLAST	Blast Hit	7043	7068	42	+	.	1174
+contig:AaegL1:contig_2125:1:87908:1	BLAST	Blast Hit	42078	42103	42	-	.	1174
+contig:AaegL1:contig_8099:1:300295:1	BLAST	Blast Hit	103354	103378	40	+	.	1174

@@ -1,0 +1,1076 @@
+<add>
+  <doc>
+    <field name="id">genome/cap_transcript/ISCW800106</field>
+    <field name="site">genome</field>
+    <field name="accession">ISCW800106-RA</field>
+    <field name="entity_type">cap_transcript</field>
+    <field name="entity_id">0</field>
+    <field name="bundle">cap_transcript</field>
+    <field name="bundle_name">CAP transcript</field>
+    <field name="label">ISCW800106-RA</field>
+    <field name="description">SIFamide neuropeptide precursor</field>
+    <field name="url">http://www.dev.vectorbase.org/ixodes_scapularis/Location/View?db=core;r=DS939604:9411-21839;contigviewbottom=das_ContigManualAnnotation=normal</field>
+    <field name="submitter">ypark</field>
+    <field name="seq_region_name">DS939604</field>
+    <field name="seq_region_start">9411</field>
+    <field name="seq_region_end">21839</field>
+    <field name="seq_region_strand">+</field>
+    <field name="species">ixodes_scapularis</field>
+  </doc>
+
+  <doc>
+    <field name="id">genome/cap_gene/ISCW800106</field>
+    <field name="site">genome</field>
+    <field name="accession">ISCW800106</field>
+    <field name="entity_type">cap_gene</field>
+    <field name="entity_id">811506</field>
+    <field name="bundle">cap_gene</field>
+    <field name="bundle_name">CAP gene</field>
+    <field name="label">ISCW800106</field>
+    <field name="url">http://www.dev.vectorbase.org/ixodes_scapularis/Location/View?db=core;r=DS939604:9411-21839;contigviewbottom=das_ContigManualAnnotation=normal</field>
+    <field name="seq_region_name">DS939604</field>
+    <field name="seq_region_start">9411</field>
+    <field name="seq_region_end">21839</field>
+    <field name="species">ixodes_scapularis</field>
+    <field name="biotype">gene</field>
+    <field name="symbol">SIF</field>
+    <field name="transcript">ISCW800106-RA</field>
+  </doc>
+  <doc>
+    <field name="id">genome/cap_transcript/ISCW800171</field>
+    <field name="site">genome</field>
+    <field name="accession">ISCW800171-RA</field>
+    <field name="entity_type">cap_transcript</field>
+    <field name="entity_id">0</field>
+    <field name="bundle">cap_transcript</field>
+    <field name="bundle_name">CAP transcript</field>
+    <field name="label">ISCW800171-RA</field>
+    <field name="description">Gustatory receptor</field>
+    <field name="url">http://www.dev.vectorbase.org/ixodes_scapularis/Location/View?db=core;r=DS873761:51055-55819;contigviewbottom=das_ContigManualAnnotation=normal</field>
+    <field name="submitter">hughrobe</field>
+    <field name="seq_region_name">DS873761</field>
+    <field name="seq_region_start">51055</field>
+    <field name="seq_region_end">55819</field>
+    <field name="seq_region_strand">-</field>
+    <field name="species">ixodes_scapularis</field>
+  </doc>
+
+  <doc>
+    <field name="id">genome/cap_gene/ISCW800171</field>
+    <field name="site">genome</field>
+    <field name="accession">ISCW800171</field>
+    <field name="entity_type">cap_gene</field>
+    <field name="entity_id">812848</field>
+    <field name="bundle">cap_gene</field>
+    <field name="bundle_name">CAP gene</field>
+    <field name="label">ISCW800171</field>
+    <field name="url">http://www.dev.vectorbase.org/ixodes_scapularis/Location/View?db=core;r=DS873761:51055-55819;contigviewbottom=das_ContigManualAnnotation=normal</field>
+    <field name="seq_region_name">DS873761</field>
+    <field name="seq_region_start">51055</field>
+    <field name="seq_region_end">55819</field>
+    <field name="species">ixodes_scapularis</field>
+    <field name="biotype">gene</field>
+    <field name="symbol">GR34</field>
+    <field name="transcript">ISCW800171-RA</field>
+  </doc>
+  <doc>
+    <field name="id">genome/cap_transcript/ISCW800170</field>
+    <field name="site">genome</field>
+    <field name="accession">ISCW800170-RA</field>
+    <field name="entity_type">cap_transcript</field>
+    <field name="entity_id">0</field>
+    <field name="bundle">cap_transcript</field>
+    <field name="bundle_name">CAP transcript</field>
+    <field name="label">ISCW800170-RA</field>
+    <field name="description">Gustatory receptor</field>
+    <field name="url">http://www.dev.vectorbase.org/ixodes_scapularis/Location/View?db=core;r=DS853698:111225-112868;contigviewbottom=das_ContigManualAnnotation=normal</field>
+    <field name="submitter">hughrobe</field>
+    <field name="seq_region_name">DS853698</field>
+    <field name="seq_region_start">111225</field>
+    <field name="seq_region_end">112868</field>
+    <field name="seq_region_strand">-</field>
+    <field name="species">ixodes_scapularis</field>
+  </doc>
+
+  <doc>
+    <field name="id">genome/cap_gene/ISCW800170</field>
+    <field name="site">genome</field>
+    <field name="accession">ISCW800170</field>
+    <field name="entity_type">cap_gene</field>
+    <field name="entity_id">812846</field>
+    <field name="bundle">cap_gene</field>
+    <field name="bundle_name">CAP gene</field>
+    <field name="label">ISCW800170</field>
+    <field name="url">http://www.dev.vectorbase.org/ixodes_scapularis/Location/View?db=core;r=DS853698:111225-112868;contigviewbottom=das_ContigManualAnnotation=normal</field>
+    <field name="seq_region_name">DS853698</field>
+    <field name="seq_region_start">111225</field>
+    <field name="seq_region_end">112868</field>
+    <field name="species">ixodes_scapularis</field>
+    <field name="biotype">gene</field>
+    <field name="symbol">GR28</field>
+    <field name="transcript">ISCW800170-RA</field>
+  </doc>
+  <doc>
+    <field name="id">genome/cap_transcript/ISCW800173</field>
+    <field name="site">genome</field>
+    <field name="accession">ISCW800173-RA</field>
+    <field name="entity_type">cap_transcript</field>
+    <field name="entity_id">0</field>
+    <field name="bundle">cap_transcript</field>
+    <field name="bundle_name">CAP transcript</field>
+    <field name="label">ISCW800173-RA</field>
+    <field name="description">Gustatory receptor</field>
+    <field name="url">http://www.dev.vectorbase.org/ixodes_scapularis/Location/View?db=core;r=DS895205:28720-34708;contigviewbottom=das_ContigManualAnnotation=normal</field>
+    <field name="submitter">hughrobe</field>
+    <field name="seq_region_name">DS895205</field>
+    <field name="seq_region_start">28720</field>
+    <field name="seq_region_end">34708</field>
+    <field name="seq_region_strand">+</field>
+    <field name="species">ixodes_scapularis</field>
+  </doc>
+
+  <doc>
+    <field name="id">genome/cap_gene/ISCW800173</field>
+    <field name="site">genome</field>
+    <field name="accession">ISCW800173</field>
+    <field name="entity_type">cap_gene</field>
+    <field name="entity_id">812852</field>
+    <field name="bundle">cap_gene</field>
+    <field name="bundle_name">CAP gene</field>
+    <field name="label">ISCW800173</field>
+    <field name="url">http://www.dev.vectorbase.org/ixodes_scapularis/Location/View?db=core;r=DS895205:28720-34708;contigviewbottom=das_ContigManualAnnotation=normal</field>
+    <field name="seq_region_name">DS895205</field>
+    <field name="seq_region_start">28720</field>
+    <field name="seq_region_end">34708</field>
+    <field name="species">ixodes_scapularis</field>
+    <field name="biotype">gene</field>
+    <field name="symbol">GR40</field>
+    <field name="transcript">ISCW800173-RA</field>
+  </doc>
+  <doc>
+    <field name="id">genome/cap_transcript/ISCW800193</field>
+    <field name="site">genome</field>
+    <field name="accession">ISCW800193-RA</field>
+    <field name="entity_type">cap_transcript</field>
+    <field name="entity_id">0</field>
+    <field name="bundle">cap_transcript</field>
+    <field name="bundle_name">CAP transcript</field>
+    <field name="label">ISCW800193-RA</field>
+    <field name="description">bursicon</field>
+    <field name="url">http://www.dev.vectorbase.org/ixodes_scapularis/Location/View?db=core;r=DS725348:326918-329362;contigviewbottom=das_ContigManualAnnotation=normal</field>
+    <field name="submitter">hughrobe</field>
+    <field name="seq_region_name">DS725348</field>
+    <field name="seq_region_start">326918</field>
+    <field name="seq_region_end">329362</field>
+    <field name="seq_region_strand">-</field>
+    <field name="species">ixodes_scapularis</field>
+    <field name="pubmed_id">17435221</field>
+  </doc>
+
+  <doc>
+    <field name="id">genome/cap_gene/ISCW800193</field>
+    <field name="site">genome</field>
+    <field name="accession">ISCW800193</field>
+    <field name="entity_type">cap_gene</field>
+    <field name="entity_id">813008</field>
+    <field name="bundle">cap_gene</field>
+    <field name="bundle_name">CAP gene</field>
+    <field name="label">ISCW800193</field>
+    <field name="url">http://www.dev.vectorbase.org/ixodes_scapularis/Location/View?db=core;r=DS725348:326918-329362;contigviewbottom=das_ContigManualAnnotation=normal</field>
+    <field name="seq_region_name">DS725348</field>
+    <field name="seq_region_start">326918</field>
+    <field name="seq_region_end">329362</field>
+    <field name="species">ixodes_scapularis</field>
+    <field name="biotype">gene</field>
+    <field name="symbol">BURS</field>
+    <field name="transcript">ISCW800193-RA</field>
+  </doc>
+  <doc>
+    <field name="id">genome/cap_transcript/ISCW800175</field>
+    <field name="site">genome</field>
+    <field name="accession">ISCW800175-RA</field>
+    <field name="entity_type">cap_transcript</field>
+    <field name="entity_id">0</field>
+    <field name="bundle">cap_transcript</field>
+    <field name="bundle_name">CAP transcript</field>
+    <field name="label">ISCW800175-RA</field>
+    <field name="description">Gustatory receptor</field>
+    <field name="url">http://www.dev.vectorbase.org/ixodes_scapularis/Location/View?db=core;r=DS663085:56946-58130;contigviewbottom=das_ContigManualAnnotation=normal</field>
+    <field name="submitter">hughrobe</field>
+    <field name="seq_region_name">DS663085</field>
+    <field name="seq_region_start">56946</field>
+    <field name="seq_region_end">58130</field>
+    <field name="seq_region_strand">-</field>
+    <field name="species">ixodes_scapularis</field>
+  </doc>
+
+  <doc>
+    <field name="id">genome/cap_gene/ISCW800175</field>
+    <field name="site">genome</field>
+    <field name="accession">ISCW800175</field>
+    <field name="entity_type">cap_gene</field>
+    <field name="entity_id">812856</field>
+    <field name="bundle">cap_gene</field>
+    <field name="bundle_name">CAP gene</field>
+    <field name="label">ISCW800175</field>
+    <field name="url">http://www.dev.vectorbase.org/ixodes_scapularis/Location/View?db=core;r=DS663085:56946-58130;contigviewbottom=das_ContigManualAnnotation=normal</field>
+    <field name="seq_region_name">DS663085</field>
+    <field name="seq_region_start">56946</field>
+    <field name="seq_region_end">58130</field>
+    <field name="species">ixodes_scapularis</field>
+    <field name="biotype">gene</field>
+    <field name="symbol">GR48</field>
+    <field name="transcript">ISCW800175-RA</field>
+  </doc>
+  <doc>
+    <field name="id">genome/cap_transcript/ISCW800174</field>
+    <field name="site">genome</field>
+    <field name="accession">ISCW800174-RA</field>
+    <field name="entity_type">cap_transcript</field>
+    <field name="entity_id">0</field>
+    <field name="bundle">cap_transcript</field>
+    <field name="bundle_name">CAP transcript</field>
+    <field name="label">ISCW800174-RA</field>
+    <field name="description">Gustatory receptor</field>
+    <field name="url">http://www.dev.vectorbase.org/ixodes_scapularis/Location/View?db=core;r=DS884190:15927-17192;contigviewbottom=das_ContigManualAnnotation=normal</field>
+    <field name="submitter">hughrobe</field>
+    <field name="seq_region_name">DS884190</field>
+    <field name="seq_region_start">15927</field>
+    <field name="seq_region_end">17192</field>
+    <field name="seq_region_strand">-</field>
+    <field name="species">ixodes_scapularis</field>
+  </doc>
+
+  <doc>
+    <field name="id">genome/cap_gene/ISCW800174</field>
+    <field name="site">genome</field>
+    <field name="accession">ISCW800174</field>
+    <field name="entity_type">cap_gene</field>
+    <field name="entity_id">812854</field>
+    <field name="bundle">cap_gene</field>
+    <field name="bundle_name">CAP gene</field>
+    <field name="label">ISCW800174</field>
+    <field name="url">http://www.dev.vectorbase.org/ixodes_scapularis/Location/View?db=core;r=DS884190:15927-17192;contigviewbottom=das_ContigManualAnnotation=normal</field>
+    <field name="seq_region_name">DS884190</field>
+    <field name="seq_region_start">15927</field>
+    <field name="seq_region_end">17192</field>
+    <field name="species">ixodes_scapularis</field>
+    <field name="biotype">gene</field>
+    <field name="symbol">GR47</field>
+    <field name="transcript">ISCW800174-RA</field>
+  </doc>
+  <doc>
+    <field name="id">genome/cap_transcript/ISCW800177</field>
+    <field name="site">genome</field>
+    <field name="accession">ISCW800177-RA</field>
+    <field name="entity_type">cap_transcript</field>
+    <field name="entity_id">0</field>
+    <field name="bundle">cap_transcript</field>
+    <field name="bundle_name">CAP transcript</field>
+    <field name="label">ISCW800177-RA</field>
+    <field name="description">Gustatory receptor</field>
+    <field name="url">http://www.dev.vectorbase.org/ixodes_scapularis/Location/View?db=core;r=DS966800:5785-7014;contigviewbottom=das_ContigManualAnnotation=normal</field>
+    <field name="submitter">hughrobe</field>
+    <field name="seq_region_name">DS966800</field>
+    <field name="seq_region_start">5785</field>
+    <field name="seq_region_end">7014</field>
+    <field name="seq_region_strand">+</field>
+    <field name="species">ixodes_scapularis</field>
+  </doc>
+
+  <doc>
+    <field name="id">genome/cap_gene/ISCW800177</field>
+    <field name="site">genome</field>
+    <field name="accession">ISCW800177</field>
+    <field name="entity_type">cap_gene</field>
+    <field name="entity_id">812860</field>
+    <field name="bundle">cap_gene</field>
+    <field name="bundle_name">CAP gene</field>
+    <field name="label">ISCW800177</field>
+    <field name="url">http://www.dev.vectorbase.org/ixodes_scapularis/Location/View?db=core;r=DS966800:5785-7014;contigviewbottom=das_ContigManualAnnotation=normal</field>
+    <field name="seq_region_name">DS966800</field>
+    <field name="seq_region_start">5785</field>
+    <field name="seq_region_end">7014</field>
+    <field name="species">ixodes_scapularis</field>
+    <field name="biotype">gene</field>
+    <field name="symbol">GR50</field>
+    <field name="transcript">ISCW800177-RA</field>
+  </doc>
+  <doc>
+    <field name="id">genome/cap_transcript/ISCW800176</field>
+    <field name="site">genome</field>
+    <field name="accession">ISCW800176-RA</field>
+    <field name="entity_type">cap_transcript</field>
+    <field name="entity_id">0</field>
+    <field name="bundle">cap_transcript</field>
+    <field name="bundle_name">CAP transcript</field>
+    <field name="label">ISCW800176-RA</field>
+    <field name="description">Gustatory receptor</field>
+    <field name="url">http://www.dev.vectorbase.org/ixodes_scapularis/Location/View?db=core;r=DS663085:62527-63657;contigviewbottom=das_ContigManualAnnotation=normal</field>
+    <field name="submitter">hughrobe</field>
+    <field name="seq_region_name">DS663085</field>
+    <field name="seq_region_start">62527</field>
+    <field name="seq_region_end">63657</field>
+    <field name="seq_region_strand">+</field>
+    <field name="species">ixodes_scapularis</field>
+  </doc>
+
+  <doc>
+    <field name="id">genome/cap_gene/ISCW800176</field>
+    <field name="site">genome</field>
+    <field name="accession">ISCW800176</field>
+    <field name="entity_type">cap_gene</field>
+    <field name="entity_id">812858</field>
+    <field name="bundle">cap_gene</field>
+    <field name="bundle_name">CAP gene</field>
+    <field name="label">ISCW800176</field>
+    <field name="url">http://www.dev.vectorbase.org/ixodes_scapularis/Location/View?db=core;r=DS663085:62527-63657;contigviewbottom=das_ContigManualAnnotation=normal</field>
+    <field name="seq_region_name">DS663085</field>
+    <field name="seq_region_start">62527</field>
+    <field name="seq_region_end">63657</field>
+    <field name="species">ixodes_scapularis</field>
+    <field name="biotype">gene</field>
+    <field name="symbol">GR49</field>
+    <field name="transcript">ISCW800176-RA</field>
+  </doc>
+  <doc>
+    <field name="id">genome/cap_transcript/ISCW800179</field>
+    <field name="site">genome</field>
+    <field name="accession">ISCW800179-RA</field>
+    <field name="entity_type">cap_transcript</field>
+    <field name="entity_id">0</field>
+    <field name="bundle">cap_transcript</field>
+    <field name="bundle_name">CAP transcript</field>
+    <field name="label">ISCW800179-RA</field>
+    <field name="description">Gustatory receptor</field>
+    <field name="url">http://www.dev.vectorbase.org/ixodes_scapularis/Location/View?db=core;r=DS931786:315480-316709;contigviewbottom=das_ContigManualAnnotation=normal</field>
+    <field name="submitter">hughrobe</field>
+    <field name="seq_region_name">DS931786</field>
+    <field name="seq_region_start">315480</field>
+    <field name="seq_region_end">316709</field>
+    <field name="seq_region_strand">-</field>
+    <field name="species">ixodes_scapularis</field>
+  </doc>
+
+  <doc>
+    <field name="id">genome/cap_gene/ISCW800179</field>
+    <field name="site">genome</field>
+    <field name="accession">ISCW800179</field>
+    <field name="entity_type">cap_gene</field>
+    <field name="entity_id">812864</field>
+    <field name="bundle">cap_gene</field>
+    <field name="bundle_name">CAP gene</field>
+    <field name="label">ISCW800179</field>
+    <field name="url">http://www.dev.vectorbase.org/ixodes_scapularis/Location/View?db=core;r=DS931786:315480-316709;contigviewbottom=das_ContigManualAnnotation=normal</field>
+    <field name="seq_region_name">DS931786</field>
+    <field name="seq_region_start">315480</field>
+    <field name="seq_region_end">316709</field>
+    <field name="species">ixodes_scapularis</field>
+    <field name="biotype">gene</field>
+    <field name="symbol">GR52</field>
+    <field name="transcript">ISCW800179-RA</field>
+  </doc>
+  <doc>
+    <field name="id">genome/cap_transcript/ISCW800178</field>
+    <field name="site">genome</field>
+    <field name="accession">ISCW800178-RA</field>
+    <field name="entity_type">cap_transcript</field>
+    <field name="entity_id">0</field>
+    <field name="bundle">cap_transcript</field>
+    <field name="bundle_name">CAP transcript</field>
+    <field name="label">ISCW800178-RA</field>
+    <field name="description">Gustatory receptor</field>
+    <field name="url">http://www.dev.vectorbase.org/ixodes_scapularis/Location/View?db=core;r=DS637704:96604-97833;contigviewbottom=das_ContigManualAnnotation=normal</field>
+    <field name="submitter">hughrobe</field>
+    <field name="seq_region_name">DS637704</field>
+    <field name="seq_region_start">96604</field>
+    <field name="seq_region_end">97833</field>
+    <field name="seq_region_strand">-</field>
+    <field name="species">ixodes_scapularis</field>
+  </doc>
+
+  <doc>
+    <field name="id">genome/cap_gene/ISCW800178</field>
+    <field name="site">genome</field>
+    <field name="accession">ISCW800178</field>
+    <field name="entity_type">cap_gene</field>
+    <field name="entity_id">812862</field>
+    <field name="bundle">cap_gene</field>
+    <field name="bundle_name">CAP gene</field>
+    <field name="label">ISCW800178</field>
+    <field name="url">http://www.dev.vectorbase.org/ixodes_scapularis/Location/View?db=core;r=DS637704:96604-97833;contigviewbottom=das_ContigManualAnnotation=normal</field>
+    <field name="seq_region_name">DS637704</field>
+    <field name="seq_region_start">96604</field>
+    <field name="seq_region_end">97833</field>
+    <field name="species">ixodes_scapularis</field>
+    <field name="biotype">gene</field>
+    <field name="symbol">GR51</field>
+    <field name="transcript">ISCW800178-RA</field>
+  </doc>
+  <doc>
+    <field name="id">genome/cap_transcript/ISCW800158</field>
+    <field name="site">genome</field>
+    <field name="accession">ISCW800158-RA</field>
+    <field name="entity_type">cap_transcript</field>
+    <field name="entity_id">0</field>
+    <field name="bundle">cap_transcript</field>
+    <field name="bundle_name">CAP transcript</field>
+    <field name="label">ISCW800158-RA</field>
+    <field name="description">Diuretic Hormone 34</field>
+    <field name="url">http://www.dev.vectorbase.org/ixodes_scapularis/Location/View?db=core;r=DS849364:213199-266446;contigviewbottom=das_ContigManualAnnotation=normal</field>
+    <field name="submitter">ypark</field>
+    <field name="seq_region_name">DS849364</field>
+    <field name="seq_region_start">213199</field>
+    <field name="seq_region_end">266446</field>
+    <field name="seq_region_strand">-</field>
+    <field name="species">ixodes_scapularis</field>
+  </doc>
+
+  <doc>
+    <field name="id">genome/cap_gene/ISCW800158</field>
+    <field name="site">genome</field>
+    <field name="accession">ISCW800158</field>
+    <field name="entity_type">cap_gene</field>
+    <field name="entity_id">812786</field>
+    <field name="bundle">cap_gene</field>
+    <field name="bundle_name">CAP gene</field>
+    <field name="label">ISCW800158</field>
+    <field name="url">http://www.dev.vectorbase.org/ixodes_scapularis/Location/View?db=core;r=DS849364:213199-266446;contigviewbottom=das_ContigManualAnnotation=normal</field>
+    <field name="seq_region_name">DS849364</field>
+    <field name="seq_region_start">213199</field>
+    <field name="seq_region_end">266446</field>
+    <field name="species">ixodes_scapularis</field>
+    <field name="biotype">gene</field>
+    <field name="symbol">DH34</field>
+    <field name="transcript">ISCW800158-RA</field>
+  </doc>
+  <doc>
+    <field name="id">genome/cap_transcript/ISCW800180</field>
+    <field name="site">genome</field>
+    <field name="accession">ISCW800180-RA</field>
+    <field name="entity_type">cap_transcript</field>
+    <field name="entity_id">0</field>
+    <field name="bundle">cap_transcript</field>
+    <field name="bundle_name">CAP transcript</field>
+    <field name="label">ISCW800180-RA</field>
+    <field name="description">Gustatory receptor</field>
+    <field name="url">http://www.dev.vectorbase.org/ixodes_scapularis/Location/View?db=core;r=DS931786:328322-329596;contigviewbottom=das_ContigManualAnnotation=normal</field>
+    <field name="submitter">hughrobe</field>
+    <field name="seq_region_name">DS931786</field>
+    <field name="seq_region_start">328322</field>
+    <field name="seq_region_end">329596</field>
+    <field name="seq_region_strand">-</field>
+    <field name="species">ixodes_scapularis</field>
+  </doc>
+
+  <doc>
+    <field name="id">genome/cap_gene/ISCW800180</field>
+    <field name="site">genome</field>
+    <field name="accession">ISCW800180</field>
+    <field name="entity_type">cap_gene</field>
+    <field name="entity_id">812866</field>
+    <field name="bundle">cap_gene</field>
+    <field name="bundle_name">CAP gene</field>
+    <field name="label">ISCW800180</field>
+    <field name="url">http://www.dev.vectorbase.org/ixodes_scapularis/Location/View?db=core;r=DS931786:328322-329596;contigviewbottom=das_ContigManualAnnotation=normal</field>
+    <field name="seq_region_name">DS931786</field>
+    <field name="seq_region_start">328322</field>
+    <field name="seq_region_end">329596</field>
+    <field name="species">ixodes_scapularis</field>
+    <field name="biotype">gene</field>
+    <field name="symbol">GR53</field>
+    <field name="transcript">ISCW800180-RA</field>
+  </doc>
+  <doc>
+    <field name="id">genome/cap_transcript/ISCW800159</field>
+    <field name="site">genome</field>
+    <field name="accession">ISCW800159-RA</field>
+    <field name="entity_type">cap_transcript</field>
+    <field name="entity_id">0</field>
+    <field name="bundle">cap_transcript</field>
+    <field name="bundle_name">CAP transcript</field>
+    <field name="label">ISCW800159-RA</field>
+    <field name="description">Ion transport peptide precursor</field>
+    <field name="url">http://www.dev.vectorbase.org/ixodes_scapularis/Location/View?db=core;r=DS934076:103116-110885;contigviewbottom=das_ContigManualAnnotation=normal</field>
+    <field name="submitter">ypark</field>
+    <field name="seq_region_name">DS934076</field>
+    <field name="seq_region_start">103116</field>
+    <field name="seq_region_end">110885</field>
+    <field name="seq_region_strand">-</field>
+    <field name="species">ixodes_scapularis</field>
+  </doc>
+
+  <doc>
+    <field name="id">genome/cap_gene/ISCW800159</field>
+    <field name="site">genome</field>
+    <field name="accession">ISCW800159</field>
+    <field name="entity_type">cap_gene</field>
+    <field name="entity_id">812788</field>
+    <field name="bundle">cap_gene</field>
+    <field name="bundle_name">CAP gene</field>
+    <field name="label">ISCW800159</field>
+    <field name="url">http://www.dev.vectorbase.org/ixodes_scapularis/Location/View?db=core;r=DS934076:103116-110885;contigviewbottom=das_ContigManualAnnotation=normal</field>
+    <field name="seq_region_name">DS934076</field>
+    <field name="seq_region_start">103116</field>
+    <field name="seq_region_end">110885</field>
+    <field name="species">ixodes_scapularis</field>
+    <field name="biotype">gene</field>
+    <field name="symbol">ITPB</field>
+    <field name="transcript">ISCW800159-RA</field>
+  </doc>
+  <doc>
+    <field name="id">genome/cap_transcript/ISCW800110</field>
+    <field name="site">genome</field>
+    <field name="accession">ISCW800110-RA</field>
+    <field name="entity_type">cap_transcript</field>
+    <field name="entity_id">0</field>
+    <field name="bundle">cap_transcript</field>
+    <field name="bundle_name">CAP transcript</field>
+    <field name="label">ISCW800110-RA</field>
+    <field name="description">proctolin neuropeptide precursor</field>
+    <field name="url">http://www.dev.vectorbase.org/ixodes_scapularis/Location/View?db=core;r=DS752645:18947-97567;contigviewbottom=das_ContigManualAnnotation=normal</field>
+    <field name="submitter">ypark</field>
+    <field name="seq_region_name">DS752645</field>
+    <field name="seq_region_start">18947</field>
+    <field name="seq_region_end">97567</field>
+    <field name="seq_region_strand">-</field>
+    <field name="species">ixodes_scapularis</field>
+  </doc>
+
+  <doc>
+    <field name="id">genome/cap_gene/ISCW800110</field>
+    <field name="site">genome</field>
+    <field name="accession">ISCW800110</field>
+    <field name="entity_type">cap_gene</field>
+    <field name="entity_id">811514</field>
+    <field name="bundle">cap_gene</field>
+    <field name="bundle_name">CAP gene</field>
+    <field name="label">ISCW800110</field>
+    <field name="url">http://www.dev.vectorbase.org/ixodes_scapularis/Location/View?db=core;r=DS752645:18947-97567;contigviewbottom=das_ContigManualAnnotation=normal</field>
+    <field name="seq_region_name">DS752645</field>
+    <field name="seq_region_start">18947</field>
+    <field name="seq_region_end">97567</field>
+    <field name="species">ixodes_scapularis</field>
+    <field name="biotype">gene</field>
+    <field name="symbol">PROCT</field>
+    <field name="transcript">ISCW800110-RA</field>
+  </doc>
+  <doc>
+    <field name="id">genome/cap_transcript/ISCW800162</field>
+    <field name="site">genome</field>
+    <field name="accession">ISCW800162-RA</field>
+    <field name="entity_type">cap_transcript</field>
+    <field name="entity_id">0</field>
+    <field name="bundle">cap_transcript</field>
+    <field name="bundle_name">CAP transcript</field>
+    <field name="label">ISCW800162-RA</field>
+    <field name="description">Gustatory receptor</field>
+    <field name="url">http://www.dev.vectorbase.org/ixodes_scapularis/Location/View?db=core;r=DS855368:122988-129732;contigviewbottom=das_ContigManualAnnotation=normal</field>
+    <field name="submitter">hughrobe</field>
+    <field name="seq_region_name">DS855368</field>
+    <field name="seq_region_start">122988</field>
+    <field name="seq_region_end">129732</field>
+    <field name="seq_region_strand">+</field>
+    <field name="species">ixodes_scapularis</field>
+  </doc>
+
+  <doc>
+    <field name="id">genome/cap_gene/ISCW800162</field>
+    <field name="site">genome</field>
+    <field name="accession">ISCW800162</field>
+    <field name="entity_type">cap_gene</field>
+    <field name="entity_id">812830</field>
+    <field name="bundle">cap_gene</field>
+    <field name="bundle_name">CAP gene</field>
+    <field name="label">ISCW800162</field>
+    <field name="url">http://www.dev.vectorbase.org/ixodes_scapularis/Location/View?db=core;r=DS855368:122988-129732;contigviewbottom=das_ContigManualAnnotation=normal</field>
+    <field name="seq_region_name">DS855368</field>
+    <field name="seq_region_start">122988</field>
+    <field name="seq_region_end">129732</field>
+    <field name="species">ixodes_scapularis</field>
+    <field name="biotype">gene</field>
+    <field name="symbol">GR9</field>
+    <field name="transcript">ISCW800162-RA</field>
+  </doc>
+  <doc>
+    <field name="id">genome/cap_transcript/ISCW800085</field>
+    <field name="site">genome</field>
+    <field name="accession">ISCW800085-RA</field>
+    <field name="entity_type">cap_transcript</field>
+    <field name="entity_id">0</field>
+    <field name="bundle">cap_transcript</field>
+    <field name="bundle_name">CAP transcript</field>
+    <field name="label">ISCW800085-RA</field>
+    <field name="description">Corazonin</field>
+    <field name="url">http://www.dev.vectorbase.org/ixodes_scapularis/Location/View?db=core;r=DS968442:4859-8967;contigviewbottom=das_ContigManualAnnotation=normal</field>
+    <field name="submitter">ypark</field>
+    <field name="seq_region_name">DS968442</field>
+    <field name="seq_region_start">4859</field>
+    <field name="seq_region_end">8967</field>
+    <field name="seq_region_strand">+</field>
+    <field name="species">ixodes_scapularis</field>
+  </doc>
+
+  <doc>
+    <field name="id">genome/cap_gene/ISCW800085</field>
+    <field name="site">genome</field>
+    <field name="accession">ISCW800085</field>
+    <field name="entity_type">cap_gene</field>
+    <field name="entity_id">811464</field>
+    <field name="bundle">cap_gene</field>
+    <field name="bundle_name">CAP gene</field>
+    <field name="label">ISCW800085</field>
+    <field name="url">http://www.dev.vectorbase.org/ixodes_scapularis/Location/View?db=core;r=DS968442:4859-8967;contigviewbottom=das_ContigManualAnnotation=normal</field>
+    <field name="seq_region_name">DS968442</field>
+    <field name="seq_region_start">4859</field>
+    <field name="seq_region_end">8967</field>
+    <field name="species">ixodes_scapularis</field>
+    <field name="biotype">gene</field>
+    <field name="symbol">CRZ</field>
+    <field name="transcript">ISCW800085-RA</field>
+  </doc>
+  <doc>
+    <field name="id">genome/cap_transcript/ISCW800161</field>
+    <field name="site">genome</field>
+    <field name="accession">ISCW800161-RA</field>
+    <field name="entity_type">cap_transcript</field>
+    <field name="entity_id">0</field>
+    <field name="bundle">cap_transcript</field>
+    <field name="bundle_name">CAP transcript</field>
+    <field name="label">ISCW800161-RA</field>
+    <field name="description">Gustatory receptor</field>
+    <field name="url">http://www.dev.vectorbase.org/ixodes_scapularis/Location/View?db=core;r=DS740051:6893-11557;contigviewbottom=das_ContigManualAnnotation=normal</field>
+    <field name="submitter">hughrobe</field>
+    <field name="seq_region_name">DS740051</field>
+    <field name="seq_region_start">6893</field>
+    <field name="seq_region_end">11557</field>
+    <field name="seq_region_strand">+</field>
+    <field name="species">ixodes_scapularis</field>
+  </doc>
+
+  <doc>
+    <field name="id">genome/cap_gene/ISCW800161</field>
+    <field name="site">genome</field>
+    <field name="accession">ISCW800161</field>
+    <field name="entity_type">cap_gene</field>
+    <field name="entity_id">812828</field>
+    <field name="bundle">cap_gene</field>
+    <field name="bundle_name">CAP gene</field>
+    <field name="label">ISCW800161</field>
+    <field name="url">http://www.dev.vectorbase.org/ixodes_scapularis/Location/View?db=core;r=DS740051:6893-11557;contigviewbottom=das_ContigManualAnnotation=normal</field>
+    <field name="seq_region_name">DS740051</field>
+    <field name="seq_region_start">6893</field>
+    <field name="seq_region_end">11557</field>
+    <field name="species">ixodes_scapularis</field>
+    <field name="biotype">gene</field>
+    <field name="symbol">GR1</field>
+    <field name="transcript">ISCW800161-RA</field>
+  </doc>
+  <doc>
+    <field name="id">genome/cap_transcript/ISCW800184</field>
+    <field name="site">genome</field>
+    <field name="accession">ISCW800184-RA</field>
+    <field name="entity_type">cap_transcript</field>
+    <field name="entity_id">0</field>
+    <field name="bundle">cap_transcript</field>
+    <field name="bundle_name">CAP transcript</field>
+    <field name="label">ISCW800184-RA</field>
+    <field name="description">Gustatory receptor</field>
+    <field name="url">http://www.dev.vectorbase.org/ixodes_scapularis/Location/View?db=core;r=DS849364:15863-44982;contigviewbottom=das_ContigManualAnnotation=normal</field>
+    <field name="submitter">hughrobe</field>
+    <field name="seq_region_name">DS849364</field>
+    <field name="seq_region_start">15863</field>
+    <field name="seq_region_end">44982</field>
+    <field name="seq_region_strand">+</field>
+    <field name="species">ixodes_scapularis</field>
+  </doc>
+
+  <doc>
+    <field name="id">genome/cap_gene/ISCW800184</field>
+    <field name="site">genome</field>
+    <field name="accession">ISCW800184</field>
+    <field name="entity_type">cap_gene</field>
+    <field name="entity_id">812963</field>
+    <field name="bundle">cap_gene</field>
+    <field name="bundle_name">CAP gene</field>
+    <field name="label">ISCW800184</field>
+    <field name="url">http://www.dev.vectorbase.org/ixodes_scapularis/Location/View?db=core;r=DS849364:15863-44982;contigviewbottom=das_ContigManualAnnotation=normal</field>
+    <field name="seq_region_name">DS849364</field>
+    <field name="seq_region_start">15863</field>
+    <field name="seq_region_end">44982</field>
+    <field name="species">ixodes_scapularis</field>
+    <field name="biotype">gene</field>
+    <field name="symbol">GR35</field>
+    <field name="transcript">ISCW800184-RA</field>
+  </doc>
+  <doc>
+    <field name="id">genome/cap_transcript/ISCW800166</field>
+    <field name="site">genome</field>
+    <field name="accession">ISCW800166-RA</field>
+    <field name="entity_type">cap_transcript</field>
+    <field name="entity_id">0</field>
+    <field name="bundle">cap_transcript</field>
+    <field name="bundle_name">CAP transcript</field>
+    <field name="label">ISCW800166-RA</field>
+    <field name="description">Gustatory receptor</field>
+    <field name="url">http://www.dev.vectorbase.org/ixodes_scapularis/Location/View?db=core;r=DS853698:97706-99752;contigviewbottom=das_ContigManualAnnotation=normal</field>
+    <field name="submitter">hughrobe</field>
+    <field name="seq_region_name">DS853698</field>
+    <field name="seq_region_start">97706</field>
+    <field name="seq_region_end">99752</field>
+    <field name="seq_region_strand">-</field>
+    <field name="species">ixodes_scapularis</field>
+  </doc>
+
+  <doc>
+    <field name="id">genome/cap_gene/ISCW800166</field>
+    <field name="site">genome</field>
+    <field name="accession">ISCW800166</field>
+    <field name="entity_type">cap_gene</field>
+    <field name="entity_id">812838</field>
+    <field name="bundle">cap_gene</field>
+    <field name="bundle_name">CAP gene</field>
+    <field name="label">ISCW800166</field>
+    <field name="url">http://www.dev.vectorbase.org/ixodes_scapularis/Location/View?db=core;r=DS853698:97706-99752;contigviewbottom=das_ContigManualAnnotation=normal</field>
+    <field name="seq_region_name">DS853698</field>
+    <field name="seq_region_start">97706</field>
+    <field name="seq_region_end">99752</field>
+    <field name="species">ixodes_scapularis</field>
+    <field name="biotype">gene</field>
+    <field name="symbol">GR22</field>
+    <field name="transcript">ISCW800166-RA</field>
+  </doc>
+  <doc>
+    <field name="id">genome/cap_transcript/ISCW800183</field>
+    <field name="site">genome</field>
+    <field name="accession">ISCW800183-RA</field>
+    <field name="entity_type">cap_transcript</field>
+    <field name="entity_id">0</field>
+    <field name="bundle">cap_transcript</field>
+    <field name="bundle_name">CAP transcript</field>
+    <field name="label">ISCW800183-RA</field>
+    <field name="description">Gustatory receptor</field>
+    <field name="url">http://www.dev.vectorbase.org/ixodes_scapularis/Location/View?db=core;r=DS775741:1373-2533;contigviewbottom=das_ContigManualAnnotation=normal</field>
+    <field name="submitter">hughrobe</field>
+    <field name="seq_region_name">DS775741</field>
+    <field name="seq_region_start">1373</field>
+    <field name="seq_region_end">2533</field>
+    <field name="seq_region_strand">+</field>
+    <field name="species">ixodes_scapularis</field>
+  </doc>
+
+  <doc>
+    <field name="id">genome/cap_gene/ISCW800183</field>
+    <field name="site">genome</field>
+    <field name="accession">ISCW800183</field>
+    <field name="entity_type">cap_gene</field>
+    <field name="entity_id">812872</field>
+    <field name="bundle">cap_gene</field>
+    <field name="bundle_name">CAP gene</field>
+    <field name="label">ISCW800183</field>
+    <field name="url">http://www.dev.vectorbase.org/ixodes_scapularis/Location/View?db=core;r=DS775741:1373-2533;contigviewbottom=das_ContigManualAnnotation=normal</field>
+    <field name="seq_region_name">DS775741</field>
+    <field name="seq_region_start">1373</field>
+    <field name="seq_region_end">2533</field>
+    <field name="species">ixodes_scapularis</field>
+    <field name="biotype">gene</field>
+    <field name="symbol">GR56</field>
+    <field name="transcript">ISCW800183-RA</field>
+  </doc>
+  <doc>
+    <field name="id">genome/cap_transcript/ISCW800165</field>
+    <field name="site">genome</field>
+    <field name="accession">ISCW800165-RA</field>
+    <field name="entity_type">cap_transcript</field>
+    <field name="entity_id">0</field>
+    <field name="bundle">cap_transcript</field>
+    <field name="bundle_name">CAP transcript</field>
+    <field name="label">ISCW800165-RA</field>
+    <field name="description">Gustatory receptor</field>
+    <field name="url">http://www.dev.vectorbase.org/ixodes_scapularis/Location/View?db=core;r=DS681555:97115-99209;contigviewbottom=das_ContigManualAnnotation=normal</field>
+    <field name="submitter">hughrobe</field>
+    <field name="seq_region_name">DS681555</field>
+    <field name="seq_region_start">97115</field>
+    <field name="seq_region_end">99209</field>
+    <field name="seq_region_strand">-</field>
+    <field name="species">ixodes_scapularis</field>
+  </doc>
+
+  <doc>
+    <field name="id">genome/cap_gene/ISCW800165</field>
+    <field name="site">genome</field>
+    <field name="accession">ISCW800165</field>
+    <field name="entity_type">cap_gene</field>
+    <field name="entity_id">812836</field>
+    <field name="bundle">cap_gene</field>
+    <field name="bundle_name">CAP gene</field>
+    <field name="label">ISCW800165</field>
+    <field name="url">http://www.dev.vectorbase.org/ixodes_scapularis/Location/View?db=core;r=DS681555:97115-99209;contigviewbottom=das_ContigManualAnnotation=normal</field>
+    <field name="seq_region_name">DS681555</field>
+    <field name="seq_region_start">97115</field>
+    <field name="seq_region_end">99209</field>
+    <field name="species">ixodes_scapularis</field>
+    <field name="biotype">gene</field>
+    <field name="symbol">GR15</field>
+    <field name="transcript">ISCW800165-RA</field>
+  </doc>
+  <doc>
+    <field name="id">genome/cap_transcript/ISCW800182</field>
+    <field name="site">genome</field>
+    <field name="accession">ISCW800182-RA</field>
+    <field name="entity_type">cap_transcript</field>
+    <field name="entity_id">0</field>
+    <field name="bundle">cap_transcript</field>
+    <field name="bundle_name">CAP transcript</field>
+    <field name="label">ISCW800182-RA</field>
+    <field name="description">Gustatory receptor</field>
+    <field name="url">http://www.dev.vectorbase.org/ixodes_scapularis/Location/View?db=core;r=DS688611:441077-442354;contigviewbottom=das_ContigManualAnnotation=normal</field>
+    <field name="submitter">hughrobe</field>
+    <field name="seq_region_name">DS688611</field>
+    <field name="seq_region_start">441077</field>
+    <field name="seq_region_end">442354</field>
+    <field name="seq_region_strand">-</field>
+    <field name="species">ixodes_scapularis</field>
+  </doc>
+
+  <doc>
+    <field name="id">genome/cap_gene/ISCW800182</field>
+    <field name="site">genome</field>
+    <field name="accession">ISCW800182</field>
+    <field name="entity_type">cap_gene</field>
+    <field name="entity_id">812870</field>
+    <field name="bundle">cap_gene</field>
+    <field name="bundle_name">CAP gene</field>
+    <field name="label">ISCW800182</field>
+    <field name="url">http://www.dev.vectorbase.org/ixodes_scapularis/Location/View?db=core;r=DS688611:441077-442354;contigviewbottom=das_ContigManualAnnotation=normal</field>
+    <field name="seq_region_name">DS688611</field>
+    <field name="seq_region_start">441077</field>
+    <field name="seq_region_end">442354</field>
+    <field name="species">ixodes_scapularis</field>
+    <field name="biotype">gene</field>
+    <field name="symbol">GR55</field>
+    <field name="transcript">ISCW800182-RA</field>
+  </doc>
+  <doc>
+    <field name="id">genome/cap_transcript/ISCW800164</field>
+    <field name="site">genome</field>
+    <field name="accession">ISCW800164-RA</field>
+    <field name="entity_type">cap_transcript</field>
+    <field name="entity_id">0</field>
+    <field name="bundle">cap_transcript</field>
+    <field name="bundle_name">CAP transcript</field>
+    <field name="label">ISCW800164-RA</field>
+    <field name="description">Gustatory receptor</field>
+    <field name="url">http://www.dev.vectorbase.org/ixodes_scapularis/Location/View?db=core;r=DS681555:110946-114435;contigviewbottom=das_ContigManualAnnotation=normal</field>
+    <field name="submitter">hughrobe</field>
+    <field name="seq_region_name">DS681555</field>
+    <field name="seq_region_start">110946</field>
+    <field name="seq_region_end">114435</field>
+    <field name="seq_region_strand">-</field>
+    <field name="species">ixodes_scapularis</field>
+  </doc>
+
+  <doc>
+    <field name="id">genome/cap_gene/ISCW800164</field>
+    <field name="site">genome</field>
+    <field name="accession">ISCW800164</field>
+    <field name="entity_type">cap_gene</field>
+    <field name="entity_id">812834</field>
+    <field name="bundle">cap_gene</field>
+    <field name="bundle_name">CAP gene</field>
+    <field name="label">ISCW800164</field>
+    <field name="url">http://www.dev.vectorbase.org/ixodes_scapularis/Location/View?db=core;r=DS681555:110946-114435;contigviewbottom=das_ContigManualAnnotation=normal</field>
+    <field name="seq_region_name">DS681555</field>
+    <field name="seq_region_start">110946</field>
+    <field name="seq_region_end">114435</field>
+    <field name="species">ixodes_scapularis</field>
+    <field name="biotype">gene</field>
+    <field name="symbol">GR14</field>
+    <field name="transcript">ISCW800164-RA</field>
+  </doc>
+  <doc>
+    <field name="id">genome/cap_transcript/ISCW800181</field>
+    <field name="site">genome</field>
+    <field name="accession">ISCW800181-RA</field>
+    <field name="entity_type">cap_transcript</field>
+    <field name="entity_id">0</field>
+    <field name="bundle">cap_transcript</field>
+    <field name="bundle_name">CAP transcript</field>
+    <field name="label">ISCW800181-RA</field>
+    <field name="description">Gustatory receptor</field>
+    <field name="url">http://www.dev.vectorbase.org/ixodes_scapularis/Location/View?db=core;r=DS940066:661113-662393;contigviewbottom=das_ContigManualAnnotation=normal</field>
+    <field name="submitter">hughrobe</field>
+    <field name="seq_region_name">DS940066</field>
+    <field name="seq_region_start">661113</field>
+    <field name="seq_region_end">662393</field>
+    <field name="seq_region_strand">+</field>
+    <field name="species">ixodes_scapularis</field>
+  </doc>
+
+  <doc>
+    <field name="id">genome/cap_gene/ISCW800181</field>
+    <field name="site">genome</field>
+    <field name="accession">ISCW800181</field>
+    <field name="entity_type">cap_gene</field>
+    <field name="entity_id">812868</field>
+    <field name="bundle">cap_gene</field>
+    <field name="bundle_name">CAP gene</field>
+    <field name="label">ISCW800181</field>
+    <field name="url">http://www.dev.vectorbase.org/ixodes_scapularis/Location/View?db=core;r=DS940066:661113-662393;contigviewbottom=das_ContigManualAnnotation=normal</field>
+    <field name="seq_region_name">DS940066</field>
+    <field name="seq_region_start">661113</field>
+    <field name="seq_region_end">662393</field>
+    <field name="species">ixodes_scapularis</field>
+    <field name="biotype">gene</field>
+    <field name="symbol">GR54</field>
+    <field name="transcript">ISCW800181-RA</field>
+  </doc>
+  <doc>
+    <field name="id">genome/cap_transcript/ISCW800163</field>
+    <field name="site">genome</field>
+    <field name="accession">ISCW800163-RA</field>
+    <field name="entity_type">cap_transcript</field>
+    <field name="entity_id">0</field>
+    <field name="bundle">cap_transcript</field>
+    <field name="bundle_name">CAP transcript</field>
+    <field name="label">ISCW800163-RA</field>
+    <field name="description">Gustatory receptor</field>
+    <field name="url">http://www.dev.vectorbase.org/ixodes_scapularis/Location/View?db=core;r=DS855368:160441-163747;contigviewbottom=das_ContigManualAnnotation=normal</field>
+    <field name="submitter">hughrobe</field>
+    <field name="seq_region_name">DS855368</field>
+    <field name="seq_region_start">160441</field>
+    <field name="seq_region_end">163747</field>
+    <field name="seq_region_strand">+</field>
+    <field name="species">ixodes_scapularis</field>
+  </doc>
+
+  <doc>
+    <field name="id">genome/cap_gene/ISCW800163</field>
+    <field name="site">genome</field>
+    <field name="accession">ISCW800163</field>
+    <field name="entity_type">cap_gene</field>
+    <field name="entity_id">812832</field>
+    <field name="bundle">cap_gene</field>
+    <field name="bundle_name">CAP gene</field>
+    <field name="label">ISCW800163</field>
+    <field name="url">http://www.dev.vectorbase.org/ixodes_scapularis/Location/View?db=core;r=DS855368:160441-163747;contigviewbottom=das_ContigManualAnnotation=normal</field>
+    <field name="seq_region_name">DS855368</field>
+    <field name="seq_region_start">160441</field>
+    <field name="seq_region_end">163747</field>
+    <field name="species">ixodes_scapularis</field>
+    <field name="biotype">gene</field>
+    <field name="symbol">GR10</field>
+    <field name="transcript">ISCW800163-RA</field>
+  </doc>
+  <doc>
+    <field name="id">genome/cap_transcript/ISCW800169</field>
+    <field name="site">genome</field>
+    <field name="accession">ISCW800169-RA</field>
+    <field name="entity_type">cap_transcript</field>
+    <field name="entity_id">0</field>
+    <field name="bundle">cap_transcript</field>
+    <field name="bundle_name">CAP transcript</field>
+    <field name="label">ISCW800169-RA</field>
+    <field name="description">Gustatory receptor</field>
+    <field name="url">http://www.dev.vectorbase.org/ixodes_scapularis/Location/View?db=core;r=DS853698:89684-92137;contigviewbottom=das_ContigManualAnnotation=normal</field>
+    <field name="submitter">hughrobe</field>
+    <field name="seq_region_name">DS853698</field>
+    <field name="seq_region_start">89684</field>
+    <field name="seq_region_end">92137</field>
+    <field name="seq_region_strand">-</field>
+    <field name="species">ixodes_scapularis</field>
+  </doc>
+
+  <doc>
+    <field name="id">genome/cap_gene/ISCW800169</field>
+    <field name="site">genome</field>
+    <field name="accession">ISCW800169</field>
+    <field name="entity_type">cap_gene</field>
+    <field name="entity_id">812844</field>
+    <field name="bundle">cap_gene</field>
+    <field name="bundle_name">CAP gene</field>
+    <field name="label">ISCW800169</field>
+    <field name="url">http://www.dev.vectorbase.org/ixodes_scapularis/Location/View?db=core;r=DS853698:89684-92137;contigviewbottom=das_ContigManualAnnotation=normal</field>
+    <field name="seq_region_name">DS853698</field>
+    <field name="seq_region_start">89684</field>
+    <field name="seq_region_end">92137</field>
+    <field name="species">ixodes_scapularis</field>
+    <field name="biotype">gene</field>
+    <field name="symbol">GR26</field>
+    <field name="transcript">ISCW800169-RA</field>
+  </doc>
+  <doc>
+    <field name="id">genome/cap_transcript/ISCW800168</field>
+    <field name="site">genome</field>
+    <field name="accession">ISCW800168-RA</field>
+    <field name="entity_type">cap_transcript</field>
+    <field name="entity_id">0</field>
+    <field name="bundle">cap_transcript</field>
+    <field name="bundle_name">CAP transcript</field>
+    <field name="label">ISCW800168-RA</field>
+    <field name="description">Gustatory receptor</field>
+    <field name="url">http://www.dev.vectorbase.org/ixodes_scapularis/Location/View?db=core;r=DS938791:80049-81932;contigviewbottom=das_ContigManualAnnotation=normal</field>
+    <field name="submitter">hughrobe</field>
+    <field name="seq_region_name">DS938791</field>
+    <field name="seq_region_start">80049</field>
+    <field name="seq_region_end">81932</field>
+    <field name="seq_region_strand">+</field>
+    <field name="species">ixodes_scapularis</field>
+  </doc>
+
+  <doc>
+    <field name="id">genome/cap_gene/ISCW800168</field>
+    <field name="site">genome</field>
+    <field name="accession">ISCW800168</field>
+    <field name="entity_type">cap_gene</field>
+    <field name="entity_id">812842</field>
+    <field name="bundle">cap_gene</field>
+    <field name="bundle_name">CAP gene</field>
+    <field name="label">ISCW800168</field>
+    <field name="url">http://www.dev.vectorbase.org/ixodes_scapularis/Location/View?db=core;r=DS938791:80049-81932;contigviewbottom=das_ContigManualAnnotation=normal</field>
+    <field name="seq_region_name">DS938791</field>
+    <field name="seq_region_start">80049</field>
+    <field name="seq_region_end">81932</field>
+    <field name="species">ixodes_scapularis</field>
+    <field name="biotype">gene</field>
+    <field name="symbol">GR25</field>
+    <field name="transcript">ISCW800168-RA</field>
+  </doc>
+  <doc>
+    <field name="id">genome/cap_transcript/ISCW800167</field>
+    <field name="site">genome</field>
+    <field name="accession">ISCW800167-RA</field>
+    <field name="entity_type">cap_transcript</field>
+    <field name="entity_id">0</field>
+    <field name="bundle">cap_transcript</field>
+    <field name="bundle_name">CAP transcript</field>
+    <field name="label">ISCW800167-RA</field>
+    <field name="description">Gustatory receptor</field>
+    <field name="url">http://www.dev.vectorbase.org/ixodes_scapularis/Location/View?db=core;r=DS938791:41333-43178;contigviewbottom=das_ContigManualAnnotation=normal</field>
+    <field name="submitter">hughrobe</field>
+    <field name="seq_region_name">DS938791</field>
+    <field name="seq_region_start">41333</field>
+    <field name="seq_region_end">43178</field>
+    <field name="seq_region_strand">+</field>
+    <field name="species">ixodes_scapularis</field>
+  </doc>
+
+  <doc>
+    <field name="id">genome/cap_gene/ISCW800167</field>
+    <field name="site">genome</field>
+    <field name="accession">ISCW800167</field>
+    <field name="entity_type">cap_gene</field>
+    <field name="entity_id">812840</field>
+    <field name="bundle">cap_gene</field>
+    <field name="bundle_name">CAP gene</field>
+    <field name="label">ISCW800167</field>
+    <field name="url">http://www.dev.vectorbase.org/ixodes_scapularis/Location/View?db=core;r=DS938791:41333-43178;contigviewbottom=das_ContigManualAnnotation=normal</field>
+    <field name="seq_region_name">DS938791</field>
+    <field name="seq_region_start">41333</field>
+    <field name="seq_region_end">43178</field>
+    <field name="species">ixodes_scapularis</field>
+    <field name="biotype">gene</field>
+    <field name="symbol">GR24</field>
+    <field name="transcript">ISCW800167-RA</field>
+  </doc>
+</add>

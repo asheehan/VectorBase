@@ -7,8 +7,7 @@
  *
  */
 
-
-require_once('LdapServer.class.php');
+module_load_include('php', 'ldap_servers', 'LdapServer.class');
 
 class LdapServerAdmin extends LdapServer {
 
@@ -18,10 +17,13 @@ class LdapServerAdmin extends LdapServer {
   /**
    * @param $type = 'all', 'enabled'
    */
-  public static function getLdapServerObjects($sid = NULL, $type = NULL, $class = 'LdapServer') {
+  public static function getLdapServerObjects($sid = NULL, $type = NULL, $class = 'LdapServer', $reset = FALSE) {
     $servers = array();
     if (module_exists('ctools')) {
       ctools_include('export');
+      if ($reset) {
+        ctools_export_load_object_reset('ldap_servers');
+      }
       $select = ctools_export_load_object('ldap_servers', 'all');
     }
     else {
@@ -64,16 +66,21 @@ class LdapServerAdmin extends LdapServer {
     $this->user_dn_expression = trim($values['user_dn_expression']);
     $this->basedn = $this->linesToArray(trim($values['basedn']));
     $this->user_attr = trim($values['user_attr']);
+    $this->account_name_attr = trim($values['account_name_attr']);
     $this->mail_attr = trim($values['mail_attr']);
     $this->mail_template = trim($values['mail_template']);
     $this->unique_persistent_attr = trim($values['unique_persistent_attr']);
     $this->allow_conflicting_drupal_accts = trim($values['allow_conflicting_drupal_accts']);
     $this->ldapToDrupalUserPhp = $values['ldap_to_drupal_user'];
     $this->testingDrupalUsername = trim($values['testing_drupal_username']);
+    $this->groupObjectClass = trim($values['group_object_category']);
+
+    $this->searchPagination = ($values['search_pagination']) ? 1 : 0;
+    $this->searchPageSize = trim($values['search_page_size']);
 
   }
 
-  public function save($op) {
+  protected function entry() {
 
     $entry = $this;
     foreach ($this->field_to_properties_map() as $field_name => $property_name) {
@@ -89,12 +96,19 @@ class LdapServerAdmin extends LdapServer {
       $entry->bindpw = NULL;
     }
     $entry->tls = (int)$entry->tls;
+    return $entry;
+
+  }
+  public function save($op) {
+
+    $entry = $this->entry();
 
     $result = FALSE;
     if ($op == 'edit') {
       if (module_exists('ctools')) {
         ctools_include('export');
         $result = ctools_export_crud_save('ldap_servers', $entry);
+         ctools_export_load_object_reset('ldap_servers'); // ctools_export_crud_save doesn't invalidate cache
       }
       else {
         $result = drupal_write_record('ldap_servers', $entry, 'sid');
@@ -111,6 +125,7 @@ class LdapServerAdmin extends LdapServer {
           }
         }
         $result = ctools_export_crud_save('ldap_servers', $entry);
+        ctools_export_load_object_reset('ldap_servers'); // ctools_export_crud_save doesn't invalidate cache
       }
       else {
         $result = drupal_write_record('ldap_servers', $entry);
@@ -126,13 +141,18 @@ class LdapServerAdmin extends LdapServer {
 
   public function delete($sid) {
     if ($sid == $this->sid) {
+      $result = db_delete('ldap_servers')->condition('sid', $sid)->execute();
+      if (module_exists('ctools')) {
+        ctools_export_load_object_reset('ldap_servers'); // invalidate cache
+      }
       $this->inDatabase = FALSE;
-      return db_delete('ldap_servers')->condition('sid', $sid)->execute();
+      return $result;
     }
     else {
       return FALSE;
     }
   }
+
   public function getLdapServerActions() {
     $switch = ($this->status ) ? 'disable' : 'enable';
     $actions = array();
@@ -204,6 +224,34 @@ EOF;
     '#collapsible' => TRUE,
     '#collapsed' => FALSE,
   );
+
+  $form['groups'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('LDAP Groups'),
+    '#description' => t('How are groups defined on your LDAP server?  This varies slightly from one LDAP implementation to another
+      such as Active Directory, Novell, OpenLDAP, etc.'),
+    '#collapsible' => TRUE,
+    '#collapsed' => !module_exists('ldap_authorization'),
+  );
+
+  $supports = (ldap_servers_php_supports_pagination()) ? t('support pagination!') : t('NOT support pagination.');
+  $form['pagination'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('LDAP Pagination'),
+    '#description' => t('In PHP 5.4, pagination is supported in ldap queries.
+      A patch to earlier versions of PHP also supports this.')
+      . ' <strong>' . t('This PHP installation appears to ') . $supports . '</strong> '
+      . '<p>' . t('The advantage to pagination support is that if an ldap server is setup to return only
+      1000 entries at a time,
+      you can use page through 1000 records at a time;
+      without pagination you would never see more than the first 1000 entries.
+      Pagination is most useful when large queries for batch creating or
+      synching accounts are used.  If you are not using this server for such
+      tasks, its recommended to leave pagination disabled.') . '</p>',
+    '#collapsible' => TRUE,
+    '#collapsed' => !ldap_servers_php_supports_pagination(),
+  );
+
 
   $field_to_prop_maps = $this->field_to_properties_map();
   foreach ($this->fields() as $field_id => $field) {
@@ -668,8 +716,12 @@ public function drupalFormSubmit($op, $values) {
           '#type' => 'textarea',
           '#cols' => 50,
           '#rows' => 6,
-          '#title' => t('Base DNs for LDAP user entries'),
-          '#description' => t('What DNs have user accounts relavant to this configuration? e.g. <code>ou=campus accounts,dc=ad,dc=uiuc,dc=edu</code>Enter one per line in case if you need more than one.'),
+          '#title' => t('Base DNs for LDAP users, groups, and other entries this server configuration.'),
+          '#description' => t('What DNs have entries relavant to this configuration?
+            e.g. <code>ou=campus accounts,dc=ad,dc=uiuc,dc=edu</code>
+            Keep in mind that every additional basedn likely doubles the number of queries.  Place the
+            more heavily used one first and consider using one higher base DN rather than 2 or more lower base DNs.
+            Enter one per line in case if you need more than one.'),
         ),
         'schema' => array(
           'type' => 'text',
@@ -682,13 +734,29 @@ public function drupalFormSubmit($op, $values) {
           'fieldset' => 'users',
           '#type' => 'textfield',
           '#size' => 30,
-          '#title' => t('UserName attribute'),
+          '#title' => t('AuthName attribute'),
           '#description' => t('The attribute that holds the users\' login name. (eg. <code>cn</code> for eDir or <code>sAMAccountName</code> for Active Directory).'),
         ),
         'schema' => array(
           'type' => 'varchar',
           'length' => 255,
           'not null' => TRUE,
+        ),
+      ),
+
+      'account_name_attr' => array(
+        'form' => array(
+          'fieldset' => 'users',
+          '#type' => 'textfield',
+          '#size' => 30,
+          '#title' => t('AccountName attribute'),
+          '#description' => t('The attribute that holds the unique account name. Defaults to the same as the AuthName attribute.'),
+        ),
+        'schema' => array(
+      	  'type' => 'varchar',
+          'length' => 255,
+          'not null' => FALSE,
+          'default' => '',
         ),
       ),
 
@@ -816,6 +884,63 @@ public function drupalFormSubmit($op, $values) {
           'type' => 'varchar',
           'length' => 255,
           'not null' => FALSE,
+        ),
+      ),
+
+
+     'group_object_category' =>  array(
+        'form' => array(
+          'fieldset' => 'groups',
+          '#type' => 'textfield',
+          '#size' => 30,
+          '#title' => t('Name of Group Object Class.'),
+          '#description' => t('This is used in ldap modules that use groups such as LDAP Authorization.'),
+        ),
+        'schema' => array(
+          'type' => 'varchar',
+          'length' => 64,
+          'not null' => FALSE,
+        ),
+      ),
+
+      'search_pagination' => array(
+        'form' => array(
+          'fieldset' => 'pagination',
+          '#type' => 'checkbox',
+          '#title' => t('Use LDAP Pagination.'),
+          '#disabled' => !ldap_servers_php_supports_pagination(),
+        ),
+        'schema' => array(
+          'type' => 'int',
+          'size' => 'tiny',
+          'not null' => FALSE,
+          'default' => 0,
+        ),
+      ),
+
+     'search_page_size' =>  array(
+        'form' => array(
+          'fieldset' => 'pagination',
+          '#type' => 'textfield',
+          '#size' => 10,
+          '#disabled' => !ldap_servers_php_supports_pagination(),
+          '#title' => t('Pagination size limit.'),
+          '#description' => t('This should be equal to or smaller than the max
+            number of entries returned at a time by your ldap server.
+            1000 is a good guess when unsure. Other modules such as LDAP Query
+            or LDAP Feeds will be allowed to set a smaller page size, but not
+            a larger one.'),
+          '#states' => array(
+            'visible' => array(   // action to take.
+              ':input[name="search_pagination"]' => array('checked' => TRUE),
+            ),
+      ),
+        ),
+        'schema' => array(
+          'type' => 'int',
+          'size' => 'medium',
+          'not null' => FALSE,
+          'default' => 1000,
         ),
       ),
 

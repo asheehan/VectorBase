@@ -1,0 +1,3 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=0 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=3446&page=res&job_id=209090
+ASTM005954-RA	BLAST	Blast Hit	1565	1678	69	+	.	gi|23093348|gb|AAF49458.2| argos [Drosophila melanogaster]
+ASTM011763-RA	BLAST	Blast Hit	4385	4549	67	-	.	gi|23093348|gb|AAF49458.2| argos [Drosophila melanogaster]

@@ -1,0 +1,13 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=1 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=335&page=res&job_id=186512
+AGAP000459-RA	BLAST	Blast Hit	27	74	96	-	.	Example Sequence
+AGAP003870-RA	BLAST	Blast Hit	902	949	80	-	.	Example Sequence
+AGAP001582-RA	BLAST	Blast Hit	3015	3062	70	+	.	Example Sequence
+AGAP005927-RA	BLAST	Blast Hit	544	591	70	-	.	Example Sequence
+AGAP005154-RA	BLAST	Blast Hit	27	74	66	-	.	Example Sequence
+AGAP012482-RA	BLAST	Blast Hit	27	74	60	-	.	Example Sequence
+AGAP011428-RA	BLAST	Blast Hit	27	74	60	-	.	Example Sequence
+AGAP005745-RA	BLAST	Blast Hit	1834	1878	60	+	.	Example Sequence
+AGAP012359-RA	BLAST	Blast Hit	1018	1064	58	-	.	Example Sequence
+AGAP002746-RA	BLAST	Blast Hit	27	76	46	-	.	Example Sequence
+AGAP003998-RA	BLAST	Blast Hit	46	64	32	-	.	Example Sequence
+AGAP007444-RA	BLAST	Blast Hit	46	64	32	-	.	Example Sequence

@@ -1,0 +1,5 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=1 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=327&page=res&job_id=186225
+2R	BLAST	Blast Hit	9260879	9262699	3090	-	.	AgCHS1
+2R	BLAST	Blast Hit	9258788	9260119	2284	-	.	AgCHS1
+2R	BLAST	Blast Hit	1508997	1510601	1818	+	.	AgCHS1
+2R	BLAST	Blast Hit	9260206	9260832	1097	-	.	AgCHS1

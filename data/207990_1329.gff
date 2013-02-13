@@ -1,0 +1,11 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=0 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=1329&page=res&job_id=207990
+supercontig:AgamM1:scf_1925497282:1:1253:1	BLAST	Blast Hit	586	635	100	-	.	Example1
+supercontig:AgamM1:scf_1925494364:1:1071:1	BLAST	Blast Hit	619	668	100	+	.	Example1
+supercontig:AgamM1:scf_1925493027:1:1096:1	BLAST	Blast Hit	923	972	100	-	.	Example1
+supercontig:AgamM1:scf_1925491387:1:3907879:1	BLAST	Blast Hit	2414721	2414770	100	-	.	Example1
+supercontig:AgamM1:scf_1925491385:1:5722304:1	BLAST	Blast Hit	3904737	3904786	100	-	.	Example1
+supercontig:AgamM1:scf_1925491384:1:7193639:1	BLAST	Blast Hit	4607873	4607922	100	+	.	Example1
+supercontig:AgamM1:scf_1925491384:1:7193639:1	BLAST	Blast Hit	5647144	5647193	100	-	.	Example1
+supercontig:AgamM1:scf_1925491384:1:7193639:1	BLAST	Blast Hit	6628408	6628457	100	+	.	Example1
+supercontig:AgamM1:scf_1925491383:1:4437438:1	BLAST	Blast Hit	371585	371634	100	-	.	Example1
+supercontig:AgamM1:scf_1925491383:1:4437438:1	BLAST	Blast Hit	445853	445902	100	+	.	Example1

@@ -1,0 +1,11 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=0 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=3045&page=res&job_id=208967
+supercont3.266	BLAST	Blast Hit	367649	367726	130	-	.	Actina cDNA
+supercont3.396	BLAST	Blast Hit	71031	71108	130	+	.	Actina cDNA
+supercont3.396	BLAST	Blast Hit	17660	17737	130	-	.	Actina cDNA
+supercont3.396	BLAST	Blast Hit	57943	58020	130	+	.	Actina cDNA
+supercont3.396	BLAST	Blast Hit	75444	75521	124	+	.	Actina cDNA
+supercont3.800	BLAST	Blast Hit	15579	15656	130	-	.	Actina cDNA
+supercont3.800	BLAST	Blast Hit	15580	15654	124	-	.	Actina cDNA
+supercont3.800	BLAST	Blast Hit	15582	15656	121	+	.	Actina cDNA
+supercont3.100	BLAST	Blast Hit	574921	574998	130	-	.	Actina cDNA
+supercont3.372	BLAST	Blast Hit	69565	69642	130	-	.	Actina cDNA

@@ -1,0 +1,11 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=1 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=33&page=res&job_id=190664
+supercontig:CpipJ1:supercont3.1001:1:151764:1	BLAST	Blast Hit	48231	49469	342	+	.	
+supercontig:CpipJ1:supercont3.1001:1:151764:1	BLAST	Blast Hit	50034	50828	286	-	.	
+supercontig:CpipJ1:supercont3.1001:1:151764:1	BLAST	Blast Hit	51339	52172	253	+	.	
+supercontig:CpipJ1:supercont3.1001:1:151764:1	BLAST	Blast Hit	53134	53916	235	-	.	
+supercontig:CpipJ1:supercont3.342:1:461848:1	BLAST	Blast Hit	31347	31880	218	+	.	
+supercontig:CpipJ1:supercont3.758:1:212678:1	BLAST	Blast Hit	94556	95149	213	-	.	
+supercontig:CpipJ1:supercont3.739:1:223496:1	BLAST	Blast Hit	79373	79906	200	-	.	
+supercontig:CpipJ1:supercont3.80:1:1046220:1	BLAST	Blast Hit	615558	616145	199	+	.	
+supercontig:CpipJ1:supercont3.421:1:390829:1	BLAST	Blast Hit	262603	263232	182	+	.	
+supercontig:CpipJ1:supercont3.284:1:535222:1	BLAST	Blast Hit	44314	44976	180	+	.	

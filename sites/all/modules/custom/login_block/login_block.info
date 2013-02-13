@@ -1,0 +1,5 @@
+name = Login Block
+description = Display a block that show a login button when logged out, vice versa.
+package = VectorBase
+core = 7.x
+files[] = login_block.module

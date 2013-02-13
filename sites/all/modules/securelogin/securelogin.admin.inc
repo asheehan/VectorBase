@@ -1,5 +1,4 @@
 <?php
-// $Id: securelogin.admin.inc,v 1.1.2.10 2011/01/28 19:13:44 mfb Exp $
 
 /**
  * Admin settings form.

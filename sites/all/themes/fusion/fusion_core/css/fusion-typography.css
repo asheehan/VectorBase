@@ -154,7 +154,7 @@ ul.menu li,
 }
 
 
-/* Skinr
+/* Fusion Apply skins
 /-------------------------------------------------------------- */
 /* callout block style */
 .fusion-callout .inner {
@@ -191,14 +191,6 @@ html.js .fusion-horiz-login#block-user-login #user-login-form label {
 .fusion-horiz-login#block-user-login #edit-openid-identifier-wrapper .description {
   font-size: 80%;
 }
-
-
-/* Grid Mask Overlay
--------------------------------------------------------------- */
-#grid-mask-toggle {
-  font-size: 14px;
-}
-
 
 /* Font Theme Settings
 /-------------------------------------------------------------- */

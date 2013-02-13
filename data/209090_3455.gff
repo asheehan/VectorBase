@@ -1,0 +1,4 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=0 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=3455&page=res&job_id=209090
+supercont3.46	BLAST	Blast Hit	1082551	1082658	86	-	.	gi|23093348|gb|AAF49458.2| argos [Drosophila melanogaster]
+supercont3.1348	BLAST	Blast Hit	31796	31903	78	-	.	gi|23093348|gb|AAF49458.2| argos [Drosophila melanogaster]
+supercont3.484	BLAST	Blast Hit	233849	233956	78	+	.	gi|23093348|gb|AAF49458.2| argos [Drosophila melanogaster]

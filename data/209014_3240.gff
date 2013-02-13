@@ -1,0 +1,7 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=0 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=3240&page=res&job_id=209014
+TMP002003-RA	BLAST	Blast Hit	733	804	86	+	.	Wgm_pabA
+TMP002003-RA	BLAST	Blast Hit	625	702	62	+	.	Wgm_pabA
+TMP002464-RB	BLAST	Blast Hit	1333	1419	62	+	.	Wgm_pabA
+TMP002464-RB	BLAST	Blast Hit	1105	1161	77	+	.	Wgm_pabA
+TMP002464-RA	BLAST	Blast Hit	1333	1419	62	+	.	Wgm_pabA
+TMP002464-RA	BLAST	Blast Hit	1105	1161	77	+	.	Wgm_pabA

@@ -1,0 +1,11 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=0 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=3075&page=res&job_id=208979
+supercont3.684	BLAST	Blast Hit	216752	216922	299	+	.	Cat B2 cDNA
+supercont3.684	BLAST	Blast Hit	216753	216923	289	-	.	Cat B2 cDNA
+supercont3.684	BLAST	Blast Hit	216754	216927	279	-	.	Cat B2 cDNA
+supercont3.684	BLAST	Blast Hit	216753	216923	266	+	.	Cat B2 cDNA
+supercont3.684	BLAST	Blast Hit	216752	216922	263	-	.	Cat B2 cDNA
+supercont3.684	BLAST	Blast Hit	216784	216927	231	+	.	Cat B2 cDNA
+supercont3.684	BLAST	Blast Hit	213825	213941	170	-	.	Cat B2 cDNA
+supercont3.684	BLAST	Blast Hit	213838	213939	143	+	.	Cat B2 cDNA
+supercont3.15	BLAST	Blast Hit	198639	198737	132	-	.	Cat B2 cDNA
+supercont3.15	BLAST	Blast Hit	204366	204470	120	+	.	Cat B2 cDNA

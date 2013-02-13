@@ -1,0 +1,23 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=1 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=127&page=res&job_id=178314
+UNKN	BLAST	Blast Hit	8005109	8005129	32	-	.	Example Sequence
+3R	BLAST	Blast Hit	4884128	4884148	32	-	.	Example Sequence
+2R	BLAST	Blast Hit	36449075	36449098	32	+	.	Example Sequence
+2R	BLAST	Blast Hit	601045	601059	30	+	.	Example Sequence
+2R	BLAST	Blast Hit	4575787	4575804	30	+	.	Example Sequence
+2R	BLAST	Blast Hit	16619580	16619594	30	+	.	Example Sequence
+2R	BLAST	Blast Hit	26744067	26744081	30	+	.	Example Sequence
+2R	BLAST	Blast Hit	9798015	9798029	30	+	.	Example Sequence
+2R	BLAST	Blast Hit	16822613	16822627	30	+	.	Example Sequence
+2R	BLAST	Blast Hit	17794096	17794113	30	+	.	Example Sequence
+2R	BLAST	Blast Hit	3201786	3201800	30	+	.	Example Sequence
+2R	BLAST	Blast Hit	21859867	21859886	30	-	.	Example Sequence
+2R	BLAST	Blast Hit	29123105	29123119	30	-	.	Example Sequence
+2R	BLAST	Blast Hit	43028617	43028631	30	-	.	Example Sequence
+X	BLAST	Blast Hit	13795274	13795288	30	+	.	Example Sequence
+X	BLAST	Blast Hit	22271389	22271403	30	-	.	Example Sequence
+3L	BLAST	Blast Hit	12424332	12424346	30	+	.	Example Sequence
+3L	BLAST	Blast Hit	18783817	18783834	30	-	.	Example Sequence
+2L	BLAST	Blast Hit	4129795	4129809	30	-	.	Example Sequence
+2L	BLAST	Blast Hit	10188629	10188643	30	+	.	Example Sequence
+2L	BLAST	Blast Hit	15046255	15046274	30	-	.	Example Sequence
+2L	BLAST	Blast Hit	47715734	47715751	30	-	.	Example Sequence

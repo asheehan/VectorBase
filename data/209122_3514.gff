@@ -1,0 +1,6 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=0 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=3514&page=res&job_id=209122
+TMP014090-PA	BLAST	Blast Hit	46	338	308	.	.	gi|8393843|ref|NP_058627.1| NADPH oxidase 4 isoform a [Homo sapiens]
+TMP014084-PA	BLAST	Blast Hit	1001	1210	222	.	.	gi|8393843|ref|NP_058627.1| NADPH oxidase 4 isoform a [Homo sapiens]
+TMP010244-PA	BLAST	Blast Hit	1253	1456	209	.	.	gi|8393843|ref|NP_058627.1| NADPH oxidase 4 isoform a [Homo sapiens]
+TMP010244-PA	BLAST	Blast Hit	575	766	191	.	.	gi|8393843|ref|NP_058627.1| NADPH oxidase 4 isoform a [Homo sapiens]
+TMP010244-PA	BLAST	Blast Hit	768	871	144	.	.	gi|8393843|ref|NP_058627.1| NADPH oxidase 4 isoform a [Homo sapiens]

@@ -1,0 +1,4 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=0 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=4115&page=res&job_id=211793
+scf_1925491377	BLAST	Blast Hit	4276217	4276268	104	-	.	Anopheles
+scf_1925491354	BLAST	Blast Hit	732231	732253	36	+	.	Anopheles
+scf_1925491322	BLAST	Blast Hit	1367037	1367054	36	+	.	Anopheles

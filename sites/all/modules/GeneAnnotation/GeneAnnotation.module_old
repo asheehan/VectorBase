@@ -1,0 +1,2367 @@
+<?php
+
+/////////// need to put the validation checks in - i.e. can't put certain fields in without justification?!?
+
+/////////// need to have the note about not recognising the name...
+
+/////////// with pre-edited check permissions and print table of current status...
+
+// $GLOBALS["bored"] = 0;
+$gene_info_switch=0;
+
+define('TEST_FORM_TOTAL_STEPS', 2);
+
+
+function strip($string) {
+    $string = str_replace(' ', '_', $string);
+    $string = preg_replace("/[^A-Za-z0-9\-_\.]/","_",$string);
+    $string = preg_replace("/_{2,}/","_",$string);
+    return $string;     
+}     
+
+// set up the global vars
+function GeneAnnotation_init() {
+
+    $inifilepath = '/homes/dsth/dev/NewCap/basedir/GeneAnnotation.ini';
+
+    define("BINARY", "Save was binary");
+    $inifile = parse_ini_file($inifilepath);
+    // var_dump($inifile);
+
+    $species_metau = str_replace('_',' ',$inifile['SPECIES_META_UP']);
+    $species_metau_array = explode(',', $species_metau);
+    variable_set('species_metau',  $species_metau_array);
+
+    $species_modelu = str_replace('_',' ',$inifile['SPECIES_MODEL_UP']);
+    $species_modelu_array = explode(',', $species_modelu);
+    variable_set('species_modelu',  $species_modelu_array);
+
+    $species_modeld = str_replace('_',' ',$inifile['SPECIES_MODEL_DWNLD']);
+    $species_modeld_array = explode(',', $species_modeld);
+    variable_set('species_modeld',  $species_modeld_array);
+
+    variable_set('feat_regex','CDS|exon|gene|mRNA|tRNA|pseudogenic_tRNA|rRNA|miRNA|ncRNA|pseudogene');
+
+    //variable_set('basedir', '/home/dsth/');
+    variable_set('filelimit', $inifile['GFFFILELIMIT']);
+    variable_set('curl', $inifile['CURL_BASH_WRAP']);
+    variable_set('update_sha1_pass', $inifile['UPDATESHA1PASS']);
+    variable_set('fasta_indexer', $inifile['FASTA_INDEXER']);
+    variable_set('basedir',  $inifile['BASEDIR']);
+    variable_set('genenames',  $inifile['GENENAMES']);
+    variable_set('auto_scfnames', $inifile['AUTOSCFNAMESFILE']); // goes in base dir - has All names for autocompletion (not sure if keeping?!?)
+    variable_set('tabix',    $inifile['TABIX']); // extracts from variable_get('basedir').'/gff/'.$species.'.gff.gz'; into $basedir.'/tmp/'
+    variable_set('gene_indexer',    $inifile['GENE_INDEXER']); // extracts from variable_get('basedir').'/gff/'.$species.'.gff.gz'; into $basedir.'/tmp/'
+}
+
+// By implementing hook_help(), a module can make documentation available to the user for the module as a whole, or for specific paths.
+function GeneAnnotation_help() {
+}
+
+// tie routines to php template files
+function GeneAnnotation_theme() {
+    return array(
+        'my_tab' => array(
+            //y set template file
+            'template' => 'cap',
+            'variables' => array('title' => NULL),
+        ),
+/*         'my_cv' => array(
+            //y set template file
+            'template' => 'cv',
+            'variables' => array('title' => NULL),
+        ),
+ */
+    );
+}
+
+// tie uri's to routine calls
+function GeneAnnotation_menu() {
+
+    /*
+    $items['intro'] = array(
+        'title' => 'Overview',
+        'page callback' => 'download_accordion',
+        'access callback' => TRUE,
+    ); */
+
+    $items['cap'] = array(
+        'title' => 'Community Annotation Portal',
+        'page callback' => 'cap_frontpage',
+        'access callback' => TRUE,
+        'access arguments' => array('access content')
+    );
+
+    $items['cap/%/gff'] = array(
+        'title'            => 'Download file',
+        'page callback'	   => 'download_gff_file',
+        'page arguments'   => array(1),
+        //'access arguments' => array('access direct download file')
+        'access arguments' => array('access content')
+    );
+        
+    $items['meta'] = array(
+        'page callback' => 'meta_data_list',
+        'access arguments' => array('administer access control')
+    );
+
+    $items['uploaded'] = array(
+        'page callback' => 'uploaded_files_list',
+//        'access callback' => TRUE,
+        'access arguments' => array('administer access control')
+    );
+
+    $items['uploaded/%'] = array(
+        'page callback'	   => 'grab_a_submission_with_rest',
+        'page arguments'   => array(1),
+        'access arguments' => array('administer access control')
+    );
+
+    $items['metadelete/%'] = array(
+        'page callback'	   => 'delete_meta_entry',
+        'page arguments'   => array(1),
+        'access arguments' => array('administer access control')
+    );
+
+    $items['update/%'] = array(
+        'page callback'	   => 'generic_update',
+        'page arguments'   => array(1),
+        'access arguments' => array('administer access control')
+    );
+
+    /*
+    $items['uploadeddelete/%'] = array(
+        'page callback'	   => 'delete_uploaded_entry',
+        'page arguments'   => array(1),
+        'access arguments' => array('administer access control')
+    );
+    */
+
+    $items['uploadedignore/%'] = array(
+        'page callback'	   => 'ignore_uploaded_entry',
+        'page arguments'   => array(1),
+        'access arguments' => array('administer access control')
+    );
+
+    $items['submission'] = array(
+        'title' => t('Gff Submission'),
+        // just calls the form processing series gff_submission_form (form builder), gff_submission_form_validate, gff_submission_form_submit
+        'page callback' => 'gff_submission_form_wrapper',
+        'access arguments' => array('access content'),
+        'description' => t('Submission'),
+        'type' => MENU_CALLBACK,
+    );
+
+    $items['download'] = array(
+        'title' => 'Dependent dropdown',
+        'page callback' => 'drupal_get_form',
+        // careful if changing names as the form name (the routine name) is referenced in the php template file
+        'page arguments' => array('gff_download_ajax_form'),
+        'access callback' => TRUE,
+        'weight' => 4,
+        'access arguments' => array('access content'),
+    );
+
+    return $items;
+}
+
+// download stuff from some other drupal download module...
+function GeneAnnoation_help($path, $arg) {
+}
+
+// need to set permissions
+function GeneAnnoation_permission() {
+    /*
+    return array(
+        'access direct download file' => array( 'title' => t('') ),
+        'administer download file' => array( 'title' => t('Administer download file') )
+    );
+     */
+}
+
+
+/// main cap page:  autocompletion works with ALL names not a sub-set of names by species - unlike lists - handed by using drupal_json_encode 
+// not sure it's worth the hassle - allow free text and just moan if it doesn't exist - or the list - but use mysql table e.g. contig names / species...
+function cap_frontpage() {
+
+    $title = t('Click sections to expand or collapse:');
+
+    $build['myelement'] = array(
+        '#theme' => 'my_tab',
+        '#title' => $title,
+    );
+
+    $options = array('type' => 'file');
+
+    $allnames = pull_autocompletion_names();
+
+    drupal_add_js(
+        "var data = " . drupal_json_encode($allnames) . ";", 
+        'inline'
+    );
+    
+    drupal_add_js(
+        drupal_get_path('module', 'GeneAnnotation') 
+          . '/jquery-compressed-google/jquery.min.js', 
+        $options
+    );                      
+
+    drupal_add_js(
+        drupal_get_path('module', 'GeneAnnotation') 
+          . '/jquery-compressed-google/jquery-ui.min.js', 
+        $options
+    );
+
+    drupal_add_css(
+        drupal_get_path('module', 'GeneAnnotation') 
+        . '/jquery-compressed-google/jquery-ui.css', 
+        array('group' => CSS_DEFAULT, 'every_page' => TRUE)
+    );
+
+    drupal_add_js(
+        drupal_get_path('module', 'GeneAnnotation') . '/js/temp.js', 
+        $options
+    );
+
+    drupal_add_css(
+        drupal_get_path('module', 'GeneAnnotation') . '/js/smoothness.css', 
+        array('group' => CSS_DEFAULT, 'every_page' => TRUE));
+
+    drupal_add_css(
+        drupal_get_path('module', 'GeneAnnotation') . '/css/jquery-ui.css', 
+        array('group' => CSS_DEFAULT, 'every_page' => TRUE)
+    ); 
+
+    drupal_add_css(
+        drupal_get_path('module', 'GeneAnnotation') . '/css/box.css', 
+        array('group' => CSS_DEFAULT, 'every_page' => TRUE)
+    ); 
+
+    $output = drupal_render($build);
+
+    return $output;
+}
+
+function delete_meta_entry($gene_id = NULL ,$format = NULL) {
+    $num_deleted = db_delete('cap_gene_node')->condition('gene_id', $gene_id, '=')->execute();
+    drupal_set_message('Wiping entries for gene ID='.$gene_id.'. Deleted entries : '.$num_deleted);
+    drupal_goto('cap/');
+}
+
+function generic_update($a) {
+
+    if(!preg_match("/^pass=(\S+?):table=(\S+?):([\s\w]+?)=([\s\w]+?):([\s\w]+?)=([\s\w]+)$/", $a, $matches)) {
+        drupal_set_message('give me string pass=pass:table=table:oldcol=old val:condcol=condval','warning');
+        drupal_goto('cap/');
+    }
+        
+    $sha1pword = variable_get('update_sha1_pass');
+    // $ar = explode(':', $a);
+    if (sha1($matches[1])!=$sha1pword) {
+        drupal_set_message('wrong password','error');
+        drupal_goto('cap/');
+    }
+
+    $table;
+
+    if ($matches[2]!='gene'&&$matches[2]!='file') {
+        drupal_set_message('must give table to modify (gene/file)','error');
+        drupal_goto('cap/');
+    }
+
+    $table = 'cap_'.$matches[2].'_node';
+
+    $num_updated = db_update($table)->fields(array($matches[3] => $matches[4] ))->condition($matches[5], $matches[6], '=')->execute();
+
+    drupal_set_message($table.' update set '.$matches[3].'='.$matches[4].'  where '.$matches[5].'='.$matches[6].'. updated entries : '.$num_updated, 'warning');
+    drupal_goto('cap/');
+
+}
+
+/*
+///// don't use this - use ignore instead!?!
+function delete_uploaded_entry($sbm_id = NULL ,$format = NULL) {
+    $num_deleted = db_delete('cap_file_node')->condition('sbm_id', $sbm_id, '=')->execute();
+    drupal_set_message('Wiping entry for file submission sbm_id='.$sbm_id.'. Deleted entries : '.$num_deleted);
+    drupal_goto('cap/');
+}
+*/
+
+function ignore_uploaded_entry($a = NULL ,$format = NULL) {
+    if(!preg_match("/^pass=(\S+?):sbm_id=(\S+?)$/", $a, $matches)) {
+        drupal_set_message('give me string pass=pass:sbm_id=value','warning');
+        drupal_goto('cap/');
+    }
+    if (sha1($matches[1])!='f2b3575186e3db43c7f19d356b6d40afbe25ce57') {
+        drupal_set_message('wrong password','error');
+        drupal_goto('cap/');
+    }
+    $num_updated = db_update('cap_file_node')->fields(array('file_name' => 'IGNORE' ))->condition('sbm_id', $matches[2], '=')->execute();
+    drupal_set_message('Ignoreing entry for file submission sbm_id='.$matches[2].'. updated entries : '.$num_updated,'warning');
+    drupal_goto('cap/');
+}
+
+// just take the file name and print it to screen in a formatted manner - i.e. need to keep '\n' etc. - perhaps have also allow for further arg processing e.g. genesonly...
+function grab_a_submission_with_rest($file = NULL ,$format = NULL) {
+
+    // die('file: '.$file.' format: '.$format);
+    $filepath = variable_get('basedir').'/sbm/'.$file;
+
+    if (!file_exists($filepath)) { 
+        die("file does not exist");
+    }
+
+    //if($format == 'genes_only') {
+    //    system("grep -P '\t(CDS|exon|gene|mRNA|tRNA|pseudogenic_tRNA|rRNA|miRNA|ncRNA|pseudogene)\t' ".$file;
+    //}
+
+    $filepath = addcslashes($filepath,'() ');
+    $contents = `cat $filepath`;
+    $start = '<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">'
+      .'<html lang="en"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><title>title</title></head><body><pre>';
+    $end = '</body></html>';
+    print $start.$contents.$end;
+    exit;
+
+}
+
+// sends download
+function download_gff_file($filename) {
+
+    $filepath = variable_get('basedir').'/tmp/'.$filename;
+    
+    if (!file_exists($filepath)) { 
+        return drupal_access_denied(); 
+    }
+
+    if (FALSE) {
+        $fd = fopen($filename,'r') ;
+        $file=$fd;
+        if ($fd) {
+            $fsize = filesize($file);
+            $path_parts = pathinfo($file);
+            header("Content-type: application/octet-stream");
+            header("Content-Disposition: attachment; filename=\""
+                . $fname
+                . "\""); // use 'attachment' to force a download
+            header("Content-length: $fsize");
+            header("Cache-control: private"); //use this to open files directly
+            while(!feof($fd)) {
+                $buffer = fread($fd, 2048);
+                echo $buffer;
+            }
+            fclose ($fd);
+        } else  {
+            return drupal_access_denied();
+        }
+    }
+
+    //'user' => $GLOBALS['user']->name,
+    //'uid' => $GLOBALS['user']->uid,
+    $userid = $GLOBALS['user']->uid;
+    //
+
+    $file_obj = (object) array(
+        'uid' => $userid,
+        'uri' => $filepath,
+        'filemime' => file_get_mimetype($filepath),
+        'status' => 1,
+    ); 
+
+    $dest = file_default_scheme();
+
+    $file_obj->filemime =  file_get_mimetype($filename);
+    $file_obj->filepath = $filepath;
+    $file_obj->filesize = filesize($filepath);
+    $file_obj->uid = $userid;
+    $file_obj->timestamp = time();
+    $file_obj->list = 1;
+    $file_obj->new = true;
+
+    $file_obj = file_copy($file_obj, 'temporary://');
+
+    drupal_write_record('files', $file_obj);
+
+    //print_r($file_obj); 
+    $fid = $file_obj->fid;
+    // print '<pre>';print_r($fid); print '</pre>';
+
+    $file = $file_obj;
+
+    if (empty($fid) || empty($file) || !$file->status) { return drupal_access_denied(); }
+
+    $headers = array(
+        'Content-Type'              => 'force-download',
+        'Content-Disposition'       => 'attachment; filename="' . $file->filename . '"',
+        'Content-Length'            => $file->filesize,
+        'Content-Transfer-Encoding' => 'binary',
+        'Pragma'                    => 'no-cache',
+        'Cache-Control'             => 'must-revalidate, post-check=0, pre-check=0',
+        'Expires'                   => '0',
+        'Accept-Ranges'             => 'bytes'
+    );
+
+    if(substr($filename,-4,4)=='.gff' || substr($filename,-3,3)=='.fa') {
+        // Let other modules provide headers and controls access to the file.
+        if (in_array(-1, $headers)) { return drupal_access_denied(); }
+        if (count($headers)) { file_transfer($file->uri, $headers); }
+        //////// may end up having to set a global var back and forth with the download option?!?
+        ////////////////////////////////////////
+        // return verbatim using minimal html
+        ////////////////////////////////////////
+    } else {
+        $start = '<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">'
+        .'<html lang="en"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><title>title</title></head><body><pre>';
+        $end = '</body></html>';
+        $tmp = `cat $filepath`;
+        // drupal_add_http_header('Content-Type', 'text/csv; utf-8');
+        //y print minimal html for verbatim text
+        print $start.$tmp.$end;
+        ////////////////////////////////////////
+        // return as single unformated string - e.g. useful for json/xml...
+        ////////////////////////////////////////
+        //y print text directly - i.e. if you want to parse json/xml etc. - doesn't format in any way at all!?!
+        // print $tmp;
+        ////////////////////////////////////////
+        // stop here to avoid download - thus put this stuff in conditional to allow file download OR page return
+        exit;
+        ////////////////////////////////////////
+    }
+}
+
+// wrapper for the triple gff_submission_form (form generator), gff_submission_form_validate, gff_submission_form_submit...
+function gff_submission_form_wrapper() {
+    // careful if renaming anything as the form names (the given the routine name) are referenced in the cap template file too
+    return drupal_get_form('gff_submission_form');
+}
+
+function gene_info_submission_form_wrapper() {
+    // careful if renaming anything as the form names (the given the routine name) are referenced in the cap template file too
+    return drupal_get_form('gene_info_submission_form');
+}
+
+
+// function check_db_ajax_callback ($form, $form_state) { return $form['name']['species']; }
+
+function gene_info_submission_form_validate($form, &$form_state) {
+
+    if($GLOBALS['user']->uid < 1 ) { return drupal_access_denied();  }
+    
+        if (
+            !$form_state['values']['genestat'] 
+            && !$form_state['values']['gene_sym']
+            && !$form_state['values']['description']
+            && !$form_state['values']['pmid']
+            && !$form_state['values']['comment']
+        ) { form_set_error('', t('You must fill something in?!?')); } 
+
+    if ($form_state['values']['pmid'] && !ctype_digit($form_state['values']['pmid'])) { form_set_error('', t('PMID must be numeric.')); } 
+
+    if ($form_state['values']['genestat'] && !$form_state['values']['status_just']) { form_set_error('', t('You must give a justification for a gene status change.')); } 
+
+    if ($form_state['values']['gene_sym'] && !$form_state['values']['gene_sym_just']) { form_set_error('', t('You must give a justification for the gene symbol.')); } 
+
+    if ($form_state['values']['description'] && !$form_state['values']['desc_just']) { form_set_error('', t('You must give a justification for the gene description.')); } 
+}
+
+function gene_info_submission_form_submit($form, &$form_state) {
+    
+    // check if the user is logged in
+    if($GLOBALS['user']->uid < 1 ) {
+        return drupal_access_denied(); 
+    }
+
+//    if ($format != 'gff3') {
+      //;
+      //} 
+    
+/*
++----------------+------------------+------+-----+---------+----------------+
+| Field          | Type             | Null | Key | Default | Extra          |
++----------------+------------------+------+-----+---------+----------------+
+| sbm_id - auto  | int(10) unsigned | NO   | PRI | NULL    | auto_increment |
+| nid            | int(10) unsigned | NO   | MUL | 0       |                |
+/| submitter_name | varchar(128)     | NO   |     | NULL    |                |
+| user           | varchar(32)      | NO   |     | NULL    |                |
+| user_email     | varchar(32)      | NO   |     | NULL    |                |
+| uid            | int(10) unsigned | NO   |     | 0       |                |
+| ip             | varchar(32)      | NO   |     | NULL    |                |
+| edited         | int(10) unsigned | NO   |     | 0       |                |
+| species        | varchar(32)      | NO   |     | NULL    |                |
+| gene_id        | varchar(32)      | NO   |     | NULL    |                |
+| status         | varchar(10)      | NO   |     | NULL    |                |
+| status_just    | varchar(1256)    | NO   |     |         |                |
+| gene_sym       | varchar(32)      | NO   |     | NULL    |                |
+| sym_just       | varchar(1256)    | NO   |     |         |                |
+| desc           | varchar(256)     | NO   |     | NULL    |                |
+| desc_just      | varchar(1256)    | NO   |     |         |                |
+| pmid           | int(10) unsigned | NO   |     | 0       |                |
+| comments       | varchar(1256)    | NO   |     |         |                |
++----------------+------------------+------+-----+---------+----------------+
+*/
+
+/*    drupal_set_message(
+        $form_state['values']['desc'],
+        'warning');
+    drupal_goto('cap/'); */
+    ///// almost certainly need conditional inclusions here - i.e. 
+    //if($GLOBALS["bored"]) {
+
+    $sbmid = db_insert('cap_gene_node')->fields(
+        array(
+            'user' => $GLOBALS['user']->name,
+            'submitter_name' => 'blah',
+            'user_email' => $GLOBALS['user']->mail,
+            'uid' => $GLOBALS['user']->uid,
+            'ip' => $GLOBALS['user']->hostname,
+            'edited'        => 1,
+            'species'       => $form_state['values']['species'],
+            'gene_id'       => $form_state['values']['howmany_select'],
+            //// clearly must check acceptable combinations - i.e. gene_sym only with justification etc..
+            'gene_sym'      => $form_state['values']['gene_sym']        ?   $form_state['values']['gene_sym']       : '',
+            'sym_just'      => $form_state['values']['gene_sym_just']   ?   $form_state['values']['gene_sym_just']  : '', 
+            'description'     => $form_state['values']['description'] ? $form_state['values']['description'] : '',
+            'desc_just'     => $form_state['values']['desc_just'] ? $form_state['values']['desc_just'] : '',
+            'status_just'   => $form_state['values']['status_just']     ?   $form_state['values']['status_just']    : '',
+            'status'        => $form_state['values']['genestat']        ?   $form_state['values']['genestat']       : '',
+            'pmid'          => $form_state['values']['pmid']            ?   $form_state['values']['pmid']           : '',
+            'comments'      => $form_state['values']['comment']         ?   $form_state['values']['comment']        : '', 
+        )
+    )->execute();
+
+    $message = '<p>Gene meta-data submission for gene ID='.$form_state['values']['howmany_select']
+      .' successful. Please quote submission id='.$sbmid.' in any enquiries you send.</p>';
+    drupal_set_message($message);
+
+   // $GLOBALS["bored"] = 0;
+   // }
+
+
+    /*
+    drupal_set_message(
+        $form_state['values']['species']
+            .' - '.
+            $form_state['values']['howmany_select']
+            .' - '.
+            $form_state['values']['comment']
+            .' - ',
+        'warning');
+        drupal_goto('cap/');
+
+    $result = db_query(
+        'insert into {cap_gene_node} '
+          .'(user, uid, submitter_name, user_email, ip,'
+          .'species, file_name, file_type, file_md5, file_desc, file_size) '
+          .'values (%s,%d,%s,%s,%s,%s,%s,%s,%s,%s,%d)',
+          $GLOBALS['user']->name,$GLOBALS['user']->uid,'hdisfndjsfnds',$GLOBALS['user']->mail,$GLOBALS['user']->hostname,
+          'glossina',$tmpfile,$format,$md5,$desc,$size
+    ) or die;// or die(mysql_error());  
+
+        drupal_set_message('We have already received.','warning');
+        drupal_goto('cap/');
+     */
+//////// put in validation to check that any entry [Na] has justification [Nb]
+
+
+    //$num_updated = db_update('cap_gene_node')->fields(array(
+    //    'file_name' => $newfile,
+    //))->condition('sbm_id', $sbmid, '=')->execute();
+
+//    $count = 0;
+
+   //   drupal_set_message('We are not currently accepting fasta or xls format files.','warning');
+     // drupal_goto('cap/');
+//    $result = db_query("SELECT count(1) as count from {cap_file_node} where file_md5 = '".$md5."'");
+    
+   // foreach ($result as $row) { 
+  //      $count = $row->count; 
+//    }
+
+//    if ($count > 0) {
+ //       drupal_set_message('We have already received a file with this md5 sum.','warning');
+ //       drupal_goto('cap/');
+        ////  }
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+//        drupal_goto('cap/');
+    
+}
+
+
+function gene_info_submission_form($form, &$form_state) { // the error was all that you were accepting ($form) and not actually form_state as well...
+
+    $GLOBALS["bored"] = 1;
+
+    $default = !empty($form_state['values']['howmany']) ? $form_state['values']['howmany'] : 1;
+
+    $species = variable_get('species_metau');
+    // $species = variable_get('species');
+
+    $form['howmany_select'] = array(
+        '#title' => t('Gene ID'),
+        '#type' => 'textfield',
+        '#size' => 20,
+        '#maxlength' => 50,
+        '#description' => t('Enter a gene stable ID as it appears in gff and press enter.'),
+        '#ajax' => array(
+        'callback' => 'ajax_callback',
+        'wrapper' => 'checkboxes-div',
+        'method' => 'replace',
+        'effect' => 'slide',
+        //'effect' => 'fade',
+        'speed' => 'fast',
+        'prevent' => 'click',
+        'progress' => 'interval',
+        'event' => 'submit',
+        'keypress' => TRUE,
+        'prevent' => 'click',
+        ),
+         '#attributes' => array('class' => array('inputything')),
+
+    );
+
+    // check if the user is logged in
+    if($GLOBALS['user']->uid < 1 ) {
+        $form['howmany_select']['#attributes'] = array('readonly' => 'readonly');
+        $form['howmany_select']['#default_value'] = t('Log in to use this!');
+    }
+
+    $form['gene_info'] = array(
+        '#title' => t("Gene Information Form"),
+        // The prefix/suffix provide the div that we're replacing, named by
+        // #ajax['wrapper'] above.
+        '#prefix' => '<div id="checkboxes-div">',
+        '#suffix' => '</div>',
+        '#type' => 'fieldset',
+        // '#description' => t('This is where we get automatically generated checkboxes'),
+    );
+
+    ////// while here we decide if we will open the form or not - not really any reason too not open it?!? - i.e. should we every really do this?!?
+    ////// - i.e. except at the start when there is no gene selected - other than that
+    ////// only thing really worth checking here is if we know what the gene name is - i.e. additional message to say make sure you know what you're doing?!?
+    $ret=-2;
+    $gene_id = '';
+
+    if(!empty($form_state['values']['howmany_select'])) {
+        $gene_id = $form_state['values']['howmany_select'];
+        $ret=check_gene_entry($gene_id);
+        //$ret=check_gene_entry($form_state['values']['howmany_select']);
+        if($ret!=-1) {
+            $gene_info_switch = 1;
+        }
+    } else {
+        $gene_info_switch = 0;
+    }
+
+    // open form for editing
+    if($gene_info_switch) {
+
+        // why?!? $species = variable_get('species');
+        $basedir = variable_get('basedir');
+        $gene_names = variable_get('genenames');
+
+        $exists = `grep -P '^$gene_id$' $basedir/gff/$gene_names`;
+        // $exists = `grep $gene_id $basedir/gff/${species}.genenames.txt`;
+
+        // print unknown gene message box
+        if($exists=='') {
+        // if($ret==0) {
+        // if(check_gene_entry($form_state['values']['howmany_select'])==0) {
+
+            $form['gene_info']['unknown'] = array(
+                '#type' => 'markup',
+                '#markup' => '<div class="warning_msgbox">You have entered an unknown gene ID. '
+                // '#markup' => '<div class="msgbox"><h3>Unknown Gene ID</h3><p>You have entered an unknown gene ID. '
+                  .'This means you either have a typo in the Gene ID or you are submitting meta data for a wholly '
+                  .'new gene model that you have submitted via the "Submit Models" form</div>',
+                  //.'new gene model that you have submitted via the "Submit Models" form</p></div>',
+                //'#prefix' => '<div class="ui-widget" style="width: 515px; height: 200px;">',
+                // '#suffix' => '</div>',
+                '#attributes' => array('id' => 'species-filler'),
+            );
+        }
+
+        $form['gene_info']['species'] = array(
+            '#type' => 'select',
+            '#title' => t('Species'),
+            '#options' => drupal_map_assoc($species),
+            /* '#states' => array( 'visible' => array( ':input[name="sbm"]' => array('value' => 'gff'), ), ), */
+        );
+
+        $form['gene_info']['genestat'] = array(
+           // '#type' => 'checkboxes',
+            '#type' => 'radios',
+            '#title' => t('[1] Gene Status'),
+            '#options' => array( 
+              //  'na' => t('Leave Status Unchanged'), 
+                'approve' => t('Approve'), 
+                'pseudo'   => t('Make pseudogene (and approve)'),
+                'delete'   => t('Mark for deletion'),
+            ),
+            //'#default_value' => 'na',
+            '#prefix' => '<div class="ui-widget">',
+            '#suffix' => '</div>',
+            '#attributes' => array('id' => 'species-filler'),
+        );
+
+        $form['gene_info']['warning1'] = array(
+            '#type' => 'container',
+            '#children' => '<div class="info_msgbox">As you are changing the gene status you must give a justification in textbox</div>',
+            '#states' => array( 'visible' => array( ':input[name="genestat"]' => array(  '!value' => false,  ), ),  ), //'checked' => TRUE, // 'value' => 'approve', 
+        );
+
+        //The following states may be applied to an element:
+        //
+        //    * enabled
+        //        * disabled
+        //            * required
+        //                * optional
+        //                    * visible
+        //                        * invisible
+        //                            * checked
+        //                                * unchecked
+        //                                    * expanded
+        //                                        * collapsed
+        //
+
+        ////// this is horrible!?!
+        // '#prefix' => '<div class="ui-widget" style="width: 515px; height: 200px;">',
+        $form['gene_info']['status_just'] = array(
+            '#type' => 'textarea',
+            '#title' => t('[1] Gene Status Change Justification *'), // try markup to make it red?!?
+            '#rows' => 3,
+            '#maxlength' => 1000,
+            '#prefix' => '<div class="ui-widget" style="width: 65%;">',
+            '#suffix' => '</div>',
+            '#states' => array( 'visible' => array( ':input[name="genestat"]' => array(  '!value' => false,  ), ),  ), //'checked' => TRUE, // 'value' => 'approve', 
+            '#description' => 'You must fill this out if you are changing the status of a gene.',
+         '#attributes' => array('class' => array('inputything')),
+        );
+
+           // '#attributes' => array('id' => 'species-filler'),
+        //       #options' => array(
+        //				'click' => t('Click'),
+        //				'mouseover' => t('MouseOver'),
+        //            ),
+
+        $form['gene_info']['gene_sym'] = array(
+            '#type' => 'textfield',
+            '#title' => t('[2] Gene Symbol'),
+            '#size' => 50,
+            //'#size' => 20,
+            '#maxlength' => 50,
+            '#prefix' => '<div class="ui-widget">',
+            '#suffix' => '</div>',
+         '#attributes' => array('class' => array('inputything')),
+           // '#attributes' => array('id' => 'species-filler'),
+        );
+
+        $form['gene_info']['warning2'] = array(
+            '#type' => 'container',
+            '#children' => '<div class="info_msgbox">You must give a justification for your choosen gene symbol in textbox</div>',
+            '#states' => array( 'visible' => array( ':input[name="gene_sym"]' => array(  '!value' => '',  ), ),  ), 
+        );
+
+        $form['gene_info']['gene_sym_just'] = array(
+            '#type' => 'textarea',
+            '#title' => t('[2] Gene Symbol Justification *'),
+            '#rows' => 3,
+            '#maxlength' => 1000,
+            '#prefix' => '<div class="ui-widget" style="width: 65%;">',
+            '#suffix' => '</div>',
+            '#states' => array( 'visible' => array( ':input[name="gene_sym"]' => array(  '!value' => '',  ), ),  ), 
+            '#description' => 'You must fill this out if you are assigning a gene symbol.',
+         '#attributes' => array('class' => array('inputything')),
+        );
+
+        $form['gene_info']['description'] = array(
+            '#type' => 'textfield',
+            '#title' => t('[3] Gene Description'),
+            '#size' => 50, 
+            '#maxlength' => 128,
+            '#prefix' => '<div class="ui-widget">',
+            '#suffix' => '</div>',
+         '#attributes' => array('class' => array('inputything')),
+        );
+
+        $form['gene_info']['warning3'] = array(
+            #'#type' => 'markup',
+            #'#markup' => '<div class="info_msgbox">You must give a justification for gene description in textbox [2b]</div>',
+            '#type' => 'container',
+            '#children' => '<div class="info_msgbox">You must give a justification for gene description in textbox</div>',
+            '#states' => array( 'visible' => array( ':input[name="description"]' => array(  '!value' => '',  ), ),  ), 
+        );
+
+        $form['gene_info']['desc_just'] = array(
+            '#type' => 'textarea',
+            '#title' => t('[3] Gene Description Justification *'),
+            // '#title' => t('[3b] Gene Description Justification <div style="font-family: Arial Black; font-size: 24px; color: black">*</div>'),
+            '#maxlength' => 1000,
+            '#rows' => 3,
+            '#prefix' => '<div class="ui-widget" style="width: 65%;">',
+            '#suffix' => '</div>',
+            '#states' => array( 'visible' => array( ':input[name="description"]' => array(  '!value' => '',  ), ),  ), 
+            '#description' => 'You must fill this out if you are giving a gene description in [3a].',
+         '#attributes' => array('class' => array('inputything')),
+        );
+
+
+        $form['gene_info']['pmid'] = array(
+            '#type' => 'textfield',
+            '#title' => t('[4] PMID'),
+            '#size' => 50,
+            // '#size' => 20,
+            '#maxlength' => 100,
+            '#prefix' => '<div class="ui-widget">',
+            '#suffix' => '</div>',
+            '#ajax' => array(
+                'callback' => 'submit_driven_callback',
+                'wrapper' => 'checkboxes-div',
+                'method' => 'replace',
+                'effect' => 'slide',
+                'speed' => 'fast',
+                'prevent' => 'click',
+                'progress' => 'interval',
+                'event' => 'submit',
+                'keypress' => TRUE,
+                'prevent' => 'click',
+            ),
+            '#description' => 'Enter a Pubmed ID and press enter.',
+         '#attributes' => array('class' => array('inputything')),
+        );
+
+        $form['gene_info']['box'] = array(
+            '#type' => 'markup',
+            '#prefix' => '<div id="box">',
+            '#suffix' => '</div>',
+            '#markup' => '<div class="msgbox3"><h5>Pubmed Entry</h5><p>Title:</p></div>',
+        );
+
+        /* multiple submission type buttons cause multiple submissions upon full form submission - sure there's a way around this, but atm will have 'enter' triggered event above'
+        $form['gene_info']['check'] = array(
+            '#type' => 'submit',
+            '#ajax' => array(
+            'callback' => 'submit_driven_callback',
+            'wrapper' => 'box',
+            'name' => 'submit1',
+            ),
+            '#value' => t('Check PMID'),
+        ); */
+
+        $form['gene_info']['comment'] = array(
+            '#type' => 'textarea',
+            '#title' => t('[5] General Comments'),
+            '#rows' => 3,
+            '#maxlength' => 256,
+            '#prefix' => '<div class="ui-widget" style="width: 65%;">',
+            // '#prefix' => '<div class="ui-widget" style="width: 515px; height: 200px;">',
+            '#suffix' => '</div>',
+            '#attributes' => array('id' => 'species-filler', 'class' => array('inputything')),
+        );
+
+    $form['gene_info']['submit'] = array(
+        '#type' => 'submit',
+        '#value' => t('Submit'),
+    );
+    
+
+    // let's print a table of the current values for the gene?!?
+    } elseif ($ret==-1) {
+
+        $user;
+        $species;
+        $gene_sym;
+        $sym_just;   
+        $description;
+        $desc_just;
+        $status_just;
+        $status;
+        $pmid; 
+        $comments;
+
+        $result = db_query("SELECT user, species, gene_sym, sym_just, description, desc_just, status, status_just, pmid, comments from {cap_gene_node} where gene_id = '".$gene_id."'");
+
+        foreach ($result as $row) { 
+            $user = $row->user; 
+            $species = $row->species; 
+            $gene_sym = $row->gene_sym; 
+            $sym_just = $row->sym_just; 
+            $description = $row->description; 
+            $desc_just = $row->desc_just; 
+            $status_just = $row->status_just; 
+            $status = $row->status; 
+            $pmid = $row->pmid; 
+            $comments = $row->comments; 
+        }
+
+        $emptystr = '---';
+            //'#markup' => '<div class="msgbox"><h3>Gene Already Edited.</h3><p>To edit the entry for this gene please contact your group representative.</p></div>
+            // '# markup' => '<div class="warning_msgbox">This Gene has already been edited. To edit the entry for this gene please contact your group representative.</div>
+            // <table id="customers" border="1">
+        $form['gene_info']['table'] = array(
+            '#type' => 'markup',
+            '#markup' => '<div class="warning_msgbox">This Gene has already been edited. To edit the entry for this gene please contact your group representative.</div>
+            
+            <table class="fancytable">
+            <tr>
+                <td>Species</td>
+                <td>'.$species.'</td>
+            </tr>
+            <tr>
+                <td>Gene ID</td>
+                <td>'.$gene_id.'</td>
+            </tr>
+            <tr>
+                <td>Gene Symbol</td>
+                <td>'.$gene_sym.'</td>
+            </tr>
+            <tr>
+                <td>Gene Symbol Just.</td>
+                <td>'.$sym_just.'</td>
+            </tr>
+            <tr>
+                <td>Gene Status</td>
+                <td>'.$status.'</td>
+            </tr>
+            <tr>
+                <td>Gene Status Just.</td>
+                <td>'.$status_just.'</td>
+            </tr>
+            <tr>
+                <td>Gene Descriptions</td>
+                <td>'.$description.'</td>
+            </tr>
+            <tr>
+                <td>Gene Description Just.</td>
+                <td>'.$desc_just.'</td>
+            </tr>
+            <tr>
+                <td>PMID</td>
+                <td>'.$pmid.'</td>
+            </tr>
+            <tr>
+                <td>Comments.</td>
+                <td>'.$comments.'</td>
+            </tr>
+            </table>       ',
+            //'#prefix' => '<div class="ui-widget" style="width: 515px; height: 200px;">',
+            // '#suffix' => '</div>',
+            '#attributes' => array('id' => 'species-filler'),
+        );
+    }
+
+
+
+
+
+
+    return $form;
+
+}
+
+function download_page($path){
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $path);
+        curl_setopt($ch, CURLOPT_FAILONERROR,1);
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION,1);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 15);
+        ///// since this runs on treason etc., you must go via webproxy to make it work!?!?
+        curl_setopt($ch, CURLOPT_PROXY, "www-proxy.ebi.ac.uk");
+        curl_setopt($ch, CURLOPT_PROXYPORT, 3128);
+        $retValue = curl_exec($ch);                      
+        curl_close($ch);
+        return $retValue;
+}
+
+        /*
+    $form['checkboxes_fieldset'] = array(
+        '#title' => t("Generated Checkboxes"),
+        // The prefix/suffix provide the div that we're replacing, named by
+        // #ajax['wrapper'] above.
+    //    '#prefix' => '<div id="checkboxes-div">',
+    //   '#suffix' => '</div>',
+        '#type' => 'fieldset',
+        '#description' => t('This is where we get automatically generated checkboxes'),
+    );
+
+    $num_checkboxes = !empty($form_state['values']['howmany_select']) ? $form_state['values']['howmany_select'] : 0;
+    for ($i=1; $i<=$num_checkboxes; $i++) {
+        $form['checkboxes_fieldset']["checkbox$i"] = array(
+        '#type' => 'checkbox',
+        '#title' => "Checkbox $i",
+        );
+    }
+        */
+
+
+
+    /*  switch ($form_state['storage']['step']) {
+    case 1:
+      // Custom page title.
+      drupal_set_title('Step 1');
+    */ /* 
+    $default = !empty($form_state['name']['sbm']) ? $form_state['name']['sbm'] : 0;
+
+    $form['name'] = array(
+        '#type' => 'fieldset',
+        '#title' => t('Submit Gene Meta Data'),
+        '#collapsible' => TRUE,
+        '#collapsed' => FALSE,
+    );
+
+    $form['#attributes'] = array('enctype' => "multipart/form-data");
+
+    $form['name']['sbm'] = array(
+        '#type' => 'textfield',
+        '#title' => t('Gene Stable ID'),
+        '#required' => TRUE,
+        '#size' => 20,
+        '#maxlength' => 20,
+        '#ajax' => array(
+            'callback' => 'check_db_ajax_callback',
+            'wrapper' => 'argh-div',
+            'effect' => 'fade',
+        ),
+    );
+
+   */
+
+/* is it multipart where we retrieve the current info for a gene first?!? - or do we do a look-up with ajax?!?
+* perhaps allow batch submissions?!?
+ * $form['name']['upload'] = array(
+ * //'#required' => TRUE,
+ * '#type' => 'file',
+ * '#description' => "File should be < 2Mb.",
+ * // apparently only way to set width of this f'er in firefox is 
+ * // here not in css so just make sure its small enough not to go out of rest...
+ * '#size' => 35,
+ *  );
+ */
+/*
+    if(!empty($form_state['name']['sbm'])){
+    //if(!empty($form_state['name']['sbm']) && $form_state['name']['sbm'] == 'pink') {
+    $species = variable_get('species');
+
+    $form['name']['species'] = array(
+        '#type' => 'select',
+        '#title' => t('Species'),
+        '#options' => drupal_map_assoc($species),
+        '#prefix' => '<div id="argh-div">',
+        '#suffix' => '</div>',
+        #'#description' => t('species.'),
+
+ */ /*        '#states' => array(
+            'visible' => array(
+                ':input[name="sbm"]' => array('value' => 'gff'),
+            ),
+        ),
+  */
+
+/* );
+    }
+ */
+    
+/*    $form['submit'] = array(
+        '#type' => 'submit',
+        '#value' => 'Submit',
+    );
+ */
+
+    /*
+
+      // All the real form fields.
+      $form['step1_field1'] = array(
+        '#title' => 'Step 1 Field 1',
+        '#type' => 'textfield',
+        '#default_value' => $form_state['storage']['values'][1]['step1_field1'],
+      );
+
+
+      // Add submit button(s).
+      $form += _test_add_submit_buttons($form_state);
+
+      // Not important - used only for displaying values posted so far.
+      $form['posted_values'] = array(
+        '#type' => 'markup',
+        '#value' => _test_display_posted_values($form_state),
+      );
+      break;
+
+    case 2:
+
+      // Custom page title.
+      drupal_set_title('Step 2');
+
+      // All the real form fields.
+      $form['step2_field1'] = array(
+        '#title' => 'Step 2 Field 1',
+        '#type' => 'textfield',
+        '#default_value' => $form_state['storage']['values'][2]['step2_field1'],
+      );
+
+      // Add submit button(s).
+      $form += _test_add_submit_buttons($form_state);
+
+      // Not important - used only for displaying values posted so far.
+      $form['posted_values'] = array(
+        '#type' => 'markup',
+        '#value' => _test_display_posted_values($form_state),
+      );
+      break;
+
+    case 3:
+
+      // Custom page title.
+      drupal_set_title('Step 3');
+
+      // All the real form fields.
+      $form['step3_field1'] = array(
+        '#title' => 'Step 3 Field 1',
+        '#type' => 'textfield',
+        '#default_value' => $form_state['storage']['values'][3]['step3_field1'],
+      );
+
+      // Add submit button(s).
+      $form += _test_add_submit_buttons($form_state);
+
+      // Not important - used only for displaying values posted so far.
+      $form['posted_values'] = array(
+        '#type' => 'markup',
+        '#value' => _test_display_posted_values($form_state),
+      );
+      break;
+  }
+
+     */
+/*        $form['gene_info']['product_name'] = array(
+            '#title' => t('Product Name'),
+            '#type' => 'textfield',
+            '#required' => TRUE,
+            '#size' => 30,
+            '#description' => t('Please enter product name.'),
+    '#ajax' => array(
+      'callback' => 'check_name',
+      'wrapper' => 'status',
+      'method' => 'replace',
+      'effect' => 'fade',
+      'progress' => 'interval',
+    ),
+        );
+ */
+
+
+
+
+
+
+
+    /*
+        $form['gene_info']['check_name'] = array(
+            '#type' => 'markup',
+            '#value' => "<a href='#' id='check_name'>" . t('Check Product Name') . "</a><br/>",
+        ); 
+    
+        $form['gene_info']['status'] = array(
+            '#type' => 'markup',
+            '#value' => "<span id='status'></span><br/>",
+        ); 
+    
+        $form['gene_info']['submit'] = array(
+            '#type' => 'submit',
+            '#value' => t('Submit'),
+        );
+    
+        $form['gene_info']['cancel'] = array(
+            '#type' => 'markup',
+            '#value' => l(t('Cancel'), 'product_mgmt'),
+        ); */
+//        return $form;
+
+function submit_driven_callback($form, $form_state) {
+  // In most cases, it is recomended that you put this logic in form generation
+  // rather than the callback. Submit driven forms are an exception, because
+  // you may not want to return the form at all.
+    //
+
+    $pmid = $form_state['values']['pmid'];
+
+    if($pmid=='') {
+        $commands[] = ajax_command_replace("#box", '<div id="box"><div class="msgbox3"><h5>Pubmed Entry</h5><p>Error: You must enter a numeric PMID.</p></div></div>');  
+        return array('#type' => 'ajax', '#commands' => $commands);
+    }
+
+    $XML = download_page("http://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&id=$pmid");
+
+    // $curl = variable_get('curl');
+    $title = '';
+    
+///////////////////////////////////////////////
+/////// when they change it we need to debug?!?
+///////////////////////////////////////////////
+/* $commands[] = ajax_command_replace("#box", '<div id="box"><div class="msgbox3"><h5>Pubmed Entry</h5><p>Title: '.$XML.'</p></div></div>');  
+return array('#type' => 'ajax', '#commands' => $commands); */
+///////////////////////////////////////////////
+
+    if(preg_match("/title\s+?\{.*?name\s+\"(.*?)\"/ms", $XML, $titlematches)) {
+    //if(preg_match("/title\s+?\{.*?name\s+?&quot;(.*?)&quot;/ms", $XML, $titlematches)) {
+        $title = $titlematches[1];
+    } else { 
+            $commands[] = ajax_command_replace("#box", '<div id="box"><div class="msgbox3"><h5>Pubmed Entry</h5><p>Error: Problem retrieving entry.</p></div></div>');  
+            return array('#type' => 'ajax', '#commands' => $commands);
+    }
+
+    //`curl -s http://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi\?db=pubmed\&id=$pmid`;// | perl -0pe 's/.*?title\s\{.*?name &quot;(.*?)&quot;.*/$1/sm' | perl -pe 's/\n//g'`;
+    // $title = `curl -s http://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi\?db=pubmed\&id=$pmid`;// | perl -0pe 's/.*?title\s\{.*?name &quot;(.*?)&quot;.*/$1/sm' | perl -pe 's/\n//g'`;
+    // $title = `curl -s http://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi\?db=pubmed\&id=$pmid | perl -0pe 's/.*?title\s\{.*?name &quot;(.*?)&quot;.*/$1/sm' | perl -pe 's/\n//g'`;
+    $commands = array();
+    // Replace the content of '#object-1' on the page with 'some html here'.
+
+    if(preg_match("/(Error occurred|does not exist)/",$title)) {
+        $commands[] = ajax_command_replace("#box", '<div id="box"><div class="msgbox3"><h5>Pubmed Entry</h5><p>Error: Article does not exist.</p></div></div>');  
+        return array('#type' => 'ajax', '#commands' => $commands);
+
+    }
+
+    $commands[] = ajax_command_replace("#box", '<div id="box"><div class="msgbox3"><h5>Pubmed Entry</h5><p>Title: '.$title.'</p></div></div>');  
+    return array('#type' => 'ajax', '#commands' => $commands);
+
+////////////////////////////////////
+////////////////////////////////////
+//
+// this method also works for wiping the entire region!?! - do db check now?!?
+// need to put in the db check - perhaps if it's already been edited and the user doesn't have permissions to re-edit
+// can just put an html talbe in here that wipes the whole form and puts the info in...
+// $commands[] = ajax_command_replace("#checkboxes-div", "<div id='checkboxes-div'>Titfdsafsd: '${title}'</div>");    
+////////////////////////////////////
+////////////////////////////////////
+/*
+Name	Description
+ajax_command_after	Creates a Drupal Ajax 'insert/after' command.
+ajax_command_alert	Creates a Drupal Ajax 'alert' command.
+ajax_command_append	Creates a Drupal Ajax 'insert/append' command.
+ajax_command_before	Creates a Drupal Ajax 'insert/before' command.
+ajax_command_changed	Creates a Drupal Ajax 'changed' command.
+ajax_command_css	Creates a Drupal Ajax 'css' command.
+ajax_command_data	Creates a Drupal Ajax 'data' command.
+ajax_command_html	Creates a Drupal Ajax 'insert/html' command.
+ajax_command_insert	Creates a Drupal Ajax 'insert' command using the method in #ajax['method'].
+ajax_command_invoke	Creates a Drupal Ajax 'invoke' command.
+ajax_command_prepend	Creates a Drupal Ajax 'insert/prepend' command.
+ajax_command_remove	Creates a Drupal Ajax 'remove' command.
+ajax_command_replace	Creates a Drupal Ajax 'insert/replaceWith' command.
+ajax_command_restripe	Creates a Drupal Ajax 'restripe' command.
+ajax_command_settings	Creates a Drupal Ajax 'settings' command.
+*/
+
+////// wipe entire form - i.e. in case of returning table?!?
+// $commands[] = ajax_command_replace("#checkboxes-div", "<div id='checkboxes-div'>Titfdsafsd: '${title}'</div>");    
+
+
+
+  //$commands[] = ajax_command_replace('#box', $title);
+  // Add a visual "changed" marker to the '#object-1' element.
+//  $commands[] = ajax_command_changed('#box');
+  // Menu 'page callback' and #ajax['callback'] functions are supposed to
+  // return render arrays. If returning an Ajax commands array, it must be
+  // encapsulated in a render array structure.
+
+
+
+
+
+////// seems this is a horrible way to do it...
+  $element = $form['box'];
+  $element['#markup'] = "";
+  return $element['#markup'] = "Title : '$title'";
+
+}
+
+
+function check_name($form,$form_status) {
+	$name = strtolower($_GET['NAME']);
+ 
+//	$query = "SELECT COUNT(*) AS total FROM {product} WHERE LOWER(product_name) LIKE ('%s')";
+//	$rs = db_query($query, $name);
+ 
+//	$info = db_fetch_object($rs);
+//	$total = $info->total;
+ 
+//	if ($total) {
+//	if ($total) {
+		//echo "$('#status').html('This product is available.');";
+		// echo "$('#box').val('This product is available.');";
+    //
+
+//  drupal_add_js(
+            echo "NAME = 'fdsfsdsdfshello';"; 
+                   // 'inline'
+  //                  );
+
+//$(document).ready(function() {
+    // prob was argument to the function is an associative array?!?
+    // var associativeArray = {}; // associativeArray["one"] = "First";                   
+    // var data = "manual annotation, alignment, aaaa, bbbb, ccccc, dddddd".split(",");
+//    $("#species-filler").autocomplete({source:data}); 
+//    $("#edit-desc").autocomplete({source:data});
+  //  $("#suggest").autocomplete({source:data});    
+//    $('#tabs').tabs();
+  //  $('#sortable').sortable({items: 'li'});
+//    $('.accordion').accordion({
+//        autoHeight: false,
+//        clearStyle: true,
+//        header: 'h3'
+//    });
+//});
+    //echo "document.getElementById('box').value = 'Blahblah';";
+
+
+//		echo "$('#box').html('This product is available.');";
+//	}
+//	else {
+//		echo "$('#status').html('This product is not available.');";
+//	}
+    ////// don't return here!?!
+}
+
+function check_gene_entry($gene_id) {
+
+    $count = 0;
+    $edited = 0;
+    $result = db_query("SELECT count(1) as count from {cap_gene_node} where gene_id = '".$gene_id."'");
+
+    // really have little clue about the drupal db interface and don't give a shite either... - it can only return one value
+    foreach ($result as $row) { 
+        $count = $row->count; 
+    }
+
+    if ($count == 0) { 
+        return 0;
+    }
+
+    $result = db_query("SELECT edited from {cap_gene_node} where gene_id = '".$gene_id."'");
+
+    foreach ($result as $row) { 
+        $edited = $row->edited; 
+    }
+
+    if ($edited == 0) {
+        return 1;
+    } else {
+        return -1;
+    } 
+}
+
+function ajax_callback($form, $form_state) {
+    
+    $return = check_gene_entry($form_state['values']['howmany_select']);
+    
+    
+    
+    // debug - remove!?!
+    //// allow for edit form atm.
+    $return = 1; // make what will be a table appear?!?
+
+
+
+    ///// here we check if the thing has already been edited and return accordingly... - i.e. both times we check check_gene_entry we are checking for binary option...
+    if ($return==-1) {
+        $commands[] = ajax_command_replace("#checkboxes-div", "<div id='checkboxes-div'>This gene has already been edited - put in a table here '${title}'</div>");    
+        return array('#type' => 'ajax', '#commands' => $commands);
+    } else {
+        ///// $form_state['gene_info']['gene_sym']['#default_value'] = t('Botty');
+        return $form['gene_info'];
+    }
+}
+
+function ajax_callback2($form, $form_state) {
+		echo "$('#status').html('This product is available.');";
+  // return $form['checkboxes_fieldset'];
+}
+
+function _test_add_submit_buttons($form_state) {
+  $buttons = array();
+  // Display 'Prev' button on all steps excluding first.
+  if ($form_state['storage']['step'] > 1) {
+    $buttons['prev'] = array(
+      '#type' => 'submit',
+      '#value' => 'Prev',
+    );
+  }
+  // Display 'Next' button on all steps excluding last.
+  if ($form_state['storage']['step'] < TEST_FORM_TOTAL_STEPS) {
+    $buttons['next'] = array(
+      '#type' => 'submit',
+      '#value' => 'Next',
+    );
+  }
+  // Display 'Finish' button on the last step.
+  if ($form_state['storage']['step'] == TEST_FORM_TOTAL_STEPS) {
+    $buttons['finish'] = array(
+      '#type' => 'submit',
+      '#value' => 'Finish',
+    );
+  }
+  return $buttons;
+}
+
+/**
+* Displays values posted so far beneath the form.
+*/
+function _test_display_posted_values($form_state) {
+  $output = '<p>Posted values:</p>';
+  $output .= '<p>Step 1 field 1: ' . $form_state['storage']['values'][1]['step1_field1'] . '</p>';
+  $output .= '<p>Step 2 field 1: ' . $form_state['storage']['values'][2]['step2_field1'] . '</p>';
+  $output .= '<p>Step 3 field 1: ' . $form_state['storage']['values'][3]['step3_field1'] . '</p>';
+  return $output;
+}
+
+// generate upload file submission form
+function gff_submission_form($form_state) {
+
+    $form['name'] = array(
+        '#type' => 'fieldset',
+        '#title' => t('Submit modified gene models'),
+        '#collapsible' => TRUE,
+        '#collapsed' => FALSE,
+    );
+
+    $form['#attributes'] = array('enctype' => "multipart/form-data");
+
+    $form['name']['upload'] = array(
+        //'#required' => TRUE,
+        '#type' => 'file',
+        '#description' => "File should be < 2Mb.",
+        // apparently only way to set width of this f'er in firefox is 
+        // here not in css so just make sure its small enough not to go out of rest...
+        '#size' => 35,
+    );
+
+    $species = variable_get('species_modelu');
+
+    $form['name']['species'] = array(
+        '#type' => 'select',
+        '#title' => t('Species'),
+        '#options' => drupal_map_assoc($species),
+        #'#description' => t('species.'),
+    );
+
+    $form['name']['format'] = array(
+        '#type' => 'select',
+        '#title' => t('Format'),
+        '#options' => drupal_map_assoc(array('gff3','fasta','xls')),
+        '#description' => t('Format of upload file.'),
+    );
+
+/*
+    $form['name']['formatprob'] = array(
+        '#type' => 'container',
+        '#children' => '<div class="warning_msgbox">We are not yet accepting this format</div>',
+        '#states' => array( 'visible' => array( ':input[name="format"]' => array('!value' => 'gff3'), ), ),
+    );
+*/
+
+    $form['name']['sbm'] = array(
+        '#type' => 'textfield',
+        '#title' => t('Submitter Name'),
+        '#required' => TRUE,
+        '#description' => "Please enter the submitters full name.",
+        '#size' => 20,
+        '#maxlength' => 20,
+     //   '#prefix' => '<div class="fieldHolder">',
+       // '#suffix' => '</div>',
+        // '#attributes' => array('class' => array('textInput1')),
+         '#attributes' => array('class' => array('inputything')),
+    );
+
+    $form['name']['desc'] = array(
+        '#type' => 'textfield',
+        '#title' => t('Description'),
+        '#required' => TRUE,
+        '#description' => "Please enter a description of the contents of the upload file.",
+        '#size' => 20,
+        '#maxlength' => 20,
+         '#attributes' => array('class' => array('inputything')),
+        //'#autocomplete_path' => "manual annotation blah",
+    );
+
+    if($GLOBALS['user']->uid < 1 ) {
+        $form['name']['sbm']['#attributes'] = array('readonly' => 'readonly');
+        $form['name']['sbm']['#default_value'] = t('Log in to use this!');
+        $form['name']['desc']['#attributes'] = array('readonly' => 'readonly');
+        $form['name']['desc']['#default_value'] = t('Log in to use this!');
+    }
+
+    // $form['submit'] = array( // put it in the form box...
+    $form['name']['submit'] = array(
+        '#type' => 'submit',
+        '#value' => 'Submit',
+    );
+    return $form;
+}
+
+// validate the file submission form
+function gff_submission_form_validate($form, &$form_state) {
+
+    if($GLOBALS['user']->uid < 1 ) {
+        return drupal_access_denied(); 
+    }
+
+    //if(user_is_logged_in()
+    // move the damned thing out of drupal tmp into basdire tmp - this is completely superfluous...
+    $basedir = variable_get('basedir');
+    $filepath = $basedir.'/tmp/' . $_FILES['files']['name']['upload'];
+    $file_move_return = move_uploaded_file($_FILES['files']['tmp_name']['upload'], $filepath);
+
+    if (!$file_move_return) {
+        form_set_error('upload', "Something went wrong with the file upload - it might be a file size issue. Are you sure you file is < 2Mb?");
+    }
+    
+}
+
+// print upload history
+function uploaded_files_list() {
+
+    /*
+     * > mysql -udrupal -pdrupal drupal -e 'desc cap_file_node'
+     * +----------------+------------------+------+-----+---------+----------------+
+     * | Field          | Type             | Null | Key | Default | Extra          |
+     * +----------------+------------------+------+-----+---------+----------------+
+     * | sbm_id         | int(10) unsigned | NO   | PRI | NULL    | auto_increment |
+     * | submitter_name | varchar(128)     | NO   |     | NULL    |                |
+     * | user           | varchar(32)      | NO   |     | NULL    |                |
+     * | user_email     | varchar(32)      | NO   |     | NULL    |                |
+     * | uid            | int(10) unsigned | NO   |     | 0       |                |
+     * | ip             | varchar(32)      | NO   |     | NULL    |                |
+     * | species        | varchar(32)      | NO   |     | NULL    |                |
+     * | file_name      | varchar(128)     | NO   |     | NULL    |                |
+     * | file_type      | varchar(32)      | NO   |     | NULL    |                |
+     * | file_md5       | varchar(32)      | NO   |     | NULL    |                |
+     * | file_size      | int(10) unsigned | NO   |     | NULL    |                |
+     * | file_desc      | varchar(1256)    | NO   |     |         |                |
+     * +----------------+------------------+------+-----+---------+----------------+
+     */
+ /*   
+   $result = db_query("SELECT sbm_id, submitter_name,user,species,file_name,file_type,file_md5,file_size,file_desc FROM {cap_file_node}");
+   // $result = db_query("SELECT * FROM {some_table} WHERE some_other_field = :some_other_field", array(':some_other_field' => $some_var));
+    foreach ($result as $row) {
+    //print "----------RESULT:";
+    //print drupal_json_encode($result);
+    //print "----------ROW:";
+    print drupal_json_encode($row);
+        // Loop through your query results and do some stuff.
+  }
+  */
+
+    //$string = '<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">'
+    //  .'<html lang="en"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><title>title</title></head><body>';
+    $result = db_query("SELECT sbm_id, submitter_name,user,user_email,uid,ip,species,file_name,file_type,file_md5,file_size,file_desc FROM {cap_file_node}");
+    $string = '';
+    $end = '</body></html>';
+    $list = array();
+    foreach ($result as $row) {
+/*
+        $string .= 
+            '<p>'
+            .$row->sbm_id.'&#09;'
+            .$row->user.'&#09;'
+            .$row->submitter_name.'&#09;'
+            .$row->species.'&#09;'
+            .$row->file_name.'&#09;'
+            .$row->file_type.'&#09;'
+            .$row->file_size.'&#09;'
+            .$row->file_desc.'&#09;'
+            .'</p>';
+*/
+        // $string .= '<p>'.$row->sbm_id.",".$row->file_name'.</p>';
+//        print drupal_json_encode($row);
+    array_push($list,$row);
+    }
+    print drupal_json_encode($list);
+//    print $string;
+    // print $string.$end;
+
+    // (need to iterate through fetchAssoc?!?: 
+   // $result = db_select('cap_file_node', 'n')->fields('n')->execute()->fetchAssoc();
+    // print drupal_json_encode($result); DatabaseStatementInterface::fetchAllKeyed
+    
+    //$result = db_select('cap_file_node', 'c')->fields('file_name')->execute()->fetchAllKeyed();
+    // $result = db_select('cap_file_node', 'c')->fields('file_name')->execute();
+    // while ($res = $result->fetchAssoc()) {
+    
+    //$result = db_select('cap_file_node', 'c')->fields('file_name')->execute()->fetchAllKeyed();
+
+
+
+    // print drupal_json_encode($result);
+    // print "------E-----------";
+    // }
+    //print_r($result);
+    //$result = db_query('select * from cap_file_node');
+   // $result = db_select('cap_file_node', 'n')->fields('n')->execute();
+  //  while ($res2 = db_fetch_object($result)) { 
+     //   print drupal_json_encode($res2);
+        // print_r($res2); 
+//    }
+   // print "------R-----------";
+     // $results = db_query('select * from cap_file_node');
+    // print "------R-----------";
+    //  $row_count = db_num_rows($results);
+       
+//    print "------R-----------";
+ //     print $row_count;
+//    print "------T-----------";
+ //       for ($counter = 1; $counter <=  $row_count; $counter++) {
+//            $res3 = db_fetch_object ($results);
+        //    print drupal_json_encode($res3);
+      //  }
+
+    exit;
+
+    //die('assmunch');
+
+}    
+
+// submit the submission form
+function gff_submission_form_submit($form, &$form_state) {
+    
+    if($GLOBALS['user']->uid < 1 ) {
+        return drupal_access_denied(); 
+    }
+
+    $tmpfile = $_FILES['files']['name']['upload'];
+    $size = $_FILES['files']['size']['upload'];
+    $desc = $form_state['values']['desc'];
+    $format = $form_state['values']['format'];
+    $species = $form_state['values']['species'];
+    $sbmname = $form_state['values']['sbm'];
+    $filepath = variable_get('basedir').'/tmp/'.$tmpfile;
+
+    if ($format != 'gff3') {
+        drupal_set_message('We are not currently accepting fasta or xls format files.','warning');
+        drupal_goto('cap/');
+    } 
+    //////////////// using envs...
+    /* $host = getenv('CAP_HOST');
+    $port = getenv('CAP_PORT');
+    $user = getenv('CAP_USER');
+    $pass = getenv('CAP_PASS');
+    $dbname = getenv('CAP_DBNAME'); 
+    mysql_connect($host.":".$port, $user, $pass) or die(mysql_error());
+    mysql_select_db($dbname) or die(mysql_error());
+    // for radio button: $format = $form_state['values']['format'] ? 'gff3' : 'fasta';
+     */
+
+    // if ($format = 'gff) {
+//        drupal_set_message('There was a problem generating gff for the selected region','error');
+//        drupal_goto('cap/');
+    // $result = db_select('cap_file_node', 'n')->fields('n')->execute()->fetchAssoc();
+    //
+    //$num_updated = db_select('cap_file_node')->fields(array(
+    //    'file_md5' => $newfile,
+    //))->condition('sbm_id', $sbmid, '=')->execute();
+    // else if ($format == 'fasta' || $format == 'xls') { not yet accepting these formats?!?
+    // select count(1) where md5...
+    // check for gff
+    // check for appropriate features - using positive grabbing of allowed features?!? or against ones we don't care about?!?
+    // check for non-comment non 9-col lines?!?
+
+    $cmd = 'md5sum '.$filepath;
+    $md5 = `$cmd`;
+    list($md5) = explode(' ',$md5);
+    $count = 0;
+
+    //$result = db_query("SELECT count(1) as count from {cap_file_node} where file_md5 = '".'7262f5682a332e2880b6105336c30bd1'."'");
+    $result = db_query("SELECT count(1) as count from {cap_file_node} where file_md5 = '".$md5."'");
+    
+    // really have little clue about the drupal db interface and don't give a shite either... - it can only return one value
+    foreach ($result as $row) { 
+        $count = $row->count; 
+        // die(print_r($row));
+    }
+
+    if ($count > 0) {
+        drupal_set_message('We have already received a file with this md5 sum.','warning');
+        drupal_goto('cap/');
+    } 
+    
+    //$regex = variable_get('feat_regex');
+    
+    //$feats = `grep -P "\t($regex)\t"`;
+
+    //if ($feats == '') {
+    //    drupal_set_message('This file does not seem to contain any valid gff models.','warning');
+    //    drupal_goto('cap/');
+    //}
+
+    //$result->fetchAllAssoc('title'); 
+    //$result->fetchAllKeyed(1,0)
+    //$result->fetchCol($db_column_number);
+    //$record = $result->fetchObject();
+    //$result->rowCount();
+
+    $message = '<p>received file ' 
+      . $_FILES['files']['name']['upload']  
+      . ' ('
+      . $_FILES['files']['size']['upload']  
+      . ' bytes/';
+    //. ' bytes ('.$md5.')</p>';
+    // $message .= t("The submission has been made");
+
+/* NOW WE (1) PUT THE FILE DETAILS INTO THE drupal DB DIRECTLY 
+ * (2) CREATE A PAGE THAT RETURNS A LIST OF ALL UPLOADED FILES
+ * (3) A PAGE THAT RETURNS JUST NEW FILES?!? - or just filter at other end?!?
+ * (4) A MECAHNISM TO RETURN EACH FILE DIRECTLY AS RAW ASCI PAGE?!?
+ * (5) A PAGE THAT RETURNS LIST OF DOWNLOADED FILES?!?
+ *
+ * > mysql -udrupal -pdrupal drupal -e 'desc cap_file_node'
+ * +----------------+------------------+------+-----+---------+----------------+
+ * | Field          | Type             | Null | Key | Default | Extra          |
+ * +----------------+------------------+------+-----+---------+----------------+
+ * | sbm_id         | int(10) unsigned | NO   | PRI | NULL    | auto_increment |
+ * | user           | varchar(32)      | NO   |     | NULL    |                |
+ * | uid            | int(10) unsigned | NO   |     | 0       |                |
+ * | user_email     | varchar(32)      | NO   |     | NULL    |                |
+ * | submitter_name | varchar(128)     | NO   |     | NULL    |                |
+ * | ip             | varchar(32)      | NO   |     | NULL    |                |
+ * | species        | varchar(32)      | NO   |     | NULL    |                |
+ * | file_name      | varchar(128)     | NO   |     | NULL    |                |
+ * | file_type      | varchar(32)      | NO   |     | NULL    |                |
+ * | file_md5       | varchar(32)      | NO   | UNI | NULL    |                |
+ * | file_size      | int(10) unsigned | NO   |     | NULL    |                |
+ * | file_desc      | varchar(1256)    | NO   |     |         |                |
+ * +----------------+------------------+------+-----+---------+----------------+
+ * $nid = db_insert('node') // Table name no longer needs {}
+ * ->fields(array(
+     *   'title' => 'Example',
+     *     'uid' => 1,
+     *       'created' => REQUEST_TIME,
+     *       ))
+     *       ->execute();
+     *
+ // Above Example is Equivalent to the Following in D6
+ $result = db_query("INSERT INTO {node} (title, uid, created) VALUES (%s, %d, %d)", 'Example', 1, time());
+
+     // OR using drupal_write_record...
+     // $data = array(
+     //   'title' => 'Example',
+     //     'uid' => 1,
+     //       'created' => REQUEST_TIME,
+     //       );
+     //       drupal_write_record('node', $data);
+
+    // $result = mysql_query(
+    $result = db_query(
+        'insert into {cap_file_node} '
+          .'(user, uid, submitter_name, user_email, ip,'
+          .'species, file_name, file_type, file_md5, file_desc, file_size) '
+          .'values (%s,%d,%s,%s,%s,%s,%s,%s,%s,%s,%d)',
+          $GLOBALS['user']->name,$GLOBALS['user']->uid,'hdisfndjsfnds',$GLOBALS['user']->mail,$GLOBALS['user']->hostname,
+          'glossina',$tmpfile,$format,$md5,$desc,$size
+    ) or die(mysql_error());  
+    *
+*/
+
+    $sbmid = db_insert('cap_file_node')->fields(
+        array(
+            'user' => $GLOBALS['user']->name,
+            'uid' => $GLOBALS['user']->uid,
+            'submitter_name' => $sbmname,
+            'user_email' => $GLOBALS['user']->mail,
+            'ip' => $GLOBALS['user']->hostname,
+            'species' => $species,
+            'file_name' => $tmpfile,
+            'file_type' => $format,
+            'file_md5' => $md5,
+            'file_desc' => $desc,
+            'file_size' => $size,
+        )
+    )->execute();
+    
+    // $sbmidres = mysql_query('select last_insert_id() as sbm_id');
+
+    // $sbmid = mysql_fetch_assoc($sbmidres);
+
+    //$sbmid = sprintf("%04s",$sbmid['sbm_id']);
+    // $sbmid = $sbmid['sbm_id'];
+    //die ($sbmid);
+    
+
+    $sbmidstr = sprintf("%04s",$sbmid);
+    $newfile = strip('sbm'.$sbmidstr.'_'.$tmpfile);
+    // $newfile = htmlspecialchars('sbm'.$sbmidstr.'_'.$tmpfile);
+
+    $basedir = variable_get('basedir');
+    $old = $basedir.'/tmp/'.$tmpfile;
+    $new = $basedir.'/sbm/'.$newfile;
+    ////// PERMISSIONS ON DIR!?!
+    rename($old,$new) or die('problem moving file: '.$old.' to '.$new);
+    // die ($sbmidstr);
+
+    $num_updated = db_update('cap_file_node')->fields(array(
+        'file_name' => $newfile,
+    ))->condition('sbm_id', $sbmid, '=')->execute();
+    // ))->condition('created', REQUEST_TIME - 3600, '=')->execute();
+    $message .= 'md5: '.$md5.'). Please quote submission id='.$sbmid.' in any enquiries you send.</p>';
+
+    drupal_set_message($message);
+
+    ///// update file name...
+/*    $result = mysql_query(
+        "update files set file = '" 
+          . $newfile 
+          . "' where sbm_id = " 
+          . $sbmid
+    ) or die(mysql_error());  
+*/
+    //$message .= " with submission id: " . print_r($sbmid,1);
+}
+//=}}}
+
+// build download form : output validated by gff_download_ajax_form_validate and then processed by gff_download_ajax_form_submit
+function gff_download_ajax_form($form, &$form_state) {
+
+    $form['dwnld'] = array(
+        '#type' => 'fieldset',
+        '#title' => t('Download Gene Models or Fasta'),
+        '#collapsible' => TRUE,
+        '#collapsed' => FALSE,
+    );
+
+    // grab species as dropdown_first
+    $options_first = _ajax_example_get_first_dropdown_options__();
+    //print '<PRE>';print_r($options_first);print '</PRE>';
+
+    $selected = isset($form_state['values']['dropdown_first']) 
+      ? $form_state['values']['dropdown_first'] 
+      : key($options_first);
+    //print '<PRE>';print_r($selected);print '</PRE>';
+
+    $form['dwnld']['dropdown_first'] = array(
+        '#type' => 'select',
+        '#title' => 'Species',
+        '#options' => $options_first,
+        '#default_value' => $selected,
+    );
+
+$form['dwnld']['format'] = array(
+    '#type' => 'radios',
+    //'#type' => 'checkbox',
+    //    '#type' => 'select',
+    '#title' => t('Download Annotation'),
+    // '#size' => 2,
+    '#options' => array( 
+        'fasta' => t('Fasta sequence'), 
+        'gff'   => t('Gff annotation') 
+    ),
+    //'#options' => array(t('fasta'),t('gff')),
+    //'#options' => drupal_map_assoc(array(t('fasta'),t('gff'))),
+    '#default_value' => 'fasta',
+    //    '#ajax' => array(
+    //    'callback' => 'blarp_autotextfields_callback',
+    //    'wrapper' => 'textfields',
+    //    'effect' => 'fade',
+    //    ),
+    //    '#description' => t('Download sequence data or annotation as gff'),
+    );
+    
+    $form['dwnld']['contig'] = array(
+        '#type' => 'textfield',
+        '#title' => t('Contig name'),
+        '#size' => 18,
+        '#maxlength' => 17,
+        '#prefix' => '<div class="ui-widget">',
+        '#suffix' => '</div>',
+        '#attributes' => array('id' => 'species-filler', 'class' =>  array('inputything')),
+    );
+
+    $form['dwnld']['warning1'] = array(
+        '#type' => 'container',
+        '#children' => '<div class="info_msgbox">To ensure that you receive valid gff if the regions you select fall within a gene we will expand the region into the next inter-genic gap.</div>',
+        '#states' => array( 'visible' => array( ':input[name="format"]' => array('value' => 'gff'), ), ),
+    );
+
+    // check if the user is logged in
+    if($GLOBALS['user']->uid < 1 ) {
+        $form['dwnld']['contig']['#attributes'] = array('readonly' => 'readonly');
+        $form['dwnld']['contig']['#default_value'] = t('Log in to use this!');
+    }
+
+    $form['dwnld']['start'] = array(
+    //$form['textfields']['start'] = array(
+        //'#prefix' => '<div id="textfields">',
+        //'#suffix' => '</div>',
+        '#type'             => 'textfield',
+        '#title'            => t('Start'),
+        '#description'      => t('Give start region in bp.'),
+        '#default_value'    => 1,
+        '#size'             => 18,
+        '#maxlength'        => 17,
+        '#states' => array(
+            'visible' => array(
+                ':input[name="format"]' => array('value' => 'gff'),
+            ),
+        ),
+         '#attributes' => array('class' => array('inputything')),
+        // '#type' => 'fieldset',
+    );
+
+    $form['dwnld']['end'] = array(
+        //$form['textfields']['end'] = array(
+        //'#prefix' => '<div id="textfields">',
+        //'#suffix' => '</div>',
+        '#type' => 'textfield',
+        '#title' => t('End'),
+        '#description' => t('Give end region in bp.'),
+        '#default_value' => 100000,
+        '#size' => 18,
+        '#maxlength' => 17,
+        '#states' => array(
+            'visible' => array(
+                ':input[name="format"]' => array('value' => 'gff'),
+            ),
+        ),
+         '#attributes' => array('class' => array('inputything')),
+        // '#type' => 'fieldset',
+    );
+
+// for ajax updates to other form parts e.g. re-generating parts of the form - don't use it to show/hide - i.e. use #states not #ajax?!?
+/*
+    // if (!empty($form_state['values']['format']) && $form_state['values']['format']) {
+    if (!empty($form_state['values']['format']) && $form_state['values']['format']) {
+    // if (!empty($form_state['values']['format']) && $form_state['values']['format'] == 'gff') {
+        // if ($form_state['values']['format']=='brass') {
+        //// should be one hash entry?!?
+    //print '<pre>';
+    //print_r(drupal_map_assoc($form_state['values']));
+    //print '</pre>';
+        $form['textfields']['start'] = array(
+            '#type' => 'textfield',
+            '#title' => t('start'),
+        '#description' => t('give start region in bp.'),
+        '#default_value' => 1,
+        '#size' => 15,
+        '#maxlength' => 14,
+        );
+        $form['textfields']['end'] = array(
+            '#type' => 'textfield',
+            '#title' => t('end'),
+        '#description' => t('give end region in bp.'),
+        '#default_value' => 100000,
+        '#size' => 15,
+        '#maxlength' => 14,
+        );
+    }
+*/
+
+    $form['dwnld']['download'] = array(
+        '#type' => 'select',
+        '#title' => t('Download As'),
+        '#options' => drupal_map_assoc(array('file','page')),
+        '#description' => t('Download file or return text directly as page'),
+    );
+
+    $form['dwnld']['submit'] = array(
+        '#type' => 'submit',
+        '#value' => t('Submit'),
+    );
+
+    //    print '<pre>';
+    //    print_r(drupal_map_assoc($scafs));
+    //    print '</pre>';
+    
+    return $form;
+
+}
+
+function meta_data_list() {
+
+    /*
++----------------+------------------+------+-----+---------+----------------+
+| Field          | Type             | Null | Key | Default | Extra          |
++----------------+------------------+------+-----+---------+----------------+
+| sbm_id - auto  | int(10) unsigned | NO   | PRI | NULL    | auto_increment |
+| nid            | int(10) unsigned | NO   | MUL | 0       |                |
+/| submitter_name | varchar(128)     | NO   |     | NULL    |                |
+| user           | varchar(32)      | NO   |     | NULL    |                |
+| user_email     | varchar(32)      | NO   |     | NULL    |                |
+| uid            | int(10) unsigned | NO   |     | 0       |                |
+| ip             | varchar(32)      | NO   |     | NULL    |                |
+| edited         | int(10) unsigned | NO   |     | 0       |                |
+| species        | varchar(32)      | NO   |     | NULL    |                |
+| gene_id        | varchar(32)      | NO   |     | NULL    |                |
+| status         | varchar(10)      | NO   |     | NULL    |                |
+| status_just    | varchar(1256)    | NO   |     |         |                |
+| gene_sym       | varchar(32)      | NO   |     | NULL    |                |
+| sym_just       | varchar(1256)    | NO   |     |         |                |
+| desc           | varchar(256)     | NO   |     | NULL    |                |
+| desc_just      | varchar(1256)    | NO   |     |         |                |
+| pmid           | int(10) unsigned | NO   |     | 0       |                |
+| comments       | varchar(1256)    | NO   |     |         |                |
++----------------+------------------+------+-----+---------+----------------+
+*/
+
+    $result = db_query("SELECT sbm_id, user, user_email, ip, edited, species, gene_id, status, status_just, gene_sym, sym_just, description, desc_just, pmid, comments FROM {cap_gene_node}");
+    $list = array();
+    foreach ($result as $row) { array_push($list,$row); }
+    print drupal_json_encode($list);
+    exit;
+}    
+
+function blarp_autotextfields_callback($form, $form_state) {
+      return $form['textfields'];
+}
+
+
+//
+function ajax_example_dependent_dropdown_callback__($form, $form_state) {
+    return $form['dropdown_second'];
+}
+
+//
+function _ajax_example_get_first_dropdown_options__() {
+/* should be pulling data from the database. */
+    
+    $species = variable_get('species_modeld');
+    //print '<PRE>first called</PRE>';
+    return drupal_map_assoc($species);
+        //array(
+        //    t('G. morsitans'), 
+        //    t('H. melpomene'),
+       // )
+    //);
+}
+
+//
+function pull_autocompletion_names() {
+     // $fucker = variable_get('tabix', 'arse');
+     // die($fucker);
+    $file = variable_get('basedir').'/'.variable_get('auto_scfnames');
+
+    // print_r(variable_get('species'));
+    // exit;
+
+    $file_handle = fopen($file, "rb") 
+      or die("Sorry: cannot find scafffold names config file $file");
+    $scafs = array();
+    $c=0;
+    while (!feof($file_handle) ) {
+        $c++;
+        if ($c > 150) break;
+        $line = fgets($file_handle, 406); 
+        if ($line == '') continue; // why break?!?
+        $scafs[] = trim($line);
+    }
+    fclose($file_handle);
+    return $scafs;
+}
+
+// grab the names of the contigs
+function pull_contig_names($species) {
+
+    $file_handle = fopen("/homes/dsth/dev/NewCap/config/".$species."_SeqNames.txt", "rb") 
+      or die("Sorry: cannot find scafffold names config file for " . $species);
+
+    $scafs = array();
+    while (!feof($file_handle) ) {
+        $line = fgets($file_handle, 406); 
+        if ($line == '') break;
+        $scafs[] = trim($line);
+    }
+
+    fclose($file_handle);
+
+    return drupal_map_assoc($scafs);
+}
+    
+// 
+function gff_download_ajax_form_validate($form, &$form_state) {
+
+    if($GLOBALS['user']->uid < 1 ) {
+        return drupal_access_denied(); 
+    }
+
+   if (!ctype_digit($form_state['values']['start']) 
+    || !ctype_digit($form_state['values']['end'])
+    ) {
+        form_set_error('', t('Start and end must be numeric.'));
+
+    } 
+}
+
+// extract gff with tabix : called after gff_download_ajax_form that builds the form and gff_download_ajax_form_validate... (the download is handled by download_gff_file)
+function gff_download_ajax_form_submit($form, &$form_state) {
+
+    if($GLOBALS['user']->uid < 1 ) {
+        return drupal_access_denied(); 
+    }
+
+    //y tabix location
+    $tabix = variable_get('tabix');
+    $gene_idx = variable_get('gene_indexer');
+    $fasta_idx = variable_get('fasta_indexer');
+
+    $date = date("YmdHis");
+    $contigname = $form_state['values']['contig'];
+    $species = $form_state['values']['dropdown_first'];
+    
+    //$species = substr_replace($species, '', 1, 2);
+    $species = str_replace(' ','_',$species);
+
+    $basedir = variable_get('basedir');
+    $indexed_gff = $basedir.'/gff/'.$species.'.gff.gz';
+
+    $ofile = '';
+    $filepath = '';
+    $type = '';
+
+    $filelimit = variable_get('filelimit');
+
+if ($form_state['values']['format']=='gff') {
+
+    $type = $form_state['values']['download']=='file'?'.gff':'';
+    $exists = `grep $contigname $basedir/gff/${species}.scfnames.txt`;
+
+    if ($exists == '') { 
+        drupal_set_message('The requested contig does not exist or is too short (<5 Kbp) and was excluded from the automatic annotation process.','error');
+        drupal_goto('cap/');
+    }
+
+    $start = $form_state['values']['start'];
+    $end = $form_state['values']['end'];
+
+    $coords = `$gene_idx extract $basedir/gff/${species}.gene.idx ${contigname}:${start}-${end}`;
+
+    // print '<pre>';
+    // print_r($coords);
+    // print '</pre>';
+    
+    $ofile = $date.'_'.$species.'_'.$coords.$type;
+    $filepath = $basedir.'/tmp/'.$ofile;
+
+    //y call tabix
+    $cmd = $tabix.' '.$indexed_gff.' '.$coords.' > '.$filepath;
+
+    //shell_exec($cmd);
+    // die($l);
+    system($cmd);
+
+    $fs = filesize($filepath);
+
+    if (!file_exists($filepath)) { 
+        drupal_set_message('There was a problem generating gff for the selected region','error');
+        drupal_goto('cap/');
+    } elseif (filesize($filepath) == 0) {
+        drupal_set_message('The requested region contains no gff features','warning'); 
+        unlink($filepath);
+        drupal_goto('cap/');
+    } elseif (filesize($filepath) > $filelimit) {
+        $filelimit = sprintf("%.2f",$filelimit/(1024^2));
+        drupal_set_message('The gff file for the requested region is greater than '.$filelimit.'Mb - please select a smaller region','warning'); 
+        unlink($filepath);
+        drupal_goto('cap/');
+    } else {
+        // drupal_set_message('download file generated');
+        drupal_goto('cap/'.$ofile.'/gff');
+    }
+
+} elseif ($form_state['values']['format']=='fasta') {
+
+    $type = $form_state['values']['download']=='file'?'.fa':'';
+    $ofile = $date.'_'.$species.'_'.$contigname.$type;
+    $filepath = $basedir.'/tmp/'.$ofile;
+
+    //y call tabix
+    $cmd = $fasta_idx.' extract '.$basedir.'/fasta/'.$species.'.fa.idx '.$contigname.' > '.$filepath;
+
+    system($cmd);
+
+    $fs = filesize($filepath);
+
+    if (!file_exists($filepath)) { 
+        drupal_set_message('There was a problem extracting sequence for scaffold '.$contigname,'error');
+        drupal_goto('cap/');
+    } elseif (filesize($filepath) == 0) {
+        drupal_set_message('There was a problem extracting sequence for scaffold '.$contigname,'warning');
+        unlink($filepath);
+        drupal_goto('cap/');
+    } elseif (filesize($filepath) > $filelimit) {
+        $filelimit = sprintf("%.2f",$filelimit/(1024^2));
+        drupal_set_message('The fasta for the requested scaffold is greater than '.$filelimit.'Mb - please download from ftp server','warning'); 
+        unlink($filepath);
+        drupal_goto('cap/');
+    } else {
+        // drupal_set_message('download file generated');
+        drupal_goto('cap/'.$ofile.'/gff');
+    }
+
+}
+
+
+}
+
+
+// bin this? old ajax routine for getting dropdown lists
+function _ajax_example_get_second_dropdown_options__($key = '') {
+
+    //print '<PRE>second called</PRE>';
+    $options = array(
+        t('G. morsitans') => pull_contig_names('Gmorsitans'),
+        t('P. humanus') => pull_contig_names('Phumanus'),
+    );
+
+    if (isset($options[$key])) {
+        return $options[$key];
+    } else {
+        return array();
+    }
+}
+
+// bin this?
+function download_url($fid) { return url('download/file/fid/' . $fid); }
+
+// bin this?
+function download_path($fid) { return 'download/file/fid/' . $fid; }
+
+// bin this?
+function download_format_bytes($bytes, $precision) {
+  $units  = array(t('B'), t('KB'), t('MB'), t('GB'), t('TB'), t('PB'));
+  $pow	  = floor(log($bytes) / log(1024));
+  $output = sprintf('%.' . $precision . 'f ', ($bytes/pow(1024, floor($pow))));
+  return array($output, $units[$pow]);
+}
+
+// bin this?
+function download_format_extension($file) {
+
+    $extension = pathinfo(strtoupper(check_plain($file->filename)), PATHINFO_EXTENSION);
+
+    switch ($file->filemime) {
+
+        // Word document types.
+        case 'application/msword':
+        case 'application/doc':
+        case 'application/vnd.ms-word':
+        case 'application/winword':
+        case 'application/word':
+        case 'application/vnd.ms-word.document.macroEnabled.12':
+        case 'application/vnd.oasis.opendocument.text':
+        case 'application/vnd.oasis.opendocument.text-template':
+        case 'application/vnd.oasis.opendocument.text-master':
+        case 'application/vnd.oasis.opendocument.text-web':
+        case 'application/vnd.openxmlformats-officedocument.wordprocessingml.document':
+        case 'application/vnd.wordperfect':
+            return array(
+                'definition' => 'DOCument', 
+                'name' => 'DOC'
+            );
+
+        // Spreadsheet document types.
+        case 'application/vnd.ms-excel':
+        case 'application/xls':
+        case 'application/msexcel':
+        case 'application/vnd.ms-excel.sheet.macroEnabled.12':
+        case 'application/vnd.oasis.opendocument.spreadsheet':
+        case 'application/vnd.oasis.opendocument.spreadsheet-template':
+        case 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet':
+            return array(
+                'definition' => 'eXceL Spreadsheet', 
+                'name' => 'XLS'
+            );
+
+        // ZIP compressed archive types.
+        case 'application/zip':
+        case 'application/gzip':
+        case 'application/gzip-compressed':
+        case 'application/x-zip':
+        case 'application/x-zip-compressed':
+        case 'application/x-bzip':
+        case 'application/x-compress':
+        case 'application/x-compressed':
+        case 'application/x-gzip':
+        case 'application/x-tgz':
+            return array(
+                'definition' => 'Archive', 
+                'name' => 'ZIP'
+            );
+
+        // RAR compressed archive types.
+        case 'application/tar':
+        case 'application/x-rar':
+        case 'application/x-bzip-compressed-tar':
+        case 'application/x-tar':
+        case 'application/x-gtar':
+        case 'application/x-tarz':
+            return array(
+                'definition' => 'Roshal ARchive', 
+                'name' => 'RAR'
+            );
+
+        // Text file types.
+        case 'application/txt':
+        case 'text/plain':
+            return array(
+                'definition' => 'TeXTe', 
+                'name' => 'TXT'
+            );
+
+        // CSV aliases.
+        case 'application/csv':
+        case 'text/csv':
+        case 'text/comma-separated-values':
+            return array(
+                'definition' => 'Comma-Separated Values', 
+                'name' => 'CSV'
+            );
+
+
+        // XML aliases.
+        case 'application/xml':
+        case 'text/xml':
+            return array(
+                'definition' => 'eXtensible Markup Language', 
+                'name' => 'XML'
+            );
+
+        // JPEG images.
+        case 'image/jpeg':
+        case 'image/jpg':
+            return array(
+                'definition' => 'Joint Photographic Experts Group', 
+                'name' => 'JPEG'
+            );
+
+        // PNG images.
+        case 'application/png':
+        case 'image/png':
+            return array(
+                'definition' => 'Portable Network Graphics', 
+                'name' => 'PNG'
+            );
+
+        default:
+        return $extension;
+    }
+}
+
+////////////////////////////////////// whatever you do make sure that php has write permissions on the tmp dir ///////////////////////////////////
+////////////////////////////////////// if you screw with .install file then you must wipe module entry in system talbe ///////////////////////////
+// downloaded files: mysql -udrupal -pdrupal drupal -e 'select * from file_managed'
+// download: gff_download_ajax_form, gff_download_ajax_form_validate, gff_download_ajax_form_submit, download_gff_file (this is where we need the conditional)
+// upload: gff_submission_form (generate form), gff_submission_form_validate (moves file from drupal tmp to our tmp), gff_submission_form_submit (this is where we need to put in the cap_file_node data entry stuff)
+// basedir has scfnames.txt (all scaffold names for autocompletion - should make it species specific) - bring back drop down list too?!?
+// e.g. cut -f1 ~/dev/Glossina/SupportingFeatures/GeneModels_n_SupportFeatures.gff | grep -v -P '^#' | sort -u > scfnames.txt
+// actually the sf just take too long: cut -f1 ~/dev/Glossina/SupportingFeatures/glossina_morsitans_core_v0_0_3_oct9_GeneFeaturesOnly.gff3 | grep -v -P '^#' | sort -u > scfnames.txt 
+// also has tmp, sbm (the submission files after prepending of sbmid to allow for duplicate file names etc.), gff (for indexed gff by species).
+// testing these vars just shove a print in pull_autocompletion_names
+// indexed file must be Gspecies.gff.gz
+// do rediculously rudimentary checks for gff - e.g. that grep -P '\tCDS|exon|gene|mRNA...)\t' returns something and or 9-col format?!?
+///// if you put gff validation back in put in gff_submission_form_submit after the md5 check?!?
+

@@ -1,0 +1,5 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=0 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=3535&page=res&job_id=209126
+CPIJ003117-RA	BLAST	Blast Hit	762	1464	547	.	.	gi|296278229|ref|NP_078781.3| NADPH oxidase 5 isoform 1 [Homo sapiens]
+CPIJ002594-RA	BLAST	Blast Hit	183	381	364	.	.	gi|296278229|ref|NP_078781.3| NADPH oxidase 5 isoform 1 [Homo sapiens]
+CPIJ010332-RA	BLAST	Blast Hit	52	560	298	.	.	gi|296278229|ref|NP_078781.3| NADPH oxidase 5 isoform 1 [Homo sapiens]
+CPIJ001307-RA	BLAST	Blast Hit	23	107	152	.	.	gi|296278229|ref|NP_078781.3| NADPH oxidase 5 isoform 1 [Homo sapiens]

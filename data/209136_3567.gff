@@ -1,0 +1,11 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=0 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=3567&page=res&job_id=209136
+AGAP008559-PC	BLAST	Blast Hit	118	1393	2638	.	.	TRP-4 [Caenorhabditis elegans]
+AGAP008559-PA	BLAST	Blast Hit	118	1393	2634	.	.	TRP-4 [Caenorhabditis elegans]
+AGAP002272-PB	BLAST	Blast Hit	147	920	777	.	.	TRP-4 [Caenorhabditis elegans]
+AGAP002272-PB	BLAST	Blast Hit	175	890	739	.	.	TRP-4 [Caenorhabditis elegans]
+AGAP002272-PB	BLAST	Blast Hit	158	857	716	.	.	TRP-4 [Caenorhabditis elegans]
+AGAP002272-PC	BLAST	Blast Hit	9	782	776	.	.	TRP-4 [Caenorhabditis elegans]
+AGAP002272-PC	BLAST	Blast Hit	37	752	741	.	.	TRP-4 [Caenorhabditis elegans]
+AGAP002272-PC	BLAST	Blast Hit	28	719	718	.	.	TRP-4 [Caenorhabditis elegans]
+AGAP002272-PA	BLAST	Blast Hit	9	782	773	.	.	TRP-4 [Caenorhabditis elegans]
+AGAP002272-PA	BLAST	Blast Hit	2	752	722	.	.	TRP-4 [Caenorhabditis elegans]

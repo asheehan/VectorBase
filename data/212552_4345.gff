@@ -1,0 +1,11 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=0 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=4345&page=res&job_id=212552
+contig:AaegL1:contig_19556:1:229685:1	BLAST	Blast Hit	26732	26754	40	+	.	Example Sequence
+contig:AaegL1:contig_32578:1:27139:1	BLAST	Blast Hit	19846	19864	38	+	.	Example Sequence
+contig:AaegL1:contig_28886:1:22909:1	BLAST	Blast Hit	12451	12469	38	-	.	Example Sequence
+contig:AaegL1:contig_25837:1:25868:1	BLAST	Blast Hit	15377	15395	38	+	.	Example Sequence
+contig:AaegL1:contig_20868:1:78948:1	BLAST	Blast Hit	57906	57924	38	+	.	Example Sequence
+contig:AaegL1:contig_15800:1:141428:1	BLAST	Blast Hit	119907	119925	38	+	.	Example Sequence
+contig:AaegL1:contig_11202:1:33076:1	BLAST	Blast Hit	25019	25037	38	+	.	Example Sequence
+contig:AaegL1:contig_3281:1:84288:1	BLAST	Blast Hit	77657	77675	38	+	.	Example Sequence
+contig:AaegL1:contig_3040:1:105938:1	BLAST	Blast Hit	30763	30781	38	-	.	Example Sequence
+contig:AaegL1:contig_3035:1:67447:1	BLAST	Blast Hit	60377	60395	38	+	.	Example Sequence

@@ -1,0 +1,5 @@
+name = Glossary
+description = Maintain a glossary on your site.
+core = 7.x
+dependencies[] = taxonomy
+files[] = glossary>admin.inc

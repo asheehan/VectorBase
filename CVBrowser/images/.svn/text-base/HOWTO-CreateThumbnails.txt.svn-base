@@ -1,0 +1,3 @@
+mkdir tn/TGMA
+find TGMA/ -name \*.jpg -exec convert {} -thumbnail 100 tn/{} \;
+

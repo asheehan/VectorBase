@@ -2,156 +2,1099 @@
 
 /**
  * @file
- * blast module
- *
+ * VectorBase's blast module
  *
 */
 
 
-// 1: make form to get job parameters from user
-//	 use same form. how do we get bast dbs? enable dbs with the configure screen?
-// 2: using these parameters, create xgrid xml batch file
-// 3: submit job, update status via AJAX
-// 4: display results
-
-
-function blast_content(){
+define ("QUERY_SEQUENCE_LIMIT", 100);
+define ("QUERY_SEQUENCE_SIZE_LIMIT", 1024*1024*4); // in bytes. 1024*1024*8 = 8Mb
 
 
 
+include('blastTopResults.php');
+include('generateGFF.php');
+//include_once('blastHspResults.php');
 
 
-
-
-
-
-
-
+// add js library
+function blast_init(){
+	drupal_add_js(drupal_get_path('module', 'blast'). '/blast.js');
+	//drupal_add_css('http://fonts.googleapis.com/css?family=Inconsolata');
 }
 
 
-function blast_submit($batchXml) {
-  $client = new SoapClient(blast_getURL(), array('compression' => SOAP_COMPRESSION_ACCEPT | SOAP_COMPRESSION_GZIP));
-  $jobId = $client->submitBatch($batchXml);
-  return $jobId;
+function blast_block_view($op='list', $delta=0, $edit=array()){
+	drupal_add_library('system', 'ui.dialog');
+	drupal_add_library('system', 'effects.bounce');
+	drupal_add_library('system', 'effects.scale');
+
+	// draw block
+	$blocks['subject'] = t('blastBlockView...i guess');
+	$blocks['content'] = drupal_get_form('blast_ajax_form');
+	return $blocks;
 }
 
-function blast_status($id) {
-  if (!$id) { throw new Exception("No job ID provided."); }
-  $soapClient = new SoapClient(blast_getURL(), array('compression' => SOAP_COMPRESSION_ACCEPT | SOAP_COMPRESSION_GZIP));
-  $statusOutput = $soapClient->getStatus($id);
-  preg_match("#jobStatus = (.*?);#",$statusOutput,$match);
-  if (!$match[1]) { throw new Exception("Sorry, we have no information for Job ID ".$id); }
-  return $match[1];
+
+
+function blast_db_name() {
+  global $db_url;
+  return ltrim( trim(parse_url($db_url, PHP_URL_PATH)), "/" );
 }
 
-function blast_get_results($id){
-  $client = new SoapClient(blast_getURL(), array('compression' => SOAP_COMPRESSION_ACCEPT | SOAP_COMPRESSION_GZIP));
-  if (!$id) { throw new Exception("No job ID provided."); }
-  $status = new JobStatus($id);
-  $this->status = $status->simpleStatus();
-  if (!$this->status) { throw new Exception("No data for job ID ".$id."."); }
 
-  if ($this->status=="Finished") {
-    $results = $client->getResults($id);
-  }
-
-  return $results;
+function blast_getDbsForSearchJob($id){
+	$dbsHit=db_query("select distinct(database_name) from blast_results where search_id=$id");
+	foreach($dbsHit as $dbHit){
+		$dbs[]=$dbHit->database_name;
+	}
+	return $dbs;
 }
+
+
+function blast_ajax_form($form, &$form_state) {
+	//drupal_add_library('system', 'ui.slider');
+
+	$form['blast'] = array(
+		'#type' => 'blast',
+//		'#attributes' => array('enctype' => "multipart/form-data"), // allow file uploads
+    	'#prefix' => '<div id="blastUIcontainer">', 
+	   	'#suffix' => '</div>',
+	);
+
+	$form['blast']['#attached'] = array(
+	'css' => array(
+		'type' => 'file',
+		'data' => drupal_get_path('module', 'blast').'/blast.css',
+		)
+	);
+
+	$form['blast']['#attached']['js'] =	
+	array(
+		'data' => drupal_get_path('module', 'blast').'/blast.js',
+		//'data' => drupal_get_path('module', 'blast').'/jquery.animate-shadow.js',
+		);
+
+
+  $form['blast']['jobid'] = array(
+    '#type' => 'item',
+   	'#prefix' => '<div id="submissionDialog"></div>', 
+
+	'#attributes' => array(
+		'style' => array('display' => 'none'),
+	),
+  );
+
+  $form['blast']['result'] = array(
+    '#type' => 'item',
+  );
+
+
+  $form['blast']['sequence'] = array(
+    '#type' => 'textarea',
+    '#resizable' => FALSE,
+    '#rows' => 8,
+    '#cols' => 50,
+	//'#default_value' => ">Example Sequence\nTCAACTACTGTTGCTCTTCGTCATTATTCCAGCTG",
+    '#attributes' => array('placeholder' => 'Paste your sequences here')
+  );
+
+	$form['blast']['sequenceUpload'] = array(
+    '#type' => 'file',
+    '#title' => t('Upload FASTA File'),
+    '#title_display' => 'before',
+  );
+
+
+/* Programs FIELD */
+	$form['blast']['programField'] = array(
+        '#type' => 'fieldset',
+        '#title' => t('Program'),
+		'#prefix' => '<div id="programControlSection">', 
+	);
+
+	$form['blast']['programField']['program'] = array(
+    	'#type' => 'radios',
+    	//'#title' => t('BLAST Program'),
+    	'#options' => array(
+    		'blastn'	=>t('blastn'),
+    		'tblastn'	=>t('tblastn'),
+    		'tblastx'	=>t('tblastx'),
+    		'blastp'	=>t('blastp'),
+    		'blastx'	=>t('blastx')),
+    	'#default_value' => 'blastn',
+    	'#suffix' => '<div id="blastProgramDescription">blastn - Nucleotide vs. Nucleotide</div>', 
+  );
+
+
+
+/* CONTROL FIELD */
+	$form['blast']['controlField'] = array(
+        '#type' => 'fieldset',
+        '#title' => t('Job Control'),
+        '#suffix' => '</div>',  // end div for program and control
+	);
+
+	$form['blast']['controlField']['lookup'] = array(
+		'#type' => 'textfield',
+		'#title' => t('Load results'),
+		'#attributes' => array('placeholder' => 'Job ID'),
+		'#size' => 9, 
+		'#maxlength' => 12,
+	);
+
+	$form['blast']['controlField']['clear'] = array(
+	    '#type' => 'button',
+	    '#value' => t('Reset'),
+	    '#attributes' => array(
+	      'onclick' => 'this.form.reset(); document.getElementById(\'edit-result\').innerHTML=\'\';document.getElementById(\'edit-jobid\').innerHTML=\'\';return false;',
+	      'id'=>'clearButton')
+	);
+
+	$form['blast']['controlField']['submit'] = array(
+	    '#type' => 'submit',
+	    '#value' => t('Submit'),
+	    '#ajax' => array(
+	      'callback' => 'blast_ajax_handler',
+	      'wrapper' => 'test',
+	      'effect' => 'fade',
+	      'progress' => array(
+	        'type' => 'throbber',
+	        'message' => t('Processing...')),
+	    ),
+	);
+
+
+
+/* Datasets FIELD */
+	// this is where we need the downloads module to tell us the dbs available on xgrid
+	$form['blast']['datasets']=blast_generateDatasets();
+	$form['blast']['datasets']['#prefix'] = '<div id="datasetOptionsDiv">';
+
+
+
+/* Options FIELD */
+	$form['blast']['optionsField'] = array(
+        '#type' => 'fieldset',
+        '#title' => t('Options'),
+        '#suffix' => '</div>',
+	);
+
+	$form['blast']['optionsField']['maxEvalue'] = array(
+		'#type' => 'select',
+		'#title' => t('Maximum E-Value'),
+		'#options' => array(
+			'10' => t('10'),
+			'1' => t('1'),
+			'1E-3' => t('1e-3'),
+			'1E-5' => t('1e-5'),
+			'1E-10' => t('1e-10'),
+			'1E-20' => t('1e-20'),
+			'1E-40' => t('1e-40'),
+			'1E-80' => t('1e-80'),
+			),
+    	'#default_value' => '1',
+	);
+
+	$form['blast']['optionsField']['wordsize'] = array(
+		'#type' => 'select',
+		'#title' => t('Word Size'),
+		'#options' => array(
+			'3' => t('3'),
+			'5' => t('5'),
+			'7' => t('7'),
+			'8' => t('8'),
+			'11' => t('11'),
+			'15' => t('15'),
+			'30' => t('30'),
+			'60' => t('60'),
+			),
+    	'#default_value' => '11'
+	);
+
+	$form['blast']['optionsField']['scoringMatrix'] = array(
+		'#type' => 'select',
+		'#title' => t('Scoring Matrix'),
+		'#options' => array(
+			'BLOSUM45' => t('BLOSUM45'),
+			'BLOSUM62' => t('BLOSUM62'),
+			'BLOSUM80' => t('BLOSUM80'),
+			'PAM30' => t('PAM30'),
+			'PAM70' => t('PAM70'),
+			),
+    	'#default_value' => 'BLOSUM62'
+	);
+
+	$form['blast']['optionsField']['complexityMasking'] = array(
+		'#type' => 'select',
+		'#title' => t('Complexity Masking'),
+		'#options' => array(
+			'Default' => t('Default'),
+			'no' => t('Off'),
+			),
+    	'#default_value' => 'Default'
+	);
+
+
+	$form['blast']['optionsField']['numberOfResults'] = array(
+		'#type' => 'select',
+		'#title' => t('Results per Query per Database'),
+		'#options' => array(
+			'1' => t('1'),
+			'10' => t('10'),
+			'50' => t('50'),
+			'100' => t('100'),
+			'250' => t('250'),
+			'500' => t('500'),
+			),
+    	'#default_value' => '10',
+	);
+
+
+
+  return $form;
+}
+
+function clearResultDiv($form, &$form_state){
+  $commands[]=ajax_command_html('#edit-result','');
+  $commands[]=ajax_command_html('#edit-jobid','');
+  return array('#type' => 'ajax', '#commands' => $commands);
+}
+
+
+// if there's a post/get for an organism id, select that data set
+//TODO!!!! if job id is set, also load that job id
+function blast_form_blast_ajax_form_alter(&$form, &$form_state) {
+	$organism=$_GET['organism'];
+	if(!$organism)
+		$organism=$_POST['organism'];
+	if($organism){
+		$form['blast']['datasets']['organisms'][$organism.'Control']['#attributes']=array('checked' => 'checked');
+	}
+}
+
+
 
 
 
 /**
- * Implementation of hook_help()
+ * Callback element needs only select the portion of the form to be updated.
+ * Since #ajax['callback'] return can be HTML or a renderable array (or an
+ * array of commands), we can just return a piece of the form.
+ */
+function blast_ajax_handler(&$form, &$form_state) {
+	//validate user input
+
+	// declare these or else drupal will display notice messages
+    $message='';
+    $id='';
+
+    // check for look up job
+	if($form_state['values']['lookup']!=''){
+
+		// verify lookup value is a number
+		if(preg_match("#^(\d+)$#",trim($form_state['values']['lookup']),$match)){
+			$id=$match[1];
+		}else{
+			$message="Invalid Job ID: ".$form_state['values']['lookup'];
+			$error=true;
+		}
+
+		// job id is verified as a number, lets make sure we have results in the db
+		$rawId=blast_getRawJobId($id);
+		$result=db_query("select * from blast_results where search_id=$rawId");
+		if(count($results)<0){
+			$message="We have no record of Job ID: $id in our system.";
+			$error=true;
+		}
+
+/*
+		if(!$error){
+
+
+
+			// pull out results
+			try{
+				$status=xgrid_status($id);
+			} catch (Exception $e){
+				// there is no status because "error = InvalidJobIdentifier;
+				$status="Error";
+			}
+
+			// job has been submitted. continually get status updates until we're done
+			while( !($status=="Finished" || $status=="Failed" || $status=="Canceled" || $status=="Error") ){
+				$status=xgrid_status($id);
+				sleep(2);
+			}
+
+			if($status=="Finished"){
+
+				$results=blast_printTopLevelResults($id);
+
+				// pull input parameters out of db
+				$params=db_query("select * from xgrid_job_params where job_id=$id");
+				$i=0;
+				$out='';
+				foreach($params as $param){
+					if($param->argument!='target_database' && $param->argument!='dbs')
+						$jobParams[$param->argument]=$param->value;
+					else{ 
+						$out.= "database$i=".$param->value.";";
+						$i++;
+					}
+				}
+
+				if($jobParams['-seg'] || $jobParams['-dust'])
+					$jobParams['masking']=='Default';
+				else
+					$jobParams['masking']=='Off';
+
+
+
+				//update params
+				// do this all in jquery below
+				$commands[]=ajax_command_replace('#edit-sequence','<textarea placeholder="Paste your sequences here" id="edit-sequence" name="sequence" cols="50" rows="8" class="form-textarea">'.$jobParams['sequence'].'</textarea>');
+				$commands[]=ajax_command_replace('#edit-program-'.$jobParams['program'],'<input type="radio" id="edit-program-'.$jobParams['program'].'" name="program" value="'.$jobParams['program'].'" checked="checked" class="form-radio">');
+
+
+				//need to do cryptic jquery stuff for the options and dbs
+				$results.="<div id=\"inputParams\">";
+				$results.="maxEvalue={$jobParams["-evalue"]};
+				wordSize={$jobParams["-word_size"]};
+				num_alignments={$jobParams["-num_alignments"]};
+				complexityMasking={$jobParams["masking"]};
+				scoringMatrix={$jobParams["-matrix"]};
+				program={$jobParams["program"]};".$out;
+
+				$results.="</div>";
+
+			// status != finished, something bad happened in xgrid
+			}else{
+				$commands[]=ajax_command_css('#edit-result', array('color' => 'red'));
+				$message="There was a problem running your job.</br>ID: $id $status</br>";
+				$message.='<a href="'.$xgridPath.'/results.php?id='.$raw.'" target="new">Output 1</a></br>';
+				$message.='<a href="'.$xgridPath.'/results.php?id='.$id.'" target="new">Output 2</a></br>';
+			}
+
+		} // end if (!$errors)
 */
-function blast_help($path, $arg){
-  switch ($path) {
-    case "admin/help#blast":
-      return '<p>'.  t("this is some text from the help hook") .'</p>';
-      break;
-  }
 
+
+		// make error text red if we have it, default color ow
+		if($message==null){
+			$commands[]=ajax_command_css('#edit-result', array('color' => '#666'));
+			$idText="<div id='rawJobId'>$rawId</div><div id='parseJobId'>$id</div>";
+			$commands[]=ajax_command_css('#edit-result', array('color' => '#666'));
+			$commands[]=ajax_command_html('#edit-jobid',$idText);
+			$commands[]=ajax_command_html('#edit-result',"");
+
+		}else{
+			$commands[]=ajax_command_css('#edit-result', array('color' => 'red'));
+			$commands[]=ajax_command_html('#edit-result',$message);
+		}
+
+		// shouldn't matter if user didn't select any datasets here
+	    $commands[]=ajax_command_css('#edit-datasets', array('border' => 'solid 1px #D6DDB9'));
+
+
+		//$commands[]=ajax_command_css('#edit-result', array('color' => '#666'));
+		//$commands[]=ajax_command_html('#edit-result',$message.$results); //.print_r($jobParams,true));
+
+
+
+
+
+	// not looking up job, submitting new one. validate user input
+	}else{
+
+		// setup directory for user upload storage
+		$filepath = 'public://userBlast';
+		file_prepare_directory($filepath, FILE_CREATE_DIRECTORY);
+
+		// save user upload locally
+		$file=file_save_upload('sequenceUpload',array('file_validate_extensions' => array()),$filepath,FILE_EXISTS_RENAME);
+		if($file){
+			$file = file_move($file, $filepath);
+			// get the contents of the file
+			$realPath = drupal_realpath($file->uri);
+			$form_state['values']['sequence']=file_get_contents($realPath);
+			// delete the file
+			file_delete($file);
+		}
+
+
+		// did user paste no/incorrect sequence in?
+		if($form_state['values']['sequence']==''){
+			$message="&bull; You forgot to enter sequences to align.<br/>";
+			$message.='&bull; If you were attempting to upload a file, it failed. Please contact info@vectorbase.org with details of your upload.</br>
+				The current size limit on uploads is: '.(file_upload_max_size()/1024).' kb<br/>';
+			$commands[]=ajax_command_css('#edit-result', array('color' => 'red'));
+			$commands[]=ajax_command_css('#edit-sequence', array('border' => 'solid red 2px'));
+		}else
+			// passed test, sequence must be ok so reset any red border that was set
+		    $commands[]=ajax_command_css('#edit-sequence', array('border' => 'solid 1px #D6DDB9'));
+
+
+		// check number of sequences in query seqeunce. only checking fasta here and not genbank format
+		$sequencesCount=substr_count($form_state['values']['sequence'],'>');
+		if($sequencesCount>QUERY_SEQUENCE_LIMIT){
+			$message="&bull; We curretly limit the number of query sequences at ".QUERY_SEQUENCE_LIMIT." to ensure all users have access to our system. If you would like to see the limit raised, please contact info@vectorbase.<br/>";
+			$commands[]=ajax_command_css('#edit-result', array('color' => 'red'));
+			$commands[]=ajax_command_css('#edit-sequence', array('border' => 'solid red 2px'));
+		}else
+			// passed test, sequence must be ok so reset any red border that was set
+		    $commands[]=ajax_command_css('#edit-sequence', array('border' => 'solid 1px #D6DDB9'));
+
+
+		// make sure query seqeunce isn't too big
+		$sequencesLengthInBytes=strlen($form_state['values']['sequence']);
+		if($sequencesLengthInBytes>QUERY_SEQUENCE_SIZE_LIMIT){
+			$message="&bull; We curretly limit the size of query sequence to ".(QUERY_SEQUENCE_SIZE_LIMIT/1024)." kB to ensure all users have access to our system. If you would like to see the limit raised, please contact info@vectorbase.<br/>";
+			$commands[]=ajax_command_css('#edit-result', array('color' => 'red'));
+			$commands[]=ajax_command_css('#edit-sequence', array('border' => 'solid red 2px'));
+		}else
+			// passed test, sequence must be ok so reset any red border that was set
+		    $commands[]=ajax_command_css('#edit-sequence', array('border' => 'solid 1px #D6DDB9'));
+
+
+		//get checked dbs. these will all be digits
+		foreach($form_state['values'] as $key => $value){
+		  	if(preg_match("#\d+#",$key) && $value==1){
+				$query=db_query("select filename from file_managed f, field_data_field_file d where d.entity_id=$key and d.field_file_fid=f.fid")->fetchField();
+		   		$args['dbs'][]=substr($query,0,-3);
+			}
+		}
+
+		if(!$args['dbs']){
+			$message.='&bull; Please select databases to search against';
+			$commands[]=ajax_command_css('#edit-result', array('color' => 'red'));
+			$commands[]=ajax_command_css('#edit-datasets', array('border-color' => 'red'));
+		}else
+			// passed test, there must be dbs selected so reset any red border that was set
+		    $commands[]=ajax_command_css('#edit-datasets', array('border' => 'solid 1px #D6DDB9'));
+
+
+		// input looks good
+		if($message==''){
+
+		    //  clear any error css that may have come up
+			$commands[]=ajax_command_css('#edit-result', array('color' => '#666'));
+
+			//build argument/value pairs from the form
+			$args['sequence']=$form_state['values']['sequence'];
+			$args['program']=$form_state['values']['program'];
+			$args['-word_size']=$form_state['values']['wordsize'];
+			$args['-evalue']=$form_state['values']['maxEvalue'];
+			$args['-num_alignments']=$form_state['values']['numberOfResults'];
+			$args['-num_descriptions']=$form_state['values']['numberOfResults'];
+
+
+			// blast+ has different names for complexity masking
+			// blast+ only allows this to be set for !blastn programs
+			// need to set task=blastn (defaults to megablast) for blastn?
+			if($form_state['values']['program']=="blastn"){
+				if($form_state['values']['complexityMasking']!='Default')
+					$args['-dust']=$form_state['values']['complexityMasking'];
+				$args['-task']='blastn';
+			}else{
+				if($form_state['values']['complexityMasking']!='Default')
+					$args['-seg']=$form_state['values']['complexityMasking'];
+				$args['-matrix']=$form_state['values']['scoringMatrix'];
+			}
+
+			// submit job
+			$ids=blast_submit_xgrid($args);
+			$rawId=$ids['raw'];
+			$id=$ids['parse'];
+
+		} // end if checking for valid user input
+
+		if($message==''){	// no error
+			// assumming we got a job id here. need to make sure that is the case!!!!!
+
+			$idText="<div id='rawJobId'>$rawId</div><div id='parseJobId'>$id</div>";
+			$commands[]=ajax_command_css('#edit-result', array('color' => '#666'));
+			$commands[]=ajax_command_html('#edit-jobid',$idText);
+			$commands[]=ajax_command_html('#edit-result',"");
+		}else{	// we had errors
+			$commands[]=ajax_command_css('#edit-result', array('color' => 'red'));
+			$commands[]=ajax_command_html('#edit-result',$message);
+		}
+
+
+	} // end if checking for lookup job id
+
+	return array('#type' => 'ajax', '#commands' => $commands);
 }
 
 
-/**
- * Implements hook_menu().
- */
-function blast_menu(){
-  $items = array();
 
-  $items['admin/config/vectorbase/blast'] = array(
-    'title' => 'blast',
-    'description' => 'Configuration for blast module',
-    'page callback' => 'drupal_get_form',
-    'page arguments' => array('blast_form'),
-    'access arguments' => array('access administration pages'),
-    'type' => MENU_NORMAL_ITEM,
-  );
-  
-  return $items;
+function blast_printTopLevelResults($id){
+	// job is done
+	$results='';
+	$raw=blast_getRawJobId($id);
+	$blastPath=drupal_get_path('module','blast');
+	$xgridPath=drupal_get_path('module','xgrid');
+
+	// generate some stats
+	$rawTime=xgrid_jobRunTime($raw);
+	$parseTime=xgrid_jobRunTime($id);
+	$totalTime=$rawTime+$parseTime;
+
+	$submitDate=preg_match("#dateSubmitted = (.*?);#",xgrid_attributes($raw),$match);
+	$date=date_create_from_format('Y-m-d H:i:s O',$match[1]);
+
+
+	// make sure we have gff files for this job
+	blast_generateGFF($id);
+
+	// display results
+	$size=32;
+	$clockSize=$size-2;
+	$downloadImg="<img src=\"$blastPath/icon.down.png\" width=\"$size\" height=\"$size\" style=\"padding:8px;\" title=\"Download Results\">";
+	$documentImg="<img src=\"$blastPath/icon.view.png\" width=\"$size\" height=\"$size\" style=\"padding:8px;\" title=\"View Raw Results\">";
+	//$clockImg="<img src=\"$blastPath/icon.clock.png\" width=\"$clockSize\" height=\"$clockSize\" title=\"CPU Runtime\" style=\"padding:10px 0 10px 10px; vertical-align:middle;\">";
+	// <div style="float:right; text-weight: bold; font-size:10pt;">'.$clockImg.' '.$totalTime.' seconds</div>
+	$results='<fieldset style="padding:4px;">
+					<legend>Results</legend>
+					<div style="font-size:12pt;font-weight:bold;float:left;padding-top:0;margin-top:0; margin-left:8px; line-height:12pt;">Job <b id="jobId">'.$id.'</b>
+					</div>
+					<div style="float:right;">
+						<input onclick="document.getElementById(\'edit-result\').innerHTML=\'\';document.getElementById(\'edit-jobid\').innerHTML=\'\';document.getElementById(\'edit-lookup\').value=\'\';return false;" id="clearResultsButton" value="Clear Results" class="form-submit"><br/>
+						<div style="float:right;">
+						<a href="'.$xgridPath.'/results.php?id='.$raw.'" target="_blank">'.$documentImg.'</a>
+						<a id="dlResults" data-jobid="'.$raw.'">'.$downloadImg.'</a>
+						</div>
+					</div>
+					<br />
+					<div style="float:left;padding-left:20px;">
+					Submitted: '.date_format($date,'l, F jS, Y H:i:s O').'
+					<br />
+					Compute Runtime: '.$totalTime.' seconds</div>
+
+					';
+	$results.=blast_results_topLevel($raw);
+	$results.="</fieldset>";
+
+	return $results;
 }
 
 
-/**
- * Form function, called by drupal_get_form() 
- * in blast_menu().
- */
-function blast_form($form, &$form_state){
-  $form['from'] = array(
-  '#type' => 'item',
-  '#title' => t('BLAST Settings'),
-  '#markup' => 'The (separate) web service runs on an OS X machine which has access to the blast program on the command line. 
-The service runs over SOAP and implements the basic functionality of the blast program.<br/>These settings connect to http://server:port/wsdlPath<br/>Currently: ' . blast_getURL(),
-);
 
-  $form['blast_server'] = array(
-    '#type' => 'textfield',
-    '#title' => t('blast service machine'),
-    '#default_value' => variable_get('blast_server', 'jobs.vectorbase.org'),
-    '#maxlength' => 35,
-    '#description' => t('The machine where the blast web service is running.'),
-    '#required' => TRUE,
-  );
 
-  $form['blast_server_port'] = array(
-    '#type' => 'textfield',
-    '#title' => t('Port'),
-    '#default_value' => variable_get('blast_server_port', '80'),
-    '#maxlength' => 4,
-    '#description' => t('The service port.'),
-    '#required' => TRUE,
-  );
 
-  $form['blast_controller_url_suffix'] = array(
-    '#type' => 'textfield',
-    '#title' => t('WSDL Path'),
-    '#default_value' => variable_get('blast_server_suffix', 'blast.wsdl'),
-    '#maxlength' => 35,
-    '#description' => t('Path to WSDL file on blast server. No leading slash.'),
-    '#required' => TRUE,
-  );
 
-  return system_settings_form($form);
+function blast_getResults($id){
+		// at this point should be the parse id
+	if($id!=''){
+
+		try{
+			$status=xgrid_status($id);
+		} catch (Exception $e){
+			// there is no status because "error = InvalidJobIdentifier;
+			$status="Error";
+		}
+
+	// job has been submitted. continually get status updates until we're done
+		while( !($status=="Finished" || $status=="Failed" || $status=="Canceled" || $status=="Error") ){
+			$status=xgrid_status($id);
+			sleep(2);
+		}
+
+		if($status!="Error" && blast_isBlastJob($id)){
+
+		// job is done
+		$results='';
+		$raw=blast_getRawJobId($id);
+		$blastPath=drupal_get_path('module','blast');
+		$xgridPath=drupal_get_path('module','xgrid');
+
+
+		if($status=='Finished'){
+			$results=blast_printTopLevelResults($id);
+
+				// pull input parameters out of db
+				$params=db_query("select * from xgrid_job_params where job_id=$id");
+				$i=0;
+				$out='';
+				foreach($params as $param){
+					if($param->argument!='target_database')
+						$jobParams[$param->argument]=$param->value;
+					else{ 
+						$out.= "database$i=".$param->value.";";
+						$i++;
+					}
+				}
+
+				if($jobParams['-seg']=='no' || $jobParams['-dust']=='no')
+					$jobParams['masking']='no';
+				else
+					$jobParams['masking']='Default';
+
+
+
+				//update params
+				// do this all in jquery below
+				$commands[]=ajax_command_replace('#edit-sequence','<textarea placeholder="Paste your sequences here" id="edit-sequence" name="sequence" cols="50" rows="8" class="form-textarea">'.$jobParams['sequence'].'</textarea>');
+
+
+				//need to do cryptic jquery stuff for the options and dbs
+				$results.="<div id=\"inputParams\">";
+				$results.="sequence={$jobParams["sequence"]}IIIjustInCase;
+				maxEvalue={$jobParams["-evalue"]};
+				wordSize={$jobParams["-word_size"]};
+				num_alignments={$jobParams["-num_alignments"]};
+				complexityMasking={$jobParams["masking"]};
+				scoringMatrix={$jobParams["-matrix"]};
+				program={$jobParams["program"]};
+				".$out."</div>";
+
+
+
+		}else{
+			$commands[]=ajax_command_css('#edit-result', array('color' => 'red'));
+			$message="There was a problem running your job.</br>ID: $id $status</br>";
+			$message.='<a href="'.$xgridPath.'/results.php?id='.$raw.'" target="new">Output 1</a></br>';
+			$message.='<a href="'.$xgridPath.'/results.php?id='.$id.'" target="new">Output 2</a></br>';
+		}
+
+		// invalid job identifier or not a blast job
+		}else
+			$message="Job $id does not contain BLAST results";
+	}
+
+  return $message.$results;
 }
 
 
-/**
- * Implements validation from the Form API.
- * 
- * @param $form
- *   A structured array containing the elements and properties of the form.
- * @param $form_state
- *   An array that stores information about the form's current state 
- *   during processing.
- */
-//implement this when we get ambitious
-function blast_form_validate($form, &$form_state){
-//  $max_num = $form_state['values']['current_posts_max'];
-//  if (!is_numeric($max_num)){
-//    form_set_error('current_posts_max', t('You must enter an integer for the maximum number of posts to display.'));
-//  } 
-//  else if ($max_num <= 0){
-//    form_set_error('current_posts_max', t('Maximum number of posts to display must be positive.'));       
-//  }
+
+
+
+// blast raw results id is typicall parseid-1 but verify that here
+function blast_getRawJobId($parseId) {
+	// better to save this in the local db than relying on the xgrid controller having results for this job
+	// and makes getting the info quicker
+	$results=db_query("select value from xgrid_job_params where job_id=$parseId and argument='rawId'");
+	$raw=$results->value;
+
+	// drop this if block after a few months and we've build up the rawid values in the input params db
+	if(!$raw){
+		$tmp=xgrid_specification($parseId);
+		preg_match("#arguments = .*?(\d+).*?;#s",$tmp,$out);
+		$raw=$out[1];
+	}
+	return $raw;
 }
+
+function blast_isBlastJob($parseId){
+
+	//first check local db
+	$results=db_query("select * from xgrid_job_params where job_id=$parseId");
+	if(count($results)>0)
+		$result=true;
+
+	// drop this if block after a few months and we've build up the rawid values in the input params db
+	if(!$result){
+		$tmp=xgrid_specification($parseId);
+		$result=preg_match("#name = \"blastParse_#",$tmp);
+	}
+	return $result;
+}
+
+
+function blast_submit_xgrid($args){
+
+	// paranoid checking of input program for security. make sure we're executing an acutal blast program
+	$program=$args['program'];
+	if( !( $program=="blastn" || $program=="tblastn" || $program=="tblastx" || $program=="blastp" || $program=="blastx"))
+		exit();
+
+
+	//generate random name to submit the job as. xgrid_genRandomString is in the xgrid module
+	$random=xgrid_genRandomString(6);
+	$filename="blast_".$random;
+	//$blastBin="legacy_blast.pl";
+	$blastPath="/usr/local/ncbi/blast/bin/";
+
+	//create program argument string
+	$arguments='';
+	foreach($args as $argument => $value){
+		if($argument!='sequence' && $argument!='dbs' && $argument!='program' ){ //&& $argument!='-num_alignments'){
+			$arguments.="\t\t\t<string>$argument</string>\n";
+			$arguments.="\t\t\t<string>$value</string>\n";
+		}
+	}
+
+	foreach($args['dbs'] as $db){
+		$dbs[]=$db;
+	}
+
+
+	$batch="<?xml version=\"1.0\" encoding=\"UTF-8\"?>
+	<!DOCTYPE plist PUBLIC \"-//Apple Computer//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">
+	<plist version=\"1.0\">
+	<array>
+	<dict>
+		<key>inputFiles</key>
+			<dict>
+				<key>sequence</key>
+				<dict>
+					<key>fileData</key>
+					<data>".base64_encode($args['sequence'])."</data>
+				</dict>
+			</dict>
+		<key>name</key>
+		<string>$filename</string>
+		<key>taskSpecifications</key>
+		<dict>\n";
+
+//					<string>--path</string>
+//					<string>$blastPath</string>
+
+	foreach($dbs as $db){
+    	$batch.="			<key>$db</key>
+                	<dict>
+				<key>command</key>
+				<string>$blastPath$program</string>
+				<key>arguments</key>
+				<array>
+					<string>-query</string>
+					<string>sequence</string>
+					<string>-db</string>
+					<string>".variable_get('xgrid_localDirectory')."$db</string>
+					$arguments
+				</array>
+	            	</dict>\n";
+    }
+	$batch.="		</dict>
+	</dict>
+	</array>
+	</plist>";
+
+
+	$rawJobId = xgrid_submit($batch);
+
+
+/*
+my $jobId = $ARGV[0];
+my $numResults = $ARGV[1];
+my $infile = $ARGV[2];
+my $dbMachine = $ARGV[3];
+*/
+
+	$connSettings=xgrid_getDrupalDBConfig();
+
+	// the parse script is a separate job. reads the raw results and stuffs a database with the data
+	$filename="blastParse_".$random;
+	$batch="<?xml version=\"1.0\" encoding=\"UTF-8\"?>
+	<!DOCTYPE plist PUBLIC \"-//Apple Computer//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">
+	<plist version=\"1.0\">
+	<array>
+	<dict>
+		<key>name</key>
+		<string>$filename</string>
+		<key>schedulerParameters</key>
+        <dict>
+        <key>dependsOnJobs</key>
+        <array>
+        <string>$rawJobId</string>
+        </array>
+        </dict>
+		<key>taskSpecifications</key>
+		<dict>
+			<key>$filename</key>
+          	<dict>
+				<key>command</key>
+				<string>/vectorbase/scripts/xgridBlastParse.sh</string>
+				<key>arguments</key>
+				<array>
+					<string>$rawJobId</string>
+					<string>".$args['-num_alignments']."</string>
+					<string>".$_SERVER['SERVER_ADDR']."</string>
+					<string>".$connSettings['db']."</string>
+					<string>".$connSettings['user']."</string>
+					<string>".$connSettings['pass']."</string>
+				</array>
+			</dict>
+		</dict>
+	</dict>
+	</array>
+</plist>";
+// 
+
+	$jobId = xgrid_submit($batch);
+
+
+
+	//save some job params in the db
+	global $user;
+	$args['user_name']=$user->name;
+	$args['submitter_ip']=$_SERVER['REMOTE_ADDR'];
+	$args['detailed_est']='F';
+	$args['program']=$program;
+	$args['date']=date("m/d/y");
+	$args['time']=date("H:i:s");
+	$args['rawId']=$rawJobId;
+	// clean up sequences entered by windows users
+	$args['sequence']=str_replace("\r","",$args['sequence']);
+	foreach($dbs as $db){
+		$params['target_database']=$db;
+		xgrid_saveParams($jobId,$params);
+	}
+	unset($args['dbs']);
+	xgrid_saveParams($jobId,$args);
+
+
+	return array('raw'=>$rawJobId,'parse'=>$jobId);
+}
+
+
+function blast_generateDatasets(){
+	$formOut = array(
+        '#type' => 'fieldset',
+        '#title' => t('Datasets'),
+	);
+
+	// get node ids for files with xgrid enabled and not archived
+	$query = new EntityFieldQuery();
+	$result = $query->entityCondition('entity_type', 'node')
+	  ->entityCondition('bundle', 'downloadable_file')
+	  ->fieldCondition('field_xgrid_enabled', 'value', '1', '=')
+	  ->fieldCondition('field_status', 'value', 'Current', '=')
+	  ->execute();
+
+	// as long as we have some dbs enabled, get info about those dbs
+	if (isset($result['node'])) {
+
+		// pull out full node info for each of the nids identified by the entityfieldquery
+		$nodes=node_load_multiple(array_keys($result['node']));
+
+	 	//first find organisms with xgrid dbs available
+		$organisms=array();
+		foreach($nodes as $node){
+			$orgTid=$node->field_organism_taxonomy['und'][0]['tid'];
+			$orgName=taxonomy_term_load($orgTid);
+			$organisms[$orgName->name]=$orgTid;
+		}
+		// alphabetically sort organisms
+		ksort($organisms);
+
+		$formOut['organisms'] = array(
+	        '#type' => 'fieldset',
+	        '#attributes' => array(
+	        	'class'=> array('organismsField'),
+	        	),
+			'#prefix' => '<div id="stupidWrapperForFirefox">',
+			'#suffix' =>  '</div>',
+		);
+
+
+		$formOut['organisms']['all'] = array(
+			'#type' => 'checkbox',
+			'#title' => t('All Datasets'),
+			'#prefix' => '<div class="organismCheckboxDiv" data-org="all">',
+			'#suffix' =>  '</div>',
+			'#attributes' => array(
+				'class' => array('allDatasets'),
+				'data-org' => array(str_replace(" ","_", $organism)),
+				),
+
+		);
+
+		// generate checkbox for organism
+		foreach ($organisms as $organism => $nid){
+			$formOut['organisms'][$organism.'Control'] = array(
+				'#type' => 'checkbox',
+				'#title' => t('<i>'.str_replace(' s.s.','',$organism).'</i>'),
+				'#prefix' => '<div class="organismCheckboxDiv" data-org="'.str_replace(" ","_", $organism).'">',
+				'#suffix' =>  '</div>',
+				'#attributes' => array(
+					'class' => array('organismCheckbox'),
+					'data-org' => array(str_replace(" ","_", $organism))
+					)
+			);
+		}
+
+
+
+			// all datasets options
+			$formOut['all'] = array(
+		        '#type' => 'fieldset',
+				'#attributes' => array(
+					'class' => array('dbContainer'),
+					'data-org' => array('all')
+					)
+			);
+			// container for the dbs
+			$formOut['all']['Nucleotide'] = array(
+		        '#type' => 'fieldset',
+                '#title' => t('Nucleotide'),
+				'#attributes' => array(
+					'class' => array('nucleotideField')
+					)
+			);
+
+			$allTypes=array('Transcripts','Scaffolds','Contigs','EST','BAC');
+			foreach($allTypes as $type){
+				$formOut['all']['Nucleotide'][$type] = array(
+					'#type' => 'checkbox',
+					'#title' => t("<b>".$type ."</b>"),
+	               	'#attributes' => array(
+						'class' => array('nucDbs', 'dbs', 'allSelector'),
+						'data-type' => array($type)
+					)
+				);
+			}
+
+
+		// what is the tid for peptides?
+		$peptideTid=taxonomy_get_term_by_name('Peptides');
+		$peptideTid=array_shift($peptideTid)->tid;
+
+	 	//second make fieldset of file types available for the organisms
+	 	// these will be visible/hidden on organism mouseover/click
+		foreach ($organisms as $organism => $orgNid) {
+
+			// container for the dbs
+			$formOut[$organism] = array(
+		        '#type' => 'fieldset',
+				'#attributes' => array(
+					'class' => array('dbContainer'),
+					'data-org' => array(str_replace(" ","_",$organism))
+					)
+			);
+
+
+			// get all nuc dbs nids for this org with xgrid enabled
+			$query = new EntityFieldQuery();
+			$result = $query->entityCondition('entity_type', 'node')
+			  ->entityCondition('bundle', 'downloadable_file')
+			  ->fieldCondition('field_xgrid_enabled', 'value', '1', '=')
+			  ->fieldCondition('field_status', 'value', 'Current', '=')
+			  ->fieldCondition('field_download_file_type', 'tid', $peptideTid, '!=')
+			  ->fieldCondition('field_organism_taxonomy', 'tid', $orgNid, '=')
+			  ->fieldOrderBy('field_download_file_type','tid')
+			  ->execute();
+
+			//get all the dbs info
+			if(isset($result['node'])){
+
+				// container for the dbs
+				$formOut[$organism]['Nucleotide'] = array(
+			        '#type' => 'fieldset',
+	                '#title' => t('Nucleotide'),
+					'#attributes' => array(
+						'class' => array('nucleotideField')
+						)
+				);
+
+				$dbs=node_load_multiple(array_keys($result['node']));
+
+// custom sorter on file types
+$fileTypeOrder=array('Chromosomes','Supercontigs','Assembled transcriptome','Transcripts','EST','Contigs','Scaffolds','Trace','BAC');
+				foreach($fileTypeOrder as $order){
+					foreach($dbs as $db){
+						//dpm($db);
+						$fileType=taxonomy_term_load($db->field_download_file_type['und'][0]['tid'])->name;	
+						if($fileType==$order){
+							$nid=$db->nid;
+							$fileDescription=$db->field_description['und'][0]['value'];
+							$formOut[$organism]['Nucleotide'][$nid] = array(
+								'#type' => 'checkbox',
+								'#title' => t("<b>".$fileType ."</b> ".$fileDescription),
+			                	'#attributes' => array(
+									'class' => array('nucDbs', 'dbs'),
+									'data-org' => array(str_replace(" ","_", $organism)),
+									'data-filename' => array(str_replace(".gz","",$db->field_file['und'][0]['filename']))
+								)
+							);
+							if($fileType=="BAC")
+								$formOut[$organism]['Nucleotide'][$nid]['#attributes']['class'][]='bac';
+							}
+						}
+					}
+				}
+
+			// now display peptide dbs
+			$query = new EntityFieldQuery();
+			$result = $query->entityCondition('entity_type', 'node')
+			  ->entityCondition('bundle', 'downloadable_file')
+			  ->fieldCondition('field_xgrid_enabled', 'value', '1', '=')
+			  ->fieldCondition('field_status', 'value', 'Current', '=')
+			  ->fieldCondition('field_download_file_type', 'tid', $peptideTid, '=')
+			  ->fieldCondition('field_organism_taxonomy', 'tid', $orgNid, '=')
+			  ->execute();
+
+			//get all the dbs info
+			if(isset($result['node'])){
+
+				// container for the dbs
+				$formOut[$organism]['Peptide'] = array(
+			        '#type' => 'fieldset',
+	                '#title' => t('Peptide'),
+					'#attributes' => array(
+						'class' => array('peptideField')
+						)
+				);
+
+				$dbs=node_load_multiple(array_keys($result['node']));
+				foreach($dbs as $db){
+					$nid=$db->nid;
+					
+					$fileDescription=$db->field_description['und'][0]['value'];
+					//$fileDescription=preg_replace("#.*?,#","",preg_replace("#<i>.*?</i>#","",$fileDescription));
+					//$fileType=taxonomy_term_load($db->field_download_file_type['und'][0]['tid'])->name;	
+					// file type will be peptide
+
+					$formOut[$organism]['Peptide'][$nid] = array(
+						'#type' => 'checkbox',
+						'#title' => t("<b>Peptides</b> ".$fileDescription),
+						'#attributes' => array(
+							'class' => array('pepDbs', 'dbs'),
+							'data-org' => array(str_replace(" ","_", $organism)),
+							'data-filename' => array(str_replace(".gz","",$db->field_file['und'][0]['filename']))
+
+						)						
+					);
+				}
+			}
+
+
+		}
+
+	} // end checking for any xgrid enabled dbs
+//blast_dbinfo('agambiae.TRANSCRIPTS-AgamP3.6.fa');
+
+
+
+
+	return $formOut;
+}
+
+//174862
+
+
+function blast_dbinfo($dbfilename){
+	// start with the file id from the filename
+	$fid=db_query("select fid from file_managed where filename='$dbfilename.gz';")->fetchField();
+
+	// where is this file stored locally?
+	$file=file_load($fid);
+	$localPath=$_SERVER['DOCUMENT_ROOT'].preg_replace("#https?://.*?/#", "/", file_create_url($file->uri));
+
+	// get type of file
+	$entity_id=db_query("select entity_id from field_data_field_file where field_file_fid=$fid;")->fetchField();
+	$node=node_load($entity_id);
+
+	$tid=$node->field_download_file_type['und'][0]['tid'];
+	$type=taxonomy_term_load($tid)->name;
+
+	// get org name for this file
+	$orgTid=$node->field_organism_taxonomy['und'][0]['tid'];
+	$orgTax=taxonomy_term_load($orgTid);
+	$orgName=$orgTax->name;
+	$description=$node->field_description['und'][0]['value'];
+
+	return array("type"=>$type,"organism" =>$orgName,"description"=>$description, "path"=>$localPath, "fid"=>$fid);
+}
+
