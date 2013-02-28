@@ -1,0 +1,4 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=0 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=54985&page=res&job_id=222795
+2R	BLAST	Blast Hit	3489292	3489311	40	+	.	Ace1_gq_19bF
+2R	BLAST	Blast Hit	14528611	14528630	34	+	.	Ace1_gq_19bF
+2R	BLAST	Blast Hit	3573475	3573493	32	+	.	Ace1_gq_19bF

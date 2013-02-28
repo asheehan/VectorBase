@@ -1,0 +1,10 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=0 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=33670&page=res&job_id=221825
+EW949391.1	BLAST	Blast Hit	1	537	361	+	.	AgGPRop9
+EW785222.1	BLAST	Blast Hit	1	807	320	+	.	AgGPRop9
+EW898719.1	BLAST	Blast Hit	140	685	318	+	.	AgGPRop9
+EW939466.1	BLAST	Blast Hit	9	341	175	+	.	AgGPRop9
+EW936105.1	BLAST	Blast Hit	9	341	175	+	.	AgGPRop9
+EW874380.1	BLAST	Blast Hit	9	341	175	+	.	AgGPRop9
+EW838300.1	BLAST	Blast Hit	1	243	173	+	.	AgGPRop9
+EW846469.1	BLAST	Blast Hit	243	458	83	-	.	AgGPRop9
+EW896814.1	BLAST	Blast Hit	227	637	83	+	.	AgGPRop9

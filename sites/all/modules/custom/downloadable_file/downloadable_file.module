@@ -252,7 +252,7 @@ function downloadable_file_node_validate($node, $form, &$form_state) {
 	if($node->type == 'downloadable_file') {
 		//dsm($form_state, 'form_state');
 		$file = file_load($node->field_file['und'][0]['fid']);	
-		$errors = validateFilename($file->filename);	
+		$errors = array();//validateFilename($file->filename);	
 		if(!empty($errors)) {
 			foreach($errors as $error) {
 				form_set_error('field_file', "Filename error: $error");

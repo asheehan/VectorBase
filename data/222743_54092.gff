@@ -1,0 +1,4 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=0 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=54092&page=res&job_id=222743
+AGAP010553-RA	BLAST	Blast Hit	604	944	276	-	.	sctg_0057_0001 length=34692
+AGAP010553-RA	BLAST	Blast Hit	1120	1242	86	-	.	sctg_0057_0001 length=34692
+AGAP010553-RA	BLAST	Blast Hit	448	543	82	-	.	sctg_0057_0001 length=34692

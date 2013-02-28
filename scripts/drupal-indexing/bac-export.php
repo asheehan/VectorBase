@@ -34,7 +34,11 @@ foreach($subdomains as $subdomain){
     // basic properties
     $n->site = BAC_DOMAIN;		// domain as it appears in the results
     $n->bundle = $subdomain;		// subdomain
-    $n->bundle_name = $subdomain;	// subdomain as it appears in the results
+    $subDisplay = ucfirst($subdomain);
+    if( strcmp($subdomain, "in_situ") == 0 ){
+      $subDisplay = "In situ images";
+    }
+    $n->bundle_name = $subDisplay;	// subdomain as it appears in the results
     $cleanName = nameCleaner($file);
     $n->label = $cleanName;
     $n->entity_type = $cleanName;

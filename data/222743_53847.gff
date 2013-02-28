@@ -1,0 +1,4 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=0 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=53847&page=res&job_id=222743
+	BLAST	Blast Hit	241010	241176	114	-	.	sctg_0046_0001 length=35929
+	BLAST	Blast Hit	5494074	5494224	104	-	.	sctg_0046_0001 length=35929
+	BLAST	Blast Hit	69852	70076	102	+	.	sctg_0046_0001 length=35929

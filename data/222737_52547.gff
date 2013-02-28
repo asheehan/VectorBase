@@ -1,0 +1,8 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=0 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=52547&page=res&job_id=222737
+SRS008484_33339	BLAST	Blast Hit	1	153	306	+	.	Ago5PCR r
+SRS008484_14640	BLAST	Blast Hit	163	208	42	-	.	Ago5PCR r
+SRS008484_20549	BLAST	Blast Hit	174	194	36	+	.	Ago5PCR r
+SRS008484_125617	BLAST	Blast Hit	16	35	34	+	.	Ago5PCR r
+SRS008484_84459	BLAST	Blast Hit	30	59	34	-	.	Ago5PCR r
+SRS008484_64646	BLAST	Blast Hit	55	76	34	+	.	Ago5PCR r
+SRS008484_46472	BLAST	Blast Hit	4	34	34	-	.	Ago5PCR r

@@ -1,0 +1,214 @@
+Protein	AGAP007938-PA
+First residue	M
+Seq size	377
+Location/Gene	3R:3214448:3217145:1|gene:CACT
+CDS	AGAP007938-RA
+Seq size*	1134
+Description	SCALAR(0x99eda30)|3R:3214448:3217145:1|gene:CACT
+ATG first?	ATG
+Last codon	*
+Genomic match	3R_Start_3200000
+E value	0
+Chromosome and link to ENSEMBL	3R
+Start	3214448
+End	3217145
+Extent of match	1139
+% identity	100
+Number of segments (exons, approximate)	5
+Orientation	FOR
+Satisfied 95% id on length 100	1
+Best match to assembled ESTs	est-07-contig_2477
+E value*	0
+Score	2208
+Extent of match*	1134
+Length of best match	2083
+% identity*	99
+% Coverage	54
+First residue of match	320
+First residue of sequence	1
+Number of segments	1
+Annotation mismatch	
+Orientation*	FOR
+Satisfied 95% id on length 100*	1
+Number of sequences	40
+all-instars	3
+normalized-fatbody	6
+head-all	2
+Immune cells	4
+Pasteur annotation	7
+Sugar-abd	0
+Blood-abd	0
+InfBlood-abd	0
+Blood-fed	7
+Non-Blood-fed	8
+Sg-male	0
+SG-fem	0
+SG-Pasteur	3
+All female glands	3
+Best match to Affymetrix chip database	Ag.3R.13.0_CDS_at
+E value**	0
+Extent of match**	536
+Length of best match*	536
+% identity**	98
+% Coverage*	100
+First residue of match*	1
+First residue of sequence*	586
+Number of segments*	1
+Annotation mismatch*	
+Orientation**	FOR
+Satisfied 95% id on length 100**	1
+L-mean	4770
+Males-mean	4239
+SF-mean	3078
+3h-mean	2326
+24h-mean	5193
+48h-mean	6910
+72h-mean	6648
+15d-mean	5774
+Sum of residues (larger value indicates differential aa usage)	0.25
+Increased AA (fold increase over average)	
+Cys number	7
+Predicted Tyr-SO4 - Prosite rules	1
+% Ser + Thr	15.1
+% Pro	2.7
+% Gly	6.9
+% Gly+Pro	9.5
+Number of possible HO-Pro [LPAE]-P-G	
+Number of possible OH-lysines X-Lys-Gly not Lys-Gly-Pro	1
+Number of ProGly''s	1
+SigP Result	CYT
+Cleavage Position	
+MW	41.18
+pI	4.54
+Mature MW	
+pI*	
+TMHMM result	ExpAA=0.14 First60=0.00 PredHel=0 Topology=o
+Predicted helices	0
+% membrane	
+% outside	
+% inside	
+mTP	0.225
+SP	0.043
+other	0.796
+Loc	_
+Relative Confidence (1 is better)	3
+ProP furin cleavage predictions 	
+Best match to NR protein database	cactus (AGAP007938-PA)
+E value***	0.0
+Match	gi|118789617
+Score*	744
+Extent of match***	377
+Length of best match**	389
+% identity***	100
+% Coverage**	97
+Alphanumeric Index	118789617 XP_317542 3 AGAP007938 116123303 EAA12805 157108523 XP_001650266 1 108884026 EAT48251 157108525 XP_001650267 108884027 EAT48252 170037072 XP_001846384 167880091 EDS43474 194759838 XP_001962154 GF15324 190615851 EDV31375 226693459 ACO72877 RE25277P 194857830 XP_001969042 GG24172 190660909 EDV58101 157041 AAA85908 17136840 NP_476942 24584588 NP_723960 45552397 NP_995721 17380464 Q03017 2 157038 AAA28408 7298294 AAF53524 17862134 AAL39544 LD10168P 22946615 AAN10936 45445149 AAS64714 220943492 ACL84289 220952720 ACL88903 198475712 XP_001357125 GA19176 198137926 EAL34191
+Text index 	CACTUS PA DEVELOPMENTAL GENE PRODUCT ISOFORM B A D CACT_DROME FULL NF KAPPA INHIBITOR MATERNAL ZYGOTIC CACT 
+Best match to NR database depleted of Anopheles gambiae sequenc	developmental protein cactus
+E value****	4E-081
+Match*	gi|157108523
+% identity****	45
+% Coverage***	104
+Alphanumeric Index*	157108523 XP_001650266 1 108884026 EAT48251 157108525 XP_001650267 108884027 EAT48252 170037072 XP_001846384 167880091 EDS43474 194759838 XP_001962154 GF15324 190615851 EDV31375 226693459 ACO72877 RE25277P 194857830 XP_001969042 GG24172 190660909 EDV58101 157041 AAA85908 17136840 NP_476942 24584588 NP_723960 45552397 NP_995721 17380464 Q03017 2 157038 AAA28408 7298294 AAF53524 17862134 AAL39544 LD10168P 22946615 AAN10936 45445149 AAS64714 220943492 ACL84289 220952720 ACL88903 198475712 XP_001357125 GA19176 198137926 EAL34191 195160098 XP_002020913 GL14084 194117863 EDW39906
+Text index *	DEVELOPMENTAL CACTUS GENE PRODUCT ISOFORM B A D CACT_DROME FULL NF KAPPA INHIBITOR MATERNAL ZYGOTIC CACT PA 
+Best match to SwissProt	NF-kappa-B inhibitor cactus OS=Drosophila melanogaster GN=cact PE=1 SV=2
+E value*****	1E-059
+Match**	sp|Q03017|CACT_DROME
+Score**	230
+Extent of match****	281
+Length of best match***	500
+% identity*****	45
+% Coverage****	56
+Alphanumeric Index**	Q03017 1 2 P83757 4 Q91974 P25963 Q9Z1E3 Q08353 3 Q63746 O54910 Q04861 NFKB1_CHICK P105 NFKB1 P98150 NFKB2_CHICK P100 NFKB2
+Text index **	CACT_DROME NF KAPPA B INHIBITOR CACTUS OS DROSOPHILA MELANOGASTER GN CACT PE SV CACT_DROYA YAKUBA IKBA_CHICK ALPHA GALLUS NFKBIA IKBA_HUMAN HOMO SAPIENS IKBA_MOUSE MUS MUSCULUS IKBA_PIG SUS SCROFA IKBA_RAT RATTUS NORVEGICUS IKBE_MOUSE EPSILON NFKBIE NUCLEAR FACTOR SUBUNIT 
+Best match to GO database	cactus - Drosophila melanogaster - dorsal appendage formation - oogenesis - antifungal humoral response - antimicrobial humoral response - cytoplasm - positive regulation of antifungal peptide biosynthetic process - cytoplasmic sequestering of transcription factor - protein binding - defense response - dorsal/ventral axis specification - response to fungus - Toll signaling pathway - immune response - neuromuscular junction - negative regulation of protein import into nucleus - hemopoiesis - transcription factor binding - innate immune response - phagocytosis, engulfment - nervous system development - cellular response to DNA damage stimulus
+E value******	4E-60
+Function descriptors	protein binding||binding
+Function parent	binding
+Function second parent	protein binding
+GO #	GO:0005515
+E value of functional GO	4.00E-60
+Component descriptors	cytoplasm||outer membrane\-bounded periplasmic space||external encapsulating structure part||cell part
+Component parent	cell part
+Component second parent	external encapsulating structure part
+GO #*	GO:0005737
+E value of component GO	4.00E-60
+Process descriptors	<dorsal appendage formation||pronuclear envelope synthesis||maintenance of seed dormancy||detection of dietary excess||diet induced thermogenesis||response to dietary excess||neurotrophin production||regulation of diuresis||renal water transport||neuropore closure||pollen tube guidance||bone morphogenesis||leaf formation||shoot development||root development||eclosion rhythm||pollen adhesion||diapedesis||seed growth||cornification||innervation
+Process parent	binding
+Process second parent	protein binding
+GO #**	GO:0046843
+E value of process GO	4.00E-60
+Best match to CDD database	ANK
+E value*******	3E-020
+Alphanumeric Index***	29261 CD00204 2 20 4 31010 COG0666 140343 PTZ00322 6 109092 PFAM00023 128544 SMART00248 33 129948 TIGR00870 1999
+Text index ***	ANK ANKYRIN REPEATS MEDIATE INTERACTIONS IN VERY DIVERSE FAMILIES PROTEINS NUMBER A CAN RANGE FROM TO OVER ANKYRINS FOR EXAMPLE MAY OCCUR COMBINATIONS WITH OTHER TYPES DOMAINS STRUCTURAL REPEAT UNIT CONTAINS TWO ANTIPARALLEL HELICES BETA HAIRPIN ARE STACKED SUPERHELICAL ARRANGEMENT THIS ALIGNMENT CONSECUTIVE ARP FOG PHOSPHOFRUCTO KINASE FRUCTOSE BIPHOSPHATASE PROVISIONAL THERE S NO CLEAR SEPARATION BETWEEN NOISE SIGNAL ON HMM SEARCH GENERALLY CONSIST ALPHA ORDER SECONDARY STRUCTURES ASSOCIATE FORM HIGHER STRUCTURE ABOUT AMINO ACIDS LONG AT LEAST FOUR COPIES THEY INVOLVED CORE SEEMS BE AN HELIX LOOP TRP AFTER CHRONIC EXPOSURE CAPSAICIN MCCLESKEY GOLD 
+Best match to KOG database	CASK-interacting adaptor protein (caskin) and related proteins with ankyrin repeats and SAM domain
+E value********	4E-017
+General class	Signal transduction mechanisms
+Alphanumeric Index****	35727 KOG0507 35729 KOG0509 39379 KOG4177 35730 KOG0510 39613 KOG4412 26S PSMD10 35728 KOG0508 38880 KOG3676 CA2 9 35725 KOG0505 36002 KOG0783 35742 KOG0522
+Text index ****	CASK INTERACTING ADAPTOR CASKIN RELATED PROTEINS WITH ANKYRIN REPEATS SAM DOMAIN REPEAT DHHC TYPE ZN FINGER CONTAINING PROTEASOME REGULATORY COMPLEX SUBUNIT PERMEABLE CATION CHANNEL OSM CHANNELS OTRPC FAMILY MYOSIN PHOSPHATASE UNCHARACTERIZED CONSERVED CONTAINS BTB POZ DOMAINS 
+Best match to PFAM database	Ank
+E value*********	3E-005
+Alphanumeric Index*****	109092 PFAM00023 118122 PFAM09586
+Text index *****	ANK ANKYRIN REPEAT THERE S NO CLEAR SEPARATION BETWEEN NOISE SIGNAL ON HMM SEARCH REPEATS GENERALLY CONSIST A BETA ALPHA ORDER SECONDARY STRUCTURES ASSOCIATE TO FORM HIGHER STRUCTURE YFHO BACTERIAL MEMBRANE THIS IS CONSERVED GENE TRANSCRIBED IN DIFCO SPORULATION MEDIUM TRANSCRIPTION AFFECTED BY YVRGHB TWO COMPONENT SYSTEM SOME MEMBERS FAMILY HAVE BEEN ANNOTATED AS GLYCOSYL TRANSFERASES PMT 
+Best match to PRK database	gnl|CDD|140343
+E value**********	0.0000009
+Alphanumeric Index******	140343 PTZ00322 6 2 137412 PRK09598
+Text index ******	PHOSPHOFRUCTO KINASE FRUCTOSE BIPHOSPHATASE PROVISIONAL LIPID A PHOSPHOETHANOLAMINE TRANSFERASE REVIEWED 
+Best match to SMART database	ANK
+E value***********	5E-006
+Alphanumeric Index*******	128544 SMART00248 33
+Text index *******	ANK ANKYRIN REPEATS ARE ABOUT AMINO ACIDS LONG OCCUR IN AT LEAST FOUR CONSECUTIVE COPIES THEY INVOLVED INTERACTIONS CORE REPEAT SEEMS TO BE AN HELIX LOOP STRUCTURE 
+Best match to Jose''s transposable element database	
+E value************	
+PROSITE motifs	ASN_GLYCOSYLATION |PKC_PHOSPHO_SITE |CK2_PHOSPHO_SITE |MYRISTYL |PRENYLATION |MICROBODIES_CTER |
+Non promiscuous PROSITE motifs	
+Salivary motifs	Hyp10-12 mosquito stringent pattern |
+Non promiscuous salivary motifs	
+Best match to AEGY-PEP database	developmental protein cactus
+E value*************	4E-83
+Match***	AAEL000709-PA
+Score***	305
+% identity******	45
+% Coverage*****	104
+Best match to Culex quinquefasciatus proteins	developmental protein cactus protein_coding supercont3.75 415727 423594
+E value**************	3E-71
+Match****	CPIJ004774
+Score****	265
+% identity*******	43
+% Coverage******	97
+Best match to D. melanogaster proteins	loc=2L:complement(16309311..16320956); name=cact-PB;
+E value***************	1E-060
+Match*****	cact-PB
+Score*****	230
+% identity********	45
+% Coverage*******	56
+Best match to C. elegans proteins	ikb-1 Ank repeat status:Confirmed TR:Q9U3S0 protein_id:CAB62796.1 Length = 597
+E value****************	5E-015
+Match******	C04F12.3
+Score******	78.6
+% identity*********	28
+% Coverage********	40
+Best match to Arabidopsis proteins	ankyrin repeat family protein, contains ankyrin repeats, Pfam:PF00023 |
+E value*****************	1E-012
+Match*******	AT2G03430.1
+Score*******	70.9
+% identity**********	26
+% Coverage*********	92
+Clustered at 30%-Sim- on 60% of length - - Cluster#	8101
+# seqs 	1
+Clustered at 40%-Sim- on 60% of length - - Cluster#	9027
+# seqs *	1
+Clustered at 50%-Sim- on 60% of length - - Cluster#	10096
+# seqs **	1
+Clustered at 60%-Sim- on 60% of length - - Cluster#	10987
+# seqs ***	1
+Clustered at 70%-Sim- on 60% of length - - Cluster#	11644
+# seqs ****	1
+Clustered at 80%-Sim- on 60% of length - - Cluster#	12094
+# seqs *****	1
+Clustered at 90%-Sim- on 60% of length - - Cluster#	12422
+# seqs ******	1
+Clustered at 95%-Sim- on 60% of length - - Cluster#	12638
+# seqs	1
+Clustered at 99%-Sim- on 60% of length - - Cluster#	12913
+# seqs*	1

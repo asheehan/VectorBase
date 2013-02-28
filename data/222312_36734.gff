@@ -1,0 +1,7 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=0 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=36734&page=res&job_id=222312
+AAWU01017382.1	BLAST	Blast Hit	19530	20329	436	-	.	gi|47679576|gb|AY590494.1| Aedes aegypti carboxypeptidase B (CPB-I)mRNA, complete cds
+AAWU01017382.1	BLAST	Blast Hit	24748	25363	70	-	.	gi|47679576|gb|AY590494.1| Aedes aegypti carboxypeptidase B (CPB-I)mRNA, complete cds
+AAWU01017382.1	BLAST	Blast Hit	35153	35197	60	-	.	gi|47679576|gb|AY590494.1| Aedes aegypti carboxypeptidase B (CPB-I)mRNA, complete cds
+AAWU01017382.1	BLAST	Blast Hit	3837	3866	50	-	.	gi|47679576|gb|AY590494.1| Aedes aegypti carboxypeptidase B (CPB-I)mRNA, complete cds
+AAWU01019788.1	BLAST	Blast Hit	124633	124694	48	+	.	gi|47679576|gb|AY590494.1| Aedes aegypti carboxypeptidase B (CPB-I)mRNA, complete cds
+AAWU01019788.1	BLAST	Blast Hit	124471	124538	46	+	.	gi|47679576|gb|AY590494.1| Aedes aegypti carboxypeptidase B (CPB-I)mRNA, complete cds

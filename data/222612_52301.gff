@@ -1,0 +1,11 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=0 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=52301&page=res&job_id=222612
+AGAP006102-PA	BLAST	Blast Hit	45	142	490	.	.	
+AGAP006398-PA	BLAST	Blast Hit	47	143	257	.	.	
+AGAP006398-PA	BLAST	Blast Hit	191	287	228	.	.	
+AGAP006398-PA	BLAST	Blast Hit	127	217	142	.	.	
+AGAP006103-PC	BLAST	Blast Hit	47	144	256	.	.	
+AGAP006103-PA	BLAST	Blast Hit	46	143	256	.	.	
+AGAP006103-PB	BLAST	Blast Hit	107	204	256	.	.	
+AGAP009604-PA	BLAST	Blast Hit	195	295	181	.	.	
+AGAP009604-PA	BLAST	Blast Hit	162	225	151	.	.	
+AGAP009606-PA	BLAST	Blast Hit	188	283	126	.	.	

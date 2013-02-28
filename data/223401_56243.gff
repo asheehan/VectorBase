@@ -1,0 +1,4 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=0 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=56243&page=res&job_id=223401
+ABKP02010640.1	BLAST	Blast Hit	785	807	46	-	.	THA28382_05_M13R
+ABKP02000556.1	BLAST	Blast Hit	95	117	46	+	.	THA28382_05_M13R
+ABKP02021616.1	BLAST	Blast Hit	13183	13222	42	-	.	THA28382_05_M13R

@@ -1,0 +1,5 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=0 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=33407&page=res&job_id=221792
+ABKQ01053796.1	BLAST	Blast Hit	112681	112740	120	-	.	
+ABKQ01012273.1	BLAST	Blast Hit	30105	30126	38	-	.	
+ABKQ01028739.1	BLAST	Blast Hit	13701	13721	36	+	.	
+ABKQ01013695.1	BLAST	Blast Hit	4887	4909	36	+	.	

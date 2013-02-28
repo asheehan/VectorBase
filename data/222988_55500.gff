@@ -1,0 +1,5 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=0 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=55500&page=res&job_id=222988
+CPIJ005279-RA	BLAST	Blast Hit	738	904	118	+	.	Contig1
+CPIJ001618-RA	BLAST	Blast Hit	1163	1187	44	-	.	Contig1
+CPIJ005280-RA	BLAST	Blast Hit	744	782	42	+	.	Contig1
+CPIJ001884-RA	BLAST	Blast Hit	1592	1620	38	+	.	Contig1

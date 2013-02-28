@@ -1,0 +1,11 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=0 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=56357&page=res&job_id=223475
+	BLAST	Blast Hit	412219	413650	2764	-	.	AGAP004359-RA E051401 exon:KNOWN_protein_coding
+	BLAST	Blast Hit	124608	124700	104	-	.	AGAP004359-RA E051401 exon:KNOWN_protein_coding
+	BLAST	Blast Hit	124556	124651	82	-	.	AGAP004359-RA E051401 exon:KNOWN_protein_coding
+	BLAST	Blast Hit	124620	124693	82	-	.	AGAP004359-RA E051401 exon:KNOWN_protein_coding
+	BLAST	Blast Hit	709048	709151	92	+	.	AGAP004359-RA E051401 exon:KNOWN_protein_coding
+	BLAST	Blast Hit	1794069	1794157	90	+	.	AGAP004359-RA E051401 exon:KNOWN_protein_coding
+	BLAST	Blast Hit	1794023	1794136	86	+	.	AGAP004359-RA E051401 exon:KNOWN_protein_coding
+	BLAST	Blast Hit	1793987	1794094	84	+	.	AGAP004359-RA E051401 exon:KNOWN_protein_coding
+	BLAST	Blast Hit	2253879	2253993	82	-	.	AGAP004359-RA E051401 exon:KNOWN_protein_coding
+	BLAST	Blast Hit	53965	54072	82	-	.	AGAP004359-RA E051401 exon:KNOWN_protein_coding

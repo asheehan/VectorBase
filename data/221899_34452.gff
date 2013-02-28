@@ -1,0 +1,4 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=0 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=34452&page=res&job_id=221899
+SRS008481_57298	BLAST	Blast Hit	67	86	34	-	.	ACE1 An. albimanus
+SRS008481_8125	BLAST	Blast Hit	44	60	34	+	.	ACE1 An. albimanus
+SRS008481_62593	BLAST	Blast Hit	39	68	32	-	.	ACE1 An. albimanus

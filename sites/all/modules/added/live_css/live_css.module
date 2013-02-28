@@ -216,7 +216,12 @@ function live_css_save() {
   // i.e. http://.../css/my_file.css?m1unhm
   $sanitized_url = _live_css_sanitize_css_url($href);
 
-  if (substr($sanitized_url, -4) != '.css' && substr($sanitized_url, -5) != '.less') {
+  // File path relative to Drupal installation folder.
+  global $base_url;
+  $stripped_url = drupal_substr($sanitized_url, drupal_strlen($base_url) , drupal_strlen($sanitized_url));
+  $relative_file_path = _live_css_document_root() . $stripped_url; 
+
+  if (substr($relative_file_path, -4) != '.css' && substr($relative_file_path, -5) != '.less') {
     echo drupal_json_encode(array(
       'result' => 'failure',
       'filename' => $href,
@@ -225,7 +230,7 @@ function live_css_save() {
     return;
   }
 
-  if (file_munge_filename($sanitized_url, 'css less') != $sanitized_url) {
+  if (file_munge_filename($relative_file_path, 'css less') != $relative_file_path) {
     echo drupal_json_encode(array(
       'result' => 'failure',
       'filename' => $href,
@@ -233,11 +238,6 @@ function live_css_save() {
     ));
     return;
   }
-
-  // File path relative to Drupal installation folder.
-  global $base_url;
-  $stripped_url = drupal_substr($sanitized_url, drupal_strlen($base_url) , drupal_strlen($sanitized_url));
-  $relative_file_path = _live_css_document_root() . $stripped_url; 
  
   // Save file back.
   $msg = '';

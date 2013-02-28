@@ -566,6 +566,10 @@ function gmap_menu() {
  * Regenerate the markerdata file.
  */
 function gmap_regenerate_markers() {
+  // This often fails in cli mode, so bail.
+  if (drupal_is_cli()) {
+    return;
+  }
   $contents = '';
 
   $contents .= "// GMap marker image data.\n";
@@ -1004,7 +1008,7 @@ function theme_gmap($variables) {
   // Some markup parsers (IE) don't handle empty inners well. Use the space to let users know javascript is required.
   // @@@ Bevan sez: Google static maps could be useful here.
   // @@@ Bdragon sez: Yeah, would be nice, but hard to guarantee functionality. Not everyone uses the static markerloader.
-  $o = '<div style="' . implode('; ', $style) . ';" id="' . $element['#id'] . '"' . drupal_attributes($element['#attributes']) . '>' . t('Javascript is required to view this map.') . '</div>';
+  $o = '<div style="' . implode('; ', $style) . ';" id="' . $element['#id'] . '"' . drupal_attributes($element['#attributes']) . '><noscript>' . t('Javascript is required to view this map.') . '</noscript></div>';
 
   gmap_module_invoke('pre_theme_map', $map);
 

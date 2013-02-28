@@ -1,0 +1,11 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=0 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=4762&page=res&job_id=220628
+DS235313.1	BLAST	Blast Hit	24890	25120	311	+	.	AgGPRop6
+DS235313.1	BLAST	Blast Hit	25568	25906	247	+	.	AgGPRop6
+DS235313.1	BLAST	Blast Hit	25989	26195	238	+	.	AgGPRop6
+DS235313.1	BLAST	Blast Hit	25192	25305	170	+	.	AgGPRop6
+DS235879.1	BLAST	Blast Hit	615344	616087	305	+	.	AgGPRop6
+DS235806.1	BLAST	Blast Hit	16055	17026	205	-	.	AgGPRop6
+DS234992.1	BLAST	Blast Hit	104975	105589	177	-	.	AgGPRop6
+DS235219.1	BLAST	Blast Hit	162618	163154	161	+	.	AgGPRop6
+DS235858.1	BLAST	Blast Hit	83524	84174	161	+	.	AgGPRop6
+DS235639.1	BLAST	Blast Hit	17519	18259	157	+	.	AgGPRop6

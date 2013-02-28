@@ -1,0 +1,4 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=0 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=55508&page=res&job_id=222988
+ISCW022217-RA	BLAST	Blast Hit	67	224	84	+	.	Contig1
+ISCW013312-RA	BLAST	Blast Hit	226	258	38	+	.	Contig1
+ISCW013119-RA	BLAST	Blast Hit	204	227	38	+	.	Contig1

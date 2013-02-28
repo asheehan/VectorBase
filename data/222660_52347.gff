@@ -1,0 +1,11 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=0 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=52347&page=res&job_id=222660
+EV322491.1	BLAST	Blast Hit	233	594	440	+	.	gi|16461062|gb|BM005502.1|BM005502 LF284T7 LIV female Aedes aegypti cDNA, mRNA sequence
+EV322250.1	BLAST	Blast Hit	444	789	398	-	.	gi|16461062|gb|BM005502.1|BM005502 LF284T7 LIV female Aedes aegypti cDNA, mRNA sequence
+FF239782.1	BLAST	Blast Hit	2	324	392	+	.	gi|16461062|gb|BM005502.1|BM005502 LF284T7 LIV female Aedes aegypti cDNA, mRNA sequence
+EV342319.1	BLAST	Blast Hit	17	271	330	+	.	gi|16461062|gb|BM005502.1|BM005502 LF284T7 LIV female Aedes aegypti cDNA, mRNA sequence
+FF182598.1	BLAST	Blast Hit	481	743	316	-	.	gi|16461062|gb|BM005502.1|BM005502 LF284T7 LIV female Aedes aegypti cDNA, mRNA sequence
+FF239781.1	BLAST	Blast Hit	475	745	278	-	.	gi|16461062|gb|BM005502.1|BM005502 LF284T7 LIV female Aedes aegypti cDNA, mRNA sequence
+EV342080.1	BLAST	Blast Hit	446	660	256	-	.	gi|16461062|gb|BM005502.1|BM005502 LF284T7 LIV female Aedes aegypti cDNA, mRNA sequence
+FF165985.1	BLAST	Blast Hit	1	153	182	+	.	gi|16461062|gb|BM005502.1|BM005502 LF284T7 LIV female Aedes aegypti cDNA, mRNA sequence
+EV323335.1	BLAST	Blast Hit	17	169	182	+	.	gi|16461062|gb|BM005502.1|BM005502 LF284T7 LIV female Aedes aegypti cDNA, mRNA sequence
+FF173691.1	BLAST	Blast Hit	444	596	182	-	.	gi|16461062|gb|BM005502.1|BM005502 LF284T7 LIV female Aedes aegypti cDNA, mRNA sequence

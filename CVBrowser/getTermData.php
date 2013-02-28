@@ -104,13 +104,13 @@ for( $t = 0; $t < $figureCount; )
 	
 	$fileName = str_replace( "Fig. ", "Fig", $figure[ $t ] ).".jpg";
 	
-	print "<td align=\"center\"><a href=\"https://dev.vectorbase.org/CVBrowser/images/$namespace/$fileName\" target=\"_blank\"><img src=\"https://dev.vectorbase.org/CVBrowser/images/$namespace/tn/$fileName\" width=\"100\"></a></td>";
+	print "<td align=\"center\"><a href=\"https://www.vectorbase.org/CVBrowser/images/$namespace/$fileName\" target=\"_blank\"><img src=\"https://www.vectorbase.org/CVBrowser/images/$namespace/tn/$fileName\" width=\"100\"></a></td>";
 
 	if( $figureCount > $t + 1 )
 	{
 		$fileName = str_replace( "Fig. ", "Fig", $figure[ $t + 1 ] ).".jpg";
 	
-		print "<td align=\"center\"><a href=\"https://dev.vectorbase.org/CVBrowser/images/$namespace/$fileName\" target=\"_blank\"><img src=\"https://dev.vectorbase.org/CVBrowser/images/$namespace/tn/$fileName\" width=\"100\"></a></td>";
+		print "<td align=\"center\"><a href=\"https://www.vectorbase.org/CVBrowser/images/$namespace/$fileName\" target=\"_blank\"><img src=\"https://www.vectorbase.org/CVBrowser/images/$namespace/tn/$fileName\" width=\"100\"></a></td>";
 	}
 	else 
 	{
@@ -121,7 +121,7 @@ for( $t = 0; $t < $figureCount; )
 	{
 		$fileName = str_replace( "Fig. ", "Fig", $figure[ $t + 2 ] ).".jpg";
 	
-		print "<td align=\"center\"><a href=\"https://dev.vectorbase.org/CVBrowser/images/$namespace/$fileName\" target=\"_blank\"><img src=\"https://dev.vectorbase.org/CVBrowser/images/$namespace/tn/$fileName\" width=\"100\"></a></td>";
+		print "<td align=\"center\"><a href=\"https://www.vectorbase.org/CVBrowser/images/$namespace/$fileName\" target=\"_blank\"><img src=\"https://www.vectorbase.org/CVBrowser/images/$namespace/tn/$fileName\" width=\"100\"></a></td>";
 	}
 	else 
 	{

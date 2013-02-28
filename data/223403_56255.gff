@@ -1,0 +1,3 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=0 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=56255&page=res&job_id=223403
+AGAP010697-RA	BLAST	Blast Hit	2381	2410	44	+	.	I18.3F
+AGAP008818-RA	BLAST	Blast Hit	1608	1626	38	+	.	I18.3F

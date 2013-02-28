@@ -1,0 +1,11 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=0 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=56330&page=res&job_id=223441
+AGAP005498-RA	BLAST	Blast Hit	1121	1180	120	+	.	
+AGAP005498-RB	BLAST	Blast Hit	628	687	120	+	.	
+AGAP005498-RC	BLAST	Blast Hit	955	1014	120	+	.	
+AGAP005504-RA	BLAST	Blast Hit	1401	1429	42	+	.	
+AGAP005504-RD	BLAST	Blast Hit	1103	1131	42	+	.	
+AGAP005504-RB	BLAST	Blast Hit	1127	1155	42	+	.	
+AGAP005504-RC	BLAST	Blast Hit	1104	1132	42	+	.	
+AGAP011788-RB	BLAST	Blast Hit	398	427	32	+	.	
+AGAP011788-RA	BLAST	Blast Hit	342	371	32	+	.	
+AGAP012295-RA	BLAST	Blast Hit	462	487	32	+	.	

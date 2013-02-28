@@ -1,0 +1,6 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=0 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=52243&page=res&job_id=222564
+CPIJ008896-RA	BLAST	Blast Hit	1259	1420	300	-	.	
+CPIJ010217-RA	BLAST	Blast Hit	2160	2198	38	-	.	
+CPIJ016277-RA	BLAST	Blast Hit	101	123	36	-	.	
+CPIJ009488-RA	BLAST	Blast Hit	741	795	34	+	.	
+CPIJ018341-RA	BLAST	Blast Hit	763	789	34	-	.	

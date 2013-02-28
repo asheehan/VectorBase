@@ -1,0 +1,4 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=0 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=35834&page=res&job_id=222084
+CPIJ001546-RA	BLAST	Blast Hit	1	836	1672	+	.	gi|170030305|ref|XM_001842978.1| Culex quinquefasciatus profilin,mRNA
+CPIJ008402-RA	BLAST	Blast Hit	98	120	40	+	.	gi|170030305|ref|XM_001842978.1| Culex quinquefasciatus profilin,mRNA
+CPIJ009779-RA	BLAST	Blast Hit	543	575	38	+	.	gi|170030305|ref|XM_001842978.1| Culex quinquefasciatus profilin,mRNA

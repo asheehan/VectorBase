@@ -1,0 +1,11 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=0 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=36754&page=res&job_id=222320
+SRS008484_84612	BLAST	Blast Hit	14	154	202	+	.	gi|46934754|emb|AJ627286.1| Anopheles gambiae mRNA for carboxypeptidase B (cpbag1 gene)
+SRS008484_23081	BLAST	Blast Hit	1	139	188	-	.	gi|46934754|emb|AJ627286.1| Anopheles gambiae mRNA for carboxypeptidase B (cpbag1 gene)
+SRS008484_9458	BLAST	Blast Hit	1	106	142	+	.	gi|46934754|emb|AJ627286.1| Anopheles gambiae mRNA for carboxypeptidase B (cpbag1 gene)
+SRS008484_119894	BLAST	Blast Hit	1	79	108	-	.	gi|46934754|emb|AJ627286.1| Anopheles gambiae mRNA for carboxypeptidase B (cpbag1 gene)
+SRS008484_62052	BLAST	Blast Hit	9	71	106	+	.	gi|46934754|emb|AJ627286.1| Anopheles gambiae mRNA for carboxypeptidase B (cpbag1 gene)
+SRS008484_38492	BLAST	Blast Hit	3	78	106	+	.	gi|46934754|emb|AJ627286.1| Anopheles gambiae mRNA for carboxypeptidase B (cpbag1 gene)
+SRS008484_16542	BLAST	Blast Hit	2	127	104	-	.	gi|46934754|emb|AJ627286.1| Anopheles gambiae mRNA for carboxypeptidase B (cpbag1 gene)
+SRS008484_19216	BLAST	Blast Hit	10	169	94	+	.	gi|46934754|emb|AJ627286.1| Anopheles gambiae mRNA for carboxypeptidase B (cpbag1 gene)
+SRS008484_40283	BLAST	Blast Hit	17	84	90	+	.	gi|46934754|emb|AJ627286.1| Anopheles gambiae mRNA for carboxypeptidase B (cpbag1 gene)
+SRS008484_34548	BLAST	Blast Hit	185	215	42	-	.	gi|46934754|emb|AJ627286.1| Anopheles gambiae mRNA for carboxypeptidase B (cpbag1 gene)

@@ -20,9 +20,13 @@ Installation
 * To install, follow the general directions available at:
 http://drupal.org/getting-started/5/install-contrib/modules
 
-* You will need a Google Maps API key for your website. You can get one at:
-http://www.google.com/apis/maps/signup.html
-Enter your Google Maps API key in the GMap settings page (admin/settings/gmap).
+In order to use 7.x-1.x and earlier versions of this module, you need a (free) Google Maps API Browser key. Here is how to get one:
+
+1. Login at https://code.google.com/apis/console
+2. Create project
+3. Go to 'Services' and turn on 'Google Maps API v2'
+4. Go to 'API Access' and 'Create New Browser Key' specifying your domain url(s)
+5. Paste the Google API Browser Key here /admin/settings/gmap
 
 * You may need to make changes to your theme so that Google Maps can display correctly. See the section on "Google Maps and XHTML" below.
 

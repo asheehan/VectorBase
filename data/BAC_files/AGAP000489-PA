@@ -1,0 +1,214 @@
+Protein	AGAP000489-PA
+First residue	L
+Seq size	1021
+Location/Gene	X:8635241:8652253:-1|gene:AGAP000489
+CDS	AGAP000489-RA
+Seq size*	3066
+Description	SCALAR(0x9646e98)|X:8635241:8652253:-1|gene:AGAP000489
+ATG first?	
+Last codon	*
+Genomic match	X_Start_8640000
+E value	0
+Chromosome and link to ENSEMBL	X
+Start	8641324
+End	8652253
+Extent of match	1929
+% identity	100
+Number of segments (exons, approximate)	7
+Orientation	REV
+Satisfied 95% id on length 100	1
+Best match to assembled ESTs	est-07-contig_28993
+E value*	0
+Score	648
+Extent of match*	343
+Length of best match	343
+% identity*	98
+% Coverage	100
+First residue of match	1
+First residue of sequence	419
+Number of segments	1
+Annotation mismatch	
+Orientation*	FOR
+Satisfied 95% id on length 100*	1
+Number of sequences	1
+all-instars	0
+normalized-fatbody	0
+head-all	0
+Immune cells	0
+Pasteur annotation	0
+Sugar-abd	0
+Blood-abd	0
+InfBlood-abd	0
+Blood-fed	0
+Non-Blood-fed	1
+Sg-male	0
+SG-fem	0
+SG-Pasteur	0
+All female glands	0
+Best match to Affymetrix chip database	Ag.X.435.1_CDS_a_at
+E value**	0
+Extent of match**	458
+Length of best match*	456
+% identity**	99
+% Coverage*	100
+First residue of match*	1
+First residue of sequence*	1537
+Number of segments*	2
+Annotation mismatch*	NOINT
+Orientation**	FOR
+Satisfied 95% id on length 100**	1
+L-mean	599
+Males-mean	549
+SF-mean	768
+3h-mean	659
+24h-mean	829
+48h-mean	746
+72h-mean	815
+15d-mean	715
+Sum of residues (larger value indicates differential aa usage)	0.19
+Increased AA (fold increase over average)	
+Cys number	24
+Predicted Tyr-SO4 - Prosite rules	2
+% Ser + Thr	14.9
+% Pro	5.5
+% Gly	5.8
+% Gly+Pro	11.3
+Number of possible HO-Pro [LPAE]-P-G	2
+Number of possible OH-lysines X-Lys-Gly not Lys-Gly-Pro	4
+Number of ProGly''s	4
+SigP Result	SIG
+Cleavage Position	23-24
+MW	114.45
+pI	6.11
+Mature MW	111.92
+pI*	6.08
+TMHMM result	ExpAA=46.54 First60=18.57 PredHel=2 Topology=i7-26o577-599i
+Predicted helices	2
+% membrane	4
+% outside	54
+% inside	42
+mTP	0.011
+SP	0.979
+other	0.072
+Loc	S
+Relative Confidence (1 is better)	1
+ProP furin cleavage predictions 	
+Best match to NR protein database	AGAP000489-PA
+E value***	0.0
+Match	gi|158288756
+Score*	2044
+Extent of match***	1014
+Length of best match**	1014
+% identity***	98
+% Coverage**	100
+Alphanumeric Index	158288756 XP_310604 4 AGAP000489 157018723 EAA06487 5 195450733 XP_002072609 1 GK13696 194168694 EDW83595 195134002 XP_002011427 GI14095 193912050 EDW10917 195402237 XP_002059713 GJ14241 194155927 EDW71111 195172558 XP_002027064 GL18177 194112842 EDW34885 194913530 XP_001982718 GG16395 190647934 EDV45237 195469369 XP_002099610 GE14555 194185711 EDW99322 62484190 NP_524625 3 61677919 AAF59329 4809260 AAD30170 AF146648_1 194768332 XP_001966266 GF22840 190618568 EDV34092
+Text index 	PA EPH RECEPTOR TYROSINE KINASE ISOFORM C 
+Best match to NR database depleted of Anopheles gambiae sequenc	GK13696
+E value****	0.0
+Match*	gi|195450733
+% identity****	80
+% Coverage***	98
+Alphanumeric Index*	195450733 XP_002072609 1 GK13696 194168694 EDW83595 195134002 XP_002011427 GI14095 193912050 EDW10917 195402237 XP_002059713 GJ14241 194155927 EDW71111 195172558 XP_002027064 GL18177 194112842 EDW34885 194913530 XP_001982718 GG16395 190647934 EDV45237 195469369 XP_002099610 GE14555 194185711 EDW99322 62484190 NP_524625 3 61677919 AAF59329 4 4809260 AAD30170 AF146648_1 194768332 XP_001966266 GF22840 190618568 EDV34092 5052337 AAD38508 AF132028_1
+Text index *	EPH RECEPTOR TYROSINE KINASE ISOFORM C 
+Best match to SwissProt	Ephrin type-B receptor 2 OS=Gallus gallus GN=EPHB2 PE=1 SV=3
+E value*****	0.0
+Match**	sp|P28693|EPHB2_CHICK
+Score**	760
+Extent of match****	1036
+Length of best match***	1004
+% identity*****	42
+% Coverage****	103
+Alphanumeric Index**	P28693 EPHB2_CHICK 2 EPHB2 1 3 P09759 EPHB1_RAT EPHB1 Q8CBF3 EPHB1_MOUSE P54762 EPHB1_HUMAN Q90344 EPHB2_COTJA P54763 EPHB2_MOUSE P29323 EPHB2_HUMAN 5 Q15375 EPHA7_HUMAN 7 EPHA7 O42422 EPHA7_CHICK P54759 EPHA7_RAT
+Text index **	EPHRIN TYPE B RECEPTOR OS GALLUS GN PE SV RATTUS NORVEGICUS MUS MUSCULUS HOMO SAPIENS COTURNIX JAPONICA A 
+Best match to GO database	Eph receptor tyrosine kinase - Drosophila melanogaster - transmembrane receptor protein tyrosine kinase activity - plasma membrane - ephrin receptor activity - protein amino acid phosphorylation - signal transduction - protein tyrosine kinase activity - axonogenesis - mushroom body development
+E value******	0
+Function descriptors	transmembrane receptor protein tyrosine kinase activity||transmembrane receptor protein kinase activity||protein kinase activity||phosphotransferase activity\, alcohol group as acceptor||transferase activity\, transferring phosphorus\-containing groups||transferase activity||catalytic activity
+Function parent	catalytic activity
+Function second parent	transferase activity
+GO #	GO:0004714
+E value of functional GO	0
+Component descriptors	plasma membrane||membrane||cell part
+Component parent	cell part
+Component second parent	membrane
+GO #*	GO:0005886
+E value of component GO	0
+Process descriptors	protein amino acid phosphorylation||post\-translational protein modification||protein modification process||cellular protein metabolic process||cellular biopolymer metabolic process||cellular macromolecule metabolic process||macromolecule metabolic process||metabolic process
+Process parent	catalytic activity
+Process second parent	transferase activity
+GO #**	GO:0006468
+E value of process GO	0
+Best match to CDD database	PTKc_EphR
+E value*******	1E-157
+Alphanumeric Index***	133165 CD05033 3 PI3K 133197 CD05066 EPHA3 EPHA4 EPHA5 EPHA7 EPHA1 EPHA2 EPHA10 10 B2 B3 133196 CD05065 EPHB1 6 EPHB2 A5 133194 CD05063 PTKC_EPHR_A2 A2 116328 PFAM07714 133163 CD00192 SH3 SH2 128515 SMART00219 133195 CD05064 PTKC_EPHR_A10 A10 133166 CD05034 SH4 133199 CD05068
+Text index ***	PTKC_EPHR CATALYTIC DOMAIN EPHRIN RECEPTOR TYROSINE KINASES KINASE PTK FAMILY EPHR SUBFAMILY C PTKC IS PART A LARGER SUPERFAMILY THAT INCLUDES DOMAINS OTHER SUCH AS SERINE THREONINE RIO PHOSPHOINOSITIDE PTKS CATALYZE TRANSFER GAMMA PHOSPHORYL GROUP FROM ATP TO TYR RESIDUES IN SUBSTRATES EPHRS COMPRISE LARGEST RTKS THEY CAN BE CLASSIFIED INTO TWO CLASSES EPHA EPHB ACCORDING THEIR EXTRACELLULAR SEQUENCES WHICH LARGELY CORRESPOND BINDING PREFERENCES FOR EITHER GPI ANCHORED LIGANDS OR TRANSMEMBRANE B VERTEBRATES HAVE TEN SIX EHPB RECEPTORS DISPLAY PROMISCUOUS LIGAND INTERACTIONS WITHIN EACH CLASS CONTAIN AN FIBRONECTIN REPEATS EXTRACELLULARLY SEGMENT CYTOPLASMIC REQUIRES CELL CONTACT SINCE BOTH ARE PLASMA MEMBRANE THIS ALLOWS DIMERS FORM LEADING ACTIVATION INTRACELLULAR RESULTING DOWNSTREAM SIGNALS OCCUR BIDIRECTIONALLY EXPRESSING CELLS FORWARD SIGNALING REVERSE MAIN EFFECT INTERACTION REPULSION ADHESION IMPORTANT NEURAL DEVELOPMENT PLASTICITY MORPHOGENESIS PROLIFERATION FATE 
+Best match to KOG database	Tyrosine kinase, EPH (ephrin) receptor family
+E value********	0.0
+General class	Signal transduction mechanisms
+Alphanumeric Index****	35417 KOG0196 35418 KOG0197 36311 KOG1095 36244 KOG1026 35415 KOG0194 39458 KOG4257 39479 KOG4278 35420 KOG0199 35421 KOG0200 36243 KOG1025
+Text index ****	TYROSINE KINASE EPH EPHRIN RECEPTOR FAMILY KINASES NERVE GROWTH FACTOR TRKA RELATED FOCAL ADHESION FAK CONTAINS FERM DOMAIN ACK NON FIBROBLAST PLATELET DERIVED EPIDERMAL EGFR 
+Best match to PFAM database	Pkinase_Tyr
+E value*********	1E-113
+Alphanumeric Index*****	116328 PFAM07714 109137 PFAM00069 110408 PFAM01404 PFAM00812 109587 PFAM00536 SAM_1 116262 PFAM07647 SAM_2 109110 PFAM00041 FN3 114855 PFAM06160 111341 PFAM02435 GLYCO_HYDRO_68 68 116313 PFAM07699 GCC2_GCC3 GCC2 GCC3 112131 PFAM03302
+Text index *****	PKINASE_TYR TYROSINE KINASE PKINASE DOMAIN EPHRIN_LBD EPHRIN RECEPTOR LIGAND BINDING EPH RECEPTORS WHICH BIND TO EPHRINS ARE A LARGE FAMILY KINASES THIS REPRESENTS AMINO TERMINAL BINDS SAM STERILE ALPHA MOTIF IT HAS BEEN SUGGESTED THAT IS AN EVOLUTIONARILY CONSERVED INVOLVED IN REGULATION NUMEROUS DEVELOPMENTAL PROCESSES DIVERSE EUKARYOTES CAN POTENTIALLY FUNCTION AS INTERACTION MODULE THROUGH ITS ABILITY HOMO HETEROOLIGOMERISE WITH OTHER DOMAINS FIBRONECTIN TYPE III EZRA SEPTATION RING FORMATION REGULATOR DURING BACTERIAL CELL CYCLE TUBULIN LIKE DIVISION FTSZ POLYMERISES INTO STRUCTURE ESTABLISHES LOCATION NASCENT SITE MODULATES FREQUENCY POSITION LEVANSUCRASE INVERTASE CONSISTS GLYCOSYL HYDROLASE INCLUDING SEVERAL ENZYMES FROM ZYMOMONAS VSP GIARDIA VARIANT SPECIFIC SURFACE 
+Best match to PRK database	gnl|CDD|140292
+E value**********	3E-13
+Alphanumeric Index******	140292 PTZ00266 140289 PTZ00263 140293 PTZ00267 140060 PTZ00024 139386 PRK13184 140306 PTZ00283 135180 PRK04778 136049 PRK06782
+Text index ******	NIMA RELATED KINASE PROVISIONAL A CATALYTIC SUBUNIT CYCLIN DEPENDENT PKND SERINE THREONINE REVIEWED SEPTATION RING FORMATION REGULATOR EZRA FLAGELLAR MOTOR SWITCH 
+Best match to SMART database	TyrKc
+E value***********	1E-109
+Alphanumeric Index*******	128515 SMART00219 128877 SMART00615 128517 SMART00221 128516 SMART00220 128730 SMART00454 SH2 128374 SMART00060 FN3 3 2 128989 SMART00750 128585 SMART00289 WR1 1
+Text index *******	TYRKC TYROSINE KINASE CATALYTIC DOMAIN PHOSPHOTRANSFERASES SPECIFIC SUBFAMILY EPH_LBD EPHRIN RECEPTOR LIGAND BINDING STYKC UNCLASSIFIED SPECIFICITY THIS CLASS KINASES CAN NOT BE POSSIBLE DUAL SER THR TYR S_TKC SERINE THREONINE OR SAM STERILE ALPHA MOTIF WIDESPREAD IN SIGNALLING NUCLEAR PROTEINS EPH RELATED APPEARS TO MEDIATE CELL INITIATED SIGNAL TRANSDUCTION VIA CONTAINING A CONSERVED THAT IS PHOSPHORYLATED MANY CASES MEDIATES HOMODIMERISATION FIBRONECTIN TYPE ONE THREE TYPES INTERNAL REPEAT WITHIN PLASMA TENTH III CONTAINS RGD RECOGNITION SEQUENCE FLEXIBLE LOOP BETWEEN STRANDS MODULES ARE PRESENT BOTH EXTRACELLULAR INTRACELLULAR KIND NON C LOBE IT AN INTERACTION IDENTIFIED AS BEING SIMILAR TERMINAL FOLD ITS PRESENCE AT N TERMINUS ABSENCE ACTIVE SITE RESIDUES ACTIVATION LOOPS SUGGEST FOLDS INDEPENDENTLY LIKELY OCCURRENCE ONLY METAZOA IMPLIES HAS EVOLVED FROM INTO POSSIBLY BY KEEPING SUBSTRATE FEATURES WORM CYSTEINE RICH APPARENTLY UNIQUE SO FAR ELEGANS OFTEN WITH KU DOMAINS ABOUT 
+Best match to Jose''s transposable element database	
+E value************	
+PROSITE motifs	ASN_GLYCOSYLATION |CAMP_PHOSPHO_SITE |PKC_PHOSPHO_SITE |CK2_PHOSPHO_SITE |TYR_PHOSPHO_SITE |MYRISTYL |PROTEIN_KINASE_ATP |PROTEIN_KINASE_TYR |PRENYLATION |MICROBODIES_CTER |RECEPTOR_TYR_KIN_V_1 |EGF_2 |
+Non promiscuous PROSITE motifs	PROTEIN_KINASE_ATP |PROTEIN_KINASE_TYR |RECEPTOR_TYR_KIN_V_1 |EGF_2 |
+Salivary motifs	
+Non promiscuous salivary motifs	
+Best match to AEGY-PEP database	eph receptor tyrosine kinase
+E value*************	0
+Match***	AAEL008301-PA
+Score***	1504
+% identity******	90
+% Coverage*****	100
+Best match to Culex quinquefasciatus proteins	eph receptor tyrosine kinase protein_coding supercont3.649 177378 187910
+E value**************	0
+Match****	CPIJ014812
+Score****	1091
+% identity*******	86
+% Coverage******	84
+Best match to D. melanogaster proteins	loc=4:631653..640605; name=Eph-PC;
+E value***************	0.0
+Match*****	Eph-PC
+Score*****	1639
+% identity********	76
+% Coverage*******	95
+Best match to C. elegans proteins	vab-1 tyrosine-protein kinase receptor status:Confirmed SW:O61460
+E value****************	1E-138
+Match******	M03A1.1a
+Score******	490
+% identity*********	34
+% Coverage********	89
+Best match to Arabidopsis proteins	protein kinase family protein, similar to protein kinase (gi:170047) from
+E value*****************	5E-037
+Match*******	AT4G35780.1
+Score*******	153
+% identity**********	34
+% Coverage*********	51
+Clustered at 30%-Sim- on 60% of length - - Cluster#	5470
+# seqs 	1
+Clustered at 40%-Sim- on 60% of length - - Cluster#	6029
+# seqs *	1
+Clustered at 50%-Sim- on 60% of length - - Cluster#	6637
+# seqs **	1
+Clustered at 60%-Sim- on 60% of length - - Cluster#	7142
+# seqs ***	1
+Clustered at 70%-Sim- on 60% of length - - Cluster#	7505
+# seqs ****	1
+Clustered at 80%-Sim- on 60% of length - - Cluster#	7766
+# seqs *****	1
+Clustered at 90%-Sim- on 60% of length - - Cluster#	7989
+# seqs ******	1
+Clustered at 95%-Sim- on 60% of length - - Cluster#	8153
+# seqs	1
+Clustered at 99%-Sim- on 60% of length - - Cluster#	8356
+# seqs*	1

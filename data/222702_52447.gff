@@ -1,0 +1,11 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=0 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=52447&page=res&job_id=222702
+AGAP002161-PA	BLAST	Blast Hit	134	418	2037	.	.	tr|Q66XT6|Q66XT6_ANOST Akt (Fragment) OS=Anopheles stephensi GN=Akt PE=2 SV=1
+AGAP002161-PB	BLAST	Blast Hit	134	418	2037	.	.	tr|Q66XT6|Q66XT6_ANOST Akt (Fragment) OS=Anopheles stephensi GN=Akt PE=2 SV=1
+AGAP002748-PA	BLAST	Blast Hit	430	658	815	.	.	tr|Q66XT6|Q66XT6_ANOST Akt (Fragment) OS=Anopheles stephensi GN=Akt PE=2 SV=1
+AGAP011988-PA	BLAST	Blast Hit	482	682	807	.	.	tr|Q66XT6|Q66XT6_ANOST Akt (Fragment) OS=Anopheles stephensi GN=Akt PE=2 SV=1
+AGAP011988-PC	BLAST	Blast Hit	151	351	801	.	.	tr|Q66XT6|Q66XT6_ANOST Akt (Fragment) OS=Anopheles stephensi GN=Akt PE=2 SV=1
+AGAP011988-PG	BLAST	Blast Hit	343	543	798	.	.	tr|Q66XT6|Q66XT6_ANOST Akt (Fragment) OS=Anopheles stephensi GN=Akt PE=2 SV=1
+AGAP000418-PA	BLAST	Blast Hit	360	559	768	.	.	tr|Q66XT6|Q66XT6_ANOST Akt (Fragment) OS=Anopheles stephensi GN=Akt PE=2 SV=1
+AGAP007333-PA	BLAST	Blast Hit	58	262	748	.	.	tr|Q66XT6|Q66XT6_ANOST Akt (Fragment) OS=Anopheles stephensi GN=Akt PE=2 SV=1
+AGAP007587-PB	BLAST	Blast Hit	871	1067	702	.	.	tr|Q66XT6|Q66XT6_ANOST Akt (Fragment) OS=Anopheles stephensi GN=Akt PE=2 SV=1
+AGAP001384-PA	BLAST	Blast Hit	41	234	688	.	.	tr|Q66XT6|Q66XT6_ANOST Akt (Fragment) OS=Anopheles stephensi GN=Akt PE=2 SV=1

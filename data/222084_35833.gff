@@ -1,0 +1,10 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=0 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=35833&page=res&job_id=222084
+	BLAST	Blast Hit	366452	367274	1646	-	.	gi|170030305|ref|XM_001842978.1| Culex quinquefasciatus profilin,mRNA
+	BLAST	Blast Hit	371064	371237	348	-	.	gi|170030305|ref|XM_001842978.1| Culex quinquefasciatus profilin,mRNA
+	BLAST	Blast Hit	385848	386026	344	-	.	gi|170030305|ref|XM_001842978.1| Culex quinquefasciatus profilin,mRNA
+	BLAST	Blast Hit	367858	367961	208	-	.	gi|170030305|ref|XM_001842978.1| Culex quinquefasciatus profilin,mRNA
+	BLAST	Blast Hit	283234	283256	46	-	.	gi|170030305|ref|XM_001842978.1| Culex quinquefasciatus profilin,mRNA
+	BLAST	Blast Hit	485953	485985	46	-	.	gi|170030305|ref|XM_001842978.1| Culex quinquefasciatus profilin,mRNA
+	BLAST	Blast Hit	306719	306758	44	+	.	gi|170030305|ref|XM_001842978.1| Culex quinquefasciatus profilin,mRNA
+	BLAST	Blast Hit	430835	430861	44	+	.	gi|170030305|ref|XM_001842978.1| Culex quinquefasciatus profilin,mRNA
+	BLAST	Blast Hit	1262196	1262232	44	-	.	gi|170030305|ref|XM_001842978.1| Culex quinquefasciatus profilin,mRNA

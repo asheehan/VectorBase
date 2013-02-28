@@ -1,0 +1,5 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=0 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=45259&page=res&job_id=222442
+Locus_5283_Length_634	BLAST	Blast Hit	171	551	550	-	.	
+contig00003_Length_946	BLAST	Blast Hit	204	257	38	+	.	
+Locus_15485_Length_953	BLAST	Blast Hit	704	740	38	+	.	
+Locus_4006_Length_1263	BLAST	Blast Hit	318	371	38	+	.	

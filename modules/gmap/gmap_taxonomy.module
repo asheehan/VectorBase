@@ -17,23 +17,17 @@ function gmap_taxonomy_form_alter(&$form, &$form_state, $form_id) {
       '#title' => t('GMap markers'),
     );
     $vid = isset($form['vid']) ? $form['vid']['#value'] : -1;
-    $temp = variable_get('gmap_taxonomy_vocabs', array());
-    if (!isset($temp[$vid])) {
-      $temp[$vid] = 0;
-    }
     $form['gmap_taxonomy']['gmap_taxonomy_enable'] = array(
       '#type' => 'checkbox',
       '#title' => t('Enable'),
       '#description' => t('Enable choosing a marker for terms in this vocabulary.'),
-      '#default_value' => $temp[$vid],
+      '#default_value' => gmap_taxonomy_vocabulary_is_enabled($vid),
     );
   }
   // @@@ Why does this get called up on delete?
   if ($form_id == 'taxonomy_form_term' && empty($form['confirm']['#value'])) {
-    $vid = $form['#vocabulary']->vid;
     $term = (object)$form['#term'];
-    $vocs = variable_get('gmap_taxonomy_vocabs', array());
-    if (isset($vocs[$vid]) && $vocs[$vid]) {
+    if (gmap_taxonomy_vocabulary_is_enabled($form['#vocabulary'])) {
       $temp = '';
       if (!empty($term->tid)) {
         if ($t = db_query('SELECT marker FROM {gmap_taxonomy_term} WHERE tid = :tid', array(':tid' => $term->tid))->fetchField()) {
@@ -83,9 +77,9 @@ function gmap_taxonomy_taxonomy_vocabulary_insert($vocabulary) {
  */
 function gmap_taxonomy_taxonomy_vocabulary_update($vocabulary) {
   if (isset($vocabulary->gmap_taxonomy_enable)) {
-    $status = variable_get('gmap_taxonomy_vocabs', array());
-    $status[$vocabulary->vid] = $vocabulary->gmap_taxonomy_enable;
-    variable_set('gmap_taxonomy_vocabs', $status);
+    variable_set('gmap_taxonomy_vocab_' . $vocabulary->machine_name, TRUE);
+  } else {
+    variable_del('gmap_taxonomy_vocab_' . $vocabulary->machine_name);
   }
 }
 
@@ -93,9 +87,7 @@ function gmap_taxonomy_taxonomy_vocabulary_update($vocabulary) {
  * Implement hook_taxonomy_vocabulary_delete().
  */
 function gmap_taxonomy_taxonomy_vocabulary_delete($vocabulary) {
-  $status = variable_get('gmap_taxonomy_vocabs', array());
-  unset($status[$vocabulary->vid]);
-  variable_set('gmap_taxonomy_vocabs', $status);
+  variable_del('gmap_taxonomy_vocab_' . $vocabulary->machine_name);
 }
 
 /**
@@ -109,8 +101,7 @@ function gmap_taxonomy_taxonomy_term_insert($term) {
  * Implement hook_taxonomy_term_update().
  */
 function gmap_taxonomy_taxonomy_term_update($term) {
-  $vocabs = variable_get('gmap_taxonomy_vocabs', array());
-  if (isset($vocabs[$term->vid]) && $vocabs[$term->vid]) {
+  if (gmap_taxonomy_vocabulary_is_enabled($term->vid)) {
     db_delete('gmap_taxonomy_term')
       ->condition('tid', $term->tid)
       ->execute();
@@ -213,6 +204,23 @@ function gmap_taxonomy_node_revision_delete($node) {
     ->execute();
 }
 */
+
+/**
+ * Check if gmap taxonomy is enabled for the given vocabulary
+ *
+ * @param $vocabulary
+ *   The vocabulary to check. Entire object and vid are allowed.
+ * @return bool
+ *   TRUE if the vocabulary is enabled
+ */
+function gmap_taxonomy_vocabulary_is_enabled($vocabulary) {
+  if (!is_object($vocabulary)) {
+    $vocabulary = taxonomy_vocabulary_load($vocabulary);
+  }
+
+  return $vocabulary
+    && variable_get('gmap_taxonomy_vocab_' . $vocabulary->machine_name, FALSE);
+}
 
 /**
  * Get all gmap taxonomy markers

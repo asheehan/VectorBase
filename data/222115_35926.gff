@@ -1,0 +1,9 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=0 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=35926&page=res&job_id=222115
+scaffold:LlonL1:Scaffold347:1:63206:1	BLAST	Blast Hit	13021	13069	40	+	.	
+scaffold:LlonL1:Scaffold347:1:63206:1	BLAST	Blast Hit	15081	15129	40	+	.	
+scaffold:LlonL1:Scaffold5834:1:4550:1	BLAST	Blast Hit	1464	1500	40	+	.	
+scaffold:LlonL1:Scaffold11209:1:1516:1	BLAST	Blast Hit	613	634	38	-	.	
+scaffold:LlonL1:Scaffold792:1:43068:1	BLAST	Blast Hit	6405	6428	38	-	.	
+scaffold:LlonL1:Scaffold437:1:141748:1	BLAST	Blast Hit	116867	116890	38	+	.	
+scaffold:LlonL1:Scaffold437:1:141748:1	BLAST	Blast Hit	119391	119414	38	+	.	
+scaffold:LlonL1:Scaffold11125:1:13938:1	BLAST	Blast Hit	6269	6290	38	-	.	

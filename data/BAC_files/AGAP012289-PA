@@ -1,0 +1,214 @@
+Protein	AGAP012289-PA
+First residue	S
+Seq size	1672
+Location/Gene	3L:39800112:39805562:1|gene:AGAP012289
+CDS	AGAP012289-RA
+Seq size*	5019
+Description	SCALAR(0x9792178)|3L:39800112:39805562:1|gene:AGAP012289
+ATG first?	
+Last codon	*
+Genomic match	3L_Start_39800000
+E value	0
+Chromosome and link to ENSEMBL	3L
+Start	39800112
+End	39805562
+Extent of match	5039
+% identity	100
+Number of segments (exons, approximate)	7
+Orientation	FOR
+Satisfied 95% id on length 100	1
+Best match to assembled ESTs	est-07-contig_34974
+E value*	0
+Score	1086
+Extent of match*	568
+Length of best match	580
+% identity*	99
+% Coverage	98
+First residue of match	13
+First residue of sequence	2410
+Number of segments	1
+Annotation mismatch	
+Orientation*	FOR
+Satisfied 95% id on length 100*	1
+Number of sequences	1
+all-instars	0
+normalized-fatbody	0
+head-all	0
+Immune cells	0
+Pasteur annotation	0
+Sugar-abd	0
+Blood-abd	0
+InfBlood-abd	0
+Blood-fed	1
+Non-Blood-fed	0
+Sg-male	0
+SG-fem	0
+SG-Pasteur	0
+All female glands	0
+Best match to Affymetrix chip database	Ag.3L.1061.0_CDS_at
+E value**	0
+Extent of match**	564
+Length of best match*	564
+% identity**	98
+% Coverage*	100
+First residue of match*	1
+First residue of sequence*	4422
+Number of segments*	1
+Annotation mismatch*	
+Orientation**	FOR
+Satisfied 95% id on length 100**	1
+L-mean	588
+Males-mean	441
+SF-mean	381
+3h-mean	410
+24h-mean	620
+48h-mean	700
+72h-mean	565
+15d-mean	753
+Sum of residues (larger value indicates differential aa usage)	0.15
+Increased AA (fold increase over average)	
+Cys number	22
+Predicted Tyr-SO4 - Prosite rules	2
+% Ser + Thr	11.2
+% Pro	4.8
+% Gly	3.9
+% Gly+Pro	8.7
+Number of possible HO-Pro [LPAE]-P-G	1
+Number of possible OH-lysines X-Lys-Gly not Lys-Gly-Pro	4
+Number of ProGly''s	5
+SigP Result	CYT
+Cleavage Position	
+MW	191.25
+pI	6.18
+Mature MW	
+pI*	
+TMHMM result	ExpAA=2.16 First60=2.13 PredHel=0 Topology=o
+Predicted helices	0
+% membrane	
+% outside	
+% inside	
+mTP	0.038
+SP	0.154
+other	0.944
+Loc	_
+Relative Confidence (1 is better)	2
+ProP furin cleavage predictions 	
+Best match to NR protein database	AGAP012289-PA
+E value***	0.0
+Match	gi|158300291
+Score*	3337
+Extent of match***	1672
+Length of best match**	1672
+% identity***	100
+% Coverage**	100
+Alphanumeric Index	158300291 XP_320248 4 AGAP012289 157013088 EAA00264 57236096 AAW48725 1 2 157167186 XP_001652212 108877338 EAT41563 170049284 XP_001855187 167871117 EDS34500 194755862 XP_001960198 GF13246 190621496 EDV37020 194880776 XP_001974538 GG21041 190657725 EDV54938 195425457 XP_002061021 GK10670 194157106 EDW72007 195124758 XP_002006854 GI21295 193911922 EDW10789 80979133 ABB54769 80979123 ABB54764
+Text index 	PA DICER ENDORIBONUCLEASE 
+Best match to NR database depleted of Anopheles gambiae sequenc	dicer-2
+E value****	0.0
+Match*	gi|57236096
+% identity****	52
+% Coverage***	101
+Alphanumeric Index*	57236096 AAW48725 1 2 157167186 XP_001652212 108877338 EAT41563 170049284 XP_001855187 167871117 EDS34500 194755862 XP_001960198 GF13246 190621496 EDV37020 194880776 XP_001974538 GG21041 190657725 EDV54938 195425457 XP_002061021 GK10670 194157106 EDW72007 195124758 XP_002006854 GI21295 193911922 EDW10789 80979133 ABB54769 80979123 ABB54764 80979121 ABB54763
+Text index *	DICER ENDORIBONUCLEASE 
+Best match to SwissProt	Endoribonuclease Dicer OS=Homo sapiens GN=DICER1 PE=1 SV=3
+E value*****	1E-113
+Match**	sp|Q9UPY3|DICER_HUMAN
+Score**	411
+Extent of match****	1385
+Length of best match***	1922
+% identity*****	26
+% Coverage****	72
+Alphanumeric Index**	Q9UPY3 DICER1 1 3 Q6TV19 2 Q25BN1 A0MQH0 Q8R418 Q6TUI4 B3DLA6 P34529 DCR1_CAEEL Q9VCU9 DCR1_DROME Q5N870 DCL3A_ORYSJ 3A DCL3A
+Text index **	DICER_HUMAN ENDORIBONUCLEASE DICER OS HOMO SAPIENS GN PE SV DICER_DANRE DANIO RERIO DICER_CHICK GALLUS DICER_CRIGR CRICETULUS GRISEUS DICER_MOUSE MUS MUSCULUS DICER_BOVIN BOS TAURUS DICER_XENTR XENOPUS TROPICALIS DCR CAENORHABDITIS ELEGANS DROSOPHILA MELANOGASTER HOMOLOG ORYZA SATIVA SUBSP JAPONICA 
+Best match to GO database	Dicer-2 - Drosophila melanogaster - double-stranded RNA binding - helicase activity - RNA interference - production of siRNA involved in RNA interference - siRNA loading onto RISC involved in RNA interference - targeting of mRNA for destruction involved in RNA interference - nucleus - cytoplasm - chromatin silencing - defense response to virus - dsRNA transport
+E value******	0
+Function descriptors	double\-stranded RNA binding||RNA binding||nucleic acid binding||binding
+Function parent	binding
+Function second parent	nucleic acid binding
+GO #	GO:0003725
+E value of functional GO	0
+Component descriptors	nucleus||intracellular membrane\-bounded organelle||intracellular organelle||outer membrane\-bounded periplasmic space||external encapsulating structure part||cell part
+Component parent	cell part
+Component second parent	external encapsulating structure part
+GO #*	GO:0005634
+E value of component GO	0
+Process descriptors	RNA interference||posttranscriptional gene silencing by RNA||posttranscriptional gene silencing||gene silencing||negative regulation of gene expression||negative regulation of macromolecule metabolic process||negative regulation of metabolic process||negative regulation of biological process||regulation of biological process||biological regulation
+Process parent	binding
+Process second parent	nucleic acid binding
+GO #**	GO:0016246
+E value of process GO	0
+Best match to CDD database	PAZ_dicer_like
+E value*******	2E-039
+Alphanumeric Index***	30328 CD02843 20 3 31308 COG1111 MPH1 ERCC4 131246 TIGR02191 PFAM00035 PFAM00636 30916 COG0571 134103 PRK00102 139838 PRK13766 29697 CD00593 128808 SMART00535 109684 RIBONUCLEASE_3 RNASE3 128763 SMART00487
+Text index ***	PAZ_DICER_LIKE PAZ DOMAIN DICER_LIKE SUBFAMILY DICER IS AN RNASE INVOLVED IN CLEAVING DSRNA RNA INTERFERENCE PATHWAY IT GENERATES DSRNAS WHICH ARE APPROXIMATELY BP LONG SIRNAS TURN TARGET HYDROLYSIS HOMOLOGOUS RNAS DOMAINS NAMED AFTER PROTEINS PIWI ARGONAUT ZWILLE FOUND TWO FAMILIES THAT ESSENTIAL COMPONENTS MEDIATED GENE SILENCING PATHWAYS INCLUDING FUNCTIONS AS A NUCLEIC ACID BINDING WITH STRONG PREFERENCE FOR SINGLE STRANDED ACIDS OR DNA DUPLEXES OVERHANGS HAS BEEN SUGGESTED PROVIDES UNIQUE MODE RECOGNITION TERMINAL NUCLEOTIDES BURIES OH GROUP MIGHT RECOGNIZE CHARACTERISTIC WITHIN RISC INDUCED OTHER COMPLEXES LIKE HELICASES RNASEIII THIS FAMILY CONSISTS BACTERIAL EXAMPLES RIBONUCLEASE III ENZYME CLEAVES DOUBLE RRNA PROCESSING RIBOSOMAL PRECURSORS EVEN MINIMAL GENONES SUCH MYCOPLASMA GENITALIUM BUCHNERA APHIDICOLA SOME CASES SHOWN TO BE THESE CONTAIN MOTIF EUKARYOTIC HOMOLOGS TEND MUCH LONGER ADDITIONAL LOCALIZED NUCLEUS NOT INCLUDED RNC SPECIFIC REVIEWED HEF NUCLEASE PROVISIONAL 
+Best match to KOG database	DEAD-box like helicase
+E value********	3E-039
+General class	General function prediction only
+Alphanumeric Index****	35575 KOG0354 35920 KOG0701 37028 KOG1817 35565 KOG0344 35556 KOG0335 35547 KOG0326 35553 KOG0332 36170 KOG0952 MER3 SLH1 39353 KOG4150 35552 KOG0331
+Text index ****	DEAD BOX LIKE HELICASE DSRNA SPECIFIC NUCLEASE DICER RELATED RIBONUCLEASES RIBONUCLEASE ATP DEPENDENT RNA DNA SUPERFAMILY 
+Best match to PFAM database	Ribonuclease_3
+E value*********	1E-026
+Alphanumeric Index*****	109684 PFAM00636 RIBONUCLEASE_3 RNASE3 109333 PFAM00271 112194 PFAM03368 109332 PFAM00270 113617 PFAM04851 115766 PFAM07133 117089 PFAM08512 RTT106 RTTP106 118967 PFAM10446 DUF2457 112171 PFAM03344 111100 PFAM02170 3
+Text index *****	DOMAIN HELICASE_C HELICASE CONSERVED C TERMINAL PROSITE FAMILY IS RESTRICTED TO DEAD H HELICASES WHEREAS THIS FOUND IN A WIDE VARIETY RELATED PROTEINS IT MAY BE THAT NOT AN AUTONOMOUSLY FOLDING UNIT BUT INTEGRAL PART DSRNA_BIND DOUBLE STRANDED RNA BINDING DIVERGENT MEMBERS DICER WHICH FUNCTION INTERFERENCE EVOLUTIONARILY MECHANISM FOR GENE SILENCING USING DSRNA MOLECULES DEAH BOX INCLUDE ARE INVOLVED UNWINDING NUCLEIC ACIDS VARIOUS ASPECTS METABOLISM INCLUDING NUCLEAR TRANSCRIPTION PRE MRNA SPLICING RIBOSOME BIOGENESIS NUCLEOCYTOPLASMIC TRANSPORT TRANSLATION DECAY ORGANELLAR EXPRESSION RESIII TYPE III RESTRICTION ENZYME RES SUBUNIT MEROZOITE_SPAM MEROZOITE SURFACE SPAM CONSISTS SEVERAL PLASMODIUM FALCIPARUM SECRETED POLYMORPHIC ANTIGEN ASSOCIATED WITH MEROZOITES VARIATION AMONG ALLELES RESULT DELETIONS AMINO ACID SUBSTITUTIONS NON REPETITIVE SEQUENCES WITHIN FLANKING ALANINE HEPTAD REPEAT REPEATS D POSITION CONTAIN HYDROPHOBIC RESIDUES GENERATE AMPHIPATHIC ALPHA HELICES GIVE RISE 
+Best match to PRK database	gnl|CDD|134103
+E value**********	3E-29
+Alphanumeric Index******	134103 PRK00102 139838 PRK13766 138915 PRK12371 134190 PRK00254 SKI2 138916 PRK12372 140141 PTZ00110 137505 PRK09751 134697 PRK02362 137475 PRK09694 140275 PTZ00248 2
+Text index ******	RNC RIBONUCLEASE III REVIEWED HEF NUCLEASE PROVISIONAL LIKE HELICASE ATP DEPENDENT LHR HYPOTHETICAL EUKARYOTIC TRANSLATION INITIATION FACTOR ALPHA SUBUNIT 
+Best match to SMART database	RIBOc
+E value***********	2E-028
+Alphanumeric Index*******	128808 SMART00535 128763 SMART00487 128766 SMART00490 128652 SMART00358 128665 SMART00382 129020 SMART00784 SPT2 15563464 128333 SMART00017 40
+Text index *******	RIBOC RIBONUCLEASE III FAMILY DEXDC DEAD LIKE HELICASES SUPERFAMILY HELICC HELICASE C TERMINAL DOMAIN DSRM DOUBLE STRANDED RNA BINDING MOTIF AAA ATPASES ASSOCIATED WITH A VARIETY CELLULAR ACTIVITIES THIS PROFILE ALIGNMENT ONLY DETECTS FRACTION VAST POORLY CONSERVED N HELIX IS MISSING FROM CHROMATIN ENTRY INCLUDES SACCHAROMYCES CEREVISIAE WHICH INVOLVED IN TRANSCRIPTIONAL REGULATION PUBMED OSTEO OSTEOPONTIN AN ACIDIC PHOSPHORYLATED GLYCOPROTEIN ABOUT KD ABUNDANT MINERAL MATRIX BONES BINDS TIGHTLY TO HYDROXYAPATITE IT SUGGESTED THAT MIGHT FUNCTION AS CELL ATTACHMENT FACTOR COULD PLAY KEY ROLE ADHESION OSTEOCLASTS BONE 
+Best match to Jose''s transposable element database	
+E value************	
+PROSITE motifs	ASN_GLYCOSYLATION |CAMP_PHOSPHO_SITE |PKC_PHOSPHO_SITE |CK2_PHOSPHO_SITE |TYR_PHOSPHO_SITE |MYRISTYL |AMIDATION |ER_TARGET |PRENYLATION |MICROBODIES_CTER |RNASE_3_1 |TONB_DEPENDENT_REC_2 |
+Non promiscuous PROSITE motifs	ER_TARGET |RNASE_3_1 |TONB_DEPENDENT_REC_2 |
+Salivary motifs	
+Non promiscuous salivary motifs	
+Best match to AEGY-PEP database	dicer-2
+E value*************	0.0
+Match***	gi|57236096
+Score***	1669
+% identity******	52
+% Coverage*****	101
+Best match to Culex quinquefasciatus proteins	endoribonuclease Dicer protein_coding supercont3.278 288265 296919
+E value**************	0
+Match****	CPIJ010534
+Score****	1660
+% identity*******	51
+% Coverage******	101
+Best match to D. melanogaster proteins	loc=2R:complement(13090261..13096289); name=Dcr-2-PA;
+E value***************	0.0
+Match*****	Dcr-2-PA
+Score*****	873
+% identity********	32
+% Coverage*******	102
+Best match to C. elegans proteins	dcr-1 dead box helicase status:Partially_confirmed SW:P34529
+E value****************	2E-079
+Match******	K12H4.8
+Score******	294
+% identity*********	24
+% Coverage********	61
+Best match to Arabidopsis proteins	DEAD/DEAH box helicase carpel factory-related, similar to RNA helicase
+E value*****************	6E-056
+Match*******	AT3G03300.1
+Score*******	217
+% identity**********	27
+% Coverage*********	50
+Clustered at 30%-Sim- on 60% of length - - Cluster#	6578
+# seqs 	1
+Clustered at 40%-Sim- on 60% of length - - Cluster#	7274
+# seqs *	1
+Clustered at 50%-Sim- on 60% of length - - Cluster#	8081
+# seqs **	1
+Clustered at 60%-Sim- on 60% of length - - Cluster#	8751
+# seqs ***	1
+Clustered at 70%-Sim- on 60% of length - - Cluster#	9242
+# seqs ****	1
+Clustered at 80%-Sim- on 60% of length - - Cluster#	9584
+# seqs *****	1
+Clustered at 90%-Sim- on 60% of length - - Cluster#	9837
+# seqs ******	1
+Clustered at 95%-Sim- on 60% of length - - Cluster#	10023
+# seqs	1
+Clustered at 99%-Sim- on 60% of length - - Cluster#	10251
+# seqs*	1

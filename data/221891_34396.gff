@@ -1,0 +1,10 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=0 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=34396&page=res&job_id=221891
+ABKQ01053771.1	BLAST	Blast Hit	18912	19410	942	+	.	ACE1 An. albimanus
+ABKQ01053771.1	BLAST	Blast Hit	18638	18806	332	+	.	ACE1 An. albimanus
+ABKQ01012788.1	BLAST	Blast Hit	883	909	44	-	.	ACE1 An. albimanus
+ABKQ01051168.1	BLAST	Blast Hit	16556	16576	42	+	.	ACE1 An. albimanus
+ABKQ01044267.1	BLAST	Blast Hit	1503	1537	42	-	.	ACE1 An. albimanus
+ABKQ01013140.1	BLAST	Blast Hit	39883	39908	42	+	.	ACE1 An. albimanus
+ABKQ01054248.1	BLAST	Blast Hit	2110	2134	40	-	.	ACE1 An. albimanus
+ABKQ01029136.1	BLAST	Blast Hit	149830	149854	40	+	.	ACE1 An. albimanus
+ABKQ01006537.1	BLAST	Blast Hit	3798	3848	40	+	.	ACE1 An. albimanus

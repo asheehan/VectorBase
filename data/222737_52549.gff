@@ -1,0 +1,11 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=0 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=52549&page=res&job_id=222737
+scaffold01146	BLAST	Blast Hit	786580	786946	708	+	.	Ago5PCR r
+scaffold00647	BLAST	Blast Hit	34601	34625	44	-	.	Ago5PCR r
+scaffold00359	BLAST	Blast Hit	193385	193426	44	+	.	Ago5PCR r
+scaffold00601	BLAST	Blast Hit	14938	14963	42	+	.	Ago5PCR r
+scaffold03639	BLAST	Blast Hit	70111	70156	42	+	.	Ago5PCR r
+scaffold05292	BLAST	Blast Hit	179996	180028	42	+	.	Ago5PCR r
+scaffold03285	BLAST	Blast Hit	238297	238353	42	-	.	Ago5PCR r
+scaffold02392	BLAST	Blast Hit	287409	287441	40	+	.	Ago5PCR r
+scaffold03144	BLAST	Blast Hit	159036	159063	40	-	.	Ago5PCR r
+scaffold01878	BLAST	Blast Hit	26897	26924	40	-	.	Ago5PCR r

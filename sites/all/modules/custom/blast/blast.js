@@ -284,7 +284,7 @@ var pinwheel='<br/><img src="'+Drupal.settings.blast.blastPath+'/ajax-loader.gif
 							},
 							error: function(msg){
 								$("#submissionDialog").dialog("open");
-								$("#submissionDialog").html("Network Error: Unable to contact Submission Host!");
+								$("#submissionDialog").html("Network Error: Unable to contact Submission Host! "+msg.responseText);
 								error=true;
 							}
 
@@ -314,7 +314,7 @@ var pinwheel='<br/><img src="'+Drupal.settings.blast.blastPath+'/ajax-loader.gif
 								},
 								error: function(msg){
 									$("#submissionDialog").dialog("open");
-									$("#submissionDialog").html("Network Error: Unable to contact Submission Host!");
+									$("#submissionDialog").html("Network Error: Unable to contact Submission Host!"+msg.responseText);
 									error=true;
 								}
 
@@ -325,7 +325,7 @@ var pinwheel='<br/><img src="'+Drupal.settings.blast.blastPath+'/ajax-loader.gif
 
 				error: function(msg){
 					$("#submissionDialog").dialog("open");
-					$("#submissionDialog").html("Network Error: Unable to contact Submission Host!");
+					$("#submissionDialog").html("Network Error: Unable to contact Submission Host!"+msg.responseText);
 					error=true;
 				}
 			});

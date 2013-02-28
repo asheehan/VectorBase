@@ -26,7 +26,10 @@ function securelogin_uninstall() {
   variable_del('securelogin_form_user_register_form');
   variable_del('securelogin_form_contact_personal_form');
   variable_del('securelogin_form_contact_site_form');
+  variable_del('securelogin_form_webform_client_form');
   variable_del('securelogin_secure_forms');
+  variable_del('securelogin_all_forms');
+  variable_del('securelogin_other_forms');
 }
 
 /**

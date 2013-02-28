@@ -1,0 +1,11 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=0 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=45814&page=res&job_id=222448
+EW784540.1	BLAST	Blast Hit	488	781	184	-	.	662_19-20-23-24_denovo_asm_contig_59648
+EW956714.1	BLAST	Blast Hit	171	302	134	-	.	662_19-20-23-24_denovo_asm_contig_59648
+EW943486.1	BLAST	Blast Hit	171	302	134	-	.	662_19-20-23-24_denovo_asm_contig_59648
+EW828124.1	BLAST	Blast Hit	288	428	126	+	.	662_19-20-23-24_denovo_asm_contig_59648
+EW875150.1	BLAST	Blast Hit	440	580	126	+	.	662_19-20-23-24_denovo_asm_contig_59648
+EW863248.1	BLAST	Blast Hit	146	277	124	-	.	662_19-20-23-24_denovo_asm_contig_59648
+EW838911.1	BLAST	Blast Hit	367	508	124	+	.	662_19-20-23-24_denovo_asm_contig_59648
+EW876877.1	BLAST	Blast Hit	404	502	118	-	.	662_19-20-23-24_denovo_asm_contig_59648
+EW860580.1	BLAST	Blast Hit	106	232	116	-	.	662_19-20-23-24_denovo_asm_contig_59648
+EW948766.1	BLAST	Blast Hit	516	647	114	-	.	662_19-20-23-24_denovo_asm_contig_59648

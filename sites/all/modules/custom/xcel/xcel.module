@@ -6,7 +6,6 @@
  *
  */
  
-
 /**
  * implementation of hook_block_info
  * @return array $blocks
@@ -20,26 +19,105 @@ function xcel_block_info() {
 }
 
 /**
- * implementation of hook_block_view
- *
- * @param string $delta
- * @return array
- *  $block['subject']
- *  $block['content']
+ * Implements hook_block_configure().
  */
-function xcel_block_view($delta) {
+function xcel_block_configure($delta='') {
+  $form = array();
+ 
+  switch($delta) {
+    case 'xcel_block' :
+      // Text field form element
+      $form['text_body'] = array(
+        '#type' => 'text_format',
+        '#title' => t('Enter your text here in WYSIWYG format'),
+        '#default_value' => variable_get('text_variable', ''),
+      );
+ 
+      // File selection form element
+      $form['file'] = array(
+        '#name' => 'block_image',
+        '#type' => 'managed_file',
+        '#title' => t('Choose an Image File'),
+        '#description' => t('Select an Image for the custom block.  Only *.gif, *.png, *.jpg, and *.jpeg images allowed.'),
+        '#default_value' => variable_get('block_image_fid', ''),
+        '#upload_location' => 'public://block_image/',
+        '#upload_validators' => array(
+          'file_validate_extensions' => array('gif png jpg jpeg'),
+        ),
+      );
+      break;
+  }
+  return $form;
+}
+
+/**
+ * Implements hook_block_view().
+ */
+function xcel_block_view($delta='') {
   $block = array();
-  //$blast = Database::getConnection('blast', 'default')->db_query('SELECT * FROM job_params WHERE value = "Anonymous"');
-  //db_set_active('blast');
-  //$blast = db_query('SELECT * FROM job_params WHERE value = \'Anonymous\'');
-  //$jobs = db_query("SELECT * FROM xgrid_job_params WHERE argument='user_id' and value=:uid ORDER BY job_id DESC LIMIT 5", array(':uid'=>$userUid));
-  //$jobs = db_query("SELECT id, title FROM xcel");
-  //db_set_active('default');
-  $jobs = db_query("SELECT jobs.job_id as job_id, programs.value as program FROM xgrid_job_params as jobs right outer join xgrid_job_params as programs on jobs.job_id=programs.job_id and programs.argument='program' WHERE jobs.argument='user_id' and jobs.value=:uid ORDER BY jobs.job_id DESC LIMIT 5", array(':uid'=>$userUid));
-  //drupal_set_message(print_r($blast));
-  //$content = "<h2 class='title'>Welcome VectorBase User!</h2>Your recent jobs:<br><ul><li>Blast: Job ID<li>ClustalW: Job ID</ul>No Jobs? Not a VectorBase User?<br><div class='more-link'><a href='/user'>Login</a> or <a href='/user/register'>Create a new account</a></div>";
-  $content = "<h2 class='title'>AnoXcel</h2>Your recent jobs:<br><ul><li>Blast: Job ID<li>ClustalW: Job ID</ul>No Jobs? <div class='more-link'><a href='/user'>Login</a>.</div>";
-  $block['content'] = $content;
+ 
+  switch($delta) {
+    case 'xcel_block' :
+      $block['content'] = anoxcel_block_view();
+      break;
+  }
+ 
   return $block;
 }
 
+function xcel_plainText($text) {
+	drupal_set_header('Content-Type: text/plain');
+	print $text;
+	exit(0);
+}
+ 
+/**
+ * Custom function to assemble renderable array for block content.
+ * Returns a renderable array with the block content.
+ * @return
+ *   returns a renderable array of block content.
+ */
+function anoxcel_block_view() {
+  $block = array();
+ 
+  $protein = $_GET["protein"];
+  $displayResults = "";
+  $outputFile = "";
+  $outputFileLocation = "/vectorbase/web/vbpre/data/BAC_files/$protein";
+
+  $result = db_query("SELECT * FROM anoxcel WHERE \"Protein\" = :protein", array(":protein" => $protein));
+  foreach ($result as $resultObject){
+    foreach ($resultObject as $key => $value) {
+      $displayResults .= "<tr><td>" . $key . "</td><td>" . $value. "</td></tr>";
+      $outputFile .= "$key\t$value\n";
+    }
+  }
+
+  //xcel_plainText($outputFile);
+  file_put_contents($outputFileLocation, $outputFile);
+ 
+
+  // Block output in HTML with div wrapper
+  $block = array(
+    'label' => array(
+      '#prefix' => '<h3>',
+      '#type' => 'markup',
+      '#markup' => $protein,
+      '#suffix' => '</h3>',
+    ),/*
+    'content' => array(
+      '#prefix' => '<a href=',
+      '#type' => 'markup',
+      '#markup' => $outputFileLocation,
+      '#suffix' => '>Download as file</a>',
+    ),*/
+    'result' => array(
+      '#prefix' => '<table>',
+      '#type' => 'markup',
+      '#markup' => $displayResults,
+      '#suffix' => '</table>',
+    ),
+  );
+ 
+  return $block;
+}

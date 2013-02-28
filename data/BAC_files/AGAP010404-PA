@@ -1,0 +1,214 @@
+Protein	AGAP010404-PA
+First residue	L
+Seq size	218
+Location/Gene	3L:2779874:2784335:-1|gene:GST_ANOGA
+CDS	AGAP010404-RA
+Seq size*	1343
+Description	SCALAR(0x95415d8)|3L:2779188:2784335:-1|gene:GST_ANOGA
+ATG first?	
+Last codon	
+Genomic match	3L_Start_2760000
+E value	0
+Chromosome and link to ENSEMBL	3L
+Start	2779188
+End	2783365
+Extent of match	1322
+% identity	100
+Number of segments (exons, approximate)	3
+Orientation	REV
+Satisfied 95% id on length 100	1
+Best match to assembled ESTs	clu5-contig_642
+E value*	0
+Score	1578
+Extent of match*	816
+Length of best match	1181
+% identity*	99
+% Coverage	69
+First residue of match	366
+First residue of sequence	334
+Number of segments	1
+Annotation mismatch	
+Orientation*	FOR
+Satisfied 95% id on length 100*	1
+Number of sequences	14
+all-instars	0
+normalized-fatbody	0
+head-all	0
+Immune cells	0
+Pasteur annotation	4
+Sugar-abd	0
+Blood-abd	0
+InfBlood-abd	0
+Blood-fed	0
+Non-Blood-fed	10
+Sg-male	0
+SG-fem	0
+SG-Pasteur	0
+All female glands	0
+Best match to Affymetrix chip database	Ag.3L.12.0_UTR_s_at
+E value**	0
+Extent of match**	479
+Length of best match*	515
+% identity**	99
+% Coverage*	93
+First residue of match*	1
+First residue of sequence*	865
+Number of segments*	1
+Annotation mismatch*	
+Orientation**	FOR
+Satisfied 95% id on length 100**	1
+L-mean	755
+Males-mean	1684
+SF-mean	4163
+3h-mean	121
+24h-mean	629
+48h-mean	433
+72h-mean	140
+15d-mean	100
+Sum of residues (larger value indicates differential aa usage)	0.36
+Increased AA (fold increase over average)	
+Cys number	1
+Predicted Tyr-SO4 - Prosite rules	
+% Ser + Thr	9.2
+% Pro	5.5
+% Gly	4.1
+% Gly+Pro	9.6
+Number of possible HO-Pro [LPAE]-P-G	
+Number of possible OH-lysines X-Lys-Gly not Lys-Gly-Pro	
+Number of ProGly''s	
+SigP Result	CYT
+Cleavage Position	
+MW	24.84
+pI	5.51
+Mature MW	
+pI*	
+TMHMM result	ExpAA=0.08 First60=0.07 PredHel=0 Topology=o
+Predicted helices	0
+% membrane	
+% outside	
+% inside	
+mTP	0.378
+SP	0.048
+other	0.63
+Loc	_
+Relative Confidence (1 is better)	4
+ProP furin cleavage predictions 	
+Best match to NR protein database	AGAP010404-PA
+E value***	1E-122
+Match	gi|158289926
+Score*	439
+Extent of match***	218
+Length of best match**	218
+% identity***	100
+% Coverage**	100
+Alphanumeric Index	158289926 XP_311546 4 AGAP010404 157018393 EAA45010 161788955 P46428 159587 AAA29358 1 157130282 XP_001661869 108871929 EAT36154 170039571 XP_001847604 167863122 EDS26505 157130284 XP_001661870 108871930 EAT36155 157130286 XP_001661871 108871931 EAT36156 21435011 AAM53611 AF513639_1 S1 2 157361557 ABV44736 157674467 ABV60329
+Text index 	PA GST_ANOGA FULL GLUTATHIONE S TRANSFERASE ALTNAME GST CLASS SIGMA LIKE 
+Best match to NR database depleted of Anopheles gambiae sequenc	glutathione s-transferase
+E value****	1E-101
+Match*	gi|157130282
+% identity****	88
+% Coverage***	100
+Alphanumeric Index*	157130282 XP_001661869 1 108871929 EAT36154 170039571 XP_001847604 167863122 EDS26505 157130284 XP_001661870 108871930 EAT36155 157130286 XP_001661871 108871931 EAT36156 157361557 ABV44736 157674467 ABV60329 224830465 ACN66332 195488826 XP_002092477 GE14214 194178578 EDW92189 195335139 XP_002034233 GM20005 195584128 XP_002081867 GD25495 194126203 EDW48246 194193876 EDX07452 24654347 NP_725653 S1 24654349 NP_523767 2 24654351 NP_725654 27923973 P41043 GST1_DROME 28948507 1M0U 28948508 7302826 AAF57900 7302827 AAF57901 21392006 AAM48357 LD21131P 21627085 AAM68496 220943812 ACL84449 GSTS1 220953714 ACL89400
+Text index *	GLUTATHIONE S TRANSFERASE LIKE ISOFORM A B C FULL ALTNAME GST CLASS SIGMA PDB CHAIN CRYSTAL STRUCTURE DROSOPHILA IN COMPLEX WITH PA 
+Best match to SwissProt	Glutathione S-transferase OS=Anopheles gambiae GN=GstS1 PE=2 SV=4
+E value*****	1E-115
+Match**	sp|P46428|GST_ANOGA
+Score**	412
+Extent of match****	203
+Length of best match***	203
+% identity*****	100
+% Coverage****	100
+Alphanumeric Index**	P46428 GSTS1 2 4 P41043 GST1_DROME S1 1 P46437 O18598 GST1_BLAGE 3 P46429 GST2_MANSE GST2 O73888 PTGD2_CHICK PTGDS2 Q21355 GST4_CAEEL O35543 PTGD2_RAT Q9JHF7 PTGD2_MOUSE P46436 GST1_ASCSU GST1
+Text index **	GST_ANOGA GLUTATHIONE S TRANSFERASE OS ANOPHELES GAMBIAE GN PE SV DROSOPHILA MELANOGASTER GST_MUSDO MUSCA DOMESTICA BLATTELLA GERMANICA MANDUCA SEXTA REQUIRING PROSTAGLANDIN D SYNTHASE GALLUS CAENORHABDITIS ELEGANS GST RATTUS NORVEGICUS MUS MUSCULUS ASCARIS SUUM 
+Best match to GO database	Glutathione S transferase S1 - Drosophila melanogaster - glutathione transferase activity - glutathione peroxidase activity - response to oxidative stress - cellular_component
+E value******	1E-78
+Function descriptors	glutathione transferase activity||transferase activity\, transferring alkyl or aryl (other than methyl) groups||transferase activity||catalytic activity
+Function parent	catalytic activity
+Function second parent	transferase activity
+GO #	GO:0004364
+E value of functional GO	1.00E-78
+Component descriptors	<cellular_component
+Component parent	<cellular_component
+Component second parent	
+GO #*	GO:0005575
+E value of component GO	1.00E-78
+Process descriptors	response to oxidative stress||response to chemical stimulus||response to stimulus
+Process parent	catalytic activity
+Process second parent	transferase activity
+GO #**	GO:0006979
+E value of process GO	1.00E-78
+Best match to CDD database	GST_N_Sigma_lik
+E value*******	1E-022
+Alphanumeric Index***	48588 CD03039 PGD2 PGH2 28 GST2 48119 CD03192 48625 CD03076 GSTP1 111671 PFAM02798 * 1 HSP26 48493 CD00570 2 URE2P 140091 PTZ00057 48137 CD03210 48624 CD03075 M1 ASK1 GSTM2 3 E2 48626 CD03077 GSTA1 GSTA2 GSTA3 GSTA4 4 109112 PFAM00043 48
+Text index ***	GST_N_SIGMA_LIKE GST_N FAMILY CLASS SIGMA_LIKE COMPOSED GSTS BELONGING TO SIGMA SIMILAR PROTEINS INCLUDING FROM MU PI ALPHA ARE CYTOSOLIC DIMERIC INVOLVED IN CELLULAR DETOXIFICATION BY CATALYZING CONJUGATION GLUTATHIONE GSH WITH A WIDE RANGE ENDOGENOUS XENOBIOTIC ALKYLATING AGENTS CARCINOGENS THERAPEUTIC DRUGS ENVIRONMENTAL TOXINS PRODUCTS OXIDATIVE STRESS GST FOLD CONTAINS AN N TERMINAL TRX DOMAIN C HELICAL ACTIVE SITE LOCATED CLEFT BETWEEN TWO DOMAINS VERTEBRATE CHARACTERIZED AS DEPENDENT HEMATOPOIETIC PROSTAGLANDIN PG D SYNTHASES RESPONSIBLE FOR PRODUCTION ISOMERIZATION FUNCTIONS INCLUDE MAINTENANCE BODY TEMPERATURE INHIBITION PLATELET AGGREGATION BRONCHOCONSTRICTION VASODILATION MEDIATION ALLERGY INFLAMMATION OTHER MEMBERS II INSECT S CRYSTALLINS CEPHALOPODS KDA PARASITIC FLATWORMS DROSOPHILA IS ASSOCIATED INDIRECT FLIGHT MUSCLE EXHIBITS PREFERENCE LIPID PEROXIDATION INDICATING ANTI OXIDANT ROLE CRYSTALLIN CONSTITUTES MAJOR LENS CEPHALOPOD EYES TRANSPARENCY PROPER REFRACTIVE 
+Best match to KOG database	Glutathione S-transferase
+E value********	1E-048
+General class	Posttranslational modification, protein turnover, chaperones
+Alphanumeric Index****	36908 KOG1695 36085 KOG0867 36086 KOG0868
+Text index ****	GLUTATHIONE S TRANSFERASE 
+Best match to PFAM database	GST_N
+E value*********	1E-012
+Alphanumeric Index*****	111671 PFAM02798 * 1 HSP26 109112 PFAM00043 48 113455 PFAM04687 12 111158 PFAM02233 PFAM01262 GLY314
+Text index *****	GST_N GLUTATHIONE S TRANSFERASE N TERMINAL DOMAIN FUNCTION CONJUGATION REDUCED TO A VARIETY TARGETS ALSO INCLUDED IN ALIGNMENT BUT ARE NOT GSTS CRYSTALLINS FROM SQUID SIMILARITY GST PREVIOUSLY NOTED EUKARYOTIC ELONGATION FACTORS GAMMA KNOWN HAVE ACTIVITY RECOGNISED FAMILY STRESS RELATED PROTEINS INCLUDING AUXIN REGULATED PLANTS STRINGENT STARVATION ESCHERICHIA COLI MOLECULE BINDS CLEFT BETWEEN C DOMAINS CATALYTICALLY IMPORTANT RESIDUES PROPOSED RESIDE GST_C CONJUGATES CRYSTALLIN FACTOR ENCODED BY LARGE GENE GENES ARABIDOPSIS CAN BE DIVIDED INTO PHI TAU THETA ZETA LAMBDA CLASSES MICROVIR_H MICROVIRUS H PILOT SINGLE IS FOUND ON EACH SPIKES SHELL INVOLVED EJECTION PHAGE DNA AT LEAST ONE COPY INJECTED HOST PERIPLASMIC SPACE ALONG WITH SSDNA VIRAL GENOME PART THOUGHT LIE OUTSIDE WHERE IT RECOGNISES LIPOPOLYSACCHARIDE VIRUS SENSITIVE STRAINS MAY WITHIN CAPSID SINCE MUTATIONS INFLUENCE MECHANISM AFFECTING INTERACTIONS SPAN THROUGH HYDROPHILIC CHANNELS FORMED G PNTB NAD P TRANSHYDROGENASE 
+Best match to PRK database	gnl|CDD|140091
+E value**********	0.00000005
+Alphanumeric Index******	140091 PTZ00057 133869 PHA00369
+Text index ******	GLUTATHIONE S TRANSFERASE PROVISIONAL H MINOR SPIKE 
+Best match to SMART database	Amelin
+E value***********	0.35
+Alphanumeric Index*******	129053 SMART00817
+Text index *******	AMELIN AMELOBLASTIN PRECURSOR THIS FAMILY CONSISTS SEVERAL MAMMALIAN PROTEINS MATRIX TOOTH ENAMEL CONSIST MAINLY AMELOGENIN BUT ALSO NON WHICH ALTHOUGH THEIR VOLUMETRIC PERCENTAGE IS LOW HAVE AN IMPORTANT ROLE IN MINERALISATION ONE KNOWN AS SHEATHLIN AMBN SHEATH THOUGH TO A DETERMINING PRISMATIC STRUCTURE GROWING CRYSTALS 
+Best match to Jose''s transposable element database	
+E value************	
+PROSITE motifs	PKC_PHOSPHO_SITE |CK2_PHOSPHO_SITE |MYRISTYL |AMIDATION |MICROBODIES_CTER |
+Non promiscuous PROSITE motifs	
+Salivary motifs	
+Non promiscuous salivary motifs	
+Best match to AEGY-PEP database	glutathione s-transferase
+E value*************	1E-103
+Match***	AAEL011741-PB
+Score***	372
+% identity******	88
+% Coverage*****	100
+Best match to Culex quinquefasciatus proteins	glutathione s-transferase protein_coding supercont3.109 397822 412644
+E value**************	1E-95
+Match****	CPIJ006160
+Score****	345
+% identity*******	80
+% Coverage******	85
+Best match to D. melanogaster proteins	loc=2R:complement(12608927..12609898); name=GstS1-PA;
+E value***************	4E-079
+Match*****	GstS1-PA
+Score*****	290
+% identity********	67
+% Coverage*******	82
+Best match to C. elegans proteins	gst-11 glutathione S-transferase status:Partially_confirmed TR:Q21945
+E value****************	4E-031
+Match******	R11G1.3
+Score******	130
+% identity*********	34
+% Coverage********	100
+Best match to Arabidopsis proteins	glutathione S-transferase, putative, similar to glutathione S-transferase
+E value*****************	0.012
+Match*******	AT1G02940.1
+Score*******	36.6
+% identity**********	22
+% Coverage*********	80
+Clustered at 30%-Sim- on 60% of length - - Cluster#	5559
+# seqs 	1
+Clustered at 40%-Sim- on 60% of length - - Cluster#	6132
+# seqs *	1
+Clustered at 50%-Sim- on 60% of length - - Cluster#	6761
+# seqs **	1
+Clustered at 60%-Sim- on 60% of length - - Cluster#	7282
+# seqs ***	1
+Clustered at 70%-Sim- on 60% of length - - Cluster#	7654
+# seqs ****	1
+Clustered at 80%-Sim- on 60% of length - - Cluster#	7928
+# seqs *****	1
+Clustered at 90%-Sim- on 60% of length - - Cluster#	8154
+# seqs ******	1
+Clustered at 95%-Sim- on 60% of length - - Cluster#	8321
+# seqs	1
+Clustered at 99%-Sim- on 60% of length - - Cluster#	8528
+# seqs*	1

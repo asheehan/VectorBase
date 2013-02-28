@@ -1,0 +1,11 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=0 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=56013&page=res&job_id=223358
+Contig17965.22	BLAST	Blast Hit	3341	5148	994	+	.	gi|157130208|ref|XM_001655592.1| Aedes aegypti heat shock protein partial mRNA
+Contig17901.57	BLAST	Blast Hit	2616	4444	918	+	.	gi|157130208|ref|XM_001655592.1| Aedes aegypti heat shock protein partial mRNA
+Contig17948.142	BLAST	Blast Hit	48023	48053	52	+	.	gi|157130208|ref|XM_001655592.1| Aedes aegypti heat shock protein partial mRNA
+Contig1508.1	BLAST	Blast Hit	227	257	52	+	.	gi|157130208|ref|XM_001655592.1| Aedes aegypti heat shock protein partial mRNA
+Contig27400.1	BLAST	Blast Hit	724	751	50	-	.	gi|157130208|ref|XM_001655592.1| Aedes aegypti heat shock protein partial mRNA
+Contig17797.31	BLAST	Blast Hit	12844	12871	50	+	.	gi|157130208|ref|XM_001655592.1| Aedes aegypti heat shock protein partial mRNA
+Contig17730.13	BLAST	Blast Hit	3673	3700	50	-	.	gi|157130208|ref|XM_001655592.1| Aedes aegypti heat shock protein partial mRNA
+Contig17708.24	BLAST	Blast Hit	1042	1069	50	+	.	gi|157130208|ref|XM_001655592.1| Aedes aegypti heat shock protein partial mRNA
+Contig16453.3	BLAST	Blast Hit	9417	9444	50	-	.	gi|157130208|ref|XM_001655592.1| Aedes aegypti heat shock protein partial mRNA
+Contig26955.1	BLAST	Blast Hit	494	517	48	+	.	gi|157130208|ref|XM_001655592.1| Aedes aegypti heat shock protein partial mRNA

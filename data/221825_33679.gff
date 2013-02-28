@@ -1,0 +1,11 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=0 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=33679&page=res&job_id=221825
+Scaffold2	BLAST	Blast Hit	1226598	1227116	582	-	.	AgGPRop9
+Scaffold2	BLAST	Blast Hit	1240251	1240793	468	-	.	AgGPRop9
+Scaffold26	BLAST	Blast Hit	548070	549050	518	+	.	AgGPRop9
+Scaffold44163	BLAST	Blast Hit	1367	1858	241	-	.	AgGPRop9
+Scaffold44163	BLAST	Blast Hit	2768	3055	220	+	.	AgGPRop9
+Scaffold45384	BLAST	Blast Hit	7502	8023	138	-	.	AgGPRop9
+Scaffold101	BLAST	Blast Hit	139057	139407	138	-	.	AgGPRop9
+Scaffold2339	BLAST	Blast Hit	17008	17850	137	-	.	AgGPRop9
+Scaffold1	BLAST	Blast Hit	42558	43340	128	-	.	AgGPRop9
+Scaffold175	BLAST	Blast Hit	146086	146433	119	-	.	AgGPRop9

@@ -1,0 +1,214 @@
+Protein	AGAP011902-PA
+First residue	R
+Seq size	678
+Location/Gene	3L:34806319:34808915:1|gene:AGAP011902
+CDS	AGAP011902-RA
+Seq size*	2034
+Description	SCALAR(0x96bec7c)|3L:34806319:34808915:1|gene:AGAP011902
+ATG first?	
+Last codon	
+Genomic match	3L_Start_34800000
+E value	0
+Chromosome and link to ENSEMBL	3L
+Start	34806319
+End	34808915
+Extent of match	2041
+% identity	99
+Number of segments (exons, approximate)	5
+Orientation	FOR
+Satisfied 95% id on length 100	1
+Best match to assembled ESTs	
+E value*	
+Score	
+Extent of match*	
+Length of best match	
+% identity*	
+% Coverage	
+First residue of match	
+First residue of sequence	
+Number of segments	
+Annotation mismatch	
+Orientation*	
+Satisfied 95% id on length 100*	
+Number of sequences	
+all-instars	
+normalized-fatbody	
+head-all	
+Immune cells	
+Pasteur annotation	
+Sugar-abd	
+Blood-abd	
+InfBlood-abd	
+Blood-fed	
+Non-Blood-fed	
+Sg-male	
+SG-fem	
+SG-Pasteur	
+All female glands	
+Best match to Affymetrix chip database	Ag.3L.1591.0_CDS_at
+E value**	0
+Extent of match**	445
+Length of best match*	445
+% identity**	99
+% Coverage*	100
+First residue of match*	1
+First residue of sequence*	791
+Number of segments*	1
+Annotation mismatch*	
+Orientation**	FOR
+Satisfied 95% id on length 100**	1
+L-mean	9
+Males-mean	52
+SF-mean	8
+3h-mean	7
+24h-mean	11
+48h-mean	6
+72h-mean	9
+15d-mean	5
+Sum of residues (larger value indicates differential aa usage)	0.35
+Increased AA (fold increase over average)	
+Cys number	8
+Predicted Tyr-SO4 - Prosite rules	
+% Ser + Thr	15.0
+% Pro	10.6
+% Gly	7.7
+% Gly+Pro	18.3
+Number of possible HO-Pro [LPAE]-P-G	3
+Number of possible OH-lysines X-Lys-Gly not Lys-Gly-Pro	3
+Number of ProGly''s	9
+SigP Result	CYT
+Cleavage Position	
+MW	73.25
+pI	9.38
+Mature MW	
+pI*	
+TMHMM result	ExpAA=0.01 First60=0.00 PredHel=0 Topology=o
+Predicted helices	0
+% membrane	
+% outside	
+% inside	
+mTP	0.149
+SP	0.077
+other	0.843
+Loc	_
+Relative Confidence (1 is better)	2
+ProP furin cleavage predictions 	1 | 585    SPSREAR|DL  0.668 *ProP*  | 
+Best match to NR protein database	AGAP011902-PA
+E value***	0.0
+Match	gi|158300789
+Score*	1389
+Extent of match***	678
+Length of best match**	678
+% identity***	100
+% Coverage**	100
+Alphanumeric Index	158300789 XP_320625 4 AGAP011902 157013330 EAA00186 170049425 XP_001855949 1 167871266 EDS34649 157114051 XP_001657959 108877463 EAT41688 195154815 XP_002018308 GL17640 194114104 EDW36147 198458733 XP_001361142 2 GA20197 198136443 EAL25719 195122448 XP_002005723 GI18921 193910791 EDW09658 195426876 XP_002061516 GK20672 194157601 EDW72502 195400594 XP_002058901 GJ19776 194156252 EDW71436 194881300 XP_001974786 GG21956 190657973 EDV55186 17985983 NP_536795 15987098 AAL11905 AF416603_1 7302504 AAF57588 33636631 AAQ23613 LD16058P 220960002 ACL92537
+Text index 	PA RIBBON RIB 
+Best match to NR database depleted of Anopheles gambiae sequenc	ribbon
+E value****	0.0
+Match*	gi|170049425
+% identity****	58
+% Coverage***	96
+Alphanumeric Index*	170049425 XP_001855949 1 167871266 EDS34649 157114051 XP_001657959 108877463 EAT41688 195154815 XP_002018308 GL17640 194114104 EDW36147 198458733 XP_001361142 2 GA20197 198136443 EAL25719 195122448 XP_002005723 GI18921 193910791 EDW09658 195426876 XP_002061516 GK20672 194157601 EDW72502 195400594 XP_002058901 GJ19776 194156252 EDW71436 194881300 XP_001974786 GG21956 190657973 EDV55186 17985983 NP_536795 15987098 AAL11905 AF416603_1 7302504 AAF57588 33636631 AAQ23613 LD16058P 220960002 ACL92537 195584822 XP_002082203 GD11439 194194212 EDX07788
+Text index *	RIBBON RIB PA 
+Best match to SwissProt	Protein bric-a-brac 1 OS=Drosophila melanogaster GN=bab1 PE=1 SV=2
+E value*****	3E-031
+Match**	sp|Q9W0K7|BAB1_DROME
+Score**	137
+Extent of match****	385
+Length of best match***	977
+% identity*****	27
+% Coverage****	39
+Alphanumeric Index**	Q9W0K7 BAB1_DROME 1 BAB1 2 Q9W0K4 BAB2_DROME BAB2 Q9V5M3 LOLA6_DROME 3 Q9V5M6 LOLA5_DROME 4 Q867Z4 LOLA4_DROME Q7KQZ4 LOLA3_DROME P42284 LOLA2_DROME P42283 LOLA1_DROME Q8IN81 P17789
+Text index **	BRIC A BRAC OS DROSOPHILA MELANOGASTER GN PE SV LONGITUDINALS LACKING ISOFORMS N O W X Y LOLA J P Q S Z F I K T B D L H M V ISOFORM G FRU_DROME SEX DETERMINATION FRUITLESS FRU TTKB_DROME TRAMTRACK BETA TTK 
+Best match to GO database	ribbon - Drosophila melanogaster - Malpighian tubule morphogenesis - central nervous system development - head involution - hindgut morphogenesis - regulation of Malpighian tubule diameter - regulation of cell shape - salivary gland morphogenesis - open tracheal system development - dorsal closure - protein localization - epithelial cell migration, open tracheal system - cell migration - nucleus - cytoskeleton organization - DNA binding - membrane organization - regulation of transcription - salivary gland development - transcription factor activity - primary branching, open tracheal system - lumen formation, open tracheal system
+E value******	0
+Function descriptors	DNA binding||nucleic acid binding||binding
+Function parent	binding
+Function second parent	nucleic acid binding
+GO #	GO:0003677
+E value of functional GO	1.00E-130
+Component descriptors	nucleus||intracellular membrane\-bounded organelle||intracellular organelle||outer membrane\-bounded periplasmic space||external encapsulating structure part||cell part
+Component parent	cell part
+Component second parent	external encapsulating structure part
+GO #*	GO:0005634
+E value of component GO	1.00E-130
+Process descriptors	<Malpighian tubule morphogenesis||embryonic hindgut morphogenesis||myoblast cell fate commitment||fish trap bristle morphogenesis||ovulation from ovarian follicle||mammary gland bud formation||mammary gland fat development||notochord cell vacuolation||notochord cell development||rhombomere cell migration||rhombomere 8 formation||hippocampus development||astrocyte activation||neuron differentiation||neural tube patterning||roof plate formation||neuropore closure||pons formation||pons formation||brain development||pons maturation||system development||eclosion rhythm||pollen adhesion||diapedesis||seed growth||cornification||innervation
+Process parent	binding
+Process second parent	nucleic acid binding
+GO #**	GO:0007443
+E value of process GO	1.00E-130
+Best match to CDD database	BTB
+E value*******	1E-019
+Alphanumeric Index***	109699 PFAM00651 PFAM00096 PFAM01344 128521 SMART00225 C2H2 BETA1 ALPHA1 138876 PRK12323 136495 PRK07764 136981 PRK08853 113976 PFAM05225 114270 PFAM05539 34937 COG5373 135496 PRK05648 134866 PRK03427
+Text index ***	BTB POZ DOMAIN FOR BR C TTK BAB OR POX VIRUS ZINC FINGER IS PRESENT NEAR N TERMINUS A FRACTION PROTEINS IN THAT CONTAIN MOTIF SUCH AS KELCH FAMILY MEDIATES HOMOMERIC DIMERISATION SOME INSTANCES HETEROMERIC STRUCTURE DIMERISED PLZF HAS BEEN SOLVED CONSISTS TIGHTLY INTERTWINED HOMODIMER CENTRAL SCAFFOLDING MADE UP CLUSTER ALPHA HELICES FLANKED BY SHORT BETA SHEETS AT BOTH TOP BOTTOM MOLECULE DOMAINS FROM SEVERAL HAVE SHOWN TO MEDIATE TRANSCRIPTIONAL REPRESSION INTERACT WITH COMPONENTS HISTONE DEACETYLASE CO REPRESSOR COMPLEXES INCLUDING COR SMRT ALSO KNOWN ZIN BROAD COMPLEX TRAMTRACK BRIC BRAC POXVIRUS BE INTERACTION FOUND TERMINI TYPE TRANSCRIPTION FACTORS WELL SHAW POTASSIUM CHANNELS REVEALS DIMER FORMED VIA INTERACTIONS BETWEEN TERMINAL STRAND HELIX STRUCTURES HOWEVER SUBSET THESE TWO SECONDARY APPEAR MISSING AWARE PREDICTS WITHOUT DNA POLYMERASE III SUBUNITS GAMMA TAU PROVISIONAL VALIDATED HTH_PSQ TURN PSQ THIS BINDING FOUR COPIES PIPSQUEAK DROSOPHILA MELANOGASTER BINDS GAGA 
+Best match to KOG database	Proteins containing BTB/POZ and Kelch domains, involved in regulatory/signal transduction processes
+E value********	2E-012
+General class	Signal transduction mechanisms, General function prediction only
+Alphanumeric Index****	39642 KOG4441 39551 KOG4350 36123 KOG0905 3 38875 KOG3671 36002 KOG0783 37888 KOG2677 38804 KOG3598 TRAP230 35384 KOG0162 36149 KOG0931 SEC7 37195 KOG1984 SFB3
+Text index ****	PROTEINS CONTAINING BTB POZ KELCH DOMAINS INVOLVED IN REGULATORY SIGNAL TRANSDUCTION PROCESSES UNCHARACTERIZED CONSERVED CONTAINS DOMAIN PHOSPHOINOSITIDE KINASE ACTIN WISKOTT ALDRICH SYNDROME ANKYRIN STONED B SYNAPTIC VESICLE BIOGENESIS THYROID HORMONE RECEPTOR ASSOCIATED COMPLEX SUBUNIT MYOSIN CLASS I HEAVY CHAIN GUANINE NUCLEOTIDE EXCHANGE FACTOR COAT COPII 
+Best match to PFAM database	BTB
+E value*********	3E-020
+Alphanumeric Index*****	109699 PFAM00651 PFAM00096 PFAM01344 113976 PFAM05225 114270 PFAM05539 118967 PFAM10446 DUF2457 114709 PFAM06003 114251 PFAM05518 113260 PFAM04484 DUF566 111991 PFAM03154 1 125370 12P 115804 PFAM07174 300 118562 PFAM10033 ATG13 13
+Text index *****	BTB POZ DOMAIN FOR BR C TTK BAB OR POX VIRUS ZINC FINGER IS PRESENT NEAR N TERMINUS A FRACTION PROTEINS IN THAT CONTAIN MOTIF SUCH AS KELCH FAMILY MEDIATES HOMOMERIC DIMERISATION SOME INSTANCES HETEROMERIC STRUCTURE DIMERISED PLZF HAS BEEN SOLVED CONSISTS TIGHTLY INTERTWINED HOMODIMER CENTRAL SCAFFOLDING MADE UP CLUSTER ALPHA HELICES FLANKED BY SHORT BETA SHEETS AT BOTH TOP BOTTOM MOLECULE DOMAINS FROM SEVERAL HAVE SHOWN TO MEDIATE TRANSCRIPTIONAL REPRESSION INTERACT WITH COMPONENTS HISTONE DEACETYLASE CO REPRESSOR COMPLEXES INCLUDING COR SMRT ALSO KNOWN ZIN HTH_PSQ HELIX TURN PSQ THIS DNA BINDING FOUND FOUR COPIES PIPSQUEAK DROSOPHILA MELANOGASTER BINDS GAGA SEQUENCE PNEUMO_ATT_G PNEUMOVIRINAE ATTACHMENT MEMBRANE GLYCOPROTEIN G UNKNOWN FUNCTION UNCHARACTERISED SMN SURVIVAL MOTOR NEURON EUKARYOTIC NEURONS PRODUCT SPINAL MUSCULAR ATROPHY DETERMINING GENE PART LARGE MACROMOLECULAR COMPLEX FUNCTIONS ASSEMBLY SPLICEOSOMAL SMALL NUCLEAR RIBONUCLEOPROTEINS SNRNPS SPECIFICITY FACTOR 
+Best match to PRK database	gnl|CDD|138876
+E value**********	0.000005
+Alphanumeric Index******	138876 PRK12323 136495 PRK07764 136981 PRK08853 135496 PRK05648 134866 PRK03427 138829 PRK12270 134530 PRK01297 138222 PRK10856 137101 PRK09169 136144 PRK06975
+Text index ******	DNA POLYMERASE III SUBUNITS GAMMA TAU PROVISIONAL VALIDATED REVIEWED CELL DIVISION ZIPA KGD ALPHA KETOGLUTARATE DECARBOXYLASE ATP DEPENDENT RNA HELICASE RHLB HYPOTHETICAL BIFUNCTIONAL UROPORPHYRINOGEN SYNTHETASE UROPORPHYRIN C METHYLTRANSFERASE 
+Best match to SMART database	BTB
+E value***********	3E-019
+Alphanumeric Index*******	128521 SMART00225 C2H2 BETA1 ALPHA1 128931 SMART00689 DM6 129053 SMART00817 128462 SMART00157 128713 SMART00436 TOP1BC
+Text index *******	BTB BROAD COMPLEX TRAMTRACK BRIC A BRAC DOMAIN IN ALSO KNOWN AS POZ POXVIRUS ZINC FINGER TO BE INTERACTION MOTIF FOUND AT N TERMINI SEVERAL TYPE TRANSCRIPTION FACTORS WELL SHAW POTASSIUM CHANNELS STRUCTURE REVEALS TIGHTLY INTERTWINED DIMER FORMED VIA INTERACTIONS BETWEEN TERMINAL STRAND HELIX STRUCTURES HOWEVER SUBSET DOMAINS THESE TWO SECONDARY APPEAR MISSING AWARE PREDICTS WITHOUT CYSTEINE RICH CURRENTLY SPECIFIC DROSOPHILA AMELIN AMELOBLASTIN PRECURSOR THIS FAMILY CONSISTS MAMMALIAN PROTEINS MATRIX TOOTH ENAMEL CONSIST MAINLY AMELOGENIN BUT NON WHICH ALTHOUGH THEIR VOLUMETRIC PERCENTAGE IS LOW HAVE AN IMPORTANT ROLE MINERALISATION ONE SHEATHLIN AMBN SHEATH THOUGH DETERMINING PRISMATIC GROWING CRYSTALS PRP MAJOR PRION COMPONENT SCRAPIE ASSOCIATED FIBRILS CREUTZFELDT JAKOB DISEASE KURU GERSTMANN STRAUSSLER SYNDROME BOVINE SPONGIFORM ENCEPHALOPATHY BACTERIAL DNA TOPOISOMERAES I ATP BINDING EXTENSION TOPRIM III EUKARYOTIC REVERSE GYRASE BETA SUBUNIT 
+Best match to Jose''s transposable element database	
+E value************	
+PROSITE motifs	ASN_GLYCOSYLATION |CAMP_PHOSPHO_SITE |PKC_PHOSPHO_SITE |CK2_PHOSPHO_SITE |TYR_PHOSPHO_SITE |MYRISTYL |PRENYLATION |MICROBODIES_CTER |
+Non promiscuous PROSITE motifs	
+Salivary motifs	Hyp10-12 mosquito stringent pattern |
+Non promiscuous salivary motifs	
+Best match to AEGY-PEP database	ribbon
+E value*************	1E-173
+Match***	AAEL006690-PA
+Score***	605
+% identity******	61
+% Coverage*****	113
+Best match to Culex quinquefasciatus proteins	ribbon protein_coding supercont3.280 499143 501464
+E value**************	0
+Match****	CPIJ010694
+Score****	703
+% identity*******	58
+% Coverage******	96
+Best match to D. melanogaster proteins	loc=2R:14792992..14794974; name=rib-PA;
+E value***************	1E-131
+Match*****	rib-PA
+Score*****	464
+% identity********	45
+% Coverage*******	102
+Best match to C. elegans proteins	Partially_confirmed TR:Q9GRY4 protein_id:CAC14415.1 Length = 390  Score = 52.4
+E value****************	8E-007
+Match******	Y59A8B.19
+Score******	52.4
+% identity*********	39
+% Coverage********	28
+Best match to Arabidopsis proteins	formin homology 2 domain-containing protein / FH2 domain-containing protein, low
+E value*****************	1E-005
+Match*******	AT5G58160.1
+Score*******	48.9
+% identity**********	33
+% Coverage*********	9
+Clustered at 30%-Sim- on 60% of length - - Cluster#	6345
+# seqs 	1
+Clustered at 40%-Sim- on 60% of length - - Cluster#	7014
+# seqs *	1
+Clustered at 50%-Sim- on 60% of length - - Cluster#	7788
+# seqs **	1
+Clustered at 60%-Sim- on 60% of length - - Cluster#	8431
+# seqs ***	1
+Clustered at 70%-Sim- on 60% of length - - Cluster#	8898
+# seqs ****	1
+Clustered at 80%-Sim- on 60% of length - - Cluster#	9227
+# seqs *****	1
+Clustered at 90%-Sim- on 60% of length - - Cluster#	9478
+# seqs ******	1
+Clustered at 95%-Sim- on 60% of length - - Cluster#	9659
+# seqs	1
+Clustered at 99%-Sim- on 60% of length - - Cluster#	9883
+# seqs*	1

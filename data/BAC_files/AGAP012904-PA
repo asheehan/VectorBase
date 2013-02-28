@@ -1,0 +1,214 @@
+Protein	AGAP012904-PA
+First residue	T
+Seq size	77
+Location/Gene	UNKN:37452037:37452267:1|gene:AGAP012904
+CDS	AGAP012904-RA
+Seq size*	231
+Description	SCALAR(0x9e9ef7c)|UNKN:37452037:37452267:1|gene:AGAP012904
+ATG first?	
+Last codon	
+Genomic match	UNKN_Start_37440000
+E value	1.00E-128
+Chromosome and link to ENSEMBL	UNKN
+Start	37452037
+End	37452267
+Extent of match	231
+% identity	100
+Number of segments (exons, approximate)	1
+Orientation	FOR
+Satisfied 95% id on length 100	1
+Best match to assembled ESTs	
+E value*	
+Score	
+Extent of match*	
+Length of best match	
+% identity*	
+% Coverage	
+First residue of match	
+First residue of sequence	
+Number of segments	
+Annotation mismatch	
+Orientation*	
+Satisfied 95% id on length 100*	
+Number of sequences	
+all-instars	
+normalized-fatbody	
+head-all	
+Immune cells	
+Pasteur annotation	
+Sugar-abd	
+Blood-abd	
+InfBlood-abd	
+Blood-fed	
+Non-Blood-fed	
+Sg-male	
+SG-fem	
+SG-Pasteur	
+All female glands	
+Best match to Affymetrix chip database	
+E value**	
+Extent of match**	
+Length of best match*	
+% identity**	
+% Coverage*	
+First residue of match*	
+First residue of sequence*	
+Number of segments*	
+Annotation mismatch*	
+Orientation**	
+Satisfied 95% id on length 100**	
+L-mean	
+Males-mean	
+SF-mean	
+3h-mean	
+24h-mean	
+48h-mean	
+72h-mean	
+15d-mean	
+Sum of residues (larger value indicates differential aa usage)	0.68
+Increased AA (fold increase over average)	
+Cys number	0
+Predicted Tyr-SO4 - Prosite rules	
+% Ser + Thr	11.7
+% Pro	6.5
+% Gly	1.3
+% Gly+Pro	7.8
+Number of possible HO-Pro [LPAE]-P-G	
+Number of possible OH-lysines X-Lys-Gly not Lys-Gly-Pro	
+Number of ProGly''s	
+SigP Result	CYT
+Cleavage Position	
+MW	9.26
+pI	10.42
+Mature MW	
+pI*	
+TMHMM result	ExpAA=0.00 First60=0.00 PredHel=0 Topology=o
+Predicted helices	0
+% membrane	
+% outside	
+% inside	
+mTP	0.55
+SP	0.052
+other	0.406
+Loc	M
+Relative Confidence (1 is better)	5
+ProP furin cleavage predictions 	
+Best match to NR protein database	Anopheles gambiae str. PEST AGAP012904-PA
+E value***	3E-036
+Match	gi|158302593
+Score*	154
+Extent of match***	77
+Length of best match**	77
+% identity***	100
+% Coverage**	100
+Alphanumeric Index	158302593 XP_001687793 1 AGAP012904 157021080 EDO64856 158289823 XP_001689403 AGAP010484 157018343 EDO64276 118785404 XP_001231026 AGAP004681 116127957 EAU76745 157109803 XP_001650831 AAEL_AAEL005377 108878933 EAT43158 157112230 XP_001657449 AAEL_AAEL000935 108883722 EAT47947 157130731 XP_001661985 AAEL_AAEL011846 108871808 EAT36033 205374630 ZP_03227424 BCOAM_16320 123412829 XP_001304161 121885594 EAX91231 50426879 XP_462038 DEHA0G12430G 49657708 CAG90524 DEHA2G11748P 237844625 XP_002371610 TGME49_075840 211969274 EEB04470
+Text index 	ANOPHELES GAMBIAE STR PEST PA HYPOTHETICAL TRICHOHYALIN 
+Best match to NR database depleted of Anopheles gambiae sequenc	hypothetical protein AaeL_AAEL005377
+E value****	9E-008
+Match*	gi|157109803
+% identity****	42
+% Coverage***	25
+Alphanumeric Index*	157109803 XP_001650831 1 AAEL_AAEL005377 108878933 EAT43158 157112230 XP_001657449 AAEL_AAEL000935 108883722 EAT47947 157130731 XP_001661985 AAEL_AAEL011846 108871808 EAT36033 205374630 ZP_03227424 BCOAM_16320 123412829 XP_001304161 121885594 EAX91231 50426879 XP_462038 DEHA0G12430G 49657708 CAG90524 DEHA2G11748P 237844625 XP_002371610 TGME49_075840 211969274 EEB04470 255722774 XP_002546321 240130838 EER30400 225683549 EEH21833 226277650 EEH33216
+Text index *	HYPOTHETICAL TRICHOHYALIN 
+Best match to SwissProt	Glutamic acid-rich protein OS=Plasmodium falciparum (isolate FC27 / Papua New
+E value*****	0.002
+Match**	sp|P13816|GARP_PLAFF
+Score**	40.8
+Extent of match****	41
+Length of best match***	678
+% identity*****	39
+% Coverage****	6
+Alphanumeric Index**	P13816 FC27 4 1 Q54ST3 Y2237_DICDI DDB_G0282237 3 Q6FWM4 MED2_CANGA 2 MED2 Q6FQ21 NOP58_CANGA 58 NOP58 Q55CU8 RSC5_DICDI 5 RSC5 A5E4P1 PXR1_LODEL PXR1 Q6BUT3 NST1_DEBHA NST1 A5E4V9 NOP58_LODEL Q1ZXE2 Y7875_DICDI DDB_G0287875 Q8STA9 Y5G8_ENCCU UPF0329 ECU05_1680 ECU11_0050
+Text index **	GARP_PLAFF GLUTAMIC ACID RICH OS PLASMODIUM FALCIPARUM ISOLATE PAPUA NEW GUINEA GN GARP PE SV DDT DOMAIN CONTAINING DICTYOSTELIUM DISCOIDEUM MEDIATOR RNA POLYMERASE II TRANSCRIPTION SUBUNIT CANDIDA GLABRATA NUCLEOLAR RANDOM SLUG LODDEROMYCES ELONGISPORUS STRESS RESPONSE DEBARYOMYCES HANSENII PH ENCEPHALITOZOON CUNICULI 
+Best match to GO database	DDT domain-containing protein - Dictyostelium discoideum - cellular_component - biological_process - molecular_function
+E value******	0.0007
+Function descriptors	<molecular_function
+Function parent	<molecular_function
+Function second parent	
+GO #	GO:0003674
+E value of functional GO	0.0007
+Component descriptors	<cellular_component
+Component parent	<cellular_component
+Component second parent	
+GO #*	GO:0005575
+E value of component GO	0.0007
+Process descriptors	<biological_process
+Process parent	<molecular_function
+Process second parent	
+GO #**	GO:0008150
+E value of process GO	0.0007
+Best match to CDD database	PRK08327
+E value*******	0.034
+Alphanumeric Index***	136786 PRK08327 116556 PFAM07946 DUF1682 134259 PRK00409
+Text index ***	ACETOLACTATE SYNTHASE CATALYTIC SUBUNIT VALIDATED UNKNOWN FUNCTION MEMBERS THIS FAMILY ARE ALL HYPOTHETICAL EUKARYOTIC PROTEINS ONE MEMBER IS DESCRIBED AS BEING AN ADIPOCYTE SPECIFIC BUT NO EVIDENCE WAS FOUND RECOMBINATION DNA STRAND EXCHANGE INHIBITOR REVIEWED 
+Best match to KOG database	Cysteinyl-tRNA synthetase
+E value********	0.055
+General class	Translation, ribosomal structure and biogenesis
+Alphanumeric Index****	37218 KOG2007 35385 KOG0163 37568 KOG2357 36359 KOG1144 5B 36577 KOG1363 36247 KOG1029 37623 KOG2412
+Text index ****	CYSTEINYL TRNA SYNTHETASE MYOSIN CLASS VI HEAVY CHAIN UNCHARACTERIZED CONSERVED TRANSLATION INITIATION FACTOR EIF REGULATOR UBIQUITIN PATHWAY CONTAINS UAS UBX DOMAINS ENDOCYTIC ADAPTOR INTERSECTIN NUCLEAR EXPORT SIGNAL NES CONTAINING POLYADENYLATED RNA 
+Best match to PFAM database	DUF1682
+E value*********	0.020
+Alphanumeric Index*****	116556 PFAM07946 DUF1682 111991 PFAM03154 1 125370 12P
+Text index *****	UNKNOWN FUNCTION MEMBERS THIS FAMILY ARE ALL HYPOTHETICAL EUKARYOTIC PROTEINS ONE MEMBER IS DESCRIBED AS BEING AN ADIPOCYTE SPECIFIC BUT NO EVIDENCE WAS FOUND ATROPHIN PRODUCT DENTATORUBRAL PALLIDOLUYSIAN ATROPHY DRPLA GENE OMIM A PROGRESSIVE NEURODEGENERATIVE DISORDER IT CAUSED BY EXPANSION CAG REPEAT IN ON CHROMOSOME RESULTS EXTENDED POLYGLUTAMINE REGION THAT THOUGHT TO CONFER TOXICITY POSSIBLY THROUGH ALTERING ITS INTERACTIONS WITH OTHER ALSO UNDERLYING DEFECT SIX DISORDERS INCLUDING HUNTINGTON S DISEASE INTERACTION EXPANDED REPEATS BE PATHOGENIC SHORT GLUTAMINE TRANSCRIPTIONAL COACTIVATOR CREB BINDING CBP DRAWS AWAY FROM USUAL NUCLEAR LOCATION AGGREGATES CHARACTERISTIC INTERFERES MEDIATED TRANSCRIPTION CAUSES CYTOTOXICITY 
+Best match to PRK database	gnl|CDD|136786
+E value**********	0.01
+Alphanumeric Index******	136786 PRK08327 134259 PRK00409 136865 PRK08506 135223 PRK05035 134186 PRK00247 138748 PRK11778 136553 PRK07899 30S S1 133896 PHA00451
+Text index ******	ACETOLACTATE SYNTHASE CATALYTIC SUBUNIT VALIDATED RECOMBINATION DNA STRAND EXCHANGE INHIBITOR REVIEWED REPLICATIVE HELICASE PROVISIONAL ELECTRON TRANSPORT COMPLEX RNFC INNER MEMBRANE TRANSLOCASE COMPONENT YIDC PERIPLASMIC PROTEASE RPSA RIBOSOMAL KINASE 
+Best match to SMART database	SHR3_chaperone
+E value***********	0.29
+Alphanumeric Index*******	129022 SMART00786 SHR3_CHAPERONE SH3 15623581 SHR3 128774 SMART00498 FH2 2 FH1 128345 SMART00030
+Text index *******	ER MEMBRANE THIS FAMILY PROTEINS ARE LOCALISED CHAPERONES THAT REQUIRED FOR CORRECT PLASMA LOCALISATION AMINO ACID PERMEASES AAPS PUBMED PREVENTS FROM AGGREGATING ASSISTS IN THEIR FOLDING ABSENCE RETAINED FORMIN HOMOLOGY DOMAIN FH CONTROL REARRANGEMENTS ACTIN CYTOSKELETON ESPECIALLY CONTEXT CYTOKINESIS CELL POLARISATION MEMBERS HAVE BEEN FOUND TO INTERACT WITH RHO GTPASES PROFILIN OTHER ASSOZIATED THESE INTERACTIONS MEDIATED BY PROLINE RICH USUALLY LOCATED FRONT BUT NOT LISTED DESPITE CYTOSOLIC FUNCTION VERTEBRATE FORMINS ASSIGNED FUNCTIONS WITHIN NUCLEUS A SET BINDING FBPS HAS SHOWN BIND WW CLB CLUSTERIN BETA CHAIN 
+Best match to Jose''s transposable element database	
+E value************	
+PROSITE motifs	PKC_PHOSPHO_SITE |CK2_PHOSPHO_SITE |MICROBODIES_CTER |
+Non promiscuous PROSITE motifs	
+Salivary motifs	
+Non promiscuous salivary motifs	
+Best match to AEGY-PEP database	hypothetical protein
+E value*************	6E-10
+Match***	AAEL005377-PA
+Score***	59.7
+% identity******	42
+% Coverage*****	25
+Best match to Culex quinquefasciatus proteins	conserved hypothetical protein protein_coding supercont3.231 243217 245414
+E value**************	0.00003
+Match****	CPIJ009549
+Score****	42.7
+% identity*******	33
+% Coverage******	13
+Best match to D. melanogaster proteins	loc=2L:625663..628140; name=CG2839-PA;
+E value***************	1E-004
+Match*****	CG2839-PA
+Score*****	41.2
+% identity********	50
+% Coverage*******	5
+Best match to C. elegans proteins	Partially_confirmed TR:Q9XUQ9 protein_id:CAB04699.2 Length = 676  Score = 40.8
+E value****************	1E-004
+Match******	T05F1.11
+Score******	40.8
+% identity*********	46
+% Coverage********	7
+Best match to Arabidopsis proteins	cupin family protein, contains Pfam profile PF00190: Cupin |
+E value*****************	6E-004
+Match*******	AT2G18540.1
+Score*******	38.9
+% identity**********	41
+% Coverage*********	6
+Clustered at 30%-Sim- on 60% of length - - Cluster#	1386
+# seqs 	2
+Clustered at 40%-Sim- on 60% of length - - Cluster#	1425
+# seqs *	2
+Clustered at 50%-Sim- on 60% of length - - Cluster#	1393
+# seqs **	2
+Clustered at 60%-Sim- on 60% of length - - Cluster#	1333
+# seqs ***	2
+Clustered at 70%-Sim- on 60% of length - - Cluster#	1157
+# seqs ****	2
+Clustered at 80%-Sim- on 60% of length - - Cluster#	984
+# seqs *****	2
+Clustered at 90%-Sim- on 60% of length - - Cluster#	12786
+# seqs ******	1
+Clustered at 95%-Sim- on 60% of length - - Cluster#	13016
+# seqs	1
+Clustered at 99%-Sim- on 60% of length - - Cluster#	13322
+# seqs*	1

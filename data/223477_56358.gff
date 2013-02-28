@@ -1,0 +1,11 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=0 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=56358&page=res&job_id=223477
+UNKN	BLAST	Blast Hit	9830926	9852310	39498	+	.	EQ099732.1 second probe
+UNKN	BLAST	Blast Hit	9863663	9871649	14640	+	.	EQ099732.1 second probe
+UNKN	BLAST	Blast Hit	9855915	9858279	4334	+	.	EQ099732.1 second probe
+UNKN	BLAST	Blast Hit	9861289	9863639	4206	+	.	EQ099732.1 second probe
+2R	BLAST	Blast Hit	55560648	55579020	34790	+	.	EQ099732.1 second probe
+2R	BLAST	Blast Hit	55544669	55550971	11414	+	.	EQ099732.1 second probe
+2R	BLAST	Blast Hit	55520268	55524247	7344	+	.	EQ099732.1 second probe
+2R	BLAST	Blast Hit	55530740	55534351	6458	+	.	EQ099732.1 second probe
+2R	BLAST	Blast Hit	55534372	55537874	6410	+	.	EQ099732.1 second probe
+2R	BLAST	Blast Hit	55554256	55556930	4400	+	.	EQ099732.1 second probe

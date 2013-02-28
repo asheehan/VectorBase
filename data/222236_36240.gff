@@ -1,0 +1,5 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=0 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=36240&page=res&job_id=222236
+CPIJ001358-RA	BLAST	Blast Hit	54	2079	10111	.	.	gi|54289295|gb|AAV31931.1| vitellogenin C2 [Culex quinquefasciatus]
+CPIJ001357-RA	BLAST	Blast Hit	52	2097	10104	.	.	gi|54289295|gb|AAV31931.1| vitellogenin C2 [Culex quinquefasciatus]
+CPIJ010191-RA	BLAST	Blast Hit	40	2111	5750	.	.	gi|54289295|gb|AAV31931.1| vitellogenin C2 [Culex quinquefasciatus]
+CPIJ010190-RA	BLAST	Blast Hit	1	2060	5697	.	.	gi|54289295|gb|AAV31931.1| vitellogenin C2 [Culex quinquefasciatus]

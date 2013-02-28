@@ -1,0 +1,11 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=0 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=56268&page=res&job_id=223407
+	BLAST	Blast Hit	857	1251	708	+	.	THA28382_02_M13F
+	BLAST	Blast Hit	1040	1197	168	+	.	THA28382_02_M13F
+	BLAST	Blast Hit	888	1024	154	+	.	THA28382_02_M13F
+	BLAST	Blast Hit	399	462	102	+	.	THA28382_02_M13F
+	BLAST	Blast Hit	681	983	530	-	.	THA28382_02_M13F
+	BLAST	Blast Hit	1379	1698	450	-	.	THA28382_02_M13F
+	BLAST	Blast Hit	1065	1287	182	-	.	THA28382_02_M13F
+	BLAST	Blast Hit	4559	4890	334	+	.	THA28382_02_M13F
+	BLAST	Blast Hit	4476	4648	114	+	.	THA28382_02_M13F
+	BLAST	Blast Hit	598	721	148	-	.	THA28382_02_M13F

@@ -1,0 +1,5 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=0 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=36265&page=res&job_id=222262
+AAEL004679-RA	BLAST	Blast Hit	49	378	630	+	.	AGMAG-contig_53
+AAEL006456-RA	BLAST	Blast Hit	159	244	56	+	.	AGMAG-contig_53
+AAEL000533-RA	BLAST	Blast Hit	247	302	42	+	.	AGMAG-contig_53
+AAEL007506-RA	BLAST	Blast Hit	6012	6049	38	+	.	AGMAG-contig_53

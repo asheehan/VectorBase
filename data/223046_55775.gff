@@ -1,0 +1,11 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=0 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=55775&page=res&job_id=223046
+3L	BLAST	Blast Hit	9015463	9015771	526	-	.	
+3L	BLAST	Blast Hit	9015461	9015769	513	-	.	
+3L	BLAST	Blast Hit	9015461	9015769	512	+	.	
+3L	BLAST	Blast Hit	9015462	9015770	509	-	.	
+3L	BLAST	Blast Hit	9015463	9015771	453	+	.	
+3L	BLAST	Blast Hit	9015600	9015770	314	+	.	
+3L	BLAST	Blast Hit	9015462	9015548	143	+	.	
+3L	BLAST	Blast Hit	14000171	14000215	67	+	.	
+2R	BLAST	Blast Hit	25277568	25277639	67	-	.	
+X	BLAST	Blast Hit	1087876	1087947	49	-	.	

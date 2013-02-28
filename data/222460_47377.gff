@@ -1,0 +1,3 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=0 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=47377&page=res&job_id=222460
+ISCW016847-RA	BLAST	Blast Hit	1134	1485	654	+	.	662_19-20-23-24_denovo_asm_contig_71913
+ISCW016847-RA	BLAST	Blast Hit	1134	1162	52	+	.	662_19-20-23-24_denovo_asm_contig_71913

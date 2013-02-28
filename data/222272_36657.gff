@@ -1,0 +1,11 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=0 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=36657&page=res&job_id=222272
+DW191626.1	BLAST	Blast Hit	59	280	483	+	.	AGMAG-contig_74
+DW191626.1	BLAST	Blast Hit	59	277	465	-	.	AGMAG-contig_74
+DW191626.1	BLAST	Blast Hit	58	279	460	+	.	AGMAG-contig_74
+DW191626.1	BLAST	Blast Hit	58	279	447	-	.	AGMAG-contig_74
+DW191626.1	BLAST	Blast Hit	48	278	444	-	.	AGMAG-contig_74
+DW716090.1	BLAST	Blast Hit	369	572	437	+	.	AGMAG-contig_74
+DW716090.1	BLAST	Blast Hit	369	572	424	-	.	AGMAG-contig_74
+DW194481.1	BLAST	Blast Hit	146	328	407	+	.	AGMAG-contig_74
+DW187100.1	BLAST	Blast Hit	2	184	407	-	.	AGMAG-contig_74
+DW188186.1	BLAST	Blast Hit	198	380	407	+	.	AGMAG-contig_74

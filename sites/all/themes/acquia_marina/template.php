@@ -1,9 +1,16 @@
 <?php
 
 function acquia_marina_preprocess_node(&$variables) {
-	if(drupal_get_path_alias("node/{$variables['nid']}") === 'transcriptomes') {
-		drupal_add_css(drupal_get_path('theme', 'acquia_marina') . '/css/transcriptomes.css');
-	} 
+	$nodeUrlName = end(explode('/', drupal_get_path_alias("node/{$variables['nid']}")));
+	$themePath = drupal_get_path('theme', 'acquia_marina');
+	switch($nodeUrlName) {	
+		case 'transcriptomes':
+			drupal_add_css($themePath . '/css/transcriptomes.css');
+			break;
+		case 'cytogenetic-map-anopheles-gambiae-connected-pest':
+			drupal_add_css($themePath . '/css/cytogenetic-map-imgs.css');
+			break;
+	}
 }
 
 function acquia_marina_preprocess_page(&$vars) {
@@ -23,7 +30,6 @@ function acquia_marina_preprocess_page(&$vars) {
 
 
 function acquia_marina_preprocess_html(&$vars) {
-
   // set site tiles and background color css for dev, pre, and !www here
 
   //bender is dev
@@ -43,17 +49,22 @@ function acquia_marina_preprocess_html(&$vars) {
     drupal_add_css('#site-name a{background-color: rgba(0,255,0,0.4);}', array('group' => CSS_THEME, 'type' => 'inline'));
   }
 
+  if($vars['head_title_array']['title'] === 'Anopheles gambiae') {
+	drupal_add_css(drupal_get_path('theme', 'acquia_marina') . '/css/cytogenetic-map-imgs.css');	
+  }
+
+
 }
 
 
 function acquia_marina_link($variables) {
-  /*$menuObject = FALSE;
-  $menuObject = menu_get_object();
-if ($menuObject && property_exists($menuObject,'type') && ($menuObject->type == 'navigation_page')) {
-  $variables['options']['html'] = FALSE;
-} else {
-  $variables['options']['html'] = TRUE;
-}*/
-  $variables['options']['html'] = TRUE;
-  return '<a href="' . check_plain(url($variables['path'], $variables['options'])) . '"' . drupal_attributes($variables['options']['attributes']) . '>' . ($variables['options']['html'] ? $variables['text'] : strip_tags($variables['text'])) . '</a>';
+	/*$menuObject = FALSE;
+	  $menuObject = menu_get_object();
+	  if ($menuObject && property_exists($menuObject,'type') && ($menuObject->type == 'navigation_page')) {
+	  $variables['options']['html'] = FALSE;
+	  } else {
+	  $variables['options']['html'] = TRUE;
+	  }*/
+	$variables['options']['html'] = TRUE;
+	return '<a href="' . check_plain(url($variables['path'], $variables['options'])) . '"' . drupal_attributes($variables['options']['attributes']) . '>' . ($variables['options']['html'] ? $variables['text'] : strip_tags($variables['text'])) . '</a>';
 }

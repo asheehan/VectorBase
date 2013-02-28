@@ -1,0 +1,5 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=0 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=34557&page=res&job_id=221907
+ADAR005432-RA	BLAST	Blast Hit	302	1220	726	+	.	
+ADAR009804-RA	BLAST	Blast Hit	1690	1708	38	-	.	
+ADAR010823-RA	BLAST	Blast Hit	290	316	38	-	.	
+ADAR007674-RA	BLAST	Blast Hit	259	280	38	+	.	

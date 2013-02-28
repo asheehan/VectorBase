@@ -367,3 +367,24 @@ clear:both;
 	color:#0000FF;
 	text-decoration:underline;
 }
+
+#blast-compatibility-banner {
+	display: block;
+	width: 50%;
+	margin-left:auto;
+	margin-right:auto;
+	background-color: rgb(229, 238, 204);
+	border-color: rgb(128, 128, 128);
+	border-style: solid;
+	border-width: 1px;
+	padding-bottom: 2px;
+	padding-left: 10px;
+	padding-right: 10px;
+	padding-top: 2px;
+	text-align: left;
+}
+
+#recommended-browsers {
+	font-weight:bold;
+}
+

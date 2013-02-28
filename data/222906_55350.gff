@@ -1,0 +1,11 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=0 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=55350&page=res&job_id=222906
+GL562974	BLAST	Blast Hit	48649	51832	6288	+	.	
+GL562974	BLAST	Blast Hit	41833	44717	5770	+	.	
+GL562974	BLAST	Blast Hit	45213	47779	5134	+	.	
+GL563178	BLAST	Blast Hit	1661620	1663355	3442	-	.	
+GL561357	BLAST	Blast Hit	35490	37227	3428	-	.	
+GL558041	BLAST	Blast Hit	13231	14967	3420	-	.	
+GL556383	BLAST	Blast Hit	13934	15664	3162	+	.	
+GL554839	BLAST	Blast Hit	2296	4028	3158	-	.	
+GL551298	BLAST	Blast Hit	27122	28852	3156	-	.	
+GL563092	BLAST	Blast Hit	5310694	5312423	3148	-	.	

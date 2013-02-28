@@ -1,0 +1,9 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=0 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=34381&page=res&job_id=221891
+Locus_21929_Length_676	BLAST	Blast Hit	4	264	280	+	.	ACE1 An. albimanus
+Locus_21929_Length_676	BLAST	Blast Hit	391	431	60	+	.	ACE1 An. albimanus
+Locus_9295_Length_1942	BLAST	Blast Hit	1864	1908	50	+	.	ACE1 An. albimanus
+Locus_2973_Length_2765	BLAST	Blast Hit	1883	1906	38	-	.	ACE1 An. albimanus
+Locus_23526_Length_482	BLAST	Blast Hit	144	169	36	-	.	ACE1 An. albimanus
+Locus_12791_Length_1582	BLAST	Blast Hit	332	357	36	+	.	ACE1 An. albimanus
+Locus_7039_Length_3224	BLAST	Blast Hit	729	754	36	+	.	ACE1 An. albimanus
+Locus_5083_Length_635	BLAST	Blast Hit	298	330	36	-	.	ACE1 An. albimanus

@@ -1,0 +1,5 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=0 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=34408&page=res&job_id=221891
+CPIJ006034-RA	BLAST	Blast Hit	1813	2001	212	+	.	ACE1 An. albimanus
+CPIJ011956-RA	BLAST	Blast Hit	1100	1131	44	+	.	ACE1 An. albimanus
+CPIJ004785-RA	BLAST	Blast Hit	1512	1530	38	-	.	ACE1 An. albimanus
+CPIJ015420-RA	BLAST	Blast Hit	768	794	38	-	.	ACE1 An. albimanus

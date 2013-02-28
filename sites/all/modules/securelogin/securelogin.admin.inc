@@ -20,69 +20,54 @@ function securelogin_admin() {
     '#default_value' => variable_get('securelogin_secure_forms', TRUE),
     '#description'   => t('If enabled, any pages containing the forms enabled below will be redirected to the secure URL. Users can be assured that they are entering their private data on a secure URL, the contents of which have not been tampered with.'),
   );
+  $form['securelogin_all_forms'] = array(
+    '#type'          => 'checkbox',
+    '#title'         => t('Submit all forms to secure URL'),
+    '#default_value' => variable_get('securelogin_all_forms', FALSE),
+    '#description'   => t('If enabled, all forms will be submitted to the secure URL.'),
+  );
   $form['required'] = array(
     '#type'          => 'fieldset',
     '#title'         => t('Required forms'),
     '#description'   => t('If enabled, the following forms will be submitted to the secure URL. These forms must be secured in order to implement basic secure login functionality.'),
-  );
-  $form['required']['securelogin_form_user_login'] = array(
-    '#type'          => 'checkbox',
-    '#title'         => t('User login form'),
-    '#default_value' => variable_get('securelogin_user_login', TRUE),
-  );
-  $form['required']['securelogin_form_user_login_block'] = array(
-    '#type'          => 'checkbox',
-    '#title'         => t('User login block form'),
-    '#default_value' => variable_get('securelogin_form_user_login_block', TRUE),
-  );
-  $form['required']['securelogin_form_user_pass_reset'] = array(
-    '#type'          => 'checkbox',
-    '#title'         => t('User password reset form'),
-    '#default_value' => variable_get('securelogin_form_user_pass_reset', TRUE),
-  );
-  $form['required']['securelogin_form_user_profile_form'] = array(
-    '#type'          => 'checkbox',
-    '#title'         => t('User edit form'),
-    '#default_value' => variable_get('securelogin_form_user_profile_form', TRUE),
   );
   $form['optional'] = array(
     '#type'          => 'fieldset',
     '#title'         => t('Optional forms'),
     '#description'   => t('Other forms accessible to anonymous users may optionally be secured. If enabled, the following forms will be submitted to the secure URL.'),
   );
+  $forms['user_login'] = array('group' => 'required', 'title' => t('User login form'));
+  $forms['user_login_block'] = array('group' => 'required', 'title' => t('User login block form'));
+  $forms['user_pass_reset'] = array('group' => 'required', 'title' => t('User password reset form'));
+  $forms['user_profile_form'] = array('group' => 'required', 'title' => t('User edit form'));
   // Registration form is also a login form if e-mail verification is disabled.
   $register = variable_get('user_email_verification', TRUE) ? 'optional' : 'required';
-  $form[$register]['securelogin_form_user_register_form'] = array(
-    '#type'          => 'checkbox',
-    '#title'         => t('User registration form'),
-    '#default_value' => variable_get('securelogin_form_user_register_form', TRUE),
+  $forms['user_register_form'] = array('group' => $register, 'title' => t('User registration form'));
+  $forms['user_pass'] = array('group' => 'optional', 'title' => t('User password request form'));
+  drupal_alter('securelogin', $forms);
+  foreach ($forms as $id => $item) {
+    $form[$item['group']]['securelogin_form_' . $id] = array(
+      '#type'          => 'checkbox',
+      '#title'         => $item['title'],
+      '#default_value' => variable_get('securelogin_form_' . $id, TRUE),
+    );
+  }
+  $form['securelogin_other_forms'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Other forms to secure'),
+    '#default_value' => variable_get('securelogin_other_forms', ''),
+    '#description' => t('List the form IDs of any other forms that you want secured, separated by a space. If the form has a base form ID, you must list the base form ID rather than the form ID.'),
   );
-  $form['optional']['securelogin_form_user_pass'] = array(
-    '#type'          => 'checkbox',
-    '#title'         => t('User password request form'),
-    '#default_value' => variable_get('securelogin_form_user_pass', TRUE),
-  );
-  $form['optional']['securelogin_form_node_form'] = array(
-    '#type'          => 'checkbox',
-    '#title'         => t('Node form'),
-    '#default_value' => variable_get('securelogin_form_node_form', TRUE),
-  );
-  $form['optional']['securelogin_form_contact_site_form'] = array(
-    '#type'          => 'checkbox',
-    '#title'         => t('Site contact form'),
-    '#default_value' => variable_get('securelogin_form_contact_site_form', TRUE),
-  );
-  $form['optional']['securelogin_form_contact_personal_form'] = array(
-    '#type'          => 'checkbox',
-    '#title'         => t('Personal contact form'),
-    '#default_value' => variable_get('securelogin_form_contact_personal_form', TRUE),
-  );
-  $form['optional']['securelogin_form_comment_form'] = array(
-    '#type'          => 'checkbox',
-    '#title'         => t('Comment form'),
-    '#default_value' => variable_get('securelogin_form_comment_form', TRUE),
-  );
+  $form['#submit'][] = 'securelogin_admin_submit';
   return system_settings_form($form);
+}
+
+/**
+ * Admin settings form submit handler.
+ */
+function securelogin_admin_submit($form, &$form_state) {
+  // Any cached pages containing forms should be regenerated.
+  cache_clear_all();
 }
 
 /**
@@ -98,4 +83,33 @@ function securelogin_admin_validate($form, &$form_state) {
   elseif (strtolower(parse_url($form_state['values']['securelogin_base_url'], PHP_URL_SCHEME)) !== 'https') {
     form_set_error('securelogin_base_url', t('The secure base URL must start with <em>https://</em>.'));
   }
+}
+
+/**
+ * Implements hook_securelogin_alter() for comment module.
+ */
+function comment_securelogin_alter(&$forms) {
+  $forms['comment_form'] = array('group' => 'optional', 'title' => t('Comment form'));
+}
+
+/**
+ * Implements hook_securelogin_alter() for contact module.
+ */
+function contact_securelogin_alter(&$forms) {
+  $forms['contact_personal_form'] = array('group' => 'optional', 'title' => t('Personal contact form'));
+  $forms['contact_site_form'] = array('group' => 'optional', 'title' => t('Site contact form'));
+}
+
+/**
+ * Implements hook_securelogin_alter() for node module.
+ */
+function node_securelogin_alter(&$forms) {
+  $forms['node_form'] = array('group' => 'optional', 'title' => t('Node form'));
+}
+
+/**
+ * Implements hook_securelogin_alter() for webform module.
+ */
+function webform_securelogin_alter(&$forms) {
+  $forms['webform_client_form'] = array('group' => 'optional', 'title' => t('Webform'));
 }

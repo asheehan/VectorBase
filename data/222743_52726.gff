@@ -1,0 +1,7 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=0 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=52726&page=res&job_id=222743
+AAEL008072-RA	BLAST	Blast Hit	313	647	180	+	.	sctg_0017_0001 length=42653
+AAEL006833-RC	BLAST	Blast Hit	250	1001	164	-	.	sctg_0017_0001 length=42653
+AAEL006833-RB	BLAST	Blast Hit	247	998	164	-	.	sctg_0017_0001 length=42653
+AAEL006833-RA	BLAST	Blast Hit	253	1004	164	-	.	sctg_0017_0001 length=42653
+AAEL011746-RB	BLAST	Blast Hit	996	1240	120	-	.	sctg_0017_0001 length=42653
+AAEL011746-RA	BLAST	Blast Hit	1005	1249	120	-	.	sctg_0017_0001 length=42653

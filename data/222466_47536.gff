@@ -1,0 +1,7 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=0 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=47536&page=res&job_id=222466
+ABJB010968599	BLAST	Blast Hit	806	1207	588	-	.	662_19-20-23-24_denovo_asm_contig_76620
+ABJB010486855	BLAST	Blast Hit	2457	2857	570	-	.	662_19-20-23-24_denovo_asm_contig_76620
+ABJB010934572	BLAST	Blast Hit	22775	22919	64	+	.	662_19-20-23-24_denovo_asm_contig_76620
+ABJB011015073	BLAST	Blast Hit	2335	2446	60	+	.	662_19-20-23-24_denovo_asm_contig_76620
+ABJB010819212	BLAST	Blast Hit	2625	2695	60	-	.	662_19-20-23-24_denovo_asm_contig_76620
+ABJB010780728	BLAST	Blast Hit	2732	2770	58	-	.	662_19-20-23-24_denovo_asm_contig_76620

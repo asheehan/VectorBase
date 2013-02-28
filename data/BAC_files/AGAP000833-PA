@@ -1,0 +1,214 @@
+Protein	AGAP000833-PA
+First residue	M
+Seq size	159
+Location/Gene	X:15383955:15384528:-1|gene:MIP
+CDS	AGAP000833-RA
+Seq size*	1063
+Description	SCALAR(0x9026940)|X:15383617:15384773:-1|gene:MIP
+ATG first?	
+Last codon	
+Genomic match	X_Start_15360000
+E value	0
+Chromosome and link to ENSEMBL	X
+Start	15383617
+End	15384773
+Extent of match	1064
+% identity	100
+Number of segments (exons, approximate)	2
+Orientation	REV
+Satisfied 95% id on length 100	1
+Best match to assembled ESTs	est-07-contig_6988
+E value*	0
+Score	1855
+Extent of match*	968
+Length of best match	1395
+% identity*	99
+% Coverage	69
+First residue of match	145
+First residue of sequence	100
+Number of segments	1
+Annotation mismatch	
+Orientation*	FOR
+Satisfied 95% id on length 100*	1
+Number of sequences	8
+all-instars	2
+normalized-fatbody	0
+head-all	4
+Immune cells	0
+Pasteur annotation	0
+Sugar-abd	0
+Blood-abd	0
+InfBlood-abd	0
+Blood-fed	1
+Non-Blood-fed	1
+Sg-male	0
+SG-fem	0
+SG-Pasteur	0
+All female glands	0
+Best match to Affymetrix chip database	Ag.X.621.0_CDS_a_at
+E value**	0
+Extent of match**	402
+Length of best match*	402
+% identity**	99
+% Coverage*	100
+First residue of match*	1
+First residue of sequence*	175
+Number of segments*	1
+Annotation mismatch*	
+Orientation**	FOR
+Satisfied 95% id on length 100**	1
+L-mean	224
+Males-mean	319
+SF-mean	379
+3h-mean	51
+24h-mean	88
+48h-mean	212
+72h-mean	162
+15d-mean	249
+Sum of residues (larger value indicates differential aa usage)	0.43
+Increased AA (fold increase over average)	W(5.03)
+Cys number	3
+Predicted Tyr-SO4 - Prosite rules	2
+% Ser + Thr	11.9
+% Pro	3.1
+% Gly	11.3
+% Gly+Pro	14.5
+Number of possible HO-Pro [LPAE]-P-G	
+Number of possible OH-lysines X-Lys-Gly not Lys-Gly-Pro	1
+Number of ProGly''s	1
+SigP Result	SIG
+Cleavage Position	22-23
+MW	17.91
+pI	9.48
+Mature MW	15.34
+pI*	9.56
+TMHMM result	ExpAA=0.61 First60=0.61 PredHel=0 Topology=o
+Predicted helices	0
+% membrane	
+% outside	
+% inside	
+mTP	0.035
+SP	0.918
+other	0.045
+Loc	S
+Relative Confidence (1 is better)	1
+ProP furin cleavage predictions 	
+Best match to NR protein database	myoinhibitory-like peptide (AGAP000833-PA)
+E value***	7E-092
+Match	gi|118788518
+Score*	338
+Extent of match***	159
+Length of best match**	159
+% identity***	100
+% Coverage**	100
+Alphanumeric Index	118788518 XP_316799 3 AGAP000833 116126145 EAA12136 157131546 XP_001655873 1 108871490 EAT35715 195125770 XP_002007349 GI12893 193918958 EDW17825 195494870 XP_002095025 GE22160 194181126 EDW94737 195328354 XP_002030880 GM24340 194119823 EDW41866 194872049 XP_001972955 GG15820 190654738 EDV51981 21355285 NP_648971 27734419 Q9VVF7 B1 B2 2 B3 B4 4 B5 5 13540260 AAK29381 AF312379_1 7293997 AAF49354 11544632 CAC17604 21391962 AAM48335 GH11008P 220944118 ACL84602 220954030 ACL89558 198465884 XP_001353804 GA19609 198150356 EAL29538 195171393 XP_002026490 GL15492 194111396 EDW33439 170028703 XP_001842234 167877919 EDS41302
+Text index 	MYOINHIBITORY LIKE PA ALLATOSTATIN B TYPE MYOINHIBITING PRECURSOR MIP_DROME FULL ALLATOSTATINS MIP ALTNAME ALLOSTATIN PREPROHORMONE CONTAINS DROSTATIN FLAGS PROHORMONE 
+Best match to NR database depleted of Anopheles gambiae sequenc	allatostatin, B-type, putative
+E value****	3E-020
+Match*	gi|157131546
+% identity****	64
+% Coverage***	31
+Alphanumeric Index*	157131546 XP_001655873 1 108871490 EAT35715 195125770 XP_002007349 GI12893 193918958 EDW17825 195494870 XP_002095025 GE22160 194181126 EDW94737 195328354 XP_002030880 GM24340 194119823 EDW41866 194872049 XP_001972955 GG15820 190654738 EDV51981 21355285 NP_648971 27734419 Q9VVF7 B1 B2 2 B3 3 B4 4 B5 5 13540260 AAK29381 AF312379_1 7293997 AAF49354 11544632 CAC17604 21391962 AAM48335 GH11008P 220944118 ACL84602 220954030 ACL89558 198465884 XP_001353804 GA19609 198150356 EAL29538 195171393 XP_002026490 GL15492 194111396 EDW33439 170028703 XP_001842234 167877919 EDS41302 195441568 XP_002068578 GK20345 194164663 EDW79564
+Text index *	ALLATOSTATIN B TYPE MYOINHIBITING PRECURSOR MIP_DROME FULL ALLATOSTATINS MIP ALTNAME MYOINHIBITORY LIKE ALLOSTATIN PREPROHORMONE CONTAINS DROSTATIN FLAGS PA PROHORMONE 
+Best match to SwissProt	Allatostatins MIP OS=Drosophila melanogaster GN=Mip PE=1 SV=1
+E value*****	1E-018
+Match**	sp|Q9VVF7|MIP_DROME
+Score**	92.4
+Extent of match****	65
+Length of best match***	211
+% identity*****	61
+% Coverage****	31
+Alphanumeric Index**	Q9VVF7 1 P82003 2 Q10998 CP1_APLCA A2A6M5 CACO2_MOUSE CALCOCO2 A1D3A0 RMD11_NEOFI RMD11 1020 3700 A1164 181 3 Q16992 Q6CLR3 DED1_KLULA DED1 Q4WTC7 RMD11_ASPFU Q6ZTR0 YG017_HUMAN MGC9712 5 P29126 4
+Text index **	MIP_DROME ALLATOSTATINS MIP OS DROSOPHILA MELANOGASTER GN PE SV PTSP_BOMMO PROTHORACICOSTATIC BOMBYX MORI CEREBRAL APLYSIA CALIFORNICA CALCIUM BINDING COILED COIL DOMAIN CONTAINING MUS MUSCULUS NEOSARTORYA FISCHERI STRAIN ATCC DSM FGSC NRRL LWA_ANTEL LWAMIDE NEUROPEPTIDES ANTHOPLEURA ELEGANTISSIMA ATP DEPENDENT RNA HELICASE KLUYVEROMYCES LACTIS ASPERGILLUS FUMIGATUS UNCHARACTERIZED HOMO SAPIENS XYNA_RUMFL BIFUNCTIONAL ENDO BETA XYLANASE XYLA RUMINOCOCCUS FLAVEFACIENS XYNA 
+Best match to GO database	Myoinhibiting peptide precursor - Drosophila melanogaster - ecdysiostatic hormone activity - hormone activity - myoinhibitory hormone activity - neuropeptide signaling pathway - neuropeptide hormone activity - cellular_component
+E value******	3E-19
+Function descriptors	ecdysiostatic hormone activity||neuropeptide hormone activity||hormone activity||receptor binding||protein binding||binding
+Function parent	binding
+Function second parent	protein binding
+GO #	GO:0016087
+E value of functional GO	3.00E-19
+Component descriptors	<cellular_component
+Component parent	<cellular_component
+Component second parent	
+GO #*	GO:0005575
+E value of component GO	3.00E-19
+Process descriptors	neuropeptide signaling pathway||G\-protein coupled receptor protein signaling pathway||cell surface receptor linked signal transduction||signal transduction||regulation of cellular process||regulation of biological process||biological regulation
+Process parent	binding
+Process second parent	protein binding
+GO #**	GO:0007218
+E value of process GO	3.00E-19
+Best match to CDD database	
+E value*******	
+Alphanumeric Index***	
+Text index ***	
+Best match to KOG database	
+E value********	
+General class	
+Alphanumeric Index****	
+Text index ****	
+Best match to PFAM database	
+E value*********	
+Alphanumeric Index*****	
+Text index *****	
+Best match to PRK database	gnl|CDD|136253
+E value**********	0.31
+Alphanumeric Index******	136253 PRK07206 139684 PRK13583 137442 PRK09633
+Text index ******	HYPOTHETICAL PROVISIONAL HISG ATP PHOSPHORIBOSYLTRANSFERASE CATALYTIC SUBUNIT LIGD DEPENDENT DNA LIGASE REVIEWED 
+Best match to SMART database	G_alpha
+E value***********	0.89
+Alphanumeric Index*******	128571 SMART00275
+Text index *******	G_ALPHA G ALPHA SUBUNIT PROTEINS THAT CONTAINS GUANINE NUCLEOTIDE BINDING SITE 
+Best match to Jose''s transposable element database	
+E value************	
+PROSITE motifs	CAMP_PHOSPHO_SITE |PKC_PHOSPHO_SITE |CK2_PHOSPHO_SITE |MYRISTYL |AMIDATION |ER_TARGET |PRENYLATION |MICROBODIES_CTER |
+Non promiscuous PROSITE motifs	ER_TARGET |
+Salivary motifs	
+Non promiscuous salivary motifs	
+Best match to AEGY-PEP database	allatostatin, B-type, putative
+E value*************	4E-22
+Match***	AAEL012139-PA
+Score***	101
+% identity******	64
+% Coverage*****	31
+Best match to Culex quinquefasciatus proteins	B-type allatostatin prohormone protein_coding supercont3.6 330449 331149
+E value**************	9E-20
+Match****	CPIJ000669
+Score****	92
+% identity*******	39
+% Coverage******	66
+Best match to D. melanogaster proteins	loc=3L:complement(17310680..17311312); name=Mip-PA;
+E value***************	9E-020
+Match*****	Mip-PA
+Score*****	92.4
+% identity********	61
+% Coverage*******	31
+Best match to C. elegans proteins	nlp-38 status:Confirmed TR:Q8T3G1 protein_id:CAD24480.1 Length = 101  Score =
+E value****************	8E-004
+Match******	C01A2.7
+Score******	39.3
+% identity*********	42
+% Coverage********	49
+Best match to Arabidopsis proteins	KOW domain-containing transcription factor family protein | chr5:1196070-1202654
+E value*****************	2E-004
+Match*******	AT5G04290.1
+Score*******	42
+% identity**********	34
+% Coverage*********	5
+Clustered at 30%-Sim- on 60% of length - - Cluster#	1306
+# seqs 	2
+Clustered at 40%-Sim- on 60% of length - - Cluster#	1340
+# seqs *	2
+Clustered at 50%-Sim- on 60% of length - - Cluster#	1312
+# seqs **	2
+Clustered at 60%-Sim- on 60% of length - - Cluster#	1255
+# seqs ***	2
+Clustered at 70%-Sim- on 60% of length - - Cluster#	1083
+# seqs ****	2
+Clustered at 80%-Sim- on 60% of length - - Cluster#	915
+# seqs *****	2
+Clustered at 90%-Sim- on 60% of length - - Cluster#	736
+# seqs ******	2
+Clustered at 95%-Sim- on 60% of length - - Cluster#	601
+# seqs	2
+Clustered at 99%-Sim- on 60% of length - - Cluster#	433
+# seqs*	2

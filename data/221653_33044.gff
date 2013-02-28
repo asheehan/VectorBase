@@ -1,0 +1,11 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=0 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=33044&page=res&job_id=221653
+2L	BLAST	Blast Hit	47480262	47480954	1691	-	.	AgGPRop10
+2L	BLAST	Blast Hit	47494268	47494564	725	-	.	AgGPRop10
+2L	BLAST	Blast Hit	27018895	27019467	412	+	.	AgGPRop10
+2R	BLAST	Blast Hit	671626	672624	649	-	.	AgGPRop10
+2R	BLAST	Blast Hit	674094	675092	649	+	.	AgGPRop10
+2R	BLAST	Blast Hit	736080	737078	649	-	.	AgGPRop10
+2R	BLAST	Blast Hit	669116	670180	630	-	.	AgGPRop10
+2R	BLAST	Blast Hit	666494	667096	436	-	.	AgGPRop10
+2R	BLAST	Blast Hit	21814097	21814732	431	+	.	AgGPRop10
+3R	BLAST	Blast Hit	48805828	48806994	606	-	.	AgGPRop10

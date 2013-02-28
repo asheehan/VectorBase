@@ -1,0 +1,11 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=0 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=56360&page=res&job_id=223477
+ABKQ01028310.1	BLAST	Blast Hit	5930	38103	64348	+	.	EQ099732.1 second probe
+ABKQ01028311.1	BLAST	Blast Hit	1	26411	52822	+	.	EQ099732.1 second probe
+ABKQ01015422.1	BLAST	Blast Hit	1	1958	2686	+	.	EQ099732.1 second probe
+ABKQ01001613.1	BLAST	Blast Hit	1	1015	1570	-	.	EQ099732.1 second probe
+ABKQ01011365.1	BLAST	Blast Hit	1	626	1036	+	.	EQ099732.1 second probe
+ABKQ01013231.1	BLAST	Blast Hit	531	1068	910	+	.	EQ099732.1 second probe
+ABKQ01023838.1	BLAST	Blast Hit	767	1303	880	-	.	EQ099732.1 second probe
+ABKQ01012153.1	BLAST	Blast Hit	47281	47907	876	+	.	EQ099732.1 second probe
+ABKQ01054234.1	BLAST	Blast Hit	58543	59170	860	+	.	EQ099732.1 second probe
+ABKQ01025717.1	BLAST	Blast Hit	865	1486	858	+	.	EQ099732.1 second probe

@@ -1,0 +1,3 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=0 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=55554&page=res&job_id=223004
+3L	BLAST	Blast Hit	33286350	33286368	38	-	.	spclip-r
+2L	BLAST	Blast Hit	8487395	8487411	34	-	.	spclip-r

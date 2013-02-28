@@ -1,0 +1,7 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=0 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=54496&page=res&job_id=222743
+CPIJ017610-RA	BLAST	Blast Hit	1035	1205	124	+	.	sctg_0063_0001 length=33778
+CPIJ017610-RA	BLAST	Blast Hit	552	645	88	+	.	sctg_0063_0001 length=33778
+CPIJ006486-RA	BLAST	Blast Hit	1035	1202	120	+	.	sctg_0063_0001 length=33778
+CPIJ006486-RA	BLAST	Blast Hit	552	645	88	+	.	sctg_0063_0001 length=33778
+CPIJ006486-RA	BLAST	Blast Hit	1483	1550	86	+	.	sctg_0063_0001 length=33778
+CPIJ019565-RA	BLAST	Blast Hit	655	722	86	+	.	sctg_0063_0001 length=33778

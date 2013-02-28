@@ -1,0 +1,7 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=0 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=34393&page=res&job_id=221891
+2R	BLAST	Blast Hit	3493667	3494167	1002	+	.	ACE1 An. albimanus
+2R	BLAST	Blast Hit	3493391	3493559	338	+	.	ACE1 An. albimanus
+2R	BLAST	Blast Hit	28718043	28718067	40	-	.	ACE1 An. albimanus
+2L	BLAST	Blast Hit	45159889	45159915	44	-	.	ACE1 An. albimanus
+2L	BLAST	Blast Hit	17322317	17322342	42	+	.	ACE1 An. albimanus
+2L	BLAST	Blast Hit	34204183	34204207	40	-	.	ACE1 An. albimanus

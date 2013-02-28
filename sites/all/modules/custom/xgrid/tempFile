@@ -4,25 +4,25 @@
 	<array>
 	<dict>
 		<key>name</key>
-		<string>blastParse_qg2mo7</string>
+		<string>blastParse_l7xtrx</string>
 		<key>schedulerParameters</key>
         <dict>
         <key>dependsOnJobs</key>
         <array>
-        <string>214194</string>
+        <string>223476</string>
         </array>
         </dict>
 		<key>taskSpecifications</key>
 		<dict>
-			<key>blastParse_qg2mo7</key>
+			<key>blastParse_l7xtrx</key>
           	<dict>
 				<key>command</key>
 				<string>/vectorbase/scripts/xgridBlastParse.sh</string>
 				<key>arguments</key>
 				<array>
-					<string>214194</string>
+					<string>223476</string>
 					<string>10</string>
-					<string>192.168.1.93</string>
+					<string>192.168.1.70</string>
 					<string>vb_drupal</string>
 					<string>db_public</string>
 					<string>limecat</string>

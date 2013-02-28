@@ -1,0 +1,11 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=0 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=35835&page=res&job_id=222084
+EV307533.1	BLAST	Blast Hit	6	844	1592	-	.	gi|170030305|ref|XM_001842978.1| Culex quinquefasciatus profilin,mRNA
+EV348863.1	BLAST	Blast Hit	1	752	1482	-	.	gi|170030305|ref|XM_001842978.1| Culex quinquefasciatus profilin,mRNA
+FF276303.1	BLAST	Blast Hit	40	775	1442	+	.	gi|170030305|ref|XM_001842978.1| Culex quinquefasciatus profilin,mRNA
+EV348508.1	BLAST	Blast Hit	17	778	1428	+	.	gi|170030305|ref|XM_001842978.1| Culex quinquefasciatus profilin,mRNA
+EV334895.1	BLAST	Blast Hit	24	649	1222	+	.	gi|170030305|ref|XM_001842978.1| Culex quinquefasciatus profilin,mRNA
+EV334651.1	BLAST	Blast Hit	1	626	1216	-	.	gi|170030305|ref|XM_001842978.1| Culex quinquefasciatus profilin,mRNA
+EV364136.1	BLAST	Blast Hit	1	493	986	-	.	gi|170030305|ref|XM_001842978.1| Culex quinquefasciatus profilin,mRNA
+EV336237.1	BLAST	Blast Hit	1	493	986	-	.	gi|170030305|ref|XM_001842978.1| Culex quinquefasciatus profilin,mRNA
+EV327890.1	BLAST	Blast Hit	1	493	986	-	.	gi|170030305|ref|XM_001842978.1| Culex quinquefasciatus profilin,mRNA
+EV341594.1	BLAST	Blast Hit	1	493	986	-	.	gi|170030305|ref|XM_001842978.1| Culex quinquefasciatus profilin,mRNA

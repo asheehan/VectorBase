@@ -1,0 +1,11 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=0 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=56359&page=res&job_id=223477
+AGAP013338-RA	BLAST	Blast Hit	1	2486	4866	+	.	EQ099732.1 second probe
+AGAP004384-RA	BLAST	Blast Hit	28	1636	3118	-	.	EQ099732.1 second probe
+AGAP004392-RA	BLAST	Blast Hit	553	2074	2978	-	.	EQ099732.1 second probe
+AGAP004392-RB	BLAST	Blast Hit	403	1924	2978	-	.	EQ099732.1 second probe
+AGAP012507-RA	BLAST	Blast Hit	2	1291	2494	-	.	EQ099732.1 second probe
+AGAP004391-RA	BLAST	Blast Hit	657	1838	2308	+	.	EQ099732.1 second probe
+AGAP004391-RA	BLAST	Blast Hit	175	660	972	+	.	EQ099732.1 second probe
+AGAP012513-RA	BLAST	Blast Hit	584	1448	1710	+	.	EQ099732.1 second probe
+AGAP012514-RA	BLAST	Blast Hit	414	916	976	+	.	EQ099732.1 second probe
+AGAP004386-RA	BLAST	Blast Hit	1	388	770	+	.	EQ099732.1 second probe

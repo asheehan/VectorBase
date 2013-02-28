@@ -91,6 +91,35 @@ function gmap_taxonomy_update_6001() {
 }
 
 /**
+ * Use vocabularies machine names instead of vids.
+ */
+function gmap_taxonomy_update_7201() {
+  $enabled_vocabularies = variable_get('gmap_taxonomy_vocabs', array());
+  $vocabularies = taxonomy_vocabulary_load_multiple(array_keys(array_filter($enabled_vocabularies)));
+
+  $result = array();
+  foreach ($vocabularies as $vocabulary) {
+    $result[$vocabulary->machine_name] = TRUE;
+  }
+
+  // Save result
+  variable_set('gmap_taxonomy_vocabs', $result);
+}
+
+/**
+ * Split settings in a variable for each vocabulary.
+ */
+function gmap_taxonomy_update_7202() {
+  $enabled_vocabularies = variable_get('gmap_taxonomy_vocabs', array());
+
+  foreach ($enabled_vocabularies as $machine_name => $enabled) {
+    variable_set('gmap_taxonomy_vocab_' . $machine_name, $enabled);
+  }
+
+  variable_del('gmap_taxonomy_vocabs');
+}
+
+/**
  * Rebuild {gmap_taxonomy_node} again.
  */
 /*

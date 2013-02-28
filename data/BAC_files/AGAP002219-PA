@@ -1,0 +1,214 @@
+Protein	AGAP002219-PA
+First residue	M
+Seq size	190
+Location/Gene	2R:17699429:17701188:-1|gene:AGAP002219
+CDS	AGAP002219-RA
+Seq size*	1666
+Description	SCALAR(0x926b570)|2R:17699429:17702648:-1|gene:AGAP002219
+ATG first?	
+Last codon	*
+Genomic match	2R_Start_17680000
+E value	0
+Chromosome and link to ENSEMBL	2R
+Start	17699429
+End	17702648
+Extent of match	1676
+% identity	100
+Number of segments (exons, approximate)	5
+Orientation	REV
+Satisfied 95% id on length 100	1
+Best match to assembled ESTs	est-07-contig_10172
+E value*	0
+Score	2363
+Extent of match*	1343
+Length of best match	1323
+% identity*	96
+% Coverage	102
+First residue of match	13
+First residue of sequence	16
+Number of segments	1
+Annotation mismatch	
+Orientation*	FOR
+Satisfied 95% id on length 100*	1
+Number of sequences	4
+all-instars	0
+normalized-fatbody	1
+head-all	2
+Immune cells	0
+Pasteur annotation	0
+Sugar-abd	0
+Blood-abd	0
+InfBlood-abd	0
+Blood-fed	0
+Non-Blood-fed	1
+Sg-male	0
+SG-fem	0
+SG-Pasteur	0
+All female glands	0
+Best match to Affymetrix chip database	Ag.2R.1176.0_CDS_at
+E value**	0
+Extent of match**	535
+Length of best match*	535
+% identity**	100
+% Coverage*	100
+First residue of match*	1
+First residue of sequence*	1131
+Number of segments*	1
+Annotation mismatch*	
+Orientation**	FOR
+Satisfied 95% id on length 100**	1
+L-mean	111
+Males-mean	116
+SF-mean	106
+3h-mean	173
+24h-mean	208
+48h-mean	267
+72h-mean	187
+15d-mean	188
+Sum of residues (larger value indicates differential aa usage)	0.3
+Increased AA (fold increase over average)	
+Cys number	3
+Predicted Tyr-SO4 - Prosite rules	2
+% Ser + Thr	9.5
+% Pro	1.6
+% Gly	6.8
+% Gly+Pro	8.4
+Number of possible HO-Pro [LPAE]-P-G	
+Number of possible OH-lysines X-Lys-Gly not Lys-Gly-Pro	
+Number of ProGly''s	
+SigP Result	CYT
+Cleavage Position	
+MW	21.71
+pI	6.84
+Mature MW	
+pI*	
+TMHMM result	ExpAA=0.60 First60=0.58 PredHel=0 Topology=o
+Predicted helices	0
+% membrane	
+% outside	
+% inside	
+mTP	0.072
+SP	0.184
+other	0.847
+Loc	_
+Relative Confidence (1 is better)	2
+ProP furin cleavage predictions 	
+Best match to NR protein database	AGAP002219-PA
+E value***	1E-104
+Match	gi|158284907
+Score*	380
+Extent of match***	190
+Length of best match**	201
+% identity***	100
+% Coverage**	95
+Alphanumeric Index	158284907 XP_307965 3 AGAP002219 157020818 EAA03664 157131407 XP_001662234 1 108871559 EAT35784 170039279 XP_001847468 167862869 EDS26252 195389420 XP_002053375 RAS1 223635718 B4LY29 RAS1_DROVI 194151461 EDW66895 195038137 XP_001990517 GH19394 223635715 B4JFU8 RAS1_DROGR 193894713 EDV93579 195451354 XP_002072879 GK13838 223635719 B4NJ72 RAS1_DROWI 194168964 EDW83865 156545968 XP_001606521 17136430 NP_476699 85D 194746659 XP_001955794 GF16057 194903130 XP_001980816 GG17366 195330398 XP_002031891 GM26252 195499442 XP_002096950 GE24771 195572268 XP_002104118 RAS85D 131859 P08646 2 RAS1_DROME DRAS1 DMRAS85D 46397675 P83831 RAS1_DROSI 46397676 P83832 RAS1_DROMA 223635713 B3M185 RAS1_DROAN 223635714 B3NZR4 RAS1_DROER 223635720 B4PUP5 RAS1_DROYA 6531630 AAF15514 AF186648_1 6531632 AAF15515 AF186649_1 6531634 AAF15516 AF186650_1 158205 AAA28847 7299191 AAF54388 19528329 AAL90279 LD17536P 20151763 AAM11241 RE53955P 190628831 EDV44355 190652519 EDV49774 194120834 EDW42877 194183051 EDW96662
+Text index 	PA RAS FULL LIKE FLAGS PRECURSOR SIMILAR TO ONCOGENE AT SHORT ALTNAME PRF GENE 
+Best match to NR database depleted of Anopheles gambiae sequenc	ras
+E value****	1E-102
+Match*	gi|157131407
+% identity****	98
+% Coverage***	100
+Alphanumeric Index*	157131407 XP_001662234 1 108871559 EAT35784 170039279 XP_001847468 167862869 EDS26252 195389420 XP_002053375 RAS1 223635718 B4LY29 RAS1_DROVI 194151461 EDW66895 195038137 XP_001990517 GH19394 223635715 B4JFU8 RAS1_DROGR 193894713 EDV93579 195451354 XP_002072879 GK13838 223635719 B4NJ72 RAS1_DROWI 194168964 EDW83865 156545968 XP_001606521 17136430 NP_476699 85D 194746659 XP_001955794 GF16057 194903130 XP_001980816 GG17366 195330398 XP_002031891 GM26252 195499442 XP_002096950 GE24771 195572268 XP_002104118 RAS85D 131859 P08646 2 RAS1_DROME DRAS1 DMRAS85D 46397675 P83831 RAS1_DROSI 46397676 P83832 RAS1_DROMA 223635713 B3M185 RAS1_DROAN 223635714 B3NZR4 RAS1_DROER 223635720 B4PUP5 RAS1_DROYA 6531630 AAF15514 AF186648_1 6531632 AAF15515 AF186649_1 6531634 AAF15516 AF186650_1 158205 AAA28847 7299191 AAF54388 19528329 AAL90279 LD17536P 20151763 AAM11241 RE53955P 190628831 EDV44355 190652519 EDV49774 194120834 EDW42877 194183051 EDW96662 194200045 EDX13621 220943236 ACL84161 220953426
+Text index *	RAS FULL LIKE FLAGS PRECURSOR SIMILAR TO ONCOGENE AT SHORT ALTNAME PA PRF GENE 
+Best match to SwissProt	Ras-like protein 1 OS=Drosophila virilis GN=Ras85D PE=3 SV=1
+E value*****	4E-091
+Match**	sp|B4LY29|RAS1_DROVI
+Score**	333
+Extent of match****	191
+Length of best match***	189
+% identity*****	87
+% Coverage****	101
+Alphanumeric Index**	B4LY29 RAS1_DROVI 1 RAS85D 3 B4JFU8 RAS1_DROGR B4NJ72 RAS1_DROWI B4PUP5 RAS1_DROYA P83831 RAS1_DROSI P08646 RAS1_DROME 2 P83832 RAS1_DROMA B3NZR4 RAS1_DROER B3M185 RAS1_DROAN Q295X7 RAS1_DROPS
+Text index **	RAS LIKE OS DROSOPHILA VIRILIS GN PE SV GRIMSHAWI WILLISTONI YAKUBA SIMULANS MELANOGASTER MAURITIANA ERECTA ANANASSAE PSEUDOOBSCURA 
+Best match to GO database	Ras oncogene at 85D - Drosophila melanogaster - GTPase activity - determination of anterior/posterior axis, embryo - torso signaling pathway - GDP binding - border follicle cell migration - ovarian follicle cell development - sevenless signaling pathway - regulation of growth - compound eye development - positive regulation of cell growth - cell fate specification - chorion-containing eggshell pattern formation - regulation of cell growth - G1/S transition of mitotic cell cycle - cell growth - anti-apoptosis - perineurial glial growth - hemocyte migration - dorsal closure, amnioserosa morphology change - negative regulation of compound eye retinal cell programmed cell death - heart development - dorsal closure - wing disc morphogenesis - imaginal disc-derived wing morphogenesis - peripheral nervous system development - primary branching, open tracheal system - gastrulation - regulation of hemocyte differentiation - instar larval development - regulation of multicellular organism growth - tracheal outgrowth, open tracheal system - eye-antennal disc morphogenesis - negative regulation of apoptosis - oocyte axis specification - establishment or maintenance of apical/basal cell polarity - cell proliferation - positive regulation of photoreceptor cell differentiation - protein import into nucleus - plasma membrane - SUMO binding
+E value******	2E-91
+Function descriptors	GTPase activity||nucleoside\-triphosphatase activity||pyrophosphatase activity||hydrolase activity\, acting on acid anhydrides\, in phosphorus\-containing anhydrides||hydrolase activity\, acting on acid anhydrides||hydrolase activity||catalytic activity
+Function parent	catalytic activity
+Function second parent	hydrolase activity
+GO #	GO:0003924
+E value of functional GO	2.00E-91
+Component descriptors	plasma membrane||membrane||cell part
+Component parent	cell part
+Component second parent	membrane
+GO #*	GO:0005886
+E value of component GO	2.00E-91
+Process descriptors	<determination of anterior/posterior axis\, embryo||polarity specification of anterior/posterior axis||establishment of posterior gap gene boundaries||establishment of central gap gene boundaries||establishment of terminal gap gene boundary||polarity specification of proximal/distal axis||regulation of antipodal cell differentiation||specification of segmental identity\, trunk||specification of segmental identity\, head||regulation of Malpighian tubule diameter||forebrain\-midbrain boundary formation||spongiotrophoblast cell proliferation||inner cell mass cell differentiation||cell wall modification during abscission||regulation of prostatic bud formation||progression of neural tube closure||initiation of neural tube closure||neural fold elevation formation||neural fold elevation formation||regulation of imaginal disc growth||regulation of pollen tube growth||muscle thin filament assembly||neuroblast fate specification||glial cell fate specification||Sertoli cell fate commitment||notochord cell vacuolation||notochord cell development||dendrite morphogenesis||root hair initiation||guard cell development||stem cell maintenance||neuron maturation||myoblast maturation||pole cell formation||glial cell growth||myoblast fusion||otolith formation||bract formation||pons formation||pons formation||tube fusion||seed growth||innervation
+Process parent	catalytic activity
+Process second parent	hydrolase activity
+GO #**	GO:0008595
+E value of process GO	2.00E-91
+Best match to CDD database	H_N_K_Ras_like
+E value*******	4E-093
+Alphanumeric Index***	133338 CD04138 RAS4A 4B 3 PI3K TIAM1 MST1 128470 SMART00173 P21RAS 133252 CD00876 RSR1 RRP22 RAS2 133339 CD04139 > 80% RLIP76 RALBP1 CDC42 SEC6 8 133336 CD04136 RAP1 RAP2 4 MAP4K4 TRAF2 CDC24 133345 CD04145 TC21 RAS3 109139 PFAM00071 YPT1 PFAM00009 PFAM00025 PFAM00063 133375 CD04175 RAP1A RAP1B 95% 1 12 P21 KREV1 133377 CD04177 BUD1P 133344 CD04144 SQL2 CDC25
+Text index ***	H_N_K_RAS_LIKE H RAS N K SUBFAMILY ARE PROTOTYPICAL MEMBERS FAMILY THESE ISOFORMS GENERATE DISTINCT SIGNAL OUTPUTS DESPITE INTERACTING WITH A COMMON SET ACTIVATORS EFFECTORS STRONGLY ASSOCIATED ONCOGENIC PROGRESSION IN TUMOR INITIATION MUTATED VERSIONS THAT INSENSITIVE TO GAP STIMULATION THEREFORE CONSTITUTIVELY ACTIVE FOUND SIGNIFICANT FRACTION HUMAN CANCERS MANY GUANINE NUCLEOTIDE EXCHANGE FACTORS GEFS HAVE BEEN IDENTIFIED THEY SEQUESTERED CYTOSOL UNTIL ACTIVATION BY GROWTH TRIGGERS RECRUITMENT PLASMA MEMBRANE OR GOLGI WHERE GEF COLOCALIZES GTP BOUND INTERACTS SEVERAL EFFECTOR PROTEINS STIMULATE VARIETY DIVERSE CYTOPLASMIC SIGNALING ACTIVITIES SOME KNOWN POSITIVELY MEDIATE PROPERTIES INCLUDING RAF PHOSPHATIDYLINOSITOL KINASE RALGEFS OTHERS PROPOSED PLAY NEGATIVE REGULATORY ROLES ONCOGENESIS RASSF NORE MOST CONTAIN LIPID MODIFICATION SITE AT C TERMINUS TYPICAL SEQUENCE MOTIF CAAX AN ALIPHATIC AMINO ACID X ANY BINDING IS ESSENTIAL FOR ATTACHMENT KEY FEATURE DUE PRESENCE TRUNCATED 
+Best match to KOG database	Ras-related GTPase
+E value********	5E-065
+General class	General function prediction only
+Alphanumeric Index****	35616 KOG0395 35301 KOG0078 SEC4 35307 KOG0084 RAB1 YPT1 35315 KOG0092 RAB5 YPT51 35614 KOG0393 35321 KOG0098 RAB2 35303 KOG0080 RAB18 35615 KOG0394 35302 KOG0079 35310 KOG0087 RAB11 YPT3
+Text index ****	RAS RELATED GTPASE GTP BINDING SMALL G SUPERFAMILY FAMILY PROTEINS GTPASES RHO TYPE H RAY 
+Best match to PFAM database	Ras
+E value*********	5E-063
+Alphanumeric Index*****	109139 PFAM00071 YPT1 PFAM00009 PFAM00025 PFAM00063 117054 PFAM08477 1 2 PFAM00036 109078 110493 PFAM01494 FAD_BINDING_3 109094 112026 PFAM03193 DUF258 110886 PFAM01926 MMR_HSR1 110320 PFAM01307 112417 PFAM03599 109125 PFAM00056 LDH_1_N
+Text index *****	RAS FAMILY INCLUDES SUB FAMILIES RAB RAC RAL RAN RAP MORE SHARES P LOOP MOTIF WITH GTP_EFTU ARF MYOSIN_HEAD SEE AS REGARDS GTPASES THESE ARE IMPORTANT REGULATORS VESICLE FORMATION MOTILITY FUSION THEY SHARE A FOLD IN COMMON ALL THIS IS SIX STRANDED BETA SHEET SURROUNDED BY FIVE ALPHA HELICES MIRO LIKE MITOCHONDRIAL RHO PROTEINS ATYPICAL HAVE UNIQUE DOMAIN ORGANISATION TANDEM GTP BINDING DOMAINS TWO EF HAND THAT MAY BIND CALCIUM ALSO LARGER THAN CLASSICAL SMALL IT HAS BEEN PROPOSED INVOLVED HOMEOSTASIS APOPTOSIS ELONGATION FACTOR TU CONTAINS FOUND SEVERAL OTHER SUCH CONSISTS THREE STRUCTURAL PLUS C TERMINAL BARREL FAD NUMBER ENZYMES ADP RIBOSYLATION COMBINES DIFFERENT PROSITE TOGETHER UNKNOWN FUNCTION GTPASE PLANT_VIR_PROT PLANT VIRAL MOVEMENT KNOWN FROM SSRNA VIRUS INCLUDING POTEXVIRUSES HORDEIVIRUSES CARLAVIRUSES CDHD CO DEHYDROGENASE ACETYL COA SYNTHASE DELTA SUBUNIT LACTATE MALATE NAD L DEHYDROGENASES METABOLIC WHICH CATALYSE CONVERSION TO PYRUVATE LAST STEP ANAEROBIC GLYCOLYSIS 
+Best match to PRK database	gnl|CDD|140161
+E value**********	6E-18
+Alphanumeric Index******	140161 PTZ00132 140131 PTZ00099 RAB6 134101 PRK00098 137355 PRK09518 135300 PRK05291 135310 PRK05306 2 134094 PRK00089 138854 PRK12299 138866 PRK12312 138853 PRK12298
+Text index ******	GTP BINDING NUCLEAR PROVISIONAL RIBOSOME ASSOCIATED GTPASE REVIEWED BIFUNCTIONAL CYTIDYLATE KINASE TRME TRNA MODIFICATION INFB TRANSLATION INITIATION FACTOR IF VALIDATED ERA OBGE 
+Best match to SMART database	RAS
+E value***********	3E-083
+Alphanumeric Index*******	128470 SMART00173 P21RAS 128472 SMART00175 128471 SMART00174 CDC42 128473 SMART00176 TC4 128328 SMART00010 128665 SMART00382 128386 SMART00072
+Text index *******	RAS SUBFAMILY SMALL GTPASES SIMILAR IN FOLD FUNCTION TO BACTERIAL EF TU GTPASE COUPLES RECEPTOR TYR KINASES G RECEPTORS KINASE CASCADES RAB ARE IMPLICATED VESICLE TRAFFICKING RHO HOMOLOGY LIKE MEMBERS THIS INCLUDE RAC AS WELL ISOFORMS RAN RELATED NUCLEAR PROTEINS IS INVOLVED ACTIVE TRANSPORT THROUGH PORES SMALL_GTPASE SUPERFAMILY ILL DEFINED PREDICTS ARF SAR SUBFAMILIES OTHERS THAT COULD NOT BE CLASSIFIED WAY WITHOUT PREDICTIONS AAA ATPASES ASSOCIATED WITH A VARIETY CELLULAR ACTIVITIES PROFILE ALIGNMENT ONLY DETECTS FRACTION VAST FAMILY POORLY CONSERVED N TERMINAL HELIX MISSING FROM GUKC GUANYLATE HOMOLOGUES ENZYMES CATALYZE ATP DEPENDENT PHOSPHORYLATION GMP GDP STRUCTURE RESEMBLES ADENYLATE SO CALLED MEMBRANE MAGUKS DO POSSESS INSTEAD AT LEAST SOME BINDING FUNCTIONS 
+Best match to Jose''s transposable element database	
+E value************	
+PROSITE motifs	PKC_PHOSPHO_SITE |CK2_PHOSPHO_SITE |TYR_PHOSPHO_SITE |MYRISTYL |AMIDATION |ATP_GTP_A |PRENYLATION |MICROBODIES_CTER |
+Non promiscuous PROSITE motifs	ATP_GTP_A |
+Salivary motifs	
+Non promiscuous salivary motifs	
+Best match to AEGY-PEP database	ras
+E value*************	1E-104
+Match***	AAEL012071-PA
+Score***	373
+% identity******	98
+% Coverage*****	100
+Best match to Culex quinquefasciatus proteins	ras protein_coding supercont3.106 445735 458130
+E value**************	1E-104
+Match****	CPIJ006054
+Score****	372
+% identity*******	97
+% Coverage******	100
+Best match to D. melanogaster proteins	loc=3R:complement(5337233..5338013); name=Ras85D-PA;
+E value***************	6E-092
+Match*****	Ras85D-PA
+Score*****	332
+% identity********	87
+% Coverage*******	101
+Best match to C. elegans proteins	let-60 LET-60 RAS protein status:Confirmed SW:P22981 protein_id:CAA92630.1
+E value****************	7E-079
+Match******	ZK792.6
+Score******	289
+% identity*********	76
+% Coverage********	103
+Best match to Arabidopsis proteins	Ras-related GTP-binding protein, putative, very strong similarity to RAB1C
+E value*****************	4E-023
+Match*******	AT4G17530.1
+Score*******	104
+% identity**********	35
+% Coverage*********	81
+Clustered at 30%-Sim- on 60% of length - - Cluster#	6
+# seqs 	91
+Clustered at 40%-Sim- on 60% of length - - Cluster#	4
+# seqs *	72
+Clustered at 50%-Sim- on 60% of length - - Cluster#	3
+# seqs **	57
+Clustered at 60%-Sim- on 60% of length - - Cluster#	45
+# seqs ***	7
+Clustered at 70%-Sim- on 60% of length - - Cluster#	51
+# seqs ****	5
+Clustered at 80%-Sim- on 60% of length - - Cluster#	4107
+# seqs *****	1
+Clustered at 90%-Sim- on 60% of length - - Cluster#	4107
+# seqs ******	1
+Clustered at 95%-Sim- on 60% of length - - Cluster#	4082
+# seqs	1
+Clustered at 99%-Sim- on 60% of length - - Cluster#	4063
+# seqs*	1

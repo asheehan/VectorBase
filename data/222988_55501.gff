@@ -1,0 +1,5 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=0 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=55501&page=res&job_id=222988
+EV340277.1	BLAST	Blast Hit	153	177	44	+	.	Contig1
+EV346910.1	BLAST	Blast Hit	154	178	44	+	.	Contig1
+EV358977.1	BLAST	Blast Hit	153	177	44	+	.	Contig1
+FF159308.1	BLAST	Blast Hit	153	177	44	+	.	Contig1

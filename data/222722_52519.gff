@@ -1,0 +1,4 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=0 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=52519&page=res&job_id=222722
+ASTM010288-RA	BLAST	Blast Hit	478	724	348	-	.	Ago4PCR rev
+ASTM010288-RA	BLAST	Blast Hit	418	479	114	-	.	Ago4PCR rev
+ASTM021299-RA	BLAST	Blast Hit	1445	1463	38	+	.	Ago4PCR rev

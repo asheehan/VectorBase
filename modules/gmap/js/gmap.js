@@ -358,6 +358,7 @@ Drupal.gmap.addHandler('gmap', function (elem) {
         };
         jQuery(elem).parents('fieldset.collapsible').children('legend').children('a').click(r);
         jQuery('.vertical-tab-button', jQuery(elem).parents('.vertical-tabs')).children('a').click(r);
+        jQuery(window).bind('hashchange', r);
         // Would be nice, but doesn't work.
         //$(elem).parents('fieldset.collapsible').children('.fieldset-wrapper').scroll(r);
       }, 0);

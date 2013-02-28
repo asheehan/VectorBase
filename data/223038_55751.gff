@@ -1,0 +1,4 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=0 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=55751&page=res&job_id=223038
+PHUM554710-RA	BLAST	Blast Hit	2954	2983	36	-	.	
+PHUM189890-RA	BLAST	Blast Hit	811	828	36	-	.	
+PHUM230130-RA	BLAST	Blast Hit	594	614	36	-	.	

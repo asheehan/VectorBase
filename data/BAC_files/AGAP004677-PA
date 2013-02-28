@@ -1,0 +1,214 @@
+Protein	AGAP004677-PA
+First residue	M
+Seq size	408
+Location/Gene	2L:157496:181213:-1|gene:AGAP004677
+CDS	AGAP004677-RA
+Seq size*	1467
+Description	SCALAR(0x8fbad74)|2L:157348:181305:-1|gene:AGAP004677
+ATG first?	
+Last codon	*
+Genomic match	2L_Start_120000
+E value	0
+Chromosome and link to ENSEMBL	2L
+Start	157348
+End	159368
+Extent of match	1077
+% identity	100
+Number of segments (exons, approximate)	3
+Orientation	REV
+Satisfied 95% id on length 100	1
+Best match to assembled ESTs	clu3-contig_1192
+E value*	0
+Score	2868
+Extent of match*	1459
+Length of best match	1552
+% identity*	99
+% Coverage	94
+First residue of match	77
+First residue of sequence	1
+Number of segments	1
+Annotation mismatch	
+Orientation*	FOR
+Satisfied 95% id on length 100*	1
+Number of sequences	25
+all-instars	0
+normalized-fatbody	4
+head-all	10
+Immune cells	0
+Pasteur annotation	0
+Sugar-abd	0
+Blood-abd	0
+InfBlood-abd	0
+Blood-fed	5
+Non-Blood-fed	5
+Sg-male	0
+SG-fem	0
+SG-Pasteur	1
+All female glands	1
+Best match to Affymetrix chip database	Ag.UNKN.76.1_CDS_s_at
+E value**	0
+Extent of match**	523
+Length of best match*	523
+% identity**	99
+% Coverage*	100
+First residue of match*	1
+First residue of sequence*	481
+Number of segments*	1
+Annotation mismatch*	
+Orientation**	FOR
+Satisfied 95% id on length 100**	1
+L-mean	1980
+Males-mean	1379
+SF-mean	2195
+3h-mean	908
+24h-mean	1504
+48h-mean	2551
+72h-mean	1744
+15d-mean	2657
+Sum of residues (larger value indicates differential aa usage)	0.29
+Increased AA (fold increase over average)	
+Cys number	10
+Predicted Tyr-SO4 - Prosite rules	
+% Ser + Thr	14.0
+% Pro	3.7
+% Gly	6.6
+% Gly+Pro	10.3
+Number of possible HO-Pro [LPAE]-P-G	
+Number of possible OH-lysines X-Lys-Gly not Lys-Gly-Pro	
+Number of ProGly''s	2
+SigP Result	CYT
+Cleavage Position	
+MW	44.85
+pI	9.06
+Mature MW	
+pI*	
+TMHMM result	ExpAA=2.91 First60=0.00 PredHel=0 Topology=o
+Predicted helices	0
+% membrane	
+% outside	
+% inside	
+mTP	0.82
+SP	0.018
+other	0.255
+Loc	M
+Relative Confidence (1 is better)	3
+ProP furin cleavage predictions 	
+Best match to NR protein database	AGAP004677-PA
+E value***	0.0
+Match	gi|158293264
+Score*	808
+Extent of match***	408
+Length of best match**	408
+% identity***	100
+% Coverage**	100
+Alphanumeric Index	158293264 XP_001687783 1 AGAP004677 157016799 EDO64016 158293262 XP_314619 3 157016798 EAA44412 170037782 XP_001846734 167881138 EDS44521 157107649 XP_001649874 108868664 EAT32889 157127210 XP_001654868 108873012 EAT37237 170037780 XP_001846733 167881137 EDS44520 242006900 XP_002424280 212507680 EEB11542 194332813 NP_001123716 LOC100170462 189441929 AAI67338 47937513 AAH72082 MGC78982 147903948 NP_001085223 LOC432317 83318434 AAI08465
+Text index 	PA PB BIFUNCTIONAL FOLD METHYLENETETRAHYDROFOLATE DEHYDROGENASE HYPOTHETICAL 
+Best match to NR database depleted of Anopheles gambiae sequenc	bifunctional protein folD
+E value****	1E-143
+Match*	gi|170037782
+% identity****	83
+% Coverage***	99
+Alphanumeric Index*	170037782 XP_001846734 1 167881138 EDS44521 157107649 XP_001649874 108868664 EAT32889 157127210 XP_001654868 108873012 EAT37237 170037780 XP_001846733 167881137 EDS44520 242006900 XP_002424280 212507680 EEB11542 194332813 NP_001123716 LOC100170462 189441929 AAI67338 47937513 AAH72082 MGC78982 147903948 NP_001085223 LOC432317 83318434 AAI08465 148232110 NP_001086806 2 50418343 AAH77480 MTHFD2 195037981 XP_001990439 GH18238 193894635 EDV93501
+Text index *	BIFUNCTIONAL FOLD METHYLENETETRAHYDROFOLATE DEHYDROGENASE HYPOTHETICAL PROV 
+Best match to SwissProt	Bifunctional methylenetetrahydrofolate dehydrogenase/cyclohydrolase,
+E value*****	1E-107
+Match**	sp|Q5ZKA5|MTDC_CHICK
+Score**	387
+Extent of match****	299
+Length of best match***	337
+% identity*****	63
+% Coverage****	89
+Alphanumeric Index**	Q5ZKA5 MTHFD2 2 1 Q0P5C2 P13995 P18155 Q04448 Q9H903 MTD2L_HUMAN MTHFD2L Q2RIB4 39073 3 A5FNE3 FOLD_FLAJ1 17061 2064 UW101 B8D2H8 168 544 9562 B8F605 5 SH0165
+Text index **	MTDC_CHICK BIFUNCTIONAL METHYLENETETRAHYDROFOLATE DEHYDROGENASE CYCLOHYDROLASE MITOCHONDRIAL OS GALLUS GN PE SV MTDC_BOVIN BOS TAURUS MTDC_HUMAN HOMO SAPIENS MTDC_MOUSE MUS MUSCULUS MTDC_DROME DROSOPHILA MELANOGASTER NMDMC PROBABLE FOLD_MOOTA FOLD MOORELLA THERMOACETICA STRAIN ATCC FLAVOBACTERIUM JOHNSONIAE DSM FOLD_HALOH HALOTHERMOTHRIX ORENII H OCM FOLD_HAEPS HAEMOPHILUS PARASUIS SEROVAR 
+Best match to GO database	methylenetetrahydrofolate dehydrogenase (NADP+ dependent) 2, methenyltetrahydrofolate cyclohydrolase - Danio rerio - cellular_component
+E value******	0
+Function descriptors	methenyltetrahydrofolate cyclohydrolase activity||cyclohydrolase activity||hydrolase activity\, acting on carbon\-nitrogen (but not peptide) bonds\, in cyclic amidines||hydrolase activity\, acting on carbon\-nitrogen (but not peptide) bonds||hydrolase activity||catalytic activity
+Function parent	catalytic activity
+Function second parent	hydrolase activity
+GO #	GO:0004477
+E value of functional GO	1.00E-105
+Component descriptors	mitochondrion||nuclear cyclin\-dependent protein kinase holoenzyme complex||cyclin\-dependent protein kinase holoenzyme complex||outer membrane\-bounded periplasmic space||external encapsulating structure part||cell part
+Component parent	cell part
+Component second parent	external encapsulating structure part
+GO #*	GO:0005739
+E value of component GO	1.00E-105
+Process descriptors	10\-formyltetrahydrofolate metabolic process||tetrahydrofolate metabolic process||folic acid and derivative metabolic process||monocarboxylic acid metabolic process||carboxylic acid metabolic process||oxoacid metabolic process||cellular ketone metabolic process||cellular metabolic process||metabolic process
+Process parent	catalytic activity
+Process second parent	hydrolase activity
+GO #**	GO:0009256
+E value of process GO	1.00E-105
+Best match to CDD database	FolD
+E value*******	1E-100
+Alphanumeric Index***	30539 COG0190 5 10 138176 PRK10792 133448 CD01080 N5 N10 3 6 111736 PFAM02882 109806 PFAM00763 133451 CD05212 133447 CD01079 131900 TIGR02853 TIGR02852 133449 CD05191 136767 PRK08306
+Text index ***	FOLD METHYLENE TETRAHYDROFOLATE DEHYDROGENASE METHENYL CYCLOHYDROLASE BIFUNCTIONAL PROVISIONAL NAD_BIND_M THF_DH_CYCLOHYD NADP BINDING DOMAIN M THF DH ENZYME IS A VERSATILE CARRIER ACTIVATED ONE CARBON UNITS MAJOR FOLATE DONORS ARE N METHYLTETRAHYDROFOLATE FORMAYLTETRAHYDROFOLATE OXIDATION METABOLIC INTERMEDIATE TO REQUIRES IN ADDITION MOST DHS ALSO HAVE AN ASSOCIATED ACTIVITY WHICH CATALYZES ITS HYDROLYSIS FORMYLTETRAHYDROFOLATE TYPICALLY FOUND AS PART MULTIFUNCTIONAL EUKARYOTES DEPENDENT MAMMALS BIRDS YEAST COMPONENTS TRIFUNCTIONAL WITH SYNTHETASE ACTIVITIES CERTAIN EUKARYOTIC CELLS CONTAIN HOMODIMERIC CYCLODROLASE FORM BACTERIA MONOFUCNTIONAL WELL DHM DHDH S CEREVISIAE EXPRESS MONOFUNCTIONAL THIS FAMILY CONTAINS LIKE OTHER AMINO ACID NAD P DOMAINS MEMBER ROSSMANN SUPERFAMILY INCLUDES GLUTAMATE LEUCINE PHENYLALANINE TETRAHYDROMETHANOPTERIN SHIKIMATE PROTEINS MALATE OXIDOREDUCTASES GLUTAMYL TRNA REDUCTASE CATALYZE DEAMINATION ACIDS KETO COFACTOR WIDE VARIETY FAMILIES INCLUDING 
+Best match to KOG database	Methylenetetrahydrofolate dehydrogenase/methylenetetrahydrofolate cyclohydrolase
+E value********	1E-100
+General class	Coenzyme transport and metabolism
+Alphanumeric Index****	35312 KOG0089 39431 KOG4230 C1 36707 KOG1494
+Text index ****	METHYLENETETRAHYDROFOLATE DEHYDROGENASE CYCLOHYDROLASE TETRAHYDROFOLATE SYNTHASE NAD DEPENDENT MALATE 
+Best match to PFAM database	THF_DHG_CYH_C
+E value*********	3E-069
+Alphanumeric Index*****	111736 PFAM02882 109806 PFAM00763 118500 PFAM09971 DUF2206 110275 PFAM01262 2 110487 PFAM01488 5 3 114571 PFAM05851 109273 PFAM00208
+Text index *****	THF_DHG_CYH_C TETRAHYDROFOLATE DEHYDROGENASE CYCLOHYDROLASE NAD P BINDING DOMAIN THF_DHG_CYH CATALYTIC MEMBRANE THIS FOUND IN VARIOUS HYPOTHETICAL ARCHAEAL PROTEINS HAS NO KNOWN FUNCTION ALADH_PNT_C ALANINE PNT C TERMINAL FAMILY NOW ALSO CONTAINS LYSINE OXOGLUTARATE REDUCTASES SHIKIMATE_DH SHIKIMATE QUINATE BOTH DEHYDROGENASES CATALYSES CONVERSION TO DEHYDROSHIKIMATE REACTION IS PART PATHWAY WHICH INVOLVED BIOSYNTHESIS AROMATIC AMINO ACIDS DEHYDROQUINATE WHERE QUINIC ACID EXPLOITED AS A SOURCE CARBON PROKARYOTES MICROBIAL EUKARYOTES PATHWAYS SHARE TWO COMMON METABOLITES LENTIVIRUS_VIF LENTIVIRUS VIRION INFECTIVITY FACTOR VIF CONSISTS SEVERAL FELINE SPECIFIC ESSENTIAL FOR PRODUCTIVE FIV INFECTION HOST TARGET CELLS VITRO ELFV_DEHYDROG GLUTAMATE LEUCINE PHENYLALANINE VALINE 
+Best match to PRK database	gnl|CDD|138176
+E value**********	1E-76
+Alphanumeric Index******	138176 PRK10792 5 10 136767 PRK08306 135414 PRK05476 134059 PRK00045 137271 PRK09424 134026 PRK00009 140108 PTZ00075 135190 PRK04863 136435 PRK07589
+Text index ******	BIFUNCTIONAL METHYLENE TETRAHYDROFOLATE DEHYDROGENASE CYCLOHYDROLASE PROVISIONAL DIPICOLINATE SYNTHASE SUBUNIT A REVIEWED S ADENOSYL L HOMOCYSTEINE HYDROLASE HEMA GLUTAMYL TRNA REDUCTASE PNTA NAD P TRANSHYDROGENASE ALPHA PHOSPHOENOLPYRUVATE CARBOXYLASE MUKB CELL DIVISION ORNITHINE CYCLODEAMINASE VALIDATED 
+Best match to SMART database	LPD_N
+E value***********	0.18
+Alphanumeric Index*******	128886 SMART00638 129020 SMART00784 SPT2 15563464 129103 SMART00870 3026924 2407723 3379033 128452 SMART00147
+Text index *******	LPD_N LIPOPROTEIN N TERMINAL DOMAIN CHROMATIN THIS ENTRY INCLUDES SACCHAROMYCES CEREVISIAE WHICH IS A INVOLVED IN TRANSCRIPTIONAL REGULATION PUBMED ASPARAGINASE FOUND VARIOUS PLANT ANIMAL BACTERIAL CELLS CATALYSES DEAMINATION ASPARAGINE TO YIELD ASPARTIC ACID AN AMMONIUM ION RESULTING DEPLETION FREE CIRCULATORY PLASMA ENZYME EFFECTIVE TREATMENT HUMAN MALIGNANT LYMPHOMAS HAVE DIMINISHED CAPACITY PRODUCE SYNTHETASE ORDER SURVIVE SUCH ABSORB FROM BLOOD IF ASN LEVELS BEEN DEPLETED BY INJECTION LYMPHOMA DIE RASGEF GUANINE NUCLEOTIDE EXCHANGE FACTOR FOR RAS LIKE SMALL GTPASES 
+Best match to Jose''s transposable element database	
+E value************	
+PROSITE motifs	ASN_GLYCOSYLATION |PKC_PHOSPHO_SITE |CK2_PHOSPHO_SITE |MYRISTYL |AMIDATION |ER_TARGET |PRENYLATION |MICROBODIES_CTER |THF_DHG_CYH_1 |THF_DHG_CYH_2 |
+Non promiscuous PROSITE motifs	ER_TARGET |THF_DHG_CYH_1 |THF_DHG_CYH_2 |
+Salivary motifs	
+Non promiscuous salivary motifs	
+Best match to AEGY-PEP database	methylenetetrahydrofolate dehydrogenase
+E value*************	1E-145
+Match***	AAEL014871-PA
+Score***	511
+% identity******	83
+% Coverage*****	90
+Best match to Culex quinquefasciatus proteins	bifunctional protein folD protein_coding supercont3.85 161974 163155
+E value**************	1E-146
+Match****	CPIJ004710
+Score****	513
+% identity*******	83
+% Coverage******	99
+Best match to D. melanogaster proteins	loc=3R:complement(4868382..4876099); name=Nmdmc-PB;
+E value***************	1E-105
+Match*****	Nmdmc-PB
+Score*****	379
+% identity********	62
+% Coverage*******	99
+Best match to C. elegans proteins	dao-3 methylenetetrahydrofolate dehydrogenase status:Confirmed TR:Q21285
+E value****************	1E-047
+Match******	K07E3.3
+Score******	187
+% identity*********	40
+% Coverage********	101
+Best match to Arabidopsis proteins	tetrahydrofolate dehydrogenase/cyclohydrolase, putative, similar to SP:P07245
+E value*****************	5E-068
+Match*******	AT4G00620.1
+Score*******	254
+% identity**********	42
+% Coverage*********	99
+Clustered at 30%-Sim- on 60% of length - - Cluster#	658
+# seqs 	2
+Clustered at 40%-Sim- on 60% of length - - Cluster#	627
+# seqs *	2
+Clustered at 50%-Sim- on 60% of length - - Cluster#	588
+# seqs **	2
+Clustered at 60%-Sim- on 60% of length - - Cluster#	499
+# seqs ***	2
+Clustered at 70%-Sim- on 60% of length - - Cluster#	377
+# seqs ****	2
+Clustered at 80%-Sim- on 60% of length - - Cluster#	1104
+# seqs *****	1
+Clustered at 90%-Sim- on 60% of length - - Cluster#	888
+# seqs ******	1
+Clustered at 95%-Sim- on 60% of length - - Cluster#	737
+# seqs	1
+Clustered at 99%-Sim- on 60% of length - - Cluster#	538
+# seqs*	1

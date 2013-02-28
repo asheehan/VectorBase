@@ -1,0 +1,6 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=0 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=34467&page=res&job_id=221899
+AGAP001356-RA	BLAST	Blast Hit	945	1138	268	+	.	ACE1 An. albimanus
+AGAP006724-RA	BLAST	Blast Hit	580	633	42	+	.	ACE1 An. albimanus
+AGAP013509-RA	BLAST	Blast Hit	417	462	38	+	.	ACE1 An. albimanus
+AGAP005836-RA	BLAST	Blast Hit	339	362	38	+	.	ACE1 An. albimanus
+AGAP005835-RA	BLAST	Blast Hit	343	369	38	+	.	ACE1 An. albimanus

@@ -1,0 +1,10 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=0 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=36779&page=res&job_id=222334
+ADMH01002424.1	BLAST	Blast Hit	5364	5498	69	+	.	
+ADMH01003342.1	BLAST	Blast Hit	26212	26289	65	-	.	
+ADMH01002333.1	BLAST	Blast Hit	57059	57127	62	+	.	
+ADMH01002906.1	BLAST	Blast Hit	3179	3274	60	-	.	
+ADMH01000190.1	BLAST	Blast Hit	16145	16189	59	+	.	
+ADMH01003427.1	BLAST	Blast Hit	11836	11886	58	+	.	
+ADMH01001027.1	BLAST	Blast Hit	12918	13010	58	+	.	
+ADMH01002632.1	BLAST	Blast Hit	2615	2695	58	-	.	
+ADMH01000053.1	BLAST	Blast Hit	1327	1470	57	+	.	

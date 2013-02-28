@@ -1,0 +1,11 @@
+track name="BLAST Hits" description="BLAST Hits" color=green useScore=0 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id=36720&page=res&job_id=222292
+BX039965.1	BLAST	Blast Hit	424	487	112	+	.	
+BX039966.1	BLAST	Blast Hit	458	521	112	-	.	
+BM634465.1	BLAST	Blast Hit	123	186	108	-	.	
+BX466680.1	BLAST	Blast Hit	486	549	102	+	.	
+BX608009.1	BLAST	Blast Hit	300	363	98	-	.	
+BM630984.1	BLAST	Blast Hit	477	540	98	-	.	
+CR532118.1	BLAST	Blast Hit	108	171	98	-	.	
+AL695862.1	BLAST	Blast Hit	211	274	92	+	.	
+BM607624.1	BLAST	Blast Hit	274	337	86	-	.	
+BX621479.1	BLAST	Blast Hit	118	181	86	-	.	
