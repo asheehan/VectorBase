@@ -18,6 +18,22 @@ a:focus,
 a:active {
 }
 
+.button a,
+.button a:link,
+.button a:visited,
+a.button,
+a.button:link,
+a.button:visited {
+	
+}
+
+.button a:hover,
+.button a:active,
+a.button:hover,
+a.button:active {
+	
+}
+
 
 /* Specific Typography
 -------------------------------------------------------------- */
@@ -61,7 +77,7 @@ body {
 /* Regions
 
   Classes (.region-name) should always be used instead of IDs (#region-name) so
-  that Skinr styles can override them with a class later
+  that skin styles can override them with a class later
 -------------------------------------------------------------- */
 
 /* All Regions
@@ -470,23 +486,4 @@ div.poll div.bar div.foreground {
 
 /* Styles for sub-headings on user profiles */
 .profile dt {
-}
-
-
-
-/* Skinr
-/-------------------------------------------------------------- */
-
-/* This is a sample Skinr style to get you started. See fusion_starter.info */
-.fusion-example-stylename .inner {
-  /* When setting the background color, also set foreground colors for text and
-    links, even if it's similar to the default body style. Remember, this block
-    style may be used in regions with other foreground colors, thus making text
-    invisible if left unspecified */
-  background-color: #ccc;
-  color: #000;
-  /* All padding and borders should go on the .inner div, so as not to break
-    the widths of the grid */
-  border: 3px solid #000;
-  padding: 10px;
 }

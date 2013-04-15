@@ -1,0 +1,18 @@
+.ds2-header {
+}
+.ds2-left { 
+  width: 65%;
+  float: left;
+  padding-left:1%;
+  padding-right:3%;
+}
+
+.ds2-right {
+  width: 30%;
+  float: right;
+  padding-right:1%;
+}
+.ds2-footer {
+  clear: both;
+}
+

@@ -11,6 +11,7 @@ a,
 a:link,
 a:visited {
   color: #27638C;
+
 }
 
 /* Hover/active link styles. Don't forget :focus for accessibility */
@@ -103,7 +104,6 @@ html {
   clear: both;
 }
 
-
 /* Primary Menu
 /-------------------------------------------------------------- */
 #main-menu .block-superfish {
@@ -134,13 +134,25 @@ html {
   margin-right: 0;
 }
 
+/* nonmoused over parents */
 .block-superfish ul.sf-style-default li a:link,
 .block-superfish ul.sf-style-default li a:visited {
   background-color: #e1e1e1;
   border: none;
   color: #154B70;
+
+background: #e8e8e8; /* Old browsers */
+background: -moz-linear-gradient(top,  #e8e8e8 0%, #d6d6d6 35%, #cccccc 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#e8e8e8), color-stop(35%,#d6d6d6), color-stop(100%,#cccccc)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top,  #e8e8e8 0%,#d6d6d6 35%,#cccccc 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top,  #e8e8e8 0%,#d6d6d6 35%,#cccccc 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top,  #e8e8e8 0%,#d6d6d6 35%,#cccccc 100%); /* IE10+ */
+background: linear-gradient(to bottom,  #e8e8e8 0%,#d6d6d6 35%,#cccccc 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e8e8e8', endColorstr='#cccccc',GradientType=0 ); /* IE6-9 */
+border: 1px solid #d1d1d1;
+
   display: block;
-  padding: 5px 10px 1px 10px;
+  padding: 3px 10px 2px 10px;
   text-decoration: none;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
@@ -149,6 +161,7 @@ html {
   -webkit-border-top-left-radius: 5px;
   -webkit-border-top-right-radius: 5px;
 }
+
 
 /* Second level - Hovers for parent menu item */
 .block-superfish ul.sf-style-default li a:hover,
@@ -162,12 +175,26 @@ html {
   background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#b5ee48), color-stop(27%,#95cf1a), color-stop(100%,#95cf1a)); /* webkit */
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b5ee48', endColorstr='#95cf1a',GradientType=0 ); /* ie */
   background: -o-linear-gradient(top, #b5ee48 0%,#95cf1a 27%,#95cf1a 100%); /* opera */  color: #fff;
-  border-top-left-radius: 5px;
-  border-top-right-radius: 5px;
-  -moz-border-radius-topleft: 5px;
-  -moz-border-radius-topright: 5px;
-  -webkit-border-top-left-radius: 5px;
-  -webkit-border-top-right-radius: 5px;
+
+background: #3e87b7; /* Old browsers */
+background: -moz-linear-gradient(top,  #3e87b7 0%, #3a7daa 27%, #255370 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#3e87b7), color-stop(27%,#3a7daa), color-stop(100%,#255370)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top,  #3e87b7 0%,#3a7daa 27%,#255370 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top,  #3e87b7 0%,#3a7daa 27%,#255370 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top,  #3e87b7 0%,#3a7daa 27%,#255370 100%); /* IE10+ */
+background: linear-gradient(to bottom,  #3e87b7 0%,#3a7daa 27%,#255370 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3e87b7', endColorstr='#255370',GradientType=0 ); /* IE6-9 */
+
+border: 1px solid #3e87b7;
+border-bottom: 1px solid #255370;
+color:#B5EE48;
+
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+  -moz-border-radius-topleft: 3px;
+  -moz-border-radius-topright: 3px;
+  -webkit-border-top-left-radius: 3px;
+  -webkit-border-top-right-radius: 3px;
 }
 
 .block-superfish ul.sf-style-default li:hover,
@@ -176,33 +203,44 @@ html {
  }
 
 
-/* Second level */
+/* Second level - non moused over children */
 .block-superfish ul.sf-style-default li ul,
 .block-superfish ul.sf-style-default li:hover ul {
-  background: #92ca2c;
+  background: #154b70;
+  background:#255370;
+
+
   font-family: Tahoma, Verdana, Arial, Helvetica, sans-serif;
   font-size: 91.7%; /* 11px/12px */
-  margin-top: -4px;
-  padding: 0 0 4px 0;
+  margin-top: -3px;
+  padding: 0 0 3px 0;
   position: absolute;
   text-align: left;
   text-transform: none;
   z-index: 2;
   opacity: 0.95;
   filter: alpha(opacity=95);
+
   border-bottom-right-radius: 5px;
   border-bottom-left-radius: 5px; 
   -webkit-border-bottom-right-radius: 5px;
   -webkit-border-bottom-left-radius: 5px;
   -moz-border-radius-bottomright: 5px;
   -moz-border-radius-bottomleft: 5px;
+  color: #92ca2c;
+  border:none;
+
 
 }
 
+/* highlighted menu item */
 .block-superfish ul.sf-style-default li ul li,
 .block-superfish ul.sf-style-default li:hover ul li {
-  background: #98D022;
+  background: #154b70;
+  background:#255370;
+  color: #92ca2c;
   border-bottom: 1px solid #83A638;
+  border:none;
   padding-left: 0;
 }
 
@@ -214,18 +252,29 @@ html {
   -webkit-border-bottom-left-radius: 5px;
   -moz-border-radius-bottomright: 5px;
   -moz-border-radius-bottomleft: 5px;
-
 }
 
+.block-superfish ul.sf-style-default li ul li:first-child {
+  border-top: 0;
+  border-top-right-radius: 5px;
+  -webkit-border-top-right-radius: 5px;
+  -moz-border-radius-topright: 5px;
+}
+
+
+/* non moused over menu children */
 .block-superfish ul.sf-style-default li ul li a:link,
 .block-superfish ul.sf-style-default li ul li a:visited,
 .block-superfish ul.sf-style-default li:hover ul li a:link,
 .block-superfish ul.sf-style-default li:hover ul li a:visited,
 .block-superfish ul.sf-style-default li.active-trail ul li a:link,
 .block-superfish ul.sf-style-default li.active-trail ul li a:visited {
-  background: #98D022;
-  color: #154B6F;
+  background: #154b70;
+  background:#255370;
+  color: #eee;
   padding-left: 10px;
+  border:none;
+border-bottom: 1px solid #386787;
 }
 
 .block-superfish ul.sf-style-default li ul li a:hover,
@@ -235,8 +284,10 @@ html {
 .block-superfish ul.sf-style-default li.active-trail ul li a:hover,
 .block-superfish ul.sf-style-default li.active-trail ul li a:focus {
   color: #fff;
+  color: #92ca2c;
 }
 
+/* this is the menu location currently being viewed */
 .block-superfish ul.sf-style-default li ul li a.active {
   text-decoration: underline;
 }
@@ -269,6 +320,7 @@ html {
 #primary-menu ul.menu li:hover ul.menu li span.nolink,
 #primary-menu ul.menu li.hover ul.menu li span.nolink {
   background: #98D022;
+  background:#255370;
   color: #154B6F;
   padding-left: 10px;
 }

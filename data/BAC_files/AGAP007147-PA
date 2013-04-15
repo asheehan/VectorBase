@@ -1,0 +1,214 @@
+Protein	AGAP007147-PA
+First residue	M
+Seq size	162
+Location/Gene	2L:43578429:43578991:1|gene:AGAP007147
+CDS	AGAP007147-RA
+Seq size*	723
+Description	SCALAR(0x91b7d54)|2L:43578331:43579127:1|gene:AGAP007147
+ATG first?	
+Last codon	
+Genomic match	2L_Start_43560000
+E value	0
+Chromosome and link to ENSEMBL	2L
+Start	43578331
+End	43579127
+Extent of match	725
+% identity	100
+Number of segments (exons, approximate)	2
+Orientation	FOR
+Satisfied 95% id on length 100	1
+Best match to assembled ESTs	est-07-contig_11905
+E value*	0
+Score	1237
+Extent of match*	724
+Length of best match	749
+% identity*	96
+% Coverage	97
+First residue of match	25
+First residue of sequence	3
+Number of segments	1
+Annotation mismatch	
+Orientation*	FOR
+Satisfied 95% id on length 100*	1
+Number of sequences	3
+all-instars	1
+normalized-fatbody	0
+head-all	0
+Immune cells	0
+Pasteur annotation	0
+Sugar-abd	0
+Blood-abd	0
+InfBlood-abd	1
+Blood-fed	1
+Non-Blood-fed	0
+Sg-male	0
+SG-fem	0
+SG-Pasteur	0
+All female glands	0
+Best match to Affymetrix chip database	Ag.2L.1129.0_CDS_at
+E value**	0
+Extent of match**	385
+Length of best match*	385
+% identity**	98
+% Coverage*	100
+First residue of match*	1
+First residue of sequence*	162
+Number of segments*	1
+Annotation mismatch*	
+Orientation**	FOR
+Satisfied 95% id on length 100**	1
+L-mean	828
+Males-mean	307
+SF-mean	344
+3h-mean	401
+24h-mean	578
+48h-mean	652
+72h-mean	647
+15d-mean	697
+Sum of residues (larger value indicates differential aa usage)	0.36
+Increased AA (fold increase over average)	
+Cys number	2
+Predicted Tyr-SO4 - Prosite rules	
+% Ser + Thr	6.2
+% Pro	4.9
+% Gly	3.1
+% Gly+Pro	8.0
+Number of possible HO-Pro [LPAE]-P-G	
+Number of possible OH-lysines X-Lys-Gly not Lys-Gly-Pro	1
+Number of ProGly''s	1
+SigP Result	CYT
+Cleavage Position	
+MW	18.84
+pI	5.79
+Mature MW	
+pI*	
+TMHMM result	ExpAA=0.02 First60=0.00 PredHel=0 Topology=o
+Predicted helices	0
+% membrane	
+% outside	
+% inside	
+mTP	0.048
+SP	0.077
+other	0.96
+Loc	_
+Relative Confidence (1 is better)	1
+ProP furin cleavage predictions 	
+Best match to NR protein database	AGAP007147-PA
+E value***	7E-090
+Match	gi|158286190
+Score*	332
+Extent of match***	162
+Length of best match**	162
+% identity***	100
+% Coverage**	100
+Alphanumeric Index	158286190 XP_001688044 1 AGAP007147 157020350 EDO64693 170071070 XP_001869802 167867000 EDS30383 157133078 XP_001656164 AAEL_AAEL002933 108881592 EAT45817 156542114 XP_001599995 91088177 XP_972343 CG8928 242008621 XP_002425101 212508766 EEB12363 110760487 XP_001120945 229367222 ACQ58591 C1D 126304383 XP_001382144 240976663 XP_002402463 215491184 EEC00825
+Text index 	PA CONSERVED HYPOTHETICAL SIMILAR TO NUCLEAR DNA BINDING NUCLEIC ACID SUN COR STEROID HORMONE RECEPTOR CO REPRESSOR 
+Best match to NR database depleted of Anopheles gambiae sequenc	conserved hypothetical protein
+E value****	7E-031
+Match*	gi|170071070
+% identity****	48
+% Coverage***	95
+Alphanumeric Index*	170071070 XP_001869802 1 167867000 EDS30383 157133078 XP_001656164 AAEL_AAEL002933 108881592 EAT45817 156542114 XP_001599995 91088177 XP_972343 CG8928 242008621 XP_002425101 212508766 EEB12363 110760487 XP_001120945 229367222 ACQ58591 C1D 126304383 XP_001382144 240976663 XP_002402463 215491184 EEC00825 193634365 XP_001950549 193693054 XP_001946329 239790557 BAH71832 ACYPI001594
+Text index *	CONSERVED HYPOTHETICAL SIMILAR TO PA NUCLEAR DNA BINDING NUCLEIC ACID SUN COR STEROID HORMONE RECEPTOR CO REPRESSOR 
+Best match to SwissProt	Nuclear nucleic acid-binding protein C1D OS=Xenopus laevis GN=c1d PE=2 SV=1
+E value*****	1E-008
+Match**	sp|Q3KPR1|C1D_XENLA
+Score**	58.9
+Extent of match****	129
+Length of best match***	145
+% identity*****	31
+% Coverage****	89
+Alphanumeric Index**	Q3KPR1 C1D_XENLA C1D 2 1 Q5ZHS3 C1D_CHICK Q5XJ97 C1D_DANRE Q13901 C1D_HUMAN Q32PE4 C1D_BOVIN Q5RBU4 C1D_PONAB Q7TSU0 C1D_CRIGR O35473 C1D_MOUSE P29616 P13538 4
+Text index **	NUCLEAR NUCLEIC ACID BINDING OS XENOPUS LAEVIS GN PE SV GALLUS DANIO RERIO HOMO SAPIENS BOS TAURUS PONGO ABELII CRICETULUS GRISEUS MUS MUSCULUS MYSC_CHICK MYOSIN HEAVY CHAIN CARDIAC MUSCLE ISOFORM FRAGMENT MYSS_CHICK SKELETAL ADULT 
+Best match to GO database	nuclear DNA binding protein, pseudogene 1 - Rattus norvegicus - DNA binding - transcription corepressor activity - protein binding - negative regulation of transcription - ligand-dependent nuclear receptor binding - transcriptional repressor complex
+E value******	0.0000002
+Function descriptors	DNA binding||nucleic acid binding||binding
+Function parent	binding
+Function second parent	nucleic acid binding
+GO #	GO:0003677
+E value of functional GO	0.0000002
+Component descriptors	transcriptional repressor complex||terminal cisterna lumen||sarcoplasmic reticulum lumen||endoplasmic reticulum lumen||intracellular organelle lumen||intracellular non\-membrane\-bounded organelle||intracellular organelle||outer membrane\-bounded periplasmic space||external encapsulating structure part||cell part
+Component parent	cell part
+Component second parent	external encapsulating structure part
+GO #*	GO:0017053
+E value of component GO	0.0000002
+Process descriptors	-negative regulation of transcription||nucleotide\-excision repair\, preincision complex assembly||trans assembly of SL\-containing precatalytic spliceosome||endonucleolytic cleavage in ITS1 to separate SSU\-rRNA from 5.8S rRNA and LSU\-rRNA from tricistr
+Process parent	binding
+Process second parent	nucleic acid binding
+GO #**	GO:0016481
+E value of process GO	0.0000002
+Best match to CDD database	Sas10_Utp3
+E value*******	0.089
+Alphanumeric Index***	112799 PFAM04000 SAS10_UTP3 SAS10 UTP3 C1D LCP5 U3 YHR081W RRP47 3 4E EIF4E 109714 PFAM00668 PFAM00550 132052 TIGR03007 PFAM02706 138753 PRK11788
+Text index ***	FAMILY THIS CONTAINS WHICH ARE COMPONENTS RIBONUCLEOPROTEIN COMPLEX IT ALSO INCLUDES HUMAN SACCHAROMYCES CEREVISIAE AN EXOSOME ASSOCIATED REQUIRED FOR PROCESSING STABLE RNAS HAS BEEN IDENTIFIED AS A REGULATOR CHROMATIN SILENCING NEUROGUIDIN INITIATION FACTOR BINDING CONDENSATION DOMAIN IS FOUND IN MANY MULTI ENZYMES SYNTHESISE ANTIBIOTICS CATALYSES REACTION TO FORM BONDS NON RIBOSOMAL BIOSYNTHESIS USUALLY CARBOXY SIDE PHOSPHOPANTETHEINE SHOWN THAT MUTATIONS HHXXXDG MOTIF ABOLISH ACTIVITY SUGGESTING PART ACTIVE SITE PEPCTERM_CHNLEN MEMBERS BELONG POLYSACCHARIDE CHAIN LENGTH DETERMINANT PROTEINS ALL SPECIES ENCODE PEP CTERM EXOSORTASE SYSTEM ACT SORTING NUMBER GRAM NEGATIVE BACTERIA NEAR EPSH HOMOLOG GENE HYPOTHETICAL PROVISIONAL 
+Best match to KOG database	DNA-binding protein C1D involved in regulation of double-strand break repair
+E value********	1E-007
+General class	Replication, recombination and repair
+Alphanumeric Index****	40032 KOG4835 C1D 36184 KOG0966
+Text index ****	DNA BINDING INVOLVED IN REGULATION DOUBLE STRAND BREAK REPAIR ATP DEPENDENT LIGASE IV 
+Best match to PFAM database	Sas10_Utp3
+E value*********	0.022
+Alphanumeric Index*****	112799 PFAM04000 SAS10_UTP3 SAS10 UTP3 C1D LCP5 U3 YHR081W RRP47 3 4E EIF4E 109714 PFAM00668 PFAM00550
+Text index *****	FAMILY THIS CONTAINS WHICH ARE COMPONENTS RIBONUCLEOPROTEIN COMPLEX IT ALSO INCLUDES HUMAN SACCHAROMYCES CEREVISIAE AN EXOSOME ASSOCIATED REQUIRED FOR PROCESSING STABLE RNAS HAS BEEN IDENTIFIED AS A REGULATOR CHROMATIN SILENCING NEUROGUIDIN INITIATION FACTOR BINDING CONDENSATION DOMAIN IS FOUND IN MANY MULTI ENZYMES SYNTHESISE ANTIBIOTICS CATALYSES REACTION TO FORM BONDS NON RIBOSOMAL BIOSYNTHESIS USUALLY CARBOXY SIDE PHOSPHOPANTETHEINE SHOWN THAT MUTATIONS HHXXXDG MOTIF ABOLISH ACTIVITY SUGGESTING PART ACTIVE SITE 
+Best match to PRK database	gnl|CDD|138753
+E value**********	0.37
+Alphanumeric Index******	138753 PRK11788
+Text index ******	HYPOTHETICAL PROVISIONAL 
+Best match to SMART database	SPEC
+E value***********	0.24
+Alphanumeric Index*******	128455 SMART00150 128806 SMART00533
+Text index *******	SPEC SPECTRIN REPEATS MUTSD DNA BINDING DOMAIN MISMATCH REPAIR MUTS FAMILY 
+Best match to Jose''s transposable element database	
+E value************	
+PROSITE motifs	ASN_GLYCOSYLATION |PKC_PHOSPHO_SITE |CK2_PHOSPHO_SITE |MYRISTYL |
+Non promiscuous PROSITE motifs	
+Salivary motifs	
+Non promiscuous salivary motifs	
+Best match to AEGY-PEP database	conserved hypothetical protein
+E value*************	5E-28
+Match***	AAEL002933-PA
+Score***	120
+% identity******	45
+% Coverage*****	95
+Best match to Culex quinquefasciatus proteins	conserved hypothetical protein protein_coding supercont3.1709 48167 48701
+E value**************	4E-33
+Match****	CPIJ019478
+Score****	136
+% identity*******	48
+% Coverage******	95
+Best match to D. melanogaster proteins	loc=X:15778993..15779537; name=CG8928-PA;
+E value***************	1E-006
+Match*****	CG8928-PA
+Score*****	48.9
+% identity********	28
+% Coverage*******	91
+Best match to C. elegans proteins	Partially_confirmed TR:Q9N3J4 protein_id:AAK39333.1 Length = 133  Score = 42.4
+E value****************	1E-004
+Match******	Y51H7C.7
+Score******	42.4
+% identity*********	28
+% Coverage********	85
+Best match to Arabidopsis proteins	copper-binding family protein, similar to copper homeostasis factor gi:3168840
+E value*****************	0.48
+Match*******	AT5G24580.2
+Score*******	30.4
+% identity**********	27
+% Coverage*********	31
+Clustered at 30%-Sim- on 60% of length - - Cluster#	2763
+# seqs 	1
+Clustered at 40%-Sim- on 60% of length - - Cluster#	2957
+# seqs *	1
+Clustered at 50%-Sim- on 60% of length - - Cluster#	3117
+# seqs **	1
+Clustered at 60%-Sim- on 60% of length - - Cluster#	3251
+# seqs ***	1
+Clustered at 70%-Sim- on 60% of length - - Cluster#	3248
+# seqs ****	1
+Clustered at 80%-Sim- on 60% of length - - Cluster#	3192
+# seqs *****	1
+Clustered at 90%-Sim- on 60% of length - - Cluster#	3131
+# seqs ******	1
+Clustered at 95%-Sim- on 60% of length - - Cluster#	3062
+# seqs	1
+Clustered at 99%-Sim- on 60% of length - - Cluster#	2984
+# seqs*	1

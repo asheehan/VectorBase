@@ -1,0 +1,5 @@
+name = User Welcome
+description = Displays a mini user profile block showing the logged in user's 
+name (that links to his/her profile page), along with some other userful data/links.
+package = VectorBase
+core = 7.x

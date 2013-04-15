@@ -1,0 +1,36 @@
+// dot 2.30.1 on Mac OS X 10.8.3
+// SchemaSpy rev 590
+digraph "skinr_skins" {
+  graph [
+    rankdir="RL"
+    bgcolor="#f7f7f7"
+    nodesep="0.18"
+    ranksep="0.46"
+    fontname="Helvetica"
+    fontsize="11"
+  ];
+  node [
+    fontname="Helvetica"
+    fontsize="11"
+    shape="plaintext"
+  ];
+  edge [
+    arrowsize="0.8"
+  ];
+  "skinr_skins" [
+    label=<
+    <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" BGCOLOR="#ffffff">
+      <TR><TD COLSPAN="3" BGCOLOR="#9bab96" ALIGN="CENTER">skinr_skins</TD></TR>
+      <TR><TD PORT="sid" COLSPAN="3" BGCOLOR="#bed1b8" ALIGN="LEFT">sid</TD></TR>
+      <TR><TD PORT="theme" COLSPAN="3" BGCOLOR="#f4f7da" ALIGN="LEFT">theme</TD></TR>
+      <TR><TD PORT="module" COLSPAN="3" BGCOLOR="#f4f7da" ALIGN="LEFT">module</TD></TR>
+      <TR><TD PORT="element" COLSPAN="3" BGCOLOR="#f4f7da" ALIGN="LEFT">element</TD></TR>
+      <TR><TD PORT="skin" COLSPAN="3" BGCOLOR="#f4f7da" ALIGN="LEFT">skin</TD></TR>
+      <TR><TD PORT="options" COLSPAN="3" ALIGN="LEFT">options</TD></TR>
+      <TR><TD PORT="status" COLSPAN="3" ALIGN="LEFT">status</TD></TR>
+      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">  </TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">9 rows</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">  </TD></TR>
+    </TABLE>>
+    URL="tables/skinr_skins.html"
+    tooltip="skinr_skins"
+  ];
+}

@@ -3,35 +3,32 @@
 	<plist version="1.0">
 	<array>
 	<dict>
-		<key>inputFiles</key>
-			<dict>
-				<key>sequence</key>
-				<dict>
-					<key>fileData</key>
-					<data>PkFCS1AwMjAyNjgwMy4xCkNHR1RDVEFUVFRHR0dHQVRDR0FBQ0NDQVRHQUNHR0dDQVRHVFRHVFRBQUdUQ0dUQQo+QUJLUDAyMDI2NzE1LjEKQ0dHVENUQVRUVEdHR0dBVENHQUFDQ0NBVEdBQ0dHR0NBVEdUVEdUVEFBR1RDR1RBCj5BQktQMDIwMjY2NzYuMQpDR0dUQ1RBVFRUR0dHR0FUQ0dBQUNDQ0FUR0FDR0dHQ0FUR1RUR1RUQUFHVENHVEEKPkFCS1AwMjAyNjUxNy4xCkNHR1RDVEFUVFRHR0dHQVRDR0FBQ0NDQVRHQUNHR0dDQVRHVFRHVFRBQUdUQ0dUQQo=</data>
-				</dict>
-			</dict>
 		<key>name</key>
-		<string>ClustalW_8wbyv1</string>
+		<string>blastParse_aprcf4</string>
+		<key>schedulerParameters</key>
+        <dict>
+        <key>dependsOnJobs</key>
+        <array>
+        <string>236121</string>
+        </array>
+        </dict>
 		<key>taskSpecifications</key>
 		<dict>
-			<key>0</key>
-			<dict>
+			<key>blastParse_aprcf4</key>
+          	<dict>
 				<key>command</key>
-				<string>/var/xgrid_results/newClustalW.sh</string>
+				<string>/vectorbase/scripts/xgridBlastParse.sh</string>
 				<key>arguments</key>
 				<array>
-					<string>ClustalW_8wbyv1</string>
-					<string>-TYPE=DNA</string>
-<string>-OUTPUT=CLUSTAL</string>
-<string>-OUTORDER=aligned</string>
-<string>-SCOREpercent</string>
-<string>-ITERATION=none</string>
-<string>-CLUSTERING=nj</string>
-
+					<string>236121</string>
+					<string>50</string>
+					<string>192.168.1.93</string>
+					<string>vb_drupal</string>
+					<string>db_public</string>
+					<string>limecat</string>
 				</array>
 			</dict>
 		</dict>
 	</dict>
 	</array>
-	</plist>
+</plist>

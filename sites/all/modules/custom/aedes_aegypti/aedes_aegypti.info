@@ -1,5 +1,0 @@
-name = Aedes aegypti
-description = Organism
-package = VectorBase Development -- Organism
-core = 7.x
-files[] = aedes_aegypti.module

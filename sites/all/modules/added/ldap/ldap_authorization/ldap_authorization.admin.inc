@@ -15,7 +15,7 @@
 
 function ldap_authorizations_admin_index() {
 
-  $consumers = ldap_authorization_get_consumers(NULL, TRUE);
+  $consumers = ldap_authorization_get_consumers(NULL, TRUE, FALSE);
   if (!is_array($consumers) || count($consumers) == 0) {
     drupal_set_message(t('No authorization consumer modules are enabled.  Enable
     LDAP Authorization Drupal Roles, OG LDAP, or another LDAP Authorization consuming module'), 'warning');
@@ -23,8 +23,8 @@ function ldap_authorizations_admin_index() {
 
   $servers = ldap_servers_get_servers(NULL, 'enabled');
   if (count($servers) == 0) {
-    $tokens = array('%add_server_link' => l(t('Add LDAP Server'), 'admin/config/people/ldap/servers/add'));
-    return t('ldap authorization can not be set up until ldap servers are configured.  %add_server_link', $tokens);
+    return t('ldap authorization can not be set up until ldap servers are configured.') . '  ' .
+    l(t('Add LDAP Server'), 'admin/config/people/ldap/servers/add');
   }
 
   foreach ($consumers as $consumer_type => $consumer) {
@@ -47,7 +47,7 @@ function ldap_authorizations_admin_index() {
  */
 
 function ldap_authorization_admin_form($form, &$form_state, $consumer_type, $op = NULL) {
-  require_once('LdapAuthorizationConsumerConfAdmin.class.php');
+  ldap_server_module_load_include('php', 'ldap_authorization', 'LdapAuthorizationConsumerConfAdmin.class');
   $consumer = ldap_authorization_get_consumer_object($consumer_type);
 
   if ($op == 'add' && is_object($consumer->consumerConf) && $consumer->consumerConf->inDatabase) {
@@ -88,11 +88,12 @@ function ldap_authorization_admin_form_validate($form, &$form_state) {
 
   list($consumer, $op, $op_past, $new)  = _ldap_authorization_admin_parse_form($form, $form_state);
   $values = $form_state['values'];
-  require_once('LdapAuthorizationConsumerConfAdmin.class.php');
+  ldap_server_module_load_include('php', 'ldap_authorization', 'LdapAuthorizationConsumerConfAdmin.class');
   $consumer_conf_admin = new LdapAuthorizationConsumerConfAdmin($consumer, $new);
 
   $errors = $consumer_conf_admin->drupalFormValidate($op, $values);
   foreach ($errors as $error_name => $error_text) {
+    $error_text = check_plain($error_text);
     form_set_error($error_name, t($error_text));
   }
 
@@ -106,12 +107,12 @@ function ldap_authorization_admin_form_validate($form, &$form_state) {
 function ldap_authorization_admin_form_submit($form, &$form_state) {
   list($consumer, $op, $op_past_tense, $new)  = _ldap_authorization_admin_parse_form($form, $form_state);
   $values = $form_state['values'];
-  require_once('LdapAuthorizationConsumerConfAdmin.class.php');
+  ldap_server_module_load_include('php', 'ldap_authorization', 'LdapAuthorizationConsumerConfAdmin.class');
   $consumer_conf = new LdapAuthorizationConsumerConfAdmin($consumer, $new);
   $consumer_conf->drupalFormSubmit($op, $values);  // add form data to object and save or create
 
   if ($consumer_conf->hasError == FALSE) {
-    drupal_set_message(t('LDAP Authorization %name !verb', array('!verb' => $op_past_tense, '%name' => $values['description'])), 'status');
+    drupal_set_message(t('LDAP Authorization %name !verb', array('!verb' => $op_past_tense, '%name' => $consumer->name)), 'status');
     drupal_goto(LDAP_SERVERS_MENU_BASE_PATH . '/authorization');
   }
 
@@ -142,6 +143,7 @@ function _ldap_authorization_admin_parse_form($form, &$form_state) {
       $new = TRUE;
     break;
 
+    case 'save':
     case 'update':
     case 'edit':
       $op_past_tense = 'Updated';

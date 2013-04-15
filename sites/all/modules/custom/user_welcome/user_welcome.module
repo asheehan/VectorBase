@@ -1,0 +1,118 @@
+<?php
+/**
+ * @file
+ * Displays a block welcoming the logged in user along with some stats.
+ * created from Dan Linn's template dan@metaltoad.com
+ *
+ */
+
+define('FRONT_PAGE', 'welcome_block');
+define('PROFILE_PAGE', 'profile_jobs_block');
+
+/**
+ * implementation of hook_block_info
+ * @return array $blocks
+ */
+function user_welcome_block_info() {
+	$blocks['welcome_block'] = array(
+			'info' => t('User Welcome Block'),
+			'cache' => DRUPAL_NO_CACHE,
+			);
+	$blocks['profile_jobs_block'] = array(
+		'info' => t('Drupal jobs for this user'),
+		'cache' => DRUPAL_NO_CACHE,
+			);
+	return $blocks;
+}
+
+/**
+ * implementation of hook_block_view
+ *
+ * @param string $delta
+ * @return array
+ *  $block['subject']
+ *  $block['content']
+ */
+function user_welcome_block_view($delta) {
+	global $user;
+	$userId = $user->uid;
+	$block = array();
+	if ($userId > 0) {
+		$userName = $user->name;
+		$currentUser = user_load($userId);
+		/*$fullName = $currentUser->field_full_name['und'][0]['safe_value'];
+		$firstName = explode(" ", $fullName);
+		if ($firstName) {
+			$firstName = $firstName[0];
+		}*/
+		$lastAccess = date("F j, Y",$currentUser->login);
+		$account = user_load($userId);	
+		$userProfileName = $userName;
+		if(!empty($account) && !empty($account->field_full_name)) {
+			$userProfileName = $account->field_full_name['und'][0]['value'];
+		}
+		$jobs = db_query("SELECT u.job_id, p.value as prog FROM xgrid_job_params u, xgrid_job_params p WHERE u.job_id = p.job_id AND p.argument='program' AND ((u.argument='user_id' AND u.value=:uid) OR (u.argument='user_name' AND u.value=:uname)) ORDER BY job_id", array(':uid'=>$userId, ':uname'=>$userName));
+		$jobList = array();	
+		foreach ($jobs as $job) {
+			$program = $job->prog;
+			$submitId = $job->job_id;
+			$jobId = $submitId+1;
+			if(!empty($submitId) && !empty($program)) {
+ 				if(!isset($jobList[$program])) {
+					$jobList[$program] = array();
+				}
+				array_push($jobList[$program], $submitId);
+			}	
+		}
+		$href = '/sites/all/modules/custom/xgrid/results.php?id=';
+		if($delta === FRONT_PAGE) { $limit = 3;
+			drupal_add_css(drupal_get_path('module', 'user_welcome'). '/css/front.css', 'file');
+			$content = "<h2 class=\"title\"><a href='/users/$userName'>$userProfileName</a></h2>Last Login: $lastAccess<br><br>";
+			$content .= "<table class='compactTable'><caption>Your recent jobs</caption>";
+			foreach($jobList as $program=>$idArray) {
+				$content .= "<tr><td>$program</td>";
+				for($i = 0; $i < $limit && $i < count($idArray); $i++) {
+					$realId = intval($idArray[$i]);
+					$displayId = $realId+1;
+					$content .= '<td><a target=_BLANK href=\'';
+					$content .= $href;
+					$content .= $realId;
+					$content .= '\'>';
+					$content .= $displayId;
+					$content .= '</a></td>';
+				}
+				$content .= '</tr>';
+			}
+			$content .= '</table>';
+		} else if ($delta === PROFILE_PAGE) {
+			drupal_add_css(drupal_get_path('module', 'user_welcome'). '/css/profile.css', 'file');
+			$content = "<table class='compactTable'><caption>Your jobs</caption>";
+			$idsPerRow = 5;
+			foreach($jobList as $program=>$idArray) {
+				$content .= '<tr><th rowspan=' . ceil(count($idArray)/$idsPerRow);
+				$content .= " BGCOLOR=\"#99CCFF\">$program</th>";
+				for($i = 0; $i < count($idArray); $i++) {
+					$realId = intval($idArray[$i]);
+					$displayId = $realId+1;
+					if($i%$idsPerRow === 0 && $i>0) {
+						$content .= '</tr><tr>';
+					}
+					$content .= '<td><a target=_BLANK href=\'';
+					$content .= $href;
+					$content .= $realId;
+					$content .= '\'>';
+					$content .= $displayId;
+					$content .= '</a></td>';
+				}
+				$content .= '</tr>';
+			}
+			$content .= '</table>';
+		}
+	} else {
+		//$block['visibility'] = 0;
+		$content = "<h3 class='title'>Want to see your BLAST, ClustalW and HMMer jobs?</h3><div class='more-link'>Login above or <a href='/user/register'>Register here</a>.</div>";
+	}
+	$block['content'] = $content;
+	return $block;
+}
+

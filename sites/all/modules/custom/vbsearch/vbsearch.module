@@ -1,0 +1,158 @@
+<?php
+
+/**
+ * @file
+ * VectorBase's search module
+ *
+*/
+
+
+// implements hook_block_info()
+function vbsearch_block_info(){
+  $blocks['vb_search'] = array(
+    'info'	=>	t('VectorBase Custom Search'),
+    'status'	=>	TRUE,
+    //'region'	=>	'sidebar_first',
+    'weight'	=>	0,
+    'visibility'=>	1,
+  );
+  return $blocks;
+}
+
+function vbsearch_block_view($delta =''){
+  $block = array();
+  switch ($delta) {
+    case 'vb_search':
+	$block['title'] = 'Custom VB Search';
+	$block['content'] = drupal_render(drupal_get_form('vbsearch_search_block_form'));
+	break;
+    }
+  return $block;
+}
+
+
+
+function vbsearch_search_block_form($form, &$form_state) {
+  $form['keys'] = array(
+    '#type' => 'textfield',
+    '#size' => 35,
+    '#required' => TRUE,
+    '#attributes' => array('title' => t('Enter the terms you wish to search for.'),  'placeholder' => t('Search VectorBase')),
+
+  );
+  $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => 'Go',
+  );
+  return $form;
+}
+
+function vbsearch_search_block_form_submit($form, &$form_state) {
+  drupal_goto('vbsearch/' . $form_state['values']['keys']);
+}
+
+function vbsearch_do_search($keys) {
+  drupal_set_title('VectorBase Search Results');
+  $results = module_invoke('apachesolr_search', 'search_execute', $keys);
+  return theme('search_results', array('results' => $results));
+}
+
+
+function escapeColon($term){
+  $terms = explode(' ',$term);
+  foreach ($terms as $i => $part){
+    if (strpos($part, ':') !== false && strlen($part) > 0) {
+	if ($part[0] !== '"' || $part[strlen($part) - 1] !== '"'){
+	      $terms[$i] = "\"" . $part . "\"";
+        }
+    }
+  }
+  return implode (' ',$terms);
+}
+
+
+function vbsearch_apachesolr_query_alter($query) {
+//Next two lines are needed to allow balancing of odd number of quote characters (should be in solrconfig.xml, but ok for now)
+  $query->addParam('defType','edismax');
+  $query->removeParam('qf');
+  $query->addParam('qf', 'text');
+  $query->addParam('qf', 'symbol');
+  $query->addParam('qf', 'label');
+  $query->addParam('qf', 'content');
+  $query->addParam('qf', 'annotations');
+  $query->addParam('qf', 'description');
+  $query->addParam('qf', 'phenotypes');
+  $query->addParam('qf', 'geolocations');
+
+//Query boosting params
+  $query->addParam('bq', 'site="Genome"^2');
+  $query->addParam('bq', 'site="General"^3');
+
+//Next four lines needed to enclose terms containing a colon with quotes (prevents some field-level searching)
+  $queryTerm = $query->getParam('q');
+  $queryTerm = escapeColon($queryTerm);
+  $query->removeParam('q');
+  $query->addParam('q', $queryTerm);
+
+//Define fields to be returned to search module
+  $query->addParam('fl', 'species_category');
+  $query->addParam('fl', 'bundle_name');
+  $query->addParam('fl', 'site');
+  $query->addParam('fl', 'description');
+  $query->addParam('fl', 'url');
+
+//Define faceting parameters
+  $query->addParam('facet', 'true');
+  $query->addParam('facet.field', 'bundle_name');
+  $query->addParam('facet.field', 'species_category');
+  $query->addParam('facet.field', 'site');
+
+//Define filters if requested
+  $query->removeParam('fq');
+  if (isset($_GET['bundle_name'])) {
+    $query->addFilter('bundle_name', $_GET['bundle_name']);
+  }
+  if (isset($_GET['species_category'])) {
+    $query->addFilter('species_category', $_GET['species_category']);
+  }
+  if (isset($_GET['site'])){
+    $query->addFilter('site', $_GET['site']);
+  }
+}
+
+
+// facet api setup
+function facetapi_bonus_facetapi_filters() {
+  return array(
+    'exclude_items' => array(
+      'handler' => array(
+	'label' => t('Exclude specified items'),
+	'class' => 'FacetapiFilterExcludeItems',
+      ),
+    ),
+    'rewrite_items' => array(
+      'handler' => array(
+	'label' => t('Rewrite facet items via callback function'),
+	'class' => 'FacetapiFilterRewriteItems',
+      ),
+    ),
+  );
+}
+
+//implements hook_menu()
+function vbsearch_menu() {
+  $items['vbsearch'] = array(
+    'title' => t('VectorBase Search'),
+    'page callback' => 'vbsearch_do_search',
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+   );
+  return $items;
+}
+
+//vbsearch splash page (default page)
+function vbsearch_splash() {
+  return t('howdy');
+}
+
+?>

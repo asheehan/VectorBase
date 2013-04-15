@@ -1,0 +1,11 @@
+# Ignore configuration files that may contain sensitive information.
+sites/*/settings*.php
+
+# Ignore paths that contain user-generated content.
+data/*.gff
+data/*.results.zip
+sites/*/files
+sites/*/private
+
+# Ignore any legacy svn repository folders.
+*.svn

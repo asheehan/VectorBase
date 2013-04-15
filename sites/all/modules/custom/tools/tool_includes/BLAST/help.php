@@ -1,1 +1,0 @@
-<?print "<input type=\"text\" name=\"dispNum\" id=\"dispNum\" width=\"0\" maxlength=\"4\" size=\"4\" value=\"" . $_GET['dispNum'] . "\" onkeypress=\"if(event.keyCode == 9 || event.keyCode == 13){closedia();}\" onchange=\"closedia();\" />";?>

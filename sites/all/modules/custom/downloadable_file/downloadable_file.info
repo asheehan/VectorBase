@@ -1,0 +1,10 @@
+name = Downloadable File
+description = Provides functionality that serves and displays information about Data files on the site. 
+package = VectorBase
+core = 7.x
+files[] = include/constants.php
+files[] = include/utilities.php
+files[] = include/ui.php
+files[] = include/heap.php
+files[] = include/incrementFileDownloadCount.php
+

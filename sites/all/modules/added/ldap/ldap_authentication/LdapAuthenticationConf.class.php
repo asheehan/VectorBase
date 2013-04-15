@@ -12,9 +12,11 @@ class LdapAuthenticationConf {
   // no need for LdapAuthenticationConf id as only one instance will exist per drupal install
 
   public $sids = array();  // server configuration ids being used for authentication
-  public $servers = array(); // ldap server object
+  public $enabledAuthenticationServers = array(); // ldap server object
   public $inDatabase = FALSE;
   public $authenticationMode = LDAP_AUTHENTICATION_MODE_DEFAULT;
+  public $loginUIUsernameTxt;
+  public $loginUIPasswordTxt;
   public $ldapUserHelpLinkUrl;
   public $ldapUserHelpLinkText = LDAP_AUTHENTICATION_HELP_LINK_TEXT_DEFAULT;
   public $loginConflictResolve = LDAP_AUTHENTICATION_CONFLICT_RESOLVE_DEFAULT;
@@ -22,6 +24,7 @@ class LdapAuthenticationConf {
   public $emailOption = LDAP_AUTHENTICATION_EMAIL_FIELD_DEFAULT;
   public $emailUpdate = LDAP_AUTHENTICATION_EMAIL_UPDATE_ON_LDAP_CHANGE_DEFAULT;
   public $ssoEnabled = FALSE;
+  public $ssoRemoteUserStripDomainName = FALSE;
   public $seamlessLogin = FALSE;
   public $ldapImplementation = FALSE;
   public $cookieExpire = LDAP_AUTHENTICATION_COOKIE_EXPIRE;
@@ -48,6 +51,8 @@ class LdapAuthenticationConf {
     'authenticationMode',
     'loginConflictResolve',
     'acctCreation',
+    'loginUIUsernameTxt',
+    'loginUIPasswordTxt',
     'ldapUserHelpLinkUrl',
     'ldapUserHelpLinkText',
     'emailOption',
@@ -56,16 +61,20 @@ class LdapAuthenticationConf {
     'excludeIfTextInDn',
     'allowTestPhp',
     'excludeIfNoAuthorizations',
-    'ssoEnabled',
+    'ssoRemoteUserStripDomainName',
     'seamlessLogin',
     'ldapImplementation',
     'cookieExpire',
   );
 
   /** are any ldap servers that are enabled associated with ldap authentication **/
-  public function enabled_servers() {
-    return !(count(array_filter(array_values($this->sids))) == 0);
+  public function hasEnabledAuthenticationServers() {
+    return !(count($this->enabledAuthenticationServers) == 0);
   }
+  public function enabled_servers() {
+    return $this->hasEnabledAuthenticationServers();
+  }
+  
   function __construct() {
     $this->load();
   }
@@ -80,17 +89,19 @@ class LdapAuthenticationConf {
           $this->{$property} = $saved[$property];
         }
       }
-      foreach ($this->sids as $sid => $is_enabled) {
-        if ($is_enabled) {
-          $this->servers[$sid] = ldap_servers_get_servers($sid, 'enabled', TRUE);
+      
+      $enabled_ldap_servers = ldap_servers_get_servers(NULL, 'enabled');
+      foreach ($this->sids as $sid => $enabled) {
+        if ($enabled && isset($enabled_ldap_servers[$sid])) {
+          $this->enabledAuthenticationServers[$sid] = $enabled_ldap_servers[$sid];
         }
       }
-
     }
     else {
       $this->inDatabase = FALSE;
     }
 
+    $this->ssoEnabled = module_exists('ldap_sso');
     $this->apiPrefs['requireHttps'] = variable_get('ldap_servers_require_ssl_for_credentails', 1);
     $this->apiPrefs['encryption'] = variable_get('ldap_servers_encryption', LDAP_SERVERS_ENC_TYPE_CLEARTEXT);
 
@@ -125,14 +136,21 @@ class LdapAuthenticationConf {
    *
    * return boolean
    */
-  public function allowUser($name, $ldap_user_entry) {
+  public function allowUser($name, $ldap_user_entry, $account_exists = NULL) {
 
     /**
      * do one of the exclude attribute pairs match
      */
     $exclude = FALSE;
+    
+    // if user does not already exists and deferring to user settings AND user settings only allow 
+    $user_register = variable_get('user_register', USER_REGISTER_VISITORS_ADMINISTRATIVE_APPROVAL);
+    if (!$account_exists && $this->acctCreation == LDAP_AUTHENTICATION_ACCT_CREATION_USER_SETTINGS_FOR_LDAP && $user_register == USER_REGISTER_ADMINISTRATORS_ONLY) {
+      return FALSE;
+    }
+    
     foreach ($this->excludeIfTextInDn as $test) {
-      if (strpos(drupal_strtolower($ldap_user_entry['dn']), drupal_strtolower($test)) !== FALSE) {
+      if (stripos($ldap_user_entry['dn'], $test) !== FALSE) {
         return FALSE;//  if a match, return FALSE;
       }
     }
@@ -157,7 +175,7 @@ class LdapAuthenticationConf {
       else {
         drupal_set_message(t(LDAP_AUTHENTICATION_DISABLED_FOR_BAD_CONF_MSG), 'warning');
         $tokens = array('!ldap_authentication_config' => l(t('LDAP Authentication Configuration'), 'admin/config/people/ldap/authentication'));
-        watchdog('warning', 'LDAP Authentication is configured to deny users based on php execution with php_eval function, but php module is not enabled. Please enable php module or remove php code at !ldap_authentication_config .', $tokens);
+        watchdog('ldap_authentication', 'LDAP Authentication is configured to deny users based on php execution with php_eval function, but php module is not enabled. Please enable php module or remove php code at !ldap_authentication_config .', $tokens);
         return FALSE;
       }
     }
@@ -168,7 +186,7 @@ class LdapAuthenticationConf {
     if (count($this->allowOnlyIfTextInDn)) {
       $fail = TRUE;
       foreach ($this->allowOnlyIfTextInDn as $test) {
-        if (strpos(drupal_strtolower($ldap_user_entry['dn']), drupal_strtolower($test)) !== FALSE) {
+        if (stripos($ldap_user_entry['dn'], $test) !== FALSE) {
           $fail = FALSE;
         }
       }
@@ -193,8 +211,8 @@ class LdapAuthenticationConf {
       $user->ldap_authenticated = TRUE; // fake user property added for query
       $consumers = ldap_authorization_get_consumers();
       $has_enabled_consumers = FALSE;
-      foreach ($consumers as $consumer_type => $consumer_config) {
 
+      foreach ($consumers as $consumer_type => $consumer_config) {
         $consumer_obj = ldap_authorization_get_consumer_object($consumer_type);
         if ($consumer_obj->consumerConf->status) {
           $has_enabled_consumers = TRUE;
@@ -208,13 +226,20 @@ class LdapAuthenticationConf {
       if (!$has_enabled_consumers) {
         drupal_set_message(t(LDAP_AUTHENTICATION_DISABLED_FOR_BAD_CONF_MSG), 'warning');
         $tokens = array('!ldap_consumer_config' => l(t('LDAP Authorization Configuration'), 'admin/config/people/ldap/authorization'));
-        watchdog('warning', 'LDAP Authentication is configured to deny users without LDAP Authorization mappings, but 0 LDAP Authorization consumers are configured:  !ldap_consumer_config .', $tokens);
+        watchdog('ldap_authentication', 'LDAP Authentication is configured to deny users without LDAP Authorization mappings, but 0 LDAP Authorization consumers are configured:  !ldap_consumer_config .', $tokens);
         return FALSE;
       }
 
       return FALSE;
     }
 
+    // allow other modules to hook in and refuse if they like
+    $hook_result = TRUE;
+    drupal_alter('ldap_authentication_allowuser_results', $ldap_user_entry, $name, $hook_result);
+    if (!$hook_result) {
+      watchdog('ldap_authentication', "Authentication Allow User Result=refused for %name", array('%name' => $name), WATCHDOG_NOTICE);
+      return FALSE;
+    }
 
     /**
      * default to allowed

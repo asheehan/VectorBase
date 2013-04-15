@@ -1,0 +1,5 @@
+name = Generic Xcel Display
+description = Displays a block that fetches Xcel (such as AnoXcel) data.
+package = VectorBase
+core = 7.x
+files[] = xcel.module

@@ -1,0 +1,11 @@
+name = View Mode Page
+description = Associate a URL pattern with a specific view mode for a node
+package = Other
+core = 7.x
+
+; Information added by drupal.org packaging script on 2013-01-29
+version = "7.x-1.3"
+core = "7.x"
+project = "view_mode_page"
+datestamp = "1359473059"
+

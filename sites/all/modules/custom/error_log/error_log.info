@@ -1,0 +1,3 @@
+name = Error Log
+description = Displays the last 100 Apache error messages.
+core = 7.x

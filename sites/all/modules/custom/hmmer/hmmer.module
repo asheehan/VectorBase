@@ -1,0 +1,572 @@
+<?php
+
+/**
+ * @file
+ * VectorBase's hmmer module
+ *
+*/
+
+
+function hmmer_block_view($op='list', $delta=0, $edit=array()){
+  // draw block
+  $blocks['subject'] = t('hmmerBlockSubject...i guess');
+  $blocks['content'] = drupal_get_form('ajax_hmmer_genform');
+  return $blocks;
+}
+
+
+function hmmer_getClustal($post){
+	$id=$post['id'];
+	if($id){
+		return clustalw_getAlignOut($id);
+	}
+}
+
+
+
+function ajax_hmmer_genform($form, &$form_state) {
+  $form['hmmer'] = array(
+    '#type' => 'hmmer'
+  );
+
+	$form['hmmer']['#attached'] = array(
+	'css' => array(
+		'type' => 'file',
+		'data' => drupal_get_path('module', 'hmmer').'/hmmer.css'
+		)
+	);
+	$form['hmmer']['#attached']['js'] =	array(
+		'data' => drupal_get_path('module', 'hmmer').'/hmmer.js',
+	);
+
+  $form['hmmer']['sequence'] = array(
+    '#type' => 'textarea',
+    '#resizable' => FALSE,
+    '#rows' => 8,
+    '#cols' => 50,
+	'#default_value' => t(hmmer_getClustal($_POST)),
+    '#suffix' => '<div id="warning">HMMer is designed to use peptide sequences. We will attempt to convert your sequence to peptides before performing the search</div>',
+    '#attributes' => array('placeholder' => 'Paste ClustlaW alignment for hmmsearch, FASTA for phmmer')
+  );
+
+
+	$form['hmmer']['parameters'] = array(
+        '#type' => 'fieldset',
+        '#title' => t('Parameters'),
+        '#collapsible' => TRUE,
+        '#collapsed' => FALSE,
+	);
+
+
+	$form['hmmer']['parameters']['basic'] = array(
+        '#type' => 'fieldset',
+        '#title' => t('Basic'),
+	);
+
+  $form['hmmer']['parameters']['basic']['type'] = array(
+    '#type' => 'radios',
+    '#title' => t('Sequence Type'),
+    '#options' => array(
+    		'DNA'		 =>t('DNA'),
+    		'PROTEIN' =>t('Protein')),
+    '#default_value' => 'PROTEIN'
+  );
+
+	$form['hmmer']['parameters']['basic']['program'] = array(
+		'#type' => 'radios',
+		'#title' => t('Program'),
+		'#options' => array(
+			'phmmer' => t('phmmer'),
+			'hmmsearch' => t('hmmsearch')),
+		'#default_value' => 'hmmsearch'
+	);
+	$form['hmmer']['parameters']['basic']['cutoff'] = array(
+		'#type' => 'radios',
+		'#title' => t('Cut-Offs'),
+		'#options' => array(
+			'evalue' => t('E-value'),
+			'bitscore' => t('Bit Score')),
+		'#default_value' => 'evalue'
+	);
+
+
+
+
+
+	$form['hmmer']['parameters']['cutoffs'] = array(
+        '#type' => 'fieldset',
+        '#title' => t('Cut-off values'),
+        '#collapsible' => TRUE,
+        '#collapsed' => FALSE,
+	);
+	$form['hmmer']['parameters']['cutoffs']['significance'] = array(
+        '#type' => 'fieldset',
+        '#title' => t('Significance'),
+	);
+	$form['hmmer']['parameters']['cutoffs']['significance']['sigSequence'] = array(
+		'#type' => 'textfield',
+		'#title' => t('Sequence'),
+		'#size' => 5, 
+		'#maxlength' => 5,
+		'#default_value' => '0.01'
+	);
+	$form['hmmer']['parameters']['cutoffs']['significance']['sigHit'] = array(
+		'#type' => 'textfield',
+		'#title' => t('Hit'),
+		'#size' => 5, 
+		'#maxlength' => 5,
+		'#default_value' => '0.03'
+	);
+	$form['hmmer']['parameters']['cutoffs']['report'] = array(
+        '#type' => 'fieldset',
+        '#title' => t('Report'),
+	);
+	$form['hmmer']['parameters']['cutoffs']['report']['reportSequence'] = array(
+		'#type' => 'textfield',
+		'#title' => t('Sequence'),
+		'#size' => 5, 
+		'#maxlength' => 5,
+		'#default_value' => '0.01'
+	);
+	$form['hmmer']['parameters']['cutoffs']['report']['reportHit'] = array(
+		'#type' => 'textfield',
+		'#title' => t('Hit'),
+		'#size' => 5, 
+		'#maxlength' => 5,
+		'#default_value' => '0.03'
+	);
+
+	$form['hmmer']['parameters']['datasets']=hmmer_generateDatasets();
+
+	$form['hmmer']['lookup'] = array(
+		'#type' => 'textfield',
+		'#title' => t('Load results with job ID'),
+		'#default_value' => '',
+		'#size' => 9, 
+		'#maxlength' => 12,
+	);
+
+
+
+
+  $form['hmmer']['submit'] = array(
+    '#type' => 'submit',
+    '#value' => t('Submit'),
+    '#ajax' => array(
+      'callback' => 'ajax_hmmer_handler',
+      'wrapper' => 'test',
+      'effect' => 'fade',
+      'progress' => array(
+        'type' => 'throbber',
+        'message' => t('Processing...')),
+    ),
+//    '#attributes' => array(
+//      'id'=>'submitButton'),
+  );
+
+ $form['hmmer']['clear'] = array(
+ //   '#name' => 'clear',
+    '#type' => 'button',
+    '#value' => t('Reset'),
+    '#prefix' => '</br>',
+    '#attributes' => array(
+      'onclick' => 'this.form.reset(); document.getElementById(\'edit-result\').innerHTML=\'\';return false;',
+      'id'=>'clearButton')
+  );
+
+  $form['hmmer']['results'] = array(
+    '#title' => '',
+    // The prefix/suffix provide the div that we're replacing, named by
+    // #ajax['wrapper'] above.
+    '#prefix' => '<div id="results">',
+    '#suffix' => '</div>',
+    '#type' => 'item',
+
+    '#ajax' => array(
+      'callback' => 'ajax_runningJob_handler',
+      'event' => 'click',
+      'wrapper' => 'test',
+      'effect' => 'fade',
+      'progress' => array(
+        'type' => 'throbber',
+        'message' => t('Getting Job Status...')),
+      )
+  );
+
+  $form['hmmer']['result'] = array(
+    '#type' => 'item',
+  );
+
+  return $form;
+}
+
+/**
+ * Callback element needs only select the portion of the form to be updated.
+ * Since #ajax['callback'] return can be HTML or a renderable array (or an
+ * array of commands), we can just return a piece of the form.
+ */
+function ajax_hmmer_handler($form, $form_state) {
+	// 1)validate user input
+	// 1.1) check for job id to look up
+
+	if($form_state['values']['lookup']!=''){
+		if(preg_match("#^(\d+)$#",$form_state['values']['lookup'],$match))
+			$id=$match[1];
+		else
+			$results="Invalid job ID";
+
+	// 1.2) check for valid data on submitted form
+	}else{
+		if($form_state['values']['sequence']==''){
+			$results="You forgot to enter query sequences.";
+			$commands[]=ajax_command_css('#edit-sequence', array('border' => 'solid red 2px'));
+			//$commands[]=ajax_command_css('#edit-sequence', array('color' => 'red', 'margin-left' => '6px'));
+
+		// input looks good
+		}else{
+
+		//get checked dbs. these will all be digits
+		foreach($form_state['values'] as $key => $value){
+		  	if(preg_match("#\d+#",$key) && $value==1){
+				$query=db_query("select filename from file_managed f, field_data_field_file d where d.entity_id=$key and d.field_file_fid=f.fid")->fetchField();
+		   		$args['dbs'][]=substr($query,0,-3);
+			}
+		}
+
+		// fail if no dbs selected
+		if(count($args['dbs'])<1){
+			$results.='Please select databases to search against';
+			$commands[]=ajax_command_css('#edit-jobid', array('color' => 'red'));
+		}else{
+
+
+	    	$message='Thank you for your submission!';
+
+		    //  clear any error css that may have come up
+		    //$commands[]=ajax_command_css('#edit-results', array('color' => 'green', 'margin-left' => '2px'));
+		    $commands[]=ajax_command_css('#edit-sequence', array('border' => 'solid 1px #aacfe4'));
+		    $commands[]=ajax_command_css('#edit-comments', array('border' => 'solid 1px #aacfe4'));
+
+
+		    // modify input sequence
+		    if($form_state['values']['program']=='hmmsearch'){
+				// convert clustal format to stockholm
+				$patterns = array("/CLUSTAL \d\.\d\d?\.?\d?\d? multiple sequence alignment\n/","/\n\s+[\*\.\:\s]+/","/-/");
+				$replacements = array("# STOCKHOLM 1.0","\n\n",".");
+				$args['sequence']= preg_replace($patterns, $replacements, $form_state['values']['sequence'])."\n//\n";
+			}else if($form_state['values']['type']=='DNA'){
+				// attempt to convert dna to pep. all 6 frames?
+				$a=NULL;
+			}else
+				$args['sequence']=$form_state['values']['sequence'];
+
+			//build argument/value pairs
+		    if($form_state['values']['cutoff']=='evalue'){
+				$args['arguments']['--incE']=$form_state['values']['sigSequence'];
+				$args['arguments']['--incdomE']=$form_state['values']['sigHit'];
+				$args['arguments']['-E']=$form_state['values']['reportSequence'];
+				$args['arguments']['--domE']=$form_state['values']['reportHit'];
+		    }else{
+				$args['arguments']['--incT']=$form_state['values']['sigSequence'];
+				$args['arguments']['--incdomT']=$form_state['values']['sigHit'];
+				$args['arguments']['-T']=$form_state['values']['reportSequence'];
+				$args['arguments']['--domT']=$form_state['values']['reportHit'];
+		    }
+		    $args['program']=$form_state['values']['program'];
+
+			// submit job
+			$id=hmmer_submit_xgrid($args);
+		}
+		}
+	}
+
+   // should have either a look up id or submitted job id at this point
+   if($id){
+
+		// job has been submitted. continually get status updates until we're done
+		while( !($status=="Finished" || $status=="Failed") ){
+			$status=xgrid_status($id);
+			sleep(2);
+		}
+
+		// job is done
+
+
+		// CHECK TO SEE IF THERE IS ERROR TEXT IN JOB RESULTS
+		$jobResults=xgrid_results($id);
+		if( strpos($jobResults,"Error: ") ){
+			//preg_match("#(.*?)====END OF STDOUT====#sm",$jobResults,$errors);
+			$errors=preg_replace("/\n+/", "\n", $jobResults);
+			$errors=str_replace("\n","<br/>",$errors);
+			$results="Job <b>$id</b> results</br>
+				<div style=\"float:left;padding:6px;margin:6px; border:1px solid red;\">
+				Yikes! There were some problems running your job. Here is the output from the hmmer program:<br/>
+				$errors<br/>
+				Please double check your input sequence.
+				</div>";
+		}else{
+
+			// generate some stats
+			$time=xgrid_jobRunTime($id);
+
+			// display results
+			xgrid_zipResults($id);
+			$results='Job <b>'.$id.'</b> results</br>
+			Runtime: '.$time.' seconds <br/>
+			<a href="/data/'.$id.'.results.zip">Download Raw Results</a><br/>';
+			$results.='<div style="font-family: monospace;border: 1px solid black; padding: 6px;">'
+			.str_replace(" ","&nbsp;",str_replace("\n","<br/>",$jobResults))
+			.'</div>';
+
+		}
+	}
+
+
+  // update the results div with some new info
+  $commands[]=ajax_command_html('#edit-result',$results);
+//  $commands[]=ajax_command_css('#jobId', $argument);
+ // $commands[]=ajax_command_invoke('#edit-results','click');
+
+  return array('#type' => 'ajax', '#commands' => $commands);
+}
+
+
+
+function hmmer_submit_xgrid($args){
+	//generate random name to submit the job as. xgrid_genRandomString is in the xgrid module
+	$random=xgrid_genRandomString(6);
+	$filename="hmmer_".$random;
+
+	//create program argument string
+	foreach($args['arguments'] as $argument => $value){
+		$arguments.="\t\t\t<string>$argument</string>\n";
+		$arguments.="\t\t\t<string>$value</string>\n";
+	}
+
+	$batch="<?xml version=\"1.0\" encoding=\"UTF-8\"?>
+	<!DOCTYPE plist PUBLIC \"-//Apple Computer//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">
+	<plist version=\"1.0\">
+	<array>
+	<dict>
+		<key>inputFiles</key>
+			<dict>
+				<key>sequence</key>
+				<dict>
+					<key>fileData</key>
+					<data>".base64_encode($args['sequence'])."</data>
+				</dict>
+			</dict>
+			<key>name</key>
+			<string>$filename</string>
+			<key>taskSpecifications</key>
+			<dict>\n";
+
+	foreach($args['dbs'] as $db){
+       	$batch.="				<key>$db</key>
+				<dict>
+					<key>command</key>
+					<string>/vectorbase/scripts/hmmer.sh</string>
+					<key>arguments</key>
+					<array>
+						<string>".$args['program']."</string>
+						<string>$filename</string>
+						<string>".variable_get('xgrid_localDirectory')."$db</string>
+						$arguments
+					</array>
+				</dict>\n";
+    }
+
+	$batch.="			</dict>
+		</dict>
+	</array>
+	</plist>";
+
+
+	$jobId = xgrid_submit($batch);
+
+
+	//save some job params in the db
+	global $user;
+	$args['arguments']['user_name']=$user->name;
+	$args['arguments']['submitter_ip']=$_SERVER['REMOTE_ADDR'];
+	$args['arguments']['program']='HMMER';
+	$args['arguments']['date']=date("m/d/y");
+	$args['arguments']['time']=date("H:i:s");
+	$args['arguments']['sequence']=$args['sequence'];
+	$args['arguments']['searchProgram']=$args['program'];
+	xgrid_saveParams($jobId,$args['arguments']);
+
+
+	return $jobId;
+}
+
+
+
+
+
+/**
+ * Implements hook_block_info().
+ */
+function hmmer_block_info() {
+  $blocks['recent']['info'] = t('hmmer GUI for submitting jobs to xgrid');
+  return $blocks;
+}
+
+
+
+/**
+ * Implementation of hook_help()
+*/
+function hmmer_help($path, $arg){
+  switch ($path) {
+    case "admin/help#hmmer":
+      return '<p>'.  t("this is some text from the help hook") .'</p>';
+      break;
+  }
+
+}
+
+
+/**
+ * Implements hook_menu().
+ */
+function hmmer_menu(){
+  $items = array();
+
+  $items['admin/config/system/hmmer'] = array(
+    'title' => 'HMMer settings',
+    'description' => 'place holder',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('hmmer_configform'),
+    'access arguments' => array('access administration pages'),
+    'type' => MENU_NORMAL_ITEM,
+  );
+  
+  return $items;
+}
+
+
+/**
+ * Form function, called by drupal_get_form() 
+ * in hmmer_menu().
+ */
+function hmmer_configform($form, &$form_state){
+  $form['from'] = array(
+  '#type' => 'item',
+  '#title' => t('hmmer Web Service Settings'),
+  '#markup' => 'The (separate) web service runs on an OS X machine which has access to the hmmer program on the command line. 
+The service runs over SOAP and implements the basic functionality of the hmmer program.<br/>These settings connect to http://server:port/wsdlPath<br/>Currently: ' . hmmer_getURL(),
+);
+
+  $form['hmmer_server'] = array(
+    '#type' => 'textfield',
+    '#title' => t('hmmer service machine'),
+    '#default_value' => variable_get('hmmer_server', 'jobs.vectorbase.org'),
+    '#maxlength' => 35,
+    '#description' => t('The machine where the hmmer web service is running.'),
+    '#required' => TRUE,
+  );
+
+  $form['hmmer_server_port'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Port'),
+    '#default_value' => variable_get('hmmer_server_port', '80'),
+    '#maxlength' => 4,
+    '#description' => t('The service port.'),
+    '#required' => TRUE,
+  );
+
+  $form['hmmer_controller_url_suffix'] = array(
+    '#type' => 'textfield',
+    '#title' => t('WSDL Path'),
+    '#default_value' => variable_get('hmmer_server_suffix', 'hmmer.wsdl'),
+    '#maxlength' => 35,
+    '#description' => t('Path to WSDL file on hmmer server. No leading slash.'),
+    '#required' => TRUE,
+  );
+
+  return system_settings_form($form);
+}
+
+
+
+function hmmer_generateDatasets(){
+	$formOut = array(
+        '#type' => 'fieldset',
+        '#title' => t('Datasets'),
+	);
+
+	// get node ids for files with xgrid enabled
+	$query = new EntityFieldQuery();
+	$result = $query->entityCondition('entity_type', 'node')
+	  ->entityCondition('bundle', 'downloadable_file')
+	  ->fieldCondition('field_xgrid_enabled', 'value', '1', '=')
+	  ->fieldCondition('field_status', 'value', 'Current', '=')
+	  ->execute();
+
+
+
+	// as long as we have some dbs enabled, get info about those dbs
+	if (isset($result['node'])) {
+
+		// pull out full node info for each of the nids identified by the entityfieldquery
+		$nodes=node_load_multiple(array_keys($result['node']));
+
+
+	 	//first find organisms with xgrid dbs available
+		$organisms=array();
+		foreach($nodes as $node){
+			$orgTid=$node->field_organism_taxonomy['und'][0]['tid'];
+			$orgName=taxonomy_term_load($orgTid);
+			$organisms[$orgName->name]=$orgTid;
+		}
+		// alphabetically sort organisms
+		ksort($organisms);
+
+
+		// what is the tid for peptides?
+		$peptideTid=taxonomy_get_term_by_name('Peptides');
+		$peptideTid=array_shift($peptideTid)->tid;
+
+	 	//second make fieldset of file types available for the organisms
+	 	// these will be visible/hidden on organism mouseover/click
+		foreach ($organisms as $organism => $orgNid) {
+
+			// now display peptide dbs
+			$query = new EntityFieldQuery();
+			$result = $query->entityCondition('entity_type', 'node')
+			  ->entityCondition('bundle', 'downloadable_file')
+			  ->fieldCondition('field_xgrid_enabled', 'value', '1', '=')
+			  ->fieldCondition('field_download_file_type', 'tid', $peptideTid, '=')
+			  ->fieldCondition('field_organism_taxonomy', 'tid', $orgNid, '=')
+			  ->fieldCondition('field_status', 'value', 'Current', '=')
+			  ->execute();
+
+			//get all the dbs info
+			if(isset($result['node'])){
+
+				$dbs=node_load_multiple(array_keys($result['node']));
+				foreach($dbs as $db){
+					$nid=$db->nid;
+					
+					$fileDescription=trim($db->field_description['und'][0]['value']);
+					//$fileDescription=preg_replace("#.*?,#","",preg_replace("#<i>.*?</i>#","",$fileDescription));
+					//$fileType=taxonomy_term_load($db->field_download_file_type['und'][0]['tid'])->name;	
+					// file type will be peptide
+
+					$formOut[$organism]['Peptide'][$nid] = array(
+						'#type' => 'checkbox',
+						'#title' => t("<b>Peptides</b> ".$fileDescription),
+						'#attributes' => array(
+							'class' => array('pepDbs', 'dbs'),
+							'data-org' => array(str_replace(" ","_", $organism))
+						)						
+					);
+				}
+			}
+		}
+
+	} // end checking for any xgrid enabled dbs
+//dpm(blast_dbinfo('agambiae.TRANSCRIPTS-AgamP3.6.fa'));
+	return $formOut;
+}

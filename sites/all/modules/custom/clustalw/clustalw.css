@@ -1,0 +1,60 @@
+
+#edit-fast{
+	float:left;
+	width: 195px;
+}
+
+#edit-full{
+	float:left;
+	width: 195px;
+}
+
+#edit-multiple{
+	float:left;
+	width: 195px;
+}
+
+#edit-output{
+	float:left;
+	width: 195px;
+}
+
+#edit-basic{
+	float:left;
+	width: 195px;
+}
+
+
+
+#edit-controlfield{
+width:200px;
+float:left;
+clear:none;
+}
+.form-item-lookup{
+	float:left;
+	margin-top:0;
+}
+.form-submit{
+	margin-top:0;
+	float:right;
+	width:70px;
+}
+
+
+
+
+
+#clearButton{
+	margin-top:4px;
+	width:70px;
+}
+
+
+#scores{
+	font-family: monospace;
+	border: 1px solid black;
+	padding: 6px;
+	display:none;
+	color:black;
+}

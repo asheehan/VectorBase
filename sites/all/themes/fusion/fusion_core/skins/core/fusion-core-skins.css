@@ -220,9 +220,8 @@ div.fusion-center {
 }
 
 /* Float imagefield images left and add margin */
-.fusion-float-imagefield-left .field-type-filefield,
-.fusion-float-imagefield-left .image-insert,
-.fusion-float-imagefield-left .imagecache {
+.fusion-float-imagefield-left .field-type-image,
+.fusion-float-imagefield-left .image-insert {
   float: left; /* LTR */
   margin: 0 15px 15px 0; /* LTR */
 }
@@ -233,9 +232,8 @@ div.fusion-center {
 }
 
 /* Float imagefield images right and add margin */
-.fusion-float-imagefield-right .field-type-filefield,
-.fusion-float-imagefield-right .image-insert
-.fusion-float-imagefield-right .imagecache {
+.fusion-float-imagefield-right .field-type-image,
+.fusion-float-imagefield-right .image-insert {
   float: right; /* LTR */
   margin: 0 0 15px 15px; /* LTR */
 }
@@ -244,74 +242,3 @@ div.fusion-center {
 .fusion-float-imagefield-right .views-row {
   clear: right; /* LTR */
 }
-
-/* Superfish: all menus */
-.sf-menu li {
-  list-style: none;
-  list-style-image: none;
-  list-style-type: none;
-}
-
-/* Superfish: vertical menus */
-.superfish-vertical {
-  position: relative;
-  z-index: 9;
-}
-
-ul.sf-vertical {
-  background: #fafafa;
-  margin: 0;
-  width: 100%;
-}
-
-ul.sf-vertical li {
-  border-bottom: 1px solid #ccc;
-  font-weight: bold;
-  line-height: 200%; /* 24px */
-  padding: 0;
-  width: 100%;
-}
-
-ul.sf-vertical li a:link,
-ul.sf-vertical li a:visited,
-ul.sf-vertical li .nolink {
-  margin-left: 10px;
-  padding: 2px;
-}
-
-ul.sf-vertical li a:hover,
-ul.sf-vertical li a.active {
-  text-decoration: underline;
-}
-
-ul.sf-vertical li ul {
-  background: #fafafa;
-  border-top: 1px solid #ccc;
-  margin-left: 0;
-  width: 150px;
-}
-
-ul.sf-vertical li ul li.last {
-  border-top: 1px solid #ccc;
-  margin-bottom: -1px;
-  margin-top: -1px;
-}
-
-ul.sf-vertical li ul {
-  border-top: none;
-  padding: 4px 0;
-}
-
-ul.sf-vertical li ul li {
-  border-bottom: none;
-  line-height: 150%; /* 24px */
-}
-
-ul.sf-vertical li ul li.last {
-  border-top: none;
-}
-
-ul.sf-vertical li ul li ul {
-  margin-top: -4px;
-}
-

@@ -1,0 +1,19 @@
+name = Taxonomy subterms
+description = "Display subterms in terms page."
+dependencies[] = taxonomy
+core = 7.x
+package = Taxonomy
+configure = admin/config/taxonomy_subterms
+
+; Information added by drupal.org packaging script on 2011-02-25
+version = "7.x-1.x-dev"
+core = "7.x"
+project = "taxonomy_subterms"
+
+
+; Information added by drupal.org packaging script on 2011-04-01
+version = "7.x-1.x-dev"
+core = "7.x"
+project = "taxonomy_subterms"
+datestamp = "1301617583"
+

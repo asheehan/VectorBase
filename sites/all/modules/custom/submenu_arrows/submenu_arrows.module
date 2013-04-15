@@ -1,0 +1,45 @@
+<?php
+/**
+ * Add arrow icons to menu items with submenus
+ */
+
+/**
+ * Implementation of hook_init().
+ */
+function submenu_arrows_init() {
+  drupal_add_css(drupal_get_path('module', 'submenu_arrows') .'/submenu_arrows.css', 'module');
+}
+/**
+ * Implementation of hook_help().
+ */
+function submenu_arrows_help($path, $arg) {
+  switch ($path) {
+    case 'admin/help#submenu_arrows':
+      $output = 'The IPTC Editor module allows permitted users to change the IPTC information for an image.';
+      return $output;
+  }
+}
+/**
+ * Implementation of hook_block_info()
+ */
+function submenu_arrows_block_info() {
+
+  $blocks['submenu_arrows'] = array(
+    'info' => t('Submenu Arrows'),
+  );
+
+  return $blocks;
+}
+/**
+ * Implementation of hook_menu_link_alter()
+ */
+function submenu_arrows_preprocess_link(&$item) {
+    //drupal_set_message(print_r($item));
+    if (isset($item['options']['attributes']['class']) && is_array($item['options']['attributes']['class'])) {
+        if (in_array('menuparent',$item['options']['attributes']['class']) && !in_array('sf-depth-1',$item['options']['attributes']['class'])) {
+            $item['text'] = '<div class="menuarrow"><div class="menuarrowleft">' . $item['text'] . ' </div><div class="menuarrowright"><img class="menuarrow" src="/sites/default/files/ftp/triang.png"></div></div>';
+        } else if (in_array('sf-depth-2',$item['options']['attributes']['class']) && preg_match('<!icon (.*) >',$item['text'], $iconFile)) {
+            $item['text'] = '<div class="menuarrow"><div class="menuarrowleft">' . $item['text'] . ' </div><div class="menuarrowright"><img src="/sites/default/files/ftp/' . $iconFile[1] . '"></div></div>';
+        }
+    }
+}

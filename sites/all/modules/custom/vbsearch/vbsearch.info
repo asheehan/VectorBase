@@ -1,0 +1,5 @@
+name = VectorBase Search
+description = VectorBase Search module for searching solr and displaying results
+package = VectorBase
+core = 7.x
+files[] = vbsearch.module

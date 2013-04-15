@@ -1,0 +1,4 @@
+name = Submenu Arrows
+description = Adds an arrow icon to the right of menu items that have a submenu.
+core = 7.x
+package = User interface

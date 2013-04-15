@@ -1,0 +1,12 @@
+; $Id: css_browser_selector.info,v 1.2 2011/01/11 13:50:37 jwhat Exp $
+
+name = "CSS Browser Selector"
+description = "Automatically includes browser/OS-specific CSS selectors in your HTML."
+core = 7.x
+
+; Information added by drupal.org packaging script on 2011-01-12
+version = "7.x-1.0"
+core = "7.x"
+project = "css_browser_selector"
+datestamp = "1294799555"
+

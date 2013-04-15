@@ -1,0 +1,262 @@
+<?php
+
+/* blast.install
+ installs the db tables needed for the module
+
+also need to make $documentRoot/data directory:
+drupal_mkdir("data");
+
+also need to make database for holding individual fasta sequences
+also create a bast page and add:
+
+drupal_add_js(drupal_get_path('module', 'blast'). '/blast.js');
+
+this module expects the tablesorter jquery plugin to be available through the theme
+
+$block = module_invoke('blast', 'block_view', 1);
+print render($block);
+
+
+ */
+
+function blast_install() {
+  drupal_install_schema('blast_schema');
+  // setup db for storing all sequence data. used to dl sequences and send to clustal
+  exec('psql -U postgres -c "create database blast_sequences;"');
+  exec('psql -U postgres -c "create table raw_sequences (
+raw_sequence_id SERIAL,
+primary_id text,
+description text,
+filename varchar(255),
+sequence text,
+PRIMARY KEY (raw_sequence_id)
+);" blast_sequences');
+  exec('psql -U postgres -c "grant all on database blast_sequences to db_public;grant all on raw_sequences TO db_public;grant all on raw_sequences_raw_sequence_id_seq TO db_public;" blast_sequences');
+
+}
+
+function blast_uninstall(){
+  drupal_uninstall_schema('blast_schema');
+  exec('psql -U postgres -c "drop database blast_sequences;"');
+}
+
+function blast_schema(){
+  $schema['blast_results'] = array(
+    'description' => t('BLAST results'),
+    'fields' => array(
+     'br_id' => array(
+      'description' => t('BLAST result unique identifier'),
+      'type' => 'serial',
+      'unsigned' => true,
+      'not null' => true,
+      ), 
+     'search_id' => array(
+       'type' => 'int',
+       'not null' => true,
+      ),
+      'algorithm' => array(
+        'type' => 'text',
+      ),
+      'algorithm_version' => array(
+        'type' => 'text',
+      ),
+      'database_name' => array(
+        'type' => 'text',
+      ),
+      'database_letters' => array(
+        'type' => 'int',
+      ),
+      'database_entries' => array(
+        'type' => 'int',
+      ),
+      'query_name' => array(
+        'type' => 'text',
+      ),
+      'query_accession' => array(
+        'type' => 'text',
+      ),
+      'query_length' => array(
+        'type' => 'text',
+      ),
+      'query_description' => array(
+        'type' => 'text',
+      ),
+      'num_hits' => array(
+        'type' => 'int',
+      ),
+      'best_e' => array(
+        'type' => 'text'
+//       'type' => 'float',
+//      	'size' => 'big',
+      ),
+      'top_score' => array(
+        'type' => 'int',
+      ),
+    ), // close fields array
+    'primary key' => array('br_id'),
+    );
+
+  $schema['blast_hits'] = array(
+    'description' => t('BLAST hits'),
+    'fields' => array(
+     'bh_id' => array(
+      'description' => t('BLAST hit unique identifier'),
+      'type' => 'serial',
+      'unsigned' => true,
+      'not null' => true,
+      ), 
+      'br_id' => array(
+        'type' => 'int',
+      ),
+      'name' => array(
+        'type' => 'text',
+      ),
+      'accession' => array(
+        'type' => 'text',
+      ),
+      'description' => array(
+        'type' => 'text',
+      ),
+      'raw_score' => array(
+        'type' => 'float',
+      ),
+      'significance' => array(
+        'type' => 'text'
+//        'type' => 'float',
+//	       'size' => 'big',
+
+      ),
+      'length' => array(
+        'type' => 'int',
+      ),
+      'num_hsps' => array(
+        'type' => 'int',
+      ),
+    ), // close fields array
+    'primary key' => array('bh_id'),
+    );
+
+  $schema['blast_hsps'] = array(
+    'description' => t('BLAST hsps'),
+    'fields' => array(
+     'bs_id' => array(
+      'description' => t('BLAST hsp unique identifier'),
+      'type' => 'serial',
+      'unsigned' => true,
+      'not null' => true,
+      ), 
+      'bh_id' => array(
+        'type' => 'int',
+      ),
+      'search_id' => array(
+        'type' => 'int',
+      ),
+      'hit_string' => array(
+        'type' => 'text',
+      ),
+      'homology_string' => array(
+        'type' => 'text',
+      ),
+      'query_string' => array(
+        'type' => 'text',
+      ),
+      'evalue' => array(
+        'type' => 'text'
+//        'type' => 'float',
+//      	'size' => 'big',
+      ),
+      'score' => array(
+        'type' => 'int',
+      ),
+      'percent_identity' => array(
+        'type' => 'float',
+      ),
+      'strandhit' => array(
+        'type' => 'int',
+      ),
+      'strandquery' => array(
+        'type' => 'int',
+      ),
+      'starthit' => array(
+        'type' => 'int',
+      ),
+      'startquery' => array(
+        'type' => 'int',
+      ),
+      'endhit' => array(
+        'type' => 'int',
+      ),
+      'endquery' => array(
+        'type' => 'int',
+      ),
+      'framehit' => array(
+        'type' => 'int',
+      ),
+      'framequery' => array(
+        'type' => 'int',
+      ),
+    ), // close fields array
+    'primary key' => array('bs_id'),
+    );
+
+    return $schema;
+}
+
+
+
+/*
+function blast_install() {
+  switch ($GLOBALS['db_type']) {
+    case 'pgsql':
+      db_query("CREATE TABLE {node_field_blast_result} (
+    br_id serial primary key,
+    search_id integer,
+    algorithm text,
+    algorithm_version text,
+    database_name text,
+    database_letters integer,
+    database_entries integer,
+    query_name text,
+    query_accession text,
+    query_length text,
+    query_description text,
+    num_hits integer,
+    best_e numeric,
+    top_score integer)");
+
+        db_query("CREATE TABLE {node_field_blast_hit} (
+    bh_id integer serial primary key,
+    br_id integer,
+    name text,
+    accession text,
+    description text,
+    raw_score numeric,
+    significance numeric,
+    length integer,
+    num_hsps integer)");
+
+        db_query("CREATE TABLE {node_field_blast_hsp} (
+    bs_id integer serial primary key,
+    bh_id integer,
+    search_id integer,
+    hit_string text,
+    homology_string text,
+    query_string text,
+    evalue numeric,
+    score integer,
+    percent_identity numeric,
+    strandhit integer,
+    strandquery integer,
+    starthit integer,
+    startquery integer,
+    endhit integer,
+    endquery integer,
+    framehit integer,
+    framequery integer)");
+
+      break;
+  }
+}
+*/
+
+?>

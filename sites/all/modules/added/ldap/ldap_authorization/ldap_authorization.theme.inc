@@ -16,6 +16,7 @@ function theme_ldap_authorization_admin_index(&$variables) {
     'sticky' => FALSE,
     'empty' => '',
     'caption' => t('LDAP Authorization Configurations'),
+    'rows' => array(),
   );
 
   foreach ($consumers as $consumer_type => $consumer) {
@@ -30,14 +31,14 @@ function theme_ldap_authorization_admin_index(&$variables) {
 
     $table['rows'][] = array(
       $consumer->consumerConf->sid,
-      $consumer->description,
+      $consumer->name,
       $consumer->consumerModule,
       $consumer_type,
       ($consumer->consumerConf->status) ? t('Yes') : t('No'),
       $actions
     );
   }
-  return theme_table($table);
+  return theme('table', $table);
 
 }
 
@@ -57,6 +58,7 @@ function theme_ldap_authorization_test_results($variables) {
     'sticky' => FALSE,
     'empty' => '',
     'caption' => t('LDAP Authorizations Test Results for consumer %consumer', array('%consumer' => $consumer->name)),
+    'rows' => array(),
   );
 
   if (count($results)) {
@@ -67,6 +69,7 @@ function theme_ldap_authorization_test_results($variables) {
       }
       foreach ($user_results as $consumer_type => $authorizations) {
         if (is_array($authorizations) && count($authorizations) > 0) {
+          $authorizations = $consumer->convertToFriendlyAuthorizationIds($authorizations);
           $authorizations_text =  theme('item_list', array('items' => $authorizations, 'title' => NULL, 'type' => 'ul', 'attributes' => array()));
         }
         else {
@@ -90,9 +93,6 @@ function theme_ldap_authorization_test_results($variables) {
         $table['rows'][] = $row;
       }
     }
-  }
-  else {
-    $table['rows'] = array();
   }
 
   $output = theme('table', $table);

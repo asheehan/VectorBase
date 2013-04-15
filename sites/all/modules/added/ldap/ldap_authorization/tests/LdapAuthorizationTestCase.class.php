@@ -26,14 +26,11 @@ class LdapAuthorizationTestCase extends DrupalWebTestCase {
   public $authenticationData;
   public $testData = array();
 
-
-
-
   public $sid; // current, or only, sid
   public $consumerType = 'drupal_role'; // current, or only, consumer type being tested
 
-  function setUp() {
-    parent::setUp(array('ldap_authentication', 'ldap_authorization', 'ldap_authorization_drupal_role'));
+  function setUp($addl_modules = array()) {
+    parent::setUp(array_merge(array('ldap_authentication', 'ldap_authorization', 'ldap_authorization_drupal_role'), $addl_modules));
     variable_set('ldap_simpletest', 1);
     variable_set('ldap_help_watchdog_detail', 0);
   }
@@ -43,9 +40,6 @@ class LdapAuthorizationTestCase extends DrupalWebTestCase {
     variable_del('ldap_help_watchdog_detail');
     variable_del('ldap_simpletest');
   }
-
-
-
 
 
   function prepTestData() {
@@ -81,7 +75,7 @@ class LdapAuthorizationTestCase extends DrupalWebTestCase {
       }
 
       // make included fake sid match feature sid
-      $this->testFunctions->prepTestConfiguration($this->testData, TRUE);
+      $this->testFunctions->prepTestConfiguration($this->testData, FALSE);
     }
     else {
       include(drupal_get_path('module', 'ldap_authorization') . '/tests/' . $this->authorizationData);
@@ -108,9 +102,5 @@ class LdapAuthorizationTestCase extends DrupalWebTestCase {
       }
       $this->testFunctions->prepTestConfiguration($this->testData, FALSE);
     }
-
-
-
   }
-
 }

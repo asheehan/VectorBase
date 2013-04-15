@@ -1,0 +1,1327 @@
+<?php
+
+function ribeiro_init() {
+
+}
+
+
+function ribeiro_help() {
+}
+
+
+function ribeiro_menu() {
+
+    $items['ribeiro'] = array(
+        'title' => 'Community Annotation Portal',
+        'page callback' => 'ribeiro_redirect',
+        'access callback' => TRUE,
+        'access arguments' => array('access content')
+    );
+    $items['ribeiro/%'] = array(
+        'page callback'	   => 'ribeiro_form_wrapper',
+        'page arguments'   => array(1),
+        'access arguments' => array('access content')
+    );
+
+    return $items;
+}
+
+
+function ribeiro_redirect() {
+    drupal_goto("ribeiro/anoxcel");
+}
+
+
+function ribeiro_form_wrapper($which = NULL) {
+
+    drupal_add_css(
+        drupal_get_path('module', 'ribeiro') . '/css/tablescroll.css', 
+        array('group' => CSS_DEFAULT, 'every_page' => TRUE)
+    ); 
+
+    //// can't decide on how to parse this crap - for now allow simple db namess?!?
+    ///// should just send it without arg directly at times?!?
+    if(strpos($which, ":")==false) {
+        // preg_replace("/db=/","",$which);
+        if(substr($which,0,3)=="db=") {
+           $which=substr($which,3);;
+        }
+        if(!$which||($which&&($which!="aedxcel" && $which!="reanoxcel")))  {
+            return drupal_get_form('anoxcel_form',"anoxcel");
+        } else {
+            return drupal_get_form('anoxcel_form',$which);
+        } 
+    }
+
+    $tok = strtok($which, ":");
+    $assoc;
+    while ($tok!==false) {
+        list($key,$value)=explode("=",$tok);
+        $assoc[$key]=$value;
+        // $tok = strtok("&");
+        $tok = strtok(":");
+    }   
+
+    $db=array_key_exists('db',$assoc)?$assoc['db']:0;
+    $type=array_key_exists('type',$assoc)?$assoc['type']:0;
+    $query=array_key_exists('query',$assoc)?$assoc['query']:0;
+
+    if(($db&&$type&&$query) 
+      &&($type=="pid"||$type=="gid"||$type=="desc"||$type=="key"||$type=="go" ) 
+      &&($db=="anoxcel"||$db=="aedxcel"||$db=="reanoxcel")
+    ) {
+        ///// this will be just the table!?!
+        return drupal_get_form('anoxcel_table_only',$db,$type,$query);
+    } else if(!$db||($db&&($db!="aedxcel" && $db!="reanoxcel")))  {
+        /// should really set default by not defining first arg?!? - but whatever?!?
+        return drupal_get_form('anoxcel_form',"anoxcel");
+    } else {
+        return drupal_get_form('anoxcel_form',$db);
+    } 
+       
+
+    /*
+        && $assoc['return']=="list"
+    if ($assoc['db'] && $assoc['db']=="annot") { 
+     */
+
+
+    // careful if renaming anything as the form names (the given the routine name) are referenced in the cap template file too
+//    $GLOBALS["bored"] = $which;
+///// simple redirect
+    // drupal_goto('ribeiro/anoxcel');
+
+    // $output = drupal_get_form('anoxcel_form');
+    // return drupal_render($output);
+
+// echo '<pre>' ;echo print_r(drupal_get_form('anoxcel_form')); echo '</pre>' ;exit;
+////////// let's add to it
+//     return drupal_get_form('anoxcel_form',"arse", "limpo");
+    // $output = drupal_get_form('anoxcel_form');
+    // return drupal_render($output);
+
+}
+
+
+
+function anoxcel_form_validate($form, &$form_state) {
+
+
+
+
+
+
+
+
+   // echo "fuck";
+  //  exit;
+}
+
+function anoxcel_form_submit($form, &$form_state) {
+    
+if($form_state['values']['dropdown_db']==1) {
+    echo "anoxcel";
+} else if($form_state['values']['dropdown_db']==2) {
+    echo "reanoxcel";
+} else {
+    echo "aedoxcel";
+}
+$sql = "SELECT * FROM anobase_AnoXcel_v45 WHERE "
+  ."ProteinView='".strtoupper("AGAP000010-PA'");
+echo $sql;
+$result = db_query($sql);
+$string = '';
+$list = array();
+foreach ($result as $row) {
+array_push($list,$row);
+}
+
+ echo "<pre>";
+// print var_dump($list[0]); // object(stdClass)#5 (250) { ["HYP_Seqname"]=> string(73) "http://anobas
+// print print_r($list[0]); // stdClass Object ( [HYP_Seqname] => http://anobase.
+//thus what is returned is an array of stdClass where the index corresponds to the rows and the column names are members?!?!!?
+//thus what is returned is an array of stdClass where the index corresponds to the rows and the column names are members?!?!!?
+//thus what is returned is an array of stdClass where the index corresponds to the rows and the column names are members?!?!!?
+
+$myrow=$list[0];
+/*
+$o = $list[0];
+print $o->HYP_Seqname; // object
+print $list[0]->HYP_Seqname; // object
+ */
+//thus what is returned is an array of stdClass where the index corresponds to the rows and the column names are members?!?!!?
+//thus what is returned is an array of stdClass where the index corresponds to the rows and the column names are members?!?!!?
+//thus what is returned is an array of stdClass where the index corresponds to the rows and the column names are members?!?!!?
+print gettype($list); // array
+print gettype($list[0]); // object
+ echo "</pre>";
+//
+//
+// print var_dump($list[0]);
+//print var_dump($list)->fetchField();
+
+// <!-- HEADER -->
+$table = ' <table class="tableone" summary="This table lists flights arriving at Bristol International Airport.">
+    <caption>Gene Info Table</caption>
+
+    <thead>
+    <tr>
+    <th class="th1" scope="col">Attribute</th> 
+    <th class="th2" scope="col">Value</th> 
+    </tr>
+    </thead>
+
+    <!-- FOOTER -->
+    <tfoot>
+    <tr>
+    <td colspan="2">DATE OF EDIT : 30 June 2012</td>
+    </tr>
+    </tfoot>
+
+    <!-- BODY -->
+    <tbody>
+    <tr><td colspan="2">
+    <div class="innerb">
+
+    <table class="tabletwo">
+';
+   
+
+
+
+
+
+// echo "<br><br>\n<table border=\"0\" cellspacing=\"0\" cellpadding=\"10\" width=\"100%\">\n";
+$table .=  "  <tr>                <th class=\"td1\" scope=\"row\">Sequence name</th>  <td class=\"td2\"><a href=\"$myrow->HYP_Seqname\">$myrow->Seqname</a></td></tr>\n";
+$table .=  "  <tr class=\"dk\">   <th class=\"td1\" scope=\"row\">First residue</th>  <td class=\"td2\">$myrow->first_res</td>    </tr>\n";
+$table .=  "  <tr>                <th class=\"td1\" scope=\"row\">Description</th>    <td class=\"td2\">$myrow->Descr</td></tr>\n";
+$table .=  "<tr class=\"dk\"><th class=\"td1\" scope=\"row\">CDS name and link to nucleotide data</th><td class=\"td2\"><a href=\"$myrow->HYP_CDS\">$myrow->CDS</a></td></tr>\n";
+$table .=  "<tr><td>Description</td><td class=\"cell_value\">$myrow->Descr_CDS</td></tr>\n";
+$table .=  "<tr><td>ATG?</td><td class=\"cell_value\">$myrow->ATG</td></tr>\n";
+$table .=  "<tr><td>Stop?</td><td class=\"cell_value\">$myrow->Stop</td></tr>\n";
+$table .=  "<tr><td>Best match to AG-CDS </td><td class=\"cell_value\"><a href=\"$myrow->HYP_BM_to_AGCDS\">$myrow->BM_to_AGCDS</a></td></tr>\n";
+$table .=  "<tr><td>E value</td><td class=\"cell_value\">$myrow->Eval_AGCDS</td></tr>\n";
+$table .=  "<tr><td>Score</td><td class=\"cell_value\">$myrow->Score_AGCDS</td></tr>\n";
+$table .=  "<tr><td>Extent of match</td><td class=\"cell_value\">$myrow->Extent_AGCDS</td></tr>\n";
+$table .=  "<tr><td>Length of best match</td><td class=\"cell_value\">$myrow->Length_BM_AGCDS</td></tr>\n";
+$table .=  "<tr><td>% identity</td><td class=\"cell_value\">$myrow->identity_AGCDS</td></tr>\n";
+$table .=  "<tr><td>% Match length</td><td class=\"cell_value\">$myrow->per_Match_length_AGCDS</td></tr>\n";
+$table .=  "<tr><td>First residue of match - UTR overhang</td><td class=\"cell_value\">$myrow->first_res_UTR_AGCDS</td></tr>\n";
+$table .=  "<tr><td>First residue of sequence</td><td class=\"cell_value\">$myrow->first_res_sequence_AGCDS</td></tr>\n";
+$table .=  "<tr><td>Link to whole gene + 2000nt 5' + 200nt 3'</td><td class=\"cell_value\"><a href=\"$myrow->HYP_Link_to_gene_AGCDS\">$myrow->Link_to_gene_AGCDS</a></td></tr>\n";
+$table .=  "<tr><td>Link to 5' 2,000 nt</td><td class=\"cell_value\"><a href=\"$myrow->HYP_Link_to_2kb_upstream_AGCDS\">$myrow->Link_to_2kb_upstream_AGCDS</a></td></tr>\n";
+$table .=  "<tr><td>Link to 3' 200 nt</td><td class=\"cell_value\"><a href=\"$myrow->HYP_Link_to_200bp_downstream_AGCDS\">$myrow->Link_to_200bp_downstream_AGCDS</a></td></tr>\n";
+$table .=  "<tr><td>Gene name and view at VectorBase</td><td class=\"cell_value\"><a href=\"$myrow->HYP_GeneView\">$myrow->GeneView</a></td></tr>\n";
+$table .=  "<tr><td>Protein view at VectorBase</td><td class=\"cell_value\"><a href=\"$myrow->HYP_ProteinView\">$myrow->ProteinView</a></td></tr>\n";
+$table .=  "<tr><td>Chromosome</td><td class=\"cell_value\"><a href=\"$myrow->HYP_Chr\">$myrow->Chr</a></td></tr>\n";
+$table .=  "<tr><td>For or Rev</td><td class=\"cell_value\">$myrow->For_or_Rev</td></tr>\n";
+$table .=  "<tr><td>Location</td><td class=\"cell_value\">$myrow->Location</td></tr>\n";
+$table .=  "<tr><td>Exon locations</td><td class=\"cell_value\">$myrow->Exon_locations</td></tr>\n";
+$table .=  "<tr><td>Number of introns and link to fasta file</td><td class=\"cell_value\"><a href=\"$myrow->HYP_Number_of_introns\">$myrow->Number_of_introns</a></td></tr>\n";
+$table .=  "<tr><td>intron lengths</td><td class=\"cell_value\">$myrow->Intron_lengths</td></tr>\n";
+$table .=  "<tr><td>Start</td><td class=\"cell_value\">$myrow->Start</td></tr>\n";
+$table .=  "<tr><td>End</td><td class=\"cell_value\">$myrow->End</td></tr>\n";
+$table .=  "<tr><td>Gene length</td><td class=\"cell_value\">$myrow->Gene_length</td></tr>\n";
+$table .=  "<tr><td>Protein size</td><td class=\"cell_value\">$myrow->Protein_size</td></tr>\n";
+$table .=  "<tr><td>Complexity index</td><td class=\"cell_value\">$myrow->Complexity_index</td></tr>\n";
+$table .=  "<tr><td>Increased AA (fold over average usage)</td><td class=\"cell_value\">$myrow->Increased_AA_fold_over_average</td></tr>\n";
+$table .=  "<tr><td>Cys number</td><td class=\"cell_value\">$myrow->Cys_number</td></tr>\n";
+$table .=  "<tr><td>SigP Result</td><td class=\"cell_value\"><a href=\"$myrow->HYP_SigP_result\">$myrow->SigP_result</a></td></tr>\n";
+$table .=  "<tr><td>Cleavage Position</td><td class=\"cell_value\">$myrow->Cleavage</td></tr>\n";
+$table .=  "<tr><td>MW</td><td class=\"cell_value\">$myrow->MW</td></tr>\n";
+$table .=  "<tr><td>pI</td><td class=\"cell_value\">$myrow->pI</td></tr>\n";
+$table .=  "<tr><td>Mature MW</td><td class=\"cell_value\">$myrow->Mature_MW</td></tr>\n";
+$table .=  "<tr><td>pI</td><td class=\"cell_value\">$myrow->Mature_pI</td></tr>\n";
+$table .=  "<tr><td>TMHMM result</td><td class=\"cell_value\">$myrow->TMHMM</td></tr>\n";
+$table .=  "<tr><td>Predicted helices</td><td class=\"cell_value\">$myrow->Pred_helices</td></tr>\n";
+$table .=  "<tr><td>% membrane</td><td class=\"cell_value\">$myrow->per_membrane</td></tr>\n";
+$table .=  "<tr><td>% outside</td><td class=\"cell_value\">$myrow->per_outside</td></tr>\n";
+$table .=  "<tr><td>% inside</td><td class=\"cell_value\">$myrow->per_inside</td></tr>\n";
+$table .=  "<tr><td>Best match to NR protein database</td><td class=\"cell_value\"><a href=\"$myrow->HYP_BM_to_NR\">$myrow->BM_to_NR</a></td></tr>\n";
+$table .=  "<tr><td>E value</td><td class=\"cell_value\"><a href=\"$myrow->HYP_Eval_NR\">$myrow->Eval_NR</a></td></tr>\n";
+$table .=  "<tr><td>Match</td><td class=\"cell_value\">$myrow->Match_NR</td></tr>\n";
+$table .=  "<tr><td>Score</td><td class=\"cell_value\">$myrow->Score_NR</td></tr>\n";
+$table .=  "<tr><td>Extent of match</td><td class=\"cell_value\">$myrow->Extent_NR</td></tr>\n";
+$table .=  "<tr><td>Length of best match</td><td class=\"cell_value\">$myrow->Length_of_BM_NR</td></tr>\n";
+$table .=  "<tr><td>% identity</td><td class=\"cell_value\">$myrow->identity_NR</td></tr>\n";
+$table .=  "<tr><td>% Match length</td><td class=\"cell_value\">$myrow->per_Match_length_NR</td></tr>\n";
+$table .=  "<tr><td>First residue of match</td><td class=\"cell_value\">$myrow->firstst_res_NR</td></tr>\n";
+$table .=  "<tr><td>First residue of sequence</td><td class=\"cell_value\">$myrow->first_res_seq_NR</td></tr>\n";
+$table .=  "<tr><td>Number of segments</td><td class=\"cell_value\">$myrow->Segments_NR</td></tr>\n";
+$table .=  "<tr><td>Species</td><td class=\"cell_value\">$myrow->Species</td></tr>\n";
+$table .=  "<tr><td>Key words</td><td class=\"cell_value\">$myrow->Key_words</td></tr>\n";
+$table .=  "<tr><td>Best match to SWISSP database</td><td class=\"cell_value\"><a href=\"$myrow->HYP_BM_to_SWISS\">$myrow->BM_to_SWISS</a></td></tr>\n";
+$table .=  "<tr><td>E value</td><td class=\"cell_value\"><a href=\"$myrow->HYP_Eval_SWISS\">$myrow->Eval_SWISS</a></td></tr>\n";
+$table .=  "<tr><td>Match</td><td class=\"cell_value\">$myrow->Match_SWISS</td></tr>\n";
+$table .=  "<tr><td>Score</td><td class=\"cell_value\">$myrow->Score_SWISS</td></tr>\n";
+$table .=  "<tr><td>Extent of match</td><td class=\"cell_value\">$myrow->Extent_SWISS</td></tr>\n";
+$table .=  "<tr><td>Length of best match</td><td class=\"cell_value\">$myrow->Length_SWISS</td></tr>\n";
+$table .=  "<tr><td>% identity</td><td class=\"cell_value\">$myrow->identity_SWISS</td></tr>\n";
+$table .=  "<tr><td>% Match length</td><td class=\"cell_value\">$myrow->per_Match_length_SWISS</td></tr>\n";
+$table .=  "<tr><td>First residue of match</td><td class=\"cell_value\">$myrow->first_res_SWISS</td></tr>\n";
+$table .=  "<tr><td>First residue of sequence</td><td class=\"cell_value\">$myrow->first_res_seq_SWISS</td></tr>\n";
+$table .=  "<tr><td>Number of segments</td><td class=\"cell_value\">$myrow->Segments_SWISS</td></tr>\n";
+$table .=  "<tr><td>PROSITE motifs</td><td class=\"cell_value\">$myrow->PROSITE_motifs</td></tr>\n";
+$table .=  "<tr><td>Non promiscuous prosite motifs</td><td class=\"cell_value\"><a href=\"$myrow->HYP_PROSITE_motifs\">$myrow->Non_promiscuous_motifs</a></td></tr>\n";
+$table .=  "<tr><td>Best match to GO database</td><td class=\"cell_value\">$myrow->BM_to_GO</td></tr>\n";
+$table .=  "<tr><td>E value</td><td class=\"cell_value\">$myrow->Eval_GO</td></tr>\n";
+$table .=  "<tr><td>Function descriptors</td><td class=\"cell_value\"><a href=\"$myrow->HYP_Eval_GO\">$myrow->Function_descr</a></td></tr>\n";
+$table .=  "<tr><td>Function parent</td><td class=\"cell_value\">$myrow->Function_parent</td></tr>\n";
+$table .=  "<tr><td>Function second parent</td><td class=\"cell_value\">$myrow->Function_2nd_parent</td></tr>\n";
+$table .=  "<tr><td>GO #</td><td class=\"cell_value\">$myrow->GO_num</td></tr>\n";
+$table .=  "<tr><td>E value of functional GO</td><td class=\"cell_value\">$myrow->Eval_function_GO</td></tr>\n";
+$table .=  "<tr><td>Component descriptors</td><td class=\"cell_value\">$myrow->CC_descr</td></tr>\n";
+$table .=  "<tr><td>Component parent</td><td class=\"cell_value\">$myrow->CC_parent</td></tr>\n";
+$table .=  "<tr><td>Component second parent</td><td class=\"cell_value\">$myrow->CC_2nd_parent</td></tr>\n";
+$table .=  "<tr><td>GO #</td><td class=\"cell_value\">$myrow->GO_process_num</td></tr>\n";
+$table .=  "<tr><td>E value of component GO</td><td class=\"cell_value\">$myrow->Eval_CC_GO</td></tr>\n";
+$table .=  "<tr><td>Process descriptors</td><td class=\"cell_value\">$myrow->Process_descr</td></tr>\n";
+$table .=  "<tr><td>Process parent</td><td class=\"cell_value\">$myrow->Process_parent</td></tr>\n";
+$table .=  "<tr><td>Process second parent</td><td class=\"cell_value\">$myrow->Process_2nd_parent</td></tr>\n";
+$table .=  "<tr><td>GO #</td><td class=\"cell_value\">$myrow->GO_proc_num</td></tr>\n";
+$table .=  "<tr><td>E value of process GO</td><td class=\"cell_value\">$myrow->Eval_process_GO</td></tr>\n";
+$table .=  "<tr><td>Best match to KOG database</td><td class=\"cell_value\"><a href=\"$myrow->HYP_BM_to_KOG\">$myrow->BM_to_KOG</a></td></tr>\n";
+$table .=  "<tr><td>E value</td><td class=\"cell_value\"><a href=\"$myrow->HYP_Eval_KOG\">$myrow->Eval_KOG</a></td></tr>\n";
+$table .=  "<tr><td>General class</td><td class=\"cell_value\">$myrow->General_class</td></tr>\n";
+$table .=  "<tr><td>Best match to PFAM database</td><td class=\"cell_value\"><a href=\"$myrow->HYP_BM_to_PFAM\">$myrow->BM_to_PFAM</a></td></tr>\n";
+$table .=  "<tr><td>E value</td><td class=\"cell_value\"><a href=\"$myrow->HYP_Eval_PFAM\">$myrow->Eval_PFAM</a></td></tr>\n";
+$table .=  "<tr><td>Best match to SMART database</td><td class=\"cell_value\"><a href=\"$myrow->HYP_BM_to_SMART\">$myrow->BM_to_SMART</a></td></tr>\n";
+$table .=  "<tr><td>E value</td><td class=\"cell_value\"><a href=\"$myrow->HYP_Eval_SMART\">$myrow->Eval_SMART</a></td></tr>\n";
+$table .=  "<tr><td>Best match to AEGY-PEP database</td><td class=\"cell_value\"><a href=\"$myrow->HYP_BM_to_AEGYPEP\">$myrow->BM_to_AEGYPEP</a></td></tr>\n";
+$table .=  "<tr><td>E value</td><td class=\"cell_value\">$myrow->Eval_AEGYPEP</td></tr>\n";
+$table .=  "<tr><td>Match</td><td class=\"cell_value\">$myrow->Match_AEGYPEP</td></tr>\n";
+$table .=  "<tr><td>Score</td><td class=\"cell_value\">$myrow->Score_AEGYPEP</td></tr>\n";
+$table .=  "<tr><td>Extent of match</td><td class=\"cell_value\">$myrow->Extent_AEGYPEP</td></tr>\n";
+$table .=  "<tr><td>Length of best match</td><td class=\"cell_value\">$myrow->Length_AEGYPEP</td></tr>\n";
+$table .=  "<tr><td>% identity</td><td class=\"cell_value\">$myrow->identity_AEGYPEP</td></tr>\n";
+$table .=  "<tr><td>% Match length</td><td class=\"cell_value\">$myrow->per_Match_length_AEGYPEP</td></tr>\n";
+$table .=  "<tr><td>First residue of match</td><td class=\"cell_value\">$myrow->first_res_AEGYPEP</td></tr>\n";
+$table .=  "<tr><td>First residue of sequence</td><td class=\"cell_value\">$myrow->first_res_seq_AEGYPEP</td></tr>\n";
+$table .=  "<tr><td>Number of segments</td><td class=\"cell_value\">$myrow->Segments_AEGYPEP</td></tr>\n";
+$table .=  "<tr><td>Best match to DMPROT database</td><td class=\"cell_value\"><a href=\"$myrow->HYP_BM_to_DMPROT\">$myrow->BM_to_DMPROT</a></td></tr>\n";
+$table .=  "<tr><td>E value</td><td class=\"cell_value\"><a href=\"$myrow->HYP_Eval_DMPROT\">$myrow->Eval_DMPROT</a></td></tr>\n";
+$table .=  "<tr><td>Match</td><td class=\"cell_value\">$myrow->Match_DMPROT</td></tr>\n";
+$table .=  "<tr><td>Score</td><td class=\"cell_value\">$myrow->Score_DMPROT</td></tr>\n";
+$table .=  "<tr><td>Extent of match</td><td class=\"cell_value\">$myrow->Extent_DMPROT</td></tr>\n";
+$table .=  "<tr><td>Length of best match</td><td class=\"cell_value\">$myrow->Length_DMPROT</td></tr>\n";
+$table .=  "<tr><td>% identity</td><td class=\"cell_value\">$myrow->identity_DMPROT</td></tr>\n";
+$table .=  "<tr><td>% Match length</td><td class=\"cell_value\">$myrow->per_Match_length_DMPROT</td></tr>\n";
+$table .=  "<tr><td>First residue of match</td><td class=\"cell_value\">$myrow->first_res_DMPROT</td></tr>\n";
+$table .=  "<tr><td>First residue of sequence</td><td class=\"cell_value\">$myrow->first_res_seq_DMPROT</td></tr>\n";
+$table .=  "<tr><td>Number of segments</td><td class=\"cell_value\">$myrow->Segments_DMPROT</td></tr>\n";
+$table .=  "<tr><td>Best match to CELEG database</td><td class=\"cell_value\"><a href=\"$myrow->HYP_BM_to_CELEG\">$myrow->BM_to_CELEG</a></td></tr>\n";
+$table .=  "<tr><td>E value</td><td class=\"cell_value\"><a href=\"$myrow->HYP_Eval_CELEG\">$myrow->Eval_CELEG</a></td></tr>\n";
+$table .=  "<tr><td>Match</td><td class=\"cell_value\">$myrow->Match_CELEG</td></tr>\n";
+$table .=  "<tr><td>Score</td><td class=\"cell_value\">$myrow->Score_CELEG</td></tr>\n";
+$table .=  "<tr><td>Extent of match</td><td class=\"cell_value\">$myrow->Extent_CELEG</td></tr>\n";
+$table .=  "<tr><td>Length of best match</td><td class=\"cell_value\">$myrow->Length_CELEG</td></tr>\n";
+$table .=  "<tr><td>% identity</td><td class=\"cell_value\">$myrow->identity_CELEG</td></tr>\n";
+$table .=  "<tr><td>% Match length</td><td class=\"cell_value\">$myrow->per_Match_legth_CELEG</td></tr>\n";
+$table .=  "<tr><td>First residue of match</td><td class=\"cell_value\">$myrow->first_res_CELEG</td></tr>\n";
+$table .=  "<tr><td>First residue of sequence</td><td class=\"cell_value\">$myrow->first_res_seq_CELEG</td></tr>\n";
+$table .=  "<tr><td>Number of segments</td><td class=\"cell_value\">$myrow->Segments_CELEG</td></tr>\n";
+$table .=  "<tr><td>Best match to ARAB database</td><td class=\"cell_value\"><a href=\"$myrow->HYP_BM_to_ARAB\">$myrow->BM_to_ARAB</a></td></tr>\n";
+$table .=  "<tr><td>E value</td><td class=\"cell_value\"><a href=\"$myrow->HYP_Eval_ARAB\">$myrow->Eval_ARAB</a></td></tr>\n";
+$table .=  "<tr><td>Match</td><td class=\"cell_value\">$myrow->Match_ARAB</td></tr>\n";
+$table .=  "<tr><td>Score</td><td class=\"cell_value\">$myrow->Score_ARAB</td></tr>\n";
+$table .=  "<tr><td>Extent of match</td><td class=\"cell_value\">$myrow->Extent_ARAB</td></tr>\n";
+$table .=  "<tr><td>Length of best match</td><td class=\"cell_value\">$myrow->Length_ARAB</td></tr>\n";
+$table .=  "<tr><td>% identity</td><td class=\"cell_value\">$myrow->identity_ARAB</td></tr>\n";
+$table .=  "<tr><td>% Match length</td><td class=\"cell_value\">$myrow->per_Match_length_ARAB</td></tr>\n";
+$table .=  "<tr><td>First residue of match</td><td class=\"cell_value\">$myrow->first_res_ARAB</td></tr>\n";
+$table .=  "<tr><td>First residue of sequence</td><td class=\"cell_value\">$myrow->first_res_seq_ARAB</td></tr>\n";
+$table .=  "<tr><td>Number of segments</td><td class=\"cell_value\">$myrow->Segments_ARAB</td></tr>\n";
+$table .=  "<tr><td>Best match to YEAST database</td><td class=\"cell_value\"><a href=\"$myrow->HYP_BM_to_YEAST\">$myrow->BM_to_YEAST</a></td></tr>\n";
+$table .=  "<tr><td>E value</td><td class=\"cell_value\"><a href=\"$myrow->HYP_Eval_YEAST\">$myrow->Eval_YEAST</a></td></tr>\n";
+$table .=  "<tr><td>Match</td><td class=\"cell_value\">$myrow->Match_YEAST</td></tr>\n";
+$table .=  "<tr><td>Score</td><td class=\"cell_value\">$myrow->Score_YEAST</td></tr>\n";
+$table .=  "<tr><td>Extent of match</td><td class=\"cell_value\">$myrow->Extent_YEAST</td></tr>\n";
+$table .=  "<tr><td>Length of best match</td><td class=\"cell_value\">$myrow->Length_YEAST</td></tr>\n";
+$table .=  "<tr><td>% identity</td><td class=\"cell_value\">$myrow->identity_YEAST</td></tr>\n";
+$table .=  "<tr><td>% Match length</td><td class=\"cell_value\">$myrow->per_Match_length_YEAST</td></tr>\n";
+$table .=  "<tr><td>First residue of match</td><td class=\"cell_value\">$myrow->first_res_YEAST</td></tr>\n";
+$table .=  "<tr><td>First residue of sequence</td><td class=\"cell_value\">$myrow->first_res_seq_YEAST</td></tr>\n";
+$table .=  "<tr><td>Number of segments</td><td class=\"cell_value\">$myrow->Segments_YEAST</td></tr>\n";
+$table .=  "<tr><td>Best match to clusterized An. gambiae ESTs from different libraries</td><td class=\"cell_value\"><a href=\"$myrow->HYP_BM_to_AGEST\">$myrow->BM_to_AGEST</a></td></tr>\n";
+$table .=  "<tr><td>E value</td><td class=\"cell_value\">$myrow->Eval_AGEST</td></tr>\n";
+$table .=  "<tr><td>Score</td><td class=\"cell_value\">$myrow->Score_AGEST</td></tr>\n";
+$table .=  "<tr><td>Extent of match</td><td class=\"cell_value\">$myrow->Extent_AGEST</td></tr>\n";
+$table .=  "<tr><td>Length of best match</td><td class=\"cell_value\">$myrow->Length_AGEST</td></tr>\n";
+$table .=  "<tr><td>% identity</td><td class=\"cell_value\">$myrow->identity_AGEST</td></tr>\n";
+$table .=  "<tr><td>% Match length</td><td class=\"cell_value\">$myrow->per_Match_length_AGEST</td></tr>\n";
+$table .=  "<tr><td>First residue of match</td><td class=\"cell_value\">$myrow->first_res_AGEST</td></tr>\n";
+$table .=  "<tr><td>First residue of sequence</td><td class=\"cell_value\">$myrow->first_res_seq_AGEST</td></tr>\n";
+$table .=  "<tr><td>Number of segments</td><td class=\"cell_value\">$myrow->Segments_AGEST</td></tr>\n";
+$table .=  "<tr><td>Orientation of output</td><td class=\"cell_value\">$myrow->Orientation_of_output</td></tr>\n";
+$table .=  "<tr><td>Satisfied 95% id on length 100</td><td class=\"cell_value\">$myrow->ninetyfive_id_on_100</td></tr>\n";
+$table .=  "<tr><td>Number of sequences on assembled contig</td><td class=\"cell_value\">$myrow->Seqs_on_contig</td></tr>\n";
+$table .=  "<tr><td>ESTs coming from from all-instars library</td><td class=\"cell_value\">$myrow->All_instars</td></tr>\n";
+$table .=  "<tr><td>Blood-abdomen library</td><td class=\"cell_value\">$myrow->Blood_abdomen</td></tr>\n";
+$table .=  "<tr><td>Sugar-abd library</td><td class=\"cell_value\">$myrow->Sugar_abdomen</td></tr>\n";
+$table .=  "<tr><td>Infected blood-abd library</td><td class=\"cell_value\">$myrow->Infected_blood_abdomen</td></tr>\n";
+$table .=  "<tr><td>Big blood fed library</td><td class=\"cell_value\">$myrow->Big_blood_fed</td></tr>\n";
+$table .=  "<tr><td>Big non blood fed library</td><td class=\"cell_value\">$myrow->Big_non_blood_fed</td></tr>\n";
+$table .=  "<tr><td>Head library</td><td class=\"cell_value\">$myrow->Head</td></tr>\n";
+$table .=  "<tr><td>Immune cells</td><td class=\"cell_value\">$myrow->Immune_cells</td></tr>\n";
+$table .=  "<tr><td>Normalized-fatbody</td><td class=\"cell_value\">$myrow->Normalized_fat_body</td></tr>\n";
+$table .=  "<tr><td>Female salivary glands</td><td class=\"cell_value\">$myrow->Female_salivary_glands</td></tr>\n";
+$table .=  "<tr><td>Male salivary glands</td><td class=\"cell_value\">$myrow->Male_salivary_glands</td></tr>\n";
+$table .=  "<tr><td>Best match to Affymetrix chip</td><td class=\"cell_value\"><a href=\"$myrow->HYP_BM_to_AFFY\">$myrow->BM_to_AFFY</a></td></tr>\n";
+$table .=  "<tr><td>Extent of match</td><td class=\"cell_value\"><a href=\"$myrow->HYP_Exntent_AFFY\">$myrow->Exntent_AFFY</a></td></tr>\n";
+$table .=  "<tr><td>% identity</td><td class=\"cell_value\">$myrow->identity_AFFY</td></tr>\n";
+$table .=  "<tr><td>Larva-mean</td><td class=\"cell_value\">$myrow->Larvamean</td></tr>\n";
+$table .=  "<tr><td>Males-mean</td><td class=\"cell_value\">$myrow->Malesmean</td></tr>\n";
+$table .=  "<tr><td>Sugar-fed females-mean</td><td class=\"cell_value\">$myrow->Sugarfed_femalesmean</td></tr>\n";
+$table .=  "<tr><td>Blood-fed 3h-mean</td><td class=\"cell_value\">$myrow->Bloodfed_females_3h_mean</td></tr>\n";
+$table .=  "<tr><td>24h-mean</td><td class=\"cell_value\">$myrow->twentyfourh_mean</td></tr>\n";
+$table .=  "<tr><td>48h-mean</td><td class=\"cell_value\">$myrow->fortyeighth_mean</td></tr>\n";
+$table .=  "<tr><td>72h-mean</td><td class=\"cell_value\">$myrow->seventytwoh_mean</td></tr>\n";
+$table .=  "<tr><td>15d-mean</td><td class=\"cell_value\">$myrow->fifteend_mean</td></tr>\n";
+$table .=  "<tr><td>Fat bodies-mean</td><td class=\"cell_value\">$myrow->Fat_bodies_mean</td></tr>\n";
+$table .=  "<tr><td>Midgut-mean</td><td class=\"cell_value\">$myrow->Midgut_mean</td></tr>\n";
+$table .=  "<tr><td>Ovaries-mean</td><td class=\"cell_value\">$myrow->Ovaries_mean</td></tr>\n";
+$table .=  "<tr><td>Clustered at 35%-Sim- on 60% of length - - Cluster#</td><td class=\"cell_value\">$myrow->thirtyfive_sim_on_60_length_clusters</td></tr>\n";
+$table .=  "<tr><td>Number of sequences</td><td class=\"cell_value\"><a href=\"$myrow->HYP_num_seqs_35_on_60\">$myrow->num_seqs_35_on_60</a></td></tr>\n";
+$table .=  "<tr><td>Clustered at 45%-Sim- on 60% of length - - Cluster#</td><td class=\"cell_value\"><a href=\"$myrow->HYP_45_sim_on_60_length_clusters\">$myrow->fortyfive_sim_on_60_length_clusters</a></td></tr>\n";
+$table .=  "<tr><td>Number of sequences</td><td class=\"cell_value\"><a href=\"$myrow->HYP_num_seqs_45_on_60\">$myrow->num_seqs_45_on_60</a></td></tr>\n";
+$table .=  "<tr><td>Clustered at 55%-Sim- on 60% of length - - Cluster#</td><td class=\"cell_value\"><a href=\"$myrow->HYP_55_sim_on_60_length_clusters\">$myrow->fiftyfive_sim_on_60_length_clusters</a></td></tr>\n";
+$table .=  "<tr><td>Number of sequences</td><td class=\"cell_value\"><a href=\"$myrow->HYP_num_seqs_55_on_60\">$myrow->num_seqs_55_on_60</a></td></tr>\n";
+$table .=  "<tr><td>Clustered at 65%-Sim- on 60% of length - - Cluster#</td><td class=\"cell_value\"><a href=\"$myrow->HYP_65_sim_on_60_length_clusters\">$myrow->sixtyfive_sim_on_60_length_clusters</a></td></tr>\n";
+$table .=  "<tr><td>Number of sequences</td><td class=\"cell_value\"><a href=\"$myrow->HYP_num_seqs_65_on_60\">$myrow->num_seqs_65_on_60</a></td></tr>\n";
+$table .=  "<tr><td>Clustered at 75%-Sim- on 60% of length - - Cluster#</td><td class=\"cell_value\"><a href=\"$myrow->HYP_75_sim_on_60_length_clusters\">$myrow->seventyfive_sim_on_60_length_clusters</a></td></tr>\n";
+$table .=  "<tr><td>Number of sequences</td><td class=\"cell_value\"><a href=\"$myrow->HYP_num_seqs_75_on_60\">$myrow->num_seqs_75_on_60</a></td></tr>\n";
+$table .=  "<tr><td>Clustered at 85%-Sim- on 60% of length - - Cluster#</td><td class=\"cell_value\"><a href=\"$myrow->HYP_85_sim_on_60_length_clusters\">$myrow->eightyfive_sim_on_60_length_clusters</a></td></tr>\n";
+$table .=  "<tr><td>Number of sequences</td><td class=\"cell_value\"><a href=\"$myrow->HYP_num_seqs_85_on_60\">$myrow->num_seqs_85_on_60</a></td></tr>\n";
+$table .=  "<tr><td>Clustered at 95%-Sim- on 60% of length - - Cluster#</td><td class=\"cell_value\"><a href=\"$myrow->HYP_95_sim_on_60_length_clusters\">$myrow->ninetyfive_sim_on_60_length_clusters</a></td></tr>\n";
+$table .=  "<tr><td>Number of sequences</td><td class=\"cell_value\"><a href=\"$myrow->HYP_num_seqs_95_on_60\">$myrow->num_seqs_95_on_60</a></td></tr>\n";
+$table .=  "</table>\n<br><br>\n";
+
+
+$table .= '
+</div>
+
+    </td></tr>
+    </tbody>
+    </table>
+';
+
+
+
+print $table;
+
+
+// exit;
+// print var_dump($list[0]);
+// print drupal_json_encode($list);
+    /*
+case 'PEPTIDE':
+$sql .= "ProteinView='".strtoupper( $_GET['query'])."'";
+break;
+
+case 'GENE':
+$sql .= "GeneView='".strtoupper( $_GET['query'])."'";
+break;
+
+case 'DESC':
+$sql .= "BM_to_NR LIKE '%".$_GET['query']."%'";
+break;
+
+case 'KW':
+$sql .= "Key_words LIKE '%".$_GET['query']."%'";
+break;
+
+case 'GO':
+$sql .= "BM_to_GO LIKE '%".$_GET['query']."%'";
+break;
+
+     */
+    /*
+        $db = mysql_connect ( "db.vectorbase.org", "db_public", "limecat" );
+mysql_select_db ( "anobase", $db );
+
+$sql = "SELECT * FROM AnoXcel_v45 WHERE ".$sql;
+
+$anoxcel_rs = mysql_query( $sql, $db );
+
+$rows = mysql_num_rows( $anoxcel_rs );
+
+
+switch( $rows )
+{
+case 0:
+echo "No records found.";
+print_form();
+return;
+case 1:
+$myrow = mysql_fetch_array( $anoxcel_rs );
+print_record( $myrow );
+return;
+case $rows>1:
+print_list( $anoxcel_rs );
+return;
+}
+     */
+    // check if the user is logged in
+    if($GLOBALS['user']->uid < 1 ) {
+        return drupal_access_denied(); 
+    }
+
+//    if ($format != 'gff3') {
+      //;
+      //} 
+    
+/*
++----------------+------------------+------+-----+---------+----------------+
+| Field          | Type             | Null | Key | Default | Extra          |
++----------------+------------------+------+-----+---------+----------------+
+| sbm_id - auto  | int(10) unsigned | NO   | PRI | NULL    | auto_increment |
+| nid            | int(10) unsigned | NO   | MUL | 0       |                |
+/| submitter_name | varchar(128)     | NO   |     | NULL    |                |
+| user           | varchar(32)      | NO   |     | NULL    |                |
+| user_email     | varchar(32)      | NO   |     | NULL    |                |
+| uid            | int(10) unsigned | NO   |     | 0       |                |
+| ip             | varchar(32)      | NO   |     | NULL    |                |
+| edited         | int(10) unsigned | NO   |     | 0       |                |
+| species        | varchar(32)      | NO   |     | NULL    |                |
+| gene_id        | varchar(32)      | NO   |     | NULL    |                |
+| status         | varchar(10)      | NO   |     | NULL    |                |
+| status_just    | varchar(1256)    | NO   |     |         |                |
+| gene_sym       | varchar(32)      | NO   |     | NULL    |                |
+| sym_just       | varchar(1256)    | NO   |     |         |                |
+| desc           | varchar(256)     | NO   |     | NULL    |                |
+| desc_just      | varchar(1256)    | NO   |     |         |                |
+| pmid           | int(10) unsigned | NO   |     | 0       |                |
+| comments       | varchar(1256)    | NO   |     |         |                |
++----------------+------------------+------+-----+---------+----------------+
+*/
+
+/*    drupal_set_message(
+        $form_state['values']['desc'],
+        'warning');
+    drupal_goto('cap/'); */
+    ///// almost certainly need conditional inclusions here - i.e. 
+    //if($GLOBALS["bored"]) {
+
+    $sbmid = db_insert('cap_gene_node')->fields(
+        array(
+            'user' => $GLOBALS['user']->name,
+            'submitter_name' => 'blah',
+            'user_email' => $GLOBALS['user']->mail,
+            'uid' => $GLOBALS['user']->uid,
+            'ip' => $GLOBALS['user']->hostname,
+            'edited'        => 1,
+            'species'       => $form_state['values']['species'],
+            'gene_id'       => $form_state['values']['howmany_select'],
+            //// clearly must check acceptable combinations - i.e. gene_sym only with justification etc..
+            'gene_sym'      => $form_state['values']['gene_sym']        ?   $form_state['values']['gene_sym']       : '',
+            'sym_just'      => $form_state['values']['gene_sym_just']   ?   $form_state['values']['gene_sym_just']  : '', 
+            'description'     => $form_state['values']['description'] ? $form_state['values']['description'] : '',
+            'desc_just'     => $form_state['values']['desc_just'] ? $form_state['values']['desc_just'] : '',
+            'status_just'   => $form_state['values']['status_just']     ?   $form_state['values']['status_just']    : '',
+            'status'        => $form_state['values']['genestat']        ?   $form_state['values']['genestat']       : '',
+            'pmid'          => $form_state['values']['pmid']            ?   $form_state['values']['pmid']           : '',
+            'comments'      => $form_state['values']['comment']         ?   $form_state['values']['comment']        : '', 
+        )
+    )->execute();
+
+    $message = '<p>Gene meta-data submission for gene ID='.$form_state['values']['howmany_select']
+      .' successful. Please quote submission id='.$sbmid.' in any enquiries you send.</p>';
+    drupal_set_message($message);
+
+   // $GLOBALS["bored"] = 0;
+   // }
+
+
+    /*
+    drupal_set_message(
+        $form_state['values']['species']
+            .' - '.
+            $form_state['values']['howmany_select']
+            .' - '.
+            $form_state['values']['comment']
+            .' - ',
+        'warning');
+        drupal_goto('cap/');
+
+    $result = db_query(
+        'insert into {cap_gene_node} '
+          .'(user, uid, submitter_name, user_email, ip,'
+          .'species, file_name, file_type, file_md5, file_desc, file_size) '
+          .'values (%s,%d,%s,%s,%s,%s,%s,%s,%s,%s,%d)',
+          $GLOBALS['user']->name,$GLOBALS['user']->uid,'hdisfndjsfnds',$GLOBALS['user']->mail,$GLOBALS['user']->hostname,
+          'glossina',$tmpfile,$format,$md5,$desc,$size
+    ) or die;// or die(mysql_error());  
+
+        drupal_set_message('We have already received.','warning');
+        drupal_goto('cap/');
+     */
+//////// put in validation to check that any entry [Na] has justification [Nb]
+
+
+    //$num_updated = db_update('cap_gene_node')->fields(array(
+    //    'file_name' => $newfile,
+    //))->condition('sbm_id', $sbmid, '=')->execute();
+
+//    $count = 0;
+
+   //   drupal_set_message('We are not currently accepting fasta or xls format files.','warning');
+     // drupal_goto('cap/');
+//    $result = db_query("SELECT count(1) as count from {cap_file_node} where file_md5 = '".$md5."'");
+    
+   // foreach ($result as $row) { 
+  //      $count = $row->count; 
+//    }
+//    if ($count > 0) {
+ //       drupal_set_message('We have already received a file with this md5 sum.','warning');
+ //       drupal_goto('cap/');
+        ////  }
+//
+//        drupal_goto('cap/');
+    
+}
+
+function anoxcel_table_only($form, &$form_state) { // the error was all that you were accepting ($form) and not actually form_state as well...
+
+    /// since we have specifically setb db already - not sure why can just grab it?!?
+    
+    $default_db= $form_state['build_info']['args'][0];
+    $type= $form_state['build_info']['args'][1];
+    $query= $form_state['build_info']['args'][2];
+
+    $query_uri = '[db='.$default_db.':type='.$type.':query='.$query.']';
+
+    $options = array(
+        'anoxcel' => 'AnoXcel',
+        'reanoxcel' => 'ReAnoXcel (not implemented)',
+        'aedxcel' => 'AedXcel (not implemented)',
+    );
+    // $form['message'] = array ('#type' => 'markup','#markup' => "<h2>".$options[$GLOBALS['bored']]."</h2><p>blurb</p>");
+    $form['ribeiro'] = array(
+        '#title' => t($default_db),
+        //'#title' => t($options[$GLOBALS['bored']]),
+        '#prefix' => '<div id="checkboxes-div">',
+        '#suffix' => '</div>',
+        '#type' => 'fieldset',
+    );
+
+    /*
+    echo "<pre>";
+    echo var_dump($form_state['build_info']['args'][0]);
+    echo $sql;
+    //echo var_dump($form_state['build_info']['args'][1]);
+    //echo var_dump($form_state['build_info']['args'][2]); 
+    echo "</pre>"; 
+    exit; 
+     */
+    $sql=grab_query($query,$default_db,$type);
+
+    // echo "$default_db $query $type $sql"; exit;
+    $markup;
+    $result = db_query($sql);
+    if (!$result) {
+        $markup='<div id="box"><h2>Problem querying database '.$query_uri.'</h2></div></div>';
+    }
+
+    //////////// WHY?!?
+    $list = array();
+    foreach ($result as $row) {
+        array_push($list,$row);
+    }
+
+    $row_num = count($list);
+
+    if (empty($row_num)) {
+        $markup='<div id="box" ><h2>No results found for '.$query.' '.$query_uri.']</h2></div></div>';
+    } else if ($row_num > 1) {
+        $markup='<div id="box" ><h2>Multiple results found for '.$query.' '.$query_uri.']</h2></div></div>';
+    } else {
+        $markup= anoxcel_peptide_table($list[0]);
+    }
+
+    $form['ribeiro']['box2'] = array(
+    // $form['ribeiro']['box'] = array(
+        '#type' => 'markup',
+        '#prefix' => '<div id="box2">',
+        '#suffix' => '</div>',
+        '#markup' => '<div class="msgbox3"></div>',
+    );
+
+    $form['ribeiro']['box'] = array(
+    // $form['box'] = array(
+    // $form['ribeiro']['box'] = array(
+        '#type' => 'markup',
+        '#prefix' => '<div id="box">',
+        '#suffix' => '</div>',
+        '#markup' => $markup,
+    );
+
+    return $form;
+}
+function anoxcel_form($form, &$form_state) { // the error was all that you were accepting ($form) and not actually form_state as well...
+
+    /// since we have specifically setb db already - not sure why can just grab it?!?
+    $default_db= $form_state['build_info']['args'][0];
+    // echo var_dump($form_state['build_info']['args']); exit;
+/*    echo "<pre>";
+    //echo var_dump($form_state['build_info']['args'][1]);
+    //echo var_dump($form_state['build_info']['args'][2]); 
+    exit;
+    echo "</pre>"; */
+    $options = array(
+        'anoxcel' => 'AnoXcel',
+        'reanoxcel' => 'ReAnoXcel (not implemented)',
+        'aedxcel' => 'AedXcel (not implemented)',
+    );
+    // $form['message'] = array ('#type' => 'markup','#markup' => "<h2>".$options[$GLOBALS['bored']]."</h2><p>blurb</p>");
+    $form['ribeiro'] = array(
+        '#title' => t($default_db),
+        //'#title' => t($options[$GLOBALS['bored']]),
+        '#prefix' => '<div id="checkboxes-div">',
+        '#suffix' => '</div>',
+        '#type' => 'fieldset',
+    );
+    $form['ribeiro']['whichdb'] = array(
+        '#type' => 'radios',
+        '#title' => t('Database'), // should prolly be ajax to either redirect or reset text of page?!?
+        '#options' => $options,
+        '#default_value' => $default_db,
+        // '#default_value' => $GLOBALS['bored'],
+    );
+    /* ordering of dropdowns is not worth the bother...?!?
+    $form['ribeiro']['dropdown_db'] = array(
+        '#type' => 'select',
+        '#title' => 'Database',
+        '#options' =>  $options, // don't use drupal_map_assoc as it will make unordered associative array?!?
+    //    '#default_value' => t('AedXcel'),
+    ); */
+    $form['ribeiro']['dropdown_entity'] = array(
+        '#type' => 'select',
+        '#title' => 'Search for',
+        '#options' => array('gid'=>'Gene Stable ID','pid'=>'Peptide ID','desc'=>'Description','key'=>'Keyword','go'=>'GO term'),
+     //   '#default_value' => '',
+    );
+
+    $form['ribeiro']['term'] = array(
+        '#type' => 'textfield',
+        '#title' => t('Search term'),
+        '#size' => 50,
+        // '#size' => 20,
+        '#maxlength' => 100,
+        '#prefix' => '<div class="ui-widget">',
+        '#suffix' => '</div>',
+        '#ajax' => array(
+            'callback' => 'submit_driven_callback3',
+            'wrapper' => 'box',
+            'method' => 'replace',
+            'effect' => 'slide',
+            'speed' => 'fast',
+            'prevent' => 'click',
+            'progress' => 'interval',
+            'event' => 'submit',
+            'keypress' => TRUE,
+            'prevent' => 'click',
+        ),
+        '#description' => 'Enter a search term and press enter.',
+        '#attributes' => array('class' => array('inputything')),
+        '#default_value' => '',
+    );
+
+    $form['ribeiro']['box2'] = array(
+    // $form['ribeiro']['box'] = array(
+        '#type' => 'markup',
+        '#prefix' => '<div id="box2">',
+        '#suffix' => '</div>',
+        '#markup' => '<div class="msgbox3"></div>',
+    );
+
+    $form['ribeiro']['box'] = array(
+    // $form['box'] = array(
+    // $form['ribeiro']['box'] = array(
+        '#type' => 'markup',
+        '#prefix' => '<div id="box">',
+        '#suffix' => '</div>',
+        '#markup' => '<div class="msgbox3"></div>',
+    );
+    /*
+    $form['ribeiro']['check'] = array(
+        '#type' => 'submit',
+        '#ajax' => array(
+            'callback' => 'submit_driven_callback3',
+            'wrapper' => 'checkboxes-div',
+            'prevent' => 'click',
+            'event' => 'submit',
+        ),
+        '#value' => t('Check PMID'),
+    );
+        */ 
+
+    return $form;
+}
+
+
+
+        /*
+    $form['checkboxes_fieldset'] = array(
+        '#title' => t("Generated Checkboxes"),
+        // The prefix/suffix provide the div that we're replacing, named by
+        // #ajax['wrapper'] above.
+    //    '#prefix' => '<div id="checkboxes-div">',
+    //   '#suffix' => '</div>',
+        '#type' => 'fieldset',
+        '#description' => t('This is where we get automatically generated checkboxes'),
+    );
+
+    $num_checkboxes = !empty($form_state['values']['howmany_select']) ? $form_state['values']['howmany_select'] : 0;
+    for ($i=1; $i<=$num_checkboxes; $i++) {
+        $form['checkboxes_fieldset']["checkbox$i"] = array(
+        '#type' => 'checkbox',
+        '#title' => "Checkbox $i",
+        );
+    }
+        */
+
+
+
+    /*  switch ($form_state['storage']['step']) {
+    case 1:
+      // Custom page title.
+      drupal_set_title('Step 1');
+    */ /* 
+    $default = !empty($form_state['name']['sbm']) ? $form_state['name']['sbm'] : 0;
+
+    $form['name'] = array(
+        '#type' => 'fieldset',
+        '#title' => t('Submit Gene Meta Data'),
+        '#collapsible' => TRUE,
+        '#collapsed' => FALSE,
+    );
+
+    $form['#attributes'] = array('enctype' => "multipart/form-data");
+
+    $form['name']['sbm'] = array(
+        '#type' => 'textfield',
+        '#title' => t('Gene Stable ID'),
+        '#required' => TRUE,
+        '#size' => 20,
+        '#maxlength' => 20,
+        '#ajax' => array(
+            'callback' => 'check_db_ajax_callback',
+            'wrapper' => 'argh-div',
+            'effect' => 'fade',
+        ),
+    );
+
+   */
+
+/* is it multipart where we retrieve the current info for a gene first?!? - or do we do a look-up with ajax?!?
+* perhaps allow batch submissions?!?
+ * $form['name']['upload'] = array(
+ * //'#required' => TRUE,
+ * '#type' => 'file',
+ * '#description' => "File should be < 2Mb.",
+ * // apparently only way to set width of this f'er in firefox is 
+ * // here not in css so just make sure its small enough not to go out of rest...
+ * '#size' => 35,
+ *  );
+ */
+/*
+    if(!empty($form_state['name']['sbm'])){
+    //if(!empty($form_state['name']['sbm']) && $form_state['name']['sbm'] == 'pink') {
+    $species = variable_get('species');
+
+    $form['name']['species'] = array(
+        '#type' => 'select',
+        '#title' => t('Species'),
+        '#options' => drupal_map_assoc($species),
+        '#prefix' => '<div id="argh-div">',
+        '#suffix' => '</div>',
+        #'#description' => t('species.'),
+
+ */ /*        '#states' => array(
+            'visible' => array(
+                ':input[name="sbm"]' => array('value' => 'gff'),
+            ),
+        ),
+  */
+
+/* );
+    }
+ */
+    
+/*    $form['submit'] = array(
+        '#type' => 'submit',
+        '#value' => 'Submit',
+    );
+ */
+
+    /*
+
+      // All the real form fields.
+      $form['step1_field1'] = array(
+        '#title' => 'Step 1 Field 1',
+        '#type' => 'textfield',
+        '#default_value' => $form_state['storage']['values'][1]['step1_field1'],
+      );
+
+
+      // Add submit button(s).
+      $form += _test_add_submit_buttons($form_state);
+
+      // Not important - used only for displaying values posted so far.
+      $form['posted_values'] = array(
+        '#type' => 'markup',
+        '#value' => _test_display_posted_values($form_state),
+      );
+      break;
+
+    case 2:
+
+      // Custom page title.
+      drupal_set_title('Step 2');
+
+      // All the real form fields.
+      $form['step2_field1'] = array(
+        '#title' => 'Step 2 Field 1',
+        '#type' => 'textfield',
+        '#default_value' => $form_state['storage']['values'][2]['step2_field1'],
+      );
+
+      // Add submit button(s).
+      $form += _test_add_submit_buttons($form_state);
+
+      // Not important - used only for displaying values posted so far.
+      $form['posted_values'] = array(
+        '#type' => 'markup',
+        '#value' => _test_display_posted_values($form_state),
+      );
+      break;
+
+    case 3:
+
+      // Custom page title.
+      drupal_set_title('Step 3');
+
+      // All the real form fields.
+      $form['step3_field1'] = array(
+        '#title' => 'Step 3 Field 1',
+        '#type' => 'textfield',
+        '#default_value' => $form_state['storage']['values'][3]['step3_field1'],
+      );
+
+      // Add submit button(s).
+      $form += _test_add_submit_buttons($form_state);
+
+      // Not important - used only for displaying values posted so far.
+      $form['posted_values'] = array(
+        '#type' => 'markup',
+        '#value' => _test_display_posted_values($form_state),
+      );
+      break;
+  }
+
+     */
+/*        $form['gene_info']['product_name'] = array(
+            '#title' => t('Product Name'),
+            '#type' => 'textfield',
+            '#required' => TRUE,
+            '#size' => 30,
+            '#description' => t('Please enter product name.'),
+    '#ajax' => array(
+      'callback' => 'check_name',
+      'wrapper' => 'status',
+      'method' => 'replace',
+      'effect' => 'fade',
+      'progress' => 'interval',
+    ),
+        );
+ */
+
+
+
+
+
+
+
+    /*
+        $form['gene_info']['check_name'] = array(
+            '#type' => 'markup',
+            '#value' => "<a href='#' id='check_name'>" . t('Check Product Name') . "</a><br/>",
+        ); 
+    
+        $form['gene_info']['status'] = array(
+            '#type' => 'markup',
+            '#value' => "<span id='status'></span><br/>",
+        ); 
+    
+        $form['gene_info']['submit'] = array(
+            '#type' => 'submit',
+            '#value' => t('Submit'),
+        );
+    
+        $form['gene_info']['cancel'] = array(
+            '#type' => 'markup',
+            '#value' => l(t('Cancel'), 'product_mgmt'),
+        ); */
+//        return $form;
+
+function grab_query($query,$db,$type) {
+
+    $query = preg_replace("/['\"]/","",$query);
+    $QUERY=strtoupper($query); 
+
+    $dbs = array(
+        'anoxcel' => 'anobase_AnoXcel_v45',
+        'reanoxcel' => 'anobase_AnoXcel_v45',
+        'aedxcel' => 'anobase_AnoXcel_v45',
+    );
+
+    $queries = array(
+            // '#options' => array('gid'=>'Gene Stable ID','pid'=>'Peptide ID','desc'=>'Description','key'=>'Keyword','go'=>'GO term')),
+        'pid' => "\"ProteinView\"='".$QUERY."'",
+        'gid' => "\"GeneView\"='".$QUERY."'",
+        'desc'=> "\"BM_to_NR\" LIKE '%".$query."%'",
+        'key'=> "\"Key_words\" LIKE '%".$query."%'",
+        'go' => "\"BM_to_GO\" LIKE '%".$query."%'",
+    );
+
+    $sql = "SELECT * FROM {". $dbs[$db] . "} where ".$queries[$type];
+
+
+///////// tmp
+// $sql .= ' limit 10';
+
+    return $sql;
+
+}
+
+function submit_driven_callback3($form, $form_state) {
+
+//    $sql = "SELECT * FROM anobase_AnoXcel_v45 WHERE "
+//    ."ProteinView='".strtoupper("AGAP000010-PA'");
+
+    if(empty($form_state['values']['term'])) {
+        $commands[] = ajax_command_replace("#box", '<div id="results_table"><h2>Ignoring empty string</h2></div></div>');  
+        return array('#type' => 'ajax', '#commands' => $commands);
+    }
+
+
+    $term = $form_state['values']['term'];
+    $term = preg_replace("/['\"]/","",$term);
+
+    $type= $form_state['values']['dropdown_entity'];
+    $db=$form_state['values']['whichdb'];
+    $sql=grab_query($term,$db,$type);
+
+    $query_uri = '[db='.$db.':type='.$type.':query='.$term.']';
+// $anoxcel_rs = mysql_query( $sql, $db );
+
+// $rows = mysql_num_rows( $anoxcel_rs );
+
+
+/*
+switch( $rows )
+{
+case 0:
+echo "No records found.";
+print_form();
+return;
+case 1:
+$myrow = mysql_fetch_array( $anoxcel_rs );
+print_record( $myrow );
+return;
+case $rows>1:
+print_list( $anoxcel_rs );
+return;
+ */
+
+
+    $result = db_query($sql);
+    if (!$result) {
+        $commands[] = ajax_command_replace("#box", '<div id="box"><h2>Problem querying database '.$query_uri.'</h2></div></div>');  
+        return array('#type' => 'ajax', '#commands' => $commands);
+    }
+
+    ////// not quite why i didn't bother removing the unpacking stuff when taking this from the json stuff?!?
+    $list = array();
+    foreach ($result as $row) {
+        array_push($list,$row);
+    }
+
+//    $row_num =db_num_rows($result);
+    $row_num = count($list);
+
+    if (empty($row_num)) {
+        $commands[] = ajax_command_replace("#box", '<div id="box" ><h2>No results found for '.$term.' '.$query_uri.'</h2></div></div>');  
+        return array('#type' => 'ajax', '#commands' => $commands);
+    } else if ($row_num > 1) {
+
+    $s = '<table class="tableone" summary="This table lists flights arriving at Bristol International Airport.">
+      <caption>List</caption><thead><tr><th class="th1" scope="col">Attribute</th> <th class="th2" scope="col">Value</th> 
+      </tr></thead><tfoot><tr><td colspan="2">DATE OF EDIT : 30 June 2012</td></tr></tfoot><tbody><tr><td colspan="2"><div class="innerb">
+      <table class="tabletwo">';
+
+        $c=0;
+        $db=$form_state['values']['whichdb'];
+        $type=$form_state['values']['dropdown_entity'];
+
+        foreach ($list as $row) {
+
+            $c++;
+            $tr=$c%2==0?"<tr>":"<tr class=\"dk\">";
+
+            $s .= "$tr<th  class=\"td1\" scope=\"row\"><a href=\"?q=ribeiro/db=$db:type=pid:query=".$row->ProteinView;
+            $s .= "\">$row->ProteinView</a><br>";
+            $s .= "$row->link_to_ensembl_gene</th>";
+            $s .= "<td class=\"td2\">$row->BM_to_NR</td>";
+            $s .= "<td class=\"td2\">$row->Key_words</td>";
+            $s .="<td class=\"td2\">$row->BM_to_GO</td></tr>\n";
+        }
+
+        $s .=  "</table>\n<br><br>\n";
+        $s .= '</div></td></tr></tbody></table>';
+
+        $commands[] = ajax_command_replace("#box", '<div id="box" ><h2>multiple results for '.$term.' ('.$row_num.') [db='.$db.':type='.$type.':query='.$term.']</h2>'.$s.'</div>');  
+        return array('#type' => 'ajax', '#commands' => $commands);
+
+    }
+
+    // $myrow = $list[0];
+    $table = anoxcel_peptide_table($list[0]);
+
+    $commands[] = ajax_command_replace("#box", '<div id="box">'.$table.'</div>');  
+    // $commands[] = ajax_command_replace("#box", '<div id="results_table">'.$table.'</div></div>');  
+
+    return array('#type' => 'ajax', '#commands' => $commands);
+
+}
+
+function anoxcel_peptide_table($myrow){
+
+    // $table = $sql.'  '.$row_num.'    <table class="tableone" summary="This table lists flights arriving at Bristol International Airport.">
+    $table = '    <table class="tableone" summary="This table lists flights arriving at Bristol International Airport.">
+      <caption>Peptide Summary</caption><thead><tr><th class="th1" scope="col">Attribute</th> <th class="th2" scope="col">Value</th> 
+      </tr></thead><tfoot><tr><td colspan="2">DATE OF EDIT : 30 June 2012</td></tr></tfoot><tbody><tr><td colspan="2"><div class="innerb">
+      <table class="tabletwo">';
+
+    $table .=  "  <tr>                <th class=\"td1\" scope=\"row\">Sequence name</th>  <td class=\"td2\"><a href=\"$myrow->HYP_Seqname\">$myrow->Seqname</a></td></tr>\n";
+    $table .=  "  <tr class=\"dk\">   <th class=\"td1\" scope=\"row\">First residue</th>  <td class=\"td2\">$myrow->first_res</td>    </tr>\n";
+    $table .=  "  <tr>                <th class=\"td1\" scope=\"row\">Description</th>    <td class=\"td2\">$myrow->Descr</td></tr>\n";
+    $table .=  "  <tr class=\"dk\">   <th class=\"td1\" scope=\"row\">CDS name and link to nucleotide data</th><td class=\"td2\"><a href=\"$myrow->HYP_CDS\">$myrow->CDS</a></td></tr>\n";
+
+    $table .=  "<tr>    <th class=\"td1\" scope=\"row\">Description</th>    <td class=\"td2\">$myrow->Descr_CDS</td></tr>\n";
+    $table .=  "<tr class=\"dk\">    <th class=\"td1\" scope=\"row\">ATG?</th>    <td class=\"td2\">$myrow->ATG</td></tr>\n";
+    $table .=  "<tr>    <th class=\"td1\" scope=\"row\">Stop?</th>    <td class=\"td2\">$myrow->Stop</td></tr>\n";
+    $table .=  "<tr class=\"dk\">    <th class=\"td1\" scope=\"row\">Best match to AG-CDS </th>    <td class=\"td2\"><a href=\"$myrow->HYP_BM_to_AGCDS\">$myrow->BM_to_AGCDS</a></td></tr>\n";
+    $table .=  "<tr>    <th class=\"td1\" scope=\"row\">E value</th>    <td class=\"td2\">$myrow->Eval_AGCDS</td></tr>\n";
+    $table .=  "<tr class=\"dk\">    <th class=\"td1\" scope=\"row\">Score</th>    <td class=\"td2\">$myrow->Score_AGCDS</td></tr>\n";
+    $table .=  "<tr>    <th class=\"td1\" scope=\"row\">Extent of match</th>    <td class=\"td2\">$myrow->Extent_AGCDS</td></tr>\n";
+    $table .=  "<tr class=\"dk\">    <th class=\"td1\" scope=\"row\">Length of best match</th>    <td class=\"td2\">$myrow->Length_BM_AGCDS</td></tr>\n";
+    $table .=  "<tr>    <th class=\"td1\" scope=\"row\">% identity</th>    <td class=\"td2\">$myrow->identity_AGCDS</td></tr>\n";
+    $table .=  "<tr class=\"dk\">    <th class=\"td1\" scope=\"row\">% Match length</th>    <td class=\"td2\">$myrow->per_Match_length_AGCDS</td></tr>\n";
+
+    $table .=  "<tr>    <th class=\"td1\" scope=\"row\">First residue of match - UTR overhang</th>    <td class=\"td2\">$myrow->first_res_UTR_AGCDS</td></tr>\n";
+    
+    $table .=  "<tr class=\"dk\">    <th class=\"td1\" scope=\"row\">First residue of sequence</th>    <td class=\"td2\">$myrow->first_res_sequence_AGCDS</td></tr>\n";
+    $table .=  "<tr>    <th class=\"td1\" scope=\"row\">Link to whole gene + 2000nt 5' + 200nt 3'</th>    <td class=\"td2\"><a href=\"$myrow->HYP_Link_to_gene_AGCDS\">$myrow->Link_to_gene_AGCDS</a></td></tr>\n";
+    $table .=  "<tr class=\"dk\">    <th class=\"td1\" scope=\"row\">Link to 5' 2,000 nt</th>    <td class=\"td2\"><a href=\"$myrow->HYP_Link_to_2kb_upstream_AGCDS\">$myrow->Link_to_2kb_upstream_AGCDS</a></td></tr>\n";
+    $table .=  "<tr>    <th class=\"td1\" scope=\"row\">Link to 3' 200 nt</th>    <td class=\"td2\"><a href=\"$myrow->HYP_Link_to_200bp_downstream_AGCDS\">$myrow->Link_to_200bp_downstream_AGCDS</a></td></tr>\n";
+    $table .=  "<tr class=\"dk\">    <th class=\"td1\" scope=\"row\">Gene name and view at VectorBase</th>    <td class=\"td2\"><a href=\"$myrow->HYP_GeneView\">$myrow->GeneView</a></td></tr>\n";
+    $table .=  "<tr>    <th class=\"td1\" scope=\"row\">Protein view at VectorBase</th>    <td class=\"td2\"><a href=\"$myrow->HYP_ProteinView\">$myrow->ProteinView</a></td></tr>\n";
+    $table .=  "<tr class=\"dk\">    <th class=\"td1\" scope=\"row\">Chromosome</th>    <td class=\"td2\"><a href=\"$myrow->HYP_Chr\">$myrow->Chr</a></td></tr>\n";
+    $table .=  "<tr>    <th class=\"td1\" scope=\"row\">For or Rev</th>    <td class=\"td2\">$myrow->For_or_Rev</td></tr>\n";
+    $table .=  "<tr class=\"dk\">    <th class=\"td1\" scope=\"row\">Location</th>    <td class=\"td2\">$myrow->Location</td></tr>\n";
+    $table .=  "<tr>    <th class=\"td1\" scope=\"row\">Exon locations</th>    <td class=\"td2\">$myrow->Exon_locations</td></tr>\n";
+    $table .=  "<tr class=\"dk\">    <th class=\"td1\" scope=\"row\">Number of introns and link to fasta file</th>    <td class=\"td2\"><a href=\"$myrow->HYP_Number_of_introns\">$myrow->Number_of_introns</a></td></tr>\n";
+    $table .=  "<tr>    <th class=\"td1\" scope=\"row\">intron lengths</th>    <td class=\"td2\">$myrow->Intron_lengths</td></tr>\n";
+    $table .=  "<tr class=\"dk\">    <th class=\"td1\" scope=\"row\">Start</th>    <td class=\"td2\">$myrow->Start</td></tr>\n";
+    $table .=  "<tr>    <th class=\"td1\" scope=\"row\">End</th>    <td class=\"td2\">$myrow->End</td></tr>\n";
+    $table .=  "<tr class=\"dk\">    <th class=\"td1\" scope=\"row\">Gene length</th>    <td class=\"td2\">$myrow->Gene_length</td></tr>\n";
+    $table .=  "<tr>    <th class=\"td1\" scope=\"row\">Protein size</th>    <td class=\"td2\">$myrow->Protein_size</td></tr>\n";
+    $table .=  "<tr class=\"dk\">    <th class=\"td1\" scope=\"row\">Complexity index</th>    <td class=\"td2\">$myrow->Complexity_index</td></tr>\n";
+    $table .=  "<tr>    <th class=\"td1\" scope=\"row\">Increased AA (fold over average usage)</th>    <td class=\"td2\">$myrow->Increased_AA_fold_over_average</td></tr>\n";
+    $table .=  "<tr class=\"dk\">    <th class=\"td1\" scope=\"row\">Cys number</th>    <td class=\"td2\">$myrow->Cys_number</td></tr>\n";
+    $table .=  "<tr>    <th class=\"td1\" scope=\"row\">SigP Result</th>    <td class=\"td2\"><a href=\"$myrow->HYP_SigP_result\">$myrow->SigP_result</a></td></tr>\n";
+    $table .=  "<tr class=\"dk\">    <th class=\"td1\" scope=\"row\">Cleavage Position</th>    <td class=\"td2\">$myrow->Cleavage</td></tr>\n";
+    $table .=  "<tr>    <th class=\"td1\" scope=\"row\">MW</th>    <td class=\"td2\">$myrow->MW</td></tr>\n";
+    $table .=  "<tr class=\"dk\">    <th class=\"td1\" scope=\"row\">pI</th>    <td class=\"td2\">$myrow->pI</td></tr>\n";
+    $table .=  "<tr>    <th class=\"td1\" scope=\"row\">Mature MW</th>    <td class=\"td2\">$myrow->Mature_MW</td></tr>\n";
+    $table .=  "<tr class=\"dk\">    <th class=\"td1\" scope=\"row\">pI</th>    <td class=\"td2\">$myrow->Mature_pI</td></tr>\n";
+    $table .=  "<tr>    <th class=\"td1\" scope=\"row\">TMHMM result</th>    <td class=\"td2\">$myrow->TMHMM</td></tr>\n";
+    $table .=  "<tr class=\"dk\">    <th class=\"td1\" scope=\"row\">Predicted helices</th>    <td class=\"td2\">$myrow->Pred_helices</td></tr>\n";
+    $table .=  "<tr>    <th class=\"td1\" scope=\"row\">% membrane</th>    <td class=\"td2\">$myrow->per_membrane</td></tr>\n";
+    $table .=  "<tr class=\"dk\">    <th class=\"td1\" scope=\"row\">% outside</th>    <td class=\"td2\">$myrow->per_outside</td></tr>\n";
+    $table .=  "<tr>    <th class=\"td1\" scope=\"row\">% inside</th>    <td class=\"td2\">$myrow->per_inside</td></tr>\n";
+    $table .=  "<tr class=\"dk\">    <th class=\"td1\" scope=\"row\">Best match to NR protein database</th>    <td class=\"td2\"><a href=\"$myrow->HYP_BM_to_NR\">$myrow->BM_to_NR</a></td></tr>\n";
+    $table .=  "<tr>    <th class=\"td1\" scope=\"row\">E value</th>    <td class=\"td2\"><a href=\"$myrow->HYP_Eval_NR\">$myrow->Eval_NR</a></td></tr>\n";
+    $table .=  "<tr class=\"dk\">    <th class=\"td1\" scope=\"row\">Match</th>    <td class=\"td2\">$myrow->Match_NR</td></tr>\n";
+    $table .=  "<tr>    <th class=\"td1\" scope=\"row\">Score</th>    <td class=\"td2\">$myrow->Score_NR</td></tr>\n";
+    $table .=  "<tr class=\"dk\">    <th class=\"td1\" scope=\"row\">Extent of match</th>    <td class=\"td2\">$myrow->Extent_NR</td></tr>\n";
+    $table .=  "<tr>    <th class=\"td1\" scope=\"row\">Length of best match</th>    <td class=\"td2\">$myrow->Length_of_BM_NR</td></tr>\n";
+    $table .=  "<tr class=\"dk\">    <th class=\"td1\" scope=\"row\">% identity</th>    <td class=\"td2\">$myrow->identity_NR</td></tr>\n";
+    $table .=  "<tr>    <th class=\"td1\" scope=\"row\">% Match length</th>    <td class=\"td2\">$myrow->per_Match_length_NR</td></tr>\n";
+    $table .=  "<tr class=\"dk\">    <th class=\"td1\" scope=\"row\">First residue of match</th>    <td class=\"td2\">$myrow->first_res_NR</td></tr>\n";
+    $table .=  "<tr>    <th class=\"td1\" scope=\"row\">First residue of sequence</th>    <td class=\"td2\">$myrow->first_res_seq_NR</td></tr>\n";
+    $table .=  "<tr class=\"dk\">    <th class=\"td1\" scope=\"row\">Number of segments</th>    <td class=\"td2\">$myrow->Segments_NR</td></tr>\n";
+    $table .=  "<tr>    <th class=\"td1\" scope=\"row\">Species</th>    <td class=\"td2\">$myrow->Species</td></tr>\n";
+    $table .=  "<tr class=\"dk\">    <th class=\"td1\" scope=\"row\">Key words</th>    <td class=\"td2\">$myrow->Key_words</td></tr>\n";
+    $table .=  "<tr>    <th class=\"td1\" scope=\"row\">Best match to SWISSP database</th>    <td class=\"td2\"><a href=\"$myrow->HYP_BM_to_SWISS\">$myrow->BM_to_SWISS</a></td></tr>\n";
+    $table .=  "<tr class=\"dk\">    <th class=\"td1\" scope=\"row\">E value</th>    <td class=\"td2\"><a href=\"$myrow->HYP_Eval_SWISS\">$myrow->Eval_SWISS</a></td></tr>\n";
+    $table .=  "<tr>    <th class=\"td1\" scope=\"row\">Match</th>    <td class=\"td2\">$myrow->Match_SWISS</td></tr>\n";
+    $table .=  "<tr class=\"dk\">    <th class=\"td1\" scope=\"row\">Score</th>    <td class=\"td2\">$myrow->Score_SWISS</td></tr>\n";
+    $table .=  "<tr>    <th class=\"td1\" scope=\"row\">Extent of match</th>    <td class=\"td2\">$myrow->Extent_SWISS</td></tr>\n";
+    $table .=  "<tr class=\"dk\">    <th class=\"td1\" scope=\"row\">Length of best match</th>    <td class=\"td2\">$myrow->Length_SWISS</td></tr>\n";
+    $table .=  "<tr>    <th class=\"td1\" scope=\"row\">% identity</th>    <td class=\"td2\">$myrow->identity_SWISS</td></tr>\n";
+    $table .=  "<tr class=\"dk\">    <th class=\"td1\" scope=\"row\">% Match length</th>    <td class=\"td2\">$myrow->per_Match_length_SWISS</td></tr>\n";
+    $table .=  "<tr>    <th class=\"td1\" scope=\"row\">First residue of match</th>    <td class=\"td2\">$myrow->first_res_SWISS</td></tr>\n";
+    $table .=  "<tr class=\"dk\">    <th class=\"td1\" scope=\"row\">First residue of sequence</th>    <td class=\"td2\">$myrow->first_res_seq_SWISS</td></tr>\n";
+    $table .=  "<tr>    <th class=\"td1\" scope=\"row\">Number of segments</th>    <td class=\"td2\">$myrow->Segments_SWISS</td></tr>\n";
+    $table .=  "<tr class=\"dk\">    <th class=\"td1\" scope=\"row\">PROSITE motifs</th>    <td class=\"td2\">$myrow->PROSITE_motifs</td></tr>\n";
+    $table .=  "<tr>    <th class=\"td1\" scope=\"row\">Non promiscuous prosite motifs</th>    <td class=\"td2\"><a href=\"$myrow->HYP_PROSITE_motifs\">$myrow->Non_promiscuous_motifs</a></td></tr>\n";
+    $table .=  "<tr class=\"dk\">    <th class=\"td1\" scope=\"row\">Best match to GO database</th>    <td class=\"td2\">$myrow->BM_to_GO</td></tr>\n";
+    $table .=  "<tr>    <th class=\"td1\" scope=\"row\">E value</th>    <td class=\"td2\">$myrow->Eval_GO</td></tr>\n";
+    $table .=  "<tr class=\"dk\">    <th class=\"td1\" scope=\"row\">Function descriptors</th>    <td class=\"td2\"><a href=\"$myrow->HYP_Eval_GO\">$myrow->Function_descr</a></td></tr>\n";
+    $table .=  "<tr>    <th class=\"td1\" scope=\"row\">Function parent</th>    <td class=\"td2\">$myrow->Function_parent</td></tr>\n";
+    $table .=  "<tr class=\"dk\">    <th class=\"td1\" scope=\"row\">Function second parent</th>    <td class=\"td2\">$myrow->Function_2nd_parent</td></tr>\n";
+    $table .=  "<tr>    <th class=\"td1\" scope=\"row\">GO #</th>    <td class=\"td2\">$myrow->GO_num</td></tr>\n";
+    $table .=  "<tr class=\"dk\">    <th class=\"td1\" scope=\"row\">E value of functional GO</th>    <td class=\"td2\">$myrow->Eval_function_GO</td></tr>\n";
+    $table .=  "<tr>    <th class=\"td1\" scope=\"row\">Component descriptors</th>    <td class=\"td2\">$myrow->CC_descr</td></tr>\n";
+    $table .=  "<tr class=\"dk\">    <th class=\"td1\" scope=\"row\">Component parent</th>    <td class=\"td2\">$myrow->CC_parent</td></tr>\n";
+    $table .=  "<tr>    <th class=\"td1\" scope=\"row\">Component second parent</th>    <td class=\"td2\">$myrow->CC_2nd_parent</td></tr>\n";
+    $table .=  "<tr class=\"dk\">    <th class=\"td1\" scope=\"row\">GO #</th>    <td class=\"td2\">$myrow->GO_process_num</td></tr>\n";
+    $table .=  "<tr>    <th class=\"td1\" scope=\"row\">E value of component GO</th>    <td class=\"td2\">$myrow->Eval_CC_GO</td></tr>\n";
+    $table .=  "<tr class=\"dk\">    <th class=\"td1\" scope=\"row\">Process descriptors</th>    <td class=\"td2\">$myrow->Process_descr</td></tr>\n";
+    $table .=  "<tr>    <th class=\"td1\" scope=\"row\">Process parent</th>    <td class=\"td2\">$myrow->Process_parent</td></tr>\n";
+    $table .=  "<tr class=\"dk\">    <th class=\"td1\" scope=\"row\">Process second parent</th>    <td class=\"td2\">$myrow->Process_2nd_parent</td></tr>\n";
+    $table .=  "<tr>    <th class=\"td1\" scope=\"row\">GO #</th>    <td class=\"td2\">$myrow->GO_proc_num</td></tr>\n";
+    $table .=  "<tr class=\"dk\">    <th class=\"td1\" scope=\"row\">E value of process GO</th>    <td class=\"td2\">$myrow->Eval_process_GO</td></tr>\n";
+    $table .=  "<tr>    <th class=\"td1\" scope=\"row\">Best match to KOG database</th>    <td class=\"td2\"><a href=\"$myrow->HYP_BM_to_KOG\">$myrow->BM_to_KOG</a></td></tr>\n";
+    $table .=  "<tr class=\"dk\">    <th class=\"td1\" scope=\"row\">E value</th>    <td class=\"td2\"><a href=\"$myrow->HYP_Eval_KOG\">$myrow->Eval_KOG</a></td></tr>\n";
+    $table .=  "<tr>    <th class=\"td1\" scope=\"row\">General class</th>    <td class=\"td2\">$myrow->General_class</td></tr>\n";
+    $table .=  "<tr class=\"dk\">    <th class=\"td1\" scope=\"row\">Best match to PFAM database</th>    <td class=\"td2\"><a href=\"$myrow->HYP_BM_to_PFAM\">$myrow->BM_to_PFAM</a></td></tr>\n";
+    $table .=  "<tr>    <th class=\"td1\" scope=\"row\">E value</th>    <td class=\"td2\"><a href=\"$myrow->HYP_Eval_PFAM\">$myrow->Eval_PFAM</a></td></tr>\n";
+    $table .=  "<tr class=\"dk\">    <th class=\"td1\" scope=\"row\">Best match to SMART database</th>    <td class=\"td2\"><a href=\"$myrow->HYP_BM_to_SMART\">$myrow->BM_to_SMART</a></td></tr>\n";
+    $table .=  "<tr>    <th class=\"td1\" scope=\"row\">E value</th>    <td class=\"td2\"><a href=\"$myrow->HYP_Eval_SMART\">$myrow->Eval_SMART</a></td></tr>\n";
+    $table .=  "<tr class=\"dk\">    <th class=\"td1\" scope=\"row\">Best match to AEGY-PEP database</th>    <td class=\"td2\"><a href=\"$myrow->HYP_BM_to_AEGYPEP\">$myrow->BM_to_AEGYPEP</a></td></tr>\n";
+    $table .=  "<tr>    <th class=\"td1\" scope=\"row\">E value</th>    <td class=\"td2\">$myrow->Eval_AEGYPEP</td></tr>\n";
+    $table .=  "<tr class=\"dk\">    <th class=\"td1\" scope=\"row\">Match</th>    <td class=\"td2\">$myrow->Match_AEGYPEP</td></tr>\n";
+    $table .=  "<tr>    <th class=\"td1\" scope=\"row\">Score</th>    <td class=\"td2\">$myrow->Score_AEGYPEP</td></tr>\n";
+    $table .=  "<tr class=\"dk\">    <th class=\"td1\" scope=\"row\">Extent of match</th>    <td class=\"td2\">$myrow->Extent_AEGYPEP</td></tr>\n";
+    $table .=  "<tr>    <th class=\"td1\" scope=\"row\">Length of best match</th>    <td class=\"td2\">$myrow->Length_AEGYPEP</td></tr>\n";
+    $table .=  "<tr class=\"dk\">    <th class=\"td1\" scope=\"row\">% identity</th>    <td class=\"td2\">$myrow->identity_AEGYPEP</td></tr>\n";
+    $table .=  "<tr>    <th class=\"td1\" scope=\"row\">% Match length</th>    <td class=\"td2\">$myrow->per_Match_length_AEGYPEP</td></tr>\n";
+    $table .=  "<tr class=\"dk\">    <th class=\"td1\" scope=\"row\">First residue of match</th>    <td class=\"td2\">$myrow->first_res_AEGYPEP</td></tr>\n";
+    $table .=  "<tr>    <th class=\"td1\" scope=\"row\">First residue of sequence</th>    <td class=\"td2\">$myrow->first_res_seq_AEGYPEP</td></tr>\n";
+    $table .=  "<tr class=\"dk\">    <th class=\"td1\" scope=\"row\">Number of segments</th>    <td class=\"td2\">$myrow->Segments_AEGYPEP</td></tr>\n";
+    $table .=  "<tr>    <th class=\"td1\" scope=\"row\">Best match to DMPROT database</th>    <td class=\"td2\"><a href=\"$myrow->HYP_BM_to_DMPROT\">$myrow->BM_to_DMPROT</a></td></tr>\n";
+    $table .=  "<tr class=\"dk\">    <th class=\"td1\" scope=\"row\">E value</th>    <td class=\"td2\"><a href=\"$myrow->HYP_Eval_DMPROT\">$myrow->Eval_DMPROT</a></td></tr>\n";
+    $table .=  "<tr>    <th class=\"td1\" scope=\"row\">Match</th>    <td class=\"td2\">$myrow->Match_DMPROT</td></tr>\n";
+    $table .=  "<tr class=\"dk\">    <th class=\"td1\" scope=\"row\">Score</th>    <td class=\"td2\">$myrow->Score_DMPROT</td></tr>\n";
+    $table .=  "<tr>    <th class=\"td1\" scope=\"row\">Extent of match</th>    <td class=\"td2\">$myrow->Extent_DMPROT</td></tr>\n";
+    $table .=  "<tr class=\"dk\">    <th class=\"td1\" scope=\"row\">Length of best match</th>    <td class=\"td2\">$myrow->Length_DMPROT</td></tr>\n";
+    $table .=  "<tr>    <th class=\"td1\" scope=\"row\">% identity</th>    <td class=\"td2\">$myrow->identity_DMPROT</td></tr>\n";
+    $table .=  "<tr class=\"dk\">    <th class=\"td1\" scope=\"row\">% Match length</th>    <td class=\"td2\">$myrow->per_Match_length_DMPROT</td></tr>\n";
+    $table .=  "<tr>    <th class=\"td1\" scope=\"row\">First residue of match</th>    <td class=\"td2\">$myrow->first_res_DMPROT</td></tr>\n";
+    $table .=  "<tr class=\"dk\">    <th class=\"td1\" scope=\"row\">First residue of sequence</th>    <td class=\"td2\">$myrow->first_res_seq_DMPROT</td></tr>\n";
+    $table .=  "<tr>    <th class=\"td1\" scope=\"row\">Number of segments</th>    <td class=\"td2\">$myrow->Segments_DMPROT</td></tr>\n";
+    $table .=  "<tr class=\"dk\">    <th class=\"td1\" scope=\"row\">Best match to CELEG database</th>    <td class=\"td2\"><a href=\"$myrow->HYP_BM_to_CELEG\">$myrow->BM_to_CELEG</a></td></tr>\n";
+    $table .=  "<tr>    <th class=\"td1\" scope=\"row\">E value</th>    <td class=\"td2\"><a href=\"$myrow->HYP_Eval_CELEG\">$myrow->Eval_CELEG</a></td></tr>\n";
+    $table .=  "<tr class=\"dk\">    <th class=\"td1\" scope=\"row\">Match</th>    <td class=\"td2\">$myrow->Match_CELEG</td></tr>\n";
+    $table .=  "<tr>    <th class=\"td1\" scope=\"row\">Score</th>    <td class=\"td2\">$myrow->Score_CELEG</td></tr>\n";
+    $table .=  "<tr class=\"dk\">    <th class=\"td1\" scope=\"row\">Extent of match</th>    <td class=\"td2\">$myrow->Extent_CELEG</td></tr>\n";
+    $table .=  "<tr>    <th class=\"td1\" scope=\"row\">Length of best match</th>    <td class=\"td2\">$myrow->Length_CELEG</td></tr>\n";
+    $table .=  "<tr class=\"dk\">    <th class=\"td1\" scope=\"row\">% identity</th>    <td class=\"td2\">$myrow->identity_CELEG</td></tr>\n";
+    $table .=  "<tr>    <th class=\"td1\" scope=\"row\">% Match length</th>    <td class=\"td2\">$myrow->per_Match_legth_CELEG</td></tr>\n";
+    $table .=  "<tr class=\"dk\">    <th class=\"td1\" scope=\"row\">First residue of match</th>    <td class=\"td2\">$myrow->first_res_CELEG</td></tr>\n";
+    $table .=  "<tr>    <th class=\"td1\" scope=\"row\">First residue of sequence</th>    <td class=\"td2\">$myrow->first_res_seq_CELEG</td></tr>\n";
+    $table .=  "<tr class=\"dk\">    <th class=\"td1\" scope=\"row\">Number of segments</th>    <td class=\"td2\">$myrow->Segments_CELEG</td></tr>\n";
+    $table .=  "<tr>    <th class=\"td1\" scope=\"row\">Best match to ARAB database</th>    <td class=\"td2\"><a href=\"$myrow->HYP_BM_to_ARAB\">$myrow->BM_to_ARAB</a></td></tr>\n";
+    $table .=  "<tr class=\"dk\">    <th class=\"td1\" scope=\"row\">E value</th>    <td class=\"td2\"><a href=\"$myrow->HYP_Eval_ARAB\">$myrow->Eval_ARAB</a></td></tr>\n";
+    $table .=  "<tr>    <th class=\"td1\" scope=\"row\">Match</th>    <td class=\"td2\">$myrow->Match_ARAB</td></tr>\n";
+    $table .=  "<tr class=\"dk\">    <th class=\"td1\" scope=\"row\">Score</th>    <td class=\"td2\">$myrow->Score_ARAB</td></tr>\n";
+    $table .=  "<tr>    <th class=\"td1\" scope=\"row\">Extent of match</th>    <td class=\"td2\">$myrow->Extent_ARAB</td></tr>\n";
+    $table .=  "<tr class=\"dk\">    <th class=\"td1\" scope=\"row\">Length of best match</th>    <td class=\"td2\">$myrow->Length_ARAB</td></tr>\n";
+    $table .=  "<tr>    <th class=\"td1\" scope=\"row\">% identity</th>    <td class=\"td2\">$myrow->identity_ARAB</td></tr>\n";
+    $table .=  "<tr class=\"dk\">    <th class=\"td1\" scope=\"row\">% Match length</th>    <td class=\"td2\">$myrow->per_Match_length_ARAB</td></tr>\n";
+    $table .=  "<tr>    <th class=\"td1\" scope=\"row\">First residue of match</th>    <td class=\"td2\">$myrow->first_res_ARAB</td></tr>\n";
+    $table .=  "<tr class=\"dk\">    <th class=\"td1\" scope=\"row\">First residue of sequence</th>    <td class=\"td2\">$myrow->first_res_seq_ARAB</td></tr>\n";
+    $table .=  "<tr>    <th class=\"td1\" scope=\"row\">Number of segments</th>    <td class=\"td2\">$myrow->Segments_ARAB</td></tr>\n";
+    $table .=  "<tr class=\"dk\">    <th class=\"td1\" scope=\"row\">Best match to YEAST database</th>    <td class=\"td2\"><a href=\"$myrow->HYP_BM_to_YEAST\">$myrow->BM_to_YEAST</a></td></tr>\n";
+    $table .=  "<tr>    <th class=\"td1\" scope=\"row\">E value</th>    <td class=\"td2\"><a href=\"$myrow->HYP_Eval_YEAST\">$myrow->Eval_YEAST</a></td></tr>\n";
+    $table .=  "<tr class=\"dk\">    <th class=\"td1\" scope=\"row\">Match</th>    <td class=\"td2\">$myrow->Match_YEAST</td></tr>\n";
+    $table .=  "<tr>    <th class=\"td1\" scope=\"row\">Score</th>    <td class=\"td2\">$myrow->Score_YEAST</td></tr>\n";
+    $table .=  "<tr class=\"dk\">    <th class=\"td1\" scope=\"row\">Extent of match</th>    <td class=\"td2\">$myrow->Extent_YEAST</td></tr>\n";
+    $table .=  "<tr>    <th class=\"td1\" scope=\"row\">Length of best match</th>    <td class=\"td2\">$myrow->Length_YEAST</td></tr>\n";
+    $table .=  "<tr class=\"dk\">    <th class=\"td1\" scope=\"row\">% identity</th>    <td class=\"td2\">$myrow->identity_YEAST</td></tr>\n";
+    $table .=  "<tr>    <th class=\"td1\" scope=\"row\">% Match length</th>    <td class=\"td2\">$myrow->per_Match_length_YEAST</td></tr>\n";
+    $table .=  "<tr class=\"dk\">    <th class=\"td1\" scope=\"row\">First residue of match</th>    <td class=\"td2\">$myrow->first_res_YEAST</td></tr>\n";
+    $table .=  "<tr>    <th class=\"td1\" scope=\"row\">First residue of sequence</th>    <td class=\"td2\">$myrow->first_res_seq_YEAST</td></tr>\n";
+    $table .=  "<tr class=\"dk\">    <th class=\"td1\" scope=\"row\">Number of segments</th>    <td class=\"td2\">$myrow->Segments_YEAST</td></tr>\n";
+    $table .=  "<tr>    <th class=\"td1\" scope=\"row\">Best match to clusterized An. gambiae ESTs from different libraries</th>    <td class=\"td2\"><a href=\"$myrow->HYP_BM_to_AGEST\">$myrow->BM_to_AGEST</a></td></tr>\n";
+    $table .=  "<tr class=\"dk\">    <th class=\"td1\" scope=\"row\">E value</th>    <td class=\"td2\">$myrow->Eval_AGEST</td></tr>\n";
+    $table .=  "<tr>    <th class=\"td1\" scope=\"row\">Score</th>    <td class=\"td2\">$myrow->Score_AGEST</td></tr>\n";
+    $table .=  "<tr class=\"dk\">    <th class=\"td1\" scope=\"row\">Extent of match</th>    <td class=\"td2\">$myrow->Extent_AGEST</td></tr>\n";
+    $table .=  "<tr>    <th class=\"td1\" scope=\"row\">Length of best match</th>    <td class=\"td2\">$myrow->Length_AGEST</td></tr>\n";
+    $table .=  "<tr class=\"dk\">    <th class=\"td1\" scope=\"row\">% identity</th>    <td class=\"td2\">$myrow->identity_AGEST</td></tr>\n";
+    $table .=  "<tr>    <th class=\"td1\" scope=\"row\">% Match length</th>    <td class=\"td2\">$myrow->per_Match_length_AGEST</td></tr>\n";
+    $table .=  "<tr class=\"dk\">    <th class=\"td1\" scope=\"row\">First residue of match</th>    <td class=\"td2\">$myrow->first_res_AGEST</td></tr>\n";
+    $table .=  "<tr>    <th class=\"td1\" scope=\"row\">First residue of sequence</th>    <td class=\"td2\">$myrow->first_res_seq_AGEST</td></tr>\n";
+    $table .=  "<tr class=\"dk\">    <th class=\"td1\" scope=\"row\">Number of segments</th>    <td class=\"td2\">$myrow->Segments_AGEST</td></tr>\n";
+    $table .=  "<tr>    <th class=\"td1\" scope=\"row\">Orientation of output</th>    <td class=\"td2\">$myrow->Orientation_of_output</td></tr>\n";
+    $table .=  "<tr class=\"dk\">    <th class=\"td1\" scope=\"row\">Satisfied 95% id on length 100</th>    <td class=\"td2\">$myrow->ninetyfive_id_on_100</td></tr>\n";
+    $table .=  "<tr>    <th class=\"td1\" scope=\"row\">Number of sequences on assembled contig</th>    <td class=\"td2\">$myrow->Seqs_on_contig</td></tr>\n";
+    $table .=  "<tr class=\"dk\">    <th class=\"td1\" scope=\"row\">ESTs coming from from all-instars library</th>    <td class=\"td2\">$myrow->All_instars</td></tr>\n";
+    $table .=  "<tr>    <th class=\"td1\" scope=\"row\">Blood-abdomen library</th>    <td class=\"td2\">$myrow->Blood_abdomen</td></tr>\n";
+    $table .=  "<tr class=\"dk\">    <th class=\"td1\" scope=\"row\">Sugar-abd library</th>    <td class=\"td2\">$myrow->Sugar_abdomen</td></tr>\n";
+    $table .=  "<tr>    <th class=\"td1\" scope=\"row\">Infected blood-abd library</th>    <td class=\"td2\">$myrow->Infected_blood_abdomen</td></tr>\n";
+    $table .=  "<tr class=\"dk\">    <th class=\"td1\" scope=\"row\">Big blood fed library</th>    <td class=\"td2\">$myrow->Big_blood_fed</td></tr>\n";
+    $table .=  "<tr>    <th class=\"td1\" scope=\"row\">Big non blood fed library</th>    <td class=\"td2\">$myrow->Big_non_blood_fed</td></tr>\n";
+    $table .=  "<tr class=\"dk\">    <th class=\"td1\" scope=\"row\">Head library</th>    <td class=\"td2\">$myrow->Head</td></tr>\n";
+    $table .=  "<tr>    <th class=\"td1\" scope=\"row\">Immune cells</th>    <td class=\"td2\">$myrow->Immune_cells</td></tr>\n";
+    $table .=  "<tr class=\"dk\">    <th class=\"td1\" scope=\"row\">Normalized-fatbody</th>    <td class=\"td2\">$myrow->Normalized_fat_body</td></tr>\n";
+    $table .=  "<tr>    <th class=\"td1\" scope=\"row\">Female salivary glands</th>    <td class=\"td2\">$myrow->Female_salivary_glands</td></tr>\n";
+    $table .=  "<tr class=\"dk\">    <th class=\"td1\" scope=\"row\">Male salivary glands</th>    <td class=\"td2\">$myrow->Male_salivary_glands</td></tr>\n";
+    $table .=  "<tr>    <th class=\"td1\" scope=\"row\">Best match to Affymetrix chip</th>    <td class=\"td2\"><a href=\"$myrow->HYP_BM_to_AFFY\">$myrow->BM_to_AFFY</a></td></tr>\n";
+    $table .=  "<tr class=\"dk\">    <th class=\"td1\" scope=\"row\">Extent of match</th>    <td class=\"td2\"><a href=\"$myrow->HYP_Exntent_AFFY\">$myrow->Exntent_AFFY</a></td></tr>\n";
+    $table .=  "<tr>    <th class=\"td1\" scope=\"row\">% identity</th>    <td class=\"td2\">$myrow->identity_AFFY</td></tr>\n";
+    $table .=  "<tr class=\"dk\">    <th class=\"td1\" scope=\"row\">Larva-mean</th>    <td class=\"td2\">$myrow->Larvamean</td></tr>\n";
+    $table .=  "<tr>    <th class=\"td1\" scope=\"row\">Males-mean</th>    <td class=\"td2\">$myrow->Malesmean</td></tr>\n";
+    $table .=  "<tr class=\"dk\">    <th class=\"td1\" scope=\"row\">Sugar-fed females-mean</th>    <td class=\"td2\">$myrow->Sugarfed_femalesmean</td></tr>\n";
+    $table .=  "<tr>    <th class=\"td1\" scope=\"row\">Blood-fed 3h-mean</th>    <td class=\"td2\">$myrow->Bloodfed_females_3h_mean</td></tr>\n";
+    $table .=  "<tr class=\"dk\">    <th class=\"td1\" scope=\"row\">24h-mean</th>    <td class=\"td2\">$myrow->twentyfourh_mean</td></tr>\n";
+    $table .=  "<tr>    <th class=\"td1\" scope=\"row\">48h-mean</th>    <td class=\"td2\">$myrow->fortyeighth_mean</td></tr>\n";
+    $table .=  "<tr class=\"dk\">    <th class=\"td1\" scope=\"row\">72h-mean</th>    <td class=\"td2\">$myrow->seventytwoh_mean</td></tr>\n";
+    $table .=  "<tr>    <th class=\"td1\" scope=\"row\">15d-mean</th>    <td class=\"td2\">$myrow->fifteend_mean</td></tr>\n";
+    $table .=  "<tr class=\"dk\">    <th class=\"td1\" scope=\"row\">Fat bodies-mean</th>    <td class=\"td2\">$myrow->Fat_bodies_mean</td></tr>\n";
+    $table .=  "<tr>    <th class=\"td1\" scope=\"row\">Midgut-mean</th>    <td class=\"td2\">$myrow->Midgut_mean</td></tr>\n";
+    $table .=  "<tr class=\"dk\">    <th class=\"td1\" scope=\"row\">Ovaries-mean</th>    <td class=\"td2\">$myrow->Ovaries_mean</td></tr>\n";
+    $table .=  "<tr>    <th class=\"td1\" scope=\"row\">Clustered at 35%-Sim- on 60% of length - - Cluster#</th>    <td class=\"td2\">$myrow->thirtyfive_sim_on_60_length_clusters</td></tr>\n";
+    $table .=  "<tr class=\"dk\">    <th class=\"td1\" scope=\"row\">Number of sequences</th>    <td class=\"td2\"><a href=\"$myrow->HYP_num_seqs_35_on_60\">$myrow->num_seqs_35_on_60</a></td></tr>\n";
+    $table .=  "<tr>    <th class=\"td1\" scope=\"row\">Clustered at 45%-Sim- on 60% of length - - Cluster#</th>    <td class=\"td2\"><a href=\"$myrow->HYP_45_sim_on_60_length_clusters\">$myrow->fortyfive_sim_on_60_length_clusters</a></td></tr>\n";
+    $table .=  "<tr class=\"dk\">    <th class=\"td1\" scope=\"row\">Number of sequences</th>    <td class=\"td2\"><a href=\"$myrow->HYP_num_seqs_45_on_60\">$myrow->num_seqs_45_on_60</a></td></tr>\n";
+    $table .=  "<tr>    <th class=\"td1\" scope=\"row\">Clustered at 55%-Sim- on 60% of length - - Cluster#</th>    <td class=\"td2\"><a href=\"$myrow->HYP_55_sim_on_60_length_clusters\">$myrow->fiftyfive_sim_on_60_length_clusters</a></td></tr>\n";
+    $table .=  "<tr class=\"dk\">    <th class=\"td1\" scope=\"row\">Number of sequences</th>    <td class=\"td2\"><a href=\"$myrow->HYP_num_seqs_55_on_60\">$myrow->num_seqs_55_on_60</a></td></tr>\n";
+    $table .=  "<tr>    <th class=\"td1\" scope=\"row\">Clustered at 65%-Sim- on 60% of length - - Cluster#</th>    <td class=\"td2\"><a href=\"$myrow->HYP_65_sim_on_60_length_clusters\">$myrow->sixtyfive_sim_on_60_length_clusters</a></td></tr>\n";
+    $table .=  "<tr class=\"dk\">    <th class=\"td1\" scope=\"row\">Number of sequences</th>    <td class=\"td2\"><a href=\"$myrow->HYP_num_seqs_65_on_60\">$myrow->num_seqs_65_on_60</a></td></tr>\n";
+    $table .=  "<tr>    <th class=\"td1\" scope=\"row\">Clustered at 75%-Sim- on 60% of length - - Cluster#</th>    <td class=\"td2\"><a href=\"$myrow->HYP_75_sim_on_60_length_clusters\">$myrow->seventyfive_sim_on_60_length_clusters</a></td></tr>\n";
+    $table .=  "<tr class=\"dk\">    <th class=\"td1\" scope=\"row\">Number of sequences</th>    <td class=\"td2\"><a href=\"$myrow->HYP_num_seqs_75_on_60\">$myrow->num_seqs_75_on_60</a></td></tr>\n";
+    $table .=  "<tr>    <th class=\"td1\" scope=\"row\">Clustered at 85%-Sim- on 60% of length - - Cluster#</th>    <td class=\"td2\"><a href=\"$myrow->HYP_85_sim_on_60_length_clusters\">$myrow->eightyfive_sim_on_60_length_clusters</a></td></tr>\n";
+    $table .=  "<tr class=\"dk\">    <th class=\"td1\" scope=\"row\">Number of sequences</th>    <td class=\"td2\"><a href=\"$myrow->HYP_num_seqs_85_on_60\">$myrow->num_seqs_85_on_60</a></td></tr>\n";
+    $table .=  "<tr>    <th class=\"td1\" scope=\"row\">Clustered at 95%-Sim- on 60% of length - - Cluster#</th>    <td class=\"td2\"><a href=\"$myrow->HYP_95_sim_on_60_length_clusters\">$myrow->ninetyfive_sim_on_60_length_clusters</a></td></tr>\n";
+    $table .=  "<tr class=\"dk\">    <th class=\"td1\" scope=\"row\">Number of sequences</th>    <td class=\"td2\"><a href=\"$myrow->HYP_num_seqs_95_on_60\">$myrow->num_seqs_95_on_60</a></td></tr>\n";
+
+
+    $table .=  "</table>\n<br><br>\n";
+
+
+    $table .= '</div></td></tr></tbody></table>';
+
+    return $table;
+}
+
+function ribeiro_mail($key, &$message, $params) {
+    $language = $message['language'];
+    $message['subject'] = $params['subject'];
+    $message['body'][] = $params['body'];
+}
+
+

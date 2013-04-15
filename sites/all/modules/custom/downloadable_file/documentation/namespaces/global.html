@@ -1,0 +1,344 @@
+<!DOCTYPE html><html xmlns:date="http://exslt.org/dates-and-times" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+<meta charset="utf-8">
+<title>phpDocumentor » global</title>
+<meta name="author" content="Mike van Riel">
+<meta name="description" content="">
+<link href="../css/template.css" rel="stylesheet" media="all">
+<script src="../js/jquery-1.7.1.min.js" type="text/javascript"></script><script src="../js/jquery-ui-1.8.2.custom.min.js" type="text/javascript"></script><script src="../js/jquery.mousewheel.min.js" type="text/javascript"></script><script src="../js/bootstrap.js" type="text/javascript"></script><script src="../js/template.js" type="text/javascript"></script><script src="../js/prettify/prettify.min.js" type="text/javascript"></script><link rel="shortcut icon" href="../img/favicon.ico">
+<link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../img/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../img/apple-touch-icon-114x114.png">
+</head>
+<body>
+<div class="navbar navbar-fixed-top">
+<div class="navbar-inner"><div class="container">
+<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a><a class="brand" href="../index.html">phpDocumentor</a><div class="nav-collapse"><ul class="nav">
+<li class="dropdown">
+<a href="#api" class="dropdown-toggle" data-toggle="dropdown">
+                                    API Documentation <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a>Packages</a></li>
+<li><a href="../packages/DataFiles.html"><i class="icon-folder-open"></i> DataFiles</a></li>
+</ul>
+</li>
+<li class="dropdown" id="charts-menu">
+<a href="#charts" class="dropdown-toggle" data-toggle="dropdown">
+                                    Charts <b class="caret"></b></a><ul class="dropdown-menu"><li><a href="../graph_class.html"><i class="icon-list-alt"></i> Class hierarchy diagram</a></li></ul>
+</li>
+<li class="dropdown" id="reports-menu">
+<a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
+                                    Reports <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
+                <span class="label label-info">0</span></a></li>
+<li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
+                <ul><li>todo 
+                <span class="label label-info">1</span>
+</li></ul></a></li>
+<li><a href="../deprecated.html"><i class="icon-stop"></i> Deprecated elements 
+                <span class="label label-info">0</span></a></li>
+</ul>
+</li>
+</ul></div>
+</div></div>
+<div class="go_to_top"><a href="#___" style="color: inherit">Back to top  <i class="icon-upload icon-white"></i></a></div>
+</div>
+<div id="___" class="container">
+<noscript><div class="alert alert-warning">
+                            Javascript is disabled; several features are only available
+                            if Javascript is enabled.
+                        </div></noscript>
+<div class="row">
+<div class="span4">
+<div class="btn-group view pull-right" data-toggle="buttons-radio">
+<button class="btn details" title="Show descriptions and method names"><i class="icon-list"></i></button><button class="btn simple" title="Show only method names"><i class="icon-align-justify"></i></button>
+</div>
+<ul class="side-nav nav nav-list">
+<li class="nav-header">
+<i class="icon-map-marker"></i> Namespaces</li>
+<li>
+<a href="../namespaces/global.html" title="global"><i class="icon-th"></i>global</a><ul class="nav nav-list nav-namespaces"></ul>
+</li>
+</ul>
+</div>
+<div class="span8 namespace-contents">
+<ul class="breadcrumb">
+<li>
+<a href="../index.html"><i class="icon-th"></i></a><span class="divider">\</span>
+</li>
+<li class="active"><a href="../namespaces/global.html">global</a></li>
+</ul>
+<div class="namespace-indent">
+<h3>
+<i class="icon-custom icon-function"></i> Functions</h3>
+<a name="download_file_post_render" id="download_file_post_render"></a><div class="element clickable function  download_file_post_render" data-toggle="collapse" data-target=".download_file_post_render .collapse">
+<h2>Re-writes the file links to display "human readable" filesize.</h2>
+<pre>download_file_post_render(string $content, array $element) : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"><p>Function is added into the "post_render" stack by this module's
+implementation of hook_node_view_alter.</p></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$content</h4>
+<code>string</code><p>HTML content to be displayed.</p></div>
+<div class="subelement argument">
+<h4>$element</h4>
+<code>array</code><p>Container for the renderable page.</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>string</code>Returning the given content variable.  This is probably not
+necessary, but to avoid possibly breaking things, this is left in.</div>
+</div></div>
+</div>
+<a name="downloadable_file_admin_ajax_handler" id="downloadable_file_admin_ajax_handler"></a><div class="element clickable function  downloadable_file_admin_ajax_handler" data-toggle="collapse" data-target=".downloadable_file_admin_ajax_handler .collapse">
+<h2>Worker function called by all "button-driven" actions from the Administration
+page.</h2>
+<pre>downloadable_file_admin_ajax_handler(string[] $form, string[] $form_state) : string[]</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"><p>At the end of each action, they return (or should return) feedback via the
+$form['status_area']['#description'] field.</p></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$form</h4>
+<code>string[]</code><p>Array defining the structure of the Admin page. This variable contains the status area which gets updated by each action.</p></div>
+<div class="subelement argument">
+<h4>$form_state</h4>
+<code>string[]</code><p>Contains state information about the form's components, like which button is currently clicked.</p>
+</div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>string[]</code>Status area component in the Admin  page</div>
+</div></div>
+</div>
+<a name="downloadable_file_admin_form" id="downloadable_file_admin_form"></a><div class="element clickable function  downloadable_file_admin_form" data-toggle="collapse" data-target=".downloadable_file_admin_form .collapse">
+<h2>Function used to construct the Administration page for this
+module.</h2>
+<pre>downloadable_file_admin_form() : string[]</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>string[]</code>Render array defining the form.</div>
+</div></div>
+</div>
+<a name="downloadable_file_block_contents" id="downloadable_file_block_contents"></a><div class="element clickable function  downloadable_file_block_contents" data-toggle="collapse" data-target=".downloadable_file_block_contents .collapse">
+<h2>Builder method for the html to be displayed in the "Related files" block.</h2>
+<pre>downloadable_file_block_contents(string $delta) : string[]</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$delta</h4>
+<code>string</code><p>Contextual information to check for to make sure this builds the html at the right time in the right place.</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>string[]</code>Markup array consisting of html.</div>
+</div></div>
+</div>
+<a name="downloadable_file_views_query_alter" id="downloadable_file_views_query_alter"></a><div class="element clickable function  downloadable_file_views_query_alter" data-toggle="collapse" data-target=".downloadable_file_views_query_alter .collapse">
+<h2>Drupal 7 implementation of hook_views_query_alter.</h2>
+<pre>downloadable_file_views_query_alter(object $view, object $query) : void</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"><p>This implementation alters filtered queries in the "Downloads/Data files"
+view. It allows a user to filter by a term in the file type taxonomy
+and get matches for that term AND its child terms.</p></p>
+<table class="table table-bordered"><tr>
+<th>see</th>
+<td>\global\hook_views_query_alter(&$view,</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$view</h4>
+<code>object</code><p>Drupal view object.</p></div>
+<div class="subelement argument">
+<h4>$query</h4>
+<code>object</code><p>Drupal query object.</p></div>
+</div></div>
+</div>
+<a name="errAdd" id="errAdd"></a><div class="element clickable function  errAdd" data-toggle="collapse" data-target=".errAdd .collapse">
+<h2>Convenience method to add an error message to an error array map.</h2>
+<pre>errAdd(string $element, string $msg, int[] | string[] $errArray) : void</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"><p>This is geared for use in the Drupal forms, where the "element" is the
+name of the UI element that the error applies to. msg is the message, and
+the errArray is the pass-by-reference variable to hold the message.</p></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$element</h4>
+<code>string</code><p>Key for the error.</p></div>
+<div class="subelement argument">
+<h4>$msg</h4>
+<code>string</code><p>Error message.</p></div>
+<div class="subelement argument">
+<h4>$errArray</h4>
+<code>int[]</code><code>string[]</code><p>Array that holds the errors. These are added by reference.</p></div>
+</div></div>
+</div>
+<a name="getFileSizeHumanReadable" id="getFileSizeHumanReadable"></a><div class="element clickable function  getFileSizeHumanReadable" data-toggle="collapse" data-target=".getFileSizeHumanReadable .collapse">
+<h2>Convenience method to calculate, in human-readable text, the
+size of something given the bytes and precision.</h2>
+<pre>getFileSizeHumanReadable(int $bytes, int $precision) : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$bytes</h4>
+<code>int</code><p>Number of bytes to convert.</p></div>
+<div class="subelement argument">
+<h4>$precision</h4>
+<code>int</code><p>How many decimal places to be specific to. default is set to 2.</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>string</code>Human readable string of the size given. Values will be
+in either B, KB, MB, GB, or TB. Note, if something larger than TB is
+given, returned value will not be correct, it will return that same
+number as B.</div>
+</div></div>
+</div>
+<a name="getShortNames" id="getShortNames"></a><div class="element clickable function  getShortNames" data-toggle="collapse" data-target=".getShortNames .collapse">
+<h2>Simple getter that returns a map from common orgnism shortnames to their
+full names in "genus-species" format.</h2>
+<pre>getShortNames() </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"><p>This function was specifically designed
+for the Download Files Name format.</p></p>
+<table class="table table-bordered"><tr>
+<th>todo</th>
+<td>Might remove this b/c the names no longer follow the name format.</td>
+</tr></table>
+</div></div>
+</div>
+<a name="getSortedFiles" id="getSortedFiles"></a><div class="element clickable function  getSortedFiles" data-toggle="collapse" data-target=".getSortedFiles .collapse">
+<h2>Returns a max heap object of ranked files.</h2>
+<pre>getSortedFiles(int | string $organismId, int | string $tagId, int $limit) : <a href="../classes/DownloadSimpleHeap.html">\DownloadSimpleHeap</a></pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$organismId</h4>
+<code>int</code><code>string</code><p>Organism taxonomy id to be ranked on.</p></div>
+<div class="subelement argument">
+<h4>$tagId</h4>
+<code>int</code><code>string</code><p>(Optional) $tagId Taxon Id of a Tag that is used by downloads to promote certain files over others.</p>
+</div>
+<div class="subelement argument">
+<h4>$limit</h4>
+<code>int</code><p>(Optional) Number of files to return in the ranking.</p>
+</div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code><a href="../classes/DownloadSimpleHeap.html">\DownloadSimpleHeap</a></code>A max heap object of ranked files (drupal nodes).</div>
+</div></div>
+</div>
+<a name="getUniqueListOrgTidsFromDownloads" id="getUniqueListOrgTidsFromDownloads"></a><div class="element clickable function  getUniqueListOrgTidsFromDownloads" data-toggle="collapse" data-target=".getUniqueListOrgTidsFromDownloads .collapse">
+<h2>Returns unique list of organisms referenced in exisiting data files (downloads).</h2>
+<pre>getUniqueListOrgTidsFromDownloads() : string[] | int[]</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"><p>Utility method designed to scan all nodes classified as "downloadable_file"s,
+and return a unique list of organism taxon ids from the organism taxonomy.
+Each taxon id returned has at least one "downloadable_file" node that exsits
+in drupal. This method is used to display a shortened, relevant list of
+organisms available to filter on in the "Data files" (downlaods) view.</p></p>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>string[]</code><code>int[]</code>List of organism taxon ids.</div>
+</div></div>
+</div>
+<h3>
+<i class="icon-custom icon-class"></i> Classes and interfaces</h3>
+<a name="DownloadSimpleHeap" id="DownloadSimpleHeap"></a><div class="element ajax clickable class" href="../classes/DownloadSimpleHeap.html">
+<h1>DownloadSimpleHeap<a href="../classes/DownloadSimpleHeap.html">¶</a>
+</h1>
+<p class="short_description">This extension of the SplHeap overrides the compare function to
+allow us to "rank" our "Data file/Download" nodes.</p>
+<div class="details collapse"></div>
+<a href="../classes/DownloadSimpleHeap.html" class="more">« More »</a>
+</div>
+<h3>
+<i class="icon-custom icon-constant"></i> Constants</h3>
+<a name="DATA_FILE_DOWNLOAD_LINK_CSS_CLASS" id="DATA_FILE_DOWNLOAD_LINK_CSS_CLASS"> </a><div class="element clickable constant  DATA_FILE_DOWNLOAD_LINK_CSS_CLASS" data-toggle="collapse" data-target=".DATA_FILE_DOWNLOAD_LINK_CSS_CLASS .collapse">
+<h2>CSS class used by jquery to locate file downloads and
+increment the download count.</h2>
+<pre>DATA_FILE_DOWNLOAD_LINK_CSS_CLASS </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="DB_PASSWORD" id="DB_PASSWORD"> </a><div class="element clickable constant  DB_PASSWORD" data-toggle="collapse" data-target=".DB_PASSWORD .collapse">
+<h2>Password for the DB_USER.</h2>
+<pre>DB_PASSWORD </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="DB_USER" id="DB_USER"> </a><div class="element clickable constant  DB_USER" data-toggle="collapse" data-target=".DB_USER .collapse">
+<h2>Public user in the drupal database that is allowed to issue SELECT queries.</h2>
+<pre>DB_USER </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="DL_COUNT_TAG" id="DL_COUNT_TAG"> </a><div class="element clickable constant  DL_COUNT_TAG" data-toggle="collapse" data-target=".DL_COUNT_TAG .collapse">
+<h2>DL_COUNT_TAG</h2>
+<pre>DL_COUNT_TAG </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="DOWNLOAD_COUNT_NODE_ID_GET_KEY" id="DOWNLOAD_COUNT_NODE_ID_GET_KEY"> </a><div class="element clickable constant  DOWNLOAD_COUNT_NODE_ID_GET_KEY" data-toggle="collapse" data-target=".DOWNLOAD_COUNT_NODE_ID_GET_KEY .collapse">
+<h2>Node id key name for the file increment php counter.</h2>
+<pre>DOWNLOAD_COUNT_NODE_ID_GET_KEY </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="DOWNLOAD_COUNT_VERSION_ID_GET_KEY" id="DOWNLOAD_COUNT_VERSION_ID_GET_KEY"> </a><div class="element clickable constant  DOWNLOAD_COUNT_VERSION_ID_GET_KEY" data-toggle="collapse" data-target=".DOWNLOAD_COUNT_VERSION_ID_GET_KEY .collapse">
+<h2>Version id key name for the file increment php counter.</h2>
+<pre>DOWNLOAD_COUNT_VERSION_ID_GET_KEY </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="DRUPAL_ROOT" id="DRUPAL_ROOT"> </a><div class="element clickable constant  DRUPAL_ROOT" data-toggle="collapse" data-target=".DRUPAL_ROOT .collapse">
+<h2>DRUPAL_ROOT</h2>
+<pre>DRUPAL_ROOT </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="FEATURED_DOWNLOAD_TAG_TEXT" id="FEATURED_DOWNLOAD_TAG_TEXT"> </a><div class="element clickable constant  FEATURED_DOWNLOAD_TAG_TEXT" data-toggle="collapse" data-target=".FEATURED_DOWNLOAD_TAG_TEXT .collapse">
+<h2>Display string of the 'Featured Download' tag (actually a taxon in the
+tags taxonomy).</h2>
+<pre>FEATURED_DOWNLOAD_TAG_TEXT </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"><p>This is used to retrieve the taxon object itself from drupal
+to get the taxon id, which is used in other queries.</p></p></div></div>
+</div>
+<a name="RELATED_FILES_DOWNLOADED_COUNT_THRESHOLD" id="RELATED_FILES_DOWNLOADED_COUNT_THRESHOLD"> </a><div class="element clickable constant  RELATED_FILES_DOWNLOADED_COUNT_THRESHOLD" data-toggle="collapse" data-target=".RELATED_FILES_DOWNLOADED_COUNT_THRESHOLD .collapse">
+<h2>Threshold value for minimum number of times a file is downloaded before it
+becomes 'more important'.</h2>
+<pre>RELATED_FILES_DOWNLOADED_COUNT_THRESHOLD </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+<a name="RELATED_FILES_VIEW_LIMIT" id="RELATED_FILES_VIEW_LIMIT"> </a><div class="element clickable constant  RELATED_FILES_VIEW_LIMIT" data-toggle="collapse" data-target=".RELATED_FILES_VIEW_LIMIT .collapse">
+<h2>How many files are to be dispalyed in the 'Related files' block on organism
+pages.</h2>
+<pre>RELATED_FILES_VIEW_LIMIT </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+</div>
+</div>
+</div>
+</div>
+<div class="row"><footer class="span12">
+            Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
+            Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a10</a> and<br>
+            generated on 2012-12-04T13:32:14-05:00.<br></footer></div>
+</div>
+</body>
+</html>

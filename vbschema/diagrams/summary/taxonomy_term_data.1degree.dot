@@ -1,0 +1,37 @@
+// dot 2.30.1 on Mac OS X 10.8.3
+// SchemaSpy rev 590
+digraph "taxonomy_term_data" {
+  graph [
+    rankdir="RL"
+    bgcolor="#f7f7f7"
+    nodesep="0.18"
+    ranksep="0.46"
+    fontname="Helvetica"
+    fontsize="11"
+  ];
+  node [
+    fontname="Helvetica"
+    fontsize="11"
+    shape="plaintext"
+  ];
+  edge [
+    arrowsize="0.8"
+  ];
+  "taxonomy_term_data" [
+    label=<
+    <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" BGCOLOR="#ffffff">
+      <TR><TD COLSPAN="3" BGCOLOR="#9bab96" ALIGN="CENTER">taxonomy_term_data</TD></TR>
+      <TR><TD PORT="tid" COLSPAN="3" BGCOLOR="#bed1b8" ALIGN="LEFT">tid</TD></TR>
+      <TR><TD PORT="vid" COLSPAN="3" BGCOLOR="#f4f7da" ALIGN="LEFT">vid</TD></TR>
+      <TR><TD PORT="name" COLSPAN="3" BGCOLOR="#f4f7da" ALIGN="LEFT">name</TD></TR>
+      <TR><TD PORT="description" COLSPAN="3" ALIGN="LEFT">description</TD></TR>
+      <TR><TD PORT="format" COLSPAN="3" ALIGN="LEFT">format</TD></TR>
+      <TR><TD PORT="weight" COLSPAN="3" BGCOLOR="#f4f7da" ALIGN="LEFT">weight</TD></TR>
+      <TR><TD PORT="taxonomy_subterms" COLSPAN="3" ALIGN="LEFT">taxonomy_subterms</TD></TR>
+      <TR><TD PORT="taxonomy_subterms_map" COLSPAN="3" ALIGN="LEFT">taxonomy_subterms_map</TD></TR>
+      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">  </TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">725 rows</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">  </TD></TR>
+    </TABLE>>
+    URL="tables/taxonomy_term_data.html"
+    tooltip="taxonomy_term_data"
+  ];
+}

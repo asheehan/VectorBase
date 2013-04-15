@@ -19,59 +19,133 @@
 function fusion_core_form_system_theme_settings_alter(&$form, $form_state) {
   global $base_url;
 
-  // Get theme name from url (admin/.../theme_name)
-  $theme_name = arg(count(arg()) - 1);
+  // Get theme name.
+  $theme_name = $GLOBALS['theme_key'];
 
-  // Get default theme settings from .info file
-  $theme_data = list_themes();   // get data for all themes
+  // Get default theme settings from .info file.
+  $theme_data = list_themes();
   $defaults = ($theme_name && isset($theme_data[$theme_name]->info['settings'])) ? $theme_data[$theme_name]->info['settings'] : array();
 
-  // Create theme settings form widgets using Forms API
+  // Calculate sidebar width options.
+  $width_options = fusion_core_get_width_options($theme_name);
 
-  // TNT Fieldset
+  // Fusion theme settings container
   $form['tnt_container'] = array(
     '#type' => 'fieldset',
     '#title' => t('Fusion theme settings'),
     '#description' => t('Use these settings to enhance the appearance and functionality of your Fusion theme.'),
     '#collapsible' => TRUE,
     '#collapsed' => FALSE,
+    '#weight' => -1,
+    '#attached' => array(
+      'css' => array(drupal_get_path('theme', 'fusion_core') . '/css/settings-form.fusion-core.css'),
+    ),
   );
 
   // General Settings
   $form['tnt_container']['general_settings'] = array(
-    '#type' => 'fieldset',
-    '#title' => t('General settings'),
-    '#collapsible' => TRUE,
-    '#collapsed' => FALSE,
+    '#type' => 'vertical_tabs',
   );
 
   // Grid settings
   $form['tnt_container']['general_settings']['theme_grid_config'] = array(
     '#type' => 'fieldset',
-    '#title' => t('Layout'),
-    '#collapsible' => TRUE,
-    '#collapsed' => TRUE,
+    '#title' => t('Grid Settings'),
+    '#description' => t("These settings control the number of columns that will comprise your grid."),
+    '#weight' => -15,
   );
-  // Grid type
-  // Generate grid type options
+
+
+  /**
+   * Default layout.  Used for large screens in responsive, and for fluid grids and themes with responsive turned off.
+   */
+  $form['tnt_container']['general_settings']['theme_responsive_desktop'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Layout: Desktop'),
+    '#description' => t('Only this layout will be used.  For tablet and smartphone layouts, enable the <a href="@accelerator">Fusion Accelerator module</a>.',
+      array('@accelerator' =>
+        url('http://drupal.org/project/fusion_accelerator',
+        array('external' => TRUE))
+      )
+    ),
+    '#weight' => -6,
+  );
+
+  // sidebar layout
+  $form['tnt_container']['general_settings']['theme_responsive_desktop']['sidebar_layout'] = array(
+    '#type'          => 'radios',
+    '#title'         => t('Sidebar layout for desktops'),
+    '#default_value' => theme_get_setting('sidebar_layout'),
+    '#options'       => array(
+      'sidebars-split' => t('Split sidebars'),
+      'sidebars-both-first' => t('Both sidebars first'),
+      'sidebars-both-last' => t('Both sidebars last'),
+    ),
+    '#attributes' => array('class' => array('clearfix', 'responsive')),
+    '#weight'         => -5,
+  );
+
+  // sidebar widths
+  // @todo - once "adjusted regions" have been removed, add settings for widebar widths to every layout.
+  $form['tnt_container']['general_settings']['theme_grid_config']['sidebar_first_width'] = array(
+    '#type'          => 'select',
+    '#title'         => t('First sidebar width'),
+    '#default_value' => theme_get_setting('sidebar_first_width'),
+    '#options'       => $width_options,
+    '#weight'        => 5,
+  );
+  $form['tnt_container']['general_settings']['theme_grid_config']['sidebar_first_width']['#options'][$defaults['sidebar_first_width']] .= t(' (default)');
+  $form['tnt_container']['general_settings']['theme_grid_config']['sidebar_second_width'] = array(
+    '#type'          => 'select',
+    '#title'         => t('Second sidebar width'),
+    '#default_value' => theme_get_setting('sidebar_second_width'),
+    '#options'       => $width_options,
+    '#weight'        => 6,
+  );
+  $form['tnt_container']['general_settings']['theme_grid_config']['sidebar_second_width']['#options'][$defaults['sidebar_second_width']] .= t(' (default)');
+
+  /**
+   * If Fusion Accelerator is unavailable, provide Fusion 1.x style grid options.
+   * Toggles are based of FAPI #states, but the description is slightly modified
+   * based on module availability.
+   */
+  if (!module_exists('fusion_accelerator')) {
+    $form['tnt_container']['general_settings']['theme_grid_config']['#description'] .= ' ' .
+      t('<p>Currently you can choose from either a <strong>fluid grid</strong> that will resize using width percentages,
+      or a <strong>fixed grid</strong> that remains the same across all devices and browser sizes.</p><p><strong>Pro tip:</strong> Download and enable
+      the <a href="@accelerator">Fusion Accelerator module</a> to support responsive layouts.</p>',
+      array('@accelerator' =>
+        url('http://drupal.org/project/fusion_accelerator',
+        array('external' => TRUE))
+        )
+      );
+  }
+
+  // Generate grid type options based on info files
   $grid_options = array();
   if (isset($defaults['theme_grid_options'])) {
     foreach ($defaults['theme_grid_options'] as $grid_option) {
-      $grid_type = (substr($grid_option, 7) == 'fluid') ? t('fluid grid') : t('fixed grid') . ' [' . substr($grid_option, 7) . 'px]';
-      $grid_options[$grid_option] = (int)substr($grid_option, 4, 2) . t(' column ') . $grid_type;
+      $grid_type = (substr($grid_option, 7) == 'fluid') ? t('fluid') : t('fixed');
+      $grid_options[$grid_option] = (int)substr($grid_option, 4, 2) . t(' column ') . ' - ' . $grid_type;
     }
   }
   $form['tnt_container']['general_settings']['theme_grid_config']['theme_grid'] = array(
     '#type'          => 'radios',
-    '#title'         => t('Select a grid layout for your theme'),
+    '#title'         => t('Select a non-responsive grid layout for your theme'),
     '#default_value' => theme_get_setting('theme_grid'),
     '#options'       => $grid_options,
   );
-  $form['tnt_container']['general_settings']['theme_grid_config']['theme_grid']['#options'][$defaults['theme_grid']] .= t(' - Theme Default');
+  $form['tnt_container']['general_settings']['theme_grid_config']['theme_grid']['#options'][$defaults['theme_grid']] .= t(' (default)');
+  $form['tnt_container']['general_settings']['theme_grid_config']['theme_grid']['#states'] = array(
+    'visible' => array(
+      ':input[name=responsive_enabled]' => array('value' => '0')
+    ),
+  );
+
   // Fluid grid width
   $form['tnt_container']['general_settings']['theme_grid_config']['fluid_grid_width'] = array(
     '#type'          => 'select',
-    '#title'         => t('Select a width for your fluid grid layout'),
+    '#title'         => t('If using a fluid layout, select the maximum width'),
     '#default_value' => theme_get_setting('fluid_grid_width'),
     '#options'       => array(
       'fluid-100' => t('100%'),
@@ -80,45 +154,16 @@ function fusion_core_form_system_theme_settings_alter(&$form, $form_state) {
       'fluid-85' => t('85%'),
     ),
   );
-  $form['tnt_container']['general_settings']['theme_grid_config']['fluid_grid_width']['#options'][$defaults['fluid_grid_width']] .= t(' - Theme Default');
-  // Sidebar layout
-  $form['tnt_container']['general_settings']['theme_grid_config']['sidebar_layout'] = array(
-    '#type'          => 'radios',
-    '#title'         => t('Select a sidebar layout for your theme'),
-    '#default_value' => theme_get_setting('sidebar_layout'),
-    '#options'       => array(
-      'sidebars-split' => t('Split sidebars'),
-      'sidebars-both-first' => t('Both sidebars first'),
-      'sidebars-both-last' => t('Both sidebars last'),
+  $form['tnt_container']['general_settings']['theme_grid_config']['fluid_grid_width']['#options'][$defaults['fluid_grid_width']] .= t(' (default)');
+  $form['tnt_container']['general_settings']['theme_grid_config']['fluid_grid_width']['#states'] = array(
+    'visible' => array(
+      ':input[name="responsive_enabled"]' => array('value' => 0)
     ),
   );
-  $form['tnt_container']['general_settings']['theme_grid_config']['sidebar_layout']['#options'][$defaults['sidebar_layout']] .= t(' - Theme Default');
-  // Calculate sidebar width options
-  $grid_width = (int)substr(theme_get_setting('theme_grid'), 4, 2);
-  $grid_type = substr(theme_get_setting('theme_grid'), 7);
-  $width_options = array();
-  for ($i = 1; $i <= floor($grid_width / 2); $i++) {
-    $grid_units = $i . (($i == 1) ? t(' grid unit: ') : t(' grid units: '));
-    $width_options[$i] = $grid_units . (($grid_type == 'fluid') ? (round($i * (100 / $grid_width), 2) . '%') : ($i * ((int)$grid_type / $grid_width)) . 'px');
-  }
-  // Sidebar first width
-  $form['tnt_container']['general_settings']['theme_grid_config']['sidebar_first_width'] = array(
-    '#type'          => 'select',
-    '#title'         => t('Select a different width for your first sidebar'),
-    '#default_value' => theme_get_setting('sidebar_first_width'),
-    '#options'       => $width_options,
-  );
-  $form['tnt_container']['general_settings']['theme_grid_config']['sidebar_first_width']['#options'][$defaults['sidebar_first_width']] .= t(' - Theme Default');
-  // Sidebar last width
-  $form['tnt_container']['general_settings']['theme_grid_config']['sidebar_second_width'] = array(
-    '#type'          => 'select',
-    '#title'         => t('Select a different width for your second sidebar'),
-    '#default_value' => theme_get_setting('sidebar_second_width'),
-    '#options'       => $width_options,
-  );
-  $form['tnt_container']['general_settings']['theme_grid_config']['sidebar_second_width']['#options'][$defaults['sidebar_second_width']] .= t(' - Theme Default');
 
-  // Theme fonts
+  /**
+   * Typography
+   */
   $form['tnt_container']['general_settings']['theme_font_config'] = array(
     '#type' => 'fieldset',
     '#title' => t('Typography'),
@@ -157,7 +202,7 @@ function fusion_core_form_system_theme_settings_alter(&$form, $form_state) {
       'font-size-18' => t('18px'),
     ),
   );
-  $form['tnt_container']['general_settings']['theme_font_config']['theme_font_size']['#options'][$defaults['theme_font_size']] .= t(' - Theme Default');
+  $form['tnt_container']['general_settings']['theme_font_config']['theme_font_size']['#options'][$defaults['theme_font_size']] .= t(' (default)');
 
   // Navigation
   $form['tnt_container']['general_settings']['navigation'] = array(
@@ -167,13 +212,7 @@ function fusion_core_form_system_theme_settings_alter(&$form, $form_state) {
     '#collapsed' => TRUE,
   );
   // Breadcrumb
-  $form['tnt_container']['general_settings']['navigation']['breadcrumb'] = array(
-    '#type' => 'fieldset',
-    '#title' => t('Breadcrumb'),
-    '#collapsible' => TRUE,
-    '#collapsed' => TRUE,
-  );
-  $form['tnt_container']['general_settings']['navigation']['breadcrumb']['breadcrumb_display'] = array(
+  $form['tnt_container']['general_settings']['navigation']['breadcrumb_display'] = array(
     '#type' => 'checkbox',
     '#title' => t('Display breadcrumb'),
     '#default_value' => theme_get_setting('breadcrumb_display'),
@@ -220,20 +259,24 @@ function fusion_core_form_system_theme_settings_alter(&$form, $form_state) {
     );
   }
 
-  // Admin & developer settings
-  $form['tnt_container']['admin_dev_settings'] = array(
-    '#type' => 'fieldset',
-    '#title' => t('Administrator & developer settings'),
-    '#collapsible' => TRUE,
-    '#collapsed' => TRUE,
-  );
- $form['tnt_container']['admin_dev_settings']['grid_mask'] = array(
-    '#type' => 'checkbox',
-    '#title' => t('Enable grid overlay mask for administrators.'),
-    '#default_value' => theme_get_setting('grid_mask'),
-    '#description' => t('This setting enables a "GRID" button in the upper left corner of each page to toggle a grid overlay and block outlines, which can help with visualizing page layout and block positioning.'),
-  );
-
   // Return theme settings form
   return $form;
+}
+
+/**
+ * @param (string) $theme
+ *    Machine name of fusion theme.
+ * @return
+ *    Array of sidebar widths options.
+ */
+function fusion_core_get_width_options($theme) {
+  $grid_width = (int)substr(theme_get_setting('theme_grid', $theme), 4, 2);
+
+  $grid_type = substr(theme_get_setting('theme_grid', $theme), 7);
+  $width_options = array();
+  for ($i = 1; $i <= floor($grid_width / 2); $i++) {
+    $grid_units = $i . t(' of @total available units', array('@total'=>$grid_width));
+    $width_options[$i] = $grid_units;
+  }
+  return $width_options;
 }

@@ -61,7 +61,7 @@
 <!--[if IE 8]>
 <link type="text/css" rel="stylesheet" href="https://drupal.vectorbase.org/sites/all/themes/acquia_marina/css/ie8-fixes.css?lzp9by" media="all" />
 <![endif]-->
-  <script type="text/javascript" src="https://drupal.vectorbase.org/misc/jquery.js?v=1.4.4"></script>
+<script type="text/javascript" src="https://drupal.vectorbase.org/misc/jquery.js?v=1.4.4"></script>
 <script type="text/javascript" src="https://drupal.vectorbase.org/misc/jquery.once.js?v=1.2"></script>
 <script type="text/javascript" src="https://drupal.vectorbase.org/misc/drupal.js?lzp9by"></script>
 <script type="text/javascript" src="https://drupal.vectorbase.org/misc/jquery.cookie.js?v=1.0"></script>

@@ -1,0 +1,294 @@
+.inputything {
+    color: #000000;;
+    /* color: #781351; */
+    background: #FFF0D3;
+    /*background: #fee3ad;*/
+    border: 2px solid #93B967
+    /*border: 1px solid #781351 */
+}
+/*
+input
+{
+    color: #781351;
+    background: #fee3ad;
+    border: 1px solid #781351
+}
+
+.submit input
+{
+    color: #000;
+    background: #ffa20f;
+    border: 2px outset #d7b9c9
+} 
+*/
+/* CSS Document */
+.textInput1
+{
+border: 1px solid #ff0000;
+background: #555555;
+color: #ffffff;
+font-size: 1.1em;
+}
+
+.fieldHolder
+{
+width: 182px;
+height: 27px;
+background: url(tfbg2.gif) no-repeat;
+float: left;
+}
+
+.textInput2
+{
+width: 170px;
+height: 22px;
+background: none;
+border: none;
+color: #000000;
+margin-top: 5px;
+margin-left: 5px;
+}
+
+
+
+/* input.form-type-textfield { 
+.form-type-textfield {
+     color: #781351; 
+     background: #fee3ad;
+    foreground: #fee3ad; 
+     border: 1px solid #781351 
+}
+*/
+
+/*
+.textfield_effect {
+    border-width: 1px;
+    border-style: solid;
+    border-color: #999999;
+    background-image: url(back_field.gif);
+    background-repeat: repeat-x;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    color: #333333;
+    width: 200px;
+    height: 15px;
+}
+*/
+
+table.fancytable {
+    font: 16px verdana;
+	border-width: 4px;
+	border-spacing: 2px;
+	border-style: outset;
+	border-color: green;
+	border-collapse: separate;
+	/* background-color: white; */
+    background-color: rgb(255, 245, 238);
+    width: 600px;	
+}
+table.fancytable th {
+	border-width: 2px;
+	padding: 3px;
+	border-style: inset;
+	border-color: gray;
+    background-color: #DDE9D9;
+    /* background-color: rgb(250, 240, 230); */
+	/* background-color: white; */
+	-moz-border-radius: ;
+}
+table.fancytable td {
+	border-width: 2px;
+	padding: 3px;
+	border-style: inset;
+	border-color: gray;
+    background-color: #F7FCFF;
+	-moz-border-radius: ;
+}
+
+
+.info_msgbox, .success_msgbox, .warning_msgbox, .error {
+    border: 1px solid;
+    margin: 15px 0px;
+    padding:15px 20px 15px 55px;
+    width: 520px;	
+    /*width: 500px;	*/
+    font: bold 12px verdana;
+    -moz-box-shadow: 0 0 5px #888;
+    -webkit-box-shadow: 0 0 5px#888;
+    box-shadow: 0 0 5px #888;
+    text-shadow: 2px 2px 2px #ccc;
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    border-radius: 15px;
+}
+.info_msgbox {
+    color: #00529B;
+    background: #BDE5F8 url('icon-info.png') no-repeat 10px center;
+}
+.success_msgbox {
+    color: #4F8A10;
+    background: #DFF2BF url('icon-tick.png') no-repeat 10px center;
+}
+.warning_msgbox {
+    color: #9F6000;
+    background: #FEEFB3 url('icon-warning.png') no-repeat 10px center;
+}
+.error_msgbox {
+    color: #D8000C;
+    background: #FFBABA url('icon-cross.png') no-repeat 10px center;
+}
+
+
+ /* .box div holds the bottom image */
+  .msgbox {
+    
+    background: url(boxBottom3.jpg); 
+    background-repeat: no-repeat
+    background-attachment: scroll left bottom;
+    background-position: left bottom;
+    margin-bottom: 10px;
+    padding: 0 0 15px;
+    width: 600px;
+ }
+
+ /*  this is the title h3 tag and contains the background
+     image for the title	*/
+
+  .msgbox h3 {
+
+    background: url(box2.jpg) repeat scroll 0 0;
+    color: #000;
+    font-size: 17px;
+    height: 35px;
+    line-height: 30px;
+    margin: 0;
+    padding: 0 15px;
+  
+ }
+
+ /* The paragraph tag contains the side borders mark-up */
+
+ .msgbox p {
+
+    background: #FDFEC2 none repeat scroll 0 0;
+    border-color: #CCC;
+    border-width: 0 1px;
+    border-style: solid;
+    color: #444444;
+    font-size: 11px;
+    line-height: 1.3em;
+    margin: 0;
+    padding: 15px 14px 0;
+    width: 570px;
+ }
+  
+  .msgbox2 {
+    
+    background: url(boxBottom.jpg); 
+    background-repeat: no-repeat
+    background-attachment: scroll left bottom;
+    background-position: left bottom;
+    margin-bottom: 10px;
+    padding: 0 0 15px;
+    width: 250px;
+ }
+
+ /*  this is the title h3 tag and contains the background
+     image for the title	*/
+
+  .msgbox2 h3 {
+
+    background: url(box.jpg) repeat scroll 0 0;
+    color: #000;
+    font-size: 17px;
+    height: 35px;
+    line-height: 30px;
+    margin: 0;
+    padding: 0 15px;
+  
+ }
+
+ /* The paragraph tag contains the side borders mark-up */
+
+ .msgbox2 p {
+
+    background: #ffffff none repeat scroll 0 0;
+    border-color: #CCC;
+    border-width: 0 1px;
+    border-style: solid;
+    color: #444444;
+    font-size: 11px;
+    line-height: 1.3em;
+    margin: 0;
+    padding: 15px 14px 0;
+    width: 220px;
+ }
+  
+  .msgbox3 {
+    
+    background: url(boxBottom2.jpg); 
+    background-repeat: no-repeat
+    background-attachment: scroll left bottom;
+    background-position: left bottom;
+    margin-bottom: 10px;
+    padding: 0 0 15px;
+    width: 600px;
+ }
+
+ /*  this is the title h3 tag and contains the background
+     image for the title	*/
+
+  .msgbox3 h5 {
+
+    background: url(box2.jpg) repeat scroll 0 0;
+    color: #000;
+    font-size: 17px;
+    height: 35px;
+    line-height: 30px;
+    margin: 0;
+    padding: 0 15px;
+  
+ }
+
+ /* The paragraph tag contains the side borders mark-up */
+
+ .msgbox3 p {
+
+    background: #ffffff none repeat scroll 0 0;
+    border-color: #CCC;
+    border-width: 0 1px;
+    border-style: solid;
+    color: #444444;
+    font-size: 11px;
+    line-height: 1.3em;
+    margin: 0;
+    padding: 15px 14px 0;
+    width: 570px;
+ }
+  
+#customers {
+    font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;
+    width:600px;
+    /* width:65%; */
+    border-collapse:collapse;
+}
+
+#customers td, #customers th {
+    font-size:1.2em;
+    border:1px solid #98bf21;
+    padding:3px 7px 2px 7px;
+}
+
+#customers th {
+    font-size:1.4em;
+    text-align:left;
+    padding-top:5px;
+    padding-bottom:4px;
+    background-color:#A7C942;
+    color:#fff;
+}
+
+#customers tr.alt td {
+    color:#000;
+    background-color:#EAF2D3;
+}

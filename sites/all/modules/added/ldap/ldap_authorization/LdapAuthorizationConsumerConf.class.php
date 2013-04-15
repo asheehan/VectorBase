@@ -20,7 +20,7 @@ class LdapAuthorizationConsumerConf {
   public $consumerModule = NULL;
   public $consumer = NULL;
   public $inDatabase = FALSE;
-
+  public $numericConsumerConfId = NULL;
 
   public $description = NULL;
   public $status = NULL;
@@ -32,14 +32,22 @@ class LdapAuthorizationConsumerConf {
   public $deriveFromAttr = FALSE;
   public $deriveFromAttrAttr = NULL;
   public $deriveFromAttrUseFirstAttr = FALSE;
+  public $deriveFromAttrNested = FALSE;
 
   public $deriveFromEntry = FALSE;
   public $deriveFromEntryEntries = NULL;
-  public $deriveFromEntryAttr = NULL;
+  public $deriveFromEntryEntriesAttr = NULL;
+
+  public $deriveFromEntryMembershipAttr = NULL;
   public $deriveFromEntrySearchAll = FALSE;
+  public $deriveFromEntryAttrMatchingUserAttr = FALSE; // can be removed in 2.0 branch
+  public $deriveFromEntryAttrMatchingUserAttrUndefined = TRUE;
+  public $deriveFromEntryUseFirstAttr = FALSE;
+  public $deriveFromEntryNested = FALSE;
 
 
   public $mappings = array();
+  public $normalizedMappings = array(); // mappings in simples form.
   public $useMappingsAsFilter = TRUE;
 
   public $synchToLdap = FALSE;
@@ -74,34 +82,32 @@ class LdapAuthorizationConsumerConf {
       $this->inDatabase = TRUE;
       $this->loadFromDb();
     }
+    // default value for deriveFromEntryAttrMatchingUserAttr set up this way for backward compatibility in 1.0 branch,
+    // make deriveFromEntryAttrMatchingUserAttr default to dn in 2.0 branch.
+    if ($this->deriveFromEntryAttrMatchingUserAttr) {
+      $this->deriveFromEntryAttrMatchingUserAttrUndefined = FALSE;
+    }
+    else {
+      $this->deriveFromEntryAttrMatchingUserAttr = 'dn';
+      $this->deriveFromEntryAttrMatchingUserAttrUndefined = TRUE;
+    }
+    $this->normalizedMappings = $consumer->normalizeMappings($this->mappings);
   }
 
   protected function loadFromDb() {
-    if (module_exists('ctools')) {
+     if (module_exists('ctools')) {
       ctools_include('export');
-      if ($this->consumerType) {
-        $result = ctools_export_load_object('ldap_authorization', 'names', array($this->consumerType));
-      }
-      else {
-        $result = ctools_export_load_object('ldap_authorization', 'all');
-      }
+      $result = ctools_export_load_object('ldap_authorization', 'names', array($this->consumerType));
+
       // @todo, this is technically wrong, but I don't quite grok what we're doing in the non-ctools case - justintime
       $consumer_conf = array_pop($result);
       // There's no ctools api call to get the reserved properties, so instead of hardcoding a list of them
       // here, we just grab everything.  Basically, we sacrifice a few bytes of RAM for forward-compatibility.
-      if ($consumer_conf) {
-        foreach ($consumer_conf as $property => $value) {
-          $this->$property = $value;
-        }
-      }
     }
     else {
       $select = db_select('ldap_authorization', 'ldap_authorization');
       $select->fields('ldap_authorization');
-      if ($this->consumerType) {
-        $select->condition('ldap_authorization.consumer_type',  $this->consumerType);
-      }
-
+      $select->condition('ldap_authorization.consumer_type',  $this->consumerType);
       $consumer_conf = $select->execute()->fetchObject();
     }
 
@@ -112,25 +118,30 @@ class LdapAuthorizationConsumerConf {
 
     $this->sid = $consumer_conf->sid;
     $this->consumerType = $consumer_conf->consumer_type;
-    $this->description = $consumer_conf->description;
-    $this->status = (bool)$consumer_conf->status;
+    $this->numericConsumerConfId = isset($consumer_conf->numeric_consumer_conf_id)? $consumer_conf->numeric_consumer_conf_id : NULL;
+    $this->status = ($consumer_conf->status) ? 1 : 0;
     $this->onlyApplyToLdapAuthenticated  = (bool)(@$consumer_conf->only_ldap_authenticated);
 
     $this->deriveFromDn  = (bool)(@$consumer_conf->derive_from_dn);
-    $this->deriveFromDnAttr = $consumer_conf->derive_from_dn_attr;
+    $this->deriveFromDnAttr = isset($consumer_conf->derive_from_dn_attr) ? $consumer_conf->derive_from_dn_attr : NULL;
 
-    $this->deriveFromAttr  = (bool)($consumer_conf->derive_from_attr);
+    $this->deriveFromAttr  = (bool)(@$consumer_conf->derive_from_attr);
     $this->deriveFromAttrAttr =  $this->linesToArray($consumer_conf->derive_from_attr_attr);
-    $this->deriveFromAttrUseFirstAttr  = (bool)($consumer_conf->derive_from_attr_use_first_attr);
-    $this->deriveFromEntrySearchAll = (bool)($consumer_conf->derive_from_entry_search_all);
-
+    $this->deriveFromAttrUseFirstAttr  = (bool)(@$consumer_conf->derive_from_attr_use_first_attr);
+    $this->deriveFromAttrNested  = (bool)(@$consumer_conf->derive_from_attr_nested);
 
     $this->deriveFromEntry  = (bool)(@$consumer_conf->derive_from_entry);
     $this->deriveFromEntryEntries = $this->linesToArray($consumer_conf->derive_from_entry_entries);
-    $this->deriveFromEntryAttr = $consumer_conf->derive_from_entry_attr;
+    $this->deriveFromEntryEntriesAttr = isset($consumer_conf->derive_from_entry_entries_attr) ? $consumer_conf->derive_from_entry_entries_attr : NULL;
 
-    $this->mappings = $this->pipeListToArray($consumer_conf->mappings);
-    $this->useMappingsAsFilter  = (bool)(@$consumer_conf->use_filter);
+    $this->deriveFromEntryMembershipAttr = $consumer_conf->derive_from_entry_attr;
+    $this->deriveFromEntryAttrMatchingUserAttr = isset($consumer_conf->derive_from_entry_user_ldap_attr) ? $consumer_conf->derive_from_entry_user_ldap_attr : NULL;
+    $this->deriveFromEntrySearchAll = (bool)(@$consumer_conf->derive_from_entry_search_all);
+    $this->deriveFromEntryUseFirstAttr  = (bool)(@$consumer_conf->derive_from_entry_use_first_attr);
+    $this->deriveFromEntryNested = isset($consumer_conf->derive_from_entry_nested) ? $consumer_conf->derive_from_entry_nested : NULL;
+
+    $this->mappings = $this->pipeListToArray($consumer_conf->mappings, FALSE);
+    $this->useMappingsAsFilter = (bool)(@$consumer_conf->use_filter);
 
     $this->synchToLdap = (bool)(@$consumer_conf->synch_to_ldap);
     $this->synchOnLogon = (bool)(@$consumer_conf->synch_on_logon);
@@ -153,18 +164,26 @@ class LdapAuthorizationConsumerConf {
   protected $saveable = array(
     'sid',
     'consumerType',
-    'description',
     'status',
     'onlyApplyToLdapAuthenticated',
+
     'deriveFromDn',
     'deriveFromDnAttr',
+
     'deriveFromAttr',
     'deriveFromAttrAttr',
     'deriveFromAttrUseFirstAttr',
+    'deriveFromAttrNested',
+
     'deriveFromEntry',
     'deriveFromEntryEntries',
-    'deriveFromEntryAttr',
+    'deriveFromEntryEntriesAttr',
+    'deriveFromEntryMembershipAttr',
     'deriveFromEntrySearchAll',
+    'deriveFromEntryAttrMatchingUserAttr',
+    'deriveFromEntryUseFirstAttr',
+    'deriveFromEntryNested',
+
     'mappings',
     'useMappingsAsFilter',
     'synchToLdap',
@@ -193,14 +212,13 @@ class LdapAuthorizationConsumerConf {
   }
 
 
-
-
-  protected function pipeListToArray($mapping_list_txt) {
+  protected function pipeListToArray($mapping_list_txt, $make_item0_lowercase = FALSE) {
     $result_array = array();
     $mappings = preg_split('/[\n\r]+/', $mapping_list_txt);
     foreach ($mappings as $line) {
       if (count($mapping = explode('|', trim($line))) == 2) {
-        $result_array[] = array(trim($mapping[0]), trim($mapping[1]));
+        $item_0 = ($make_item0_lowercase) ? drupal_strtolower(trim($mapping[0])) : trim($mapping[0]);
+        $result_array[] = array($item_0, trim($mapping[1]));
       }
     }
     return $result_array;

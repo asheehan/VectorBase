@@ -31,8 +31,24 @@ ul, ol, dd {
   margin-right: 2em;
 }
 
+/* ordered list margin fix for IE6 & IE7 */
+.ie6 .block ol,
+.ie7 .block ol {
+  margin-right: 2em;
+}
+
 .block ul.links {
   margin-right: 0;
+}
+
+/* broken content menu layout fix for IE7 */
+.ie7 #content-tabs .content-tabs-inner {
+  overflow: hidden;
+}
+
+/* broken content menu layout fix for IE7 */
+.ie7 #content-tabs .content-tabs-inner ul.tabs {
+  width: 100%;
 }
 
 /* remove left margin from main menu list */
@@ -177,6 +193,12 @@ div.fusion-right {
   margin-right: 0;
 }
 
+/* adjust openid link for IE6 */
+html.ie6 #user-login-form li.openid-processed,
+html.ie6 #user-login li.openid-processed {
+  padding-right: 6px;
+}
+
 /* Horizontal login form (Skinr selectable) */
 .fusion-horiz-login#block-user-login {
   float: left;
@@ -210,4 +232,11 @@ html.js .fusion-horiz-login#block-user-login #user-login-form div#edit-openid-id
 .fusion-horiz-login#block-user-login #edit-openid-identifier-wrapper .description {
   padding-left: 5px;
   text-align: left;
+}
+
+/* prevent "What is OpenID?" from breaking layout in IE6 & IE7 */
+.ie6 .fusion-horiz-login #block-user-login #edit-openid-identifier-wrapper .description,
+.ie7 .fusion-horiz-login #block-user-login #edit-openid-identifier-wrapper .description {
+  left: 3px;
+  right: auto;
 }

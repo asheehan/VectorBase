@@ -1,0 +1,134 @@
+.searchButton{
+padding:0px,
+}
+
+
+#block-search-form{
+ float:right;
+ clear:none;
+ margin-top:10px;
+ text-align:right;
+ width:320px; /* old value */
+ padding-left:6px;
+width:auto;
+}
+
+#edit-keys{
+  width: 400px;
+}
+
+
+input[name=search_block_form]{
+  background: url(/sites/all/themes/acquia_marina/search-white.png) no-repeat 10px 6px #fcfcfc;
+  border: 1px solid #d1d1d1;
+  
+/*
+  font: bold 12px Arial,Helvetica,Sans-serif;
+  color: #bebebe;
+*/
+  color: black;
+
+  width: 200px;
+  padding: 6px 15px 6px 6px;
+
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  border-radius: 20px;
+
+  -webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.15);
+  -moz-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.15);
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.15);
+
+  margin:0;
+font-size:130%;
+}
+
+
+/*
+input[name=search_block_form]:focus {
+ width: 200px;
+}
+*/
+
+
+input[name=keys]{
+  background: url(/sites/all/themes/acquia_marina/search-white.png) no-repeat 10px 6px #fcfcfc;
+  border: 1px solid #d1d1d1;
+/*
+  font: bold 12px Arial,Helvetica,Sans-serif;
+  color: #bebebe;
+  color: black;
+*/
+  width: 300px;
+  padding: 6px 15px 6px 35px;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  border-radius: 20px;
+  text-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+  -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15) inset;
+  -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15) inset;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15) inset;
+  margin:0;
+  font-size:130%;
+}
+
+label[for=edit-keys]{
+  font-size:130%;
+}
+
+
+input[value=Search]{
+  visibility: visible;
+}
+
+
+
+label[for=edit-search-block-form--2]{
+display:none;
+}
+
+#search-inner > div.form-item {
+    float: center;
+    vertical-align: middle;
+}
+
+#search-inner > div.form-actions {
+    float: center;
+    vertical-align: middle;
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+.search_result_item {
+	width:100%; overflow:auto;border-top: 1px solid gray; padding:5px 0;
+}
+
+.search_result_item_detail {
+	float:right;margin: 0 0 10px 10px;width:200px;
+}
+
+.search_result_item p {
+	margin:0; padding:2px;
+}
+
+.search_result_item p span {
+	color:black;font-weight:bold;
+}
+
+.search_filter_box {
+float:left; width:25%;padding:5px;border:1px solid #336699;margin-top: 10px;background-color:#f6f6e7;
+
+}
+
+.search_filter_box table {
+	margin-top:10px;
+}
+
+.search_filter_box_header {
+	width:80%;
+}
+
+.search_filter_reset {
+	font-size:12px; font-weight:normal;
+}
+

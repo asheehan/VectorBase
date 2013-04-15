@@ -1,0 +1,8 @@
+name = Stuff
+description = more stuff
+core = 7.x
+files[] = ribeiro.module
+files[] = ribeiro.install
+version = "7.x-3.x-dev"
+
+

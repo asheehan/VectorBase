@@ -16,6 +16,7 @@ img, abbr, acronym {
 
 /* HTML Elements
 -------------------------------------------------------------- */
+
 p {
   margin: 1em 0;
 }
@@ -160,7 +161,6 @@ tr.drag-previous td {
 }
 
 /* clear floats after an element */
-/* (also in ie7-fixes.css) */
 .clearfix:after,
 .clearfix .inner:after {
   clear: both;
@@ -173,6 +173,20 @@ tr.drag-previous td {
   visibility: hidden;
 }
 
+/* additional clearfix styles for IE6 */
+.ie6 .clearfix,
+.ie6 .clearfix .inner {
+  display: block;
+  height: 1%;
+}
+
+/* additional clearfix styles for IE7 */
+.ie7 .clearfix,
+.ie7 .clearfix .inner {
+  zoom: 1;
+}
+
+
 
 /* Grid Layout Basics (specifics in 'gridnn_x.css')
 -------------------------------------------------------------- */
@@ -181,15 +195,6 @@ tr.drag-previous td {
 .region {
   margin: 0 auto;
 }
-
-/* fix background display on floated elements */
-/* OVERFLOW FIX DISABLED. REMOVE IF IT TURNS OUT IT'S NOT NEEDED FOR D7 FUSION
-.region,
-.nested,
-.block {
-  overflow: hidden;
-}
-*/
 
 /* full-width region wrapper */
 div.full-width {
@@ -203,14 +208,11 @@ div.full-width {
   width: 100%;
 }
 
-/* allow Superfish menus to overflow */
-/* OVERFLOW FIX DISABLED. REMOVE IF IT TURNS OUT IT'S NOT NEEDED FOR D7 FUSION
-#sidebar-first.nested,
-#sidebar-second.nested,
-div.superfish {
-  overflow: visible;
+/* fix double-margin bug in IE6 */
+.ie6 .block, 
+.ie6 .nested {
+  display: inline;
 }
-*/
 
 /* sidebar layouts */
 .sidebars-both-first .content-group {
@@ -221,64 +223,21 @@ div.superfish {
   float: right; /* LTR */
 }
 
-/* Grid Mask Overlay
--------------------------------------------------------------- */
-#grid-mask-overlay {
-  display: none;
-  left: 0;
-  opacity: 0.75;
-  position: absolute;
-  top: 0;
-  width: 100%;
-  z-index: 997;
+/* fluid: fix skipped % margin inherit bug in IE6*/
+.ie6 .grid-type-fluid .sidebar-first-inner,
+.ie6 .grid-type-fluid .sidebar-second-inner {
+  zoom: 1;
 }
 
-#grid-mask-overlay .region {
-  margin: 0 auto;
+/* fluid: fix list shift-on-hover bug in iE6 */
+.ie6 .grid-type-fluid .block {
+  height: 1%;
 }
 
-#grid-mask-overlay .block .gutter {
-  background-color: #e3fffc;
-  outline: none;
+/* fluid: fix list shift-on-hover bug in IE7*/
+.ie7 .grid-type-fluid .block-wrapper {
+  height: 1%;
 }
-
-.grid-mask #grid-mask-overlay {
-  display: block;
-}
-
-/* OVERFLOW FIX DISABLED. REMOVE IF IT TURNS OUT IT'S NOT NEEDED FOR D7 FUSION
-.grid-mask .block {
-  margin-bottom: 0;
-  overflow: visible;
-}
-*/
-
-.grid-mask .block .gutter {
-  outline: #f00 dashed 1px;
-}
-
-#grid-mask-toggle {
-  background-color: #777;
-  border: 2px outset #fff;
-  color: #fff;
-  cursor: pointer;
-  font-variant: small-caps;
-  font-weight: normal;
-  left: 0;
-  -moz-border-radius: 5px;
-  padding: 0 5px 2px 5px;
-  position: absolute;
-  text-align: center;
-  top: 30px;
-  -webkit-border-radius: 5px;
-  z-index: 998;
-}
-
-#grid-mask-toggle.grid-on {
-  border-style: inset;
-  font-weight: bold;
-}
-
 
 /* Site Info
 -------------------------------------------------------------- */
@@ -341,6 +300,18 @@ div.superfish {
 /* Drupal Core
 /-------------------------------------------------------------- */
 
+/* Content tabs
+/-------------------------------------------------------------- */
+
+/* fix tab layout in IE6*/
+.ie6 div#content-tabs,
+.ie6 div#content-tabs ul.primary,
+.ie6 div#content-tabs ul.secondary {
+  display: block;
+  float: none;
+  height: 1%;
+}
+
 /* Lists
 /-------------------------------------------------------------- */
 .item-list ul li {
@@ -351,6 +322,12 @@ div.superfish {
 .block ol {
   margin-left: 2em; /* LTR */
   padding: 0;
+}
+
+/* ordered list margin fix in IE6 & IE7 */
+.ie6 .block ol,
+.ie7 .block ol {
+  margin-left: 2em;
 }
 
 .content-inner ul,
@@ -377,21 +354,20 @@ ul.links li {
 
 /* Main Menu
 /-------------------------------------------------------------- */
-/* use ID to override overflow: hidden for .block, dropdowns should always be visible */
-/* OVERFLOW FIX DISABLED. REMOVE IF IT TURNS OUT IT'S NOT NEEDED FOR D7 FUSION
-#main-menu {
-  overflow: visible;
+/* This corrects an issue with excess space above (yes, above) the menu.
+ * For more information: http://drupal.org/node/1340348 */
+.region-main-menu ul {
+  margin-bottom: 0;
 }
-*/
 
 /* hide block titles in the main menu region, accessible to screen readers */
-#main-menu h2.block-title {
+#main-menu .block-menu h2.block-title {
   height: 0;
   overflow: hidden;
   position: absolute;
 }
 
-/* hide child menu items by default -- override with Superfish skin */
+/* hide child menu items by default */
 .region-main-menu ul.menu ul {
   display: none;
 }
@@ -430,11 +406,21 @@ ul.links li {
   outline: 0;
 }
 
+/* main menu dropping behind other menus fix in IE6 & IE7*/
+.ie6 .main-menu,
+.ie7 .main-menu {
+  z-index: 20;
+}
 
-/* Skinr styles
+/* fix main menu dropping behind content below in IE7 */
+.ie7 .main-menu .main-menu-inner {
+  position: static;
+}
+
+/* Fusion Apply skin styles
 /-------------------------------------------------------------- */
 
-/* Skinr selectable helper classes */
+/* selectable helper classes */
 .fusion-clear {
   clear: both;
 }
@@ -456,6 +442,17 @@ div.fusion-center {
 .fusion-center-content .inner ul.menu {
   display: inline-block;
   text-align: center;
+}
+
+/* fix for inline-block centering in IE6 & IE7 */
+.ie6 .fusion-center-content .inner ul.menu,
+.ie7 .fusion-center-content .inner ul.menu {
+  display: inline-block;
+}
+
+.ie6 .fusion-center-content .inner ul.menu,
+.ie7 .fusion-center-content .inner ul.menu {
+  display: inline;
 }
 
 /* required to override drupal core */
@@ -720,6 +717,12 @@ html.js fieldset.collapsed {
   margin-bottom: 15px;
 }
 
+/* limit legend width to text length in IE6 & IE7*/
+.ie6 form fieldset legend,
+.ie7 form fieldset legend {
+  display: inline-block !important;
+}
+
 /* limit width of form inputs */
 textarea,
 .form-item input,
@@ -800,7 +803,13 @@ fieldset.collapsible .resizable-textarea .grippie {
   padding: 0 0 0 20px;
 }
 
-/* User Login Form - Horizontal (Skinr selectable)
+/* adjust openid link for IE6 */
+html.ie6 #user-login-form li.openid-processed,
+html.ie6 #user-login li.openid-processed {
+  padding-left: 6px;
+}
+
+/* User Login Form - Horizontal (Fusion Apply selectable)
 /-------------------------------------------------------------- */
 .fusion-horiz-login#block-user-login {
   margin: 20px 0 10px 0;
@@ -828,12 +837,29 @@ html.js .fusion-horiz-login#block-user-login {
   text-align: center;
 }
 
+/* reduce button size for IE6 */
+.ie6 .fusion-horiz-login #block-user-login #user-login-form input.form-submit {
+  padding: 0 7px;
+  position: relative;
+}
+
+/* reduce button size for IE7*/
+.ie7 .fusion-horiz-login #block-user-login #user-login-form input.form-submit {
+  padding: 0 7px;
+}
+
 .fusion-horiz-login#block-user-login #user-login-form div.form-item {
   width: 115px;
 }
 
 .fusion-horiz-login#block-user-login #user-login-form label {
   margin: -20px 0 0 2px;
+}
+
+/* fix positioning bugs in IE6 & IE7 */
+.ie6 .fusion-horiz-login #block-user-login #user-login-form label,
+.ie7 .fusion-horiz-login #block-user-login #user-login-form label {
+  position: relative;
 }
 
 html.js .fusion-horiz-login#block-user-login #user-login-form label {
@@ -856,6 +882,12 @@ html.js .fusion-horiz-login#block-user-login #user-login-form label {
 .fusion-horiz-login#block-user-login .item-list ul {
   margin: 0;
   padding: 0;
+}
+
+/* eliminate list item leading spacing for IE6 & IE7 */
+.ie6 .fusion-horiz-login #block-user-login .item-list ul ,
+.ie7 .fusion-horiz-login #block-user-login .item-list ul {
+  list-style-position: outside;
 }
 
 .fusion-horiz-login#block-user-login .item-list li {
@@ -885,6 +917,12 @@ html.js .fusion-horiz-login#block-user-login #user-login-form label {
   width: 145px;
 }
 
+/* prevent "What is OpenID?" from breaking layout in IE6 & IE7 */
+.ie6 .fusion-horiz-login #block-user-login #edit-openid-identifier-wrapper,
+.ie7 .fusion-horiz-login #block-user-login #edit-openid-identifier-wrapper  {
+  position: relative;
+}
+
 .fusion-horiz-login#block-user-login #user-login-form input#edit-openid-identifier.form-text {
   width: 135px;
 }
@@ -898,6 +936,13 @@ html.js .fusion-horiz-login#block-user-login #user-login-form div#edit-openid-id
   text-align: right;
 }
 
+/* prevent "What is OpenID?" from breaking layout in IE6 & IE7 */
+.ie6 .fusion-horiz-login #block-user-login #edit-openid-identifier-wrapper .description,
+.ie7 .fusion-horiz-login #block-user-login #edit-openid-identifier-wrapper .description {
+  right: 3px;
+  position: absolute;
+  top: 20px;
+}
 
 /* Blocks
 /-------------------------------------------------------------- */

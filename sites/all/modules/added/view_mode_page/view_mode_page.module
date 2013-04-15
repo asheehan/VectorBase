@@ -1,0 +1,318 @@
+<?php
+/**
+ * @file
+ * View Mode Page module allows users to add a page for a specific view mode.
+ */
+
+/**
+ * Implements hook_features_api().
+ */
+function view_mode_page_features_api() {
+  return array(
+    'view_mode_page_pattern' => array(
+      'name' => t('View mode page'),
+      'file' => drupal_get_path('module', 'view_mode_page') . '/view_mode_page.features.inc',
+      'default_hook' => 'view_mode_page_pattern_default',
+      'features_source' => TRUE,
+    ),
+  );
+}
+
+/**
+ * Implements hook_page_alter().
+ *
+ * Add the tab to additional settings.
+ */
+function view_mode_page_form_alter(&$form, $form_state, $form_id) {
+  $is_node_page = isset($form['#entity_type']) && $form['#entity_type'] == 'node';
+  $is_display_overview = isset($form['#id']) && $form['#id'] == 'field-ui-display-overview-form';
+  if (!$is_node_page || ($is_node_page && !$is_display_overview)) {
+    return;
+  }
+
+  // Add additional settings vertical tab, if it does not currently exist.
+  // This code was borrowed from display suite
+  if (!isset($form['additional_settings'])) {
+    $form['additional_settings'] = array(
+      '#type' => 'vertical_tabs',
+      '#theme_wrappers' => array('vertical_tabs'),
+      '#prefix' => '<div>',
+      '#suffix' => '</div>',
+      '#tree' => TRUE,
+    );
+    $form['#attached']['js'][] = 'misc/form.js';
+    $form['#attached']['js'][] = 'misc/collapse.js';
+  }
+
+  // Add tab to the additional_settings.
+  $form['additional_settings']['view_mode_page_settings'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('View mode pages'),
+    '#collapsible' => TRUE,
+    '#collapsed' => TRUE,
+    '#weight' => 10
+  );
+
+  $form['additional_settings']['view_mode_page_settings']['view_mode_page_url_pattern'] = array(
+    '#type' => 'textfield',
+    '#title' => t('URL Pattern'),
+    '#description' => t('Provide a URL pattern for the page that will display view mode'),
+  );
+  $form['additional_settings']['view_mode_page_settings']['view_mode_page_show_title'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Show title on the view mode page'),
+    '#description' => t('This option will show the title on the view mode page. By default, this will be the node title or the title provided below')
+  );
+  $form['additional_settings']['view_mode_page_settings']['view_mode_page_title'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Title'),
+    '#maxlength' => 200,
+    '#description' => 'Specify an alternate title for the view mode page. You may include tokens as they relate to the node (e.g., <code>[node:title]</code>). <strong>The show title option must be on for this to show up!</strong>'
+  );
+
+  // Get the value from the database and set it here.
+  $definitions = view_mode_page_get_patterns($form['#bundle'], $form['#view_mode']);
+  if (isset($definitions[0])) {
+    $form['additional_settings']['view_mode_page_settings']['view_mode_page_url_pattern']['#default_value'] = $definitions[0]->url_pattern;
+    $form['additional_settings']['view_mode_page_settings']['view_mode_page_show_title']['#default_value'] = $definitions[0]->show_title;
+    $form['additional_settings']['view_mode_page_settings']['view_mode_page_title']['#default_value'] = $definitions[0]->title;
+  }
+
+  $form['#submit'][] = 'view_mode_page_form_submit';
+}
+
+/**
+ * Implements hook_form_submit().
+ *
+ * Form submit handler for saving view mode page patterns.
+ */
+function view_mode_page_form_submit($form, &$form_state) {
+  $content_type = $form['#bundle'];
+  $view_mode = $form['#view_mode'];
+  if (isset($form_state['values']['additional_settings']['view_mode_page_settings']['view_mode_page_url_pattern'])) {
+    view_mode_page_delete_patterns($content_type, $view_mode);
+    view_mode_page_add_pattern(
+      $content_type,
+      $view_mode,
+      $form_state['values']['additional_settings']['view_mode_page_settings']['view_mode_page_url_pattern'],
+      $form_state['values']['additional_settings']['view_mode_page_settings']['view_mode_page_show_title'],
+      $form_state['values']['additional_settings']['view_mode_page_settings']['view_mode_page_title']
+    );
+    menu_rebuild();
+  }
+}
+
+/**
+ * Implements hook_menu_alter().
+ */
+function view_mode_page_menu_alter(&$items) {
+  $page_definitions = view_mode_page_get_patterns();
+  foreach ($page_definitions as $page) {
+    $pattern = $page->url_pattern;
+    $content_type = $page->content_type;
+    $view_mode = $page->view_mode;
+    $show_title = $page->show_title;
+    $title = $page->title;
+
+    // Define or redefine our page.
+    $page = array();
+    if (isset($items[$pattern])) {
+      $page = $items[$pattern];
+    }
+
+    $page['page callback'] = 'view_mode_page_change_view_mode';
+    $page['page arguments'] = array($content_type, $view_mode, $pattern, $show_title, $title);
+
+    if (!isset($page['access arguments'])) {
+      $page['access arguments'] = array('access content');
+    }
+
+    $items[$pattern] = $page;
+  }
+}
+
+/**
+ * Render the node with the given view mode.
+ *
+ * @param string $content_type
+ *   The name of the content type that the pattern is used for.
+ * @param string $view_mode
+ *   The name of the view mode.
+ * @param string $pattern
+ *   The URL pattern that is used in the hook_menu() call.
+ */
+function view_mode_page_change_view_mode($content_type, $view_mode, $pattern, $show_title = FALSE, $title = '') {
+  // If the args are simply node/N we can get the node ID that way.
+  if (arg(0) == 'node' && is_numeric(arg(1))) {
+    $nid = arg(1);
+  }
+  else {
+    // This is an alias, so we need to lookup the path of the node based on
+    // the pattern
+    //
+    // To do this, we look at the url_pattern for our view_mode_page and find
+    // what position the wildcard is in. based on this we can figure out what
+    // section of the path is likely the url/alias for the node.
+    $pattern_array = explode('/', $pattern);
+    $url_array = arg();
+
+    // Find the wildcard position in the pattern.
+    $wildcard_positions = array_keys($pattern_array, '%');
+    $wildcard_position = array_pop($wildcard_positions) + 1;
+
+    // Create the node url/alias based on the wildcard position.
+    $node_url = implode('/', array_slice($url_array, 0, $wildcard_position));
+
+    // Look that up...
+    $source_path = drupal_lookup_path('source', $node_url);
+    if (!$source_path) {
+      return drupal_not_found();
+    }
+
+    // Parse out the nid.
+    $source_path_array = explode('/', $source_path);
+    $nid = array_pop($source_path_array);
+  }
+
+  $node = node_load($nid);
+
+  // Check that we only use this on the specified content types.
+  if ($node->type != $content_type) {
+    return drupal_not_found();
+  }
+
+  $node = module_invoke_all('view_mode_page_pre_view', $node, $content_type, $view_mode, $pattern);
+  $node = $node[0];
+  $view = node_view($node, $view_mode);
+  if ($show_title) {
+    if (!$title && isset($node->title)) {
+      $title = $node->title;
+    }
+    $tokenData = array('node' => $node);
+    $title = token_replace($title, $tokenData);
+    drupal_set_title($title);
+  }
+  $view = module_invoke_all('view_mode_page_post_view', $node, $view, $content_type, $view_mode, $pattern);
+  return $view;
+}
+
+/**
+ * Add a URL pattern to the database.
+ *
+ * This does not add the pattern to the menu_router table, but only
+ * adds it to the View Mode Page table.
+ *
+ * @param string $content_type
+ *   The name of the content type that the pattern is used for.
+ * @param string $view_mode
+ *   The name of the view mode.
+ * @param string $pattern
+ *   The URL pattern that is used in the hook_menu() call.
+ */
+function view_mode_page_add_pattern($content_type, $view_mode, $pattern, $show_title = FALSE, $title = '') {
+  $query = db_insert('view_mode_page');
+  $result = $query->fields(array(
+      'content_type' => $content_type,
+      'view_mode' => $view_mode,
+      'url_pattern' => $pattern,
+      'show_title' => intval($show_title),
+      'title' => $title
+    ))->execute();
+
+  module_invoke_all('view_mode_page_pattern_added', $content_type, $view_mode, $pattern, $result);
+  return $result;
+}
+
+/**
+ * Delete URL patterns from the database.
+ *
+ * The query may be used with no arguments or with one or more arguments.
+ * Each argument increases the specificity of the delete process.
+ *
+ * This does not necessarily effect the patterns saved in the menu_router
+ * table. It only removes the patterns from the View Mode Page table.
+ *
+ * @param string $content_type
+ *   The name of the content type that the pattern is used for.
+ * @param string $view_mode
+ *   The name of the view mode.
+ * @param string $pattern
+ *   The URL pattern that is used in the hook_menu() call.
+ */
+function view_mode_page_delete_patterns($content_type = NULL, $view_mode = NULL, $pattern = NULL) {
+  $query = db_delete('view_mode_page');
+
+  if ($content_type) {
+    $query->condition('content_type', $content_type, '=');
+  }
+
+  if ($view_mode) {
+    $query->condition('view_mode', $view_mode, '=');
+  }
+
+  if ($pattern) {
+    $query->condition('url_pattern', $pattern, '=');
+  }
+
+  $result = $query->execute();
+  module_invoke_all('view_mode_page_patterns_deleted', $content_type, $view_mode, $pattern);
+  return $result;
+}
+
+/**
+ * Get URL patterns.
+ *
+ * @param string $content_type
+ *   Optional limit to a specific content type.
+ * @param string $view_mode
+ *   Optionally limit to a specific view_mode.
+ */
+function view_mode_page_get_patterns($content_type = NULL, $view_mode = NULL) {
+  $query = db_select('view_mode_page');
+  $query->fields('view_mode_page');
+
+  if ($content_type) {
+    $query->condition('content_type', $content_type, '=');
+  }
+
+  if ($view_mode) {
+    $query->condition('view_mode', $view_mode, '=');
+  }
+
+  $results = $query->execute()->fetchAll();
+  $results = module_invoke_all('view_mode_page_get_patterns', $results, $content_type, $view_mode);
+  return $results;
+}
+
+/**
+ * Implements hook_view_mode_page_get_patterns().
+ */
+function view_mode_page_view_mode_page_get_patterns($results, $content_type, $view_mode) {
+  return $results;
+}
+
+/**
+ * Implements hook_view_mode_page_pre_view().
+ */
+function view_mode_page_view_mode_page_pre_view($node, $content_type, $view_mode, $pattern) {
+  return $node;
+}
+
+/**
+ * Implements hook_view_mode_page_post_view().
+ */
+function view_mode_page_view_mode_page_post_view($node, $view, $content_type, $view_mode, $pattern) {
+  return $view;
+}
+
+/**
+ * Implements hook_view_mode_page_pattern_added().
+ */
+function view_mode_page_view_mode_page_pattern_added($content_type, $view_mode, $pattern, $result) {
+}
+
+/**
+ * Implements hook_view_mode_page_patterns_deleted().
+ */
+function view_mode_page_view_mode_page_patterns_deleted($content_type = NULL, $view_mode = NULL, $pattern = NULL) {
+}

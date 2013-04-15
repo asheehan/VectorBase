@@ -1,0 +1,685 @@
+<?php
+
+/**
+ * @file
+ * VectorBase's blast module
+ *
+*/
+
+
+function blast_block_view($op='list', $delta=0, $edit=array()){
+  // draw block
+  $blocks['subject'] = t('BLAST blockView subject goes here');
+  $blocks['content'] = drupal_get_form('ajax_blast_genform');
+  return $blocks;
+}
+
+
+function ajax_blast_genform($form, &$form_state) {
+  $form['blast'] = array(
+    '#type' => 'blast'
+  );
+
+  $form['blast']['sequence'] = array(
+    '#type' => 'textarea',
+//    '#description' => t("Thoughts, questions, or suggestions"),
+    '#resizable' => FALSE,
+    '#rows' => 8,
+    '#cols' => 50,
+    '#attributes' => array('placeholder' => 'Paste your sequences here',
+    	'onmouseout'=>'isFastaNucleotide(this)')
+  );
+
+
+	$form['blast']['parameters'] = array(
+        '#type' => 'fieldset',
+        '#title' => t('Parameters'),
+        '#collapsible' => TRUE,
+        '#collapsed' => TRUE,
+	);
+
+  $form['blast']['parameters']['type'] = array(
+    '#type' => 'radios',
+    '#title' => t('Sequence Type'),
+    '#options' => array(
+    		'DNA'		 =>t('DNA'),
+    		'PROTEIN' =>t('Protein')),
+    '#default_value' => 'DNA'
+  );
+
+	$form['blast']['parameters']['alignment'] = array(
+		'#type' => 'radios',
+		'#title' => t('Pairwise Alignment'),
+		'#options' => array(
+			'full' => t('Full'), // -ALIGN
+			'fast' => t('Fast')), // null
+		'#default_value' => 'full'
+	);
+
+	$form['blast']['parameters']['pairwise'] = array(
+        '#type' => 'fieldset',
+        '#title' => t('Pairwise Alignment'),
+        '#collapsible' => TRUE,
+	);
+
+
+/*
+***Fast Pairwise Alignments:***
+-KTUPLE=n    :word size
+-TOPDIAGS=n  :number of best diags.
+-WINDOW=n    :window around best diags.
+-PAIRGAP=n   :gap penalty
+-SCORE       :PERCENT or ABSOLUTE
+*/
+	$form['blast']['parameters']['pairwise']['fast'] = array(
+        '#type' => 'fieldset',
+        '#title' => t('Fast'),
+        '#states' => array(
+        	 'visible' => array(
+        	 	  ':input[name="alignment"]' => array('value' => 'fast'),
+        	 	),
+        	),
+	);
+	$form['blast']['parameters']['pairwise']['fast']['wordSize'] = array(
+		'#type' => 'textfield',
+		'#title' => t('K-tuple (word) Size'),
+		'#default_value' => '',
+		'#size' => 2, 
+		'#maxlength' => 3
+	);
+	$form['blast']['parameters']['pairwise']['fast']['window'] = array(
+		'#type' => 'textfield',
+		'#title' => t('Window Size'),
+		'#default_value' => '',
+		'#size' => 2, 
+		'#maxlength' => 3
+	);
+	$form['blast']['parameters']['pairwise']['fast']['gapPenalty'] = array(
+		'#type' => 'textfield',
+		'#title' => t('Gap Penalty'),
+		'#default_value' => '',
+		'#size' => 2, 
+		'#maxlength' => 3
+	);
+	$form['blast']['parameters']['pairwise']['fast']['diagonals'] = array(
+		'#type' => 'textfield',
+		'#title' => t('Number of Top Diagonals'),
+		'#default_value' => '',
+		'#size' => 2, 
+		'#maxlength' => 3
+	);
+	$form['blast']['parameters']['pairwise']['fast']['scoringMethod'] = array(
+		'#type' => 'radios',
+		'#title' => t('Scoring Method'),
+		'#options' => array(
+			'percent' => t('Percent'),
+			'absolute' => t('Absolute'),
+			),
+		'#default_value' => 'percent'
+
+	);
+
+
+/*
+***Slow Pairwise Alignments:***
+-PWMATRIX=    :Protein weight matrix=BLOSUM, PAM, GONNET, ID or filename
+-PWDNAMATRIX= :DNA weight matrix=IUB, blast or filename
+-PWGAPOPEN=f  :gap opening penalty        
+-PWGAPEXT=f   :gap opening penalty
+*/
+	$form['blast']['parameters']['pairwise']['full'] = array(
+        '#type' => 'fieldset',
+        '#title' => t('Full'),
+        '#states' => array(
+        	 'visible' => array(
+        	 	  ':input[name="alignment"]' => array('value' => 'full'),
+        	 	),
+        	),
+	);
+	$form['blast']['parameters']['pairwise']['full']['pwProteinMatrix'] = array(
+		'#type' => 'select',
+		'#title' => t('Protein weight matrix'),
+		'#options' => array(
+			'default' => t('Default'),
+			'BLOSUM' => t('BLOSUM'),
+			'PAM' => t('PAM'),
+			'GONNET' => t('GONNET'),
+			'ID' => t('Identity'),
+			),
+		'#states' => array(
+        	 'visible' => array(
+        	 	  ':input[name="type"]' => array('value' => 'PROTEIN'),
+        	 	),
+        	),
+	);
+	$form['blast']['parameters']['pairwise']['full']['pwDnaMatrix'] = array(
+		'#type' => 'select',
+		'#title' => t('DNA weight matrix'),
+		'#options' => array(
+			'default' => t('Default'),
+			'IUB' => t('IUB'),
+			'blast' => t('blast'),
+			),
+		'#states' => array(
+        	 'visible' => array(
+        	 	  ':input[name="type"]' => array('value' => 'DNA'),
+        	 	),
+        	),
+	);
+	$form['blast']['parameters']['pairwise']['full']['gapOpen'] = array(
+		'#type' => 'textfield',
+		'#title' => t('Gap Open Penalty'),
+		'#default_value' => '',
+		'#size' => 2, 
+		'#maxlength' => 3
+	);
+	$form['blast']['parameters']['pairwise']['full']['gapExtend'] = array(
+		'#type' => 'textfield',
+		'#title' => t('Gap Extension Penalty'),
+		'#default_value' => '',
+		'#size' => 2, 
+		'#maxlength' => 3
+	);
+
+
+
+/*
+***Multiple Alignments:***
+-NEWTREE=      :file for new guide tree
+-USETREE=      :file for old guide tree
+-MATRIX=       :Protein weight matrix=BLOSUM, PAM, GONNET, ID or filename
+-DNAMATRIX=    :DNA weight matrix=IUB, blast or filename
+-GAPOPEN=f     :gap opening penalty        
+-GAPEXT=f      :gap extension penalty
+-ENDGAPS       :no end gap separation pen. 
+-GAPDIST=n     :gap separation pen. range
+-NOPGAP        :residue-specific gaps off  
+-NOHGAP        :hydrophilic gaps off
+-HGAPRESIDUES= :list hydrophilic res.    
+-MAXDIV=n      :% ident. for delay
+-TYPE=         :PROTEIN or DNA
+-TRANSWEIGHT=f :transitions weighting
+-ITERATION=    :NONE or TREE or ALIGNMENT
+-NUMITER=n     :maximum number of iterations to perform
+-NOWEIGHTS     :disable sequence weighting
+*/
+	$form['blast']['parameters']['multiple'] = array(
+        '#type' => 'fieldset',
+        '#title' => t('Multiple Alignment'),
+        '#collapsible' => TRUE,
+	);
+	$form['blast']['parameters']['multiple']['proteinMatrix'] = array(
+		'#type' => 'select',
+		'#title' => t('Protein weight matrix'),
+		'#options' => array(
+			'default' => t('Default'),
+			'BLOSUM' => t('BLOSUM'),
+			'PAM' => t('PAM'),
+			'GONNET' => t('GONNET'),
+			'ID' => t('Identity'),
+			),
+		'#states' => array(
+        	 'visible' => array(
+        	 	  ':input[name="type"]' => array('value' => 'PROTEIN'),
+        	 	),
+        	),
+	);
+	$form['blast']['parameters']['multiple']['dnaMatrix'] = array(
+		'#type' => 'select',
+		'#title' => t('DNA weight matrix'),
+		'#options' => array(
+			'default' => t('Default'),
+			'IUB' => t('IUB'),
+			'blast' => t('blast'),
+			),
+		'#states' => array(
+        	 'visible' => array(
+        	 	  ':input[name="type"]' => array('value' => 'DNA'),
+        	 	),
+        	),
+	);
+	$form['blast']['parameters']['multiple']['openGap'] = array(
+		'#type' => 'textfield',
+		'#title' => t('Gap Opening Penalty'),
+		'#default_value' => '',
+		'#size' => 3, 
+		'#maxlength' => 3
+	);
+	$form['blast']['parameters']['multiple']['extendGap'] = array(
+		'#type' => 'textfield',
+		'#title' => t('Gap Extension Penalty'),
+		'#default_value' => '',
+		'#size' => 3, 
+		'#maxlength' => 3
+	);
+	$form['blast']['parameters']['multiple']['gapDistance'] = array(
+		'#type' => 'textfield',
+		'#title' => t('Gap Separation penalty'),
+		'#default_value' => '',
+		'#size' => 2, 
+		'#maxlength' => 3
+	);
+	$form['blast']['parameters']['multiple']['endGap'] = array(
+		'#type' => 'checkbox',
+		'#title' => t('End Gap Separation Penalty'),
+		'#default_value' => '1',
+	);
+	$form['blast']['parameters']['multiple']['iteration'] = array(
+		'#type' => 'select',
+		'#title' => t('Output'),
+		'#options' => array(
+			'none' => t('None'),
+			'tree' => t('Tree'),
+			'alignment' => t('Alignment'),
+			)
+	);
+	$form['blast']['parameters']['multiple']['iterations'] = array(
+		'#type' => 'textfield',
+		'#title' => t('Maximum Number of Iterations'),
+		'#default_value' => '',
+		'#size' => 2, 
+		'#maxlength' => 3,
+	);
+
+	$form['blast']['parameters']['multiple']['clustering'] = array(
+		'#type' => 'radios',
+		'#title' => t('Clustering'),
+		'#options' => array(
+			'nj' => t('Neighbour Joining'),
+			'upgma' => t('UPGMA'),
+			),
+		'#default_value' => 'nj'
+
+	);
+
+
+/*
+	$form['blast']['parameters'][''] = array(
+		'#type' => 'select',
+		'#title' => t('Output'),
+		'#options' => array(
+			'' => t(''),
+			'' => t(''),
+			'' => t(''),
+			'' => t(''),
+			'' => t(''),
+			)
+	);
+
+*/
+
+
+
+	$form['blast']['parameters']['output'] = array(
+        '#type' => 'fieldset',
+        '#title' => t('Output'),
+        '#collapsible' => TRUE,
+	);
+   $form['blast']['parameters']['output']['format'] = array(
+		'#type' => 'select',
+		'#title' => t('Format'),
+		'#options' => array(
+			'CLUSTAL' => t('Clustal'),
+         'GCG' => t('GCG'),
+         'GDE' => t('GDE'),
+         'PHYLIP' => t('PHYLIP'),
+         'PIR' => t('PIR'),
+         'NEXUS' => t('NEXUS'),
+         'FASTA' => t('FASTA'),
+		)
+   );
+	$form['blast']['parameters']['output']['outOrder'] = array(
+		'#type' => 'select',
+		'#title' => t('Output'),
+		'#options' => array(
+			'aligned' => t('Aligned'),
+			'input' => t('Input')
+			)
+	);
+
+	$form['blast']['lookup'] = array(
+		'#type' => 'textfield',
+		'#title' => t('Look up previous results with job ID'),
+		'#default_value' => '',
+		'#size' => 9, 
+		'#maxlength' => 12,
+	);
+
+
+
+
+  $form['blast']['submit'] = array(
+    '#type' => 'submit',
+    '#value' => t('Submit'),
+    '#ajax' => array(
+      'callback' => 'ajax_blast_handler',
+      'wrapper' => 'test',
+      'effect' => 'fade',
+      'progress' => array(
+        'type' => 'throbber',
+        'message' => t('Submitting blast Job...')),
+    ),
+//    '#attributes' => array(
+//      'id'=>'submitButton'),
+  );
+
+ $form['blast']['clear'] = array(
+ //   '#name' => 'clear',
+    '#type' => 'button',
+    '#value' => t('Reset'),
+    '#attributes' => array(
+      'onclick' => 'this.form.reset(); return false;',
+      'id'=>'clearButton')
+  );
+
+  $form['blast']['results'] = array(
+    '#title' => '',
+    // The prefix/suffix provide the div that we're replacing, named by
+    // #ajax['wrapper'] above.
+    '#prefix' => '<div id="results">',
+    '#suffix' => '</div>',
+    '#type' => 'item',
+
+    '#ajax' => array(
+      'callback' => 'ajax_runningJob_handler',
+      'event' => 'click',
+      'wrapper' => 'test',
+      'effect' => 'fade',
+      'progress' => array(
+        'type' => 'throbber',
+        'message' => t('Getting Job Status...')),
+      )
+  );
+
+  $form['blast']['jobid'] = array(
+    '#type' => 'item',
+  );
+
+  $form['blast']['status'] = array(
+    '#type' => 'item',
+  );
+
+  $form['blast']['result'] = array(
+    '#type' => 'item',
+  );
+
+  return $form;
+}
+
+function ajax_runningJob_handler($form, $form_state){
+	// results contains the job id, lets get the status
+	if(preg_match("Job id: (\d+)",$form['blast']['results'],$match)){
+		$id=$match[1];
+		$status=xgrid_status($id);
+	}
+		$commands[]=ajax_command_html('#status',$match);
+//print_r($form['blast']['results'])
+
+  return array('#type' => 'ajax', '#commands' => $commands);
+}
+
+/**
+ * Callback element needs only select the portion of the form to be updated.
+ * Since #ajax['callback'] return can be HTML or a renderable array (or an
+ * array of commands), we can just return a piece of the form.
+ */
+function ajax_blast_handler($form, $form_state) {
+
+  //validate user input
+    //$commands[]=ajax_command_data('#edit-email','value','this is the new html' );
+  if($form_state['values']['lookup']!=''){
+	if(preg_match("#^(\d+)$#",$form_state['values']['lookup'],$match))
+		$id=$match[1];
+	else
+		$message="Invalid job ID";
+
+  }else{
+	if($form_state['values']['sequence']==''){
+    	$message="You forgot to enter sequences to align.";
+    	$commands[]=ajax_command_css('#edit-sequence', array('border' => 'solid red 2px'));
+//    $commands[]=ajax_command_css('#edit-sequence', array('color' => 'red', 'margin-left' => '6px'));
+/*
+ } 
+ elseif($form_state['values']['email']==''){
+    $message="Please enter your address";
+    $commands[]=ajax_command_css('#edit-comments', array('border' => 'solid 1px #aacfe4'));
+    $commands[]=ajax_command_css('#edit-email', array('border' => 'solid red 2px'));
+    $commands[]=ajax_command_css('#edit-results', array('color' => 'red', 'margin-left' => '6px'));
+
+  }elseif(!preg_match("#.+?@.+?\..+?#",$form_state['values']['email'])){
+    $message="Your address appears invalid";
+    $commands[]=ajax_command_css('#edit-email', array('border' => 'solid red 2px'));
+    $commands[]=ajax_command_css('#edit-results', array('color' => 'red', 'margin-left' => '6px'));
+*/
+  // input looks good
+  	} else {
+    	$message='Thank you for your submission!';
+
+
+    //  clear any error css that may have come up
+    //$commands[]=ajax_command_css('#edit-results', array('color' => 'green', 'margin-left' => '2px'));
+    $commands[]=ajax_command_css('#edit-sequence', array('border' => 'solid 1px #aacfe4'));
+    $commands[]=ajax_command_css('#edit-comments', array('border' => 'solid 1px #aacfe4'));
+
+
+
+   //build argument/value pairs from the form
+   $args['sequence']=$form_state['values']['sequence'];
+   $args['arguments'][]='-TYPE='.$form_state['values']['type'];
+	$args['arguments'][]='-OUTPUT='.$form_state['values']['format'];
+	$args['arguments'][]='-OUTORDER='.$form_state['values']['outOrder'];
+
+
+
+   //remove options that weren't changed
+	foreach($form_state['values'] as $value){
+		if($value=='' || $value=='default')
+			unset($form_state['values'][$value]);
+	}
+
+
+   if($form_state['values']['alignment']=='fast'){
+		if($form_state['values']['wordSize']) $args['arguments'][]='-KTUPLE='.$form_state['values']['wordSize'];
+		if($form_state['values']['diagonals']) $args['arguments'][]='-TOPDIAGS='.$form_state['values']['diagonals'];
+		if($form_state['values']['windows']) $args['arguments'][]='-WINDOW='.$form_state['values']['window'];
+		if($form_state['values']['gapPenalty']) $args['arguments'][]='-PAIRGAP'.$form_state['values']['gapPenalty'];
+		if($form_state['values']['scoringMethod']) $args['arguments'][]='-SCORE'.$form_state['values']['scoringMethod'];
+   }else{
+   	   if($form_state['values']['type']=='DNA')
+				if($form_state['values']['pwDnaMatrix']!='default') $args['arguments'][]='-PWDNAMATRIX='.$form_state['values']['pwDnaMatrix'];
+			else
+				if($form_state['values']['pwProteinMatrix']!='default') $args['arguments'][]='-PWMATRIX='.$form_state['values']['pwProteinMatrix'];
+		if($form_state['values']['gapOpen']) $args['arguments'][]='-PWGAPOPEN='.$form_state['values']['gapOpen'];
+		if($form_state['values']['gapExtend']) $args['arguments'][]='-PWGAPEXT='.$form_state['values']['gapExtend'];
+	}
+
+	if($form_state['values']['type']=='DNA')
+		if($form_state['values']['dnaMatrix']!='default') $args['arguments'][]='-DNAMATRIX='.$form_state['values']['dnaMatrix'];
+	else
+		if($form_state['values']['proteinMatrix']!='default') $args['arguments'][]='-MATRIX='.$form_state['values']['proteinMatrix'];
+
+	if($form_state['values']['openGap']) $args['arguments'][]='-GAPOPEN='.$form_state['values']['openGap'];
+	if($form_state['values']['extendGap']) $args['arguments'][]='-GAPEXT='.$form_state['values']['extendGap'];
+	if($form_state['values']['gapDistance']) $args['arguments'][]='-GAPDIST='.$form_state['values']['gapDistance'];
+	if($form_state['values']['endGap']==0) $args['arguments'][]='-ENDGAPS';
+	if($form_state['values']['iteration']) $args['arguments'][]='-ITERATION='.$form_state['values']['iteration'];
+	if($form_state['values']['iterations']) $args['arguments'][]='-NUMITER='.$form_state['values']['iterations'];
+	$args['arguments'][]='-CLUSTERING='.$form_state['values']['clustering'];
+
+
+
+//	$args['arguments'][]=''.$form_state['values'][''];
+
+   // submit job
+   $id=blast_submit_xgrid($args);
+   $message=$message.$form_state['values']['output'].' Job id: '.$id;//.print_r($args);
+  }
+
+}
+
+  // update the results div with some new info
+  $commands[]=ajax_command_html('#edit-results',$message );
+  $commands[]=ajax_command_html('#edit-jobid',$id );
+//  $commands[]=ajax_command_css('#jobId', $argument);
+ // $commands[]=ajax_command_invoke('#edit-results','click');
+
+  return array('#type' => 'ajax', '#commands' => $commands);
+}
+
+
+
+function blast_submit_xgrid($args){
+
+	//generate random name to submit the job as. xgrid_genRandomString is in the xgrid module
+	$random=xgrid_genRandomString(6);
+	$filename="blast_".$random;
+
+	//create program argument string
+	foreach($args['arguments'] as $argument){
+		$arguments.="<string>$argument</string>\n";
+	}
+
+	$batch="<?xml version=\"1.0\" encoding=\"UTF-8\"?>
+	<!DOCTYPE plist PUBLIC \"-//Apple Computer//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">
+	<plist version=\"1.0\">
+	<array>
+	<dict>
+		<key>inputFiles</key>
+			<dict>
+				<key>sequence</key>
+				<dict>
+					<key>fileData</key>
+					<data>".base64_encode($args['sequence'])."</data>
+				</dict>
+			</dict>
+		<key>name</key>
+		<string>$filename</string>
+		<key>taskSpecifications</key>
+		<dict>
+			<key>0</key>
+			<dict>
+				<key>command</key>
+				<string>/var/xgrid_results/blast.sh</string>
+				<key>arguments</key>
+				<array>
+					<string>$filename</string>
+					$arguments
+				</array>
+			</dict>
+		</dict>
+	</dict>
+	</array>
+	</plist>";
+
+	$jobId = xgrid_submit($batch);
+	return $jobId;
+}
+
+
+
+
+
+/**
+ * Implements hook_block_info().
+ */
+function blast_block_info() {
+  $blocks['recent']['info'] = t('blast GUI for submitting jobs to xgrid');
+  return $blocks;
+}
+
+
+
+/**
+ * Implementation of hook_help()
+*/
+function blast_help($path, $arg){
+  switch ($path) {
+    case "admin/help#blast":
+      return '<p>'.  t("this is some text from the help hook") .'</p>';
+      break;
+  }
+
+}
+
+
+/**
+ * Implements hook_menu().
+ */
+function blast_menu(){
+  $items = array();
+
+  $items['admin/config/system/blast'] = array(
+    'title' => 'Contact Form',
+    'description' => 'Manage contact form messages',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('blast_configform'),
+    'access arguments' => array('access administration pages'),
+    'type' => MENU_NORMAL_ITEM,
+  );
+  
+  return $items;
+}
+
+
+/**
+ * Form function, called by drupal_get_form() 
+ * in blast_menu().
+ */
+function blast_configform($form, &$form_state){
+  $form['from'] = array(
+  '#type' => 'item',
+  '#title' => t('blast Web Service Settings'),
+  '#markup' => 'The (separate) web service runs on an OS X machine which has access to the blast program on the command line. 
+The service runs over SOAP and implements the basic functionality of the blast program.<br/>These settings connect to http://server:port/wsdlPath<br/>Currently: ' . blast_getURL(),
+);
+
+  $form['blast_server'] = array(
+    '#type' => 'textfield',
+    '#title' => t('blast service machine'),
+    '#default_value' => variable_get('blast_server', 'jobs.vectorbase.org'),
+    '#maxlength' => 35,
+    '#description' => t('The machine where the blast web service is running.'),
+    '#required' => TRUE,
+  );
+
+  $form['blast_server_port'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Port'),
+    '#default_value' => variable_get('blast_server_port', '80'),
+    '#maxlength' => 4,
+    '#description' => t('The service port.'),
+    '#required' => TRUE,
+  );
+
+  $form['blast_controller_url_suffix'] = array(
+    '#type' => 'textfield',
+    '#title' => t('WSDL Path'),
+    '#default_value' => variable_get('blast_server_suffix', 'blast.wsdl'),
+    '#maxlength' => 35,
+    '#description' => t('Path to WSDL file on blast server. No leading slash.'),
+    '#required' => TRUE,
+  );
+
+  return system_settings_form($form);
+}
+
+
+/**
+ * Implements validation from the Form API.
+ * 
+ * @param $form
+ *   A structured array containing the elements and properties of the form.
+ * @param $form_state
+ *   An array that stores information about the form's current state 
+ *   during processing.
+ */
+//implement this when we get ambitious
+function blast_form_validate($form, &$form_state){
+//  $max_num = $form_state['values']['current_posts_max'];
+//  if (!is_numeric($max_num)){
+//    form_set_error('current_posts_max', t('You must enter an integer for the maximum number of posts to display.'));
+//  } 
+//  else if ($max_num <= 0){
+//    form_set_error('current_posts_max', t('Maximum number of posts to display must be positive.'));       
+//  }
+}

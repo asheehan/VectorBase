@@ -4,6 +4,16 @@
  *   Exposed Hooks in 7.x:
  */
 
+/**
+ * Lets modules know when the default environment is changed.
+ */
+function hook_apachesolr_default_environment($env_id, $old_env_id) {
+  $page = apachesolr_search_page_load('core_search');
+  if ($page && $page['env_id'] != $env_id) {
+    $page['env_id'] = $env_id;
+    apachesolr_search_page_save($page);
+  }
+}
 
 /**
  * Add index mappings for Field API types. The default mappings array
@@ -172,7 +182,13 @@ function hook_apachesolr_field_name_map_alter(&$map) {
  *   An object implementing DrupalSolrQueryInterface. No need for &.
  */
 function hook_apachesolr_query_alter($query) {
-  // I only want to see articles by the admin!
+  // I only want to see articles by the admin.
+  //
+  // NOTE: this "is_uid" filter does NOT refer to the English word "is"
+  // It is a combination of flags representing Integer-Single, which is
+  // abbreviated with the letters i and s.
+  //
+  // @see the <dynamicField> definitions in schema.xml or schema-solr3.xml
   $query->addFilter("is_uid", 1);
 
   // Only search titles.
@@ -185,15 +201,66 @@ function hook_apachesolr_query_alter($query) {
  * @param string $query
  *   Defaults to *:*
  */
-function hook_apachesolr_delete_index_alter($query) {
+function hook_apachesolr_delete_by_query_alter($query) {
   // use the site hash so that you only delete this site's content
-  $query = 'hash:' . apachesolr_site_hash();
+  if ($query == '*:*') {
+    $query = 'hash:' . apachesolr_site_hash();
+  }
+  else {
+    $query .= ' AND hash:' . apachesolr_site_hash();
+  }
+}
+
+/**
+ * This is the place to look for the replacement to hook_apachesolr_node_exclude
+ * You should define a replacement for the status callback and return
+ * FALSE for entities which you do not want to appear in the index and TRUE for
+ * those that you want to include
+ */
+
+/**
+ * This is invoked for each entity that is being inspected to be added to the
+ * index. if any module returns TRUE, the entity is skipped for indexing.
+ *
+ * @param integer $entity_id
+ * @param string $entity_type
+ * @param integer $row
+ *   A complete set of data from the indexing table.
+ * @param string $env_id
+ * @return boolean
+ */
+function hook_apachesolr_exclude($entity_id, $entity_type, $row, $env_id) {
+  // Never index media entities to core_1
+  if ($entity_type == 'media' && $env_id == 'core_1') {
+    return TRUE;
+  }
+  return FALSE;
+}
+
+/**
+ * This is invoked for each entity from the type of ENTITY_TYPE that is being
+ * inspected to be added to the index. if any module returns TRUE, 
+ * the entity is skipped for indexing.
+ *
+ * @param integer $entity_id
+ * @param integer $row
+ *   A complete set of data from the indexing table.
+ * @param string $env_id
+ * @return boolean
+ */
+function hook_apachesolr_ENTITY_TYPE_exclude($entity_id, $row, $env_id) {
+  // Never index ENTITY_TYPE to core_1
+  if ($env_id == 'core_1') {
+    return TRUE;
+  }
+  return FALSE;
 }
 
 /**
  * Add information to index other entities.
  * There are some modules in http://drupal.org that can give a good example of
- * custom entity indexing such as apachesolr_user_indexer, apachesolr_term
+ * custom entity indexing such as apachesolr_user, apachesolr_term
+ *
  * @param array $entity_info
  */
 function hook_apachesolr_entity_info_alter(&$entity_info) {
@@ -202,8 +269,9 @@ function hook_apachesolr_entity_info_alter(&$entity_info) {
   $entity_info['node'] = array();
   // Set this entity as indexable
   $entity_info['node']['indexable'] = TRUE;
-  // Validate each entity if it can be indexed or not
-  $entity_info['node']['status callback'] = 'apachesolr_index_node_status_callback';
+  // Validate each entity if it can be indexed or not. Multiple callbacks are
+  // allowed. If one of them returns false it won't be indexed
+  $entity_info['node']['status callback'][] = 'apachesolr_index_node_status_callback';
   // Build up a custom document.
   $entity_info['node']['document callback'][] = 'apachesolr_index_node_solr_document';
   // What to do when a reindex is issued. Most probably this will reset all the
@@ -218,6 +286,13 @@ function hook_apachesolr_entity_info_alter(&$entity_info) {
   $entity_info['node']['cron_check'] = 'apachesolr_index_node_check_table';
   // Specific output processing for the results
   $entity_info['node']['apachesolr']['result callback'] = 'apachesolr_search_node_result';
+
+  // BUNDLE SPECIFIC OVERRIDES
+  // The following can be overridden on a per-bundle basis.
+  // The bundle-specific settings will take precedence over the entity settings.
+  $entity_info['node']['bundles']['page']['apachesolr']['result callback'] = 'apachesolr_search_node_result';
+  $entity_info['node']['bundles']['page']['apachesolr']['status callback'][] = 'apachesolr_index_node_status_callback';
+  $entity_info['node']['bundles']['page']['apachesolr']['document callback'][] = 'apachesolr_index_node_solr_document';
 }
 
 
@@ -313,12 +388,14 @@ function hook_apachesolr_index_document_build(ApacheSolrDocument $document, $ent
  * @param $entity_type
  */
 function hook_apachesolr_index_document_build_ENTITY_TYPE(ApacheSolrDocument $document, $entity, $env_id) {
-  // Index book module data.
-  if (!empty($entity->book['bid'])) {
-    // Hard-coded - must change if apachesolr_index_key() changes.
-    $document->is_book_bid = (int) $entity->book['bid'];
+  // Index field_main_image as a separate field
+  if ($entity->type == 'profile') {
+    $user = user_load(array('uid' => $entity->uid));
+    // Hard coded field, not recommended for inexperienced users.
+    $document->setMultiValue('sm_field_main_image', $user->picture);
   }
 }
+
 /**
  * Alter the prepared documents from one entity before sending them to Solr.
  *

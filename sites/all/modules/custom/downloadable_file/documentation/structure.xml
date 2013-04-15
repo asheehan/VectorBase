@@ -1,0 +1,468 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project version="2.0.0a10" title="">
+  <file path="incrementFileDownloadCount.php" hash="a46d1be4aebdb470fc000f850f143b75" package="DataFiles">
+    <docblock line="3">
+      <description><![CDATA[This script +1's the download counter on a particular drupal
+"downloadable_file" node.]]></description>
+      <long-description><![CDATA[]]></long-description>
+      <tag line="3" name="package" description="DataFiles"/>
+      <tag line="3" name="filesource" description=""/>
+    </docblock>
+    <include line="16" type="Require Once" package="Default">
+      <name/>
+    </include>
+    <include line="17" type="Require Once" package="Default">
+      <name>constants.php</name>
+    </include>
+    <constant namespace="global" line="13" package="DataFiles">
+      <name>DRUPAL_ROOT</name>
+      <full_name>\DRUPAL_ROOT</full_name>
+      <value><![CDATA[$_SERVER[]]]></value>
+    </constant>
+    <constant namespace="global" line="14" package="DataFiles">
+      <name>DL_COUNT_TAG</name>
+      <full_name>\DL_COUNT_TAG</full_name>
+      <value><![CDATA[]]></value>
+    </constant>
+  </file>
+  <file path="constants.php" hash="2701e345ffb6d3a47880f98269a7b26e" package="DataFiles">
+    <docblock line="2">
+      <description><![CDATA[This is the constnts file for the Data file (downloadable_file) module.]]></description>
+      <long-description><![CDATA[]]></long-description>
+      <tag line="2" name="package" description="DataFiles"/>
+      <tag line="2" name="filesource" description=""/>
+    </docblock>
+    <constant namespace="global" line="14" package="DataFiles">
+      <name>RELATED_FILES_DOWNLOADED_COUNT_THRESHOLD</name>
+      <full_name>\RELATED_FILES_DOWNLOADED_COUNT_THRESHOLD</full_name>
+      <value><![CDATA[15]]></value>
+      <docblock line="10">
+        <description><![CDATA[Threshold value for minimum number of times a file is downloaded before it
+becomes 'more important'.]]></description>
+        <long-description><![CDATA[]]></long-description>
+      </docblock>
+    </constant>
+    <constant namespace="global" line="20" package="DataFiles">
+      <name>RELATED_FILES_VIEW_LIMIT</name>
+      <full_name>\RELATED_FILES_VIEW_LIMIT</full_name>
+      <value><![CDATA[5]]></value>
+      <docblock line="16">
+        <description><![CDATA[How many files are to be dispalyed in the 'Related files' block on organism
+pages.]]></description>
+        <long-description><![CDATA[]]></long-description>
+      </docblock>
+    </constant>
+    <constant namespace="global" line="27" package="DataFiles">
+      <name>FEATURED_DOWNLOAD_TAG_TEXT</name>
+      <full_name>\FEATURED_DOWNLOAD_TAG_TEXT</full_name>
+      <value><![CDATA[]]></value>
+      <docblock line="22">
+        <description><![CDATA[Display string of the 'Featured Download' tag (actually a taxon in the
+tags taxonomy).]]></description>
+        <long-description><![CDATA[<p>This is used to retrieve the taxon object itself from drupal
+to get the taxon id, which is used in other queries.</p>]]></long-description>
+      </docblock>
+    </constant>
+    <constant namespace="global" line="32" package="DataFiles">
+      <name>DB_USER</name>
+      <full_name>\DB_USER</full_name>
+      <value><![CDATA[]]></value>
+      <docblock line="29">
+        <description><![CDATA[Public user in the drupal database that is allowed to issue SELECT queries.]]></description>
+        <long-description><![CDATA[]]></long-description>
+      </docblock>
+    </constant>
+    <constant namespace="global" line="37" package="DataFiles">
+      <name>DB_PASSWORD</name>
+      <full_name>\DB_PASSWORD</full_name>
+      <value><![CDATA[]]></value>
+      <docblock line="34">
+        <description><![CDATA[Password for the DB_USER.]]></description>
+        <long-description><![CDATA[]]></long-description>
+      </docblock>
+    </constant>
+    <constant namespace="global" line="42" package="DataFiles">
+      <name>DOWNLOAD_COUNT_NODE_ID_GET_KEY</name>
+      <full_name>\DOWNLOAD_COUNT_NODE_ID_GET_KEY</full_name>
+      <value><![CDATA[]]></value>
+      <docblock line="39">
+        <description><![CDATA[Node id key name for the file increment php counter.]]></description>
+        <long-description><![CDATA[]]></long-description>
+      </docblock>
+    </constant>
+    <constant namespace="global" line="47" package="DataFiles">
+      <name>DOWNLOAD_COUNT_VERSION_ID_GET_KEY</name>
+      <full_name>\DOWNLOAD_COUNT_VERSION_ID_GET_KEY</full_name>
+      <value><![CDATA[]]></value>
+      <docblock line="44">
+        <description><![CDATA[Version id key name for the file increment php counter.]]></description>
+        <long-description><![CDATA[]]></long-description>
+      </docblock>
+    </constant>
+    <constant namespace="global" line="53" package="DataFiles">
+      <name>DATA_FILE_DOWNLOAD_LINK_CSS_CLASS</name>
+      <full_name>\DATA_FILE_DOWNLOAD_LINK_CSS_CLASS</full_name>
+      <value><![CDATA[]]></value>
+      <docblock line="49">
+        <description><![CDATA[CSS class used by jquery to locate file downloads and
+increment the download count.]]></description>
+        <long-description><![CDATA[]]></long-description>
+      </docblock>
+    </constant>
+  </file>
+  <file path="utilities.php" hash="56f3d165ea3935db72526e48e9bff0c9" package="DataFiles">
+    <docblock line="2">
+      <description><![CDATA[This file contains a set of utility functions that both serve as core functions
+for certain actions related to "downloadable_files"/"Data files", as well as
+auxilliary functions that makes coding easeier and cleaner for the developer.]]></description>
+      <long-description><![CDATA[]]></long-description>
+      <tag line="2" name="package" description="DataFiles"/>
+      <tag line="2" name="filesource" description=""/>
+    </docblock>
+    <include line="12" type="Require Once" package="Default">
+      <name>constants.php</name>
+    </include>
+    <include line="13" type="Require Once" package="Default">
+      <name>heap.php</name>
+    </include>
+    <function namespace="global" line="31" package="DataFiles">
+      <name>errAdd</name>
+      <full_name>\errAdd</full_name>
+      <docblock line="16">
+        <description><![CDATA[Convenience method to add an error message to an error array map.]]></description>
+        <long-description><![CDATA[<p>This is geared for use in the Drupal forms, where the "element" is the
+name of the UI element that the error applies to. msg is the message, and
+the errArray is the pass-by-reference variable to hold the message.</p>]]></long-description>
+        <tag line="16" name="param" description="Key for the error." type="string" variable="$element">
+          <type by_reference="false">string</type>
+        </tag>
+        <tag line="16" name="param" description="Error message." type="string" variable="$msg">
+          <type by_reference="false">string</type>
+        </tag>
+        <tag line="16" name="param" description="Array that holds the errors. These are added by reference." type="int[]|string[]" variable="$errArray">
+          <type by_reference="false">int[]</type>
+          <type by_reference="false">string[]</type>
+        </tag>
+        <tag line="16" name="return" description="If the element variable is not set or is set to null, this method will&#10;simply return." type="void">
+          <type by_reference="false">void</type>
+        </tag>
+      </docblock>
+      <argument line="31">
+        <name>$element</name>
+        <default><![CDATA[]]></default>
+        <type/>
+      </argument>
+      <argument line="31">
+        <name>$msg</name>
+        <default><![CDATA[]]></default>
+        <type/>
+      </argument>
+      <argument line="31">
+        <name>$errArray</name>
+        <default><![CDATA[]]></default>
+        <type/>
+      </argument>
+    </function>
+    <function namespace="global" line="65" package="DataFiles">
+      <name>downloadable_file_views_query_alter</name>
+      <full_name>\downloadable_file_views_query_alter</full_name>
+      <docblock line="51">
+        <description><![CDATA[Drupal 7 implementation of hook_views_query_alter.]]></description>
+        <long-description><![CDATA[<p>This implementation alters filtered queries in the "Downloads/Data files"
+view. It allows a user to filter by a term in the file type taxonomy
+and get matches for that term AND its child terms.</p>]]></long-description>
+        <tag line="51" name="see" description="\global\hook_views_query_alter(&amp;$view," refers="\global\hook_views_query_alter(&amp;$view,"/>
+        <tag line="51" name="param" description="Drupal view object." type="object" variable="$view">
+          <type by_reference="false">object</type>
+        </tag>
+        <tag line="51" name="param" description="Drupal query object." type="object" variable="$query">
+          <type by_reference="false">object</type>
+        </tag>
+        <tag line="51" name="return" description="" type="void">
+          <type by_reference="false">void</type>
+        </tag>
+      </docblock>
+      <argument line="65">
+        <name>$view</name>
+        <default><![CDATA[]]></default>
+        <type/>
+      </argument>
+      <argument line="65">
+        <name>$query</name>
+        <default><![CDATA[]]></default>
+        <type/>
+      </argument>
+    </function>
+    <function namespace="global" line="95" package="DataFiles">
+      <name>getUniqueListOrgTidsFromDownloads</name>
+      <full_name>\getUniqueListOrgTidsFromDownloads</full_name>
+      <docblock line="84">
+        <description><![CDATA[Returns unique list of organisms referenced in exisiting data files (downloads).]]></description>
+        <long-description><![CDATA[<p>Utility method designed to scan all nodes classified as "downloadable_file"s,
+and return a unique list of organism taxon ids from the organism taxonomy.
+Each taxon id returned has at least one "downloadable_file" node that exsits
+in drupal. This method is used to display a shortened, relevant list of
+organisms available to filter on in the "Data files" (downlaods) view.</p>]]></long-description>
+        <tag line="84" name="return" description="List of organism taxon ids." type="string[]|int[]">
+          <type by_reference="false">string[]</type>
+          <type by_reference="false">int[]</type>
+        </tag>
+      </docblock>
+    </function>
+    <function namespace="global" line="123" package="DataFiles">
+      <name>getSortedFiles</name>
+      <full_name>\getSortedFiles</full_name>
+      <docblock line="113">
+        <description><![CDATA[Returns a max heap object of ranked files.]]></description>
+        <long-description><![CDATA[]]></long-description>
+        <tag line="113" name="param" description="Organism taxonomy id to be ranked on." type="int|string" variable="$organismId">
+          <type by_reference="false">int</type>
+          <type by_reference="false">string</type>
+        </tag>
+        <tag line="113" name="param" description="(Optional) $tagId Taxon Id of a Tag that is used by downloads to promote certain files over others." type="int|string" variable="$tagId">
+          <type by_reference="false">int</type>
+          <type by_reference="false">string</type>
+        </tag>
+        <tag line="113" name="param" description="(Optional) Number of files to return in the ranking." type="int" variable="$limit">
+          <type by_reference="false">int</type>
+        </tag>
+        <tag line="113" name="return" description="A max heap object of ranked files (drupal nodes)." type="\DownloadSimpleHeap">
+          <type by_reference="false">\DownloadSimpleHeap</type>
+        </tag>
+      </docblock>
+      <argument line="123">
+        <name>$organismId</name>
+        <default><![CDATA[]]></default>
+        <type/>
+      </argument>
+      <argument line="123">
+        <name>$tagId</name>
+        <default><![CDATA[]]></default>
+        <type/>
+      </argument>
+      <argument line="123">
+        <name>$limit</name>
+        <default><![CDATA[]]></default>
+        <type/>
+      </argument>
+    </function>
+    <function namespace="global" line="165" package="DataFiles">
+      <name>download_file_post_render</name>
+      <full_name>\download_file_post_render</full_name>
+      <docblock line="153">
+        <description><![CDATA[Re-writes the file links to display "human readable" filesize.]]></description>
+        <long-description><![CDATA[<p>Function is added into the "post_render" stack by this module's
+implementation of hook_node_view_alter.</p>]]></long-description>
+        <tag line="153" name="param" description="HTML content to be displayed." type="string" variable="$content">
+          <type by_reference="false">string</type>
+        </tag>
+        <tag line="153" name="param" description="Container for the renderable page." type="array" variable="$element">
+          <type by_reference="false">array</type>
+        </tag>
+        <tag line="153" name="return" description="Returning the given content variable.  This is probably not&#10;necessary, but to avoid possibly breaking things, this is left in." type="string">
+          <type by_reference="false">string</type>
+        </tag>
+      </docblock>
+      <argument line="165">
+        <name>$content</name>
+        <default><![CDATA[]]></default>
+        <type/>
+      </argument>
+      <argument line="165">
+        <name>$element</name>
+        <default><![CDATA[]]></default>
+        <type/>
+      </argument>
+    </function>
+    <function namespace="global" line="192" package="DataFiles">
+      <name>getFileSizeHumanReadable</name>
+      <full_name>\getFileSizeHumanReadable</full_name>
+      <docblock line="179">
+        <description><![CDATA[Convenience method to calculate, in human-readable text, the
+size of something given the bytes and precision.]]></description>
+        <long-description><![CDATA[]]></long-description>
+        <tag line="179" name="param" description="Number of bytes to convert." type="int" variable="$bytes">
+          <type by_reference="false">int</type>
+        </tag>
+        <tag line="179" name="param" description="How many decimal places to be specific to. default is set to 2." type="int" variable="$precision">
+          <type by_reference="false">int</type>
+        </tag>
+        <tag line="179" name="return" description="Human readable string of the size given. Values will be&#10;in either B, KB, MB, GB, or TB. Note, if something larger than TB is&#10;given, returned value will not be correct, it will return that same&#10;number as B." type="string">
+          <type by_reference="false">string</type>
+        </tag>
+      </docblock>
+      <argument line="192">
+        <name>$bytes</name>
+        <default><![CDATA[]]></default>
+        <type/>
+      </argument>
+      <argument line="192">
+        <name>$precision</name>
+        <default><![CDATA[2]]></default>
+        <type/>
+      </argument>
+    </function>
+    <function namespace="global" line="219" package="DataFiles">
+      <name>getShortNames</name>
+      <full_name>\getShortNames</full_name>
+      <docblock line="212">
+        <description><![CDATA[Simple getter that returns a map from common orgnism shortnames to their
+full names in "genus-species" format.]]></description>
+        <long-description><![CDATA[<p>This function was specifically designed
+for the Download Files Name format.</p>]]></long-description>
+        <tag line="212" name="todo" description="Might remove this b/c the names no longer follow the name format."/>
+      </docblock>
+    </function>
+  </file>
+  <file path="ui.php" hash="0db5eaefcdde0bb4f93d3cb0a01b6e77" package="DataFiles">
+    <docblock line="2">
+      <description><![CDATA[This file contains all the support functions realted to rendering pages,
+generating html, etc that are part of the data file (downloadable_file) module.]]></description>
+      <long-description><![CDATA[]]></long-description>
+      <tag line="2" name="package" description="DataFiles"/>
+      <tag line="2" name="filesource" description=""/>
+    </docblock>
+    <include line="11" type="Require Once" package="Default">
+      <name>constants.php</name>
+    </include>
+    <include line="12" type="Require Once" package="Default">
+      <name>utilities.php</name>
+    </include>
+    <function namespace="global" line="21" package="DataFiles">
+      <name>downloadable_file_admin_form</name>
+      <full_name>\downloadable_file_admin_form</full_name>
+      <docblock line="15">
+        <description><![CDATA[Function used to construct the Administration page for this
+module.]]></description>
+        <long-description><![CDATA[]]></long-description>
+        <tag line="15" name="return" description="Render array defining the form." type="string[]">
+          <type by_reference="false">string[]</type>
+        </tag>
+      </docblock>
+    </function>
+    <function namespace="global" line="98" package="DataFiles">
+      <name>downloadable_file_admin_ajax_handler</name>
+      <full_name>\downloadable_file_admin_ajax_handler</full_name>
+      <docblock line="84">
+        <description><![CDATA[Worker function called by all "button-driven" actions from the Administration
+page.]]></description>
+        <long-description><![CDATA[<p>At the end of each action, they return (or should return) feedback via the
+$form['status_area']['#description'] field.</p>]]></long-description>
+        <tag line="84" name="param" description="Array defining the structure of the Admin page. This variable contains the status area which gets updated by each action." type="string[]" variable="$form">
+          <type by_reference="false">string[]</type>
+        </tag>
+        <tag line="84" name="param" description="Contains state information about the form's components, like which button is currently clicked." type="string[]" variable="$form_state">
+          <type by_reference="false">string[]</type>
+        </tag>
+        <tag line="84" name="return" description="Status area component in the Admin  page" type="string[]">
+          <type by_reference="false">string[]</type>
+        </tag>
+      </docblock>
+      <argument line="98">
+        <name>$form</name>
+        <default><![CDATA[]]></default>
+        <type/>
+      </argument>
+      <argument line="98">
+        <name>$form_state</name>
+        <default><![CDATA[]]></default>
+        <type/>
+      </argument>
+    </function>
+    <function namespace="global" line="208" package="DataFiles">
+      <name>downloadable_file_block_contents</name>
+      <full_name>\downloadable_file_block_contents</full_name>
+      <docblock line="200">
+        <description><![CDATA[Builder method for the html to be displayed in the "Related files" block.]]></description>
+        <long-description><![CDATA[]]></long-description>
+        <tag line="200" name="param" description="Contextual information to check for to make sure this builds the html at the right time in the right place." type="string" variable="$delta">
+          <type by_reference="false">string</type>
+        </tag>
+        <tag line="200" name="return" description="Markup array consisting of html." type="string[]">
+          <type by_reference="false">string[]</type>
+        </tag>
+      </docblock>
+      <argument line="208">
+        <name>$delta</name>
+        <default><![CDATA[]]></default>
+        <type/>
+      </argument>
+    </function>
+  </file>
+  <file path="heap.php" hash="443c0510449f122ebaa8ba07cb7a6ac2" package="DataFiles">
+    <docblock line="2">
+      <description><![CDATA[MaxHeap object tayolored to comparing (ranking) drupal data file nodes.]]></description>
+      <long-description><![CDATA[]]></long-description>
+      <tag line="2" name="package" description="DataFiles"/>
+      <tag line="2" name="filesource" description=""/>
+    </docblock>
+    <include line="10" type="Require Once" package="Default">
+      <name>constants.php</name>
+    </include>
+    <class final="false" abstract="false" namespace="global" line="20" package="DataFiles">
+      <extends>\SplHeap</extends>
+      <name>DownloadSimpleHeap</name>
+      <full_name>\DownloadSimpleHeap</full_name>
+      <docblock line="13">
+        <description><![CDATA[This extension of the SplHeap overrides the compare function to
+allow us to "rank" our "Data file/Download" nodes.]]></description>
+        <long-description><![CDATA[<p>The ranking
+is used to show the "top X" files to users.</p>]]></long-description>
+        <tag line="13" name="package" description="DataFiles"/>
+      </docblock>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="52" package="DataFiles">
+        <name>compare</name>
+        <full_name>compare</full_name>
+        <docblock line="23">
+          <description><![CDATA[Comparison function used by the heap.]]></description>
+          <long-description><![CDATA[<p>Since this returns the "greater"
+of the two items, this makes the parent object a "max" heap.</p>
+
+<p>In english terms, this is how the comparison (ranking) is computed:</p>
+
+<p>There are 3 variables in this ranking:
+1. Number of times downloaded
+2. Presence of a "Featured" tag
+3. Download count threshold</p>
+
+<p>If a file has a higher download count than another then it will
+be ranked higher, unless:
+* The higher count is under the count threshold AND the lesser count
+file has a "featuerd" tag AND the higher one doesn't. In this case,
+the lesser count file gets ranked higher.</p>
+
+<p>If the counts are equal and one has a "featured" tag while the other
+one does not, then the "featured" one ranks higher.</p>
+
+<p>Finally, if the counts and tag existance (null vs !null)  are equal,
+the two files are ranked equallly.</p>]]></long-description>
+          <tag line="23" name="param" description="The file node to be compared." type="object" variable="$value1">
+            <type by_reference="false">object</type>
+          </tag>
+          <tag line="23" name="param" description="The file node to be the comparing reference." type="object" variable="$value2">
+            <type by_reference="false">object</type>
+          </tag>
+          <tag line="23" name="return" description="if value1 is less than value2, 1 if value1 is greater than&#10;value2, or 0 if they are equal." type="\-1">
+            <type by_reference="false">\-1</type>
+          </tag>
+        </docblock>
+        <argument line="52">
+          <name>$value1</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="52">
+          <name>$value2</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+    </class>
+  </file>
+  <package name="DataFiles" full_name="DataFiles"/>
+  <package name="Default" full_name="Default"/>
+  <namespace name="global" full_name="global"/>
+  <marker count="1">todo</marker>
+  <marker count="0">fixme</marker>
+  <deprecated count="0"/>
+</project>

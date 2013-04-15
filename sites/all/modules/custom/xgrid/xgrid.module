@@ -15,32 +15,76 @@ function xgrid_getURL(){
 }
 
 function xgrid_submit($batchXml) {
-
   $path = drupal_get_path('module', 'xgrid');
-  file_put_contents($path.'/tempFile',$batchXml);
-
+  //$tempFile=xgrid_genRandomString(8).'.temp';
+  //file_put_contents("$path/$tempFile",$batchXml);
+  file_put_contents("$path/tempFile",$batchXml);
   $client = new SoapClient(xgrid_getURL(), array('compression' => SOAP_COMPRESSION_ACCEPT | SOAP_COMPRESSION_GZIP));
   $jobId = $client->submitBatch($batchXml);
+
   return $jobId;
 }
 
-function xgrid_status($id) {
+function xgrid_attributes($id) {
   if (!$id) { throw new Exception("No job ID provided."); }
   $soapClient = new SoapClient(xgrid_getURL(), array('compression' => SOAP_COMPRESSION_ACCEPT | SOAP_COMPRESSION_GZIP));
-  $statusOutput = $soapClient->getStatus($id);
+  return $soapClient->getStatus($id);
+}
+
+function xgrid_specification($id) {
+  if (!$id) { throw new Exception("No job ID provided."); }
+  $soapClient = new SoapClient(xgrid_getURL(), array('compression' => SOAP_COMPRESSION_ACCEPT | SOAP_COMPRESSION_GZIP));
+  return $soapClient->getSpecification($id);
+}
+
+ini_set("soap.wsdl_cache_enabled", 0);
+
+// specific case of attributes
+function xgrid_status($id) {
+  $statusOutput = xgrid_attributes($id);
   preg_match("#jobStatus = (.*?);#",$statusOutput,$match);
   if (!$match[1]) { throw new Exception("Sorry, we have no information for Job ID ".$id); }
   return $match[1];
 }
 
-function xgrid_get_results($id){
+// this will always return an int. even 0 for invalid jobs
+function xgrid_percentDone($id){
+  $statusOutput = xgrid_attributes($id);
+  preg_match("#percentDone = (.*?);#",$statusOutput,$match);
+  if (!$match[1])
+    $match[0]=0;
+
+  return $match[1];
+}
+
+
+function xgrid_jobRunTime($id){
+  if (!$id) { throw new Exception("No job ID provided."); }
+  $soapClient = new SoapClient(xgrid_getURL(), array('compression' => SOAP_COMPRESSION_ACCEPT | SOAP_COMPRESSION_GZIP));
+  $tmp=$soapClient->getStatus($id);
+  preg_match("#dateStarted = (.*?);#",$tmp,$start);
+  preg_match("#dateStopped = (.*?);#",$tmp,$stop);
+  $datetime1=date_create($start[1]);
+  $datetime2=date_create($stop[1]);
+  $interval=date_diff($datetime1, $datetime2);
+  return $interval->format('%s');
+}
+
+function xgrid_jobSubmitDate($id){
+  if (!$id) { throw new Exception("No job ID provided."); }
+  $soapClient = new SoapClient(xgrid_getURL(), array('compression' => SOAP_COMPRESSION_ACCEPT | SOAP_COMPRESSION_GZIP));
+  $tmp=$soapClient->getStatus($id);
+  preg_match("#dateSubmitted = (.*?);#",$tmp,$submit);
+  $datetime=date_create($submit[1]);
+  return $datetime->format('m-d-Y');
+}
+
+
+function xgrid_results($id){
   $client = new SoapClient(xgrid_getURL(), array('compression' => SOAP_COMPRESSION_ACCEPT | SOAP_COMPRESSION_GZIP));
   if (!$id) { throw new Exception("No job ID provided."); }
-  $status = new JobStatus($id);
-  $this->status = $status->simpleStatus();
-  if (!$this->status) { throw new Exception("No data for job ID ".$id."."); }
-
-  if ($this->status=="Finished") {
+  $status = xgrid_status($id);
+  if ($status=="Finished") {
     $results = $client->getResults($id);
   }
 
@@ -48,6 +92,97 @@ function xgrid_get_results($id){
 }
 
 
+function xgrid_zipResults($id){
+  $results=xgrid_results($id);
+  $rand=xgrid_genRandomString(12);
+  //save result to temp file
+  file_put_contents("/tmp/$id",$results);
+  exec("cd /tmp; /usr/bin/zip $id.results.zip $id; mv /tmp/$id.results.zip ".$_SERVER['DOCUMENT_ROOT']."/data/; rm /tmp/$id; rm /tmp/$id.results.zip;");
+}
+
+
+// make sure all the xgrid_enabled files are actually on xgrid
+/*
+function xgrid_cron(){
+
+  // find dbs with sequence info (assume these are loaded on xgrid)
+  $conn = pg_connect("host=".$_SERVER['SERVER_NAME']." port=5432 dbname=blast_sequences user=db_public password=limecat");
+  $sql="SELECT DISTINCT filename FROM raw_sequences;";
+  $result = pg_query($conn, $sql);
+  while ($row = pg_fetch_assoc($result)) {
+    $loadedDbs[]=$row['filename'];
+  }
+
+  // find dbs with xgrid_enabled
+  $query = new EntityFieldQuery();
+  $result = $query->entityCondition('entity_type', 'node')
+    ->entityCondition('bundle', 'downloadable_file')
+    ->fieldCondition('field_xgrid_enabled', 'value', '1', '=')
+    ->execute();
+
+  if (isset($result['node'])) {
+    // pull out full node info for each of the nids identified by the entityfieldquery
+    $nodes=node_load_multiple(array_keys($result['node']));
+    foreach($nodes as $node){
+      $setDbs[]=substr($node->title,0,-3);
+    }
+
+    $needToLoad=array_diff($setDbs,$loadedDbs);
+
+
+    if(count($needToLoad)>0){
+      foreach($needToLoad as $db){
+        $fid=$fid=db_query("select fid from file_managed where filename='$db.gz';")->fetchField();
+        // distribute to xgrid clients
+        //xgrid_distribute_file($fid);
+      }
+    }
+  }
+}
+*/
+
+
+// scp file to all xgrid clients. make balast-able as well. $filepath is local file path
+function xgrid_distribute_file($fid){
+
+  // where is this file stored locally?
+  $file=file_load($fid);
+  $fileName=$file->filename;
+  $file=$_SERVER['DOCUMENT_ROOT'].preg_replace("#https?://.*?/#", "/", file_create_url($file->uri));
+
+  $sshIdent=variable_get('xgrid_sshIdent');
+  $sshUser=variable_get('xgrid_sshUser');
+  $clientDir=variable_get('xgrid_localDirectory');
+  $clients[]=variable_get('xgrid_client_1');
+  $clients[]=variable_get('xgrid_client_2');
+  $clients[]=variable_get('xgrid_client_3');
+  $clients[]=variable_get('xgrid_client_4');
+  $clients=array_unique($clients);
+
+
+  // if file name does not have peptide in it, use -p F flag
+  if(!stristr($file,"peptide"))
+    $type="-dbtype nucl";
+  else
+    $type="-dbtype prot";
+
+  // uncompress file
+  exec("gunzip -c $file > $fileName");
+
+  foreach($clients as $client){
+    // send file to client
+    exec("scp -i $sshIdent $fileName $sshUser@$client:$clientDir/");
+
+    // format db on client
+    exec("ssh -i $sshIdent $sshUser@$client cd $clientDir; /usr/local/ncbi/blast/bin/makeblastdb $type -in $fileName");
+  }
+  // clean up
+  exec("rm $fileName");
+
+  // load the sequences into the db.
+  exec("psql -U postgres -c \"delete from raw_sequences where filename='$fileName'\" blast_sequences");
+  exec("ssh -i $sshIdent $sshUser@".$clients[0]." /vectorbase/scripts/fastaDBimport.pl ".$_SERVER['SERVER_NAME']." $clientDir $fileName");
+}
 
 /**
  * Implementation of hook_help()
@@ -72,7 +207,7 @@ function xgrid_menu(){
     'title' => 'Xgrid',
     'description' => 'Configuration for Xgrid module',
     'page callback' => 'drupal_get_form',
-    'page arguments' => array('xgrid_form'),
+    'page arguments' => array('xgrid_config_form'),
     'access arguments' => array('access administration pages'),
     'type' => MENU_NORMAL_ITEM,
   );
@@ -85,12 +220,13 @@ function xgrid_menu(){
  * Form function, called by drupal_get_form() 
  * in xgrid_menu().
  */
-function xgrid_form($form, &$form_state){
+function xgrid_config_form($form, &$form_state){
   $form['from'] = array(
   '#type' => 'item',
   '#title' => t('Xgrid Web Service Settings'),
   '#markup' => 'The (separate) web service runs on an OS X machine which has access to the xgrid program on the command line. 
-The service runs over SOAP and implements the basic functionality of the xgrid program.<br/>These settings connect to http://server:port/wsdlPath<br/>Currently: ' . xgrid_getURL(),
+The service runs over SOAP and implements the basic functionality of the xgrid program.<br/>These settings connect to http://server:port/wsdlPath<br/>Currently: ' . xgrid_getURL().'<br/><b>When setting up a new clinet</b> make sure this ssh user first places their public key into authorized keys on the client so passwordless ssh/scp is available!!!!<br/>
+Use this command:  ssh newClient "umask 077; cat >> ~/.ssh/authorized_keys" < ~/.ssh/id_rsa.pub',
 );
 
   $form['xgrid_server'] = array(
@@ -120,6 +256,87 @@ The service runs over SOAP and implements the basic functionality of the xgrid p
     '#required' => TRUE,
   );
 
+
+  $form['clients'] = array(
+        '#type' => 'fieldset',
+        '#title' => t('Xgrid Clients'),
+  );
+
+  $form['clients']['xgrid_sshIdent'] = array(
+    '#type' => 'textfield',
+    '#title' => t('SSH Identity File'),
+    '#default_value' => variable_get('xgrid_sshIdent', '/home/user/.ssh/id_rsa'),
+    '#description' => t('Identity file for scp of files to xgrid clients.'),
+    '#required' => TRUE,
+  );
+
+  $form['clients']['xgrid_sshUser'] = array(
+    '#type' => 'textfield',
+    '#title' => t('User for SSH Identity File'),
+    '#default_value' => variable_get('xgrid_sshUser', ''),
+    '#description' => t('The identity file for this user should allow passwordless access into the clients'),
+    '#required' => TRUE,
+  );
+
+  $form['clients']['xgrid_localDirectory'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Directory Xgrid clients store local data in'),
+    '#default_value' => variable_get('xgrid_localDirectory', '/vectorbase/dbs/'),
+    '#description' => t('For Xgrids using local and not network storage on the clients.'),
+    '#required' => TRUE,
+  );
+
+  $form['clients']['xgrid_client_1'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Xgrid clinet 1'),
+    '#default_value' => variable_get('xgrid_client_1', 'jobs.vectorbase.org'),
+    '#maxlength' => 35,
+    '#description' => t('An Xgrid client.'),
+    '#required' => TRUE,
+  );
+  $form['clients']['xgrid_client_2'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Xgrid clinet 2'),
+    '#default_value' => variable_get('xgrid_client_2', ''),
+    '#maxlength' => 35,
+    '#description' => t('An Xgrid client.'),
+  );
+  $form['clients']['xgrid_client_3'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Xgrid clinet 3'),
+    '#default_value' => variable_get('xgrid_client_3', ''),
+    '#maxlength' => 35,
+    '#description' => t('An Xgrid client.'),
+  );
+  $form['clients']['xgrid_client_4'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Xgrid clinet 4'),
+    '#default_value' => variable_get('xgrid_client_4', ''),
+    '#maxlength' => 35,
+    '#description' => t('An Xgrid client.'),
+  );
+  $form['clients']['xgrid_client_5'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Xgrid clinet 5'),
+    '#default_value' => variable_get('xgrid_client_5', ''),
+    '#maxlength' => 35,
+    '#description' => t('An Xgrid client.'),
+  );
+  $form['clients']['xgrid_client_6'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Xgrid clinet 6'),
+    '#default_value' => variable_get('xgrid_client_6', ''),
+    '#maxlength' => 35,
+    '#description' => t('An Xgrid client.'),
+  );
+  $form['clients']['xgrid_client_7'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Xgrid clinet 7'),
+    '#default_value' => variable_get('xgrid_client_7', ''),
+    '#maxlength' => 35,
+    '#description' => t('An Xgrid client.'),
+  );
+
   return system_settings_form($form);
 }
 
@@ -146,6 +363,13 @@ function xgrid_form_validate($form, &$form_state){
 
 
 
+function xgrid_saveParams($id,$params){
+  foreach($params as $param => $value){
+    $fields = array('job_id' => $id, 'argument' => $param, 'value' => $value);
+    db_insert('xgrid_job_params')->fields($fields)->execute();
+  }
+}
+
 
 function xgrid_genRandomString($length) {
     $characters = "0123456789abcdefghijklmnopqrstuvwxyz";
@@ -156,3 +380,80 @@ function xgrid_genRandomString($length) {
     return $string;
 }
 
+function xgrid_getDrupalDBConfig(){
+  $dbConn=shell_exec("grep -A 3 -P \"^[^\*] .*?'database'\" ".$_SERVER["DOCUMENT_ROOT"]."/sites/default/settings.php");
+  preg_match("#'database' => '(.*?)'#",$dbConn,$db);
+  preg_match("#'username' => '(.*?)'#",$dbConn,$user);
+  preg_match("#'password' => '(.*?)'#",$dbConn,$pass);
+  preg_match("#'host' => '(.*?)'#",$dbConn,$host);
+
+  $out['db']=$db[1];
+  $out['user']=$user[1];
+  $out['pass']=$pass[1];
+  $out['host']=$host[1];
+
+  return $out;
+}
+
+
+
+function xgrid_block_view($op='list', $delta=0, $edit=array()){
+  // draw block
+  $blocks['subject'] = t('xgrid BlockView?...i guess');
+  $blocks['content'] = xgrid_userJobsTable();
+   return $blocks;
+}
+function xgrid_block_info() {
+  $blocks['recent']['info'] = t('Display stats for my xgrid jobs');
+  return $blocks;
+}
+
+
+function xgrid_userJobsTable(){
+  // get all job ids for this user:
+  //select job_id from xgrid_job_params where argument='user_id' and value='1';
+
+
+  // Prepare table header
+  $header = array(t('Job ID'), t('Program'), t('Submitted'), t('Runtime'), t('Results'));
+
+  $out="
+  <table>
+  <tr>
+  <th>Job ID</th><th>Program</th><th>Submitted</th><th>Runtime (sec)</th><th>Result</th>
+  </tr>"; 
+
+
+  global $user;
+  $jobs=db_query("select job_id from xgrid_job_params where argument='user_id' and value='".$user->uid."'");
+
+  foreach($jobs as $job){
+    $id=$job->job_id;
+    //get job stats for each of these
+    $program=db_query("select value from xgrid_job_params where job_id=$id and argument='program'")->fetchField();
+    $date=xgrid_jobSubmitDate($id);
+    if(stristr($program,'blast')){
+      $raw=blast_getRawJobId($id);
+      $runtime=xgrid_jobRunTime($id)+xgrid_jobRunTime($raw);
+      $link='<a href="http://steak.vectorbase.org/sites/all/modules/xgrid/results.php?id='.$raw.'">View</a>';
+    }else{
+      $runtime=xgrid_jobRunTime($id);
+      $link='<a href="http://steak.vectorbase.org/sites/all/modules/xgrid/results.php?id='.$id.'">View</a>';
+    }
+    $rows[]=array($id,$program,$runtime,$link);
+
+    $out.="<tr>
+    <td>$id</td>
+    <td>$program</td>
+    <td>$date</td>
+    <td>$runtime</td>
+    <td>$link</td>
+    </tr>
+    ";
+  }
+
+  $out.="</table>";
+
+//  return theme('table', $header, $rows);
+return $out;
+}

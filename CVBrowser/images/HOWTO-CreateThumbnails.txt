@@ -1,0 +1,1 @@
+find ./ -name \*.jpg -exec convert {} -thumbnail 100 tn/{} \;

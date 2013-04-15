@@ -1,0 +1,38 @@
+// dot 2.30.1 on Mac OS X 10.8.3
+// SchemaSpy rev 590
+digraph "blast_hits" {
+  graph [
+    rankdir="RL"
+    bgcolor="#f7f7f7"
+    nodesep="0.18"
+    ranksep="0.46"
+    fontname="Helvetica"
+    fontsize="11"
+  ];
+  node [
+    fontname="Helvetica"
+    fontsize="11"
+    shape="plaintext"
+  ];
+  edge [
+    arrowsize="0.8"
+  ];
+  "blast_hits" [
+    label=<
+    <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" BGCOLOR="#ffffff">
+      <TR><TD COLSPAN="3" BGCOLOR="#9bab96" ALIGN="CENTER">blast_hits</TD></TR>
+      <TR><TD PORT="bh_id" COLSPAN="3" BGCOLOR="#bed1b8" ALIGN="LEFT">bh_id</TD></TR>
+      <TR><TD PORT="br_id" COLSPAN="3" ALIGN="LEFT">br_id</TD></TR>
+      <TR><TD PORT="name" COLSPAN="3" ALIGN="LEFT">name</TD></TR>
+      <TR><TD PORT="accession" COLSPAN="3" ALIGN="LEFT">accession</TD></TR>
+      <TR><TD PORT="description" COLSPAN="3" ALIGN="LEFT">description</TD></TR>
+      <TR><TD PORT="raw_score" COLSPAN="3" ALIGN="LEFT">raw_score</TD></TR>
+      <TR><TD PORT="significance" COLSPAN="3" ALIGN="LEFT">significance</TD></TR>
+      <TR><TD PORT="length" COLSPAN="3" ALIGN="LEFT">length</TD></TR>
+      <TR><TD PORT="num_hsps" COLSPAN="3" ALIGN="LEFT">num_hsps</TD></TR>
+      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">  </TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">261,593 rows</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">  </TD></TR>
+    </TABLE>>
+    URL="tables/blast_hits.html"
+    tooltip="blast_hits"
+  ];
+}

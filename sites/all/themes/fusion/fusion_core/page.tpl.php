@@ -11,7 +11,7 @@
           <div id="header-group-inner" class="header-group-inner inner clearfix">
 
             <?php if ($logo || $site_name || $site_slogan): ?>
-            <div id="header-site-info" class="header-site-info">
+            <div id="header-site-info" class="header-site-info clearfix">
               <div id="header-site-info-inner" class="header-site-info-inner gutter">
                 <?php if ($logo): ?>
                 <div id="logo">
@@ -65,9 +65,9 @@
 
                         <div id="content-region" class="content-region region nested">
                           <div id="content-region-inner" class="content-region-inner inner">
-                            <a name="main-content-area" id="main-content-area"></a>
+                            <a id="main-content-area"></a>
                             <?php print theme('grid_block', array('content' => render($tabs), 'id' => 'content-tabs')); ?>
-                            <?php print theme('grid_block', array('content' => render($page['help']), 'id' => 'content-help')); ?>
+                            <?php print render($page['help']); ?>
                             <?php print render($title_prefix); ?>
                             <?php if ($title): ?>
                             <h1 class="title gutter"><?php print $title; ?></h1>

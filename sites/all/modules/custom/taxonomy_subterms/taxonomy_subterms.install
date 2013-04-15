@@ -1,0 +1,66 @@
+<?php
+
+/**
+ * @file
+ * Installation functions for Taxonomy subterms module.
+ */
+
+/**
+ * Implementation of hook_install().
+ */
+function taxonomy_subterms_install() {
+  $ret = array();
+  $new_schema = array();
+  taxonomy_subterms_schema_alter($new_schema);
+  foreach ($new_schema as $table => &$info) {
+    foreach ($info['fields'] as $field => &$spec) {
+      db_add_field($table, $field, $spec);
+    }
+  }
+}
+
+/**
+ * Implementation of hook_uninstall().
+ */
+function taxonomy_subterms_uninstall() {
+  $ret = array();
+  $new_schema = array();
+  // Get {users} table altering provided by your module
+  taxonomy_subterms_schema_alter($new_schema);
+  foreach ($new_schema as $table => &$info) {
+    foreach ($info['fields'] as $field => &$spec) {
+      db_drop_field($table, $field);
+    }
+  }
+}
+
+/**
+ * Implementation of hook_menu_alter().
+ */
+function taxonomy_subterms_schema_alter(&$schema) {
+  $schema['taxonomy_term_data']['fields']['taxonomy_subterms'] = array(
+    'type' => 'int',
+    'size' => 'tiny',
+    'default' => TAXONOMY_SUBTERMS_INHERIT,
+    'description' => 'Taxonomy subterms depth.',
+  );
+  $schema['taxonomy_vocabulary']['fields']['taxonomy_subterms'] = array(
+    'type' => 'int', 
+    'size' => 'tiny',
+    'default' => TAXONOMY_SUBTERMS_DISABLE,
+    'description' => 'Taxonomy subterms depth.',
+  );
+  $schema['taxonomy_term_data']['fields']['taxonomy_subterms_map'] = array(
+    'type' => 'int',
+    'size' => 'tiny',
+    'default' => TAXONOMY_SUBTERMS_INHERIT,
+    'description' => 'Taxonomy subterms map.',
+  );
+  $schema['taxonomy_vocabulary']['fields']['taxonomy_subterms_map'] = array(
+    'type' => 'int', 
+    'size' => 'tiny',
+    'default' => TAXONOMY_SUBTERMS_DISABLE,
+    'description' => 'Taxonomy subterms map.',
+  );
+}
+

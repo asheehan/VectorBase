@@ -1,9 +1,9 @@
 <?php
 
 /**
- * Implements hook_skinr_group_PLUGIN_info().
+ * Implements hook_fusion_apply_group_PLUGIN_info().
  */
-function fusion_core_skinr_group_core_info() {
+function fusion_core_fusion_apply_group_core_info() {
   $groups['menus'] = array(
     'title' => t('Menus'),
     'description' => t('Menu and navigation styles.'),
@@ -18,9 +18,9 @@ function fusion_core_skinr_group_core_info() {
 }
 
 /**
- * Implements hook_skinr_skin_PLUGIN_info().
+ * Implements hook_fusion_apply_skin_PLUGIN_info().
  */
-function fusion_core_skinr_skin_core_info() {
+function fusion_core_fusion_apply_skin_core_info() {
 
   $skins = array();
   
@@ -194,14 +194,14 @@ function fusion_core_skinr_skin_core_info() {
        'js' => array('js/jquery.overlabel.js'), 
     ),
     'options' => array(
-      'fusion_float_imagefield_left' => array(
+      'fusion_horizontal_login' => array(
         'title' => t('Horizontal: puts user login block on a single line with label overlays (good for Header Top region)'),
         'class' => array('fusion-horiz-login'),
       ),
     ),
   );
   
-  // TODO: detect current grid, and add column settings accordingly.
+  // @todo: detect current grid, and add column settings accordingly.
   $skins['fusion_skins_grid16_width'] = array(
     'title' => t('Width (16 column grid)'),
     'description' => t("Change the width of this block. Fluid grid % widths are relative to the parent region's width. Default widths: sidebar blocks default to the sidebar width; in other regions width is divided equally among all blocks."),    
@@ -226,8 +226,8 @@ function fusion_core_skinr_skin_core_info() {
 }
 
 /**
- * Generates Skinr options based on Fusion grid parameters.
- * Assists in hook_skinr_skin_PLUGIN_info() implementation.
+ * Generates fusion_apply options based on Fusion grid parameters.
+ * Assists in hook_fusion_apply_skin_PLUGIN_info() implementation.
  * @return array
  */
 function _fusion_skins_grid_options($units, $width) {

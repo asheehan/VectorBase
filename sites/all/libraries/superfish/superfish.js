@@ -112,6 +112,7 @@
       sf.IE7fix.call($ul);
       o.onBeforeShow.call($ul);
       $ul.animate(o.animation,o.speed,function(){ sf.IE7fix.call($ul); o.onShow.call($ul); });
+      this.css('z-index','9999');
       return this;
     }
   });

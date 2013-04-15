@@ -1,0 +1,56 @@
+// dot 2.30.1 on Mac OS X 10.8.3
+// SchemaSpy rev 590
+digraph "ldap_authorization" {
+  graph [
+    rankdir="RL"
+    bgcolor="#f7f7f7"
+    nodesep="0.18"
+    ranksep="0.46"
+    fontname="Helvetica"
+    fontsize="11"
+  ];
+  node [
+    fontname="Helvetica"
+    fontsize="11"
+    shape="plaintext"
+  ];
+  edge [
+    arrowsize="0.8"
+  ];
+  "ldap_authorization" [
+    label=<
+    <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" BGCOLOR="#ffffff">
+      <TR><TD COLSPAN="3" BGCOLOR="#9bab96" ALIGN="CENTER">ldap_authorization</TD></TR>
+      <TR><TD PORT="numeric_consumer_conf_id" COLSPAN="3" BGCOLOR="#bed1b8" ALIGN="LEFT">numeric_consumer_conf_id</TD></TR>
+      <TR><TD PORT="sid" COLSPAN="3" ALIGN="LEFT">sid</TD></TR>
+      <TR><TD PORT="consumer_type" COLSPAN="3" ALIGN="LEFT">consumer_type</TD></TR>
+      <TR><TD PORT="consumer_module" COLSPAN="3" ALIGN="LEFT">consumer_module</TD></TR>
+      <TR><TD PORT="status" COLSPAN="3" ALIGN="LEFT">status</TD></TR>
+      <TR><TD PORT="only_ldap_authenticated" COLSPAN="3" ALIGN="LEFT">only_ldap_authenticated</TD></TR>
+      <TR><TD PORT="derive_from_dn" COLSPAN="3" ALIGN="LEFT">derive_from_dn</TD></TR>
+      <TR><TD PORT="derive_from_dn_attr" COLSPAN="3" ALIGN="LEFT">derive_from_dn_attr</TD></TR>
+      <TR><TD PORT="derive_from_attr" COLSPAN="3" ALIGN="LEFT">derive_from_attr</TD></TR>
+      <TR><TD PORT="derive_from_attr_attr" COLSPAN="3" ALIGN="LEFT">derive_from_attr_attr</TD></TR>
+      <TR><TD PORT="derive_from_attr_use_first_attr" COLSPAN="3" ALIGN="LEFT">derive_from_attr_use_first_attr</TD></TR>
+      <TR><TD PORT="derive_from_entry" COLSPAN="3" ALIGN="LEFT">derive_from_entry</TD></TR>
+      <TR><TD PORT="derive_from_entry_entries" COLSPAN="3" ALIGN="LEFT">derive_from_entry_entries</TD></TR>
+      <TR><TD PORT="derive_from_entry_attr" COLSPAN="3" ALIGN="LEFT">derive_from_entry_attr</TD></TR>
+      <TR><TD PORT="derive_from_entry_search_all" COLSPAN="3" ALIGN="LEFT">derive_from_entry_search_all</TD></TR>
+      <TR><TD PORT="mappings" COLSPAN="3" ALIGN="LEFT">mappings</TD></TR>
+      <TR><TD PORT="use_filter" COLSPAN="3" ALIGN="LEFT">use_filter</TD></TR>
+      <TR><TD PORT="synch_to_ldap" COLSPAN="3" ALIGN="LEFT">synch_to_ldap</TD></TR>
+      <TR><TD PORT="synch_on_logon" COLSPAN="3" ALIGN="LEFT">synch_on_logon</TD></TR>
+      <TR><TD PORT="revoke_ldap_provisioned" COLSPAN="3" ALIGN="LEFT">revoke_ldap_provisioned</TD></TR>
+      <TR><TD PORT="create_consumers" COLSPAN="3" ALIGN="LEFT">create_consumers</TD></TR>
+      <TR><TD PORT="regrant_ldap_provisioned" COLSPAN="3" ALIGN="LEFT">regrant_ldap_provisioned</TD></TR>
+      <TR><TD PORT="derive_from_entry_user_ldap_attr" COLSPAN="3" ALIGN="LEFT">derive_from_entry_user_ldap_attr</TD></TR>
+      <TR><TD PORT="derive_from_attr_nested" COLSPAN="3" ALIGN="LEFT">derive_from_attr_nested</TD></TR>
+      <TR><TD PORT="derive_from_entry_nested" COLSPAN="3" ALIGN="LEFT">derive_from_entry_nested</TD></TR>
+      <TR><TD PORT="derive_from_entry_use_first_attr" COLSPAN="3" ALIGN="LEFT">derive_from_entry_use_first_attr</TD></TR>
+      <TR><TD PORT="derive_from_entry_entries_attr" COLSPAN="3" ALIGN="LEFT">derive_from_entry_entries_attr</TD></TR>
+      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">  </TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">1 row</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">  </TD></TR>
+    </TABLE>>
+    URL="tables/ldap_authorization.html"
+    tooltip="ldap_authorization"
+  ];
+}

@@ -68,7 +68,7 @@ function search_help($path, $arg) {
     case 'admin/help#search':
       $output = '';
       $output .= '<h3>' . t('About') . '</h3>';
-      $output .= '<p>' . t('The Search module provides the ability to index and search for content by exact keywords, and for users by username or e-mail. For more information, see the online handbook entry for <a href="@search-module">Search module</a>.', array('@search-module' => 'http://drupal.org/handbook/modules/search/', '@search' => url('search'))) . '</p>';
+      $output .= '<p>' . t('The Search module provides the ability to index and search for content by exact keywords, and for users by username or e-mail. For more information, see the online handbook entry for <a href="@search-module">Search module</a>.', array('@search-module' => 'http://drupal.org/documentation/modules/search/', '@search' => url('search'))) . '</p>';
       $output .= '<h3>' . t('Uses') . '</h3>';
       $output .= '<dl>';
       $output .= '<dt>' . t('Searching content and users') . '</dt>';
@@ -994,7 +994,7 @@ function search_form($form, &$form_state, $action = '', $keys = '', $module = NU
   // processed_keys is used to coordinate keyword passing between other forms
   // that hook into the basic search form.
   $form['basic']['processed_keys'] = array('#type' => 'value', '#value' => '');
-  $form['basic']['submit'] = array('#type' => 'submit', '#value' => t('Search'));
+  $form['basic']['submit'] = array('#type' => 'submit', '#value' => t('Go'));
 
   return $form;
 }
@@ -1016,8 +1016,13 @@ function search_box($form, &$form_state, $form_id) {
     '#attributes' => array('title' => t('Enter the terms you wish to search for.')),
   );
   $form['actions'] = array('#type' => 'actions');
-  $form['actions']['submit'] = array('#type' => 'submit', '#value' => t('Search'));
+  $form['actions']['submit'] = array('#type' => 'submit', '#value' => t('Go'));
   $form['#submit'][] = 'search_box_form_submit';
+
+ global $user;
+  if ($user->uid) {
+    $form['#token'] = FALSE;
+  }
 
   return $form;
 }
@@ -1292,6 +1297,11 @@ function search_simplify_excerpt_match($key, $text, $offset, $boundary) {
   $pos = NULL;
   $simplified_key = search_simplify($key);
   $simplified_text = search_simplify($text);
+
+  // Return immediately if simplified key or text are empty.
+  if (!$simplified_key || !$simplified_text) {
+    return FALSE;
+  }
 
   // Check if we have a match after simplification in the text.
   if (!preg_match('/' . $boundary . $simplified_key . $boundary . '/iu', $simplified_text, $match, PREG_OFFSET_CAPTURE, $offset)) {

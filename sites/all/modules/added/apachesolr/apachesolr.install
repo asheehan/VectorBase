@@ -106,8 +106,6 @@ function apachesolr_schema() {
       'can disable' => FALSE,
       // Variable name to use in exported code.
       'identifier' => 'environment',
-      // Use the environment load callback directly.
-      'load callback' => 'apachesolr_environment_load',
       // Thin wrapper for the environment save callback.
       'save callback' => 'apachesolr_ctools_environment_save',
       // Thin wrapper for the environment delete callback.
@@ -191,8 +189,8 @@ function apachesolr_schema() {
       'other' => 'apachesolr_index_entities',
       'node' => 'apachesolr_index_entities_node',
   );
-  foreach ($types as $type) {
-    $schema[$type] = array(
+  foreach ($types as $type => $table) {
+    $schema[$table] = array(
       'description' => 'Stores a record of when an entity changed to determine if it needs indexing by Solr.',
       'fields' => array(
         'entity_type' => array(
@@ -214,7 +212,7 @@ function apachesolr_schema() {
           'not null' => TRUE,
         ),
         'status' => array(
-          'description' => 'Boolean indicating whether the entity is visible to non-administrators (eg, published for nodes).',
+          'description' => 'Boolean indicating whether the entity should be in the index.',
           'type' => 'int',
           'not null' => TRUE,
           'default' => 1,
@@ -227,13 +225,13 @@ function apachesolr_schema() {
         ),
       ),
       'indexes' => array(
-        'changed' => array('bundle', 'status', 'changed'),
+        'bundle_changed' => array('bundle', 'changed'),
       ),
       'primary key' => array('entity_id'),
     );
     if ($type == 'other') {
       // Need the entity type also in the pkey for multiple entities in one table.
-      $schema[$type]['primary key'][] = 'entity_type';
+      $schema[$table]['primary key'][] = 'entity_type';
     }
   }
 
@@ -280,6 +278,7 @@ function apachesolr_uninstall() {
   variable_del('apachesolr_index_updated');
   variable_del('apachesolr_read_only');
   variable_del('apachesolr_set_nodeapi_messages');
+  variable_del('apachesolr_last_optimize');
   // Remove blocks.
   db_delete('block')->condition('module', 'apachesolr')->execute();
 }
@@ -601,7 +600,11 @@ function apachesolr_update_7011() {
  * Rename some variables and update the database tables
  */
 function apachesolr_update_7012() {
-  module_load_include('inc', 'apachesolr', 'apachesolr.index');
+  // @see: drupal_load()
+  if (!function_exists('apachesolr_default_environment')) {
+    include_once dirname(__FILE__) . '/apachesolr.module';
+  }
+
   $env_id = apachesolr_default_environment();
 
   // Variable changed from integer to array with environment integers
@@ -630,8 +633,8 @@ function apachesolr_update_7012() {
       'other' => 'apachesolr_index_entities',
       'node' => 'apachesolr_index_entities_node',
   );
-  foreach ($types as $type) {
-    $schema[$type] = array(
+  foreach ($types as $type => $table) {
+    $schema[$table] = array(
       'description' => 'Stores a record of when an entity changed to determine if it needs indexing by Solr.',
       'fields' => array(
         'entity_type' => array(
@@ -672,10 +675,10 @@ function apachesolr_update_7012() {
     );
     if ($type == 'other') {
       // Need the entity type also in the pkey for multiple entities in one table.
-      $schema[$type]['primary key'][] = 'entity_type';
+      $schema[$table]['primary key'][] = 'entity_type';
     }
     // Create the table
-    db_create_table($type, $schema[$type]);
+    db_create_table($table, $schema[$table]);
   }
 
   $schema['apachesolr_index_bundles'] = array(
@@ -737,8 +740,26 @@ function apachesolr_update_7012() {
       }
     }
     // Set all except the excluded types
+    // @see apachesolr_index_set_bundles()
     foreach ($options as $entity_type => $bundles) {
-       apachesolr_index_set_bundles($env_id, $entity_type, $bundles);
+      db_delete('apachesolr_index_bundles')
+        ->condition('env_id', $env_id)
+        ->condition('entity_type', $entity_type)
+        ->execute();
+
+      if ($bundles) {
+        $insert = db_insert('apachesolr_index_bundles')
+          ->fields(array('env_id', 'entity_type', 'bundle'));
+
+        foreach ($bundles as $bundle) {
+          $insert->values(array(
+            'env_id' => $env_id,
+            'entity_type' => $entity_type,
+            'bundle' => $bundle,
+          ));
+        }
+        $insert->execute();
+      }
     }
     // Remove the excluded types
     apachesolr_environment_variable_del($env_id, 'apachesolr_search_excluded_types');
@@ -777,4 +798,28 @@ function apachesolr_update_7013() {
     'not null' => TRUE)
   );
   db_add_primary_key('apachesolr_index_bundles', array('env_id', 'entity_type', 'bundle'));
+}
+
+/**
+ * Remove status from the key.
+ */
+function apachesolr_update_7014() {
+  $types = array(
+    'other' => 'apachesolr_index_entities',
+    'node' => 'apachesolr_index_entities_node',
+  );
+  foreach ($types as $type => $table) {
+    db_drop_index($table, 'changed');
+    db_add_index($table, 'bundle_changed', array('bundle', 'changed'));
+  }
+}
+
+
+/**
+ * Fix primary key schema mismatch for those who cleanly installed with beta16.
+ */
+function apachesolr_update_7015() {
+  // Brand new installations since update_7013 have the wrong primary key.
+  db_drop_primary_key('apachesolr_index_entities');
+  db_add_primary_key('apachesolr_index_entities', array('entity_id', 'entity_type'));
 }

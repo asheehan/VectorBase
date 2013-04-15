@@ -1,15 +1,17 @@
-
 name = Fusion Core
-description = <a href="http://drupal.org/project/fusion">Fusion Core</a> is the grid-enabled base theme for powerful sub-themes.  With the <a href="http://drupal.org/project/skinr">Skinr</a> module, it enables easy point-and-click theming. By <a href="http://www.topnotchthemes.com">TopNotchThemes</a>
+description = <a href="http://drupal.org/project/fusion">Fusion Core</a> is the grid-enabled base theme for powerful sub-themes.  With the <a href="http://drupal.org/project/fusion_accelerator">Fusion Accelerator</a> module, it enables easy point-and-click theming. By <a href="http://www.topnotchthemes.com">TopNotchThemes</a>
 core = 7.x
 engine = phptemplate
+
+; Uncomment once this bug is squashed in core: http://drupal.org/node/986888
+; hidden = TRUE
 
 stylesheets[all][] = css/fusion-style.css
 stylesheets[all][] = css/fusion-typography.css
 stylesheets[all][] = skins/core/fusion-core-skins.css
 
-skinr[api] = 2
-skinr[directory] = skins
+fusion[api] = 2
+fusion[directory] = skins
 
 scripts[] = js/script.js
 
@@ -92,9 +94,9 @@ settings[grid_adjusted_regions_fluid][content][] = sidebar_second
 ; Nested group fluid width adjustments: regions inside a parent group to subtract to get remaining width
 settings[grid_adjusted_groups_fluid][content_group][] = sidebar_second
 
-; Information added by drupal.org packaging script on 2011-08-03
-version = "7.x-1.0-alpha2"
+; Information added by drupal.org packaging script on 2012-03-23
+version = "7.x-2.0-beta2"
 core = "7.x"
 project = "fusion"
-datestamp = "1312385816"
+datestamp = "1332517846"
 

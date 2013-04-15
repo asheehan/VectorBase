@@ -1,0 +1,6 @@
+<?php
+
+function github_widget_block_view($op='list', $delta=0, $edit=array()){
+ 	$blocks['#markup'] = "<div class='github_widget' data-user='asheehan'><h2>Andrew's Github Projects</h2></div><hr><div class='github_widget' data-user='bobular'><h2>Bob's Github Projects</h2></div><hr><div class='github_widget' data-user='sethnr'><h2>Seth's Github Projects</h2></div><script src='github_widget.js'></script><link href='github_widget.css' rel='stylesheet' />";
+	return $blocks;
+}

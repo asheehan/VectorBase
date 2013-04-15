@@ -8,8 +8,7 @@
  */
 
 function ldap_servers_settings() {
-
-  require_once('ldap_servers.functions.inc');
+  ldap_server_module_load_include('inc', 'ldap_servers', 'ldap_servers.functions');
 
   if (! ldap_servers_ldap_extension_loaded()) {
     drupal_set_message(t('PHP LDAP Extension is not loaded.'), "warning");
@@ -26,7 +25,7 @@ function ldap_servers_settings() {
     '#type' => 'checkbox',
     '#title' => t('If checked, modules using LDAP will not allow credentials to
       be entered on or submitted to HTTP pages, only HTTPS. This option should be used with an
-      approache to get all logon forms to be https, such as:') .
+      approach to get all logon forms to be https, such as:') .
       theme('item_list', array('items' => $https_approaches)),
     '#default_value' => variable_get('ldap_servers_require_ssl_for_credentails', 1),
   );
@@ -50,7 +49,7 @@ function ldap_servers_settings() {
     discovery of a clear text password.'),
     );
 
- 
+
     // $options will be empty if server does not support mcrypt.
   // Disable the form field and explain this to the user.
   if (empty($options)) {
