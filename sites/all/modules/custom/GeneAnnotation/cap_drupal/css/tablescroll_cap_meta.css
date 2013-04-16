@@ -1,0 +1,74 @@
+.outer {
+    position:relative;
+    padding:4em 0 3em 0;
+    width:54em;
+    background:#eee;
+    margin:0 auto 3em auto;
+}
+.innera {
+    overflow:auto;
+    width:54em;
+    height:9.6em;
+    background:#eee;
+}
+.outer table caption {
+    position:absolute;
+    width:51.7em;
+    text-align:center;
+    top:0;
+    left:0;
+    height:1.5em;
+    background:#697210;
+    border:0.1em solid #fff;
+    color:#fff;
+}
+.outer thead tr {
+    position:absolute;
+    top:1.5em;
+    height:1.5em;
+    left:0;
+}
+.outer tfoot td {
+    position:absolute;
+    width:51.5em;
+    text-align:center;
+    background:#f0c992; 
+    border:0.1em solid #000;
+    color:#000;
+    bottom:0;
+    left:0
+}
+.outer th, .outer td {
+    width:10em; 
+    text-align:left;
+}
+.outer th {
+        background:#724a10; 
+        color:#fff;}
+.outer .dk {background:#fff;
+}
+
+/* .tableone {width:650px; border-collapse:collapse; margin:0 auto;}
+.tabletwo {width:620px; border-collapse:collapse;} */
+.tableone {width:880px; border-collapse:collapse; margin:0 auto;}
+.tabletwo {width:850px; border-collapse:collapse;}
+.th1 {width:175px;} /* main table (header/col names first col width */
+.th2 {width:604px;}
+
+.td1 {width:175px;} /* inner table first col width - keep same as outer table to keep flush - except for last for scroll bar */
+.td2 {width:574px;}
+
+.tableone {background:#697210; border:1px solid #fff; color:#fff;} /* header/footer bg colour... */
+.tableone td {border:1px solid #fff; color:#fff;}
+.tableone tbody {background:#f0c992; color:#000;} /* general bg colour - used for first col etc.. */
+.tableone caption {background:#fff; color:#697210; font-size:1.2em; margin:0 auto;}
+
+/* even rows bg colour */
+.tabletwo td {background:#eee; color:#000;} /* default row colour - i.e. given to odd rows as they are not assigned to dk class */
+
+.tableone th, .tabletwo th {text-align:left;}
+
+/* odd rows bg colour */
+.tabletwo tr.dk td {background:#ddd; color:#000;} /* even row bg colour - simply assign alternating rows to this class or not */
+
+.innerb {height:15.5em; overflow:auto;} /* height of table - 1em is equal to the current font size. */
