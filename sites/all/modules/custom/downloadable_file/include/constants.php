@@ -52,3 +52,11 @@ define('DOWNLOAD_COUNT_VERSION_ID_GET_KEY', 'vid');
  */
 define('DATA_FILE_DOWNLOAD_LINK_CSS_CLASS', 'data-file-download-link');
 
+/** 
+ *
+ * Last part of the url for the given node if you are viewing that node.
+  * this is used because it is a unique value AND is user friendly...kind of.
+  * This is the key used to find the node to increment its download count.
+  */
+  define('DATA_FILE_NODE_VIEW_BASENAME', 'file');
+

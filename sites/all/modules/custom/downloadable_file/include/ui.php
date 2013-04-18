@@ -254,18 +254,19 @@ function downloadable_file_block_contents($delta) {
 							$fileNames .= '">More...</a></li>';
 							break;
 						}
-						$fileNames .= '<li><a href="/node/';
-						$fileNames .= $file->nid;
-						$fileNames .= '" nid="';
-						$fileNames .= $file->nid;	
-						$fileNames .= '" vid="';
-						$fileNames .= $file->vid;
-						$fileNames .= '">';
-						$fileNames .= $file->title;
+						$q = db_select('url_alias', 'a');
+						$q->addField('a', 'alias');
+						$q->condition('a.source', "node/{$file->nid}", '=');
+						$results = $q->execute()->fetchAssoc();
+						$url_download = '';
+						$url_alias = '';
+						if($results !== FALSE) {
+							$url_alias = $results['alias'];
+							$url_download = str_replace('content', 'download', $results['alias']);
+						}
 						$fileSize = getFileSizeHumanReadable($file->filesize);
-						$fileNames .= " | $fileSize";
-						$fileNames .= '</a></li>';
-
+						$fileNames .= "<li><a href=\"/$url_alias\">{$file->title}</a> | ";
+						$fileNames .= "<a href=\"/$url_download\">Download ($fileSize)</a></li>";
 					}
 					$fileNames .= '</ul>';
 					return array('#markup' => $fileNames);

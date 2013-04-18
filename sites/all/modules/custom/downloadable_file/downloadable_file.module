@@ -232,20 +232,6 @@ function downloadable_file_field_attach_view_alter(&$output, $context) {
 
 /**
  * Implementation of hook_node_validate
- * 
- * Adds an extra level of validation to submitting new or editing existing
- * Data files (downlaodable files). This method checks the filename itself
- * and nothing more. Also added a hack to highlight the file field in red
- * when it doesn't validate.  The existing form_set_error method doesn't
- * seem to work with complex forms.
- *
- * @param object $node The downloadable_file node object
- * @param array[] $form Array structure holding all info on the 'Add to content'
- * web form.
- * @param array[] $form_state Array structure holding the state information of
- * from array, like which button was pressed and what fields were filled in, etc
- * @return boolean true if the node validates or false if something is wrong. 
- * Errors are printed to the red error box at the top of the form.
  */
 function downloadable_file_node_validate($node, $form, &$form_state) {
 
@@ -255,7 +241,7 @@ function downloadable_file_node_validate($node, $form, &$form_state) {
 		$errors = array();//validateFilename($file->filename);	
 		if(!empty($errors)) {
 			foreach($errors as $error) {
-				form_set_error('field_file', "Filename error: $error");
+				form_set_error('field_file', $error);
 				drupal_add_css('.file {border-style:solid;border-width:2px;border-radius:5px;border-color:red;}', 'inline');
 			}
 			return false;
@@ -310,9 +296,8 @@ function validateFilename($filename) {
 	}
 
 	// Validate the first part of the filename
-	$bodyPartIndex = 0;
 	$bodyParts = explode('_',$fileNameParts[0]);
-	$first = substrnpos($bodyParts[$bodyPartIndex], '-', 2);
+	$bodyPartIndex = 0;
 	$vocab = taxonomy_vocabulary_machine_name_load('organisms_taxonomy');
 	$tree = taxonomy_get_tree($vocab->vid);
 	$fieldValid = false;
@@ -320,7 +305,7 @@ function validateFilename($filename) {
 		$taxStr = str_replace(' ', '-', $tax->name);
 		$taxStr = str_replace('.', '', $taxStr);
 		// Checking if the org name is within the first part of the filename
-		if(strtolower($first) === strtolower($taxStr)) {
+		if(strpos(strtolower($bodyParts[$bodyPartIndex]), strtolower($taxStr)) !== false) {
 			$fieldValid = true;
 			break;
 		}

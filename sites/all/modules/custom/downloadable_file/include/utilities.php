@@ -165,13 +165,13 @@ function getSortedFiles($organismId, $tagId, $limit) {
 function download_file_post_render($content, $element) {
 	$fileSize = getFileSizeHumanReadable($element['field_file']['#items'][0]['filesize']);
 	$matches = array();
+	$urlPieces = parse_url(request_uri());
 	$stuff = $element['field_file']['#items'][0]['filename'];
 	$content = preg_replace("#href\s*=\s*\".+?\"\s*(.+?)\s*>$stuff</a>#", 
-			"href=\"/sites/all/modules/custom/downloadable_file/include/incrementFileDownloadCount.php?nid=" .
-			$element['#node']->nid  . "&vid=" . 
-			$element['#node']->vid . "\" class=\"" . 
-			DATA_FILE_DOWNLOAD_LINK_CSS_CLASS . "\" $1>" . $stuff . 
-			' | ' . $fileSize . '</a>', $content);
+			"href=\"/download/" . basename($urlPieces['path']) . "\" class=\"" .
+			DATA_FILE_DOWNLOAD_LINK_CSS_CLASS . 
+			"\" $1>$stuff | $fileSize </a>",
+			$content);
 	return $content;
 }
 
@@ -292,42 +292,4 @@ function getShortNames() {
 		      );
 	return $names;
 }
-
-
-/**
- * Convenience method that returns a string from the beginning
- * to the nth instance of a given character.
- *
- * Warning: String-typed checks are performed in this function,
- * so make sure the original and char inputs are strings. If,
- * for some reason, one of the 2 is something else, they will
- * never match.
- * Warning 2: Negative numbers will not work in this method.
- *
- * @param string $original The given string.
- * @param string $char The character to search for.
- * @param int	$nth How many occurrances to count before returning
- * the substring.
- *
- * @return The substring before the nth occurrance of the given char,
- * or the original string if the char is not found or if there are less
- * than n chars in the string. 
- */
-function substrnpos($original, $char, $nth) {
-	$max = strlen($original);
-	$n = 0;
-	for($i = 0; $i < $max; $i++) {
-		if($original[$i] === $char) {
-			$n++;
-			if($n>=$nth) {
-				return substr($original, 0, $i);
-			}
-		}
-	}
-	return $original;
-}
-
-
-
-
 

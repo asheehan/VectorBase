@@ -264,7 +264,7 @@ function GeneAnnotation_menu() {
         'type' => MENU_CALLBACK,
     );
 
-    $items['download'] = array(
+    $items['cap_download'] = array(
         'title' => 'Dependent dropdown',
         'page callback' => 'drupal_get_form',
         // careful if changing names as the form name (the routine name) is referenced in the php template file
