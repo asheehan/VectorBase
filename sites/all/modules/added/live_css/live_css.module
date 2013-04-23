@@ -230,7 +230,8 @@ function live_css_save() {
     return;
   }
 
-  if (file_munge_filename($relative_file_path, 'css less') != $relative_file_path) {
+  $filename = array_pop(explode('/', 'asdf/asdf.g'));
+  if (file_munge_filename($filename, 'css less') != $filename) {
     echo drupal_json_encode(array(
       'result' => 'failure',
       'filename' => $href,

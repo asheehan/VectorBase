@@ -269,8 +269,8 @@ window.sidebar = {
         $('#csidebar').addClass(sidebar.dock);
         
         //hide admin menu d7
-        if($('#toolbar').length > 0 && Drupal.settings.live_css.hideadmin == 1){
-            $('#toolbar').css('display', 'none');
+        if($('#toolbar, #admin-menu').length > 0 && Drupal.settings.live_css.hideadmin == 1){
+            $('#toolbar, #admin-menu').css('display', 'none');
             $(document.body).removeClass('toolbar');
             $(document.body).css('padding-top', '');
         }
@@ -321,8 +321,8 @@ window.sidebar = {
        $('#csstab').css('display', 'block');
        
         //show admin menu d6
-        if($('#toolbar').length > 0){
-            $('#toolbar').css('display', 'block');
+        if($('#toolbar, #admin-menu').length > 0){
+            $('#toolbar, #admin-menu').css('display', 'block');
             $(document.body).addClass('toolbar');
             $(document.body).css('padding-top', '');
         }
@@ -368,7 +368,7 @@ window.style = function(href, complete){
         var dots = '';
         while(parts.pop()){
             baseURI.push(parts.join('/'));
-            css = css.replace(new RegExp('url\\(' + dots, 'gi'), 'url(' + parts.join('/') + '/');
+            css = css.replace(new RegExp('url\\((?!\\/)' + dots, 'gi'), 'url(' + parts.join('/') + '/');
             dots += '../';
         }
         return css;

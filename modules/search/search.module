@@ -994,7 +994,7 @@ function search_form($form, &$form_state, $action = '', $keys = '', $module = NU
   // processed_keys is used to coordinate keyword passing between other forms
   // that hook into the basic search form.
   $form['basic']['processed_keys'] = array('#type' => 'value', '#value' => '');
-  $form['basic']['submit'] = array('#type' => 'submit', '#value' => t('Go'));
+  $form['basic']['submit'] = array('#type' => 'submit', '#value' => t('Search'));
 
   return $form;
 }
@@ -1013,16 +1013,11 @@ function search_box($form, &$form_state, $form_id) {
     '#title_display' => 'invisible',
     '#size' => 15,
     '#default_value' => '',
-    '#attributes' => array('title' => t('Enter the terms you wish to search for.')),
+    '#attributes' => array('title' => t('Enter the terms you wish to search for.'), 'placeholder' => t('Enter serach terms')),
   );
   $form['actions'] = array('#type' => 'actions');
   $form['actions']['submit'] = array('#type' => 'submit', '#value' => t('Go'));
   $form['#submit'][] = 'search_box_form_submit';
-
- global $user;
-  if ($user->uid) {
-    $form['#token'] = FALSE;
-  }
 
   return $form;
 }

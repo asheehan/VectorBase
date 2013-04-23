@@ -40,13 +40,3 @@
 .view .progress-disabled {
   float: none;
 }
-
-.views-reset-button #edit-reset {
-  background: transparent;
-  border:none;
-  text-transform: none;
-  color: rgb(39, 99, 140);
-  text-decoration: underline;
-}
-
-
