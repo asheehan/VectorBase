@@ -1,7 +1,7 @@
-<?
+<?php
 
-function connectToDb() {
-	
+function connectToDb()
+{
 	$db = mysql_connect( "localhost","mito","m1t0drUp@l" );
 	
 	if( $db === FALSE )
@@ -14,8 +14,8 @@ function connectToDb() {
 }
 
 
-function printDbError( $q )    {
-
+function printDbError( $q )
+{
 	global $db;
 
 	print "\nDatabase error! ".mysql_affected_rows( )."\n";
@@ -25,15 +25,15 @@ function printDbError( $q )    {
 }
 
 
-function getDbTermIdByTermId( $termId ) {
-	
+function getDbTermIdByTermId( $termId )
+{
 	$q = "SELECT id FROM cv_term WHERE term_id='$termId'";
 	$qr = mysql_query( $q );
 	
 	$matchingRows = mysql_num_rows( $qr );
 	
-	if( $matchingRows < 1 || $matchingRows > 1 ) {
-		
+	if( $matchingRows < 1 || $matchingRows > 1 )
+	{
 		dbAlert( $q );
 	}
 	
@@ -43,21 +43,38 @@ function getDbTermIdByTermId( $termId ) {
 }
 
 
-function getTermIdByDbTermId( $dbTermId ) {
-
+function getTermIdByDbTermId( $dbTermId )
+{
 	$q = "SELECT term_id FROM cv_term WHERE id='$dbTermId'";
 	$qr = mysql_query( $q );
 
 	$matchingRows = mysql_num_rows( $qr );
 
-	if( $matchingRows < 1 || $matchingRows > 1 ) {
-
+	if( $matchingRows < 1 || $matchingRows > 1 )
+	{
 		dbAlert( $q );
 	}
 
 	$row = mysql_fetch_array( $qr );
 
 	return $row[ 'term_id' ];
+}
+
+
+function getPathId( $cvId, $xrefId )
+{
+	$q = "SELECT id FROM cv_path WHERE cv_id=$cvId AND term_xref_id='$xrefId' LIMIT 1";	
+	$qr = mysql_query( $q );
+print $q;
+	if( mysql_num_rows( $qr ) > 0 )
+	{
+		$row = mysql_fetch_array( $qr );
+		return $row['id'];
+	}
+	else
+	{
+		return "-1";
+	}
 }
 
 ?>
