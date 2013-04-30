@@ -43,6 +43,8 @@ function acquia_marina_preprocess_html(&$vars) {
     drupal_add_css('#site-name a{background-color: rgba(0,0,255,0.4);}', array('group' => CSS_THEME, 'type' => 'inline'));
 
   //bella is live. if not bella, show the name of this machine
+  } else if (strstr(gethostname(),"bella")){
+    variable_set('site_name', 'VectorBase');
   }else if($_SERVER['SERVER_NAME']!='www.vectorbase.org' && $_SERVER['SERVER_NAME']!='vectorbase.org' && strstr(gethostname(),"bella") ){
    $newName=strstr($_SERVER['SERVER_NAME'],'.',TRUE);
     variable_set('site_name', ucfirst($newName).'.VectorBase');

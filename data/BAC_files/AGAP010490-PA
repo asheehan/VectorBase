@@ -1,0 +1,214 @@
+Protein	AGAP010490-PA
+First residue	M
+Seq size	3521
+Location/Gene	3L:5009145:5025078:1|gene:AGAP010490
+CDS	AGAP010490-RA
+Seq size*	10566
+Description	SCALAR(0x966f34c)|3L:5009145:5025078:1|gene:AGAP010490
+ATG first?	ATG
+Last codon	*
+Genomic match	3L_Start_5000000
+E value	0
+Chromosome and link to ENSEMBL	3L
+Start	5009145
+End	5025078
+Extent of match	10605
+% identity	100
+Number of segments (exons, approximate)	18
+Orientation	FOR
+Satisfied 95% id on length 100	1
+Best match to assembled ESTs	est-07-contig_13928
+E value*	0
+Score	1427
+Extent of match*	724
+Length of best match	728
+% identity*	99
+% Coverage	99
+First residue of match	5
+First residue of sequence	8017
+Number of segments	1
+Annotation mismatch	
+Orientation*	FOR
+Satisfied 95% id on length 100*	1
+Number of sequences	2
+all-instars	0
+normalized-fatbody	0
+head-all	0
+Immune cells	1
+Pasteur annotation	0
+Sugar-abd	0
+Blood-abd	0
+InfBlood-abd	0
+Blood-fed	1
+Non-Blood-fed	0
+Sg-male	0
+SG-fem	0
+SG-Pasteur	0
+All female glands	0
+Best match to Affymetrix chip database	Ag.3L.520.0_CDS_a_at
+E value**	0
+Extent of match**	569
+Length of best match*	569
+% identity**	100
+% Coverage*	100
+First residue of match*	1
+First residue of sequence*	9996
+Number of segments*	1
+Annotation mismatch*	
+Orientation**	FOR
+Satisfied 95% id on length 100**	1
+L-mean	909
+Males-mean	863
+SF-mean	731
+3h-mean	563
+24h-mean	929
+48h-mean	1017
+72h-mean	1035
+15d-mean	1192
+Sum of residues (larger value indicates differential aa usage)	0.12
+Increased AA (fold increase over average)	
+Cys number	67
+Predicted Tyr-SO4 - Prosite rules	6
+% Ser + Thr	15.9
+% Pro	5.2
+% Gly	7.0
+% Gly+Pro	12.1
+Number of possible HO-Pro [LPAE]-P-G	3
+Number of possible OH-lysines X-Lys-Gly not Lys-Gly-Pro	8
+Number of ProGly''s	8
+SigP Result	CYT
+Cleavage Position	
+MW	386.74
+pI	5.87
+Mature MW	
+pI*	
+TMHMM result	ExpAA=3.02 First60=2.02 PredHel=0 Topology=o
+Predicted helices	0
+% membrane	
+% outside	
+% inside	
+mTP	0.184
+SP	0.093
+other	0.755
+Loc	_
+Relative Confidence (1 is better)	3
+ProP furin cleavage predictions 	3 | 1345    DDARSPR|SV  0.646 *ProP*  | 1992    GLYRSKR|DE  0.650 *ProP*  | 2495    RAARRKR|WL  0.773 *ProP*  | 
+Best match to NR protein database	AGAP010490-PA
+E value***	0.0
+Match	gi|158293116
+Score*	7137
+Extent of match***	3521
+Length of best match**	3521
+% identity***	100
+% Coverage**	100
+Alphanumeric Index	158293116 XP_558026 3 AGAP010490 157016804 EAL40333 170045722 XP_001850447 1 167868657 EDS32040 157113444 XP_001657831 108877718 EAT41943 3096961 CAA57760 242016272 XP_002428753 212513438 EEB16015 195457012 XP_002075387 GK17684 194171472 EDW86373 195133202 XP_002011028 GI16232 193907003 EDW05870 125982451 XP_001355095 GA17538 54643407 EAL32151 1279384 CAA65830 194896153 XP_001978423 GG17687 190650072 EDV47350
+Text index 	PA RABCONNECTIN CPY HYPOTHETICAL 
+Best match to NR database depleted of Anopheles gambiae sequenc	rabconnectin
+E value****	0.0
+Match*	gi|170045722
+% identity****	82
+% Coverage***	105
+Alphanumeric Index*	170045722 XP_001850447 1 167868657 EDS32040 157113444 XP_001657831 108877718 EAT41943 3096961 CAA57760 242016272 XP_002428753 212513438 EEB16015 195457012 XP_002075387 GK17684 194171472 EDW86373 195133202 XP_002011028 GI16232 193907003 EDW05870 125982451 XP_001355095 GA17538 54643407 EAL32151 1279384 CAA65830 194896153 XP_001978423 GG17687 190650072 EDV47350 195340416 XP_002036809 GM12586 194130925 EDW52968
+Text index *	RABCONNECTIN CPY HYPOTHETICAL 
+Best match to SwissProt	DmX-like protein 1 OS=Homo sapiens GN=DMXL1 PE=1 SV=2
+E value*****	0.0
+Match**	sp|Q9Y485|DMXL1_HUMAN
+Score**	2025
+Extent of match****	3585
+Length of best match***	3027
+% identity*****	37
+% Coverage****	118
+Alphanumeric Index**	Q9Y485 DMXL1_HUMAN 1 DMXL1 2 Q8BPN8 DMXL2_MOUSE DMXL2 3 Q8TDJ6 DMXL2_HUMAN Q6PNC0 DMXL1_MOUSE P47104 RAV1_YEAST RAV1 Q9Y817 RAV1_SCHPO Q6TMK6 GBB1_CRIGR GNB1 P52287 GBB3_RAT GNB3 Q61011 GBB3_MOUSE P54311 GBB1_RAT 4
+Text index **	DMX LIKE OS HOMO SAPIENS GN PE SV MUS MUSCULUS REGULATOR V ATPASE IN VACUOLAR MEMBRANE SACCHAROMYCES CEREVISIAE SCHIZOSACCHAROMYCES POMBE GUANINE NUCLEOTIDE BINDING G I S T SUBUNIT BETA CRICETULUS GRISEUS RATTUS NORVEGICUS 
+Best match to GO database	Drosophila melanogaster - open tracheal system development
+E value******	0
+Function descriptors	Rab GTPase binding||small GTPase regulator activity||GTPase regulator activity||nucleoside\-triphosphatase regulator activity||enzyme regulator activity
+Function parent	enzyme regulator activity
+Function second parent	nucleoside\-triphosphatase regulator activity
+GO #	GO:0017137
+E value of functional GO	0
+Component descriptors	synaptic vesicle||clathrin\-coated vesicle||coated vesicle||cytoplasmic membrane\-bounded vesicle||cytoplasmic vesicle||nuclear cyclin\-dependent protein kinase holoenzyme complex||cyclin\-dependent protein kinase holoenzyme complex||outer membrane\-bounded periplasmic space||external encapsulating structure part||cell part
+Component parent	cell part
+Component second parent	external encapsulating structure part
+GO #*	GO:0008021
+E value of component GO	0
+Process descriptors	<biological_process
+Process parent	enzyme regulator activity
+Process second parent	nucleoside\-triphosphatase regulator activity
+GO #**	GO:0008150
+E value of process GO	0
+Best match to CDD database	WD40
+E value*******	3E-030
+Alphanumeric Index***	29257 CD00200 WD40 11 24 40 7 32473 COG2319 128615 SMART00320 109458 PFAM00400 118043 PFAM09507 CDC27 POL1 293 332 160 CDC1 10 362 372
+Text index ***	DOMAIN FOUND IN A NUMBER EUKARYOTIC PROTEINS THAT COVER WIDE VARIETY FUNCTIONS INCLUDING ADAPTOR REGULATORY MODULES SIGNAL TRANSDUCTION PRE MRNA PROCESSING CYTOSKELETON ASSEMBLY TYPICALLY CONTAINS GH DIPEPTIDE RESIDUES FROM ITS N TERMINUS WD AT C IS LONG HENCE NAME BETWEEN LIES CONSERVED CORE SERVES AS STABLE PROPELLER LIKE PLATFORM TO WHICH CAN BIND EITHER STABLY OR REVERSIBLY FORMS STRUCTURE WITH SEVERAL BLADES WHERE EACH BLADE COMPOSED FOUR STRANDED ANTI PARALLEL B SHEET INSTANCES FEW DETECTABLE COPIES ARE HYPOTHESIZED FORM LARGER STRUCTURES BY DIMERIZATION SEQUENCE REPEAT FIRST THREE STRANDS ONE LAST STRAND NEXT TERMINAL COMPLETES CREATE CLOSED RING ON TOP BOTTOM SURFACE PROPOSED COORDINATE INTERACTIONS OTHER SMALL LIGANDS PRESENT THIS ALIGNMENT FOG REPEATS NOTE THESE PERMUTED RESPECT STRUCTURAL BETA G DNA POLYMERASE SUBUNIT DELTA IT CARRIES ESSENTIAL FOR BINDING ALPHA CHARACTERISED MOTIF D VT REFERRED DPIM MINIMAL FINAL BEING SLIDING CLAMP PCNA 
+Best match to KOG database	RAVE (regulator of V-ATPase assembly) complex subunit RAV1/DMX protein, WD repeat superfamily
+E value********	0.0
+General class	General function prediction only
+Alphanumeric Index****	36282 KOG1064 RAV1 35487 KOG0266 WD40 35484 KOG0263 TAF5 35493 KOG0272 U4 U6 PRP4 35540 KOG0319 18S 35497 KOG0276 35517 KOG0296 35539 KOG0318 35864 KOG0645 35495 KOG0274 CDC4 40
+Text index ****	RAVE REGULATOR V ATPASE ASSEMBLY COMPLEX SUBUNIT DMX WD REPEAT SUPERFAMILY CONTAINING TRANSCRIPTION INITIATION FACTOR TFIID ALSO COMPONENT HISTONE ACETYLTRANSFERASE SAGA SMALL NUCLEAR RIBONUCLEOPROTEIN CONTAINS REPEATS RRNA PROCESSING VESICLE COAT COPI BETA ANGIO ASSOCIATED MIGRATORY CELL STRESS ACTIN INTERACTING RELATED F BOX PROTEINS 
+Best match to PFAM database	WD40
+E value*********	2E-005
+Alphanumeric Index*****	109458 PFAM00400 WD40 118043 PFAM09507 CDC27 POL1 293 332 160 CDC1 10 362 372 111062 PFAM02126 114729 PFAM06023 DUF911
+Text index *****	WD DOMAIN G BETA REPEAT DNA POLYMERASE SUBUNIT THIS FORMS C DELTA IT CARRIES ESSENTIAL RESIDUES FOR BINDING TO ALPHA FROM WHICH ARE CHARACTERISED BY MOTIF D VT REFERRED AS DPIM FIRST FORM MINIMAL B FINAL TERMINAL BEING SLIDING CLAMP PCNA PTE PHOSPHOTRIESTERASE FAMILY ARCHAEAL UNKNOWN FUNCTION CONSISTS SEVERAL PROTEINS 
+Best match to PRK database	gnl|CDD|139957
+E value**********	0.52
+Alphanumeric Index******	139957 PRK13897 VIRD4
+Text index ******	TYPE IV SECRETION SYSTEM COMPONENT PROVISIONAL 
+Best match to SMART database	WD40
+E value***********	6E-007
+Alphanumeric Index*******	128615 SMART00320 WD40 129043 SMART00807 AKAP_110 110 3 PRKA3 AKAP110 10319321 129010 SMART00771
+Text index *******	REPEATS NOTE THAT THESE ARE PERMUTED WITH RESPECT TO STRUCTURAL BLADES BETA PROPELLER DOMAIN A KINASE ANCHOR KDA THIS FAMILY CONSISTS SEVERAL MAMMALIAN ANCHORING OR AKAP SEQUENCES AGENTS INCREASE INTRACELLULAR CAMP POTENT STIMULATORS SPERM MOTILITY INHIBITOR PEPTIDES DESIGNED DISRUPT INTERACTION DEPENDENT PKA PROTEINS AKAPS INHIBITORS IS KEY BIOCHEMICAL MECHANISM CONTROLLING SHARES COMPARTMENTS BOTH RI RII ISOFORMS MAY FUNCTION AS REGULATOR HEAD ASSOCIATED FUNCTIONS SUCH CAPACITATION ACROSOME REACTION PUBMED ZIPA_C ZIPA C TERMINAL FTSZ BINDING COMPONENT CELL DIVISION IN E COLI IT INTERACTS ONE INITIAL STEPS SEPTUM FORMATION STRUCTURE COMPOSED THREE ALPHA HELICES SHEET CONSISTING SIX ANTIPARALLEL STRANDS 
+Best match to Jose''s transposable element database	
+E value************	
+PROSITE motifs	ASN_GLYCOSYLATION |CAMP_PHOSPHO_SITE |PKC_PHOSPHO_SITE |CK2_PHOSPHO_SITE |TYR_PHOSPHO_SITE |MYRISTYL |AMIDATION |ER_TARGET |PRENYLATION |MICROBODIES_CTER |
+Non promiscuous PROSITE motifs	ER_TARGET |
+Salivary motifs	Aegyptin Culicoides 40pct |Hyp10-12 mosquito stringent pattern |
+Non promiscuous salivary motifs	Aegyptin Culicoides 40pct |
+Best match to AEGY-PEP database	rabconnectin
+E value*************	0
+Match***	AAEL006472-PA
+Score***	5544
+% identity******	81
+% Coverage*****	106
+Best match to Culex quinquefasciatus proteins	rabconnectin protein_coding supercont3.206 450540 483354
+E value**************	0
+Match****	CPIJ008792
+Score****	5704
+% identity*******	82
+% Coverage******	105
+Best match to D. melanogaster proteins	loc=X:complement(6086703..6098490); name=CG3585-PA;
+E value***************	0.0
+Match*****	CG3585-PA
+Score*****	3978
+% identity********	59
+% Coverage*******	105
+Best match to C. elegans proteins	rbc-1 Drosophila protein X like status:Partially_confirmed TR:Q93785
+E value****************	0.0
+Match******	F54E4.1
+Score******	1153
+% identity*********	32
+% Coverage********	83
+Best match to Arabidopsis proteins	transducin family protein / WD-40 repeat family protein, similar to CPY
+E value*****************	2E-034
+Match*******	AT2G46560.1
+Score*******	146
+% identity**********	30
+% Coverage*********	13
+Clustered at 30%-Sim- on 60% of length - - Cluster#	5614
+# seqs 	1
+Clustered at 40%-Sim- on 60% of length - - Cluster#	6194
+# seqs *	1
+Clustered at 50%-Sim- on 60% of length - - Cluster#	6830
+# seqs **	1
+Clustered at 60%-Sim- on 60% of length - - Cluster#	7357
+# seqs ***	1
+Clustered at 70%-Sim- on 60% of length - - Cluster#	7735
+# seqs ****	1
+Clustered at 80%-Sim- on 60% of length - - Cluster#	8012
+# seqs *****	1
+Clustered at 90%-Sim- on 60% of length - - Cluster#	8239
+# seqs ******	1
+Clustered at 95%-Sim- on 60% of length - - Cluster#	8406
+# seqs	1
+Clustered at 99%-Sim- on 60% of length - - Cluster#	8613
+# seqs*	1

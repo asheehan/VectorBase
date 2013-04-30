@@ -9,3 +9,6 @@ sites/*/private
 
 # Ignore any legacy svn repository folders.
 *.svn
+
+# Ignore CVBrowser cache files
+CVBrowser/CVBrowser/*.cache.*

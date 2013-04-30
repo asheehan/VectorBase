@@ -1,0 +1,214 @@
+Protein	AGAP012426-PA
+First residue	M
+Seq size	148
+Location/Gene	3L:41951983:41952426:1|gene:AGAP012426
+CDS	AGAP012426-RA
+Seq size*	732
+Description	SCALAR(0x97a0dcc)|3L:41950563:41952426:1|gene:AGAP012426
+ATG first?	
+Last codon	
+Genomic match	3L
+E value	0
+Chromosome and link to ENSEMBL	=hyperlink("http://www.ensembl.org/Anopheles_gambiae/contigview?chr=3L&region=&start=
+Start	
+End	
+Extent of match	734
+% identity	100
+Number of segments (exons, approximate)	3
+Orientation	FOR
+Satisfied 95% id on length 100	1
+Best match to assembled ESTs	est-07-contig_13365
+E value*	0
+Score	1451
+Extent of match*	732
+Length of best match	744
+% identity*	100
+% Coverage	98
+First residue of match	13
+First residue of sequence	1
+Number of segments	1
+Annotation mismatch	
+Orientation*	FOR
+Satisfied 95% id on length 100*	1
+Number of sequences	2
+all-instars	0
+normalized-fatbody	0
+head-all	0
+Immune cells	0
+Pasteur annotation	0
+Sugar-abd	0
+Blood-abd	0
+InfBlood-abd	0
+Blood-fed	2
+Non-Blood-fed	0
+Sg-male	0
+SG-fem	0
+SG-Pasteur	0
+All female glands	0
+Best match to Affymetrix chip database	Ag.3L.1670.1_a_at
+E value**	0
+Extent of match**	553
+Length of best match*	553
+% identity**	100
+% Coverage*	100
+First residue of match*	1
+First residue of sequence*	147
+Number of segments*	1
+Annotation mismatch*	
+Orientation**	FOR
+Satisfied 95% id on length 100**	1
+L-mean	115
+Males-mean	243
+SF-mean	228
+3h-mean	111
+24h-mean	114
+48h-mean	73
+72h-mean	73
+15d-mean	139
+Sum of residues (larger value indicates differential aa usage)	0.56
+Increased AA (fold increase over average)	Y(3.07)
+Cys number	3
+Predicted Tyr-SO4 - Prosite rules	
+% Ser + Thr	20.3
+% Pro	4.7
+% Gly	2.7
+% Gly+Pro	7.4
+Number of possible HO-Pro [LPAE]-P-G	
+Number of possible OH-lysines X-Lys-Gly not Lys-Gly-Pro	
+Number of ProGly''s	
+SigP Result	CYT
+Cleavage Position	
+MW	17.08
+pI	6.26
+Mature MW	
+pI*	
+TMHMM result	ExpAA=23.20 First60=0.32 PredHel=1 Topology=i119-141o
+Predicted helices	1
+% membrane	14.9
+% outside	4.7
+% inside	80.4
+mTP	0.207
+SP	0.042
+other	0.842
+Loc	_
+Relative Confidence (1 is better)	2
+ProP furin cleavage predictions 	
+Best match to NR protein database	sex peptide receptor
+E value***	1E-081
+Match	gi|158991493
+Score*	305
+Extent of match***	148
+Length of best match**	464
+% identity***	100
+% Coverage**	32
+Alphanumeric Index	158991493 ABW86945 1 57906990 XP_551754 AGAP012426 55234228 EAL38659 170044590 XP_001849925 167867679 EDS31062 158991491 ABW86944 157115998 XP_001652753 AAEL_AAEL007405 108876693 EAT40918 195047994 XP_001992451 GH24758 193893292 EDV92158 195164245 XP_002022959 GL16438 194105021 EDW27064 198471742 XP_001355711 2 GA14126 198146057 EAL32770 158991489 ABW86943 195394123 XP_002055695 GJ18645 194150205 EDW65896
+Text index 	SEX RECEPTOR PA CONSERVED HYPOTHETICAL 
+Best match to NR database depleted of Anopheles gambiae sequenc	conserved hypothetical protein
+E value****	5E-020
+Match*	gi|170044590
+% identity****	41
+% Coverage***	67
+Alphanumeric Index*	170044590 XP_001849925 1 167867679 EDS31062 158991491 ABW86944 157115998 XP_001652753 AAEL_AAEL007405 108876693 EAT40918 195047994 XP_001992451 GH24758 193893292 EDV92158 195164245 XP_002022959 GL16438 194105021 EDW27064 198471742 XP_001355711 2 GA14126 198146057 EAL32770 158991489 ABW86943 195394123 XP_002055695 GJ18645 194150205 EDW65896 195476841 XP_002100008 GE16407 194187532 EDX01116 195448569 XP_002071716 GK10126 194167801 EDW82702
+Text index *	CONSERVED HYPOTHETICAL SEX RECEPTOR 
+Best match to SwissProt	Holliday junction ATP-dependent DNA helicase ruvA OS=Mycoplasma penetrans
+E value*****	0.43
+Match**	sp|Q8EWC5|RUVA_MYCPE
+Score**	33.5
+Extent of match****	91
+Length of best match***	219
+% identity*****	34
+% Coverage****	42
+Alphanumeric Index**	Q8EWC5 3 1 P0CA91 VF196_ASFM2 I196L 20 1983 153 2 P0A0N5 P0A0N4 P0A0N3 MU50 700699 Q54KU3 PKS25_DICDI 25 PKS25 Q54KU5 PKS24_DICDI 24 PKS24 O15816 Q9Y7L5 YGJ3_SCHPO C685 03 SPBC685 Q00155 VG34_ICHV1 34 4
+Text index **	RUVA_MYCPE HOLLIDAY JUNCTION ATP DEPENDENT DNA HELICASE RUVA OS MYCOPLASMA PENETRANS GN PE SV LATE AFRICAN SWINE FEVER VIRUS ISOLATE TICK MALAWI LIL MAL QACR_STAHA HTH TYPE TRANSCRIPTIONAL REGULATOR QACR STAPHYLOCOCCUS HAEMOLYTICUS QACR_STAAU AUREUS QACR_STAAM STRAIN ATCC PROBABLE POLYKETIDE SYNTHASE DICTYOSTELIUM DISCOIDEUM MYBB_DICDI MYB LIKE B MYBB UNCHARACTERIZED SCHIZOSACCHAROMYCES POMBE GENE ICTALURID HERPESVIRUS 
+Best match to GO database	Sex peptide receptor - Drosophila melanogaster - neuropeptide receptor activity - plasma membrane - negative regulation of female receptivity, post-mating - regulation of post-mating oviposition
+E value******	2E-13
+Function descriptors	neuropeptide receptor activity||peptide receptor activity\, G\-protein coupled||G\-protein coupled receptor activity||transmembrane receptor activity||receptor activity||signal transducer activity||molecular transducer activity
+Function parent	molecular transducer activity
+Function second parent	signal transducer activity
+GO #	GO:0008188
+E value of functional GO	2E-13
+Component descriptors	plasma membrane||membrane||cell part
+Component parent	cell part
+Component second parent	membrane
+GO #*	GO:0005886
+E value of component GO	2E-13
+Process descriptors	negative regulation of female receptivity\, post\-mating||regulation of female receptivity\, post\-mating||regulation of female receptivity||female mating behavior||reproductive behavior in a multicellular organism||plantlet formation on parent plant||multicellular organism reproduction||multicellular organismal process
+Process parent	molecular transducer activity
+Process second parent	signal transducer activity
+GO #**	GO:0045434
+E value of process GO	2E-13
+Best match to CDD database	
+E value*******	
+Alphanumeric Index***	
+Text index ***	
+Best match to KOG database	UDP-N-acetylglucosamine pyrophosphorylase
+E value********	0.47
+General class	Cell wall/membrane/envelope biogenesis
+Alphanumeric Index****	37599 KOG2388
+Text index ****	UDP N ACETYLGLUCOSAMINE PYROPHOSPHORYLASE 
+Best match to PFAM database	
+E value*********	
+Alphanumeric Index*****	
+Text index *****	
+Best match to PRK database	
+E value**********	
+Alphanumeric Index******	
+Text index ******	
+Best match to SMART database	
+E value***********	
+Alphanumeric Index*******	
+Text index *******	
+Best match to Jose''s transposable element database	
+E value************	
+PROSITE motifs	ASN_GLYCOSYLATION |MYRISTYL |RGD |MICROBODIES_CTER |
+Non promiscuous PROSITE motifs	
+Salivary motifs	
+Non promiscuous salivary motifs	
+Best match to AEGY-PEP database	conserved hypothetical protein
+E value*************	2E-20
+Match***	AAEL007405-PA
+Score***	95.5
+% identity******	43
+% Coverage*****	50
+Best match to Culex quinquefasciatus proteins	conserved hypothetical protein protein_coding supercont3.186 365345 367186
+E value**************	2E-22
+Match****	CPIJ007971
+Score****	100
+% identity*******	41
+% Coverage******	67
+Best match to D. melanogaster proteins	loc=X:5324008..5337495; name=CG16752-PA;
+E value***************	7E-014
+Match*****	CG16752-PA
+Score*****	72.8
+% identity********	51
+% Coverage*******	12
+Best match to C. elegans proteins	steroid hormone receptor status:Partially_confirmed TR:Q21659
+E value****************	3E-004
+Match******	R03A10.6
+Score******	40.4
+% identity*********	28
+% Coverage********	14
+Best match to Arabidopsis proteins	protein kinase family protein, contains protein kinase domain, Pfam:PF00069 |
+E value*****************	0.89
+Match*******	AT1G54820.1
+Score*******	29.3
+% identity**********	34
+% Coverage*********	10
+Clustered at 30%-Sim- on 60% of length - - Cluster#	6644
+# seqs 	1
+Clustered at 40%-Sim- on 60% of length - - Cluster#	7350
+# seqs *	1
+Clustered at 50%-Sim- on 60% of length - - Cluster#	8172
+# seqs **	1
+Clustered at 60%-Sim- on 60% of length - - Cluster#	8862
+# seqs ***	1
+Clustered at 70%-Sim- on 60% of length - - Cluster#	9363
+# seqs ****	1
+Clustered at 80%-Sim- on 60% of length - - Cluster#	9711
+# seqs *****	1
+Clustered at 90%-Sim- on 60% of length - - Cluster#	9967
+# seqs ******	1
+Clustered at 95%-Sim- on 60% of length - - Cluster#	10153
+# seqs	1
+Clustered at 99%-Sim- on 60% of length - - Cluster#	10381
+# seqs*	1
