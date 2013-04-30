@@ -65,7 +65,7 @@ function getPathId( $cvId, $xrefId )
 {
 	$q = "SELECT id FROM cv_path WHERE cv_id=$cvId AND term_xref_id='$xrefId' LIMIT 1";	
 	$qr = mysql_query( $q );
-print $q;
+
 	if( mysql_num_rows( $qr ) > 0 )
 	{
 		$row = mysql_fetch_array( $qr );

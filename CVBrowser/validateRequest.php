@@ -1,4 +1,4 @@
-<?
+<?php
 
 require( "dbFunctions.php" );
 $db = connectToDb();
@@ -18,7 +18,6 @@ if( mysql_num_rows( $qr ) < 1 )
 $row = mysql_fetch_array( $qr );
 $cvId = $row[ 'id' ];	
 
-
 $q = "SELECT xref_id FROM cv_term WHERE cv_id='$cvId' AND id='$termId'";
 $qr = mysql_query( $q );
 
@@ -33,7 +32,6 @@ $xrefId = $row[ 'xref_id' ];
 
 $pathId = getPathId( $cvId, $xrefId );
 
-print "[{"cvId":$cvId,"termXrefId":$xrefId,"pathId":$pathId}]";
-
+print "[{\"cvId\":$cvId,\"termXrefId\":$xrefId,\"pathId\":$pathId}]";
 
 ?>
