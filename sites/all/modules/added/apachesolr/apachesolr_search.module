@@ -1728,9 +1728,27 @@ function theme_apachesolr_search_snippets($vars) {
  * @see search_help()
  */
 function theme_apachesolr_search_noresults() {
-  return t('<ul>
+
+  $new_query = '/search/site/';
+  $new_query_terms = '';
+  $environments = apachesolr_load_all_environments();
+  foreach ($environments as $env_id => $environment) {
+    if (apachesolr_has_searched($env_id) && !apachesolr_suppress_blocks($env_id) ) {
+      $query = apachesolr_current_query($env_id);
+      if ($query) {
+        $params = explode(' ', $query->getParam('q'));
+        foreach ($params as $param=>$value){
+           $new_query_terms = $new_query_terms . $value . '* ';
+        }
+      }
+    }
+  }
+
+  return t('<p style="font-weight:bold">No Results Found</p><ul>
+<li>Use the asterisk wildcard character (*) to broaden  matching criteria. For example, you could use the following as your search term: <a href="'. $new_query . $new_query_terms .'">' . htmlspecialchars($new_query_terms) . '</a></li>
 <li>Check if your spelling is correct, or try removing filters.</li>
-<li>Remove quotes around phrases to match each word individually: <em>"blue drop"</em> will match less than <em>blue drop</em>.</li>
-<li>You can require or exclude terms using + and -: <em>big +blue drop</em> will require a match on <em>blue</em> while <em>big blue -drop</em> will exclude results that contain <em>drop</em>.</li>
-</ul>');
+<li>Remove quotes around phrases to match each word individually: <em>"Anopheles gambiae"</em> will return fewer results than <em>Anopheles gambiae</em>.</li>
+<li>You can require or exclude terms using + and -: <em>Anopheles +gambiae </em> will require a match on <em>gambiae</em> while <em>Anopheles -gambiae</em> will exclude results that contain <em>gambiae</em>.</li>
+</ul>') . $new_query . $new_query_terms;
+
 }
