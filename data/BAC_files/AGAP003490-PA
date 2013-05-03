@@ -1,0 +1,214 @@
+Protein	AGAP003490-PA
+First residue	M
+Seq size	396
+Location/Gene	2R:38606960:38608353:1|gene:AGAP003490
+CDS	AGAP003490-RA
+Seq size*	1260
+Description	SCALAR(0x93ba644)|2R:38606946:38608408:1|gene:AGAP003490
+ATG first?	
+Last codon	
+Genomic match	2R_Start_38600000
+E value	0
+Chromosome and link to ENSEMBL	2R
+Start	38606946
+End	38608408
+Extent of match	1260
+% identity	100
+Number of segments (exons, approximate)	3
+Orientation	FOR
+Satisfied 95% id on length 100	1
+Best match to assembled ESTs	est-07-contig_9727
+E value*	0
+Score	1332
+Extent of match*	691
+Length of best match	758
+% identity*	99
+% Coverage	91
+First residue of match	68
+First residue of sequence	1
+Number of segments	1
+Annotation mismatch	
+Orientation*	FOR
+Satisfied 95% id on length 100*	1
+Number of sequences	5
+all-instars	2
+normalized-fatbody	0
+head-all	0
+Immune cells	3
+Pasteur annotation	0
+Sugar-abd	0
+Blood-abd	0
+InfBlood-abd	0
+Blood-fed	0
+Non-Blood-fed	0
+Sg-male	0
+SG-fem	0
+SG-Pasteur	0
+All female glands	0
+Best match to Affymetrix chip database	Ag.2R.1121.0_CDS_at
+E value**	0
+Extent of match**	599
+Length of best match*	599
+% identity**	99
+% Coverage*	100
+First residue of match*	1
+First residue of sequence*	607
+Number of segments*	1
+Annotation mismatch*	
+Orientation**	FOR
+Satisfied 95% id on length 100**	1
+L-mean	806
+Males-mean	595
+SF-mean	650
+3h-mean	2634
+24h-mean	401
+48h-mean	354
+72h-mean	374
+15d-mean	925
+Sum of residues (larger value indicates differential aa usage)	0.25
+Increased AA (fold increase over average)	
+Cys number	7
+Predicted Tyr-SO4 - Prosite rules	1
+% Ser + Thr	11.6
+% Pro	5.6
+% Gly	9.1
+% Gly+Pro	14.6
+Number of possible HO-Pro [LPAE]-P-G	2
+Number of possible OH-lysines X-Lys-Gly not Lys-Gly-Pro	
+Number of ProGly''s	2
+SigP Result	CYT
+Cleavage Position	
+MW	43.59
+pI	8.42
+Mature MW	
+pI*	
+TMHMM result	ExpAA=0.14 First60=0.00 PredHel=0 Topology=o
+Predicted helices	0
+% membrane	
+% outside	
+% inside	
+mTP	0.11
+SP	0.083
+other	0.867
+Loc	_
+Relative Confidence (1 is better)	2
+ProP furin cleavage predictions 	
+Best match to NR protein database	AGAP003490-PA
+E value***	0.0
+Match	gi|119113449
+Score*	802
+Extent of match***	396
+Length of best match**	396
+% identity***	100
+% Coverage**	100
+Alphanumeric Index	119113449 XP_309676 3 AGAP003490 116131477 EAA05410 157126360 XP_001660875 1 75709231 ABA26661 108873315 EAT37540 157107131 XP_001649636 108868720 EAT32945 170054015 XP_001862936 167874406 EDS37789 116667854 2HUF 116667855 116667856 2HUI 116667857 116667859 2HUU 116667860 125983250 XP_001355390 GA17780 195162001 XP_002021844 GL14301 54643705 EAL32448 194103742 EDW25785 194769015 XP_001966603 GF22261 190617367 EDV32891 194896303 XP_001978452 GG19592 190650101 EDV47379 17530823 NP_511062 7290721 AAF46168 255653092 ACU24744 RH29315P
+Text index 	PA SERINE PYRUVATE AMINOTRANSFERASE ALANINE GLYOXYLATE MITOCHONDRIAL PDB A CHAIN CRYSTAL STRUCTURE AEDES AEGYPTI B IN COMPLEX WITH GLYOXYLIC ACID 
+Best match to NR database depleted of Anopheles gambiae sequenc	serine-pyruvate aminotransferase
+E value****	0.0
+Match*	gi|157126360
+% identity****	81
+% Coverage***	98
+Alphanumeric Index*	157126360 XP_001660875 1 75709231 ABA26661 108873315 EAT37540 157107131 XP_001649636 108868720 EAT32945 170054015 XP_001862936 167874406 EDS37789 116667854 2HUF 116667855 116667856 2HUI 116667857 116667859 2HUU 116667860 125983250 XP_001355390 GA17780 195162001 XP_002021844 GL14301 54643705 EAL32448 194103742 EDW25785 194769015 XP_001966603 GF22261 190617367 EDV32891 194896303 XP_001978452 GG19592 190650101 EDV47379 17530823 NP_511062 7290721 AAF46168 255653092 ACU24744 RH29315P 195565437 XP_002106308 GD16801 194203682 EDX17258
+Text index *	SERINE PYRUVATE AMINOTRANSFERASE ALANINE GLYOXYLATE MITOCHONDRIAL PDB A CHAIN CRYSTAL STRUCTURE AEDES AEGYPTI B IN COMPLEX WITH GLYOXYLIC ACID 
+Best match to SwissProt	Serine--pyruvate aminotransferase, mitochondrial OS=Felis catus GN=AGXT PE=2
+E value*****	1E-102
+Match**	sp|P41689|SPYA_FELCA
+Score**	372
+Extent of match****	378
+Length of best match***	414
+% identity*****	48
+% Coverage****	91
+Alphanumeric Index**	P41689 2 1 P31029 P31030 P09139 P21549 Q5RDP0 O35423 Q54GT6 3 O32148 Q58369 Y959_METJA MJ0959
+Text index **	SPYA_FELCA SERINE PYRUVATE AMINOTRANSFERASE MITOCHONDRIAL OS FELIS CATUS GN AGXT PE SV SPYA_CALJA CALLITHRIX JACCHUS SPYA_RABIT ORYCTOLAGUS CUNICULUS SPYA_RAT RATTUS NORVEGICUS SPYA_HUMAN HOMO SAPIENS SPYA_PONAB PONGO ABELII SPYA_MOUSE MUS MUSCULUS SPYA_DICDI DICTYOSTELIUM DISCOIDEUM PUCG_BACSU PURINE CATABOLISM PUCG BACILLUS SUBTILIS UNCHARACTERIZED METHANOCALDOCOCCUS JANNASCHII 
+Best match to GO database	Serine pyruvate aminotransferase - Drosophila melanogaster - alanine-glyoxylate transaminase activity - serine-pyruvate transaminase activity - mitochondrial matrix - peroxisome - glyoxylate catabolic process - lipid particle
+E value******	0
+Function descriptors	alanine\-glyoxylate transaminase activity||transaminase activity||transferase activity\, transferring nitrogenous groups||transferase activity||catalytic activity
+Function parent	catalytic activity
+Function second parent	transferase activity
+GO #	GO:0008453
+E value of functional GO	1.00E-139
+Component descriptors	<mitochondrial matrix||clathrin coat of endocytic vesicle||clathrin coat of endocytic vesicle||chloroplast thylakoid membrane||mitochondrial respiratory chain||mitochondrial proton\-transporting ATP synthase complex\, coupling factor F(o)||mitochondrial inner membrane protein insertion complex||fatty acid beta\-oxidation multienzyme complex||fatty acid beta\-oxidation multienzyme complex||TRAPP complex||ESCRT II complex||ESCRT I complex||ESCRT I complex||chloroplast photosystem I||Tic complex||Tic complex||chloroplast intermembrane space||PSII associated light\-harvesting complex II\, peripheral complex||mitochondrial proton\-transporting ATP synthase\, catalytic core||mitochondrial proton\-transporting ATP synthase\, central stalk||mitochondrial proton\-transporting ATP synthase\, catalytic core||mitochondrial proton\-transporting ATP synthase\, stator stalk||striated muscle thin filament||macropinocytic cup cytoskeleton||mitochondrial proton\-transporting ATP synthase\, stator stalk||apical junction complex||sarcoglycan complex||oxygen evolving complex||mitochondrial respiratory chain complex III||mitochondrial respiratory chain complex IV||mitochondrial respiratory chain complex I||nuclear proteasome regulatory particle\, lid subcomplex||lamin filament||core TFIIH complex portion of holo TFIIH complex||rDNA protrusion||outer kinetochore of condensed nuclear chromosome||outer kinetochore of condensed nuclear chromosome||gamma\-tubulin large complex\, spindle pole body||spindle pole body||NMS complex||nucleolar part||Sec complex\-associated translocon complex||intrinsic to endoplasmic reticulum membrane||actin capping protein of dynactin complex||condensed nuclear chromosome kinetochore||intermediate layer of spindle pole body||chiasma||platelet dense tubular network membrane||intrinsic to plastid outer membrane||integral to plastid outer membrane||plastid biotin carboxylase complex||chloroplast ATP synthase complex||snRNP U2||nuclear proteasome core complex||Swr1 complex||gamma DNA polymerase complex||mitochondrial membrane part||intrinsic to Golgi membrane||recycling endosome membrane||tertiary granule membrane||chromaffin granule lumen||peribacteroid membrane||clathrin vesicle coat||acidocalcisome membrane||peribacteroid fluid||COPII vesicle coat||melanosome membrane||chitosome membrane||plastid chromosome||proplastid stroma||etioplast stroma||cyanelle stroma||Toc complex||microbody part||yolk granule||snRNP U12||C zone||C zone||axon part
+Component parent	axon part
+Component second parent	C zone
+GO #*	GO:0005759
+E value of component GO	1.00E-139
+Process descriptors	glyoxylate catabolic process||glyoxylate metabolic process||monocarboxylic acid metabolic process||carboxylic acid metabolic process||oxoacid metabolic process||cellular ketone metabolic process||cellular metabolic process||metabolic process
+Process parent	catalytic activity
+Process second parent	transferase activity
+GO #**	GO:0009436
+E value of process GO	1.00E-139
+Best match to CDD database	AGAT_like
+E value*******	1E-147
+Alphanumeric Index***	99744 CD06451 3 30424 COG0075 109328 PFAM00266 AMINOTRAN_5 4 1 132344 TIGR03301 2 TIGR02326 99742 CD01494 30866 COG0520 131379 11 32115 COG1932 139601 PRK13479 31301 COG1104
+Text index ***	AGAT_LIKE ALANINE GLYOXYLATE AMINOTRANSFERASE AGAT FAMILY THIS BELONGS TO PYRIDOXAL PHOSPHATE PLP DEPENDENT ASPARTATE SUPERFAMILY FOLD I MAJOR GROUPS IN CD CORRESPOND SERINE SGAT HYDROXYKYNURENINE TRANSAMINASE HKT IS A HOMODIMERIC WHICH CATALYSES TRANSAMINATION GLYCINE CONVERTS HYDROXYPYRUVATE CATALYZES POTENTIALLY TOXIC METABOLITE KYNURENINE PATHWAY PYRUVATE ARCHAEAL CLASS V DOMAIN FOUND AMINO TRANSFERASES OTHER ENZYMES INCLUDING CYSTEINE DESULPHURASE EC PHNW AEPZ INCLUDES NUMBER AMINOETHYLPHOSPHONATE AMINOTRANSFERASES SOME ARE INDICATED OPERATE CATABOLISM AEP OTHERS INVOLVED BIOSYNTHESIS SAME COMPOUND CATABOLIC ENZYME KNOWN USE AS TRANSFER PARTNER MODELED BY EQUIVALOG LEVEL HMM APPARENTLY BRANCH LARGER TREE GENES ADJACENT RESPONSIBLE FOR PHOSPHONOACETALDEHYDE IDENTITY UNKNOWN THESE CONSIDERING REVERSED FLUX COMPARED IT MAY VERY WELL BE DIFFERENT AAT_I AAT TYPE COMBINES WITH AN ALPHA ACID FORM CALLED SCHIFF BASE OR ALDIMINE INTERMEDIATE DEPENDING ON REACTION SUBSTRATE FOUR KINDS 
+Best match to KOG database	Alanine-glyoxylate aminotransferase AGT1
+E value********	1E-134
+General class	General function prediction only
+Alphanumeric Index****	38073 KOG2862 AGT1 38001 KOG2790 36582 KOG1368 36762 KOG1549 NFS1 39050 KOG3846 35478 KOG0257
+Text index ****	ALANINE GLYOXYLATE AMINOTRANSFERASE PHOSPHOSERINE THREONINE ALDOLASE CYSTEINE DESULFURASE L KYNURENINE HYDROLASE GLUTAMINE TRANSAMINASE K 
+Best match to PFAM database	Aminotran_5
+E value*********	3E-036
+Alphanumeric Index*****	109328 PFAM00266 AMINOTRAN_5 4 1 110229 PFAM01212 109221 PFAM00155 AMINOTRAN_1_2 109267 PFAM00202 AMINOTRAN_3 110080 PFAM01053 5 109343 PFAM00282 113506 PFAM04738
+Text index *****	AMINOTRANSFERASE CLASS V THIS DOMAIN IS FOUND IN AMINO TRANSFERASES OTHER ENZYMES INCLUDING CYSTEINE DESULPHURASE EC BETA_ELIM_LYASE BETA ELIMINATING LYASE I II III CYS_MET_META_PP CYS MET METABOLISM PLP DEPENDENT ENZYME FAMILY INCLUDES INVOLVED METHIONINE FOLLOWING ARE MEMBERS CYSTATHIONINE GAMMA SYNTHASE OAH OAS SULFHYDRYLASE O SUCCINYLHOMOSERINE ALL THESE PARTICIPATE SLIGHTLY DIFFERENT REACTIONS USE PYRIDOXAL PHOSPHATE AS A COFACTOR PYRIDOXAL_DEC DECARBOXYLASE CONSERVED LANT_DEHYD_C LANTIBIOTIC DEHYDRATASE C TERMINUS LANTIBIOTICS RIBOSOMALLY SYNTHESISED ANTIMICROBIAL AGENTS DERIVED FROM PEPTIDES THEY PRODUCED BY BACTERIA FIRMICUTES PHYLUM INCLUDE MUTACIN SUBTILIN NISIN CONTAIN THIOETHER BRIDGES TERMED LANTHIONINES THAT THOUGHT TO BE GENERATED DEHYDRATION SERINE THREONINE RESIDUES FOLLOWED ADDITION CONSTITUTES PROPOSED CATALYSE STEP 
+Best match to PRK database	gnl|CDD|139601
+E value**********	0.000000002
+Alphanumeric Index******	139601 PRK13479 2 134802 PRK02948 135191 PRK04870 135340 PRK05355 136236 PRK07179 134848 PRK03317 136503 PRK07777 136759 PRK08297 134740 PRK02627 138239 PRK10874
+Text index ******	AMINOETHYLPHOSPHONATE PYRUVATE TRANSAMINASE PROVISIONAL CYSTEINE DESULFURASE HISTIDINOL PHOSPHATE AMINOTRANSFERASE PHOSPHOSERINE HYPOTHETICAL VALIDATED L LYSINE ACETYLORNITHINE SULFINATE DESULFINASE 
+Best match to SMART database	
+E value***********	
+Alphanumeric Index*******	
+Text index *******	
+Best match to Jose''s transposable element database	
+E value************	
+PROSITE motifs	ASN_GLYCOSYLATION |CAMP_PHOSPHO_SITE |PKC_PHOSPHO_SITE |CK2_PHOSPHO_SITE |MYRISTYL |PRENYLATION |MICROBODIES_CTER |AA_TRANSFER_CLASS_5 |
+Non promiscuous PROSITE motifs	AA_TRANSFER_CLASS_5 |
+Salivary motifs	
+Non promiscuous salivary motifs	
+Best match to AEGY-PEP database	serine-pyruvate aminotransferase
+E value*************	0
+Match***	AAEL010480-PA
+Score***	662
+% identity******	81
+% Coverage*****	98
+Best match to Culex quinquefasciatus proteins	serine-pyruvate aminotransferase, mitochondrial protein_coding supercont3.407
+E value**************	0
+Match****	CPIJ012673
+Score****	661
+% identity*******	81
+% Coverage******	98
+Best match to D. melanogaster proteins	loc=X:6374352..6375902; name=Spat-PA;
+E value***************	1E-139
+Match*****	Spat-PA
+Score*****	492
+% identity********	61
+% Coverage*******	97
+Best match to C. elegans proteins	serine-pyruvate aminotransferase status:Confirmed TR:Q94055
+E value****************	2E-096
+Match******	T14D7.1
+Score******	349
+% identity*********	45
+% Coverage********	92
+Best match to Arabidopsis proteins	serine-glyoxylate aminotransferase-related, similar to serine-glyoxylate
+E value*****************	8E-037
+Match*******	AT2G13360.2
+Score*******	151
+% identity**********	30
+% Coverage*********	87
+Clustered at 30%-Sim- on 60% of length - - Cluster#	1115
+# seqs 	2
+Clustered at 40%-Sim- on 60% of length - - Cluster#	1121
+# seqs *	2
+Clustered at 50%-Sim- on 60% of length - - Cluster#	1084
+# seqs **	2
+Clustered at 60%-Sim- on 60% of length - - Cluster#	1020
+# seqs ***	2
+Clustered at 70%-Sim- on 60% of length - - Cluster#	850
+# seqs ****	2
+Clustered at 80%-Sim- on 60% of length - - Cluster#	5435
+# seqs *****	1
+Clustered at 90%-Sim- on 60% of length - - Cluster#	5505
+# seqs ******	1
+Clustered at 95%-Sim- on 60% of length - - Cluster#	5554
+# seqs	1
+Clustered at 99%-Sim- on 60% of length - - Cluster#	5620
+# seqs*	1
