@@ -291,7 +291,7 @@ function blast_ajax_handler(&$form, &$form_state) {
 
     // check for look up job
 	if($form_state['values']['lookup']!=''){
-
+$start = microtime(true);
 		// verify lookup value is a number
 		if(preg_match("#^(\d+)$#",trim($form_state['values']['lookup']),$match)){
 			$id=$match[1];
@@ -523,16 +523,19 @@ function blast_ajax_handler(&$form, &$form_state) {
 
 
 	} // end if checking for lookup job id
-
+$stop = microtime(true);
+echo '<br>Time it took to look up/submit job: ' + ($stop-$start);
 	return array('#type' => 'ajax', '#commands' => $commands);
 }
 
 
 
-function blast_printTopLevelResults($id){
+function blast_printTopLevelResults($id, $raw = null){
 	// job is done
 	$results='';
-	$raw=blast_getRawJobId($id);
+	if(empty($raw)) {
+		$raw=blast_getRawJobId($id);
+	}
 	$blastPath=drupal_get_path('module','blast');
 	$xgridPath=drupal_get_path('module','xgrid');
 
@@ -546,7 +549,10 @@ function blast_printTopLevelResults($id){
 
 
 	// make sure we have gff files for this job
+$start = microtime(true);
 	blast_generateGFF($id);
+$stop = microtime(true);
+echo 'Time it took to generate gff (seconds): ' . ($stop-$start);
 
 	// display results
 	$size=32;
@@ -573,7 +579,11 @@ function blast_printTopLevelResults($id){
 					Compute Runtime: '.$totalTime.' seconds</div>
 
 					';
+
+$start = microtime(true);
 	$results.=blast_results_topLevel($raw);
+$stop = microtime(true);
+echo '<br>Time it took to generate top level results (seconds): ' . ($stop-$start);  
 	$results.="</fieldset>";
 
 	return $results;
@@ -609,9 +619,8 @@ function blast_getResults($id){
 		$blastPath=drupal_get_path('module','blast');
 		$xgridPath=drupal_get_path('module','xgrid');
 
-
 		if($status=='Finished'){
-			$results=blast_printTopLevelResults($id);
+			$results=blast_printTopLevelResults($id, $raw);
 
 				// pull input parameters out of db
 				$params=db_query("select * from xgrid_job_params where job_id=$id");
@@ -689,9 +698,11 @@ function blast_getRawJobId($parseId) {
 function blast_isBlastJob($parseId){
 
 	//first check local db
-	$results=db_query("select * from xgrid_job_params where job_id=$parseId");
-	if(count($results)>0)
+	$reesult=db_query("select count(*) from xgrid_job_params where job_id=$parseId");
+	$results = $reesult->fetchAssoc();
+	if(!empty($results['count'])) { 
 		$result=true;
+	}
 
 	// drop this if block after a few months and we've build up the rawid values in the input params db
 	if(!$result){

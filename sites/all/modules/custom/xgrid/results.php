@@ -15,13 +15,12 @@ if (empty($id)) {
 	$xgridUrl="http://jobs.vectorbase.org/xgrid.wsdl";
 	$client = new SoapClient($xgridUrl, array('compression' => SOAP_COMPRESSION_ACCEPT | SOAP_COMPRESSION_GZIP));
 	$statusOutput = $client->getStatus($id);
+	$match = array();	
 	preg_match("#jobStatus = (.*?);#",$statusOutput,$match);
-	
 	$status = '';
 	if (!empty($match)) {
 		$status = $match[1];
 	}
-
 	$results = '';
 	if (empty($status)) {
 		$results = "No data for job $id";

@@ -150,8 +150,6 @@
 		});
 
 
-
-
 		// toggles for specific type select alls
 		$(".allSelector").live("click",function (event) {
 			var thisType= $(this).attr('data-type');
@@ -163,9 +161,6 @@
 
 			setCheckedDbs();
 		});
-
-
-
 
 
 		// if any dbs are checked, also check it's parent dataset
@@ -286,14 +281,14 @@ var pinwheel='<br/><img src="'+Drupal.settings.blast.blastPath+'/ajax-loader.gif
 							},
 							error: function(msg){
 								$("#submissionDialog").dialog("open");
-								$("#submissionDialog").html("Network Error: Unable to contact Submission Host! "+msg.responseText);
+								$("#submissionDialog").html("Error while retieving job status: " + msg.responseText);
 								error=true;
 							}
 
 						});
 
 					// this is a parse job
-					}else{
+					} else{
 						$("#submissionDialog").html("Parsing results"+pinwheel);
 						// if final job status has been achieved
 						if ( status=="Finished" || status=="Failed" || status=="Canceled" || status=="Error" ){
@@ -316,7 +311,7 @@ var pinwheel='<br/><img src="'+Drupal.settings.blast.blastPath+'/ajax-loader.gif
 								},
 								error: function(msg){
 									$("#submissionDialog").dialog("open");
-									$("#submissionDialog").html("Network Error: Unable to contact Submission Host!"+msg.responseText);
+									$("#submissionDialog").html("Error while parsing results: " + msg.responseText);
 									error=true;
 								}
 
@@ -327,7 +322,7 @@ var pinwheel='<br/><img src="'+Drupal.settings.blast.blastPath+'/ajax-loader.gif
 
 				error: function(msg){
 					$("#submissionDialog").dialog("open");
-					$("#submissionDialog").html("Network Error: Unable to contact Submission Host!"+msg.responseText);
+					$("#submissionDialog").html("Error: " + msg.responseText);
 					error=true;
 				}
 			});
@@ -716,9 +711,6 @@ scroll=scrollTo.offset().top-400;
 	$(".dbs[data-org="+ $(".form-checkbox:checked").parent().parent().attr('data-org') +"]:checkbox").attr('checked', 'checked');
 	setAvailableDbs($("input[name='program']:checked", '#blast-ajax-form').val());
 	$(".organismCheckboxDiv[data-org="+$(".form-checkbox:checked").parent().parent().attr('data-org')+"]").trigger('mouseover');
-
-
-
 
 	jQuery.customPost = function(url, data){
 		//url and data options required
