@@ -67,7 +67,7 @@ function downloadable_file_views_query_alter(&$view, &$query) {
 		foreach($query->where[1]['conditions'] as $key => $condition) {
 			if($condition['field'] == 'field_data_field_download_file_type.field_download_file_type_tid') {
 				$type = $condition['value'];
-				$familyTree = taxonomy_get_children($type);
+				$familyTree = taxonomy_get_tree(6, $type);
 				$tids = array($type);
 				foreach($familyTree as $node) {
 					array_push($tids, $node->tid);

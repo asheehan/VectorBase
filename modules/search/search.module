@@ -996,7 +996,6 @@ function search_form($form, &$form_state, $action = '', $keys = '', $module = NU
   // that hook into the basic search form.
   $form['basic']['processed_keys'] = array('#type' => 'value', '#value' => '');
   $form['basic']['submit'] = array('#type' => 'submit', '#value' => t('Search'));
-
   return $form;
 }
 
@@ -1019,6 +1018,8 @@ function search_box($form, &$form_state, $form_id) {
   $form['actions'] = array('#type' => 'actions');
   $form['actions']['submit'] = array('#type' => 'submit', '#value' => t('Go'));
   $form['#submit'][] = 'search_box_form_submit';
+  global $user;
+  if ($user->uid > 0) $form['#token'] = FALSE;
 
   return $form;
 }
@@ -1076,6 +1077,7 @@ function template_preprocess_search_block_form(&$variables) {
       $variables['search'][$key] = drupal_render($variables['form'][$key]);
     }
   }
+  
   // Hidden form elements have no value to themers. No need for separation.
   $variables['search']['hidden'] = implode($hidden);
   // Collect all form elements to make it easier to print the whole form.

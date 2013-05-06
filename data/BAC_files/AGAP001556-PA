@@ -1,0 +1,214 @@
+Protein	AGAP001556-PA
+First residue	M
+Seq size	154
+Location/Gene	2R:6152226:6154270:-1|gene:OBP7
+CDS	AGAP001556-RA
+Seq size*	878
+Description	SCALAR(0x9346b38)|2R:6152013:6154470:-1|gene:OBP7
+ATG first?	
+Last codon	*
+Genomic match	2R_Start_6120000
+E value	1.00E-177
+Chromosome and link to ENSEMBL	2R
+Start	6152013
+End	6154470
+Extent of match	879
+% identity	100
+Number of segments (exons, approximate)	3
+Orientation	REV
+Satisfied 95% id on length 100	1
+Best match to assembled ESTs	est-07-contig_14885
+E value*	0
+Score	1015
+Extent of match*	512
+Length of best match	534
+% identity*	100
+% Coverage	96
+First residue of match	23
+First residue of sequence	28
+Number of segments	1
+Annotation mismatch	
+Orientation*	FOR
+Satisfied 95% id on length 100*	1
+Number of sequences	1
+all-instars	1
+normalized-fatbody	0
+head-all	0
+Immune cells	0
+Pasteur annotation	0
+Sugar-abd	0
+Blood-abd	0
+InfBlood-abd	0
+Blood-fed	0
+Non-Blood-fed	0
+Sg-male	0
+SG-fem	0
+SG-Pasteur	0
+All female glands	0
+Best match to Affymetrix chip database	Ag.2R.88.0_CDS_at
+E value**	0.00E+00
+Extent of match**	434
+Length of best match*	434
+% identity**	100
+% Coverage*	100
+First residue of match*	1
+First residue of sequence*	228
+Number of segments*	1
+Annotation mismatch*	
+Orientation**	FOR
+Satisfied 95% id on length 100**	1
+L-mean	541
+Males-mean	668
+SF-mean	770
+3h-mean	115
+24h-mean	339
+48h-mean	268
+72h-mean	279
+15d-mean	521
+Sum of residues (larger value indicates differential aa usage)	0.39
+Increased AA (fold increase over average)	C(3.1)
+Cys number	9
+Predicted Tyr-SO4 - Prosite rules	
+% Ser + Thr	10.4
+% Pro	4.5
+% Gly	1.9
+% Gly+Pro	6.5
+Number of possible HO-Pro [LPAE]-P-G	
+Number of possible OH-lysines X-Lys-Gly not Lys-Gly-Pro	
+Number of ProGly''s	
+SigP Result	SIG
+Cleavage Position	28-29
+MW	17.57
+pI	5.32
+Mature MW	14.24
+pI*	5.15
+TMHMM result	ExpAA=21.52 First60=21.52 PredHel=1 Topology=i12-34o
+Predicted helices	1
+% membrane	14.3
+% outside	77.9
+% inside	7.8
+mTP	0.029
+SP	0.931
+other	0.074
+Loc	S
+Relative Confidence (1 is better)	1
+ProP furin cleavage predictions 	
+Best match to NR protein database	odorant binding protein, antennal (AGAP001556-PA)
+E value***	1E-085
+Match	gi|58395871
+Score*	318
+Extent of match***	154
+Length of best match**	154
+% identity***	100
+% Coverage**	100
+Alphanumeric Index	58395871 XP_321558 2 AGAP001556 118794516 XP_001238798 1 27414071 AAO12102 AGAMOBP7 55233781 EAA01289 116116331 EAU75675 19071284 AAL84185 AF437890_1 194271283 ACF37116 7 194271279 ACF37114 194271281 ACF37115 37778929 AAO74644 157112540 XP_001651827 56E 108878048 EAT42273 170030533 XP_001843143 170074811 XP_001870623 167867384 EDS30767 167871737 EDS35120 195126156 XP_002007540 GI13005 193919149 EDW18016 195376267 XP_002046918 GJ13150 194154076 EDW69260
+Text index 	ODORANT BINDING ANTENNAL PA PB 
+Best match to NR database depleted of Anopheles gambiae sequenc	odorant-binding protein 7
+E value****	3E-084
+Match*	gi|194271283
+% identity****	98
+% Coverage***	100
+Alphanumeric Index*	194271283 ACF37116 1 7 194271279 ACF37114 194271281 ACF37115 37778929 AAO74644 2 157112540 XP_001651827 56E 108878048 EAT42273 170030533 XP_001843143 170074811 XP_001870623 167867384 EDS30767 167871737 EDS35120 195126156 XP_002007540 GI13005 193919149 EDW18016 195376267 XP_002046918 GJ13150 194154076 EDW69260 198464856 XP_001353390 GA10317 198149910 EAL30897 194747117 XP_001955999 GF24818 190623281 EDV38805
+Text index *	ODORANT BINDING 
+Best match to SwissProt	Pheromone-binding protein-related protein 1 OS=Drosophila melanogaster GN=Pbprp1
+E value*****	3E-012
+Match**	sp|P54191|PBP1_DROME
+Score**	70.9
+Extent of match****	131
+Length of best match***	148
+% identity*****	29
+% Coverage****	89
+Alphanumeric Index**	P54191 PBP1_DROME 1 PBPRP1 2 P54193 PBP3_DROME 3 PBPRP3 Q23970 PBP6_DROME 6 Q8SY61 OB56D_DROME 56D OBP56D P54192 PBP2_DROME PBPRP2 Q9V8Y2 OB56A_DROME 56A OBP56A Q27017 B1_TENMO B1 Q27018 B2_TENMO B2 Q9V931 OB57C_DROME 57C OBP57C Q9VAI6 OB99B_DROME 99B OBP99B
+Text index **	PHEROMONE BINDING RELATED OS DROSOPHILA MELANOGASTER GN PE SV E GENERAL ODORANT FRAGMENT TENEBRIO MOLITOR 
+Best match to GO database	Pheromone-binding protein-related protein 1 - Drosophila melanogaster - phenylalkylamine binding - pheromone binding - odorant binding - sensory perception of chemical stimulus - extracellular region
+E value******	8E-13
+Function descriptors	phenylalkylamine binding||drug binding||binding
+Function parent	binding
+Function second parent	drug binding
+GO #	GO:0008145
+E value of functional GO	8E-13
+Component descriptors	extracellular region
+Component parent	extracellular region
+Component second parent	
+GO #*	GO:0005576
+E value of component GO	8E-13
+Process descriptors	sensory perception of chemical stimulus||sensory perception||cognition||neurological system process||system process||multicellular organismal process
+Process parent	binding
+Process second parent	drug binding
+GO #**	GO:0007606
+E value of process GO	8E-13
+Best match to CDD database	PBP_GOBP
+E value*******	1E-015
+Alphanumeric Index***	110399 PFAM01395 128948 SMART00708 73387 CD04725 5 139312 PRK12898
+Text index ***	PBP_GOBP PBP GOBP FAMILY OLFACTORY RECEPTORS TERRESTRIAL ANIMALS EXIST IN AN AQUEOUS ENVIRONMENT YET DETECT ODORANTS THAT ARE PRIMARILY HYDROPHOBIC SOLUBILITY IS THOUGHT TO BE GREATLY ENHANCED VIA ODORANT BINDING PROTEINS WHICH EXTRACELLULAR FLUID SURROUNDING THIS COMPOSED PHEROMONE MALE SPECIFIC ASSOCIATE WITH SENSITIVE NEURONS GENERAL PHBP INSECT DOMAINS OMP_DECARBOXYLASE_LIKE OROTIDINE PHOSPHATE DECARBOXYLASE ODCASE A DIMERIC ENZYME DECARBOXYLATES MONOPHOSPHATE OMP FORM URIDINE UMP ESSENTIAL STEP PYRIMIDINE BIOSYNTHETIC PATHWAY MAMMALS SYNTHASE CONTAINS TWO OROTATE PHOSPHORIBOSYLTRANSFERASE OPRTASE DOMAIN CATALYZES TRANSFER PHOSPHORIBOSYL PYROPHOSPHATE PRPP SECA PREPROTEIN TRANSLOCASE SUBUNIT REVIEWED 
+Best match to KOG database	Neurotransmitter release regulator, UNC-13
+E value********	0.51
+General class	Signal transduction mechanisms, Intracellular trafficking, secretion, and vesicular transport
+Alphanumeric Index****	36229 KOG1011 13
+Text index ****	NEUROTRANSMITTER RELEASE REGULATOR UNC 
+Best match to PFAM database	PBP_GOBP
+E value*********	2E-016
+Alphanumeric Index*****	110399 PFAM01395
+Text index *****	PBP_GOBP PBP GOBP FAMILY OLFACTORY RECEPTORS TERRESTRIAL ANIMALS EXIST IN AN AQUEOUS ENVIRONMENT YET DETECT ODORANTS THAT ARE PRIMARILY HYDROPHOBIC SOLUBILITY IS THOUGHT TO BE GREATLY ENHANCED VIA ODORANT BINDING PROTEINS WHICH EXTRACELLULAR FLUID SURROUNDING THIS COMPOSED PHEROMONE MALE SPECIFIC ASSOCIATE WITH SENSITIVE NEURONS GENERAL 
+Best match to PRK database	gnl|CDD|139312
+E value**********	0.067
+Alphanumeric Index******	139312 PRK12898
+Text index ******	SECA PREPROTEIN TRANSLOCASE SUBUNIT REVIEWED 
+Best match to SMART database	PhBP
+E value***********	3E-010
+Alphanumeric Index*******	128948 SMART00708
+Text index *******	PHBP INSECT PHEROMONE ODORANT BINDING DOMAINS 
+Best match to Jose''s transposable element database	
+E value************	
+PROSITE motifs	PKC_PHOSPHO_SITE |CK2_PHOSPHO_SITE |TYR_PHOSPHO_SITE |MYRISTYL |PRENYLATION |MICROBODIES_CTER |
+Non promiscuous PROSITE motifs	
+Salivary motifs	
+Non promiscuous salivary motifs	
+Best match to AEGY-PEP database	odorant-binding protein 2
+E value*************	1E-044
+Match***	gi|37778929
+Score***	176
+% identity******	54
+% Coverage*****	98
+Best match to Culex quinquefasciatus proteins	odorant-binding protein 2 protein_coding supercont3.2998 517 4023
+E value**************	5E-44
+Match****	CPIJ020280
+Score****	172
+% identity*******	60
+% Coverage******	91
+Best match to D. melanogaster proteins	loc=3L:12370153..12370837; name=Pbprp1-PA;
+E value***************	3E-013
+Match*****	Pbprp1-PA
+Score*****	70.9
+% identity********	29
+% Coverage*******	89
+Best match to C. elegans proteins	kal-1 WAP-type (Whey Acidic Protein) 'four-disulfide core', Fibronectin type III
+E value****************	0.28
+Match******	K03D10.1
+Score******	30.8
+% identity*********	23
+% Coverage********	9
+Best match to Arabidopsis proteins	expressed protein,  ; expression supported by MPSS | chr1:26830851-26832184
+E value*****************	0.43
+Match*******	AT1G71150.1
+Score*******	30.4
+% identity**********	33
+% Coverage*********	15
+Clustered at 30%-Sim- on 60% of length - - Cluster#	27
+# seqs 	28
+Clustered at 40%-Sim- on 60% of length - - Cluster#	5251
+# seqs *	1
+Clustered at 50%-Sim- on 60% of length - - Cluster#	5747
+# seqs **	1
+Clustered at 60%-Sim- on 60% of length - - Cluster#	6175
+# seqs ***	1
+Clustered at 70%-Sim- on 60% of length - - Cluster#	6463
+# seqs ****	1
+Clustered at 80%-Sim- on 60% of length - - Cluster#	6639
+# seqs *****	1
+Clustered at 90%-Sim- on 60% of length - - Cluster#	6788
+# seqs ******	1
+Clustered at 95%-Sim- on 60% of length - - Cluster#	6892
+# seqs	1
+Clustered at 99%-Sim- on 60% of length - - Cluster#	7033
+# seqs*	1
