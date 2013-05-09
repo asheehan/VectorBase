@@ -1,0 +1,4 @@
+name = IRBase
+description = Code library for the Insecticide Resistance database interface in VectorBase.
+package = VectorBase
+core = 7.x
