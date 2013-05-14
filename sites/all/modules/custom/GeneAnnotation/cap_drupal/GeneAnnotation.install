@@ -1,30 +1,9 @@
 <?php
 
-/**
- * @file
- * Install, update and uninstall functions for the GeneAnnotation module.
- */
+/*
+    with the changes made to get this to work with ND postgres this may not work so you may just have to create the tables by hand or fix this file?!?
+*/
 
-/**
-function GeneAnnotation_uninstall() {
-  // Delete variables.
-  variable_del('GeneAnnotation_default_country');
-  variable_del('GeneAnnotation_display_GeneAnnotation');
-  variable_del('GeneAnnotation_usegmap');
-  variable_del('GeneAnnotation_locpick_macro');
-
-  // Delete geocoder settings.
-  $result = db_query("SELECT name FROM {variable} WHERE name LIKE 'GeneAnnotation_geocode_%'")->fetchCol();
-  foreach ($result as $var) {
-    variable_del($var);
-  }
-}
- */
-
-///// cannot stand this - just completely denormalised...
-/**
- * Implementation of hook_schema().
- */
 function GeneAnnotation_schema() {
 
     $schema['cap_file_node'] = array(

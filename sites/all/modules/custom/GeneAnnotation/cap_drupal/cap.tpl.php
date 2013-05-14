@@ -9,7 +9,7 @@
 		<li><a href='#tab2'>Download Models</a></li>
 		<li><a href='#tab3'>Submit Models</a></li>
 		<li><a href='#tab4'>Submit Gene Info</a></li>
-		<li><a href='#tab5'>Blast Genome</a></li>
+<!--		<li><a href='#tab5'>Blast Genome</a></li> -->
 	</ul>
 	<div id='tab1'>
 		<div class='accordion'>
@@ -21,19 +21,15 @@
         <input id="species-filler">
     </div>
 -->
-        <p>Welcome to the GeneDB/VectorBase Community Annotation Portal.</p>
+        <p>Welcome to the VectorBase Community Annotation Portal.</p>
 
-        <p>This portal is dedicated to communities involved in the manual annotation of a (preliminary) gene set.</p>
+        <p>This portal is dedicated to communities involved in the manual annotation of a gene sets.</p>
 
         <p>This site allows you to download genomic features (e.g. gene models, protein or EST alignments) from a selection of organisms. Files can then be opened with Apollo or Artemis and edited to modify the annotations. Files containing new or modified annotations can be uploaded via the portal and integrated in the main gene set.</p>
 
         <p>You will need to create an account to be able to download or submit files.</p>
 
         <br>
-
-	<h5><i>Glossina morsitans</i></h5>
- 	<p>Check out this <a href="http://vectorbase-cap.ensemblgenomes.org/?q=node/2">page</a> for more information and quick links to annotation resources.</p>
-	
 
 	</div>
 
@@ -72,8 +68,6 @@
         <div>
 
          <p>This section allows you to modify the gene status (delete, set as pseudogene, approve gene structure) and submit information on the gene name, gene symbol, or add a comment. </p>
-         <p>Implementation on this site is still in progress.</p> 
-         <p>For the <i>Glossina</i> Community Annotation effort: the functionality is available via the external <a href="https://docs.google.com/spreadsheet/viewform?formkey=dC1DODd1c2MyMzJObUZOOXZvZEV5YkE6MQ&theme=0AX42CRMsmRFbUy0wYjVlZjc1Mi00ZmQ1LTQ1YTktOWUyMC05M2IxMzljNTJkOTQ&ifq">Gene Information Capture Form</a></p>
 
         <p><b>NOTE:</b> Confirming a gene model as correct does <b>not</b> require uploading of gff for that gene model and is used to track which predictions have been appraised by curators. If you modify the gff for a gene model it will automatically be marked as appraised.</p>
         </div>
@@ -126,6 +120,9 @@
     
 ?>
 	</div>
+
+<!--
+
 	<div id='tab5'>
 
       <?php if($GLOBALS['user']->uid >= 1): ?>
@@ -137,7 +134,6 @@
   </div>
 </div>
 <div id="external-site-container" height="100%">
-  <!-- <iframe id="external-site" src="http://vectorbase-cap.ensemblgenomes.org/blast/blast.html" width="100%" scrolling="auto" frameBorder="0" height="100%" /> -->
   <iframe id="external-site" src="http://treason.ebi.ac.uk:43232/blast/blast.html" width="100%" scrolling="auto" frameBorder="0" height="100%" />
     <h3>Your Browser Does Not Support Iframes.</h3>
   </iframe>
@@ -147,8 +143,10 @@
     <p>You must be logged in to use this.</p>
 <?php endif; ?>
 
-
 	</div>
+
+-->
+
 </div>
 
 
