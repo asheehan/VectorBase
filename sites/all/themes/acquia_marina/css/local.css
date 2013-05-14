@@ -780,7 +780,7 @@ div.top-tip-row {
   background: -o-linear-gradient(top,  #e5e5e5 0%,#c1c1c1 100%); /* Opera 11.10+ */
   background: -ms-linear-gradient(top,  #e5e5e5 0%,#c1c1c1 100%); /* IE10+ */
   background: linear-gradient(to bottom,  #e5e5e5 0%,#c1c1c1 100%); /* W3C */
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e5e5e5', endColorstr='#c1c1c1',GradientType=0 ); /* IE6-9 */
+  /*filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e5e5e5', endColorstr='#c1c1c1',GradientType=0 ); /* IE6-9 */
 }
 #menu-1002-1 > .sf-depth-1 {
   /* pointer-events: none; To disable the tools menu */
@@ -869,7 +869,8 @@ background: -webkit-linear-gradient(top, #f5f7e6 0%,#cfe19d 100%);
 background: -o-linear-gradient(top, #f5f7e6 0%,#cfe19d 100%); 
 background: -ms-linear-gradient(top, #f5f7e6 0%,#cfe19d 100%); 
 background: linear-gradient(to bottom, #f5f7e6 0%,#cfe19d 100%); 
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f5f7e6', endColorstr='#cfe19d',GradientType=0 );
+/*Filters break ie compatibility (ironic because they're present only for ie*/
+/*filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f5f7e6', endColorstr='#cfe19d',GradientType=0 );*/
 }
 
 #menu-994-1 a:hover, #menu-994-1 a.active{
@@ -880,7 +881,8 @@ background: -webkit-linear-gradient(top, #3e87b7 0%,#3a7daa 27%,#255370 100%);
 background: -o-linear-gradient(top, #3e87b7 0%,#3a7daa 27%,#255370 100%); 
 background: -ms-linear-gradient(top, #3e87b7 0%,#3a7daa 27%,#255370 100%); 
 background: linear-gradient(to bottom, #3e87b7 0%,#3a7daa 27%,#255370 100%);
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3e87b7', endColorstr='#255370',GradientType=0 ); 
+/*Filters break ie compatibility (ironic because they're present only for ie*/
+/*filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3e87b7', endColorstr='#255370',GradientType=0 ); */
 }
 
 /* hide the page title on 404 page */

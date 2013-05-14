@@ -31,9 +31,9 @@ function login_block_block_view($delta) {
     $userId = $user->uid;
     $content = '<div id="login-block">';
     if ($userId > 0) {
-        $content .= '<form action="/user/logout"><input type="submit" value="Logout" class="form-submit"></form>';
+        $content .= '<form action="/user/logout"><input type="submit" value="Logout" class="form-submit" /></form>';
     } else {
-        $content .= '<form action="/user"><input type="submit" value="Login" class="form-submit"></form>';
+        $content .= '<form action="/user"><input type="submit" value="Login" class="form-submit" /></form>';
     }
     $content .= '</div>';
     $block['content'] = $content;
