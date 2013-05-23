@@ -1,4 +1,3 @@
-//req.open("GET", "/example.jsp?date=" + (+new Date), true);
 var studyId=0;
 var populationId=0;
 var csId=0;
@@ -13,10 +12,6 @@ var destDivId="";
 var divAC=document.getElementById("divAutoComplete");
 var resultsTypeId=0;
 var resultsForm=new Array();
-//<?php
-//for( $t=1; $t<=4; $t++ )
-//	echo "resultsForm[$t]='".file_get_contents("/var/www/html/ir/assay_results_form/$t.html")."';\n";
-//?>
 
 //***********************************
 //
@@ -87,7 +82,7 @@ function autoComplete(tbxObj,event)	{
 		tbxValue=tbxValue+String.fromCharCode(newChar);
 
 	if(tbxValue.length>=2)
-		divAC.innerHTML=getDataFromServer("/irbase/autoComplete.php?oid="+tbxId+"&q="+tbxValue);
+		divAC.innerHTML=getDataFromServer("autoComplete.php?oid="+tbxId+"&q="+tbxValue);
 	else
 		divAC.style.visibility="hidden";
 }
@@ -158,8 +153,8 @@ function getchildren(objGroup,objId,objCount) {
 		}
 		return;
 	}
-
-	response=getDataFromServer("/irbase/getChildren.php?id="+termId);
+	<?php $theBaseUrl = 'https://' . $_SERVER['HTTP_HOST'] . "/$irPath"; ?>
+	response=getDataFromServer("<?print $theBaseUrl; ?>/getChildren.php?id="+termId);
 	listItems=response.split("\n");
 	destObj.length=0;
 	if(listItems.length>0)	{
@@ -291,10 +286,20 @@ function submitSearch()	{
 		if(document.getElementById("y_to").value.search("-")<0)
 			query=query+"&y_to="+document.getElementById("y_to").value;
 	}
-
 	if(dataInputError==0 && query!="")	{
 		query=query+"&sid="+sid;
-		this.window.location="ir-search?"+query;
+		//this.window.location=" print 'https://' . $_SERVER['HTTP_HOST'] . "/$irPath/irSearch.php";?"+query;
+		jQuery.ajax({
+
+			url:'<?php print 'https://' . $_SERVER['HTTP_HOST'] . "/$irPath/irSearch.php";?>',
+			type: "GET",
+			data: query,
+			success: function(response) {
+				//console.log(response);
+				jQuery(".irbase_results").html(response);
+			}
+
+		});
 	}
 }
 

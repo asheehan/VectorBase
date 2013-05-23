@@ -1,7 +1,6 @@
 <?php
 require_once( "IRBaseConnect.php" );
 $db = connectIRBase();
-
 $aclid = mysql_real_escape_string( $_GET['oid'] );
 $query = "SELECT * FROM auto_complete_list WHERE aclid='$aclid'";
 if( $result = mysql_query( $query ) )	{

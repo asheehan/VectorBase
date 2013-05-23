@@ -1,8 +1,16 @@
 <?php
-$irPath = drupal_get_path('module', 'irbase') . '/includes';
+
+define('DRUPAL_ROOT', $_SERVER['DOCUMENT_ROOT']);
+require_once(DRUPAL_ROOT . '/includes/bootstrap.inc');
+$phase = drupal_bootstrap(DRUPAL_BOOTSTRAP_FULL);
+$irPath = drupal_get_path('module', 'irbase');
+$irPath .= '/includes';
 $sid = "ses".substr( md5(session_id()), 0, 12);
-include_once("$irPath/IRBaseConnect.php");
-drupal_add_js("$irPath/ajax2.php");
+//include_once("$irPath/IRBaseConnect.php");
+require_once("$irPath/IRBaseConnect.php");
+print '<script language="javascript">';
+include("$irPath/ajax2.php");
+print '</script>';
 $dbConn = connectIRBase();
 ?>
 <html>
@@ -87,6 +95,7 @@ $dbConn = connectIRBase();
 ?>
   
 	<tr><td colspan="3" class="plain">Database statistics - Studies:144&nbsp;&nbsp;Mosquito population samples:1330&nbsp;&nbsp;Assays:5190</td></tr>
+	<tr><td colspan="3"><div class="irbase_results"></div></td></tr>
 </table>
 <script language="javascript">
 var sid='<?php print $sid; ?>';

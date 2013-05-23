@@ -40,4 +40,4 @@ function getIds( $query, $db )	{
 			$ids[$n++]=$myrow['assay_id'];
 	return $ids;
 }
-?>
+
