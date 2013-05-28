@@ -1745,10 +1745,10 @@ function theme_apachesolr_search_noresults() {
   }
 
   return t('<p style="font-weight:bold">No Results Found</p><ul>
-<li>Use the asterisk wildcard character (*) to broaden  matching criteria. For example, you could use the following as your search term: <a href="'. $new_query . $new_query_terms .'">' . htmlspecialchars($new_query_terms) . '</a></li>
+<li>Use the asterisk wildcard character (*) to broaden  matching criteria. For example, you could use the following as your search term: <b><a href="'. $new_query . $new_query_terms .'">' . htmlspecialchars($new_query_terms) . '</a></b></li>
 <li>Check if your spelling is correct, or try removing filters.</li>
 <li>Remove quotes around phrases to match each word individually: <em>"Anopheles gambiae"</em> will return fewer results than <em>Anopheles gambiae</em>.</li>
 <li>You can require or exclude terms using + and -: <em>Anopheles +gambiae </em> will require a match on <em>gambiae</em> while <em>Anopheles -gambiae</em> will exclude results that contain <em>gambiae</em>.</li>
-</ul>') . $new_query . $new_query_terms;
+</ul>');
 
 }
