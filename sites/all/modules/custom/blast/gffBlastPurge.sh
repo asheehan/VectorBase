@@ -11,5 +11,5 @@ else
 fi
 
 echo "Removing `find /vectorbase/web/root/data/* -maxdepth 1 -type f -mtime $days | wc -l` files older than $days days on `date`"
-#echo `find /vectorbase/web/root/data/* -maxdepth 1 -type f -mtime $days -exec rm {} \;`
+echo `find /vectorbase/web/root/data/* -maxdepth 1 -type f -mtime $days -exec rm {} \;`
 

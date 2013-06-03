@@ -179,12 +179,12 @@ function blast_generateGFF($id, $searchId = null){
 	  $hitsTimer = new Timer();*/
 
 	$timingData = "Timing data for gff file generation for job $id / $searchId\n";
-	$timingData .= "\tReverse header query took: " . $reverseHeaderTimer->elapsed() . " seconds\n";
-	$timingData .= "\tAll blast results query took: " . $allResultsTimer->elapsed() . " seconds\n";
-	$timingData .= "\tIs tagged queries (3n) took: " . $queryTimer->elapsed() . " seconds\n";
-	$timingData .= "\tHits query took: " . $hitsTimer->elapsed() . " seconds\n";
+	$timingData .= "\tReverse header query took: " . $reverseHeaderTimer->toString() . " seconds\n";
+	$timingData .= "\tAll blast results query took: " . $allResultsTimer->toString() . " seconds\n";
+	$timingData .= "\tIs tagged queries (3n) took: " . $queryTimer->toString() . " seconds\n";
+	$timingData .= "\tHits query took: " . $hitsTimer->toString() . " seconds\n";
 	//	$timingData .= "\tTime took to fetch hit results out of object: " . $hspsQueryFetchTimer->elapsed() . "\n";
-	$timingData .= "\tFile writing took: " . $writeTimer->elapsed() . " seconds\n";	
+	$timingData .= "\tFile writing took: " . $writeTimer->toString() . " seconds\n";	
 	$timingData .= "\tBlast hit ids (should match the number of ?'s in the hists query) (size: " . count($bh_ids) . '):  ' . print_r($bh_ids, true) . "\n";
 	file_put_contents($_SERVER['DOCUMENT_ROOT']."/data/gffFileGenerationTimingDataForJob_$id.log", $timingData);
 }

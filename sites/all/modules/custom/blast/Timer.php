@@ -6,6 +6,7 @@ class Timer {
 	var $start = 0; 
 	var $stop = 0; 
 	var $elapsed = 0; 
+	var $splits = 0;
 	var $running = false;
 
 # Constructor 
@@ -27,6 +28,7 @@ class Timer {
 # Stop counting time 
 	function stop() { 
 		if($this->running) {
+			$this->splits++;
 			$this->stop = $this->_getTime();
 			$this->elapsed += $this->_compute(); 
 			$this->running = false;
@@ -41,11 +43,22 @@ class Timer {
 		return $this->elapsed; 
 	} 
 
-# Get Elapsed Time 
+# Get Splits
+	function splits() {
+		return $this->splits;
+	}
+
+# Prints elapsed time and number of splits (this stops the timer)
+	function toString() {
+		return $this->elapsed() . ' (' . $this->splits() . ' splits)';
+	}
+
+# Reset Timer
 	function reset() { 
 		$this->start   = 0; 
 		$this->stop    = 0; 
 		$this->elapsed = 0; 
+		$this->splits  = 0;
 		$this->running = false;
 	}
 
@@ -56,15 +69,15 @@ class Timer {
 		echo "\trunning timer for ~2 seconds\n";
 		$test = new Timer(true);
 		sleep(2);
-		echo "\ttime elapsed (should be ~2 sec): " . $test->elapsed() . "\n";
+		echo "\ttime elapsed (should be ~2 sec): " . $test->toString() . "\n";
 		sleep(2);	
 		echo "\twaiting 2 sec to simulate break between timings\n";
 		$test->start();
 		echo "\trunning timer for another ~3 seconds\n";
 		sleep(3);
-		echo "\ttotal time elapsed should be cumulative (~5 sec): " . $test->elapsed() . "\n";
+		echo "\ttotal time elapsed should be cumulative (~5 sec): " . $test->toString() . "\n";
 		$test->reset();
-		echo 'reset test (should be 0): ' . $test->elapsed() . "\n";
+		echo 'reset test (should be 0): ' . $test->toString() . "\n";
 		echo "done!\n";
 
 	} 
@@ -83,4 +96,7 @@ class Timer {
 		return $this->stop - $this->start; 
 	} 
 }
+
+//$t = new Timer();
+//$t->demoTest();
 
