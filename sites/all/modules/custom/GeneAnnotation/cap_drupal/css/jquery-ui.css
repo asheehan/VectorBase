@@ -89,7 +89,7 @@
 
 .ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active { 
     border: 1px solid #acdd4a; 
-    background: #95CF1A url(images/ui-bg_gloss-wave_50_6eac2c_500x100.png) 50% 50% repeat-x; 
+    background: #B1DF70 url(images/ui-bg_gloss-wave_50_6eac2c_500x100.png) 50% 50% repeat-x; 
     font-weight: bold; color: #ffffff; 
 }
 
