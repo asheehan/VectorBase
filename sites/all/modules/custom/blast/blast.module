@@ -532,7 +532,6 @@ echo '<br>Time it took to look up/submit job: ' + ($stop-$start);
 
 function blast_printTopLevelResults($id, $raw = null){
 	// job is done
-	$s1 = microtime(true);
 	$results='';
 	if(empty($raw)) {
 		$raw=blast_getRawJobId($id);
@@ -547,24 +546,9 @@ function blast_printTopLevelResults($id, $raw = null){
 
 	$submitDate=preg_match("#dateSubmitted = (.*?);#",xgrid_attributes($raw),$match);
 	$date=date_create_from_format('Y-m-d H:i:s O',$match[1]);
-$st1 = microtime(true);
-echo 'Time to get xgrid stuff: ' . ($st1-$s1);
 
 	// make sure we have gff files for this job
-class AsyncOperation extends Thread {
-
-	public function __construct($arg) {
-		$this->arg = $arg;
-	}
-	public function run() {
-		if($this->arg && !empty($this->arg)) {
-			blast_generateGFF($this->arg);
-		}
-	}
-}
-
-$generateGffJob = new AsyncOperation($id);
-$generateGffJob->start();
+	blast_generateGFF($id);
 
 	// display results
 	$size=32;
@@ -592,10 +576,7 @@ $generateGffJob->start();
 
 					';
 
-$start = microtime(true);
 	$results.=blast_results_topLevel($raw);
-$stop = microtime(true);
-echo '<br>Time it took to generate top level results (seconds): ' . ($stop-$start);  
 	$results.="</fieldset>";
 
 	return $results;

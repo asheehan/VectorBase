@@ -5,15 +5,21 @@ require_once('Timer.php');
 // these are used for viewing chromosome arm/supercontig segments in the genome browser
 function blast_generateGFF($id, $searchId = null){
 
-	$debugFilename = $_SERVER['DOCUMENT_ROOT']."/data/debugDataForJob_$id.log";
+
+	$isTimerEnabled = false; // Turn on/off blast query timers and log
+
 	$hspsQuery = '';
 	$bh_ids = null;
-	$queryTimer = new Timer();
-	$writeTimer = new Timer();
-	$reverseHeaderTimer = new Timer();
-	$allResultsTimer = new Timer();
-	$hitsTimer = new Timer();
-	$hspsQueryFetchTimer = new Timer();
+	
+	if($isTimerEnabled) {	
+		$queryTimer = new Timer();
+		$writeTimer = new Timer();
+		$reverseHeaderTimer = new Timer();
+		$allResultsTimer = new Timer();
+		$hitsTimer = new Timer();
+		$hspsQueryFetchTimer = new Timer();
+	}
+
 	if(empty($searchId)) {
 		$searchId=blast_getRawJobId($id);
 	}
@@ -21,16 +27,16 @@ function blast_generateGFF($id, $searchId = null){
 
 
 	// get the tid for "Reversed Headers"
-	$reverseHeaderTimer->start();
+	if($isTimerEnabled) { $reverseHeaderTimer->start(); }
 	$rhTidQuery=db_select('taxonomy_term_Data', 't');
 	$rhTidQuery->addField('t', 'tid');
 	$rhTidQuery->condition('t.name', 'Reversed Headers', '=');
 	$rhTid = $rhTidQuery->execute()->fetchField();
 
-	$reverseHeaderTimer->stop();
+	if($isTimerEnabled) { $reverseHeaderTimer->stop(); }
 
 	// look up all blast_results that have this search id
-	$allResultsTimer->start();	
+	if($isTimerEnabled) { $allResultsTimer->start(); }
 	$blastResultsQuery=db_select('blast_results', 'br');
 	$blastResultsQuery->addField('br', 'br_id');
 	$blastResultsQuery->addField('br', 'query_name');
@@ -38,7 +44,7 @@ function blast_generateGFF($id, $searchId = null){
 	$blastResultsQuery->addField('br', 'database_name');
 	$blastResultsQuery->condition('br.search_id', $searchId, '=');
 	$results = $blastResultsQuery->execute();
-	$allResultsTimer->stop();
+	if($isTimerEnabled) { $allResultsTimer->stop(); }
 
 	while(($result = $results->fetchAssoc()) !== false){
 		$br_ids[]=$result['br_id'];  
@@ -59,14 +65,14 @@ function blast_generateGFF($id, $searchId = null){
 			$gff='track name="BLAST Hits" description="BLAST Hits" color=green useScore=0 url=http://www.vectorbase.org/Tools/BLAST/?result=html_results&br_id='.$br_id.'&page=res&job_id='.$id."\n";
 
 			// look up all blast hits for this blast result
-			$queryTimer->start();
+			if($isTimerEnabled) { $queryTimer->start(); }
 			$blastHitsQuery=db_select('blast_hits', 'bh');
 			$blastHitsQuery->addField('bh', 'bh_id');
 			$blastHitsQuery->addField('bh', 'name');	
 			$blastHitsQuery->addField('bh', 'description');
 			$blastHitsQuery->condition('bh.br_id', $br_id, '=');
 			$hits = $blastHitsQuery->execute();
-			$queryTimer->stop();
+			if($isTimerEnabled) { $queryTimer->stop(); }
 			while(($hit = $hits->fetchAssoc()) !== false){
 				$bh_ids[]=$hit['bh_id'];
 				$hitNames[]=$hit['name'];
@@ -83,7 +89,7 @@ function blast_generateGFF($id, $searchId = null){
 
 					// get the nid(entity_id) for this db name
 					if(is_null($rh_dbs[$databaseNames[$br_idx]])) {
-						$queryTimer->start();			
+						if($isTimerEnabled) { $queryTimer->start(); }
 						$isTaggedQuery = db_select('file_managed', 'fm');
 						$isTaggedQuery->addField('fm', 'fid');
 						$isTaggedQuery->join('field_data_field_file', 'ff', 'fm.fid = ff.field_file_fid');
@@ -95,7 +101,7 @@ function blast_generateGFF($id, $searchId = null){
 						//$isTaggedObj=db_query('select count(*) from file_managed fm, field_data_field_file ff, field_data_field_tags ft where fm.filename = :filename and fm.fid = ff.field_file_fid and ff.entity_id = ft.entity_id and ft.field_tags_tid = :taxId', array(':filename'=>$databaseNames[$br_idx], ':taxId'=>$rhTid));
 						//$isTagged = $isTaggedObj->fetchAssoc();
 						$rh_dbs[$databaseNames[$br_idx]] = ($isTagged !== false && !empty($isTagged['count']));
-						$queryTimer->stop();
+						if($isTimerEnabled) { $queryTimer->stop(); }
 					}
 
 					if($rh_dbs[$databaseNames[$br_idx]]){
@@ -105,7 +111,7 @@ function blast_generateGFF($id, $searchId = null){
 
 				}
 
-				$hitsTimer->start();			
+				if($isTimerEnabled) { $hitsTimer->start(); }			
 				$hspsQuery = db_select('blast_hsps', 'bh');
 				$hspsQuery->addField('bh', 'bh_id');
 				$hspsQuery->addField('bh', 'starthit');
@@ -129,7 +135,7 @@ function blast_generateGFF($id, $searchId = null){
 				//	$hspsObj = pg_execute($db, 'hspsQuery', $bh_ids);
 				//	$hsps = pg_fetch_array($hspsObj);
 				$hsps = $hspsQuery->execute();
-				$hitsTimer->stop();
+				if($isTimerEnabled) { $hitsTimer->stop(); }
 
 				/*$hspsQueryFetchTimer->start();
 				  $hsps = $hspsObj->fetchAssoc();
@@ -143,7 +149,6 @@ function blast_generateGFF($id, $searchId = null){
 					$lastDistinctBlastId = $hsp['bh_id'];
 					do {
 
-						file_put_contents($debugFilename, print_r($hsp, true) . "\n", FILE_APPEND);
 						if($lastDistinctBlastId !== $hsp['bh_id']) {
 							$currentBlastResultIdx++;
 							$lastDistinctBlastId = $hsp['bh_id'];
@@ -164,27 +169,22 @@ function blast_generateGFF($id, $searchId = null){
 				// save locally
 				$location=$_SERVER['DOCUMENT_ROOT']."/data/";
 				$fileName=$id."_".$br_id.".gff";
-				$writeTimer->start();
+				if($isTimerEnabled) { $writeTimer->start(); }
 				file_put_contents($location.$fileName,$gff);
-				$writeTimer->stop();
+				if($isTimerEnabled) { $writeTimer->stop(); }
 			} // end check for results
 		}
 	}
 
+	if($isTimerEnabled) { 
+		$timingData = "\n" . date('H:i:s, d M Y') . " Timing data for gff file generation for job $id / $searchId\n";
+		$timingData .= "\tReverse header query took: " . $reverseHeaderTimer->toString() . " seconds\n";
+		$timingData .= "\tAll blast results query took: " . $allResultsTimer->toString() . " seconds\n";
+		$timingData .= "\tIs tagged queries (3n) took: " . $queryTimer->toString() . " seconds\n";
+		$timingData .= "\tHits query took: " . $hitsTimer->toString() . " seconds\n";
+		$timingData .= "\tFile writing took: " . $writeTimer->toString() . " seconds\n";	
+		//$timingData .= "\tBlast hit ids (should match the number of ?'s in the hists query) (size: " . count($bh_ids) . '):  ' . print_r($bh_ids, true) . "\n";
+		file_put_contents($_SERVER['DOCUMENT_ROOT']."/data/blastTimingDataForGffFileGeneration.log", $timingData, FILE_APPEND); 
+	}
 
-	/*$queryTimer = new Timer();
-	  $writeTimer = new Timer();
-	  $reverseHeaderTimer = new Timer();
-	  $allResultsTimer = new Timer();
-	  $hitsTimer = new Timer();*/
-
-	$timingData = "Timing data for gff file generation for job $id / $searchId\n";
-	$timingData .= "\tReverse header query took: " . $reverseHeaderTimer->toString() . " seconds\n";
-	$timingData .= "\tAll blast results query took: " . $allResultsTimer->toString() . " seconds\n";
-	$timingData .= "\tIs tagged queries (3n) took: " . $queryTimer->toString() . " seconds\n";
-	$timingData .= "\tHits query took: " . $hitsTimer->toString() . " seconds\n";
-	//	$timingData .= "\tTime took to fetch hit results out of object: " . $hspsQueryFetchTimer->elapsed() . "\n";
-	$timingData .= "\tFile writing took: " . $writeTimer->toString() . " seconds\n";	
-	$timingData .= "\tBlast hit ids (should match the number of ?'s in the hists query) (size: " . count($bh_ids) . '):  ' . print_r($bh_ids, true) . "\n";
-	file_put_contents($_SERVER['DOCUMENT_ROOT']."/data/gffFileGenerationTimingDataForJob_$id.log", $timingData);
 }

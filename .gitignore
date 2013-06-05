@@ -10,6 +10,9 @@ sites/*/private
 # Ignore any legacy svn repository folders.
 *.svn
 
+# Ignore log files
+data/blastTimingDataForGffFileGeneration.log
+
 # Ignore CVBrowser cache files
 CVBrowser/CVBrowser/*.cache.*
 

@@ -132,54 +132,11 @@
 			 setAvailableDbs($("input[name='program']:checked", '#blast-ajax-form').val());
 			 });
 
-// dave - experiment queue with timers and delayed binding to reduce page freezing
-/*$.queue = {
-_timer: null,
-	_queue: [],
-	add: function(fn, context, time) {
-		var setTimer = function(time) {
-			$.queue._timer = setTimeout(function() {
-					time = $.queue.add();
-					if ($.queue._queue.length) {
-					setTimer(time);
-					}
-					}, time || 2);
-		}
-
-		if (fn) {
-			$.queue._queue.push([fn, context, time]);
-			if ($.queue._queue.length == 1) {
-				setTimer(time);
-			}
-			return;
-		}
-
-		var next = $.queue._queue.shift();
-		if (!next) {
-			return 0;
-		}
-		next[0].call(next[1] || window);
-		return next[2];
-	},
-clear: function() {
-	       clearTimeout($.queue._timer);
-	       $.queue._queue = [];
-       }
-};*/
-// end queue experiment code
-
 	 // examine all checked datasets, check dbs according to what program is selected
 	 function setCheckedDbs(){
-		 /*$(".organismCheckboxDiv :checked").each(
-				 function() {
-				 var self = $(".organismCheckbox");
-				 var doTrigger = function() {
-				 self.trigger('change');
-				 };
-				 $.queue.add(doTrigger, self);
-				 }
-				 );*/
-			console.log('setCheckedDbs called');
+		$(".organismCheckboxDiv :checked").each(function() {
+			$(".organismCheckbox").trigger('change');
+		});
 	 }
 
 	 // master toggle for all datasets
@@ -289,41 +246,39 @@ function getJobStatus(){
 	var error=false;
 	var done=false;
 
-	$.ajax({
-type: "POST",
-data: "id=" + jobId +"&ieIsCrap="+Math.round(new Date().getTime()/1000.0),
-async: false,
-url: Drupal.settings.xgrid.xgridPath+"/status.php",
-success: function(status){
-//console.log('is raw? '+ isRaw);
+	$.ajax({type: "POST",
+			data: "id=" + jobId +"&ieIsCrap="+Math.round(new Date().getTime()/1000.0),
+			async: false,
+			url: Drupal.settings.xgrid.xgridPath+"/status.php",
+	success: function(status){
+			//console.log('is raw? '+ isRaw);
 
-// is this the raw blast job?
-if(isRaw==true){
-// report on the job progress
-//console.log( "id=" + jobId+"&ieIsCrap="+Math.round(new Date().getTime()/1000.0) );
-$.ajax({
-type: "POST",
-data: "id=" + jobId+"&ieIsCrap="+Math.round(new Date().getTime()/1000.0),
-async: false,
-url: Drupal.settings.xgrid.xgridPath+"/jobProgress.php",
-success: function(msg){
-$("#submissionDialog").dialog("open");
-if(status=="Running"){
-$("#submissionDialog").html("Job "+parseId+" is running: "+msg+'%'+pinwheel);
-}else{
-var statuz = status === "" ? 'in an unknown state' : status.toLowerCase();
-$("#submissionDialog").html("Job "+parseId+" is "+statuz+pinwheel);
-}
+			// is this the raw blast job?
+			if(isRaw==true){
+			// report on the job progress
+			//console.log( "id=" + jobId+"&ieIsCrap="+Math.round(new Date().getTime()/1000.0) );
+			$.ajax({type: "POST",
+				data: "id=" + jobId+"&ieIsCrap="+Math.round(new Date().getTime()/1000.0),
+				async: false,
+				url: Drupal.settings.xgrid.xgridPath+"/jobProgress.php",
+				success: function(msg){
+				$("#submissionDialog").dialog("open");
+				if(status=="Running"){
+				$("#submissionDialog").html("Job "+parseId+" is running: "+msg+'%'+pinwheel);
+				}else{
+				var statuz = status === "" ? 'in an unknown state' : status.toLowerCase();
+				$("#submissionDialog").html("Job "+parseId+" is "+statuz+pinwheel);
+				}
 
-// if final job status has been achieved
-if ( status=="Finished" || status=="Failed" || status=="Canceled" || status=="Error" ){
-isRaw=false;
-jobId=parseId;
-}else{
-console.log(status);
-}
-},
-error: function(msg){
+				// if final job status has been achieved
+				if ( status=="Finished" || status=="Failed" || status=="Canceled" || status=="Error" ) {
+					isRaw=false;
+					jobId=parseId;
+				} else{
+					//console.log(status);
+				}
+			},
+	error: function(msg){
 	       $("#submissionDialog").dialog("open");
 	       $("#submissionDialog").html('Job ' +parseId+' encountered an error while retrieving job status: ' + msg.responseText);
 	       error=true;
@@ -348,22 +303,22 @@ async: false,
 url: Drupal.settings.blast.blastPath+"/displayResults.php",
 success: function(msg){
 var ss = new Date().getTime();
-console.log('Time took for post: ' + (ss - s));
+//console.log('Time took for post: ' + (ss - s));
 $("#edit-result").html(msg);
 var s2 = new Date().getTime();
-console.log('Time took for edit-result update: ' + (s2 - ss));
+//console.log('Time took for edit-result update: ' + (s2 - ss));
 $("#submissionDialog").dialog("close");
 var s3 = new Date().getTime();
-console.log('Time took to close the dialog: ' + (s3 - s2));
+//console.log('Time took to close the dialog: ' + (s3 - s2));
 $("#edit-jobid").html('');
 var s4 = new Date().getTime();
-console.log('Time took to clear edit-jobid: ' + (s4 - s3));
+//console.log('Time took to clear edit-jobid: ' + (s4 - s3));
 isRaw=true;
 done=true;
 loadInputParams(msg);
 var s5 = new Date().getTime();
-console.log('Time took to load input params: ' + (s5 - s4));
-console.log('Time took for whole success method: ' + (s5 - ss));
+//console.log('Time took to load input params: ' + (s5 - s4));
+//console.log('Time took for whole success method: ' + (s5 - ss));
 },
 error: function(msg){
 	       $("#submissionDialog").dialog("open");
@@ -412,7 +367,7 @@ function returnOneSubstring(regex,input){
 }
 
 function loadInputParams(input){
-	var l1 = new Date().getTime();
+	//var l1 = new Date().getTime();
 	// load job input parameters
 	$("#edit-sequence").val(returnOneSubstring(/sequence=([\s\S]*?)IIIjustInCase;/,input));
 
@@ -439,8 +394,9 @@ function loadInputParams(input){
 
 	}
 
-	var l2 = new Date().getTime();	
-	console.log('Time took for job input param settings to get filled in: ' + (l2 - l1));
+	//var l2 = new Date().getTime();	
+	//console.log('Time took for job input param settings to get filled in: ' + (l2 - l1));
+	
 	// run some checks on this new data we're importing to the form
 	// hide scoring matrix for blastn since it isn't supported in new blastall
 	if(program=='blastn'){
@@ -451,8 +407,8 @@ function loadInputParams(input){
 		$("#edit-scoringmatrix").removeAttr("disabled");
 	}
 
-	var l3 = new Date().getTime();	
-	console.log('Time took for some more css and attr modifications: ' + (l3 - l2));
+	//var l3 = new Date().getTime();	
+	//console.log('Time took for some more css and attr modifications: ' + (l3 - l2));
 
 	//  --- check dbs ---
 	// first, uncheck all datasets/dbs currently selected
@@ -473,15 +429,15 @@ function loadInputParams(input){
 		$(".organismCheckbox[data-org='"+org+"']:checkbox").attr('checked','checked');
 	}
 
-	var l4 = new Date().getTime();	
-	console.log('Time took for db check box fill-ins: ' + (l4 - l3));
+	//var l4 = new Date().getTime();	
+	//console.log('Time took for db check box fill-ins: ' + (l4 - l3));
 	// do checks on dbs and select datasets of selected dbs
 	setAvailableDbs(program);
-	var l5 = new Date().getTime();	
-	console.log('Time took for setAvailableDbs to run: ' + (l5 - l4));
+	//var l5 = new Date().getTime();	
+	//console.log('Time took for setAvailableDbs to run: ' + (l5 - l4));
 	setCheckedDbs();
-	var l6 = new Date().getTime();	
-	console.log('Time took for setCheckedDbs to run: ' + (l6 - l5));
+	//var l6 = new Date().getTime();	
+	//console.log('Time took for setCheckedDbs to run: ' + (l6 - l5));
 }
 
 
