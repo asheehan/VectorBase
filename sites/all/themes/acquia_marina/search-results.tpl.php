@@ -71,7 +71,51 @@
 			$siteList[$key] = $value;
 		}
 	}
+	
+	drupal_add_js('/sites/all/themes/acquia_marina/js/advanced-search.js');
+	drupal_add_js('/sites/all/themes/acquia_marina/js/uri.js/src/URI.js');
+	
+	// initial values
+	$initValues['adv_search'] = (isset($_GET['adv_search'])) ? $_GET['adv_search'] : FALSE;
+	$initValues['site'] = (isset($_GET['site'])) ? $_GET['site'] : '';
+	$initValues['bundle_name'] = (isset($_GET['bundle_name'])) ? $_GET['bundle_name'] : '';
+	$initValues['title'] = (isset($_GET['title'])) ? $_GET['title'] : '';
+	
+
+  	$advancedSearchContent = '
+  		<div class="search_advanced_box">
+  			<form name="advanced_search_form" action="/search/site/%2a" method="get">
+  			Domain: <select id="advanced_search_select_domain" name="site" value="Ontology"></select>&nbsp;&nbsp;
+  			Sub-domain: <select id="advanced_search_select_subdomain" name="bundle_name"></select>&nbsp;&nbsp;
+  			<input id="advanced_serach_input_submit" type="submit" value=" Search ">
+  			<br />
+  			<table class="advanced_search_table_inputs">
+  			<tr><th colspan="2">Field</th><th>Exact</th></tr>
+  			<tr>
+  				<td>Title:</td><td><input id="advanced_search_input_title" type="text" name="title" value='.$initValues['title'].'></td>
+  				<td><input id="advanced_search_input_title_exact" type="checkbox" name="title_exact" /></td>
+  			</tr>
+  				<td>Description:</td><td><input id="advanced_search_input_description" type="text" name="description"></td>
+  				<td><input id="advanced_search_input_description_exact" type="checkbox" name="description_exact"></td>
+  			</tr>
+  			<tr>
+  				<td colspan="2"><input id="advanced_serach_input_submit" type="submit" value=" Search "></td>
+  			</tr>
+  			</table>
+  			<input type="hidden" name="adv_search" value="1">
+			</form>
+  		</div>
+  	';
+	
+	print theme('ctools_collapsible',
+		array(
+			'handle'	=>	'<b>Advanced Search</b>',
+			'content'	=>	$advancedSearchContent,
+			'collapsed'	=>	!$initValues['adv_search']
+		)
+	);
   ?>
+  <br />
 	<div class="search_filter_box">
 		<h2>Filter Results</h2>
 
@@ -147,7 +191,7 @@
 			?>
 		</table>
 	</div>	
-<div style="width:70%;float:right;padding:10px;">
+<div style="width:70%;float:right;padding:10px;">		
   <h2><?php print t('Search results');?></h2>
 	<?
 	global $pager_page_array, $pager_total_items;

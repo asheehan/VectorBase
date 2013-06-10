@@ -118,6 +118,11 @@ function vbsearch_apachesolr_query_alter($query) {
   if (isset($_GET['site'])){
     $query->addFilter('site', $_GET['site']);
   }
+  
+  // setup our advanced search queries
+  if (isset($_GET['adv_search'])) {
+  	// do nothing
+  }
 }
 
 

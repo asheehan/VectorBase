@@ -118,9 +118,13 @@
    <copyField source="site" dest="text"/>
    <field name="hash" type="string" indexed="true" stored="true"/>
    <field name="url" type="string" indexed="true" stored="true"/>
+   
    <!-- label is the default field for a human-readable string for this entity (e.g. the title of a node) -->
    <field name="label" type="text_ws" indexed="true" stored="true" termVectors="true" omitNorms="true"/>
+   <field name="label_exact" type="string" indexed="true" stored="true"/> <!-- exact search field -- label -->
+   <copyField source="label" dest="label_exact">
    <copyField source="label" dest="text"/>
+   
    <!-- The string version of the title is used for sorting -->
    <copyField source="label" dest="sort_label"/>
    <!-- content is the default field for full text search - dump crap here -->
