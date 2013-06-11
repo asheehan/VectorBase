@@ -322,8 +322,12 @@ div#vbpg_page table {
   border-collapse: separate;
 }
 
-div#vbpg_page table th, div#vbpg_page table td {
-  boder: none;
+div#vbpg_page table th,
+div#vbpg_page table td,
+div#vbpg_page thead th,
+div#vbpg_page tbody th,
+{
+  border: none;
 }
 
 
