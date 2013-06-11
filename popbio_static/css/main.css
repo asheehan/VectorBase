@@ -7,98 +7,96 @@
  *
  */
 
-
 body#vbpg {
   color: black;
   font-family: arial,sans-serif;
-  margin: 0;
-  font-size: 85%;
-  padding: 5px; 
-  background: #f7f7f7;
 }
 
-div#vbpg_page a { text-decoration: none; color: #1010f0; }
-div#vbpg_page a:hover { color: #5050ff; }
-
-div#vbpg_page { width: 900px; padding: 5px; background: white; }
-
-div#vbpg_banner { background: #005500; padding: 5px;
-      /* the following two attributes avoid the need for  */
-      overflow: hidden; width: 890px; }
-div#vbpg_logo { float: left; }
-div#vbpg_logo img { border: none; padding: 0px; }
-div#vbpg_banner_title {
-		margin-left: 10px;
-		margin-top: 8px;
-		font-size: 20px;
-		font-weight: bold;
-		float: left;
+div#vbpg_page {
+  width: 900px;
 }
-div#vbpg_banner_title a { color: white; }
-div#vbpg_banner_title a:hover { color: white; }
 
-div#vbpg_nav { float: right; }
-div#vbpg_nav ul { list-style-type: none; margin: 0px;}
-div#vbpg_nav li { float: left; padding: 4px; padding-top: 3px; background: #f7f7f7; margin: 5px; }
-div#vbpg_nav li a { font-size: 85%; } /* text-decoration: none; color: #1010f0; }*/
-
-
-div#vbpg_content { min-height: 400px; }
-
-div#vbpg_footer { margin-top: 10px; font-size: 75%; text-align: center; }
-
-.vbpg_progress { }
+.vbpg_progress { 
+}
 
 #project_load_status {
-  position: fixed;
-	left: 550px;
-	top: 30px;
-	width: 200px;
-	background: yellow;
-	color: black;
-	font-size: 12px;
-	text-align: center;
+    position: fixed;
+    left: 370px;
+    top: 10px;
+    width: 200px;
+    background: yellow;
+    color: black;
+    font-size: 12px;
+    text-align: center;
 }
 
 /* optional fixed-height container for spinner */
-.vbpg_progress_container {
-    float: left;
-    min-height: 32px;
-    width: 0px;
+div.vbpg_progress_container {
+    position: absolute;
+    left: 400px;
+    height: 24px;
+    width: 24px;
+}
+div.vbpg_progress img {
+    height: 24px;
+    width: 24px;
+}
+div.vbpg_progress {
+    margin-top: -42px;
+}
+
+/* temp style for standalone demo server */
+ul#vbpg_nav {
+  text-align: right;
+  margin: 0px;
+  margin-bottom: -10px;
+  padding: 0px;
+  width: 100%;
+} 
+ul#vbpg_nav li {
+    display: inline;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-size: 75%;
 }
 
 .list_row_template { display: none; }
 .hide_on_load { display: none; }
 .hide_unless_paging { display: none; }
 
-/* clear the floating vbpg_progress_container divs */
-div.vbpg_object_info, div.vbpg_object_list { clear: both; }
+div.vbpg_object_info, div.vbpg_object_list {
+/* clear: both; */
+ width: 900px;
+}
 
 /* these dl dt dd stylings are for key=value lists */
 div.vbpg_object_info dl, div.vbpg_object_list dl {
-    margin: 0px;
-    /* next two attribs clear the floats somehow */
-    overflow: hidden;
-    width: 100%;
-}
-
-div.vbpg_object_info dl.margin-below, div.vbpg_object_list dl.margin-below {
-  margin-bottom: 1ex;
+ width:100%;
+ overflow:hidden;
+ margin: 0px;
 }
 
 div.vbpg_object_info dl dt, div.vbpg_object_list dl dt {
-    float: left;
-    clear: left;  
-    width: 200px;
-    text-align: left;
-    font-weight: bold;
+    float:left;
+    width:200px;
+    clear: left;
+    padding: 1px;
     color: #666;
 }
+
+
+
 div.vbpg_object_info dl dd, div.vbpg_object_list dl dd {
-    float: left;
+    float:left;
+/*    width: 500px; */
+    padding: 1px;
+
+/*    float: left; */
 /*		width: 500px; */
-    color: black;
-		margin: 0px;
+/*    color: black;
+		margin: 0px; */
+
+    
 }
 
 div.vbpg_object_info h1 { font-size: 140%;
@@ -115,29 +113,31 @@ div.vbpg_object_list h2, div.vbpg_object_info h2 { font-size: 125%;
 
 div.vbpg_object_list h3, div.vbpg_object_info h3 { font-size: 100%;
                                                    font-weight: bold;
+						   color: #333;
+						   margin-bottom: 5px;
                                                  }
 
 div.vbpg_object_list table {
     width: 100%;
 }
 
-/* bg colours when second level deep */
-div.vbpg_object div.vbpg_object.sample { background: white }
-div.vbpg_object div.vbpg_object.experiment { background: white; }
-div.vbpg_object div.vbpg_object.project { background: white; }
-
-/*
-.field_collection { background: #f0fff0; }
-.species_identification_assay { background: #fff0f0; }
-.phenotype_assay { background: #f0f0ff; }
-.genotype_assay { background: #fff0ff; }
-*/
-
 .species_name { font-style: italic; }
 
-
-table tr th { vertical-align: top; text-align: left; background: #e7e7e7; }
-table tr td { vertical-align: top; }
+#vbpg_content table {
+}
+#vbpg_content table tr th {
+    vertical-align: top;
+    text-align: left;
+    color: #666;
+    font-weight: normal;
+}
+#vbpg_content th.row_heading {
+  padding-right: 25px;
+  width: 200px;
+}
+#vbpg_content table tr td {
+    vertical-align: middle;
+}
 
 table tr th.project_name { width: 400px; }
 
@@ -151,37 +151,29 @@ table tr th.project_name { width: 400px; }
     margin: 15px;
 }
 
-.vbpg_pager_prev {
+.vbpg_pager_prev, .vbpg_pager_first {
     margin-right: 20px;
 }
 
-.vbpg_pager_next {
+.vbpg_pager_next, .vbpg_pager_last {
     margin-left: 20px;
 }
 
-.vbpg_pager_prev, .vbpg_pager_next {
+.vbpg_pager_prev, .vbpg_pager_next, .vbpg_pager_first, .vbpg_pager_last {
     padding-left: 10px;
     padding-right: 10px;
     background: #eee;
     color: black;
     border: 2px solid #ddd;
     font-size: 100%;
+    cursor: pointer;
 }
 
 .vbpg_pager_inactive {
     color: #ddd;
+    cursor: default;
 }
 
-/* to show that what's on the screen is not current any more
- * (after clicking 'next' or 'previous')
- */
-
-.vbpg_pager_pending {
-    color: #eee;
-}
-div#vbpg_page .vbpg_pager_pending a {
-    color: #eee;
-}
 
 .todo {
     border: 3px dotted #e0e0e0;
@@ -195,10 +187,66 @@ div#vbpg_page .vbpg_pager_pending a {
 .vis_panel {
 		display: inline-block; /* so it doesn't move when protovis sets it to this */
 		width: 800px;
-    height: 400px;
+		height: 400px;
 		margin-left: 50px;
 		margin-right: 50px;
 		margin-top: 25px;
+}
+
+.vis_flag {
+    color: #a00;
+    font-size: 75%;
+    background: #ccc;
+    margin-left: 10px;
+    border: 2px solid #a00;
+    padding: 2px;
+}
+
+.vis_flag a:link {text-decoration:none;}
+.vis_flag a:visited {text-decoration:none;}
+.vis_flag a:hover {text-decoration:underline;}
+.vis_flag a:active {text-decoration:underline;}
+
+ul#tabnav {
+    display: block;
+    margin-left: 50px;
+    text-align: center;
+    padding: 0;
+}
+
+ul#tabnav li {
+    float: left;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    position: relative;
+}
+
+ul#tabnav li a {
+/*    display: block; */
+    float: left;
+    font-size: 16px;
+    font-weight: bold;
+    margin: 0 0 0 5px;
+    padding: 0 6px;
+    position: relative;
+    text-decoration: none;
+}
+
+ul#tabnav li a:hover, ul#tabnav li a.selected {
+    background: yellow;
+}
+
+ul#tabnav li a:visited, ul#tabnav li a:link, ul#tabnav li a:hover  {
+    color: #0000ee;
+}
+
+div.sandbox {
+    margin-left: 50px;
+}
+
+.visualisation h3 {
+    text-align: center;
 }
 
 /* for any spinner pre-loaded */
@@ -208,28 +256,89 @@ div#vbpg_page .vbpg_pager_pending a {
 		padding-top: 170px;
 }
 
-
-#experiment_geolocation_text {
-		width: 590px;
-		overflow: hidden;
+#assay_geolocation_text {
+    /* leave 300px for the mini_map_panel (for safari) */
+    width: 500px;
 }
 
 #mini_map_panel {
-		float: right;
+    float: right;
     width:300px;
-		height:200px;
+    height:200px;
 }
 
-.visualisation h3 {
-		text-align: center;
+span.cvterm {
+    color: #408040;
+    border-bottom: 1px #408040 dotted;
+}
+
+/* a pseudo centered heading */
+div.assay_protocol_name {
+  padding-top: 3px;
+  font-weight: bold;
+  text-align: center;
+  border-bottom: 1px dotted black;
+  margin-top: 3px;
+}
+
+.phenotype_prop {
+/*  font-size: 85%; */
+}
+
+.sample_prop {
+  font-size: 85%;
 }
 
 .project .name {
-		font-weight: bold;
+    padding-bottom: 10px;
 }
 
 .project .description {
-		padding-bottom: 1ex;
-		margin-bottom: 2px;
+    margin-left: 20px;
+    padding-bottom: 10px;
 }
 
+.project .contacts {
+  font-size: 85%;
+  padding-bottom: 20px;
+}
+
+.publication {
+  font-size: 85%;
+  padding-bottom: 15px;
+}
+.publication #title {
+  font-weight: bold;
+}
+
+td.assay_projects, th.assay_projects {
+  width: 100px;
+}
+
+
+/* cancel out some drupal table styling */
+
+div#vbpg_page table {
+  border-collapse: separate;
+}
+
+div#vbpg_page table th, div#vbpg_page table td {
+  boder: none;
+}
+
+
+
+/* to show that what's on the screen is not current any more
+ * (after clicking 'next' or 'previous')
+ *
+ * HAS TO BE NEAR END OF THIS FILE
+ */
+
+.vbpg_pager_pending {
+    visibility: hidden;
+}
+/*
+div#vbpg_page .vbpg_pager_pending a {
+    color: #eee;
+}
+*/
