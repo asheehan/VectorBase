@@ -13,6 +13,7 @@ var divAC=document.getElementById("divAutoComplete");
 var resultsTypeId=0;
 var resultsForm=new Array();
 
+
 //***********************************
 //
 // Create HTTP object for global use
@@ -81,8 +82,12 @@ function autoComplete(tbxObj,event)	{
     } else
 		tbxValue=tbxValue+String.fromCharCode(newChar);
 
-	if(tbxValue.length>=2)
-		divAC.innerHTML=getDataFromServer("autoComplete.php?oid="+tbxId+"&q="+tbxValue);
+	if(tbxValue.length>=2) {
+		//divAC.innerHTML=getDataFromServer("/irbase/autoComplete.php?oid="+tbxId+"&q="+tbxValue);
+		<?php $theBaseUrl2 = 'https://' . $_SERVER['HTTP_HOST'] . "/$irPath"; ?>
+		divAC.innerHTML=getDataFromServer("<?print $theBaseUrl2; ?>/autoComplete.php?oid="+tbxId+"&q="+tbxValue);
+
+	}
 	else
 		divAC.style.visibility="hidden";
 }

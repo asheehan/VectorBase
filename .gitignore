@@ -1,6 +1,9 @@
 # Ignore configuration files that may contain sensitive information.
 sites/*/settings*.php
 
+# Ignore these index files
+data/BAC_files/*
+
 # Ignore paths that contain user-generated content.
 data/*.gff
 data/*.results.zip

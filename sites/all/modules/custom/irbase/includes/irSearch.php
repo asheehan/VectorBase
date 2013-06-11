@@ -2,6 +2,9 @@
 
 <?php 
 
+//$irPath = drupal_get_path('module', 'irbase');
+//$irPath .= '/includes';
+
 function connectIRBase2( ) {
 	$connection = mysql_connect( "localhost", "iradmin", "ir@dm1n" );
 	if( !$connection )
@@ -243,6 +246,9 @@ if( $assays_count > 0 )	{
 				echo "</td>";
 				echo "<td>".gettermname2( $db, $myrow['resistance_mechanism_id'] )."</td>";
                                 echo "<td align=\"center\"><a href=\"/content/ir-assay?id=$myrow[assay_id]\">";
+				//	$theBaseUrl3 = 'https://' . $_SERVER['HTTP_HOST'] . "/$irPath";
+				//	echo "<td align=\"center\"><a href=$irPath\"/irAssay?id=$myrow[assay_id]\">";
+
 				echo "<img border=\"0\" src=\"/images/report.png\" height=\"15\"></a></td>\n";
 				echo "</tr>\n";
 			}
@@ -262,8 +268,8 @@ if( $assays_count > 0 )	{
 		if( $assay_id != "" )	{
 			         $kati = $myrow['assay_id'];
                                  echo "<tr><td align=\"center\"></td></tr>\n";
-				//echo "<tr><td align=\"center\"><a href=\"/content/ir-assay?id=$kati\">";
-				//echo "<img border=\"0\" src=\"/images/report.png\" height=\"15\"></a></td></tr>\n";
+				echo "<tr><td align=\"center\"><a href=\"/irAssay?id=$kati\">";
+				echo "<img border=\"0\" src=\"/images/report.png\" height=\"15\"></a></td></tr>\n";
 			}
 		
 		

@@ -10,6 +10,8 @@ $sid = "ses".substr( md5(session_id()), 0, 12);
 require_once("$irPath/IRBaseConnect.php");
 print '<script language="javascript">';
 include("$irPath/ajax2.php");
+//include("$irPath/irAssay.php");
+drupal_add_js("$irPath/irSearch.php");
 print '</script>';
 $dbConn = connectIRBase();
 ?>
