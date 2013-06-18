@@ -1,20 +1,30 @@
 (function ($) {
 	$(document).ready(function() {	// on document load we will populate the domain/subdomain dropdowns
-		var domains = new Array("Expression", "Ontology", "Genome", "Population Biology");
+		
+		/*
+		 * Handle selection of domains and subdomains
+		 */
+		var domains = {
+			'expression': "Expression",
+			'ontology': "Ontology",
+			'genome': "Genome",
+			'popbio': "Population Biology"};
 		var subDomains = {
-			'Expression' : ['Expression statistic', 'Probe/Reporter', 'Sample', 'Next-gen expression data', 'Experiment', 'Microarray'],
-			'Ontology' : ['GAZ term', 'GO term', 'IDODEN term', 'MIRO term', 'IDOMAL term', 'Mosquito anatomy term', 'VectorBase CV term', 'TADS term'],
-			'Genome' : ['Gene'],
-			'Population Biology' : ['Sample', 'Project', 'Assay']
+			'expression' : ['Expression statistic', 'Probe/Reporter', 'Sample', 'Next-gen expression data', 'Experiment', 'Microarray'],
+			'ontology' : ['GAZ term', 'GO term', 'IDODEN term', 'MIRO term', 'IDOMAL term', 'Mosquito anatomy term', 'VectorBase CV term', 'TADS term'],
+			'genome' : ['Gene'],
+			'popbio' : ['Sample', 'Project', 'Assay']
 		};
 		var domainSelect = $('#advanced_search_select_domain');
 		var subDomainSelect = $('#advanced_search_select_subdomain');
-		domainSelect.html('');	//empty the dropdown
+				
+		// empty the dropdowns and repopulate them
+		domainSelect.html('');
 		subDomainSelect.html('');
 		$.each(domains, function(index, value) {
-			domainSelect.append($("<option />").val(value).text(value));
+			domainSelect.append($("<option />").val(index).text(value));
 		});
-		$.each(subDomains[domains[0]], function(index, value) {	//initialize the subDomain array with the first group
+		$.each(subDomains['expression'], function(key, value) {	//initialize the subDomain array with the first group
 			subDomainSelect.append($("<option />").val(value).text(value));
 		});
 		
@@ -27,14 +37,18 @@
 			subDomainSelect.val(cleanUrl(urlQuery['bundle_name']));
 		}
 		
-		// change the subdomain select box based on a change in the domain select
+		// change the subdomain select box and the available fields based on a change in the domain select
 		domainSelect.change(function() {
 			var sel = "";
-			sel = domainSelect.find(':selected').text();
+			sel = domainSelect.find(':selected').val();
 			subDomainSelect.html('');
-			$.each(subDomains[sel], function(index, value) {
+			$.each(subDomains[sel], function(key, value) {
 				subDomainSelect.append($("<option />").val(value).text(value));
 			})
+			$.each(domains, function(index,value) {	// hide all extra option divs
+				$('#'+(index)).hide();
+			});
+			$('#'+sel).show();	// show the selected div
 		});
 	});
 	
@@ -54,13 +68,16 @@
 		return vars;
 	}
 	
+	// Clean up variables pulled from the URL
 	function cleanUrl(str) {
-		var newStr = str.replace(/\+/g, ' ');
-		newStr = newStr.replace(/%20/g, ' ');
-		newStr = newStr.replace(/%22/g, '');
-		newStr = newStr.replace(/\"/g, '');
+		var newStr = str.replace(/\+/g, ' ');	// plus sign -> space
+		newStr = newStr.replace(/%20/g, ' ');	// space sign -> space
+		newStr = newStr.replace(/%22/g, '');	// double quotes -> nothing
+		newStr = newStr.replace(/\"/g, '');		// double quotes -> nothing
 		return newStr;
 	}
+	
+// might need a helper method here to do index lookup by key.  There are plenty of examples on stack overflow
 
 })(jQuery);
 
