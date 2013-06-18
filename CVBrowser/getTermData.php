@@ -1,4 +1,6 @@
-<?
+<?php
+
+$server = "https://dev.vectorbase.org/";
 
 require( "dbFunctions.php" );
 
@@ -79,7 +81,7 @@ $figure = array();
 
 if( $cvId == 2 )
 {
-	$figureQualifier = "Fig";
+	$figureQualifier = "Fig.";
 }
 else
 {
@@ -92,11 +94,14 @@ for( $n = 0; $n < count( $commentLines ); $n++ )
 {
 	$offset = 0;
 	$figureDelimeter = $figureQualifier;
+	$figuresInThisLine = 0;
+
 	while( strpos( $commentLines[ $n ], $figureDelimeter, $offset ) !== FALSE ) 
 	{	
 		if( $cvId == 2 )
 		{
-			if( count( $figure ) == 0 )
+//			if( count( $figure ) == 0 )
+			if( $figuresInThisLine == 0 )
 			{
 				$figureDelimeter = $figureQualifier;
 			}
@@ -109,10 +114,10 @@ for( $n = 0; $n < count( $commentLines ); $n++ )
 		{
 			$figureDelimeter = $figureQualifier;
 		}
-		
+
 		$figureNameStartPos = strpos( $commentLines[ $n ], $figureDelimeter, $offset );
-		
-		if( $cvId == 2 && count( $figure ) >= 0 )
+
+		if( $cvId == 2 && $figuresInLine >= 0 )
 		{
 			$figureDelimeter = ",";	
 		}
@@ -124,24 +129,25 @@ for( $n = 0; $n < count( $commentLines ); $n++ )
 		
 		$figureNameEndPos = strpos( $commentLines[ $n ], $figureDelimeter, $figureNameStartPos + 1 );
 		
-		if( $cvId == 2 && $figureNameEndPos === FALSE && count( $figure ) == 0)
+		if( $cvId == 2 && $figureNameEndPos == FALSE && $figuresInThisLine == 0 )
 		{
-			$figureNameEndPos = strpos( $commentLines[ $n ], " ", $figureNameStartPos + 4 );
+			$figureNameEndPos = strpos( $commentLines[ $n ], " ", $figureNameStartPos + 5 );
 		}
 		
-		if( $cvId == 2 && $figureNameEndPos === FALSE && count( $figure ) >= 0)
+		if( $cvId == 2 && $figureNameEndPos == FALSE && $figuresInThisLine >= 0 )
 		{
 			$figureNameEndPos = strpos( $commentLines[ $n ], " ", $figureNameStartPos + 1 );
 		}
 		
 		$figureName = substr( $commentLines[ $n ], $figureNameStartPos, $figureNameEndPos - $figureNameStartPos );
+
 		$figureName = str_replace( ",", "", $figureName );	
 		$figureName = str_replace( " ", " ", $figureName );
 		$figureName = trim( $figureName );
 		
 		if( $cvId == 2 && count( $figure ) == 0 )
 		{
-			$figureName = str_replace( "Fig 0", "Fig. ", $figureName );	
+			$figureName = str_replace( "Fig. 0", "Fig. ", $figureName );	
 			$figureName = str_replace( "Fig ", "Fig. ", $figureName );	
 		}
 		
@@ -165,7 +171,7 @@ for( $n = 0; $n < count( $commentLines ); $n++ )
 				$figureName = "$namespace/Anopheles|$figureName";
 			}
 
-			if( $n == 1 )
+			if( $n > 0 )
 			{
 				$figureName = "$namespace/Aedes|$figureName";
 			}
@@ -185,13 +191,14 @@ for( $n = 0; $n < count( $commentLines ); $n++ )
 		{
 			$offset = $figureNameEndPos ;
 		}
+
+		$figuresInThisLine++;
 	}
 }
 
 $figure = array_unique( $figure );
 $figureCount = count( $figure );
-//print_r( $figure );
-
+print_r( $figure );
 if( $figureCount > 0 ) 
 {
 	print "<tr><td colspan=\"3\" style='border-bottom: solid 3px black; width: 100%; text-align: center'><b>Images</b></td></tr>";
@@ -204,7 +211,7 @@ if( $figureCount > 0 )
 		$namespace = $tok[0];
 		$fileName = $tok[1];
 		
-		print "<td align=\"center\"><a href=\"https://dev.vectorbase.org/CVBrowser/images/$namespace/$fileName\" target=\"_blank\"><img src=\"https://dev.vectorbase.org/CVBrowser/images/$namespace/tn/$fileName\" width=\"100\"></a></td>";
+		print "<td align=\"center\"><a href=\"https://www.vectorbase.org/CVBrowser/images/$namespace/$fileName\" target=\"_blank\"><img src=\"https://www.vectorbase.org/CVBrowser/images/$namespace/tn/$fileName\" width=\"100\"></a></td>";
 	
 		if( $figureCount > $t + 1 )
 		{
@@ -212,7 +219,7 @@ if( $figureCount > 0 )
 		$namespace = $tok[0];
 		$fileName = $tok[1];
 					
-			print "<td align=\"center\"><a href=\"https://dev.vectorbase.org/CVBrowser/images/$namespace/$fileName\" target=\"_blank\"><img src=\"https://dev.vectorbase.org/CVBrowser/images/$namespace/tn/$fileName\" width=\"100\"></a></td>";
+			print "<td align=\"center\"><a href=\"https://www.vectorbase.org/CVBrowser/images/$namespace/$fileName\" target=\"_blank\"><img src=\"https://www.vectorbase.org/CVBrowser/images/$namespace/tn/$fileName\" width=\"100\"></a></td>";
 		}
 		else 
 		{
@@ -225,7 +232,7 @@ if( $figureCount > 0 )
 		$namespace = $tok[0];
 		$fileName = $tok[1];
 					
-			print "<td align=\"center\"><a href=\"https://dev.vectorbase.org/CVBrowser/images/$namespace/$fileName\" target=\"_blank\"><img src=\"https://dev.vectorbase.org/CVBrowser/images/$namespace/tn/$fileName\" width=\"100\"></a></td>";
+			print "<td align=\"center\"><a href=\"https://www.vectorbase.org/CVBrowser/images/$namespace/$fileName\" target=\"_blank\"><img src=\"https://www.vectorbase.org/CVBrowser/images/$namespace/tn/$fileName\" width=\"100\"></a></td>";
 		}
 		else 
 		{
@@ -240,3 +247,4 @@ if( $figureCount > 0 )
 print "</table>";
 
 ?>
+
