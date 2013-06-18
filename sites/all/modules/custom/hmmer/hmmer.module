@@ -548,12 +548,19 @@ function hmmer_generateDatasets(){
 				$dbs=node_load_multiple(array_keys($result['node']));
 				foreach($dbs as $db){
 					$nid=$db->nid;
-					
-					$fileDescription=trim($db->field_description['und'][0]['value']);
-					//$fileDescription=preg_replace("#.*?,#","",preg_replace("#<i>.*?</i>#","",$fileDescription));
-					//$fileType=taxonomy_term_load($db->field_download_file_type['und'][0]['tid'])->name;	
+					$fileDescription=$organism . ', ';	
+					$a = explode(',', trim($db->field_description['und'][0]['value']));
+					if(empty($a) || count($a) != 2) {
+						$fileDescription = substr($fileDescription, 0, -2);
+					} else {
+						$b = explode('strain', $a[0]);
+						if(!empty($b)) {
+							$fileDescription.=$b[0];
+							$fileDescription.=' strain, ';
+						}
+						$fileDescription.= $a[1];
+					}
 					// file type will be peptide
-
 					$formOut[$organism]['Peptide'][$nid] = array(
 						'#type' => 'checkbox',
 						'#title' => t("<b>Peptides</b> ".$fileDescription),
