@@ -19,3 +19,5 @@ CVBrowser/CVBrowser/*.cache.*
 # Ignore temp Blast file
 sites/all/modules/custom/xgrid/tempFile
 
+# Ignore backup file for greg
+sites/all/modules/custom/vbsearch/vbsearch.module.bak
