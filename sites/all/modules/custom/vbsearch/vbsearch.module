@@ -85,8 +85,8 @@ function vbsearch_apachesolr_query_alter($query) {
   $query->addParam('qf', 'geolocations');
 
 //Query boosting params
-  $query->addParam('bq', 'site="Genome"^2');
-  $query->addParam('bq', 'site="General"^3');
+  $query->addParam('bq', 'site="Genome"^4');
+  $query->addParam('bq', 'site="General"^6');
 
 //Next four lines needed to enclose terms containing a colon with quotes (prevents some field-level searching)
   $queryTerm = $query->getParam('q');
