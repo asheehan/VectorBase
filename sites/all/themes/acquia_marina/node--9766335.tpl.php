@@ -100,7 +100,7 @@ $dbConn = connectIRBase();
 	<tr><td colspan="3"><div class="irbase_results"></div></td></tr>
 </table>
 <script language="javascript">
-var sid='<?php print $sid; ?>';
+var sid='<?php echo $sid; ?>';
 document.getElementById("div_s5").style.visibility='hidden';
 document.getElementById("div_s6").style.visibility='hidden';
 document.getElementById("div_s7").style.visibility='hidden';
@@ -124,3 +124,5 @@ document.getElementById("div_cm").innerHTML="";
 
 </body>
 </html>
+
+

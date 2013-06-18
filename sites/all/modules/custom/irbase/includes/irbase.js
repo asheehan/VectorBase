@@ -8,7 +8,7 @@ function markAll( assays_count )	{
 }
 
 function mapResults() {
-	this.window.location="/content/ir-map?sid=<? print $sid ?>";
+	this.window.location="/content/ir-map?sid="+sid;
 }
 
 function exportResults( assays_count )	{
