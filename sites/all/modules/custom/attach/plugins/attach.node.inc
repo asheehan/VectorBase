@@ -9,11 +9,18 @@ function _attach_node_process($params) {
     $params['default_title'] = empty($params['title']) ? $node->title : $params['title'];
 
     if ($params['simple']) {
-      return '<span class="attach-node-' . $node->type . '">' . l($params['default_title'], 'node/' . $node->nid) . '</span>';
+      if (variable_get('attach_utm_source', FALSE)) {
+        $options = array('query' => array('utm_source' => 'attach'));
+      }
+      else {
+        $options = array();
+      }
+      return '<span class="attach-node-' . $node->type . '">' . l($params['default_title'], 'node/' . $node->nid, $options) . '</span>';
     }
     else {
       $node->attach = $params;
-      return render(node_view($node, $params['display']));
+      $content = node_view($node, 'attach');
+      return render($content);
     }
   }
 }

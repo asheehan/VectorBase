@@ -1,6 +1,5 @@
 /**
- * $Id: css_browser_selector.js,v 1.2 2011/01/11 13:50:37 jwhat Exp $
- * 
+ *
  * CSS Browser Selector v0.4.0 (Nov 02, 2010)
  * Rafael Lima (http://rafael.adm.br)
  * http://rafael.adm.br/css_browser_selector
@@ -21,11 +20,8 @@
           m = 'mobile',
           h = document.documentElement,
           b = [
-            (!(/opera|webtv/i.test(ua)) && /msie\s(\d)/.test(ua)) ? ('ie ie' + RegExp.$1) :
-            is('firefox/2') ? g + ' ff2' :
-            is('firefox/3.5') ? g + ' ff3 ff3_5' :
-            is('firefox/3.6') ? g + ' ff3 ff3_6' :
-            is('firefox/3') ? g + ' ff3' :
+            (!(/opera|webtv/i.test(ua)) && /msie\s(\d+)/.test(ua)) ? ('ie ie' + RegExp.$1) :
+            is('firefox/') ? g + (/firefox\/(\d+)(\.?(\d*))/.test(ua) ? ' ff' + RegExp.$1 + (RegExp.$3 != 0 ? ' ff' + RegExp.$1 + '_' + RegExp.$3 : '') : '') :
             is('gecko/') ? g :
             is('opera') ? o + (/version\/(\d+)/.test(ua) ? ' ' + o + RegExp.$1 : (/opera(\s|\/)(\d+)/.test(ua) ? ' ' + o + RegExp.$2 : '')) :
             is('konqueror') ? 'konqueror' :
@@ -42,7 +38,7 @@
             is('mac') ? 'mac' :
             is('darwin') ? 'mac' :
             is('webtv') ? 'webtv' :
-            is('win') ? 'win' + (is('windows nt 6.0') ? ' vista' : '') :
+            is('win') ? 'win' + (is('windows nt 6.0') ? ' vista' : (is('windows nt 6.1') ? ' win7' : (is('windows nt 6.2') ? ' win8' : ''))) :
             is('freebsd') ? 'freebsd' :
             is('x11') ? 'linux' :
             is('linux') ? 'linux' : ''

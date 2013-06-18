@@ -49,3 +49,10 @@ you want the output is dependant on node type.
 If you want to reuse your node.tpl.php and node-NODETYPE.tpl.php, use build_mode
 to verify and output the proper tags. Don't forget to go to
 admin/settings/attach and disable attach's template file.
+
+== Hidden variables
+
+If you want to add a "source" to track in Google Analytics, for example, you
+can set the variable "attach_utm_source" value 1. In that case, links to
+attached nodes become node/%nid?utm_source=attach.
+
