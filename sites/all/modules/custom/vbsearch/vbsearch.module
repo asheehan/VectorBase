@@ -99,9 +99,11 @@ function vbsearch_apachesolr_query_alter($query) {
   $query->addParam('qf', 'symbol');
   $query->addParam('qf', 'label');
   $query->addParam('qf', 'content');
+  $query->addParam('qf', 'accession');
   $query->addParam('qf', 'annotations');
   $query->addParam('qf', 'description');
   $query->addParam('qf', 'phenotypes');
+  $query->addParam('qf', 'genotypes');
   $query->addParam('qf', 'geolocations');
 
 //Query boosting params
@@ -175,6 +177,7 @@ function vbsearch_splash() {
   return t('howdy');
 }
 
+// This is temporary attempt to fix bug VB-1971. It still does not work.
 function acquia_marina_theme_apachesolr_search_noresults() {
   $new_query = '/search/site/';
   $new_query_terms = '';
