@@ -4,9 +4,12 @@ sites/*/settings*.php
 # Ignore these index files
 data/BAC_files/*
 
-# Ignore paths that contain user-generated content.
+# Ignore paths that contain user-generated/dynamic content.
+data/backup/*.sql
+data/backup/*.zip
+data/BAC_files/*
 data/*.gff
-data/*.results.zip
+data/*.zip
 sites/*/files
 sites/*/private
 

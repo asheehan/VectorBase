@@ -172,7 +172,8 @@ function GeneAnnotation_menu() {
         'title'            => 'Download file',
         'page callback'	   => 'download_gff_file',
         'page arguments'   => array(1),
-        'access arguments' => array('access content')
+    'access callback' => 'user_is_logged_in', 
+        // 'access arguments' => array('access content')
     );
         
     $items['meta'] = array(
@@ -415,9 +416,9 @@ function grab_a_submission_with_rest($file = NULL ,$format = NULL) {
 
 function download_gff_file($filename) {
 
-    if($GLOBALS['user']->uid != variable_get('cap_admin_uid')) { 
-        return drupal_access_denied();  
-    }
+    //if($GLOBALS['user']->uid != variable_get('cap_admin_uid')) { 
+    //    return drupal_access_denied();  
+    //}
 
     $filepath = variable_get('basedir').'/tmp/'.$filename;
     
@@ -1437,6 +1438,71 @@ function gff_download_ajax_form($form, &$form_state) {
         '#default_value' => $selected,
     );
 
+    $form['dwnld']['exmpl_rp'] = array(
+        '#type' => 'container',
+        '#children' => 'Rhodnius contig example: GL563039',
+        '#states' => array( 'visible' => array( ':input[name="dropdown_first"]' => array('value' => 'Rhodnius prolixus RproC1.0'), ), ), 
+     );  
+    $form['dwnld']['exmpl_gm'] = array(
+        '#type' => 'container',
+        '#children' => 'Glossina contig example: scf7180000649169',
+        '#states' => array( 'visible' => array( ':input[name="dropdown_first"]' => array('value' => 'Glossina morsitans GmorY1.0'), ), ), 
+     );  
+
+    $form['dwnld']['exmpl_aalb'] = array(
+        '#type' => 'container',
+        '#children' => 'A. albimanus contig example: KB672405',
+        '#states' => array( 'visible' => array( ':input[name="dropdown_first"]' => array('value' => 'Anopheles albimanus v0.5'), ), ), 
+     );  
+
+    $form['dwnld']['exmpl_ara'] = array(
+        '#type' => 'container',
+        '#children' => 'A. arabiensis contig example: KB704762',
+        '#states' => array( 'visible' => array( ':input[name="dropdown_first"]' => array('value' => 'Anopheles arabiensis v0.5'), ), ), 
+     );  
+
+    $form['dwnld']['exmpl_chr'] = array(
+        '#type' => 'container',
+        '#children' => 'A. christyi contig example: KB697215',
+        '#states' => array( 'visible' => array( ':input[name="dropdown_first"]' => array('value' => 'Anopheles christyi v0.5'), ), ), 
+     );  
+
+    $form['dwnld']['exmpl_dir'] = array(
+        '#type' => 'container',
+        '#children' => 'A. dirus contig example: KB672857',
+        '#states' => array( 'visible' => array( ':input[name="dropdown_first"]' => array('value' => 'Anopheles dirus v0.5'), ), ), 
+     );  
+
+    $form['dwnld']['exmpl_epi'] = array(
+        '#type' => 'container',
+        '#children' => 'A. epiroticus contig example: KB671636',
+        '#states' => array( 'visible' => array( ':input[name="dropdown_first"]' => array('value' => 'Anopheles epiroticus v0.5'), ), ), 
+     );  
+
+    $form['dwnld']['exmpl_fun'] = array(
+        '#type' => 'container',
+        '#children' => 'A. funestus contig example: KB668909',
+        '#states' => array( 'visible' => array( ':input[name="dropdown_first"]' => array('value' => 'Anopheles funestus v0.5'), ), ), 
+     );  
+
+    $form['dwnld']['exmpl_min'] = array(
+        '#type' => 'container',
+        '#children' => 'A. minimus contig example: KB663765',
+        '#states' => array( 'visible' => array( ':input[name="dropdown_first"]' => array('value' => 'Anopheles minimus v0.5'), ), ), 
+     );  
+
+    $form['dwnld']['exmpl_qua'] = array(
+        '#type' => 'container',
+        '#children' => 'A. quadriannulatus contig example: KB667526',
+        '#states' => array( 'visible' => array( ':input[name="dropdown_first"]' => array('value' => 'Anopheles quadriannulatus v0.5'), ), ), 
+     );  
+
+    $form['dwnld']['exmpl_ste'] = array(
+        '#type' => 'container',
+        '#children' => 'A. stephensi contig example: KB664650',
+        '#states' => array( 'visible' => array( ':input[name="dropdown_first"]' => array('value' => 'Anopheles stephensi v0.5'), ), ), 
+     );  
+
     $form['dwnld']['format'] = array(
         '#type' => 'radios',
         '#title' => t('Download Annotation'),
@@ -1450,7 +1516,7 @@ function gff_download_ajax_form($form, &$form_state) {
     $form['dwnld']['contig'] = array(
         '#type' => 'textfield',
         '#title' => t('Contig name'),
-        '#description' => t('Do not include version numbers.  Rhodnius example: GL563039  Glossina example: scf7180000649169'),
+        '#description' => t('Do not include version numbers.'),
         '#size' => 18,
         '#maxlength' => 17,
         '#prefix' => '<div class="ui-widget">',

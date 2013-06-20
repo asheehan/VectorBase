@@ -37,6 +37,7 @@ function vbsearch_form_alter(&$form, &$form_state, $form_id) {
     $form['search_block_form']['#attributes']['placeholder'] = t('Enter search terms');
     global $user;
     if ($user->uid > 0) $form['#token'] = FALSE;
+    unset($form['#token']);
   } 
   else if ($form_id == 'apachesolr_search_custom_page_search_form') {
     $form['basic']['submit'] = array(
@@ -44,9 +45,7 @@ function vbsearch_form_alter(&$form, &$form_state, $form_id) {
       '#value' => t('Go'),
     );
 
-  }
-  else {
-    watchdog('Whoops!', $form_id);
+    unset($form['#token']);
   }
 }
 
@@ -107,8 +106,8 @@ function vbsearch_apachesolr_query_alter($query) {
   $query->addParam('qf', 'geolocations');
 
 //Query boosting params
-  $query->addParam('bq', 'site="Genome"^2');
-  $query->addParam('bq', 'site="General"^3');
+  $query->addParam('bq', 'site="Genome"^4');
+  $query->addParam('bq', 'site="General"^6');
 
 //Next four lines needed to enclose terms containing a colon with quotes (prevents some field-level searching)
   $queryTerm = $query->getParam('q');
@@ -139,6 +138,16 @@ function vbsearch_apachesolr_query_alter($query) {
   }
   if (isset($_GET['site'])){
     $query->addFilter('site', $_GET['site']);
+  }
+  // Need to check post variables as well...
+  if (isset($_POST['bundle_name'])) {
+    $query->addFilter('bundle_name', $_POST['bundle_name']);
+  }
+  if (isset($_POST['species_category'])) {
+    $query->addFilter('species_category', $_POST['species_category']);
+  }
+  if (isset($_POST['site'])){
+    $query->addFilter('site', $_POST['site']);
   }
 }
 
