@@ -13,7 +13,6 @@ blast_hspDetails($_POST['id']);
 
 // display a pretty table of hsp details
 function blast_hspDetails($id){
-
 	$hsps=db_query("select * from blast_hsps where bs_id=$id;");
 	foreach($hsps as $hsp){
 		$bhid=$hsp->bh_id;

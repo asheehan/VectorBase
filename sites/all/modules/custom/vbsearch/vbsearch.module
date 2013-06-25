@@ -71,6 +71,7 @@ function vbsearch_search_block_form_submit($form, &$form_state) {
 }
 
 function vbsearch_do_search($keys) {
+  
   drupal_set_title('VectorBase Search Results');
   $results = module_invoke('apachesolr_search', 'search_execute', $keys);
   return theme('search_results', array('results' => $results));
@@ -104,10 +105,13 @@ function vbsearch_apachesolr_query_alter($query) {
   $query->addParam('qf', 'phenotypes');
   $query->addParam('qf', 'genotypes');
   $query->addParam('qf', 'geolocations');
+  $query->addParam('qf', 'cvterms');
+  $query->addParam('qf', 'authors');
 
 //Query boosting params
-  $query->addParam('bq', 'site="Genome"^4');
+  $query->addParam('bq', 'site="Genome"^35');
   $query->addParam('bq', 'site="General"^6');
+  $query->addParam('bq', 'site="Ontology"^1');
 
 //Next four lines needed to enclose terms containing a colon with quotes (prevents some field-level searching)
   $queryTerm = $query->getParam('q');
@@ -139,16 +143,7 @@ function vbsearch_apachesolr_query_alter($query) {
   if (isset($_GET['site'])){
     $query->addFilter('site', $_GET['site']);
   }
-  // Need to check post variables as well...
-  if (isset($_POST['bundle_name'])) {
-    $query->addFilter('bundle_name', $_POST['bundle_name']);
-  }
-  if (isset($_POST['species_category'])) {
-    $query->addFilter('species_category', $_POST['species_category']);
-  }
-  if (isset($_POST['site'])){
-    $query->addFilter('site', $_POST['site']);
-  }
+
 }
 
 
@@ -186,47 +181,3 @@ function vbsearch_splash() {
   return t('howdy');
 }
 
-// This is temporary attempt to fix bug VB-1971. It still does not work.
-function acquia_marina_theme_apachesolr_search_noresults() {
-  $new_query = '/search/site/';
-  $new_query_terms = '';
-  $searched_value = '';
-  $suggestion = '';
-  $environments = apachesolr_load_all_environments();
-  foreach ($environments as $env_id => $environment) {
-    if (apachesolr_has_searched($env_id) && !apachesolr_suppress_blocks($env_id) ) {
-      $query = apachesolr_current_query($env_id);
-      if ($query) {
-        $searched_value = $query->getParam('q');
-        $params = explode(' ', $query->getParam('q'));
-        foreach ($params as $param=>$value){
-           $new_query_terms = $new_query_terms . $value . '* ';
-        }
-      }
-    }
-  }
-  $query_result = 'No Results Found';
-  $query_warning = '';
-  if ($_GET['site']) {
-    $query_warning .= 'Searching the <em>' . trim($_GET['site'], "\"") . '</em> domain';
-  }
-  if ($_GET['bundle_name']) {
-    $query_warning .= ' and the <em>' . trim($_GET['bundle_name'], "\"") . '</em> subdomain';
-  }
-  if (strlen($query_warning) > 1) {       // give users the option to rerun this query without any filters (provided there ARE some set)
-    $query_warning .= ': ';
-    $query_result .= ' (<a href="'. $new_query . $searched_value . '">remove filters</a>)';
-  }
- if ($new_query_terms) { // only offer a suggestion if a term was actually queried (i.e. search field isn't blank)
-                $suggestion =  ' For example, you could use the following as your search term: <b><a href="'. $new_query . $new_query_terms . '">' . htmlspecialchars($new_query_terms) . '</a></b>';
-        }
-
-
-  return t('<br /><h3>' . $query_warning . $query_result . '</h3><ul>
-	<li>TUse the asterisk wildcard character (*) to broaden  matching criteria.' . $suggestion . '</li>
-	<li>Check if your spelling is correct, or try removing filters.</li>
-	<li>Remove quotes around phrases to match each word individually: <em>"Anopheles gambiae"</em> will return fewer results than <em>Anopheles gambiae</em>.</li>
-	<li>You can require or exclude terms using + and -: <em>Anopheles +gambiae </em> will require a match on <em>gambiae</em> while <em>Anopheles -gambiae</em> will exclude results that contain <em>gambiae</em>.</li>
-	</ul>');
-
-}

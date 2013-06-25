@@ -262,6 +262,17 @@ function GeneAnnoation_permission() {
 */
 }
 
+function GeneAnnotation_js_alter(&$js) {
+//  $jquery_path = drupal_get_path('module','GeneAnnotation') . '/jquery-compressed-google/jquery.min.js';
+//  $javascript[$jquery_path] = $javascript['misc/jquery.js'];
+//  $javascript[$jquery_path]['version'] = '1.5.2';
+//  $javascript[$jquery_path]['data'] = $jquery_path;
+
+
+  // Finally remove the original jQuery
+//  unset($js['misc/jquery.js']);
+}
+
 function cap_frontpage() {
 
     $title = t('Click sections to expand or collapse:');
@@ -270,9 +281,6 @@ function cap_frontpage() {
         '#theme' => 'my_tab',
         '#title' => $title,
     );
-
-    $options = array('type' => 'file');
-    $allnames = pull_autocompletion_names();
 
     drupal_add_js(
         "var data = " . drupal_json_encode($allnames) . ";", 

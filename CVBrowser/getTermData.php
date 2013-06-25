@@ -198,7 +198,7 @@ for( $n = 0; $n < count( $commentLines ); $n++ )
 
 $figure = array_unique( $figure );
 $figureCount = count( $figure );
-print_r( $figure );
+//print_r( $figure );
 if( $figureCount > 0 ) 
 {
 	print "<tr><td colspan=\"3\" style='border-bottom: solid 3px black; width: 100%; text-align: center'><b>Images</b></td></tr>";

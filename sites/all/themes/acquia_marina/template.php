@@ -7,9 +7,6 @@ function acquia_marina_preprocess_node(&$variables) {
 		case 'transcriptomes':
 			drupal_add_css($themePath . '/css/transcriptomes.css');
 			break;
-		case 'cytogenetic-map-anopheles-gambiae-connected-pest':
-			drupal_add_css($themePath . '/css/cytogenetic-map-imgs.css');
-			break;
 	}
 }
 

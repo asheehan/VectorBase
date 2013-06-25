@@ -1,14 +1,16 @@
 #widget_pager_top_featured_slideshow-block {
  position:relative;
  margin: inherit auto;
- left:28%;
+ left:40%;
 }
+
 
 .views-slideshow-controls-top {
  position: relative;
  width: 100%;
  height:40px;
  background-color:white;
+ text-align: center;/*g*/
 }
  
 #slideContent {
@@ -52,7 +54,7 @@
 
 #views_slideshow_controls_text_previous_featured_slideshow-block {
   position:absolute;
-  left:160px;
+  left:240px;
   bottom:0px;
 
   margin-top:10px;
@@ -65,7 +67,7 @@
   
 #views_slideshow_controls_text_next_featured_slideshow-block {  
   position:absolute;
-  right:110px;
+  right:210px; 
   bottom:0px;
   margin-top:10px;
   margin-bottom:10px;
