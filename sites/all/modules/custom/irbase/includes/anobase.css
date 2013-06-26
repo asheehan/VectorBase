@@ -1,0 +1,26 @@
+<style type="text/css">
+<!--
+
+body { font-family:arial; font-size:10px; margin-top: 0px; background-color:#EEEEEE; margin-left: 0px; margin-bottom: 0px; margin-right: 0px; }
+
+a { text-decoration: none; color:blue; }
+
+.plain { background-color:#efefef; border:0px; border-spacing:0px; border:1px #cfcfcf solid; padding: 2px; }
+.services_title { font-family:Geneva; color:#003300; background-color:#CCEECC; text-align: center; vertical-align:middle; height: 19px; font-size:14px;font-weight:bold; }
+.cell_key { background-color:#efefef; border:0px; border-spacing:0px; border:1px #cfcfcf solid; padding: 2px; text-align: right; vertical-align: top;}
+.col_key { background-color:#efefef; border:0px; border-spacing:0px; border:1px #cfcfcf solid; padding: 2px; text-align: center; }
+.cell_value { background-color:#ffffff; border:0px; border-spacing:0px; border:1px #cfcfcf solid; padding: 2px; text-align: left; vertical-align: top; }
+.cell_value_r { background-color:#ffffff; border:0px; border-spacing:0px; border:1px #cfcfcf solid; padding: 2px; text-align: right; vertical-align: top; }
+.wct { background-color:#ffffff; border:0px; border-spacing:0px; border:1px #cfcfcf solid; padding: 2px; text-align: center; vertical-align: top; }
+.std_table { background:#cfcfcf; padding: 0px; border-spacing: 0px; border:0px; border-collapse: collapse; }
+
+.autocomp {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  width: 200px;
+  visibility: hidden;
+  z-index: +2;
+}
+--> 
+</style>

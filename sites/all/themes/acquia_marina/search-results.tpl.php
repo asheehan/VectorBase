@@ -28,9 +28,25 @@
 	$speciesSummary = $response->facet_counts->facet_fields->species_category;
 	$siteSummary = $response->facet_counts->facet_fields->site;
 	$queryTerm = htmlspecialchars($response->responseHeader->params->q);
-	$bundleTerm = urlencode($_GET['bundle_name']);
-	$speciesTerm = urlencode($_GET['species_category']);
-	$siteTerm = urlencode($_GET['site']);
+	if (isset($_GET['bundle_name'])){
+            $bundleTerm = urlencode($_GET['bundle_name']);
+        }
+	if (isset($_GET['species_category'])){
+	    $speciesTerm = urlencode($_GET['species_category']);
+        }
+	if (isset($_GET['site'])){
+	    $siteTerm = urlencode($_GET['site']);
+        }
+        if (isset($_POST['bundle_name'])){
+            $bundleTerm = urlencode($_POST['bundle_name']);
+        }
+        if (isset($_POST['species_category'])){
+            $speciesTerm = urlencode($_POST['species_category']);
+        }
+        if (isset($_POST['species_category'])){
+            $siteTerm = urlencode($_POST['site']);
+        }
+
 	$baseQuery = "/search/site/" . $queryTerm . "?";
 	$bundleResetURL = $baseQuery;
 	$speciesResetURL = $baseQuery;
@@ -71,7 +87,77 @@
 			$siteList[$key] = $value;
 		}
 	}
+	
+	/* Commenting this out for this release. GREGD
+	drupal_add_js('/sites/all/themes/acquia_marina/js/advanced-search.js');
+	drupal_add_js('/sites/all/themes/acquia_marina/js/uri.js/src/URI.js');
+	
+	// initial values
+	$initValues['adv_search'] = (isset($_GET['adv_search'])) ? $_GET['adv_search'] : FALSE;
+	$initValues['site'] = (isset($_GET['site'])) ? $_GET['site'] : '';
+	$initValues['bundle_name'] = (isset($_GET['bundle_name'])) ? $_GET['bundle_name'] : '';
+	$initValues['title'] = (isset($_GET['title'])) ? $_GET['title'] : '';
+	
+	// create our domain specific forms
+	$displayDiv = array(
+		"Expression" => '
+			<div id="expression" style="display:none">
+				Expression Cell
+				Label: <input id="advanced_search_input_label" name="label"><br />
+			</div>',
+		"Genome" => '
+			<div id="genome" style="display:none">
+				Genomezz Stufz
+				Label: <input id="advanced_search_input_label" name="label"><br />
+				Organism: <input id="advanced_search_input_label" name="label"><br />
+			</div>',
+		"Population Biology" => '
+			<div id="popbio" style="display:none">
+				Popbio Stufz
+				Label: <input id="advanced_search_input_label" name="label"><br />
+			</div>',
+		"Ontology" => '
+			<div id="ontology" style="display:none">
+				Ontology Stufz
+				Label: <input id="advanced_search_input_label" name="label"><br />
+			</div>',
+	);
+	
+  	$advancedSearchContent = '
+  		<div class="search_advanced_box">
+  			<form name="advanced_search_form" action="/search/site/%2a" method="get">
+  			Domain: <select id="advanced_search_select_domain" name="site" value="Ontology"></select>&nbsp;&nbsp;
+  			Sub-domain: <select id="advanced_search_select_subdomain" name="bundle_name"></select>&nbsp;&nbsp;
+  			<input id="advanced_search_input_submit" type="submit" value=" Search ">
+  			<br />
+  			<div class="advanced_search_div_inputs">
+  			<hr />
+  			';
+			
+	foreach ($displayDiv as $div) {
+		$advancedSearchContent .= $div;
+	}
+	
+	$advancedSearchContent .= '
+  			</div>
+  			<input type="hidden" name="adv_search" value="1">
+			</form>
+  		</div>
+  	';
+	
+	//debugging option do not go live with this enabled:
+	//$initValues['adv_search'] = TRUE;	// make the advanced search always open
+		
+	print theme('ctools_collapsible',
+			array(
+			'handle'	=>	'<b>Advanced Search</b>',
+			'content'	=>	$advancedSearchContent,
+			'collapsed'	=>	!$initValues['adv_search']
+		)
+	);
+	END COMMENTING OUT GREG D*/
   ?>
+  <br />
 	<div class="search_filter_box">
 		<h2>Filter Results</h2>
 
@@ -147,7 +233,7 @@
 			?>
 		</table>
 	</div>	
-<div style="width:70%;float:right;padding:10px;">
+<div style="width:70%;float:right;padding:10px;">		
   <h2><?php print t('Search results');?></h2>
 	<?
 	global $pager_page_array, $pager_total_items;

@@ -132,3 +132,15 @@ float:left; width:25%;padding:5px;border:1px solid #336699;margin-top: 10px;back
 	font-size:12px; font-weight:normal;
 }
 
+.search_advanced_box {
+	float:left;
+	width:99%;
+	padding:5px;
+	border:1px solid #336699;
+	margin-top:10px;
+	background-color:#f6f6e7;
+}
+
+.search_advanced_table_inputs table {
+	width:70%;
+}

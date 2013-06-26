@@ -1,4 +1,3 @@
- // $Id: README.txt,v 1.2 2011/01/11 13:50:37 jwhat Exp $
 
 -- SUMMARY --
 

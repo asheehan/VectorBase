@@ -63,11 +63,17 @@
  */
 
   $displayTitle = $title;
-  $siteType = $result['fields']['site'];
+  if (isset($result['fields']['site'])){
+      $siteType = $result['fields']['site'];
+  }
   $hitUrl = $result['fields']['url'];
-  $hitBundle = $result['fields']['bundle_name'];
-  $hitSpecies = $result['fields']['species'][0];
-  $hitSpeciesCategory = $result['fields']['species_category'];
+  if (isset($result['fields']['bundle_name'])){
+      $hitBundle = $result['fields']['bundle_name'];
+  }
+  if (isset($result['fields']['species'])){
+      $hitSpecies = $result['fields']['species'][0];
+      $hitSpeciesCategory = $result['fields']['species'];
+  }
   $hitDesc = $result['fields']['description'];
   if (strlen($hitDesc) > 200) {
     $hitDesc = substr($hitDesc, 0, 200) . "...";

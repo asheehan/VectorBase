@@ -15,7 +15,7 @@
 # limitations under the License.
 
 FILES=$*
-URL=http://search:8080/solr/update
+URL=http://search:8080/solr/devcore/update
 
 for f in $FILES; do
   echo Posting file $f to $URL

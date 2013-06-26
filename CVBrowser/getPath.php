@@ -24,6 +24,8 @@ $row = mysql_fetch_array( $qr );
 
 $lastAncestorId = -1;
 
+$searchTermFound = FALSE;
+
 while( $row != FALSE && $searchTermFound == FALSE )
 {
 	

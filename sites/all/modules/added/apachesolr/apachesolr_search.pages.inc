@@ -62,7 +62,7 @@ function apachesolr_search_custom_page_search_form($form, &$form_state, $search_
   );
   $form['basic']['submit'] = array(
     '#type' => 'submit',
-    '#value' => t('Go'),
+    '#value' => t('Search'),
   );
 
   $form['basic']['get'] = array(

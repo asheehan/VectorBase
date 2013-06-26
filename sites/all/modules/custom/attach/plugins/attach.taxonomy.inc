@@ -7,9 +7,9 @@ function attach_taxonomy_process($params) {
   SELECT n.title, n.nid FROM {node} n
   INNER JOIN {node_revisions} nv ON n.vid = nv.vid
   INNER JOIN {taxonomy_term_node} tn ON n.vid = tn.vid
-  WHERE tn.tid = %d
+  WHERE tn.tid = :tid
   ORDER BY n.changed DESC
-  ", $params['tid']);
+  ", 0, $params['count'], array(':tid' => $params['tid']));
 
   $items = array();
   while ($row = db_fetch_object($result)) {

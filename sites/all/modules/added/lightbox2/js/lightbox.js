@@ -730,7 +730,7 @@ Lightbox = {
 
     // If image is part of set display 'Image x of x'.
     var numberDisplay = null;
-    if (s.image_count && Lightbox.total > 1) {
+    if (s.image_count && Lightbox.total > 0) {
       var currentImage = Lightbox.activeImage + 1;
       if (!Lightbox.isLightframe && !Lightbox.isModal && !Lightbox.isVideo) {
         numberDisplay = s.image_count.replace(/\!current/, currentImage).replace(/\!total/, Lightbox.total);

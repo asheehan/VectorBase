@@ -1,0 +1,4 @@
+name = Mito
+description = Code library for the Mitochondrial Data in VectorBase.
+package = VectorBase
+core = 7.x

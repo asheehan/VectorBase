@@ -1,5 +1,4 @@
 <?php
-// $Id: css_browser_selector.module,v 1.2 2011/01/11 13:50:37 jwhat Exp $
 
 /**
  * Implements hook_init().
@@ -86,6 +85,12 @@ function css_browser_selector_get_selectors($ua = '') {
     if (strpos($ua, 'windows nt 6.0') !== FALSE) {
       $selectors[] = 'vista';
     }
+    elseif (strpos($ua, 'windows nt 6.1') !== FALSE) {
+      $selectors[] = 'win7';
+    }
+    elseif (strpos($ua, 'windows nt 6.2') !== FALSE) {
+      $selectors[] = 'win8';
+    }
   }
   elseif (strpos($ua, 'freebsd') !== FALSE) {
     $selectors[] = 'freebsd';
@@ -95,27 +100,18 @@ function css_browser_selector_get_selectors($ua = '') {
   }
 
   // Browser selectors.
-  if (!preg_match('/opera|webtv/i', $ua) && preg_match('/msie\s(\d)/', $ua, $matches)) {
+  if (!preg_match('/opera|webtv/i', $ua) && preg_match('/msie\s(\d+)/', $ua, $matches)) {
     $selectors[] = 'ie';
     $selectors[] = 'ie'. $matches[1];
   }
-  elseif (strpos($ua, 'firefox/2') !== FALSE) {
+  elseif (strpos($ua, 'firefox/') !== FALSE) {
+    preg_match('/firefox\/(\d+\.\d+)/', $ua, $matches);
+    list($major, $minor) = explode('.', $matches[1]);
     $selectors[] = 'gecko';
-    $selectors[] = 'ff2';
-  }
-  elseif (strpos($ua, 'firefox/3.5') !== FALSE) {
-    $selectors[] = 'gecko';
-    $selectors[] = 'ff3';
-    $selectors[] = 'ff3_5';
-  }
-  elseif (strpos($ua, 'firefox/3.6') !== FALSE) {
-    $selectors[] = 'gecko';
-    $selectors[] = 'ff3';
-    $selectors[] = 'ff3_6';
-  }
-  elseif (strpos($ua, 'firefox/3') !== FALSE) {
-    $selectors[] = 'gecko';
-    $selectors[] = 'ff3';
+    $selectors[] = 'ff'. $major;
+    if ($minor != 0) {
+      $selectors[] = 'ff'. $major .'_'. $minor;
+    }
   }
   elseif (strpos($ua, 'gecko/') !== FALSE) {
     $selectors[] = 'gecko';

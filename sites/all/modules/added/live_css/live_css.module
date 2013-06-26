@@ -175,7 +175,7 @@ function live_css_init() {
   
   // Check that a user has the permission to edit the files in order to set the
   // settings and add required javascript libraries.
-  if (user_access('edit css')) {
+  if (user_access('edit css') && !variable_get('preprocess_css', FALSE)) {
     
     // Set settings
     $theme = variable_get('live_css_theme', 'twilight');

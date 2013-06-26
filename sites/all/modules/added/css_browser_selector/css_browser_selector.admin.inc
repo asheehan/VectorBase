@@ -1,5 +1,4 @@
 <?php
-// $Id: css_browser_selector.admin.inc,v 1.2 2011/01/11 13:50:37 jwhat Exp $
 
 /**
  * The admin settings form for CSS Browser Selector.

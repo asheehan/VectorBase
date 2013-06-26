@@ -10,6 +10,7 @@ stylesheets[all][] = css/fusion-acquia-marina-style.css
 ;stylesheets[all][] = css/superfish.css
 stylesheets[all][] = css/slideshow.css
 
+scripts[] = js/advanced-search.js
 scripts[] = js/jquery.corner.js
 scripts[] = js/acquia-marina-script.js
 ; fancy tables with sortable headers

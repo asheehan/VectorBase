@@ -30,6 +30,25 @@ function vbsearch_block_view($delta =''){
   return $block;
 }
 
+function vbsearch_form_alter(&$form, &$form_state, $form_id) {
+  if ($form_id == 'search_block_form') {
+    $form['actions']['submit'] = array('#type' => 'submit', '#value' => t('Go'));
+    // HTML5 placeholder attribute
+    $form['search_block_form']['#attributes']['placeholder'] = t('Enter search terms');
+    global $user;
+    if ($user->uid > 0) $form['#token'] = FALSE;
+    unset($form['#token']);
+  } 
+  else if ($form_id == 'apachesolr_search_custom_page_search_form') {
+    $form['basic']['submit'] = array(
+      '#type' => 'submit',
+      '#value' => t('Go'),
+    );
+
+    unset($form['#token']);
+  }
+}
+
 
 
 function vbsearch_search_block_form($form, &$form_state) {
@@ -52,6 +71,7 @@ function vbsearch_search_block_form_submit($form, &$form_state) {
 }
 
 function vbsearch_do_search($keys) {
+  
   drupal_set_title('VectorBase Search Results');
   $results = module_invoke('apachesolr_search', 'search_execute', $keys);
   return theme('search_results', array('results' => $results));
@@ -79,14 +99,19 @@ function vbsearch_apachesolr_query_alter($query) {
   $query->addParam('qf', 'symbol');
   $query->addParam('qf', 'label');
   $query->addParam('qf', 'content');
+  $query->addParam('qf', 'accession');
   $query->addParam('qf', 'annotations');
   $query->addParam('qf', 'description');
   $query->addParam('qf', 'phenotypes');
+  $query->addParam('qf', 'genotypes');
   $query->addParam('qf', 'geolocations');
+  $query->addParam('qf', 'cvterms');
+  $query->addParam('qf', 'authors');
 
 //Query boosting params
-  $query->addParam('bq', 'site="Genome"^4');
+  $query->addParam('bq', 'site="Genome"^35');
   $query->addParam('bq', 'site="General"^6');
+  $query->addParam('bq', 'site="Ontology"^1');
 
 //Next four lines needed to enclose terms containing a colon with quotes (prevents some field-level searching)
   $queryTerm = $query->getParam('q');
@@ -118,6 +143,7 @@ function vbsearch_apachesolr_query_alter($query) {
   if (isset($_GET['site'])){
     $query->addFilter('site', $_GET['site']);
   }
+
 }
 
 
@@ -155,4 +181,3 @@ function vbsearch_splash() {
   return t('howdy');
 }
 
-?>

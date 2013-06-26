@@ -1,0 +1,12 @@
+<?php
+
+/**
+ * @file
+ * VectorBase's irbase module
+ *
+ */
+
+function irbase_init(){
+	drupal_add_js(drupal_get_path('module', 'irbase'). '/includes/irbase.js');
+}
+
