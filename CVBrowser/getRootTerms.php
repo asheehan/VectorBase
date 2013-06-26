@@ -18,6 +18,8 @@ $row = mysql_fetch_array( $qr );
 $rootTerms = explode( ",", $row['root_terms'] );
 $rootTermsLength = count( $rootTerms );
 
+$response = "";
+
 for( $t = 0; $t < $rootTermsLength; $t++ )
 {
 	$q = "SELECT name FROM cv_term WHERE xref_id='".$rootTerms[$t]."'";

@@ -75,7 +75,8 @@ function blast_hspDetails($id){
 	$entity_id=db_query("select entity_id from field_data_field_file where field_file_fid=$fid;")->fetchField();
 	// is this db tagged with reverse headers?
 	$isTagged=db_query("select nid from taxonomy_index where tid=$rhTid and nid=$entity_id;")->fetchField();
-	if($isTagged){
+	$strings = "<p>isTagged: $isTagged, hitName: $hitName</p>";
+	if($isTagged && strstr($hitName, ':') !== false){
         preg_match("#^.*?:.*?:(.*?):#",$hitName,$match);
 	    $hitDescription=$hitName.$dbName;
 		$hitName=$match[1];
@@ -159,7 +160,7 @@ function blast_hspDetails($id){
 	}
 
 
-	$strings="<table id=\"hspTable\"><tbody>";
+	$strings.="<table id=\"hspTable\"><tbody>";
 	for($i=0; $i<count($hitStringArray); $i++){
 
 		$hitGaps=substr_count($hitStringArray[$i],"-");

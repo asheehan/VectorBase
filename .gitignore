@@ -21,3 +21,4 @@ sites/all/modules/custom/xgrid/tempFile
 
 # Ignore backup file for greg
 sites/all/modules/custom/vbsearch/vbsearch.module.bak
+CVBrowser/getRootTerms.php.save
