@@ -57,7 +57,7 @@ foreach($subdomains as $subdomain){
 // encode in json and snip the front/back to parse
 $json = json_encode($data);
 $json = jsonCleaner($json);
-file_put_contents('/vectorbase/web/root/scripts/drupal-indexing/bac-export.json', $json);
+file_put_contents('bac-export.json', $json);
 print "$count objects indexed.\n";
 
 // minor changes to the json file so that solr parses it correctly

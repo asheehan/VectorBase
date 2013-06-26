@@ -72,7 +72,7 @@ foreach ($nodes as $nid => $node) {
 // encode in json and snip the front/back to parse
 $json = json_encode($data);
 $json = jsonCleaner($json);
-file_put_contents('/vectorbase/web/root/scripts/drupal-indexing/drupal-export.json', $json);
+file_put_contents('./drupal-export.json', $json);
 print "$count objects indexed.\n";
 
 // reformat the type to make it presentable for search results
