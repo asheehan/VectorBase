@@ -129,7 +129,7 @@ echo '<table width="600" cellpadding="0" cellspacing="10" border="0">';
 This section provides the user with a compilation of mtDNA sequences for species of the genus <i>Anopheles</i>, as submitted to the NCBI nucleic acid sequence database by different authors. Although the lists are updated regularly, some species may be absent at the time of your search.</td></tr><tr><td>
 You may click on a specific mitochondrial locus or on a species name 
 to access a list of all available sequences.</td></tr><tr><td>
-Last update: April 2013 - 299 species / 12737 GenBank entries
+Last update: June 2013 - 308 species / 13340 GenBank entries
     </td>
   </tr>
   <tr>

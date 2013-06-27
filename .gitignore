@@ -1,15 +1,9 @@
 # Ignore configuration files that may contain sensitive information.
 sites/*/settings*.php
 
-# Ignore these index files
-data/BAC_files/*
-
 # Ignore paths that contain user-generated/dynamic content.
-data/backup/*.sql
-data/backup/*.zip
-data/BAC_files/*
-data/*.gff
-data/*.zip
+data/*
+includes/search/*
 sites/*/files
 sites/*/private
 
@@ -24,3 +18,4 @@ sites/all/modules/custom/xgrid/tempFile
 
 # Ignore backup file for greg
 sites/all/modules/custom/vbsearch/vbsearch.module.bak
+CVBrowser/getRootTerms.php.save

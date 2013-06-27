@@ -118,7 +118,7 @@ if((!isset($_GET['ref'])) || (!$_GET['ref'] == 'seq')){
 This section provides the user with a compilation of mtDNA sequences for some species of the <i>Aedes</i> genus, as submitted to the NCBI nucleic acid sequence database by different authors. Although the lists are updated regularly, some species may be absent at the time of your search.</td></tr><tr><td>
 You may click on a specific mitochondrial locus or on a species name
 to access a list of all available sequences.</td></tr><tr><td>
-Last update: April 2013 - 78 species / 1932 GenBank entries
+Last update: June 2013 - 89 species / 2581 GenBank entries
     </td>
   </tr>
   <tr>

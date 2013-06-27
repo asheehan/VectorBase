@@ -74,7 +74,7 @@ function updateSampleFull(stock, element) {
 			    projects.records.each(function(project) {
 				var li = new Element('li');
 				li.insert(
-				    { bottom: new Element('a', { href: config.ROOT+'project/?id='+project.id, title: project.name }).update(project.id) });
+				    { bottom: new Element('a', { href: config.ROOT+'project/?id='+project.id, title: project.name, alt: project.name }).update(project.id) });
 				ul.insert({ bottom: li });
 			    });
 
@@ -111,6 +111,16 @@ function updateAssayFull(assay, element) {
 	}
 	prop.cvterms[0].name = prop.cvterms[0].name.replace(/_/g, " "); // e.g. for reference_genome
     });
+
+    // remove redundant props when showing browse genome button
+    if (assay.genome_browser_path) {
+	assay.props = assay.props.filter(
+	    function(prop) {
+		var acc = prop.cvterms[0].accession;
+		return acc != 'SO:0001505' && acc != 'SO:0001507' && acc != 'SO:0000703';
+	    }
+	);
+    }
 
     fillInObjectValues(assay, element.down('#assay_info')).removeClassName('hide_on_load');
 
@@ -762,9 +772,9 @@ function renderCvterm(term) {
     if (term != null) {
 	if (term.accession.match(/^\w+:\d+$/)) {
 	    if (term.accession.match(/^VBsp:/)) { // !!warning: copy and paste next two lines!!
-		return '<span class="cvterm species_name" title="Ontology term '+term.accession+'" accession="'+term.accession+'">'+term.name+'</span>';
+		return '<span class="cvterm species_name" title="Ontology term '+term.accession+'" alt="Ontology term '+term.accession+'" accession="'+term.accession+'">'+term.name+'</span>';
 	    } else {
-		return '<span class="cvterm" title="Ontology term '+term.accession+'" accession="'+term.accession+'">'+term.name+'</span>';
+		return '<span class="cvterm" title="Ontology term '+term.accession+'" alt="Ontology term '+term.accession+'" accession="'+term.accession+'">'+term.name+'</span>';
 	    }
 	} else {
 	    return term.name;

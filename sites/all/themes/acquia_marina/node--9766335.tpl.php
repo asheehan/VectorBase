@@ -12,6 +12,7 @@ print '<script language="javascript">';
 include("$irPath/ajax2.php");
 //include("$irPath/irAssay.php");
 drupal_add_js("$irPath/irSearch.php");
+drupal_add_js("$irPath/irbase.js");
 print '</script>';
 $dbConn = connectIRBase();
 ?>

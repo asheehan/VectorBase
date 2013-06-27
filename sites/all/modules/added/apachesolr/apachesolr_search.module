@@ -1750,13 +1750,13 @@ function theme_apachesolr_search_noresults() {
 				$searched_value = $query->getParam('q');
 				$params = explode(' ', $query->getParam('q'));
 				foreach ($params as $param=>$value){
-					$new_query_terms = $new_query_terms . $value . '* ';
+					$new_query_terms = $new_query_terms . '*' .  $value . '* ';
 				}
 			}
 		}
 	}
 
-	$query_result = 'No Results Found';
+	$query_result = 'No Results Found.';
 	$query_warning = '';
 	if ($_GET['site']) {
 		$query_warning .= 'Searching the <em>' . trim($_GET['site'], "\"") . '</em> domain';
@@ -1764,17 +1764,18 @@ function theme_apachesolr_search_noresults() {
 	if ($_GET['bundle_name']) {
 		$query_warning .= ' and the <em>' . trim($_GET['bundle_name'], "\"") . '</em> subdomain';
 	}
-	if (strlen($query_warning) > 1) {	// give users the option to rerun this query without any filters (provided there ARE some set)
-		$query_warning .= ': ';
-		$query_result .= ' (<a href="'. $new_query . $searched_value . '">remove filters</a>)';
-	}
 	if ($new_query_terms) {	// only offer a suggestion if a term was actually queried (i.e. search field isn't blank)
-		$suggestion =  ' For example, you could use the following as your search term: <b><a href="'. $new_query . $new_query_terms . '">' . htmlspecialchars($new_query_terms) . '</a></b>';
+		$suggestion =  ' You can try your search again using wildcards: <b><a href="'. $new_query . $new_query_terms . '">' . htmlspecialchars($new_query_terms) . '</a></b>';
+                if (strlen($query_warning) > 1) {
+                      $query_warning .= ': ';
+		      $suggestion .= ', or by <a href="'. $new_query . $searched_value . '">clearing search filters</a>.';
+                      
+		}
 	}
 
 
-	return t('<br /><h3>' . $query_warning . $query_result . '</h3><ul>
-			<li>Use the asterisk wildcard character (*) to broaden  matching criteria.' . $suggestion . '</li>
+	return t('<br /><h3>' . $query_warning . $query_result . $suggestion . '</h3> <p>The following tips may be helpful in refining or expanding your search query:</p><ul>
+			<li>Use the asterisk wildcard character (*) to broaden  matching criteria.</li>
 			<li>Check if your spelling is correct, or try removing filters.</li>
 			<li>Remove quotes around phrases to match each word individually: <em>"Anopheles gambiae"</em> will return fewer results than <em>Anopheles gambiae</em>.</li>
 			<li>You can require or exclude terms using + and -: <em>Anopheles +gambiae </em> will require a match on <em>gambiae</em> while <em>Anopheles -gambiae</em> will exclude results that contain <em>gambiae</em>.</li>

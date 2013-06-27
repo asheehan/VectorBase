@@ -260,7 +260,7 @@ function show_main_page( $mitoDB )
 This section provides the user with a compilation of mtDNA sequences for species of the subfamilies <i>Ixodidae</I> and <i>Argasidae</i>, as submitted to the NCBI nucleic acid sequence database by different authors. Although this list is updated regularly, some species may be absent at the time of your search.<br><br>
 You may click on a specific mitochondrial locus or on a species name
 to access a list of all available sequences.</td></tr><tr>
-<td class="cell_value"><font size="2">Last update: April 2013 - 327 species / 6328 GenBank entries</td></tr>
+<td class="cell_value"><font size="2">Last update: June 2013 - 330 species / 6687 GenBank entries</td></tr>
 </table>
 <br>
 <br>

@@ -503,7 +503,8 @@ sorter: 'links'
 3: { 
 sorter: 'scinot' 
 } 
-}
+},
+sortList:[[2,0]]
 });
 
 //scroll view down to where results start

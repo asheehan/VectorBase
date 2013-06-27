@@ -23,7 +23,7 @@ while( $row != FALSE )
 {
 	$response = $response.$row['descendant_xref_id']."|".$row['name']."|";
 	
-	$tq = "SELECT DISTINCT(descendant_xref_id) FROM cv_term_relationship WHERE ancestor_xref_id='".$row[descendant_xref_id]."'";
+	$tq = "SELECT DISTINCT(descendant_xref_id) FROM cv_term_relationship WHERE ancestor_xref_id='".$row['descendant_xref_id']."'";
 	$tqr = mysql_query( $tq );
 	
 	$rowsCount = mysql_num_rows( $tqr ); 

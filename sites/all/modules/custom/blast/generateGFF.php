@@ -50,7 +50,7 @@ function blast_generateGFF($id, $searchId = null){
 		$br_ids[]=$result['br_id'];  
 		$queryNames[]=trim($result['query_name'].' '.$result['query_description']);
 		$databaseNames[] = $result['database_name'];
-		$rh_dbs[$result['database_name']] = null; // super important to make this null - tells us we haven't looked up if we have a reverse header or not
+		$reverseHeaderDbs[$result['database_name']] = null; // super important to make this null - tells us we haven't looked up if we have a reverse header or not
 	}
 
 	// only run if there are results or else drupal will report notice errors
@@ -75,20 +75,20 @@ function blast_generateGFF($id, $searchId = null){
 			if($isTimerEnabled) { $queryTimer->stop(); }
 			while(($hit = $hits->fetchAssoc()) !== false){
 				$bh_ids[]=$hit['bh_id'];
-				$hitNames[]=$hit['name'];
+				$hitNames[$hit['bh_id']]=$hit['name'];
 				//$hitDescriptions[]=$hit->description;
 			}
 
 			// get hsp info for these hits
 			if($bh_ids){ // check for results
 
-				for($k=0; $k<count($hitNames); $k++){
+				foreach($hitNames as  $key => $value){
 
 					// change some of the hit names so the gffs show up in ensembl properly
 					// these should all be tagged with "Reversed Headers"
 
 					// get the nid(entity_id) for this db name
-					if(is_null($rh_dbs[$databaseNames[$br_idx]])) {
+					if(is_null($reverseHeaderDbs[$databaseNames[$br_idx]])) {
 						if($isTimerEnabled) { $queryTimer->start(); }
 						$isTaggedQuery = db_select('file_managed', 'fm');
 						$isTaggedQuery->addField('fm', 'fid');
@@ -100,13 +100,13 @@ function blast_generateGFF($id, $searchId = null){
 						$isTagged = $isTaggedQuery->execute()->fetchAssoc();
 						//$isTaggedObj=db_query('select count(*) from file_managed fm, field_data_field_file ff, field_data_field_tags ft where fm.filename = :filename and fm.fid = ff.field_file_fid and ff.entity_id = ft.entity_id and ft.field_tags_tid = :taxId', array(':filename'=>$databaseNames[$br_idx], ':taxId'=>$rhTid));
 						//$isTagged = $isTaggedObj->fetchAssoc();
-						$rh_dbs[$databaseNames[$br_idx]] = ($isTagged !== false && !empty($isTagged['count']));
+						$reverseHeaderDbs[$databaseNames[$br_idx]] = ($isTagged !== false && !empty($isTagged['count']));
 						if($isTimerEnabled) { $queryTimer->stop(); }
 					}
 
-					if($rh_dbs[$databaseNames[$br_idx]]){
-						preg_match("#^.*?:.*?:(.*?):#",$hitNames[$k],$match);
-						$hitNames[$k]=$match[1];
+					if($reverseHeaderDbs[$databaseNames[$br_idx]]){
+						preg_match("#^.*?:.*?:(.*?):#",$value,$match);
+						$hitNames[$key]=$match[1];
 					}
 
 				}
@@ -145,12 +145,12 @@ function blast_generateGFF($id, $searchId = null){
 				//foreach($bh_ids as $bh_id) {
 				$hsp = $hsps->fetchAssoc();
 				if($hsp !== false) {
-					$currentBlastResultIdx = 0;
+					//$currentBlastResultIdx = 0;
 					$lastDistinctBlastId = $hsp['bh_id'];
 					do {
 
 						if($lastDistinctBlastId !== $hsp['bh_id']) {
-							$currentBlastResultIdx++;
+					//		$currentBlastResultIdx++;
 							$lastDistinctBlastId = $hsp['bh_id'];
 						}
 						if($hsp['strandhit']=='1')
@@ -160,7 +160,7 @@ function blast_generateGFF($id, $searchId = null){
 						else 
 							$strand=".";
 
-						$gff.=$hitNames[$currentBlastResultIdx]."\tBLAST\tBlast Hit\t".$hsp['starthit']."\t".$hsp['endhit']."\t".$hsp['score']."\t".$strand."\t.\t".$queryNames[$br_idx]."\n";
+						$gff.=$hitNames[$lastDistinctBlastId]."\tBLAST\tBlast Hit\t".$hsp['starthit']."\t".$hsp['endhit']."\t".$hsp['score']."\t".$strand."\t.\t".$queryNames[$br_idx]."\n";
 						//      hit name        BLAST   Blast Hit   start   end     length  strand  .   query name
 					} while(($hsp = $hsps->fetchAssoc()) !== false); 
 				}
@@ -173,7 +173,7 @@ function blast_generateGFF($id, $searchId = null){
 				file_put_contents($location.$fileName,$gff);
 				if($isTimerEnabled) { $writeTimer->stop(); }
 			} // end check for results
-		}
+		} // Blast result loop
 	}
 
 	if($isTimerEnabled) { 
