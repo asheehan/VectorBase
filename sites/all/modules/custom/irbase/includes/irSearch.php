@@ -26,7 +26,6 @@ function gettermname2( $db, $term_id )	{
 	}
 }
 
-
 // Returns an array of assay_ids that match the $query
 //
 // Used in: search.php
@@ -280,7 +279,8 @@ if( $assays_count > 0 )	{
         echo "</tr></table>\n";
 	echo "<table  width=\"800\" align=\"center\">";
 	echo "<tr><td class=\"plain\" colspan=\"3\">$assays_count records.</td>";
-	print "<td colspan=\"3\" class=\"plain\" align=\"right\"><input type=\"button\" value=\"Map results\" onclick=\"mapResults()\"></td></tr>\n";
+	//print "<td colspan=\"3\" class=\"plain\" align=\"right\"><input type=\"button\" value=\"Map results\" onclick=\"mapResults()\"></td></tr>\n";
+	print "<td colspan=\"3\" class=\"plain\" align=\"right\"><input type=\"button\" value=\"Map results\" onclick=\"window.location='/content/ir-map?sid='+sid;\"></td></tr>\n";
 //	echo "<tr><td class=\"plain\" colspan=\"3\">";
 //	echo "<input type=\"checkbox\" id=\"cbx_all\" onclick=\"markAll(".($n-1).")\">&nbsp;&nbsp;Select all";
  //	echo "</td>\n";

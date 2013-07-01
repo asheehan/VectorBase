@@ -55,16 +55,31 @@ function blast_hspDetails($id){
 	//$orgId=db_query("select field_organism_target_id from field_data_field_organism where entity_id=$entity_id;")->fetchField();
 	$tid=db_query("select field_organism_taxonomy_tid from field_data_field_organism_taxonomy where entity_id=$entity_id;")->fetchField();
 	//$orgTid=db_query("select field_organism_taxonomy_tid from field_data_field_organism_taxonomy where entity_id=$orgId;")->fetchField();
-	$orgName=str_replace(" ","_",db_query("select name from taxonomy_term_data where tid=$tid;")->fetchField());
-	// dirty hack to remove stupid s.s from a. gambiae name
+	
+	// Get Organsism. Try the ensembl-specific field first. Else, use the drupal name.
+	$orgName = db_query("select field_ensembl_name_value from field_data_field_ensembl_name where entity_type = 'taxonomy_term' and entity_id = $tid")->fetchField();
+	if($orgName === false) {
+		$orgName = db_query("select name from taxonomy_term_data where tid = $tid;")->fetchField();
+	}
+
+	// Replace spaces with underscores
+	$orgName=str_replace(" ","_", $orgName);//db_query("select name from taxonomy_term_data where tid=$tid;")->fetchField());
+	
+	/*if(stristr($orgName, 'Anopheles_dirus') !== false) { 
+		$orgName = 'Anopheles_dirus';
+	} else if (stristr($orgName, 'Anopheles_minimus') !== false) {
+		$orgName = 'Anopheles_minimus';
+	}*/
+
+	// Dirty hack to remove stupid s.s from a. gambiae name
 	$orgName=str_replace("_s.s.", "", $orgName);
 
-	//dirty hacks for M and S
+	// Silly S and M hacks
 	if(stristr($dbName,"Pimperena"))
 		$orgName="Anopheles_gambiaeS";
 	if(stristr($dbName,"Mali"))
 		$orgName="Anopheles_gambiaeM";
-
+	
 
 	// change some of the hit names so the gffs show up in ensembl properly
 	// these should all be tagged with "Reversed Headers"

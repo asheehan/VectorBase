@@ -46,7 +46,7 @@ function ajax_hmmer_genform($form, &$form_state) {
     '#cols' => 50,
 	'#default_value' => t(hmmer_getClustal($_POST)),
     '#suffix' => '<div id="warning">HMMer is designed to use peptide sequences. We will attempt to convert your sequence to peptides before performing the search</div>',
-    '#attributes' => array('placeholder' => 'Paste ClustlaW alignment for hmmsearch, FASTA for phmmer')
+    '#attributes' => array('placeholder' => 'Paste ClustalW alignment for hmmsearch, FASTA for phmmer')
   );
 
 
